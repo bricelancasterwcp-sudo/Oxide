@@ -1,6 +1,5 @@
 import inspect
 import json
-import shutil
 import subprocess
 import urllib.error
 from datetime import datetime
@@ -22,7 +21,7 @@ from eval.driver import (
 )
 from eval.extract import Extraction, extract
 from eval.models import Generation, ModelError, OllamaClient
-from eval.repair import build_repair_prompt
+from eval.repair import RepairPromptError, build_repair_prompt
 from eval.rollup import (
     INSUFFICIENT,
     across_seed_se,
@@ -109,14 +108,30 @@ _RUNTIME_FAIL = {
 }
 
 
+_REPAIR_TASK = "t01"  # a real corpus task: repair prompts are task-bound
+
+
+def _repair(arm: str, source: str, verdict: dict, **kwargs) -> str:
+    return build_repair_prompt(
+        arm, source, verdict, task_id=_REPAIR_TASK, **kwargs
+    )
+
+
+def _attempt_block(prompt: str) -> str:
+    """The repair-specific tail, after the carried-over initial prompt."""
+    marker = "The program below was rejected."
+    assert marker in prompt
+    return prompt[prompt.index(marker):]
+
+
 def test_repair_prompt_includes_program_and_diagnostics():
-    out = build_repair_prompt("oxide", "let x = 1", _COMPILE_FAIL)
+    out = _repair("oxide", "let x = 1", _COMPILE_FAIL)
     assert "let x = 1" in out
     assert "4:15: OX0400: value moved here" in out
 
 
 def test_repair_prompt_renders_notes_and_suggestion_indented():
-    out = build_repair_prompt("oxide", "let x = 1", _COMPILE_FAIL)
+    out = _repair("oxide", "let x = 1", _COMPILE_FAIL)
     assert "  note: line 3, col 18" in out
     assert "  suggestion: Keep it available by cloning at the move site." in out
 
@@ -124,26 +139,65 @@ def test_repair_prompt_renders_notes_and_suggestion_indented():
 def test_repair_prompt_omits_empty_suggestion():
     diag = dict(_BAD_DIAG, suggestion="")
     verdict = dict(_COMPILE_FAIL, diagnostics=[diag])
-    assert "suggestion:" not in build_repair_prompt("rust", "x", verdict)
+    assert "suggestion:" not in _attempt_block(_repair("rust", "x", verdict))
 
 
 def test_repair_prompt_ends_with_output_contract():
-    out = build_repair_prompt("oxide", "let x = 1", _COMPILE_FAIL)
+    out = _repair("oxide", "let x = 1", _COMPILE_FAIL)
     assert out.rstrip().endswith(
         "Reply with ONLY the complete corrected program source, "
         "no fences, no commentary."
     )
 
 
+def test_repair_prompt_drops_the_initial_output_contract():
+    # Exactly one instruction survives: the corrected-program one. The
+    # initial prompt's contract would otherwise trail in mid-prompt.
+    out = _repair("oxide", "let x = 1", _COMPILE_FAIL)
+    assert harness.OUTPUT_CONTRACT not in out
+
+
+def test_repair_prompt_carries_the_arms_initial_prompt():
+    # The whole point of the section-6.3 change: each arm re-enters the
+    # repair turn with the context it started with, so section 47's
+    # repair lift measures diagnostics rather than card recall.
+    for arm in ("oxide", "explicit", "rust"):
+        initial = harness.build_prompt(arm, _REPAIR_TASK)
+        carried = initial[: initial.rstrip("\n").rindex(harness.OUTPUT_CONTRACT)]
+        assert carried.strip() in _repair(arm, "src", _COMPILE_FAIL)
+
+
+def test_repair_prompt_carries_the_task_statement():
+    task = harness.load_tasks()[_REPAIR_TASK]
+    for arm in ("oxide", "explicit", "rust"):
+        assert task["prompt"].rstrip("\n") in _repair(arm, "src", _COMPILE_FAIL)
+
+
+def test_repair_prompt_carries_few_shot_examples():
+    out = _repair("oxide", "src", _COMPILE_FAIL, shots=3)
+    assert out.count("Example task:") == 3
+    assert len(out) > len(_repair("oxide", "src", _COMPILE_FAIL))
+
+
+def test_repair_prompt_raises_if_harness_tail_moves(monkeypatch):
+    # A frozen-harness change must fail loudly, not silently emit a
+    # prompt whose tail was never stripped.
+    monkeypatch.setattr(
+        "eval.harness.build_prompt", lambda *a, **k: "no contract here\n"
+    )
+    with pytest.raises(RepairPromptError):
+        _repair("oxide", "src", _COMPILE_FAIL)
+
+
 def test_repair_prompt_runtime_failure_reports_own_output():
-    out = build_repair_prompt("oxide", "print(41)", _RUNTIME_FAIL)
+    out = _repair("oxide", "print(41)", _RUNTIME_FAIL)
     assert "compiled and ran, but produced incorrect output" in out
     assert "41" in out
 
 
 def test_repair_prompt_runtime_failure_has_no_diagnostics_block():
-    assert "Diagnostics:" not in build_repair_prompt(
-        "oxide", "print(41)", _RUNTIME_FAIL
+    assert "Diagnostics:" not in _attempt_block(
+        _repair("oxide", "print(41)", _RUNTIME_FAIL)
     )
 
 
@@ -153,16 +207,45 @@ def test_repair_prompt_cannot_leak_expected_stdout():
     # learned the expected string could pass by hard-coding a print of
     # it, which would silently corrupt the headline metric.
     assert "expected" not in inspect.signature(build_repair_prompt).parameters
-    out = build_repair_prompt("oxide", "print(41)", _RUNTIME_FAIL)
-    assert "42" not in out  # the task's real expected output
+    assert (
+        "expected" not in inspect.signature(harness.build_prompt).parameters
+    )
 
 
-def test_repair_prompt_structure_is_arm_identical():
+def test_repair_prompt_never_discloses_a_real_tasks_expected_output():
+    # The literal check, over the real corpus x arms x shot conditions.
+    # "no substring" cannot be taken character-literally: bare digits and
+    # words recur innocently (t03 expects "21\n" and the Rust preamble
+    # says "edition 2021"; t13 expects "false" and the card documents the
+    # `false` literal). The enforced form is the one a model could
+    # actually copy: neither the whole expected_stdout nor any single
+    # LINE of it ever appears as a line of the prompt.
+    for task_id, task in sorted(harness.load_tasks().items()):
+        expected = task["expected_stdout"]
+        want_lines = {line for line in expected.split("\n") if line}
+        for arm in ("oxide", "explicit", "rust"):
+            for shots in (0, 3):
+                out = build_repair_prompt(
+                    arm,
+                    "src",
+                    _RUNTIME_FAIL,
+                    task_id=task_id,
+                    shots=shots,
+                )
+                assert expected not in out, (task_id, arm, shots)
+                got_lines = {line.strip() for line in out.split("\n")}
+                assert not (want_lines & got_lines), (task_id, arm, shots)
+
+
+def test_repair_prompt_attempt_block_is_arm_identical():
+    # The carried-over lead is arm-NATIVE by construction (each arm gets
+    # its own initial prompt back). The repair-specific tail stays
+    # arm-identical in structure, arm-native in content.
     def skeleton(text: str) -> list[str]:
         return [ln for ln in text.split("\n") if ln.endswith(":") or not ln]
 
     shapes = {
-        arm: skeleton(build_repair_prompt(arm, "src", _COMPILE_FAIL))
+        arm: skeleton(_attempt_block(_repair(arm, "src", _COMPILE_FAIL)))
         for arm in ("oxide", "explicit", "rust")
     }
     assert shapes["oxide"] == shapes["explicit"] == shapes["rust"]
@@ -174,7 +257,7 @@ def test_repair_prompt_preserves_rustc_help_text_verbatim():
     message = "borrow of moved value\nhelp: consider cloning the value"
     diag = dict(_BAD_DIAG, code="E0382", message=message, suggestion="")
     verdict = dict(_COMPILE_FAIL, diagnostics=[diag])
-    assert message in build_repair_prompt("rust", "fn main(){}", verdict)
+    assert message in _repair("rust", "fn main(){}", verdict)
 
 
 def _chat_response(content: str = "ok", done_reason: str = "stop") -> bytes:
@@ -346,7 +429,7 @@ def test_healthy_is_false_when_unreachable(monkeypatch):
 
 def test_repair_prompt_rejects_unknown_arm():
     with pytest.raises(ValueError):
-        build_repair_prompt("python", "x", _COMPILE_FAIL)
+        build_repair_prompt("python", "x", _COMPILE_FAIL, task_id=_REPAIR_TASK)
 
 
 class _StubClient:
@@ -1227,13 +1310,7 @@ def test_render_report_states_band_alongside_delta():
     assert "2.4" in out  # the interval is never omitted
 
 
-live = pytest.mark.skipif(
-    shutil.which("ollama") is None,
-    reason="ollama not installed",
-)
-
-
-@live
+@pytest.mark.live
 def test_live_smoke_one_task_on_smallest_model(tmp_path):
     """One real generation end to end, against the real transpiler and
     rustc. Asserts the plumbing works, NOT that the model succeeds -- a

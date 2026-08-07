@@ -76,7 +76,14 @@ def run_session(
         if verdict["passed"]:
             attempts_to_pass = attempt
             break
-        prompt = build_repair_prompt(arm, candidate.source, verdict)
+        prompt = build_repair_prompt(
+            arm,
+            candidate.source,
+            verdict,
+            task_id=task_id,
+            shots=shots,
+            tasks_path=tasks_path,
+        )
 
     assert first is not None
     return {

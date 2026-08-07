@@ -1884,12 +1884,25 @@ persisted, so the strict-verbatim number stays recoverable post-hoc.
 ### 50.3 `eval/repair.py`
 
 ```python
-def build_repair_prompt(arm: str, source: str, verdict: dict) -> str: ...
+def build_repair_prompt(
+    arm: str,
+    source: str,
+    verdict: dict,
+    *,
+    task_id: str,
+    shots: int = 0,
+    tasks_path: str | Path | None = None,
+) -> str: ...
 ```
 
-Arm-identical *structure*, arm-native *content*. Compile failure:
+A repair prompt is **the arm's own initial prompt with its tail
+swapped**. It is built by calling `harness.build_prompt(arm, task_id,
+shots=shots, tasks_path=tasks_path)`, stripping the trailing
+`harness.OUTPUT_CONTRACT` constant, and appending the attempt block:
 
 ```
+<the arm's full initial prompt, minus its output contract>
+
 The program below was rejected. Fix it.
 
 Program:
@@ -1901,12 +1914,46 @@ Diagnostics:
 Reply with ONLY the complete corrected program source, no fences, no commentary.
 ```
 
+The carried-over lead is therefore the language card (oxide /
+explicit) or the pinned Rust preamble, plus any few-shot examples, plus
+the task statement — exactly what the arm was given on attempt 1.
+Reusing the frozen harness rather than reconstructing a lead here is
+what makes the property structural: no arm can drift out of step with
+its own initial prompt. Stripping a *known constant suffix* is
+deterministic and testable, and its absence raises
+`repair.RepairPromptError` — a change to the frozen harness must fail
+loudly rather than silently emit a prompt carrying a stale contract.
+
+*Why the lead is carried.* Every generation is a standalone HTTP call
+with no conversation history, so whatever the repair prompt omits is
+simply gone. The earlier template — program, diagnostics, and the fix
+instruction only — retained this much of each arm's initial context:
+
+| Arm | Initial | Repair | Retained |
+|---|---|---|---|
+| oxide (0-shot) | 5305 ch | 271 | **5.1%** |
+| explicit (0-shot) | 5593 ch | 271 | **4.8%** |
+| rust (0-shot) | 245 ch | 271 | **110.6%** |
+
+Rust *gained* context on repair, because Rust lives in the model's
+weights and its preamble is one line; the Oxide arms lost 95% of
+theirs, and the language card is the only place Oxide syntax ever
+appears. The task statement appeared in **no** repair prompt at all, so
+on a runtime failure the model was told its output was wrong without
+being told what it should have been — it could not repair except by
+guessing. That would have made §47's repair-lift secondary metric
+("whether an arm's diagnostics teach") measure card recall for the
+Oxide arms instead of diagnostic quality. §47's primary pass@1 metric
+is first-attempt-only and was never affected. The change was decided
+before the grid ran, blind to any results, as §47 requires.
+
 Diagnostics render as `line:col: CODE: message`, notes indented two
 spaces, then `suggestion: <text>` when non-empty. Oxide arms therefore
 supply OX codes with suggestions; the Rust arm supplies rustc's full
 help text verbatim (SPEC §45 already folds rustc's children into
 `message`). Giving each arm its strongest native diagnostics is the fair
-form of the test.
+form of the test. The attempt block's *structure* stays arm-identical;
+its *content*, and the lead above it, stay arm-native.
 
 **Runtime failure** (compiled, wrong stdout) has no diagnostics. The
 `Diagnostics:` block is replaced by:
@@ -1919,12 +1966,16 @@ Its output was:
 
 The task's `expected_stdout` is **never** disclosed. Disclosing it would
 let a weak model pass by hard-coding a print of the expected string,
-which would silently corrupt the headline metric. The task prompt
-already states what the program must produce.
+which would silently corrupt the headline metric. It is not a parameter
+of `build_repair_prompt`, and `harness.build_prompt` does not include it
+either — the carried-over task statement says what the program must
+produce without ever quoting the answer.
 
-No transcript accumulation: each repair prompt contains one program and
-one verdict. Growing transcripts would confound repair skill with
-long-context ability, which 0.5B lacks.
+No transcript accumulation: a repair prompt carries the arm's fixed
+initial context plus exactly one program and one verdict. Prior
+attempts are never appended. Growing transcripts would confound repair
+skill with long-context ability, which 0.5B lacks; a fixed-size prompt
+does not.
 
 ### 50.4 `eval/driver.py`
 
@@ -2037,8 +2088,14 @@ in `harness.py` or `src/` is touched).
    (first wins), unfenced, empty, whitespace-only, CRLF; and
    `contract_compliant` correct in each.
 2. **Repair prompt** — compile-failure shape; runtime-failure shape;
-   **asserts `expected_stdout` never appears in any repair prompt**;
-   arm-identical structure across all three arms; rustc help text
+   the arm's full initial prompt (lead, shots, task statement) is
+   carried and its output contract dropped; a moved harness tail raises;
+   **asserts `expected_stdout` never appears in any repair prompt** —
+   structurally (not a parameter of `build_repair_prompt` nor of
+   `harness.build_prompt`) and empirically, over every real corpus task
+   x arm x shot count, where neither the whole expected output nor any
+   single line of it may appear as a line of the prompt; arm-identical
+   attempt-block structure across all three arms; rustc help text
    preserved verbatim.
 3. **Model client** — protocol conformance against a stub; retry-then-
    abort on transport error; preflight raises on a missing tag;
@@ -2061,5 +2118,8 @@ in `harness.py` or `src/` is touched).
    only when a task is missing from one arm; partition classification
    correct at the ±5pp boundaries; pooled-binomial CI absent; incomplete
    grid refused without `--partial`.
-7. **Live smoke** — one task, 0.5B, marked so it can be deselected when
-   Ollama is unavailable.
+7. **Live smoke** — one task, 0.5B. Carries `@pytest.mark.live`, which
+   `pytest.ini` deselects by default (`addopts = -m "not live"`), so a
+   full-suite run never burns a real generation; run it with
+   `pytest -m live`. It still skips cleanly when the daemon is down or
+   the model is not pulled.
