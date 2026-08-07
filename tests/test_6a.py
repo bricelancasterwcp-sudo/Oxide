@@ -1,4 +1,5 @@
 import json
+import shutil
 import urllib.error
 
 from eval import harness
@@ -802,3 +803,38 @@ def test_render_report_states_band_alongside_delta():
     assert "no-detectable-difference" in out
     assert "±5pp" in out
     assert "2.4" in out  # the interval is never omitted
+
+
+live = pytest.mark.skipif(
+    shutil.which("ollama") is None,
+    reason="ollama not installed",
+)
+
+
+@live
+def test_live_smoke_one_task_on_smallest_model(tmp_path):
+    """One real generation end to end, against the real transpiler and
+    rustc. Asserts the plumbing works, NOT that the model succeeds -- a
+    0.5B failure is a valid experimental result (section 47)."""
+    client = OllamaClient(MODELS["qwen0_5b"])
+    if not client.healthy():
+        pytest.skip("ollama daemon not running")
+    try:
+        client.preflight()
+    except ModelError as exc:
+        pytest.skip(f"model not pulled: {exc}")
+
+    cell = run_session(
+        client,
+        run_id="6a-smoke",
+        task_id="t01",
+        arm="oxide",
+        shots=0,
+        results_root=tmp_path,
+        raw_dir=tmp_path / "raw",
+    )
+    assert cell["task"] == "t01"
+    assert 1 <= cell["attempts"] <= 4
+    assert isinstance(cell["final_passed"], bool)
+    assert len(cell["truncated"]) == cell["attempts"]
+    assert (tmp_path / "raw" / "t01.oxide.1.txt").exists()
