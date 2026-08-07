@@ -10,6 +10,7 @@ from eval.driver import (
     run_grid,
     run_one,
     run_session,
+    wait_for_health,
 )
 from eval.extract import Extraction, extract
 from eval.models import Generation, ModelError, OllamaClient
@@ -642,3 +643,49 @@ def test_run_grid_waits_for_health_between_runs(tmp_path):
     )
     monkeypatch.undo()
     assert waits == ["checked", "checked"]
+
+
+class _AlwaysHealthy:
+    def healthy(self) -> bool:
+        return True
+
+
+class _HealthyAfterProbes:
+    """Reports unhealthy for the scripted results, then healthy."""
+
+    def __init__(self, *results: bool) -> None:
+        self.results = list(results)
+        self.calls = 0
+
+    def healthy(self) -> bool:
+        self.calls += 1
+        return self.results.pop(0)
+
+
+class _NeverHealthy:
+    def healthy(self) -> bool:
+        return False
+
+
+def test_wait_for_health_returns_immediately_when_already_healthy():
+    sleeps: list[float] = []
+    wait_for_health(_AlwaysHealthy(), sleep=sleeps.append)
+    assert sleeps == []
+
+
+def test_wait_for_health_polls_then_returns_once_healthy():
+    sleeps: list[float] = []
+    client = _HealthyAfterProbes(False, False, True)
+    wait_for_health(client, sleep=sleeps.append)
+    assert client.calls == 3
+    assert sleeps == [5, 5]
+
+
+def test_wait_for_health_raises_after_cap_exhausted_without_looping_forever():
+    # Pins the exact poll-interval/cap arithmetic: 600s cap / 5s interval
+    # is 120 probes, never more -- this is the backstop that keeps an
+    # overnight run from stalling forever on a dead daemon.
+    sleeps: list[float] = []
+    with pytest.raises(ModelError, match="600s"):
+        wait_for_health(_NeverHealthy(), sleep=sleeps.append)
+    assert sleeps == [5] * 120

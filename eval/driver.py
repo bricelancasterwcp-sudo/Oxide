@@ -156,7 +156,7 @@ def reset_run(run_dir: Path) -> None:
 
 
 def wait_for_health(client: object, *, cap_s: int = HEALTH_WAIT_CAP_S,
-                    sleep: object = time.sleep) -> None:
+                    sleep: Callable[[float], None] = time.sleep) -> None:
     """Poll between run ids so a daemon restart costs no work. Applied
     BETWEEN runs only -- mid-session waiting would collide with the
     O_EXCL locks and half-written triples section 6.4 avoids."""
@@ -192,25 +192,20 @@ def run_grid(
                 if is_complete(run_dir):
                     continue
                 reset_run(run_dir)
-                if health_check is not None:
-                    health_check(client)
-                # Section 6.4 order: manifest BEFORE the sessions, so an
-                # interrupted run still records what it was running.
-                _write_manifest(run_dir, run_id, slug, shots, seed)
-                try:
-                    run_one(
-                        client,
-                        run_id=run_id,
-                        shots=shots,
-                        seed=seed,
-                        results_root=results_root,
-                        tasks_path=tasks_path,
-                    )
-                except ModelError as exc:
+                exc = _run_grid_cell(
+                    client,
+                    run_id=run_id,
+                    run_dir=run_dir,
+                    slug=slug,
+                    shots=shots,
+                    seed=seed,
+                    results_root=results_root,
+                    tasks_path=tasks_path,
+                    health_check=health_check,
+                )
+                if exc is not None:
                     aborted.append(run_id)
                     consecutive += 1
-                    _write_manifest(run_dir, run_id, slug, shots, seed,
-                                    aborted_reason=str(exc))
                     if consecutive >= MAX_CONSECUTIVE_ABORTS:
                         raise RuntimeError(
                             f"{consecutive} consecutive run aborts "
@@ -224,8 +219,55 @@ def run_grid(
     return {"completed": completed, "aborted": aborted}
 
 
+def _run_grid_cell(
+    client: ModelClient,
+    *,
+    run_id: str,
+    run_dir: Path,
+    slug: str,
+    shots: int,
+    seed: int,
+    results_root: Path,
+    tasks_path: Path | None,
+    health_check: Callable[[object], None] | None,
+) -> ModelError | None:
+    """Run one grid cell (one run id) start to finish.
+
+    Ordering is load-bearing (section 6.4): health check, THEN the
+    manifest, THEN the sessions, so an interrupted run still records what
+    it was running. On abort the manifest is rewritten with the reason,
+    and the exception is returned (not raised) so the caller decides
+    whether the consecutive-abort backstop fires.
+    """
+    if health_check is not None:
+        health_check(client)
+    temperature = getattr(client, "temperature", 0.8)
+    top_p = getattr(client, "top_p", 0.95)
+    num_predict = getattr(client, "num_predict", 2048)
+    _write_manifest(run_dir, run_id, slug, shots, seed,
+                    temperature=temperature, top_p=top_p,
+                    num_predict=num_predict)
+    try:
+        run_one(
+            client,
+            run_id=run_id,
+            shots=shots,
+            seed=seed,
+            results_root=results_root,
+            tasks_path=tasks_path,
+        )
+    except ModelError as exc:
+        _write_manifest(run_dir, run_id, slug, shots, seed,
+                        temperature=temperature, top_p=top_p,
+                        num_predict=num_predict, aborted_reason=str(exc))
+        return exc
+    return None
+
+
 def _write_manifest(run_dir: Path, run_id: str, slug: str, shots: int,
-                    seed: int, *, aborted_reason: str | None = None) -> None:
+                    seed: int, *, temperature: float, top_p: float,
+                    num_predict: int,
+                    aborted_reason: str | None = None) -> None:
     run_dir.mkdir(parents=True, exist_ok=True)
     payload = {
         "run_id": run_id,
@@ -233,9 +275,9 @@ def _write_manifest(run_dir: Path, run_id: str, slug: str, shots: int,
         "model": MODELS[slug],
         "shots": shots,
         "seed": seed,
-        "temperature": 0.8,
-        "top_p": 0.95,
-        "num_predict": 2048,
+        "temperature": temperature,
+        "top_p": top_p,
+        "num_predict": num_predict,
         "aborted_reason": aborted_reason,
     }
     (run_dir / "manifest.json").write_text(
