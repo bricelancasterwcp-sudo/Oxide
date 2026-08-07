@@ -19,3 +19,6 @@ eval/results/*/.sessions/
 
 # Transpiler scratch output
 *.rs.out
+
+# Subagent-driven-development scratch (ledgers, briefs, review packages)
+.superpowers/

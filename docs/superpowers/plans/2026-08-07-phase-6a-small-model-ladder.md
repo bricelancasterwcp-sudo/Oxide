@@ -584,7 +584,7 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Callable, Protocol
 
 DEFAULT_HOST = "http://localhost:11434"
 
@@ -608,17 +608,16 @@ class ModelClient(Protocol):
     def generate(self, prompt: str, *, seed: int) -> Generation: ...
 
 
-def _request(url: str, payload: dict | None = None) -> dict:
+def _request(
+    url: str, payload: dict | None = None, timeout_s: int = 120
+) -> dict:
     """POST json (or GET when payload is None) and decode the reply."""
     data = None if payload is None else json.dumps(payload).encode()
     req = urllib.request.Request(
         url, data=data, headers={"Content-Type": "application/json"}
     )
-    with urllib.request.urlopen(req, timeout=_request.timeout_s) as resp:
+    with urllib.request.urlopen(req, timeout=timeout_s) as resp:
         return json.loads(resp.read().decode())
-
-
-_request.timeout_s = 120  # type: ignore[attr-defined]
 
 
 class OllamaClient:
@@ -635,7 +634,7 @@ class OllamaClient:
         timeout_s: int = 120,
         retries: int = 3,
         backoff_s: float = 2.0,
-        sleep: object = time.sleep,
+        sleep: Callable[[float], None] = time.sleep,
     ) -> None:
         self.model = model
         self.temperature = temperature
@@ -652,7 +651,7 @@ class OllamaClient:
         last: Exception | None = None
         for attempt in range(self.retries):
             try:
-                return _request(url, payload)
+                return _request(url, payload, self.timeout_s)
             except (urllib.error.URLError, OSError, ValueError) as exc:
                 last = exc
                 if attempt < self.retries - 1:
@@ -713,7 +712,7 @@ class OllamaClient:
     def healthy(self) -> bool:
         """True when the daemon answers. Never raises."""
         try:
-            _request(f"{self.host}/api/tags")
+            _request(f"{self.host}/api/tags", None, self.timeout_s)
         except Exception:
             return False
         return True
@@ -1207,7 +1206,7 @@ def test_run_grid_waits_for_health_between_runs(tmp_path):
         shot_counts=[0],
         seeds=[1, 2],
         results_root=tmp_path,
-        wait_for_health=lambda client: waits.append("checked"),
+        health_check=lambda client: waits.append("checked"),
     )
     monkeypatch.undo()
     assert waits == ["checked", "checked"]
@@ -1279,7 +1278,7 @@ def run_grid(
     shot_counts: list[int],
     seeds: list[int],
     results_root: Path,
-    wait_for_health: object = None,
+    health_check: Callable[[object], None] | None = None,
     tasks_path: Path | None = None,
 ) -> dict:
     """Walk the grid, one run id at a time."""
@@ -1295,8 +1294,11 @@ def run_grid(
                 if is_complete(run_dir):
                     continue
                 reset_run(run_dir)
-                if wait_for_health is not None:
-                    wait_for_health(client)
+                if health_check is not None:
+                    health_check(client)
+                # Section 6.4 order: manifest BEFORE the sessions, so an
+                # interrupted run still records what it was running.
+                _write_manifest(run_dir, run_id, slug, shots, seed)
                 try:
                     run_one(
                         client,
@@ -1321,7 +1323,6 @@ def run_grid(
                     continue
                 consecutive = 0
                 completed.append(run_id)
-                _write_manifest(run_dir, run_id, slug, shots, seed)
     return {"completed": completed, "aborted": aborted}
 
 
@@ -1392,7 +1393,7 @@ def main(argv: list[str] | None = None) -> int:
         shot_counts=[int(s) for s in args.shots.split(",") if s],
         seeds=_parse_seeds(args.seeds),
         results_root=Path(args.results_root),
-        wait_for_health=wait_for_health,
+        health_check=wait_for_health,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 1 if result["aborted"] else 0
@@ -1734,16 +1735,13 @@ def aggregate(
             cells: list[dict] = []
             for seed in seeds:
                 cells.extend(_load_cells(root / build_run_id(slug, shots, seed)))
-            arms = {
-                arm: _arm_stats([c for c in cells if c["arm"] == arm])
+            by_arm = {
+                arm: [c for c in cells if c["arm"] == arm]
                 for arm in ("oxide", "explicit", "rust")
             }
-            delta = paired_delta(
-                [c for c in cells if c["arm"] == "oxide"],
-                [c for c in cells if c["arm"] == "explicit"],
-            )
-            oxide = [c for c in cells if c["arm"] == "oxide"]
-            explicit = [c for c in cells if c["arm"] == "explicit"]
+            arms = {arm: _arm_stats(rows) for arm, rows in by_arm.items()}
+            oxide, explicit = by_arm["oxide"], by_arm["explicit"]
+            delta = paired_delta(oxide, explicit)
             points.append(
                 {
                     "model_slug": slug,
