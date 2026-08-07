@@ -1,5 +1,15 @@
 # Ownership Probe — 20 classes (qwen2.5-coder 7B-instruct-q8_0)
 
+> **SUPERSEDED (2026-08-07).** The headline below — +18.3pp with a 2-SE
+> interval excluding zero, called "the first statistically resolved result" —
+> did not survive re-running at 10 seeds. The same subject on the same corpus
+> gave **+10.0pp, 2-SE `[−1.7, +21.7]`, sign test p = 0.18**. That interval
+> includes zero; the "resolved" claim was an artifact of three seeds and is
+> withdrawn. See [`../ownership-probe-10seed/`](../ownership-probe-10seed/).
+> The direction and the per-class table below still stand; the magnitude and
+> the significance do not.
+
+
 **Date:** 2026-08-07
 **Corpus:** `eval/probes.jsonl` — 20 defect classes × 3 arms, 60 records, every
 one mechanically verified (broken fails with its intended ownership code and

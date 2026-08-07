@@ -24,6 +24,12 @@ time.
 **18 of 21 non-tied comparisons favour implicit linearity, two-sided exact
 p = 0.0015.**
 
+> **Updated 2026-08-07.** Re-running qwen at 10 seeds changed its signs from
+> +8/−1 to +10/−4. Recomputed with the better estimate, the pooled test is
+> **20 of 26, p = 0.0094** — still significant, weaker than stated here.
+> codegemma and granite remain at 3 seeds and are provisional for the same
+> reason qwen's 3-seed number was. See `../ownership-probe-10seed/`.
+
 ## Applying this project's own guards honestly
 
 Neither replication clears 2 SE on its own, and both intervals include zero

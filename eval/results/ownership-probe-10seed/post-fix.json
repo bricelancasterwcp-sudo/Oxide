@@ -1,0 +1,7407 @@
+[
+ {
+  "id": "p01",
+  "arm": "oxide",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "oxide",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "oxide",
+  "defect": "use-after-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p01",
+  "arm": "oxide",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "oxide",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "oxide",
+  "defect": "use-after-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p01",
+  "arm": "oxide",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "oxide",
+  "defect": "use-after-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p01",
+  "arm": "oxide",
+  "defect": "use-after-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p01",
+  "arm": "oxide",
+  "defect": "use-after-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p01",
+  "arm": "explicit",
+  "defect": "use-after-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p01",
+  "arm": "explicit",
+  "defect": "use-after-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p01",
+  "arm": "explicit",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "explicit",
+  "defect": "use-after-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p01",
+  "arm": "explicit",
+  "defect": "use-after-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p01",
+  "arm": "explicit",
+  "defect": "use-after-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0305"
+  ]
+ },
+ {
+  "id": "p01",
+  "arm": "explicit",
+  "defect": "use-after-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p01",
+  "arm": "explicit",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "explicit",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "explicit",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "rust",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "rust",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "rust",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "rust",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "rust",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "rust",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "rust",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "rust",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "rust",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p01",
+  "arm": "rust",
+  "defect": "use-after-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p02",
+  "arm": "oxide",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "oxide",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "oxide",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "oxide",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "oxide",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "oxide",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "oxide",
+  "defect": "double-consume",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p02",
+  "arm": "oxide",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "oxide",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "oxide",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "explicit",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "explicit",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0003"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "explicit",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "explicit",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0003"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "explicit",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "explicit",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "explicit",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0003"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "explicit",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "explicit",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "explicit",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p02",
+  "arm": "rust",
+  "defect": "double-consume",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p02",
+  "arm": "rust",
+  "defect": "double-consume",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p02",
+  "arm": "rust",
+  "defect": "double-consume",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p02",
+  "arm": "rust",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n",
+  "codes": []
+ },
+ {
+  "id": "p02",
+  "arm": "rust",
+  "defect": "double-consume",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p02",
+  "arm": "rust",
+  "defect": "double-consume",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p02",
+  "arm": "rust",
+  "defect": "double-consume",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n",
+  "codes": []
+ },
+ {
+  "id": "p02",
+  "arm": "rust",
+  "defect": "double-consume",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p02",
+  "arm": "rust",
+  "defect": "double-consume",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p02",
+  "arm": "rust",
+  "defect": "double-consume",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0401"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0403"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0403"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0203",
+   "OX0203",
+   "OX0203"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0403"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0403"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p04",
+  "arm": "oxide",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "oxide",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "oxide",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "oxide",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "oxide",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "oxide",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "oxide",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "oxide",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "oxide",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "oxide",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "explicit",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0300",
+   "OX0300",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "explicit",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "explicit",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0303"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "explicit",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "explicit",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "explicit",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "explicit",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "explicit",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "explicit",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "explicit",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "rust",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0502"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "rust",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0502"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "rust",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0502"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "rust",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0502"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "rust",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0502"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "rust",
+  "defect": "assign-to-iterated-vec",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n4\n",
+  "codes": []
+ },
+ {
+  "id": "p04",
+  "arm": "rust",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0502"
+  ]
+ },
+ {
+  "id": "p04",
+  "arm": "rust",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n",
+  "codes": []
+ },
+ {
+  "id": "p04",
+  "arm": "rust",
+  "defect": "assign-to-iterated-vec",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n4\n",
+  "codes": []
+ },
+ {
+  "id": "p04",
+  "arm": "rust",
+  "defect": "assign-to-iterated-vec",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "oxide",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "oxide",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "oxide",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "oxide",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "oxide",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "oxide",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "oxide",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "oxide",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "oxide",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "oxide",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "explicit",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "explicit",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "explicit",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "explicit",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "explicit",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0300",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "explicit",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "explicit",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "explicit",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "explicit",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "explicit",
+  "defect": "move-then-read-field",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p05",
+  "arm": "rust",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "rust",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "rust",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "rust",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "rust",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "rust",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "rust",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "rust",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "rust",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p05",
+  "arm": "rust",
+  "defect": "move-then-read-field",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "oxide",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "oxide",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "oxide",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "oxide",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "oxide",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "oxide",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "oxide",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "oxide",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "oxide",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "oxide",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "explicit",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "explicit",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "explicit",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "explicit",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "explicit",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "explicit",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "explicit",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "explicit",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "explicit",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "explicit",
+  "defect": "move-inside-branch",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p06",
+  "arm": "rust",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "rust",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "rust",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "rust",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "rust",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "rust",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "rust",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "rust",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "rust",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p06",
+  "arm": "rust",
+  "defect": "move-inside-branch",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p07",
+  "arm": "oxide",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": false,
+  "parsed": false,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0101"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "oxide",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "oxide",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": false,
+  "parsed": false,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0101"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "oxide",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "oxide",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": false,
+  "parsed": false,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0101"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "oxide",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "oxide",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "oxide",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": false,
+  "parsed": false,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0101"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "oxide",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": false,
+  "parsed": false,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0101"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "oxide",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "explicit",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "explicit",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "explicit",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "explicit",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "explicit",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "explicit",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "explicit",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "explicit",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "explicit",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "explicit",
+  "defect": "move-into-struct-literal",
+  "strict": false,
+  "lenient": false,
+  "parsed": false,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0101"
+  ]
+ },
+ {
+  "id": "p07",
+  "arm": "rust",
+  "defect": "move-into-struct-literal",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p07",
+  "arm": "rust",
+  "defect": "move-into-struct-literal",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p07",
+  "arm": "rust",
+  "defect": "move-into-struct-literal",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p07",
+  "arm": "rust",
+  "defect": "move-into-struct-literal",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p07",
+  "arm": "rust",
+  "defect": "move-into-struct-literal",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p07",
+  "arm": "rust",
+  "defect": "move-into-struct-literal",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p07",
+  "arm": "rust",
+  "defect": "move-into-struct-literal",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p07",
+  "arm": "rust",
+  "defect": "move-into-struct-literal",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p07",
+  "arm": "rust",
+  "defect": "move-into-struct-literal",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p07",
+  "arm": "rust",
+  "defect": "move-into-struct-literal",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "oxide",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "oxide",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "oxide",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "oxide",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "oxide",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "oxide",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "oxide",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "oxide",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "oxide",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "oxide",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "explicit",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "explicit",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "explicit",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "explicit",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "explicit",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "explicit",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "explicit",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "explicit",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "explicit",
+  "defect": "move-into-enum-variant",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p08",
+  "arm": "explicit",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "rust",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "rust",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "rust",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "rust",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "rust",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "rust",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "rust",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "rust",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "rust",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p08",
+  "arm": "rust",
+  "defect": "move-into-enum-variant",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n2\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "oxide",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "oxide",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "oxide",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "oxide",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "oxide",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "oxide",
+  "defect": "move-into-vec-push",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p09",
+  "arm": "oxide",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "oxide",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "oxide",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "oxide",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "explicit",
+  "defect": "move-into-vec-push",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p09",
+  "arm": "explicit",
+  "defect": "move-into-vec-push",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p09",
+  "arm": "explicit",
+  "defect": "move-into-vec-push",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p09",
+  "arm": "explicit",
+  "defect": "move-into-vec-push",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p09",
+  "arm": "explicit",
+  "defect": "move-into-vec-push",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p09",
+  "arm": "explicit",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "explicit",
+  "defect": "move-into-vec-push",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p09",
+  "arm": "explicit",
+  "defect": "move-into-vec-push",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p09",
+  "arm": "explicit",
+  "defect": "move-into-vec-push",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p09",
+  "arm": "explicit",
+  "defect": "move-into-vec-push",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p09",
+  "arm": "rust",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "rust",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "rust",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "rust",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "rust",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "rust",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "rust",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "rust",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "rust",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p09",
+  "arm": "rust",
+  "defect": "move-into-vec-push",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p10",
+  "arm": "oxide",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "oxide",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "oxide",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "oxide",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "oxide",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "oxide",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0300",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "oxide",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "oxide",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "oxide",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "oxide",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "explicit",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "explicit",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "explicit",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "explicit",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "explicit",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "explicit",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "explicit",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "explicit",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "explicit",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "explicit",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p10",
+  "arm": "rust",
+  "defect": "move-via-struct-update",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n55\n",
+  "codes": []
+ },
+ {
+  "id": "p10",
+  "arm": "rust",
+  "defect": "move-via-struct-update",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n55\n",
+  "codes": []
+ },
+ {
+  "id": "p10",
+  "arm": "rust",
+  "defect": "move-via-struct-update",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p10",
+  "arm": "rust",
+  "defect": "move-via-struct-update",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n55\n",
+  "codes": []
+ },
+ {
+  "id": "p10",
+  "arm": "rust",
+  "defect": "move-via-struct-update",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n55\n",
+  "codes": []
+ },
+ {
+  "id": "p10",
+  "arm": "rust",
+  "defect": "move-via-struct-update",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n55\n",
+  "codes": []
+ },
+ {
+  "id": "p10",
+  "arm": "rust",
+  "defect": "move-via-struct-update",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n55\n",
+  "codes": []
+ },
+ {
+  "id": "p10",
+  "arm": "rust",
+  "defect": "move-via-struct-update",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n55\n",
+  "codes": []
+ },
+ {
+  "id": "p10",
+  "arm": "rust",
+  "defect": "move-via-struct-update",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n55\n",
+  "codes": []
+ },
+ {
+  "id": "p10",
+  "arm": "rust",
+  "defect": "move-via-struct-update",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "5\n55\n",
+  "codes": []
+ },
+ {
+  "id": "p11",
+  "arm": "oxide",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "oxide",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "oxide",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "oxide",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "oxide",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0305"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "oxide",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "oxide",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0300",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "oxide",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "oxide",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "oxide",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "explicit",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "explicit",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "explicit",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "explicit",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "explicit",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "explicit",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0004",
+   "EX0004"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "explicit",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "explicit",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "explicit",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "explicit",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p11",
+  "arm": "rust",
+  "defect": "destructure-then-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p11",
+  "arm": "rust",
+  "defect": "destructure-then-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p11",
+  "arm": "rust",
+  "defect": "destructure-then-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p11",
+  "arm": "rust",
+  "defect": "destructure-then-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p11",
+  "arm": "rust",
+  "defect": "destructure-then-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p11",
+  "arm": "rust",
+  "defect": "destructure-then-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p11",
+  "arm": "rust",
+  "defect": "destructure-then-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p11",
+  "arm": "rust",
+  "defect": "destructure-then-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p11",
+  "arm": "rust",
+  "defect": "destructure-then-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p11",
+  "arm": "rust",
+  "defect": "destructure-then-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n5\n5\n",
+  "codes": []
+ },
+ {
+  "id": "p12",
+  "arm": "oxide",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "oxide",
+  "defect": "move-in-match-scrutinee",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n24\n",
+  "codes": []
+ },
+ {
+  "id": "p12",
+  "arm": "oxide",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "oxide",
+  "defect": "move-in-match-scrutinee",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n24\n",
+  "codes": []
+ },
+ {
+  "id": "p12",
+  "arm": "oxide",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "oxide",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "oxide",
+  "defect": "move-in-match-scrutinee",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n24\n",
+  "codes": []
+ },
+ {
+  "id": "p12",
+  "arm": "oxide",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "oxide",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "oxide",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "explicit",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "explicit",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "explicit",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "explicit",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "explicit",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "explicit",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0401"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "explicit",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "explicit",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "explicit",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "explicit",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "rust",
+  "defect": "move-in-match-scrutinee",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n24\n",
+  "codes": []
+ },
+ {
+  "id": "p12",
+  "arm": "rust",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0382"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "rust",
+  "defect": "move-in-match-scrutinee",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n24\n",
+  "codes": []
+ },
+ {
+  "id": "p12",
+  "arm": "rust",
+  "defect": "move-in-match-scrutinee",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0382"
+  ]
+ },
+ {
+  "id": "p12",
+  "arm": "rust",
+  "defect": "move-in-match-scrutinee",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n24\n",
+  "codes": []
+ },
+ {
+  "id": "p12",
+  "arm": "rust",
+  "defect": "move-in-match-scrutinee",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n24\n",
+  "codes": []
+ },
+ {
+  "id": "p12",
+  "arm": "rust",
+  "defect": "move-in-match-scrutinee",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n24\n",
+  "codes": []
+ },
+ {
+  "id": "p12",
+  "arm": "rust",
+  "defect": "move-in-match-scrutinee",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n24\n",
+  "codes": []
+ },
+ {
+  "id": "p12",
+  "arm": "rust",
+  "defect": "move-in-match-scrutinee",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n24\n",
+  "codes": []
+ },
+ {
+  "id": "p12",
+  "arm": "rust",
+  "defect": "move-in-match-scrutinee",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n24\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0403"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0403"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0203"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "oxide",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "oxide",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "oxide",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "oxide",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "oxide",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "oxide",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "oxide",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "oxide",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "oxide",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "oxide",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "explicit",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "explicit",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "explicit",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "explicit",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "explicit",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "explicit",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0300",
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "explicit",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "explicit",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "explicit",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "explicit",
+  "defect": "move-then-early-return",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p14",
+  "arm": "rust",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "rust",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "rust",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "rust",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "rust",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "rust",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "rust",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "rust",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "rust",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p14",
+  "arm": "rust",
+  "defect": "move-then-early-return",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n60\n",
+  "codes": []
+ },
+ {
+  "id": "p15",
+  "arm": "oxide",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "oxide",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "oxide",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0401"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "oxide",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "oxide",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "oxide",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "oxide",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "oxide",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0201"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "oxide",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "oxide",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "explicit",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304",
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "explicit",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "explicit",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0401"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "explicit",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0401"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "explicit",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "explicit",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0401"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "explicit",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "explicit",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0401"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "explicit",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0401"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "explicit",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0401"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "rust",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0382"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "rust",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0382"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "rust",
+  "defect": "move-via-question-mark",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "22\n99\n",
+  "codes": []
+ },
+ {
+  "id": "p15",
+  "arm": "rust",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0382"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "rust",
+  "defect": "move-via-question-mark",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "22\n99\n",
+  "codes": []
+ },
+ {
+  "id": "p15",
+  "arm": "rust",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0382"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "rust",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0382"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "rust",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0382"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "rust",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0382"
+  ]
+ },
+ {
+  "id": "p15",
+  "arm": "rust",
+  "defect": "move-via-question-mark",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "E0382"
+  ]
+ },
+ {
+  "id": "p16",
+  "arm": "oxide",
+  "defect": "move-in-nested-block",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p16",
+  "arm": "oxide",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "oxide",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "oxide",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "oxide",
+  "defect": "move-in-nested-block",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p16",
+  "arm": "oxide",
+  "defect": "move-in-nested-block",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p16",
+  "arm": "oxide",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "oxide",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "oxide",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "oxide",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "explicit",
+  "defect": "move-in-nested-block",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p16",
+  "arm": "explicit",
+  "defect": "move-in-nested-block",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p16",
+  "arm": "explicit",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "explicit",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "explicit",
+  "defect": "move-in-nested-block",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p16",
+  "arm": "explicit",
+  "defect": "move-in-nested-block",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p16",
+  "arm": "explicit",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "explicit",
+  "defect": "move-in-nested-block",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p16",
+  "arm": "explicit",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "explicit",
+  "defect": "move-in-nested-block",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p16",
+  "arm": "rust",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "rust",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "rust",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "rust",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "rust",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "rust",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "rust",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "rust",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "rust",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p16",
+  "arm": "rust",
+  "defect": "move-in-nested-block",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "oxide",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "oxide",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "oxide",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "oxide",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "oxide",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "oxide",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0401"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "oxide",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "oxide",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "oxide",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "oxide",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "explicit",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "explicit",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "explicit",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0003"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "explicit",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "explicit",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "explicit",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0001"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "explicit",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "explicit",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "explicit",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0003"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "explicit",
+  "defect": "double-move-in-one-expression",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p18",
+  "arm": "rust",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "rust",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "rust",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "rust",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "rust",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "rust",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "rust",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "rust",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "rust",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p18",
+  "arm": "rust",
+  "defect": "double-move-in-one-expression",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n20\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "oxide",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "oxide",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "oxide",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "oxide",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "oxide",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "oxide",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "oxide",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "oxide",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "oxide",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "oxide",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "explicit",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "explicit",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "explicit",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "explicit",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "explicit",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "explicit",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "explicit",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "explicit",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "explicit",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "explicit",
+  "defect": "move-then-conditional-use",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p19",
+  "arm": "rust",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "rust",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "rust",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "rust",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "rust",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "rust",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "rust",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "rust",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "rust",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p19",
+  "arm": "rust",
+  "defect": "move-then-conditional-use",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "11\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p20",
+  "arm": "oxide",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "oxide",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0406"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "oxide",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0406"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "oxide",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0406"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "oxide",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "oxide",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "oxide",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "oxide",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "oxide",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "oxide",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0406"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "explicit",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "explicit",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "explicit",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "explicit",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "explicit",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "explicit",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": false,
+  "parsed": false,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0101",
+   "OX0101"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "explicit",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0400"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "explicit",
+  "defect": "consume-while-iterating",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p20",
+  "arm": "explicit",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0300"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "explicit",
+  "defect": "consume-while-iterating",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p20",
+  "arm": "rust",
+  "defect": "consume-while-iterating",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p20",
+  "arm": "rust",
+  "defect": "consume-while-iterating",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p20",
+  "arm": "rust",
+  "defect": "consume-while-iterating",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p20",
+  "arm": "rust",
+  "defect": "consume-while-iterating",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p20",
+  "arm": "rust",
+  "defect": "consume-while-iterating",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p20",
+  "arm": "rust",
+  "defect": "consume-while-iterating",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p20",
+  "arm": "rust",
+  "defect": "consume-while-iterating",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p20",
+  "arm": "rust",
+  "defect": "consume-while-iterating",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p20",
+  "arm": "rust",
+  "defect": "consume-while-iterating",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n11\n",
+  "codes": []
+ },
+ {
+  "id": "p20",
+  "arm": "rust",
+  "defect": "consume-while-iterating",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n11\n",
+  "codes": []
+ }
+]
