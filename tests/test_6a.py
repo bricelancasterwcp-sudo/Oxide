@@ -1630,3 +1630,443 @@ def test_live_smoke_one_task_on_smallest_model(tmp_path):
     assert isinstance(cell["final_passed"], bool)
     assert len(cell["truncated"]) == cell["attempts"]
     assert (tmp_path / "raw" / "t01.oxide.1.txt").exists()
+
+
+# ------------------------------------------------------- grammar-constrained
+# Phase 6b: GBNF grammars + the llama.cpp client that enforces them.
+# Imports are local to this section so the block stays purely additive.
+
+import collections
+import random
+
+from eval.grammar import build as grammar_build
+from eval.llamacpp import (
+    GRAMMAR_DIR,
+    LlamaCppClient,
+    grammar_digest,
+    load_grammar,
+)
+from src.explicit.lexer import ExplicitLexer
+from src.explicit.parser import ExplicitParser
+from src.lexer.lexer import Lexer
+from src.lexer.tokens import KEYWORDS
+from src.parser.parser import _MAX_DEPTH, Parser
+
+# The property under test: nothing the grammar can emit reaches the lexer's
+# "unexpected character" or any parser diagnostic. Semantic codes
+# (OX02xx/OX03xx/OX04xx) are the signal the whole exercise exists to reach
+# and must never fail a soundness assertion.
+def _is_syntax_code(code: str) -> bool:
+    return code == "OX0001" or code.startswith("OX01")
+
+
+def _depth_probing(parser_cls):
+    """A parser subclass that records the deepest recursion it reached."""
+
+    class _Probe(parser_cls):
+        def __init__(self, tokens) -> None:
+            super().__init__(tokens)
+            self.max_depth: int = 0
+
+        def _enter_nested(self) -> None:
+            super()._enter_nested()
+            self.max_depth = max(self.max_depth, self._depth)
+
+    return _Probe
+
+
+def _front_end(source: str, *, explicit: bool = False) -> tuple[list, int]:
+    """Lex + parse ``source`` with the real front end for the given dialect;
+    returns (diagnostics, max parser depth)."""
+    lexer_cls = ExplicitLexer if explicit else Lexer
+    parser_cls = _depth_probing(ExplicitParser if explicit else Parser)
+    lexer = lexer_cls(source)
+    tokens = lexer.tokenize()
+    parser = parser_cls(tokens)
+    parser.parse_module()
+    return [*lexer.diagnostics, *parser.diagnostics], parser.max_depth
+
+
+def _sampled_programs(count: int, *, explicit: bool = False) -> list[str]:
+    rules = grammar_build.build_grammar(explicit=explicit)
+    rng = random.Random(20260807)
+    return [
+        grammar_build.sample(rules, rng, budget=rng.choice([150, 700, 3000]))
+        for _ in range(count)
+    ]
+
+
+def test_committed_grammar_matches_the_generator():
+    """The .gbnf files are build artefacts; drift would mean the tested
+    grammar and the served grammar are different objects."""
+    assert grammar_build.render(explicit=False) == (
+        GRAMMAR_DIR / "oxide.gbnf"
+    ).read_text(encoding="utf-8")
+    assert grammar_build.render(explicit=True) == (
+        GRAMMAR_DIR / "explicit.gbnf"
+    ).read_text(encoding="utf-8")
+
+
+def test_sampled_oxide_programs_never_produce_a_syntax_diagnostic():
+    offenders = []
+    for source in _sampled_programs(400):
+        diagnostics, _ = _front_end(source)
+        offenders += [
+            (d.code, d.message, source)
+            for d in diagnostics
+            if _is_syntax_code(d.code)
+        ]
+    assert offenders == [], offenders[:1]
+
+
+def test_sampled_explicit_programs_never_produce_a_syntax_diagnostic():
+    offenders = []
+    for source in _sampled_programs(400, explicit=True):
+        diagnostics, _ = _front_end(source, explicit=True)
+        offenders += [
+            (d.code, d.message, source)
+            for d in diagnostics
+            if _is_syntax_code(d.code)
+        ]
+    assert offenders == [], offenders[:1]
+
+
+def test_sampled_programs_stay_under_the_parser_depth_guard():
+    deepest = max(_front_end(src)[1] for src in _sampled_programs(400))
+    assert deepest < _MAX_DEPTH
+
+
+def test_worst_case_nesting_stays_under_the_parser_depth_guard():
+    """The bound the tier count buys, exercised rather than argued.
+
+    A full precedence cascade at every tier is the deepest shape the
+    grammar admits; the unbounded recursive grammar this replaces would
+    trip OX0101 'nesting too deep' here instead.
+    """
+    inner = "a || a && a == a + a * -a"
+    for _ in range(grammar_build.TIERS - 1):
+        inner = f"a || a && a == a + a * -({inner})"
+    diagnostics, depth = _front_end("fn main() {\n    let z = " + inner + "\n}\n")
+    assert [d.code for d in diagnostics] == []
+    assert depth < _MAX_DEPTH
+
+
+def test_sampled_programs_always_declare_main():
+    assert all("fn main() {" in src for src in _sampled_programs(60))
+
+
+def _end_positions(rules: dict, node, text: str, pos: int) -> set[int]:
+    """Every position ``node`` can consume ``text`` up to, starting at ``pos``.
+
+    A tiny backtracking recognizer over the same IR the GBNF is rendered
+    from. Sampling can only ever show that keywords are *unlikely*; this
+    shows the identifier rule cannot derive them at all.
+    """
+    if isinstance(node, grammar_build.Lit):
+        return {pos + len(node.text)} if text.startswith(node.text, pos) else set()
+    if isinstance(node, grammar_build.Chars):
+        inside = pos < len(text) and any(
+            lo <= text[pos] <= hi for lo, hi in node.ranges
+        )
+        return {pos + 1} if inside else set()
+    if isinstance(node, grammar_build.Ref):
+        return _end_positions(rules, rules[node.name], text, pos)
+    if isinstance(node, grammar_build.Seq):
+        positions = {pos}
+        for item in node.items:
+            positions = {
+                nxt
+                for cur in positions
+                for nxt in _end_positions(rules, item, text, cur)
+            }
+            if not positions:
+                return set()
+        return positions
+    if isinstance(node, grammar_build.Alt):
+        found: set[int] = set()
+        for option in node.options:
+            found |= _end_positions(rules, option, text, pos)
+        return found
+    if isinstance(node, grammar_build.Rep):
+        found = set() if node.op == "+" else {pos}
+        frontier = {pos}
+        for _ in range(len(text) - pos + 1):
+            frontier = {
+                nxt
+                for cur in frontier
+                for nxt in _end_positions(rules, node.node, text, cur)
+                if nxt > cur
+            }
+            if not frontier:
+                break
+            found |= frontier
+            if node.op == "?":
+                break
+        return found
+    raise TypeError(node)
+
+
+def _derives(rules: list, text: str, root: str = "lname") -> bool:
+    table = dict(rules)
+    return len(text) in _end_positions(table, grammar_build.Ref(root), text, 0)
+
+
+def test_identifier_rule_cannot_derive_any_keyword():
+    """GBNF has no negative lookahead, so keyword exclusion is structural;
+    an identifier that lexed as a keyword would be a parse error."""
+    rules = grammar_build.build_grammar()
+    assert [kw for kw in KEYWORDS if _derives(rules, kw)] == []
+
+
+def test_identifier_rule_still_derives_ordinary_names():
+    """The complement must exclude the keywords and nothing else: prefixes,
+    extensions and near-misses all stay legal identifiers."""
+    rules = grammar_build.build_grammar()
+    legal = (
+        "x", "_", "i", "l", "le", "lets", "letter", "iffy", "inn", "forx",
+        "fn2", "matched", "structs", "count", "first", "is_prime", "sum",
+        "breaks", "continued", "elsewhere", "returns", "truey", "whilst",
+    )
+    assert [name for name in legal if not _derives(rules, name)] == []
+
+
+def test_explicit_grammar_excludes_the_dialect_keyword():
+    # `drop` is a keyword only in the dialect (SPEC section 41), so the two
+    # grammars must disagree about it -- and only about it.
+    assert _derives(grammar_build.build_grammar(), "drop")
+    assert not _derives(grammar_build.build_grammar(explicit=True), "drop")
+
+
+def test_sampled_identifiers_are_never_keywords():
+    rules = grammar_build.build_grammar()
+    rng = random.Random(4)
+    names = {
+        grammar_build.sample(rules, rng, budget=12, root="lname")
+        for _ in range(3000)
+    }
+    assert names.isdisjoint(KEYWORDS)
+    assert len(names) > 500  # the sampler really is exploring the trie
+
+
+def test_load_grammar_reads_the_committed_file():
+    assert load_grammar("oxide").startswith("# GENERATED")
+    assert "root ::=" in load_grammar("explicit")
+
+
+def test_load_grammar_refuses_an_arm_that_has_none():
+    # Not a ModelError: constraining the rust arm would change the control.
+    with pytest.raises(ValueError):
+        load_grammar("rust")
+
+
+def test_grammar_digest_is_stable_and_optional():
+    assert grammar_digest(None) is None
+    assert grammar_digest("root ::= \"a\"") == grammar_digest("root ::= \"a\"")
+    assert grammar_digest("a") != grammar_digest("b")
+
+
+# -------------------------------------------------------- llama.cpp client
+
+
+def _oai_response(
+    content: str = "ok",
+    finish_reason: str = "stop",
+    **overrides: object,
+) -> dict:
+    body: dict = {
+        "choices": [
+            {
+                "index": 0,
+                "message": {"role": "assistant", "content": content},
+                "finish_reason": finish_reason,
+            }
+        ],
+        "usage": {"prompt_tokens": 41, "completion_tokens": 17},
+        "timings": {"prompt_ms": 52.1, "predicted_ms": 1099.4},
+    }
+    body.update(overrides)
+    return body
+
+
+def _llama(monkeypatch, http: _FakeHTTP, **kwargs) -> LlamaCppClient:
+    monkeypatch.setattr("eval.llamacpp._request", http)
+    kwargs.setdefault("sleep", lambda _s: None)
+    return LlamaCppClient("qwen0_5b", **kwargs)
+
+
+def test_llamacpp_generate_returns_populated_generation(monkeypatch):
+    http = _FakeHTTP(_oai_response("hello"))
+    gen = _llama(monkeypatch, http).generate("hi", seed=3)
+    assert gen == Generation(
+        text="hello", tokens_in=41, tokens_out=17, ms=1151, truncated=False
+    )
+
+
+def test_llamacpp_generate_sends_the_pinned_sampling_options(monkeypatch):
+    http = _FakeHTTP(_oai_response())
+    _llama(monkeypatch, http).generate("hi", seed=4)
+    url, payload = http.calls[0]
+    assert url.endswith("/v1/chat/completions")
+    assert payload["temperature"] == 0.8
+    assert payload["top_p"] == 0.95
+    assert payload["seed"] == 4
+    assert payload["max_tokens"] == 2048
+    assert payload["stream"] is False
+
+
+def test_llamacpp_generate_attaches_the_grammar(monkeypatch):
+    http = _FakeHTTP(_oai_response())
+    client = _llama(monkeypatch, http, grammar='root ::= "PURPLE"')
+    client.generate("hi", seed=1)
+    assert http.calls[0][1]["grammar"] == 'root ::= "PURPLE"'
+
+
+def test_llamacpp_generate_omits_grammar_when_unconstrained(monkeypatch):
+    http = _FakeHTTP(_oai_response())
+    _llama(monkeypatch, http).generate("hi", seed=1)
+    assert "grammar" not in http.calls[0][1]
+
+
+def test_llamacpp_marks_length_stop_as_truncated(monkeypatch):
+    http = _FakeHTTP(_oai_response(finish_reason="length"))
+    assert _llama(monkeypatch, http).generate("hi", seed=1).truncated is True
+
+
+def test_llamacpp_retries_then_succeeds(monkeypatch):
+    http = _FakeHTTP(urllib.error.URLError("refused"), _oai_response("late"))
+    assert _llama(monkeypatch, http).generate("hi", seed=1).text == "late"
+    assert len(http.calls) == 2
+
+
+def test_llamacpp_raises_model_error_after_exhausting_retries(monkeypatch):
+    http = _FakeHTTP(*[urllib.error.URLError("down")] * 3)
+    with pytest.raises(ModelError):
+        _llama(monkeypatch, http).generate("hi", seed=1)
+
+
+@pytest.mark.parametrize(
+    "body",
+    [
+        {"error": {"message": "context shift disabled"}},
+        {"choices": []},
+        {"choices": [{"message": "just a string"}]},
+        {"choices": [{"message": None}]},
+        {"object": "chat.completion"},
+    ],
+)
+def test_llamacpp_refuses_a_malformed_200_body(monkeypatch, body):
+    # Infrastructure misclassified as a model failure would bias toward the
+    # null; an empty Generation must never be manufactured from a bad 200.
+    with pytest.raises(ModelError):
+        _llama(monkeypatch, _FakeHTTP(body)).generate("hi", seed=1)
+
+
+def test_llamacpp_refuses_an_overflowing_prompt_before_requesting(monkeypatch):
+    http = _FakeHTTP()
+    client = _llama(monkeypatch, http)
+    with pytest.raises(ContextOverflowError):
+        client.generate("x" * (4 * 8192), seed=1)
+    assert http.calls == []
+
+
+def test_llamacpp_preflight_returns_provenance(monkeypatch):
+    props = {
+        "default_generation_settings": {"n_ctx": 8192},
+        "model_path": "/blobs/sha256-828125",
+        "build_info": "b1-4988f6e",
+    }
+    client = _llama(monkeypatch, _FakeHTTP(props), grammar="root ::= \"a\"")
+    info = client.preflight()
+    assert info["server_n_ctx"] == 8192
+    assert info["num_ctx"] == 8192
+    assert info["model_path"] == "/blobs/sha256-828125"
+    assert info["build_info"] == "b1-4988f6e"
+    assert info["grammar_sha256"] == grammar_digest("root ::= \"a\"")
+
+
+def test_llamacpp_preflight_refuses_a_server_with_a_smaller_window(monkeypatch):
+    # n_ctx is a launch flag here, not a request field: a smaller window
+    # truncates from the front and drops the language card from the oxide
+    # arms only, which is exactly the bias section 48 pins against.
+    props = {"default_generation_settings": {"n_ctx": 4096}}
+    with pytest.raises(ModelError):
+        _llama(monkeypatch, _FakeHTTP(props)).preflight()
+
+
+def test_llamacpp_preflight_refuses_props_without_a_window(monkeypatch):
+    with pytest.raises(ModelError):
+        _llama(monkeypatch, _FakeHTTP({})).preflight()
+
+
+def test_llamacpp_version_reports_the_build(monkeypatch):
+    http = _FakeHTTP({"build_info": "b1-4988f6e"})
+    assert _llama(monkeypatch, http).version() == "b1-4988f6e"
+
+
+def test_llamacpp_healthy_is_false_when_the_server_is_down(monkeypatch):
+    http = _FakeHTTP(urllib.error.URLError("down"))
+    assert _llama(monkeypatch, http).healthy() is False
+
+
+def test_llamacpp_healthy_is_true_when_the_server_answers(monkeypatch):
+    assert _llama(monkeypatch, _FakeHTTP({"status": "ok"})).healthy() is True
+
+
+_LIVE_GRAMMAR_TASKS = ("t01", "t02", "t03", "t05", "t07", "t09", "t12", "t19")
+
+
+@pytest.mark.live
+def test_live_constrained_generation_emits_no_syntax_diagnostics(tmp_path):
+    """The soundness property, tested against the real front end.
+
+    Eight real constrained generations from the real 0.5B, each run through
+    ``harness.check_file``. Zero OX0001 and zero OX01xx is the assertion;
+    OX02xx/OX03xx/OX04xx are expected and are the point -- the pilot saw
+    ~5000 diagnostics and not one linearity code, because nothing survived
+    the lexer.
+
+    A generation stopped at ``num_predict`` is the one exception, and it is
+    not a grammar failure: soundness is a claim about complete derivations,
+    and a prefix of one is not one. Truncation is a RESULT (section 51), so
+    it must not fail the test -- but it may only ever surface as premature
+    end of input, so those are asserted to be EOF errors and nothing else.
+    Grammar constraint makes hitting the cap *more* likely, not less: every
+    continuation of a repetition stays legal, so a degenerate loop runs to
+    the cap instead of derailing into a stop token.
+    """
+    client = LlamaCppClient(
+        "qwen2.5-coder-0.5b-instruct-q8_0", grammar=load_grammar("oxide")
+    )
+    if not client.healthy():
+        pytest.skip(f"no llama-server on {client.host}")
+    try:
+        client.preflight()
+    except ModelError as exc:
+        pytest.skip(f"llama-server unusable: {exc}")
+
+    codes: collections.Counter = collections.Counter()
+    syntax: list[tuple[str, str, str]] = []
+    at_eof: list[tuple[str, str, str]] = []
+    complete = 0
+    for index, task_id in enumerate(_LIVE_GRAMMAR_TASKS, start=1):
+        generation = client.generate(
+            harness.build_prompt("oxide", task_id, shots=0), seed=index
+        )
+        complete += not generation.truncated
+        path = tmp_path / f"{task_id}.ox"
+        path.write_text(extract(generation.text).source, encoding="utf-8")
+        for diagnostic in harness.check_file("oxide", path)["diagnostics"]:
+            code = str(diagnostic["code"])
+            codes[code] += 1
+            if not _is_syntax_code(code):
+                continue
+            found = (task_id, code, str(diagnostic["message"]))
+            bucket = at_eof if generation.truncated and "found EOF" in found[2] else syntax
+            bucket.append(found)
+    print(
+        f"\nconstrained diagnostic distribution: {dict(sorted(codes.items()))}"
+        f"\ncomplete generations: {complete}/{len(_LIVE_GRAMMAR_TASKS)}"
+        f"; truncation-only EOF errors: {len(at_eof)}"
+    )
+    assert complete > 0, "every generation hit the token cap; result is vacuous"
+    assert syntax == [], syntax
