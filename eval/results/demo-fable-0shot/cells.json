@@ -1,0 +1,782 @@
+[
+ {
+  "arm": "oxide",
+  "task": "t01",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let total = 0\n    for x in range(0, 10) {\n        total = total + x * x\n    }\n    print(total)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t02",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let n = 27\n    let steps = 0\n    while n > 1 {\n        let half = n / 2\n        if half * 2 == n {\n            n = half\n        } else {\n            n = n * 3 + 1\n        }\n        steps = steps + 1\n    }\n    print(steps)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t03",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let a = 252\n    let b = 105\n    while b > 0 {\n        let t = a - (a / b) * b\n        a = b\n        b = t\n    }\n    print(a)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t04",
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn is_prime(n: Int) -> Bool {\n    if n < 2 {\n        return false\n    }\n    let prime = true\n    for d in range(2, n) {\n        if n - n / d * d == 0 {\n            prime = false\n        }\n    }\n    prime\n}\n\nfn main() {\n    let count = 0\n    for n in range(2, 100) {\n        if is_prime(n) {\n            count = count + 1\n        }\n    }\n    print(count)\n}\n"
+   }
+  ],
+  "final_passed": true
+ },
+ {
+  "arm": "oxide",
+  "task": "t05",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let a = 1\n    let b = 1\n    let i = 2\n    while i < 20 {\n        let c = a + b\n        a = b\n        b = c\n        i = i + 1\n    }\n    print(b)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t06",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn is_perfect(n: Int) -> Bool {\n    let sum = 0\n    for d in range(1, n) {\n        if n - (n / d) * d == 0 {\n            sum = sum + d\n        }\n    }\n    sum == n\n}\n\nfn main() {\n    for n in range(1, 1000) {\n        if is_perfect(n) {\n            print(n)\n        }\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t07",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let v = vec()\n    for i in range(1, 9) {\n        v = push(v, i * 3)\n    }\n    let sum = 0\n    for x in v {\n        sum = sum + x\n    }\n    print(sum)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t08",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let v = push(push(push(push(push(vec(), 3), 8), -2), 12), 7)\n    let count = 0\n    let best = -1000000\n    for x in v {\n        if x > 0 {\n            count = count + 1\n        }\n        if x > best {\n            best = x\n        }\n    }\n    print(count)\n    print(best)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t09",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let v = push(push(push(push(push(vec(), 1), 2), 3), 4), 5)\n    let i = len(v) - 1\n    while i >= 0 {\n        match get(v, i) {\n            Some(x) => print(x),\n            None => print_str(\"missing\"),\n        }\n        i = i - 1\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t10",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let v = push(push(push(push(push(push(vec(), 4), 1), 7), 3), 9), 2)\n    let kept = vec()\n    for x in v {\n        if x > 3 {\n            kept = push(kept, x)\n        }\n    }\n    for k in kept {\n        print(k)\n    }\n    print(len(kept))\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t11",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn insert_sorted(acc: Vec<Int>, x: Int) -> Vec<Int> {\n    let out = vec()\n    let placed = false\n    for y in acc {\n        if placed {\n            out = push(out, y)\n        } else {\n            if y < x {\n                out = push(out, y)\n            } else {\n                out = push(out, x)\n                out = push(out, y)\n                placed = true\n            }\n        }\n    }\n    if placed {\n        out\n    } else {\n        push(out, x)\n    }\n}\n\nfn main() {\n    let v = push(push(push(push(push(push(vec(), 5), 3), 8), 1), 9), 2)\n    let sorted = vec()\n    for x in v {\n        sorted = insert_sorted(sorted, x)\n    }\n    for x in sorted {\n        print(x)\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t12",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let s = \"stack\"\n    let out = \"\"\n    for c in chars(s) {\n        out = concat(c, out)\n    }\n    print_str(out)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t13",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn reverse(s: Str) -> Str {\n    let out = \"\"\n    for c in chars(s) {\n        out = concat(c, out)\n    }\n    out\n}\n\nfn is_pal(s: Str) -> Bool {\n    let r = reverse(clone(s))\n    s == r\n}\n\nfn main() {\n    print(is_pal(\"level\"))\n    print(is_pal(\"stereo\"))\n    print(is_pal(\"rotor\"))\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t14",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let text = \"mississippi\"\n    let cs = chars(text)\n    let s_count = 0\n    for c in cs {\n        if c == \"s\" {\n            s_count = s_count + 1\n        }\n    }\n    print(s_count)\n    let seen = vec()\n    for c in cs {\n        let is_new = true\n        for d in seen {\n            if d == c {\n                is_new = false\n            }\n        }\n        if is_new {\n            seen = push(seen, c)\n        }\n    }\n    print(len(seen))\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t15",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let inputs = push(push(push(vec(), \"12\"), \"x\"), \"30\")\n    let sum = 0\n    let failed = 0\n    for s in inputs {\n        match parse_int(s) {\n            Some(n) => { sum = sum + n },\n            None => { failed = failed + 1 },\n        }\n    }\n    print(sum)\n    print(failed)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t16",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn show(d: Int) {\n    if d == 0 {\n        print_str(\"undefined\")\n    } else {\n        print(100 / d)\n    }\n}\n\nfn main() {\n    show(5)\n    show(0)\n    show(4)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t17",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let v = push(push(push(vec(), 10), 20), 30)\n    match get(v, 1) {\n        Some(x) => print(x),\n        None => print(-1),\n    }\n    match get(v, 5) {\n        Some(x) => print(x),\n        None => print(-1),\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t18",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "enum Shape { Rect(Int, Int), Tri(Int, Int, Int) }\n\nfn perimeter(s: Shape) -> Int {\n    match s {\n        Rect(w, h) => 2 * (w + h),\n        Tri(a, b, c) => a + b + c,\n    }\n}\n\nfn main() {\n    let shapes = push(push(push(vec(), Rect(3, 4)), Tri(3, 4, 5)), Rect(2, 5))\n    for s in shapes {\n        print(perimeter(s))\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t19",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let width = 7\n    let height = 4\n    print(width * height)\n    print(2 * (width + height))\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "oxide",
+  "task": "t20",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "struct Item { name: Str, price: Int, qty: Int }\n\nfn main() {\n    let items = push(push(push(vec(), Item { name: \"pen\", price: 3, qty: 4 }), Item { name: \"pad\", price: 9, qty: 2 }), Item { name: \"ink\", price: 5, qty: 3 })\n    let total = 0\n    let best_name = \"\"\n    let best_cost = -1\n    for it in items {\n        let cost = it.price * it.qty\n        total = total + cost\n        if cost > best_cost {\n            best_cost = cost\n            best_name = it.name\n        }\n    }\n    print(total)\n    print_str(best_name)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t01",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let total = 0\n    let i = 0\n    while i < 10 {\n        total = total + i * i\n        i = i + 1\n    }\n    print(total)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t02",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let n = 27\n    let steps = 0\n    while n > 1 {\n        if (n / 2) * 2 == n {\n            n = n / 2\n        } else {\n            n = 3 * n + 1\n        }\n        steps = steps + 1\n    }\n    print(steps)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t03",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let a = 252\n    let b = 105\n    while a != b {\n        if a > b {\n            a = a - b\n        } else {\n            b = b - a\n        }\n    }\n    print(a)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t04",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let count = 0\n    let n = 2\n    while n < 100 {\n        let is_p = true\n        let d = 2\n        while d < n {\n            let m = d\n            while m < n {\n                m = m + d\n            }\n            if m == n {\n                is_p = false\n            }\n            d = d + 1\n        }\n        if is_p {\n            count = count + 1\n        }\n        n = n + 1\n    }\n    print(count)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t05",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let a = 1\n    let b = 1\n    let i = 2\n    while i < 20 {\n        let c = a + b\n        a = b\n        b = c\n        i = i + 1\n    }\n    print(b)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t06",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    for n in range(1, 1000) {\n        let total = 0\n        for d in range(1, n) {\n            if n % d == 0 {\n                total = total + d\n            }\n        }\n        if total == n {\n            print(n)\n        }\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t07",
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let idxs = range(1, 9)\n    let multiples = vec()\n    for i in &idxs {\n        multiples = push(multiples, i * 3)\n    }\n    drop idxs\n    let total = 0\n    for x in &multiples {\n        total = total + x\n    }\n    drop multiples\n    print(total)\n}\n"
+   }
+  ],
+  "final_passed": true
+ },
+ {
+  "arm": "explicit",
+  "task": "t08",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let nums = push(push(push(push(push(vec(), 3), 8), -2), 12), 7)\n    let count = 0\n    let largest = -1000000\n    for x in &nums {\n        if x > 0 {\n            count = count + 1\n        }\n        if x > largest {\n            largest = x\n        }\n    }\n    drop nums\n    print(count)\n    print(largest)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t09",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let v = push(push(push(push(push(vec(), 1), 2), 3), 4), 5)\n    let i = len(&v) - 1\n    while i >= 0 {\n        match get(&v, i) {\n            Some(x) => print(x),\n            None => print(0)\n        }\n        i = i - 1\n    }\n    drop v\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t10",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let nums = push(push(push(push(push(push(vec(), 4), 1), 7), 3), 9), 2)\n    let kept = vec()\n    for x in &nums {\n        if x > 3 {\n            kept = push(kept, x)\n        }\n    }\n    drop nums\n    for x in &kept {\n        print(x)\n    }\n    print(len(&kept))\n    drop kept\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t11",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let nums = push(push(push(push(push(push(vec(), 5), 3), 8), 1), 9), 2)\n    let last = 0\n    let i = 0\n    while i < 6 {\n        let best = 1000\n        for x in &nums {\n            if x > last {\n                if x < best {\n                    best = x\n                }\n            }\n        }\n        print(best)\n        last = best\n        i = i + 1\n    }\n    drop nums\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t12",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let s = \"stack\"\n    let cs = chars(&s)\n    drop s\n    let out = \"\"\n    for c in &cs {\n        out = concat(c, out)\n    }\n    drop cs\n    print_str(&out)\n    drop out\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t13",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn get_or_empty(v: &Vec<Str>, i: Int) -> Str {\n    match get(&v, i) {\n        Some(x) => x,\n        None => \"\"\n    }\n}\n\nfn is_pal(s: &Str) -> Bool {\n    let cs = chars(&s)\n    let n = len(&cs)\n    let ok = true\n    let i = 0\n    while i < n {\n        let a = get_or_empty(&cs, i)\n        let b = get_or_empty(&cs, n - 1 - i)\n        let same = &a == &b\n        drop a\n        drop b\n        if same == false {\n            ok = false\n        }\n        i = i + 1\n    }\n    drop cs\n    ok\n}\n\nfn main() {\n    let w1 = \"level\"\n    print(is_pal(&w1))\n    drop w1\n    let w2 = \"stereo\"\n    print(is_pal(&w2))\n    drop w2\n    let w3 = \"rotor\"\n    print(is_pal(&w3))\n    drop w3\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t14",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn contains(v: &Vec<Str>, x: &Str) -> Bool {\n    let found = false\n    for e in &v {\n        if &e == &x {\n            found = true\n        }\n        drop e\n    }\n    found\n}\n\nfn main() {\n    let text = \"mississippi\"\n    let cs = chars(&text)\n    drop text\n    let target = \"s\"\n    let count = 0\n    for c in &cs {\n        if &c == &target {\n            count = count + 1\n        }\n        drop c\n    }\n    drop target\n    print(count)\n    let seen = vec()\n    for c in &cs {\n        if contains(&seen, &c) {\n            drop c\n        } else {\n            seen = push(seen, c)\n        }\n    }\n    drop cs\n    print(len(&seen))\n    drop seen\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t15",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let strs = push(push(push(vec(), \"12\"), \"x\"), \"30\")\n    let total = 0\n    let failed = 0\n    for s in &strs {\n        match parse_int(&s) {\n            Some(n) => { total = total + n },\n            None => { failed = failed + 1 }\n        }\n        drop s\n    }\n    drop strs\n    print(total)\n    print(failed)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t16",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn print_quot(a: Int, b: Int) {\n    if b == 0 {\n        let msg = \"undefined\"\n        print_str(&msg)\n        drop msg\n    } else {\n        print(a / b)\n    }\n}\n\nfn main() {\n    print_quot(100, 5)\n    print_quot(100, 0)\n    print_quot(100, 4)\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t17",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn lookup(v: &Vec<Int>, i: Int) -> Int {\n    match get(&v, i) {\n        Some(x) => x,\n        None => 0 - 1\n    }\n}\n\nfn main() {\n    let nums = push(push(push(vec(), 10), 20), 30)\n    print(lookup(&nums, 1))\n    print(lookup(&nums, 5))\n    drop nums\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t18",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "enum Shape {\n    Rect(Int, Int),\n    Tri(Int, Int, Int)\n}\n\nfn perimeter(s: Shape) -> Int {\n    match s {\n        Rect(w, h) => 2 * (w + h),\n        Tri(a, b, c) => a + b + c\n    }\n}\n\nfn main() {\n    let shapes = push(push(push(vec(), Rect(3, 4)), Tri(3, 4, 5)), Rect(2, 5))\n    for s in &shapes {\n        print(perimeter(s))\n    }\n    drop shapes\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t19",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let w = 7\n    let h = 4\n    print(w * h)\n    print(2 * (w + h))\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "explicit",
+  "task": "t20",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let pen_cost = 3 * 4\n    let pad_cost = 9 * 2\n    let ink_cost = 5 * 3\n    print(pen_cost + pad_cost + ink_cost)\n    let best = \"pen\"\n    let best_cost = pen_cost\n    if pad_cost > best_cost {\n        best = \"pad\"\n        best_cost = pad_cost\n    }\n    if ink_cost > best_cost {\n        best = \"ink\"\n        best_cost = ink_cost\n    }\n    print_str(&best)\n    drop best\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t01",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let sum: i32 = (0..10).map(|n| n * n).sum();\n    println!(\"{}\", sum);\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t02",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let mut n: u64 = 27;\n    let mut steps: u64 = 0;\n    while n != 1 {\n        if n % 2 == 0 {\n            n /= 2;\n        } else {\n            n = 3 * n + 1;\n        }\n        steps += 1;\n    }\n    println!(\"{}\", steps);\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t03",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn gcd(mut a: u64, mut b: u64) -> u64 {\n    while b != 0 {\n        let t = a % b;\n        a = b;\n        b = t;\n    }\n    a\n}\n\nfn main() {\n    println!(\"{}\", gcd(252, 105));\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t04",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let mut count = 0;\n    for n in 2..100u32 {\n        let mut is_prime = true;\n        let mut d = 2;\n        while d * d <= n {\n            if n % d == 0 {\n                is_prime = false;\n                break;\n            }\n            d += 1;\n        }\n        if is_prime {\n            count += 1;\n        }\n    }\n    println!(\"{}\", count);\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t05",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let mut a: u64 = 1;\n    let mut b: u64 = 1;\n    for _ in 2..20 {\n        let next = a + b;\n        a = b;\n        b = next;\n    }\n    println!(\"{}\", b);\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t06",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    for n in 1..1000u32 {\n        let mut sum = 0u32;\n        for d in 1..n {\n            if n % d == 0 {\n                sum += d;\n            }\n        }\n        if sum == n && n > 0 {\n            println!(\"{}\", n);\n        }\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t07",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let multiples: Vec<i32> = (1..=8).map(|i| i * 3).collect();\n    let sum: i32 = multiples.iter().sum();\n    println!(\"{}\", sum);\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t08",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let values = [3, 8, -2, 12, 7];\n    let positive_count = values.iter().filter(|&&v| v > 0).count();\n    let largest = values.iter().max().unwrap();\n    println!(\"{}\", positive_count);\n    println!(\"{}\", largest);\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t09",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let list = vec![1, 2, 3, 4, 5];\n    for x in list.iter().rev() {\n        println!(\"{}\", x);\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t10",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let values = [4, 1, 7, 3, 9, 2];\n    let mut count = 0;\n    for v in values.iter() {\n        if *v > 3 {\n            println!(\"{}\", v);\n            count += 1;\n        }\n    }\n    println!(\"{}\", count);\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t11",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let mut numbers = vec![5, 3, 8, 1, 9, 2];\n    numbers.sort();\n    for n in numbers {\n        println!(\"{}\", n);\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t12",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let text = \"stack\";\n    let reversed: String = text.chars().rev().collect();\n    println!(\"{}\", reversed);\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t13",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    for text in [\"level\", \"stereo\", \"rotor\"] {\n        let reversed: String = text.chars().rev().collect();\n        println!(\"{}\", text == reversed);\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t14",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "use std::collections::HashSet;\n\nfn main() {\n    let text = \"mississippi\";\n    let s_count = text.chars().filter(|&c| c == 's').count();\n    let distinct: HashSet<char> = text.chars().collect();\n    println!(\"{}\", s_count);\n    println!(\"{}\", distinct.len());\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t15",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let inputs = [\"12\", \"x\", \"30\"];\n    let mut sum: i64 = 0;\n    let mut failed: usize = 0;\n    for s in inputs.iter() {\n        match s.parse::<i64>() {\n            Ok(n) => sum += n,\n            Err(_) => failed += 1,\n        }\n    }\n    println!(\"{}\", sum);\n    println!(\"{}\", failed);\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t16",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let dividend: u32 = 100;\n    let divisors: [u32; 3] = [5, 0, 4];\n    for divisor in divisors {\n        if divisor == 0 {\n            println!(\"undefined\");\n        } else {\n            println!(\"{}\", dividend / divisor);\n        }\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t17",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let items = vec![10, 20, 30];\n    for pos in [1usize, 5usize] {\n        match items.get(pos) {\n            Some(value) => println!(\"{}\", value),\n            None => println!(\"-1\"),\n        }\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t18",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "enum Shape {\n    Rectangle(f64, f64),\n    Triangle(f64, f64, f64),\n}\n\nfn perimeter(shape: &Shape) -> f64 {\n    match shape {\n        Shape::Rectangle(w, h) => 2.0 * (w + h),\n        Shape::Triangle(a, b, c) => a + b + c,\n    }\n}\n\nfn main() {\n    let shapes = [\n        Shape::Rectangle(3.0, 4.0),\n        Shape::Triangle(3.0, 4.0, 5.0),\n        Shape::Rectangle(2.0, 5.0),\n    ];\n    for shape in &shapes {\n        println!(\"{}\", perimeter(shape));\n    }\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t19",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let width = 7;\n    let height = 4;\n    println!(\"{}\", width * height);\n    println!(\"{}\", 2 * (width + height));\n}\n"
+   }
+  ]
+ },
+ {
+  "arm": "rust",
+  "task": "t20",
+  "final_passed": true,
+  "attempts": [
+   {
+    "compiled": true,
+    "passed": true,
+    "diag_codes": [],
+    "code": "fn main() {\n    let items = [(\"pen\", 3, 4), (\"pad\", 9, 2), (\"ink\", 5, 3)];\n    let mut total = 0;\n    let mut best_name = \"\";\n    let mut best_cost = -1;\n    for &(name, price, qty) in items.iter() {\n        let cost = price * qty;\n        total += cost;\n        if cost > best_cost {\n            best_cost = cost;\n            best_name = name;\n        }\n    }\n    println!(\"{}\", total);\n    println!(\"{}\", best_name);\n}\n"
+   }
+  ]
+ }
+]

@@ -1,0 +1,527 @@
+"""Blind golden tests for the Oxide parser — SPEC.md Part II, sections 6-13.
+
+Every expectation below is derived from SPEC.md alone: grammar (section 6),
+AST catalog (section 7), canonical dump format (section 8), Pratt binding
+powers (section 10), error recovery (section 11), and the normative golden
+dumps (section 12). One test function per section-13 plan item, parametrized
+within items.
+"""
+
+import dataclasses
+
+import pytest
+
+from src.parser.ast import BinOp, Let, Module, dump
+from src.parser.parser import parse_source
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+
+def d(src: str) -> str:
+    """Canonical dump of the module parsed from *src*."""
+    return dump(parse_source(src)[0])
+
+
+def codes(src: str) -> list[str]:
+    """All diagnostic codes for *src*: lexer codes first, then parser codes."""
+    return [diag.code for diag in parse_source(src)[1]]
+
+
+def mod_f(body_dump: str) -> str:
+    """Expected module dump for a single `fn f()` whose block dumps as *body_dump*."""
+    return f"(module (fn f (params) {body_dump}))"
+
+
+def collect_node_ids(root: object) -> list[int]:
+    """Gather every node_id in an AST by walking dataclasses.fields."""
+    ids: list[int] = []
+    stack: list[object] = [root]
+    while stack:
+        node = stack.pop()
+        if dataclasses.is_dataclass(node) and hasattr(node, "node_id"):
+            ids.append(node.node_id)
+            for field in dataclasses.fields(node):
+                stack.append(getattr(node, field.name))
+        elif isinstance(node, tuple):
+            stack.extend(node)
+    return ids
+
+
+# ---------------------------------------------------------------------------
+# Golden sources and dumps (SPEC section 12, verbatim)
+# ---------------------------------------------------------------------------
+
+P1_SRC = "fn main() {\n    let x = 42\n    print(x)\n}\n"
+P1_DUMP = "(module (fn main (params) (block (let (bind x) (lit int 42)) (tail (call (var print) (var x))))))"
+
+P2_SRC = "fn f() { let y = 1 + 2 * 3 == 7 && !flag }"
+P2_BODY = "(block (let (bind y) (bin && (bin == (bin + (lit int 1) (bin * (lit int 2) (lit int 3))) (lit int 7)) (un ! (var flag)))))"
+P2_DUMP = f"(module (fn f (params) {P2_BODY}))"
+
+P3_SRC = (
+    "struct Point { x: Int, y: Int }\n"
+    "\n"
+    "fn add(p: Point) -> Int {\n"
+    "    let Point { x, y } = p\n"
+    "    x + y\n"
+    "}\n"
+)
+P3_DUMP = "(module (struct Point (field x (type Int)) (field y (type Int))) (fn add (params (param p (type Point))) (ret (type Int)) (block (let (destruct Point x y) (var p)) (tail (bin + (var x) (var y))))))"
+
+P4_SRC = (
+    "fn f(a: Int) -> Int {\n"
+    "    while a < 10 {\n"
+    "        step()\n"
+    "    }\n"
+    "    if a > 0 {\n"
+    "        a\n"
+    "    } else if a == 0 {\n"
+    "        make(Point { x: 1, y: 2 }).x\n"
+    "    } else {\n"
+    "        -a\n"
+    "    }\n"
+    "}\n"
+)
+P4_BODY = "(block (exprstmt (while (bin < (var a) (lit int 10)) (block (tail (call (var step)))))) (tail (if (bin > (var a) (lit int 0)) (block (tail (var a))) (if (bin == (var a) (lit int 0)) (block (tail (field (call (var make) (structlit Point (x (lit int 1)) (y (lit int 2)))) x))) (block (tail (un - (var a))))))))"
+P4_DUMP = f"(module (fn f (params (param a (type Int))) (ret (type Int)) {P4_BODY}))"
+
+
+# ---------------------------------------------------------------------------
+# 1. Golden programs P1-P4
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("src", "expected"),
+    [(P1_SRC, P1_DUMP), (P2_SRC, P2_DUMP), (P3_SRC, P3_DUMP), (P4_SRC, P4_DUMP)],
+    ids=["P1", "P2", "P3", "P4"],
+)
+def test_golden_programs_dump_exactly_with_zero_diagnostics(src: str, expected: str) -> None:
+    # Act
+    module, diagnostics = parse_source(src)
+    # Assert
+    assert dump(module) == expected
+    assert diagnostics == []
+
+
+# ---------------------------------------------------------------------------
+# 2. Tail rule
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("src", "expected"),
+    [
+        ("fn f() { let x = 1 }", mod_f("(block (let (bind x) (lit int 1)))")),
+        ("fn f() { 1 }", mod_f("(block (tail (lit int 1)))")),
+        ("fn f() {\n    1\n}\n", mod_f("(block (tail (lit int 1)))")),
+    ],
+    ids=["let-has-no-tail", "single-line-tail", "newline-before-brace-still-tail"],
+)
+def test_tail_rule_last_expression_statement_becomes_block_tail(src: str, expected: str) -> None:
+    assert d(src) == expected
+    assert codes(src) == []
+
+
+# ---------------------------------------------------------------------------
+# 3. Params / args / fields: empty and trailing-comma forms
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("src", "expected"),
+    [
+        ("fn f() {}", mod_f("(block)")),
+        ("fn f(a, b,) {}", "(module (fn f (params (param a) (param b)) (block)))"),
+        ("fn f() { g() }", mod_f("(block (tail (call (var g))))")),
+        ("fn f() { g(1, 2,) }", mod_f("(block (tail (call (var g) (lit int 1) (lit int 2))))")),
+        ("struct S { a: Int, }", "(module (struct S (field a (type Int))))"),
+        ("struct S {}", "(module (struct S))"),
+        ("fn f() { let p = S { a: 1, } }", mod_f("(block (let (bind p) (structlit S (a (lit int 1)))))")),
+    ],
+    ids=[
+        "empty-params",
+        "trailing-comma-params",
+        "empty-call-args",
+        "trailing-comma-call-args",
+        "trailing-comma-struct-decl",
+        "empty-struct-decl",
+        "trailing-comma-struct-lit",
+    ],
+)
+def test_delimited_lists_support_empty_and_trailing_comma_forms(src: str, expected: str) -> None:
+    assert d(src) == expected
+    assert codes(src) == []
+
+
+# ---------------------------------------------------------------------------
+# 4. Types
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("src", "expected"),
+    [
+        (
+            "fn f(v: Vec<Vec<Int>>) {}",
+            "(module (fn f (params (param v (type Vec (type Vec (type Int))))) (block)))",
+        ),
+        (
+            "fn f(m: Map<Int, Str>) {}",
+            "(module (fn f (params (param m (type Map (type Int) (type Str)))) (block)))",
+        ),
+        ("fn f() { let x: Int = 1 }", mod_f("(block (let (bind x) (type Int) (lit int 1)))")),
+    ],
+    ids=["nested-generic", "two-arg-generic", "let-annotation"],
+)
+def test_generic_types_and_let_annotations_dump(src: str, expected: str) -> None:
+    assert d(src) == expected
+    assert codes(src) == []
+
+
+# ---------------------------------------------------------------------------
+# 5. Precedence & associativity
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("expr", "tail"),
+    [
+        ("a - b - c", "(bin - (bin - (var a) (var b)) (var c))"),
+        ("a && b || c", "(bin || (bin && (var a) (var b)) (var c))"),
+        ("-a * b", "(bin * (un - (var a)) (var b))"),
+        ("-a.b", "(un - (field (var a) b))"),
+        ("f(x)(y)", "(call (call (var f) (var x)) (var y))"),
+        ("a.b.c", "(field (field (var a) b) c)"),
+    ],
+    ids=["sub-left", "and-binds-tighter-than-or", "neg-then-mul", "postfix-over-prefix", "curried-call", "field-chain"],
+)
+def test_precedence_and_associativity_shape_expression_trees(expr: str, tail: str) -> None:
+    # Arrange
+    src = f"fn f() {{ {expr} }}"
+    # Act / Assert
+    assert d(src) == mod_f(f"(block (tail {tail}))")
+    assert codes(src) == []
+
+
+# ---------------------------------------------------------------------------
+# 6. Chained comparison
+# ---------------------------------------------------------------------------
+
+
+def test_chained_comparison_emits_exactly_one_ox0110_and_stays_left_assoc() -> None:
+    # Arrange
+    src = "fn f() { a < b < c }"
+    # Act / Assert
+    assert d(src) == mod_f("(block (tail (bin < (bin < (var a) (var b)) (var c))))")
+    assert codes(src) == ["OX0110"]
+
+
+# ---------------------------------------------------------------------------
+# 7. If / else-if chains; if as an expression
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("src", "expected"),
+    [
+        (
+            "fn f() { if a { } else if b { } else { } }",
+            mod_f("(block (tail (if (var a) (block) (if (var b) (block) (block)))))"),
+        ),
+        (
+            "fn f() { let m = if c { 1 } else { 2 } }",
+            mod_f("(block (let (bind m) (if (var c) (block (tail (lit int 1))) (block (tail (lit int 2))))))"),
+        ),
+    ],
+    ids=["else-if-nests-as-if", "if-as-let-initializer"],
+)
+def test_else_if_chains_nest_as_if_in_else_slot(src: str, expected: str) -> None:
+    assert d(src) == expected
+    assert codes(src) == []
+
+
+# ---------------------------------------------------------------------------
+# 8. Struct-literal restriction in conditions
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("src", "fragment"),
+    [
+        ("fn f() { if x { } }", "(tail (if (var x) (block)))"),
+        ("fn f() { while p { } }", "(while (var p) (block))"),
+        ("fn f() { if (Point { x: 1 }) { } }", "(if (structlit Point (x (lit int 1))) (block))"),
+    ],
+    ids=["if-cond-is-var-not-structlit", "while-cond-is-var-not-structlit", "parenthesized-structlit-cond"],
+)
+def test_struct_literal_restriction_applies_in_conditions_but_lifts_in_parens(src: str, fragment: str) -> None:
+    assert fragment in d(src)
+    assert codes(src) == []
+
+
+# ---------------------------------------------------------------------------
+# 9. NEWLINE handling inside parens and after operators
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("src", "expected"),
+    [
+        (
+            "fn g() {\n    f(\n        x,\n        y\n    )\n}\n",
+            "(module (fn g (params) (block (tail (call (var f) (var x) (var y))))))",
+        ),
+        (
+            "fn g() {\n    let z = 1 +\n        2\n}\n",
+            "(module (fn g (params) (block (let (bind z) (bin + (lit int 1) (lit int 2))))))",
+        ),
+    ],
+    ids=["multiline-call-args", "operator-at-line-end-continues"],
+)
+def test_newlines_in_parens_and_trailing_operators_continue_expressions(src: str, expected: str) -> None:
+    assert d(src) == expected
+    assert codes(src) == []
+
+
+# ---------------------------------------------------------------------------
+# 10. return
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("src", "expected"),
+    [
+        ("fn f() { return }", mod_f("(block (return))")),
+        ("fn f() { return x }", mod_f("(block (return (var x)))")),
+    ],
+    ids=["bare-return", "return-with-value"],
+)
+def test_return_parses_with_and_without_value(src: str, expected: str) -> None:
+    assert d(src) == expected
+    assert codes(src) == []
+
+
+# ---------------------------------------------------------------------------
+# 11. Recovery
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("src", "expected_codes", "fragments"),
+    [
+        (
+            "fn f() { let = 5 }\nfn g() {}\n",
+            ["OX0104"],
+            ["(error)", "(fn g (params) (block))"],
+        ),
+        (
+            "fn f() { (1 + ) }",
+            ["OX0100"],
+            ["(tail (bin + (lit int 1) (error)))"],
+        ),
+        (
+            "42\nfn g() {}\n",
+            ["OX0102"],
+            ["(fn g (params) (block))"],
+        ),
+    ],
+    ids=["bad-let-pattern-then-g-survives", "missing-operand-in-parens", "bad-top-level-item-then-g-survives"],
+)
+def test_recovery_yields_error_nodes_and_later_definitions_survive(
+    src: str, expected_codes: list[str], fragments: list[str]
+) -> None:
+    # Act
+    result = d(src)
+    # Assert
+    assert codes(src) == expected_codes
+    for fragment in fragments:
+        assert fragment in result
+
+
+# ---------------------------------------------------------------------------
+# 12. No cascade from lexer ERROR tokens
+# ---------------------------------------------------------------------------
+
+
+def test_lexer_error_token_does_not_cascade_into_parser_diagnostics() -> None:
+    # Arrange
+    src = "fn f() { let x = 123abc }"
+    # Act
+    cs = codes(src)
+    # Assert
+    assert "OX0004" in cs
+    assert "OX0100" not in cs
+    assert "(let (bind x) (error))" in d(src)
+
+
+# ---------------------------------------------------------------------------
+# 13. Diagnostic ordering: lexer before parser
+# ---------------------------------------------------------------------------
+
+
+def test_lexer_diagnostics_precede_parser_diagnostics() -> None:
+    # Arrange: '@' is a lexer error (OX0001); 'let =' is a parser error (OX0104).
+    src = "fn f() { let = @ }"
+    # Act
+    cs = codes(src)
+    # Assert: lexer code first even though the parser error's span starts earlier.
+    assert cs == ["OX0001", "OX0104"]
+
+
+# ---------------------------------------------------------------------------
+# 14. node_id uniqueness
+# ---------------------------------------------------------------------------
+
+
+def test_all_node_ids_in_one_parse_are_unique() -> None:
+    # Act
+    module, _ = parse_source(P4_SRC)
+    ids = collect_node_ids(module)
+    # Assert
+    assert len(ids) > 1
+    assert len(ids) == len(set(ids))
+
+
+# ---------------------------------------------------------------------------
+# 15. Spans
+# ---------------------------------------------------------------------------
+
+
+def test_let_and_binop_spans_cover_their_source_text_exactly() -> None:
+    # Arrange
+    src = "fn f() { let x = 1 + 2 }"
+    # Act
+    module, _ = parse_source(src)
+    let_stmt = module.items[0].body.stmts[0]
+    binop = let_stmt.init
+    # Assert
+    assert isinstance(let_stmt, Let)
+    assert isinstance(binop, BinOp)
+    assert (let_stmt.span.start, let_stmt.span.end) == (src.index("let"), src.index("2") + 1)
+    assert (binop.span.start, binop.span.end) == (src.index("1"), src.index("2") + 1)
+
+
+# ---------------------------------------------------------------------------
+# 16. Never raises
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "src",
+    ['"\\u{', "/*/*/*", "\x00\xff@#$", "0x 0b2 9e", "fn", "fn f(", "{", "}}}", "fn f() -> {"],
+)
+def test_parse_source_never_raises_and_always_returns_a_module(src: str) -> None:
+    # Act (must not raise on any input)
+    module, diagnostics = parse_source(src)
+    # Assert
+    assert isinstance(module, Module)
+    assert isinstance(diagnostics, list)
+
+
+# ---------------------------------------------------------------------------
+# Regressions: demonstrated defects
+# ---------------------------------------------------------------------------
+
+
+def test_trailing_while_statement_stays_exprstmt_not_tail() -> None:
+    # A while_stmt is a distinct stmt production (SPEC section 6): the tail
+    # rule converts only expression statements, so a block-final while must
+    # dump as (exprstmt (while ...)), never as the block's tail.
+    src = "fn f() { while c { } }"
+    assert d(src) == mod_f("(block (exprstmt (while (var c) (block))))")
+    assert codes(src) == []
+
+
+def test_empty_destructure_pattern_is_rejected() -> None:
+    # pattern := IDENT | IDENT "{" IDENT ("," IDENT)* [","] "}" requires at
+    # least one field name inside the braces (SPEC section 6).
+    src = "fn f() { let P { } = p }"
+    assert "OX0101" in codes(src)
+    assert "(destruct" not in d(src)
+
+
+def test_newline_inside_destructure_pattern_braces_is_rejected() -> None:
+    # Pattern braces are not one of the enumerated NEWLINE-skip contexts
+    # (SPEC section 6), so a NEWLINE before the closing brace is an error.
+    src = "fn f(p: P) {\n    let P { x,\n            y\n          } = p\n    x\n}\n"
+    assert "OX0101" in codes(src)
+    assert "(destruct" not in d(src)
+
+
+def test_parenthesized_subexpression_spans_are_token_balanced() -> None:
+    # Arrange
+    src = "fn f() { (1 + 2) * 3 }"
+    # Act
+    module, diagnostics = parse_source(src)
+    mul = module.items[0].body.tail
+    # Assert: no span starts inside a paren pair it does not fully contain.
+    assert diagnostics == []
+    assert isinstance(mul, BinOp)
+    assert src[mul.span.start : mul.span.end] == "(1 + 2) * 3"
+    assert src[mul.lhs.span.start : mul.lhs.span.end] == "(1 + 2)"
+
+
+@pytest.mark.parametrize(
+    "src",
+    ["fn f() { ( + ) }", "fn f() { + }"],
+    ids=["empty-operand-parens", "bare-operator-statement"],
+)
+def test_broken_expression_region_emits_exactly_one_diagnostic(src: str) -> None:
+    # SPEC section 11: one diagnostic per error region — a failed nud must
+    # not cascade into extra OX0100s via the binary-operator loop.
+    assert codes(src) == ["OX0100"]
+
+
+def test_newline_before_lbrace_or_else_is_tolerated() -> None:
+    # SPEC Part VII section 34 (supersedes the earlier ruling): a NEWLINE run
+    # is skipped between a fn/if/while/for/match header and its '{', and
+    # between '}' and 'else' (golden W6).
+    module, diagnostics = parse_source("fn f()\n{\n    1\n}\n")
+    assert diagnostics == []
+    assert dump(module) == "(module (fn f (params) (block (tail (lit int 1)))))"
+    else_src = "fn f() {\n    if c {\n        1\n    }\n    else {\n        2\n    }\n}\n"
+    else_module, else_diagnostics = parse_source(else_src)
+    assert else_diagnostics == []
+    assert dump(else_module) == (
+        "(module (fn f (params) (block (tail (if (var c) "
+        "(block (tail (lit int 1))) (block (tail (lit int 2))))))))"
+    )
+
+
+@pytest.mark.parametrize(
+    ("label", "src"),
+    [
+        ("parens", "fn f() { " + "(" * 400 + "1" + ")" * 400 + " }"),
+        ("ifs", "fn f() { " + "if a { " * 250 + "x" + " }" * 250 + " }"),
+        ("bangs", "fn f() { " + "!" * 600 + "x }"),
+        ("whiles", "fn f() { " + "while a { " * 400 + "}" * 400 + " }"),
+        ("types", "fn f(v: " + "Vec<" * 1200 + "Int" + ">" * 1200 + ") {}"),
+        ("else-ifs", "fn f() { if a { } " + "else if a { } " * 1200 + "}"),
+    ],
+    ids=["parens", "ifs", "bangs", "whiles", "types", "else-ifs"],
+)
+def test_parse_source_never_raises_on_pathologically_deep_nesting(
+    label: str, src: str
+) -> None:
+    # Act (SPEC section 9: the parser NEVER raises — deep nesting included)
+    module, diagnostics = parse_source(src)
+    # Assert
+    assert isinstance(module, Module)
+    assert isinstance(diagnostics, list)
+
+
+def test_dump_renders_very_long_operator_and_field_chains() -> None:
+    # Arrange: valid diagnostics-free programs whose ASTs nest thousands deep.
+    binop_src = "fn f() { 1" + " + 1" * 2000 + " }"
+    field_src = "fn f() { a" + ".b" * 3000 + " }"
+    # Act
+    binop_module, binop_diags = parse_source(binop_src)
+    field_module, field_diags = parse_source(field_src)
+    # Assert: dump must not overflow the call stack on ASTs the parser builds.
+    assert binop_diags == []
+    assert dump(binop_module).count("(bin +") == 2000
+    assert field_diags == []
+    assert dump(field_module).count("(field") == 3000

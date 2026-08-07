@@ -1,0 +1,1 @@
+A list contains 7, 8. Look up the element at position 0, then at position 9, where positions count from 0. For each lookup print the element found, or 0 when the position is outside the list.

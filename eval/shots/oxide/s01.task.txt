@@ -1,0 +1,1 @@
+Print the product of the integers 1 through 6.

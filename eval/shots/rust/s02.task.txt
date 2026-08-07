@@ -1,0 +1,1 @@
+A list contains 2, 5, 1, 6. Print the sum of its elements, then the smallest element.

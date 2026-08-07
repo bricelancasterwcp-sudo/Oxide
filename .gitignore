@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtualenv (recreate with: python3.14 -m venv .venv && .venv/bin/pip install pytest pytest-cov)
+.venv/
+
+# Test + coverage artifacts
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Eval run internals — O_EXCL session locks are runtime-only state.
+# Results themselves (triples.jsonl, cells.jsonl, raw/, REPORT.md) ARE tracked:
+# they are the experimental record.
+eval/results/*/.sessions/
+
+# Transpiler scratch output
+*.rs.out

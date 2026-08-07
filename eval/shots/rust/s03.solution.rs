@@ -1,0 +1,6 @@
+fn main() {
+    let s = "flame";
+    println!("{}", s.chars().count());
+    let rev: String = s.chars().rev().collect();
+    println!("{}", rev);
+}
