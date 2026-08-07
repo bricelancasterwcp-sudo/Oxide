@@ -1,7 +1,7 @@
 import json
 import urllib.error
-from pathlib import Path
 
+from eval import harness
 from eval.driver import run_one, run_session
 from eval.extract import Extraction, extract
 from eval.models import Generation, ModelError, OllamaClient
@@ -426,3 +426,89 @@ def test_run_session_lets_model_error_propagate(tmp_path):
             raw_dir=tmp_path / "raw",
             tasks_path=tasks,
         )
+
+
+class _ArmAwareClient:
+    """Returns a program valid for whichever arm's prompt it receives, so
+    every session passes on its first attempt. This keeps rustc
+    invocations across run_one's full task x arm grid to a bare minimum
+    (one per session) instead of running each arm to the 4-attempt cap.
+    """
+
+    _PROGRAMS = {
+        "rust": 'fn main() { println!("42"); }\n',
+        "explicit": "fn main() {\n    print(42)\n}\n",
+        "oxide": "fn main() {\n    print(42)\n}\n",
+    }
+
+    def __init__(self) -> None:
+        self.prompts: list[str] = []
+
+    def generate(self, prompt: str, *, seed: int) -> Generation:
+        self.prompts.append(prompt)
+        if harness.RUST_PREAMBLE in prompt:
+            arm = "rust"
+        elif "Oxide Explicit" in prompt:
+            arm = "explicit"
+        else:
+            arm = "oxide"
+        return Generation(self._PROGRAMS[arm], 10, 5, 100, False)
+
+
+_CELL_SCHEMA = {
+    "task",
+    "arm",
+    "attempts",
+    "first_compiled",
+    "first_passed",
+    "final_passed",
+    "attempts_to_pass",
+    "tokens_in",
+    "tokens_out",
+    "ms",
+    "contract_compliant",
+    "truncated",
+}
+
+
+def test_run_one_writes_one_well_formed_cell_per_task_arm_pair(tmp_path):
+    tasks = [
+        {"id": "tA", "prompt": "Print 42.", "expected_stdout": "42\n"},
+        {"id": "tB", "prompt": "Print 42, again.", "expected_stdout": "42\n"},
+    ]
+    tasks_path = tmp_path / "tasks.jsonl"
+    tasks_path.write_text(
+        "\n".join(json.dumps(task) for task in tasks) + "\n", encoding="utf-8"
+    )
+    results_root = tmp_path / "results"
+    run_id = "6a-test-run-one"
+
+    run_one(
+        _ArmAwareClient(),
+        run_id=run_id,
+        shots=0,
+        seed=1,
+        results_root=results_root,
+        tasks_path=tasks_path,
+    )
+
+    cells_path = results_root / run_id / "cells.jsonl"
+    lines = cells_path.read_text(encoding="utf-8").splitlines()
+    assert len(lines) == len(tasks) * len(harness.ARMS)
+
+    seen_tasks: set[str] = set()
+    seen_arms: set[str] = set()
+    for line in lines:
+        cell = json.loads(line)
+        assert set(cell.keys()) == _CELL_SCHEMA
+        seen_tasks.add(cell["task"])
+        seen_arms.add(cell["arm"])
+
+    assert seen_tasks == {"tA", "tB"}
+    assert seen_arms == set(harness.ARMS)
+
+    raw_dir = results_root / run_id / "raw"
+    assert raw_dir.is_dir()
+    for task in tasks:
+        for arm in harness.ARMS:
+            assert (raw_dir / f"{task['id']}.{arm}.1.txt").is_file()
