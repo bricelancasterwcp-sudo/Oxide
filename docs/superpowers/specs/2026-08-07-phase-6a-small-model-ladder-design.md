@@ -34,8 +34,9 @@ result showing no Oxide advantage is a successful run of this phase.
 Recorded before any generation, because the thesis under test is the
 author's own.
 
-**Primary comparison.** Oxide vs explicit-Oxide first-attempt pass rate
-(pass@1) at each capability point. These two arms are matched on novelty —
+**Primary comparison.** Oxide vs explicit-Oxide first-attempt pass
+(pass@1) at each capability point, read as the **paired-by-task delta**
+defined under *Statistics* below. These two arms are matched on novelty —
 both are languages the subject saw zero times in pretraining, both taught
 only by a card of comparable length — and differ only in whether ownership
 is implicit or written out. This isolates the thesis claim.
@@ -50,18 +51,50 @@ a descriptive reference point with that advantage stated inline. Any
 Oxide-vs-Rust difference at 0.5B/1.5B is **not** evidence about language
 design and must not be reported as such.
 
-**Directional predictions.** If the hypothesis holds, the Oxide −
-explicit-Oxide pass@1 delta is ≥ 0 and widens as capability drops. If the
-delta is ≤ 0 at every point, the implicit-linearity ergonomics claim is
-not supported at small scale, and Part VI's inversion should be revisited
-on that basis.
-
 **Statistics.** Tasks are a fixed corpus, not a sample; generalization
-beyond the corpus is not claimed. The primary interval is the across-seed
-standard error (n=5) of the per-seed pass rate. Pooling all 100
-task×seed trials into a single binomial CI is **prohibited** — it treats
-fixed tasks as random draws and understates the interval. Per-task pass
-counts are reported alongside so task-level effects stay visible.
+beyond the corpus is not claimed.
+
+The primary statistic is the **paired-by-task** delta. Both arms run the
+same 20 tasks, and task difficulty is the dominant variance source, so
+pairing cancels it: for each task, compare the Oxide pass count (out of 5
+seeds) against the explicit-Oxide pass count, then average the 20
+per-task differences. Comparing marginal arm rates instead discards the
+pairing and is **prohibited** as the primary readout.
+
+Pooling all 100 task×seed trials into a single binomial CI is likewise
+**prohibited** — it treats fixed tasks as random draws and understates
+the interval. Reported alongside: per-task pass counts (so task-level
+effects stay visible) and the across-seed SE (n=5) as a sampling-noise
+check.
+
+**Power — a pre-registered limit, not a finding.** With 20 tasks and 5
+seeds, a per-seed pass rate moves in 5-point steps. At p≈0.5 (worst case
+for variance) the per-seed SD is ≈11pp and the across-seed SE of the mean
+is ≈5pp, so an *unpaired* comparison needs a ~10pp delta — two whole
+tasks — to clear two SE. Pairing by task roughly halves that, to ~5pp.
+**This design cannot detect a true effect smaller than about 5
+percentage points.** That is a property of a 20-task corpus, not evidence
+of absence, and every report from this phase must say so.
+
+**Directional predictions.** Stated in advance, on the paired-by-task
+pass@1 delta (Oxide − explicit-Oxide), as an exhaustive and
+non-overlapping partition:
+
+| Paired delta | Pre-registered reading |
+|---|---|
+| **≥ +5pp** | Consistent with the implicit-linearity ergonomics claim. Strengthened further if the delta widens monotonically as capability drops. |
+| **−5pp … +5pp** | **No detectable difference.** Below this design's resolution; supports neither direction and must not be reported as either. |
+| **≤ −5pp** | Disconfirming: implicit linearity *costs* accuracy at small scale. Part VI's ownership-default inversion should be revisited on that basis. |
+
+Mixed signs across capability points (e.g. positive at 0.5B, negative at
+7B) are reported as such and read as **no coherent directional effect** —
+not as selective support from whichever rung agrees.
+
+The ±5pp band is a floor imposed by 20 tasks, chosen from the power
+calculation above rather than from taste. It is not a claim that 4pp
+would be scientifically uninteresting. Resolving effects below it
+requires a larger corpus; that is a Phase 6b decision, and the band must
+not be renegotiated after seeing results.
 
 ## 4. Pinned run parameters
 
@@ -72,6 +105,7 @@ counts are reported alongside so task-level effects stay visible.
 | Backend | Ollama HTTP (`http://localhost:11434`), version recorded |
 | Temperature | 0.8 |
 | top_p | 0.95 |
+| `num_predict` (max gen tokens) | 2048 |
 | Seeds | 1, 2, 3, 4, 5 |
 | Shot conditions | 0 and 3 |
 | Attempt cap | 4 (existing `MAX_ATTEMPTS`) |
@@ -87,6 +121,17 @@ manifest at preflight.
 
 Temperature is deliberately non-zero. At temperature 0 all five seeds
 produce identical output and the variance estimate is vacuous.
+
+`num_predict` is **load-bearing, not a nicety.** Degenerate repetition
+loops are the most characteristic small-model failure mode. Without a
+token cap, a looping 0.5B generation runs until the HTTP timeout and gets
+classified as a *transport* error — so the run would abort on precisely
+the behavior the phase exists to measure, and the grid would end up
+systematically missing its worst-performing cells. With the cap, runaway
+generation terminates as a **model** result: the truncated output fails
+to compile and counts as a real failed attempt. 2048 tokens is generous
+against reference solutions of 50–150 tokens. Truncation (`done_reason ==
+"length"`) is recorded per attempt so its frequency is auditable.
 
 **Grid:** 3 models × 2 shot conditions × 5 seeds × 20 tasks × 3 arms =
 **1800 sessions**, at most **7200 generations**. Estimated 8–14h wall
@@ -127,12 +172,14 @@ eval/results/6a-rollup/
 {"task": "t01", "arm": "oxide", "attempts": 2,
  "first_compiled": false, "first_passed": false, "final_passed": true,
  "attempts_to_pass": 2, "tokens_in": 1531, "tokens_out": 88, "ms": 4210,
- "contract_compliant": [false, true]}
+ "contract_compliant": [false, true], "truncated": [false, false]}
 ```
 
-`contract_compliant` is one boolean **per attempt**, in attempt order;
-its length always equals `attempts`. `tokens_in`/`tokens_out`/`ms` are
-summed across the session's attempts.
+`contract_compliant` and `truncated` are one boolean **per attempt**, in
+attempt order; each length always equals `attempts`. `truncated` records
+`done_reason == "length"` so runaway-generation frequency is auditable
+per arm and per model. `tokens_in`/`tokens_out`/`ms` are summed across
+the session's attempts.
 
 ## 6. Module contracts
 
@@ -238,6 +285,12 @@ Preflight (whole grid, before any generation): Ollama reachable, all three
 tags present with digests, `rustc` invocable, corpus loads, shots
 available for every arm at 3-shot. Fail fast, listing everything missing.
 
+Per run id: health-check Ollama (poll until healthy, cap 10 min) → write
+`manifest.json` → 60 sessions → mark the run complete. On persistent
+transport failure, record the cause in the manifest, abort this run id,
+and continue with the next; three consecutive aborts stop the grid with a
+non-zero exit (§7).
+
 Per session: `harness.build_prompt(arm, task, shots)` → `generate` →
 `extract` → `session.submit` → on failure `build_repair_prompt` →
 generate → … up to the cap. Append raw output per attempt; append one
@@ -260,25 +313,64 @@ Completed run ids are skipped on re-entry; the default is the full grid.
 
 ### 6.5 `eval/rollup.py`
 
-Aggregates the 30 run dirs into `grid.json` + `REPORT.md`: pass@1 per
-(model, arm, shots) with across-seed SE, final pass rate, repair lift,
-mean attempts-to-pass, per-code histograms (**the v0.3 gate
-deliverable**), tokens and wall-clock per cell, and contract-compliance
-rate reported as its own metric.
+Aggregates the 30 run dirs into `grid.json` + `REPORT.md`.
+
+**Primary readout:** the paired-by-task Oxide − explicit-Oxide pass@1
+delta per (model, shots), classified against the §3 partition
+(≥+5pp / −5…+5pp / ≤−5pp) with the band printed alongside the number, so
+an inconclusive result cannot be read as a positive one.
+
+Also reported: pass@1 per (model, arm, shots) with across-seed SE, final
+pass rate, repair lift, mean attempts-to-pass, per-code histograms (**the
+v0.3 gate deliverable**), tokens and wall-clock per cell, prompt token
+counts (the §9 asymmetry), and contract-compliance and truncation rates
+as their own metrics.
+
+The rollup refuses to emit a report for an incomplete grid unless passed
+`--partial`, which stamps the missing run ids into `REPORT.md`. A grid
+silently missing aborted runs is the failure mode most likely to be
+misread as a finished result.
 
 ## 7. Error handling
 
-| Condition | Behavior |
-|---|---|
-| Ollama down / tag missing | preflight abort, before any generation |
-| Transport error, timeout | 3 retries with backoff, then **abort the run** |
-| Empty or malformed generation | counts as a real failure, consumes an attempt |
-| Non-UTF8 source | existing `_unencodable_source_verdict` |
-| Program nontermination | existing `timeout 10` |
+The governing rule: **infrastructure failures must never be recorded as
+model failures, and model failures must never be classified as
+infrastructure.** The first biases every arm toward the null; the second
+silently drops the worst-performing cells. Both corrupt the primary
+comparison, in opposite directions.
 
-Transport failures must never be recorded as model failures. Doing so
-would bias every arm toward the null and silently corrupt the primary
-comparison. Aborting is the conservative choice.
+| Condition | Classification | Behavior |
+|---|---|---|
+| Ollama down / tag missing at start | infrastructure | preflight abort, before any generation |
+| Transport error or HTTP timeout | infrastructure | 3 retries with backoff, then **abort this `run_id`** (below) |
+| Generation hits `num_predict` | **model** | truncated source submitted; real failed attempt; `truncated: true` logged |
+| Empty or malformed generation | **model** | real failure, consumes an attempt |
+| Non-UTF8 source | **model** | existing `_unencodable_source_verdict` |
+| Program nontermination | **model** | existing `timeout 10` |
+
+**Run-id-scoped abort.** A persistent transport failure aborts only the
+current `run_id` — at most 60 sessions, ~20–30 min — records the cause in
+that run's `manifest.json`, and the driver proceeds to the next run id.
+Resume later redoes the aborted run dir whole. The grid degrades in
+throughput instead of dying overnight, and no partial-state surgery is
+needed.
+
+Cells are **never** individually quarantined or excluded. Under memory
+pressure (7B-q8 is ~8GB on a 16GB card) infrastructure failures would
+correlate with long generations on hard tasks, so per-cell exclusion is
+non-random and would bias pass rates upward. Whole-run redo preserves the
+no-non-random-exclusion property.
+
+**Health-check wait, between run ids only.** Before starting each
+`run_id`, poll Ollama until healthy, capped at 10 minutes. This survives
+transient restarts with zero lost work. It is deliberately **not** applied
+mid-session: mid-session resumption would interact with the O_EXCL locks
+and half-written triples that §6.4 exists to avoid.
+
+**Consecutive-abort backstop.** Three consecutive `run_id` aborts stop
+the whole grid with a non-zero exit. Without it, a systematically broken
+configuration (7B OOM, a corrupt tag) would burn silently through every
+remaining run id and leave a grid that looks complete but is not.
 
 ## 8. Test plan
 
@@ -293,13 +385,24 @@ New `tests/test_6a.py`, plus the existing 717 staying green (nothing in
    arm-identical structure across all three arms; rustc help text
    preserved verbatim.
 3. **Model client** — protocol conformance against a stub; retry-then-
-   abort on transport error; preflight raises on a missing tag.
-4. **Driver** — stub-model end-to-end over a 2-task subset; attempt cap
+   abort on transport error; preflight raises on a missing tag;
+   `num_predict` passed through; `done_reason == "length"` surfaced as
+   `truncated`.
+4. **Failure classification** (§7's governing rule, both directions) — a
+   generation truncated at `num_predict` is submitted as a **model**
+   failure and does **not** abort; an HTTP timeout **does** abort the run
+   id and is **never** written to `cells.jsonl` as a failed attempt.
+5. **Driver** — stub-model end-to-end over a 2-task subset; attempt cap
    respected; resume deletes and redoes a short run dir; raw outputs
-   persisted per attempt.
-5. **Rollup** — aggregates correctly on synthetic run dirs; across-seed
-   SE computed as specified; pooled-binomial CI absent.
-6. **Live smoke** — one task, 0.5B, marked so it can be deselected when
+   persisted per attempt; run-id abort continues to the next run id;
+   three consecutive aborts stop the grid non-zero; health-check waits
+   then proceeds when Ollama returns.
+6. **Rollup** — paired-by-task delta computed per §3 on synthetic run
+   dirs, including a fixture whose marginal-rate and paired-delta answers
+   differ (proving the pairing is real); partition classification correct
+   at the ±5pp boundaries; across-seed SE as specified; pooled-binomial
+   CI absent; incomplete grid refused without `--partial`.
+7. **Live smoke** — one task, 0.5B, marked so it can be deselected when
    Ollama is unavailable.
 
 ## 9. Risks
