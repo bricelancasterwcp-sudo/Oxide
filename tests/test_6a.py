@@ -1,6 +1,8 @@
 import json
 import urllib.error
+from pathlib import Path
 
+from eval.driver import run_one, run_session
 from eval.extract import Extraction, extract
 from eval.models import Generation, ModelError, OllamaClient
 
@@ -277,3 +279,150 @@ def test_healthy_is_false_when_unreachable(monkeypatch):
 def test_repair_prompt_rejects_unknown_arm():
     with pytest.raises(ValueError):
         build_repair_prompt("python", "x", _COMPILE_FAIL)
+
+
+class _StubClient:
+    """Returns scripted texts; records the prompts it was given."""
+
+    def __init__(self, *texts: str, truncated: bool = False) -> None:
+        self.texts = list(texts)
+        self.prompts: list[str] = []
+        self._truncated = truncated
+
+    def generate(self, prompt: str, *, seed: int) -> Generation:
+        self.prompts.append(prompt)
+        text = self.texts.pop(0) if self.texts else self.texts_default()
+        return Generation(text, 10, 5, 100, self._truncated)
+
+    def texts_default(self) -> str:
+        return "not a program"
+
+
+# Verified against the real pipeline: Oxide's print() quotes STRINGS, so
+# print("hi") emits '"hi"\n', not 'hi\n'. Printing an Int avoids that.
+_GOOD_OXIDE = "fn main() {\n    print(42)\n}\n"
+
+
+def test_run_session_records_a_pass_on_first_attempt(tmp_path):
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
+    tasks = tmp_path / "tasks.jsonl"
+    tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
+    cell = run_session(
+        _StubClient(_GOOD_OXIDE),
+        run_id="6a-test-0shot-s1",
+        task_id="tX",
+        arm="oxide",
+        shots=0,
+        results_root=tmp_path / "results",
+        raw_dir=tmp_path / "raw",
+        tasks_path=tasks,
+    )
+    assert cell["first_passed"] is True
+    assert cell["final_passed"] is True
+    assert cell["attempts"] == 1
+    assert cell["truncated"] == [False]
+
+
+def test_run_session_repairs_after_a_failure(tmp_path):
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
+    tasks = tmp_path / "tasks.jsonl"
+    tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
+    client = _StubClient("this is not a program", _GOOD_OXIDE)
+    cell = run_session(
+        client,
+        run_id="6a-test-0shot-s1",
+        task_id="tX",
+        arm="oxide",
+        shots=0,
+        results_root=tmp_path / "results",
+        raw_dir=tmp_path / "raw",
+        tasks_path=tasks,
+    )
+    assert cell["first_passed"] is False
+    assert cell["final_passed"] is True
+    assert cell["attempts_to_pass"] == 2
+    # The second prompt must be a repair prompt, not the original.
+    assert "The program below was rejected" in client.prompts[1]
+
+
+def test_run_session_stops_at_the_attempt_cap(tmp_path):
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
+    tasks = tmp_path / "tasks.jsonl"
+    tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
+    cell = run_session(
+        _StubClient(),  # always returns garbage
+        run_id="6a-test-0shot-s1",
+        task_id="tX",
+        arm="oxide",
+        shots=0,
+        results_root=tmp_path / "results",
+        raw_dir=tmp_path / "raw",
+        tasks_path=tasks,
+    )
+    assert cell["attempts"] == 4
+    assert cell["final_passed"] is False
+    assert cell["attempts_to_pass"] == 5  # cap + 1
+
+
+def test_run_session_persists_raw_output_per_attempt(tmp_path):
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
+    tasks = tmp_path / "tasks.jsonl"
+    tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
+    raw_dir = tmp_path / "raw"
+    run_session(
+        _StubClient("garbage", _GOOD_OXIDE),
+        run_id="6a-test-0shot-s1",
+        task_id="tX",
+        arm="oxide",
+        shots=0,
+        results_root=tmp_path / "results",
+        raw_dir=raw_dir,
+        tasks_path=tasks,
+    )
+    assert (raw_dir / "tX.oxide.1.txt").read_text() == "garbage"
+    assert (raw_dir / "tX.oxide.2.txt").read_text() == _GOOD_OXIDE
+
+
+def test_run_session_records_truncation_as_a_model_failure(tmp_path):
+    # Section 7's governing rule, direction one: a generation cut off at
+    # num_predict is a MODEL result. It must be submitted and counted,
+    # never raised as infrastructure.
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
+    tasks = tmp_path / "tasks.jsonl"
+    tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
+    cell = run_session(
+        _StubClient("fn main() { print(", truncated=True),
+        run_id="6a-test-0shot-s1",
+        task_id="tX",
+        arm="oxide",
+        shots=0,
+        results_root=tmp_path / "results",
+        raw_dir=tmp_path / "raw",
+        tasks_path=tasks,
+    )
+    assert cell["truncated"][0] is True
+    assert cell["final_passed"] is False
+
+
+def test_run_session_lets_model_error_propagate(tmp_path):
+    # Section 7's governing rule, direction two: infrastructure failure
+    # must NOT be written to cells.jsonl as a failed attempt. It escapes
+    # to the grid loop, which scopes the abort to one run id.
+    class _Broken:
+        def generate(self, prompt: str, *, seed: int) -> Generation:
+            raise ModelError("ollama down")
+
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
+    tasks = tmp_path / "tasks.jsonl"
+    tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
+    with pytest.raises(ModelError):
+        run_session(
+            _Broken(),
+            run_id="6a-test-0shot-s1",
+            task_id="tX",
+            arm="oxide",
+            shots=0,
+            results_root=tmp_path / "results",
+            raw_dir=tmp_path / "raw",
+            tasks_path=tasks,
+        )
