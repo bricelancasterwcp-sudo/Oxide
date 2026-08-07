@@ -401,3 +401,59 @@ def test_empty_submission_is_judged_identically_across_arms():
         for arm in ("oxide", "explicit", "rust")
     }
     assert set(verdicts.values()) == {False}, verdicts
+
+
+class TestP17Disambiguation:
+    """p17 originally admitted two valid repairs with different behaviour.
+
+    The class is accumulate-without-reassign. Its original form printed
+    INSIDE the loop, so a clone-based repair could redirect the print to
+    the clone and satisfy it locally -- and cloning is precisely what
+    OX0403's own suggestion text ("...or clone it") and rustc's
+    "help: consider cloning" recommend. The frontier subject took that
+    route and strict-failed in both Oxide arms, which made the class
+    unable to distinguish a model that misunderstood ownership from one
+    that followed the compiler's advice.
+
+    The rewrite prints before and after the loop on the accumulator
+    itself. These tests pin that the ambiguity is closed.
+    """
+
+    def _p17(self, arm: str) -> dict:
+        return next(r for r in PROBES if r["id"] == "p17" and r["arm"] == arm)
+
+    def test_accumulator_is_only_read_outside_the_loop(self):
+        """No print inside the loop body -- that is what let the original
+        be satisfied by a clone."""
+        for arm in ("oxide", "explicit"):
+            body = self._p17(arm)["fix"]
+            loop = body.split("for ")[1].split("}")[0]
+            assert "print" not in loop, f"{arm}: p17 fix prints inside the loop again"
+
+    @pytest.mark.parametrize("arm", ["oxide", "explicit"])
+    def test_clone_repair_compiles_but_fails_strict(self, arm):
+        """The clone route must remain compilable -- it is legal code, and
+        pretending otherwise would test the wrong thing -- while failing
+        strict because it does not accumulate."""
+        record = self._p17(arm)
+        read = "&acc" if arm == "explicit" else "acc"
+        clone_repair = record["broken"].replace(
+            "let grown = push(acc, i)", f"let grown = push(clone({read}), i)"
+        )
+        if arm == "explicit":
+            clone_repair = clone_repair.replace("drop grown", "drop grown")
+        result = probe.score(record, clone_repair)
+        assert result["strict"] is False, "clone repair must not score strict"
+        assert result["compiled"] is True, (
+            "clone repair must still COMPILE -- if it fails to compile the "
+            "probe is testing syntax, not the accumulate-vs-clone choice"
+        )
+
+    @pytest.mark.parametrize("arm", ["oxide", "explicit", "rust"])
+    def test_reference_fix_is_the_accumulating_one(self, arm):
+        record = self._p17(arm)
+        result = probe.score(record, record["fix"])
+        assert result["strict"] is True
+        assert record["expected_stdout"] == "10\n13\n", (
+            "the before/after pair is what makes accumulation observable"
+        )
