@@ -41,6 +41,12 @@ RECORD_KEYS = {
     "broken",
     "fix",
 }
+#: Optional. Records why an arm's `expected_code` diverges from its
+#: siblings' -- p04 is OX0406/E0502 and p20 is OX0406/E0505, because the
+#: two languages disagree about WHICH rule an iterate-and-consume breaks.
+#: That disagreement is a finding about the languages, so it belongs in
+#: the corpus rather than being smoothed away or left unexplained.
+OPTIONAL_RECORD_KEYS = {"note"}
 REQUIRED_DEFECTS = {
     "use-after-move",
     "double-consume",
@@ -78,7 +84,30 @@ class TestCorpusShape:
 
     def test_every_record_has_the_pinned_keys(self):
         for rec in PROBES:
-            assert set(rec) == RECORD_KEYS, probe.probe_key(rec)
+            keys = set(rec)
+            assert RECORD_KEYS <= keys, probe.probe_key(rec)
+            assert keys <= RECORD_KEYS | OPTIONAL_RECORD_KEYS, probe.probe_key(rec)
+
+    def test_divergent_expected_codes_are_explained(self):
+        """A record whose expected_code differs from its siblings' must
+        say why. Silent divergence reads as a corpus defect; explained
+        divergence is a finding about where the two languages disagree."""
+        by_id: dict[str, list[dict]] = {}
+        for rec in PROBES:
+            by_id.setdefault(rec["id"], []).append(rec)
+        for probe_id, recs in sorted(by_id.items()):
+            oxide = {r["expected_code"] for r in recs if r["arm"] != "rust"}
+            for rec in recs:
+                if rec["arm"] != "rust":
+                    continue
+                # Rust codes always differ in form (E-codes vs OX-codes);
+                # what needs explaining is a rust code that is not the
+                # corpus's usual E0382 partner for an OX04xx move error.
+                if rec["expected_code"] not in {"E0382"}:
+                    assert rec.get("note"), (
+                        f"{probe_id}: rust expects {rec['expected_code']} "
+                        f"against {oxide} but carries no note explaining why"
+                    )
 
     def test_ids_and_arms_are_unique(self):
         keys = [probe.probe_key(rec) for rec in PROBES]
