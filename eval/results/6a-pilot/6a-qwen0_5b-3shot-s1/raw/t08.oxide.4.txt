@@ -1,0 +1,25 @@
+```
+fn main() {
+    let mut v = vec![1, 5, 1, 6];
+    for x in &v {
+        print!("{}", x);
+    }
+}
+
+fn main() {
+    let v = push(push(push(vec(), 2), 5), 1);
+    for x in v {
+        print!("{}", x);
+    }
+}
+
+fn main() {
+    let s = "flame";
+    print(str_len(s));
+    let rev = "";
+    for c in chars(s) {
+        rev = concat(c, rev);
+    }
+    print_str(rev);
+}
+```

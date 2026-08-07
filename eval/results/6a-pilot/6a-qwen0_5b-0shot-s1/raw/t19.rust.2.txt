@@ -1,0 +1,12 @@
+To fix the issue, you need to ensure that the width of the rectangle is multiplied by 7 and then added to the height. Here's the corrected program:
+
+```rust
+fn main() {
+    let area = 7 * 4;
+    let perimeter = 2 * (area + 4);
+    println!("Area: {}", area);
+    println!("Perimeter: {}", perimeter);
+}
+```
+
+This code will correctly calculate and print the area and perimeter of the rectangle with a width of 7 and a height of 4.

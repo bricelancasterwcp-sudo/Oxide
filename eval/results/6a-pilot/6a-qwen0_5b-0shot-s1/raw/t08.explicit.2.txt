@@ -1,0 +1,18 @@
+```
+fn main() {
+    let num_values = vec![3, 8, -2, 12, 7];
+    let count_positive = num_values.into_iter().filter(|&value| value > 0).count();
+    println!("Count of positive values: {}", count_positive);
+    println!("Largest value: {}", *num_values.iter().max().unwrap());
+}
+```
+
+**Explanation:**
+
+- The program reads a vector of integers `num_values` into a new vector `v`.
+- It counts the number of positive numbers in `v` using the `filter` method with a closure that checks if each number is greater than zero.
+- It then uses the `max` method to find the largest value in `v`.
+
+**Diagnostics:**
+
+- The compiler errors were due to unexpected characters and incorrect parameter modes. The first two errors are about unexpected brackets `[` and `]`, while the last error is related to missing a closing parenthesis `;`.

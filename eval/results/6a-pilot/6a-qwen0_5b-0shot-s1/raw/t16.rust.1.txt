@@ -1,0 +1,16 @@
+```
+fn main() {
+    let one_hundred = 100;
+    for divisor in [5, 0, 4] {
+        match divisor {
+            0 => println!("undefined"),
+            _ => {
+                let quotient = one_hundred / divisor as f64;
+                println!("{}", quotient);
+            }
+        }
+    }
+}
+```
+
+This program defines a function `main` that takes no arguments. It iterates over the list of divisors [5, 0, 4], checks each divisor for its division result, and prints either the quotient or "undefined" based on whether the divisor is 0 or not.

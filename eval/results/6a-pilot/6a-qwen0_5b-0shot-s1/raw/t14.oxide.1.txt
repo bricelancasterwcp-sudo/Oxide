@@ -1,0 +1,8 @@
+```
+let s: String = "mississippi";
+for x in s.chars() {
+    if x == 's' {
+        print!("{}", x);
+    }
+}
+```

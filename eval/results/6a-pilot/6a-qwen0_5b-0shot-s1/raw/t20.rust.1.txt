@@ -1,0 +1,13 @@
+```
+fn main() {
+    let mut pen = 3;
+    let pad = 9;
+    let ink = 5;
+
+    let total_cost = pen * 4 + pad * 2 + ink * 3;
+    let max_cost_item = if pen > pad && pen > ink { "pen" } else if pad > pen && pad > ink { "pad" } else { "ink" };
+
+    println!("Total cost: {}", total_cost);
+    println!("Item with the highest cost: {}", max_cost_item);
+}
+```

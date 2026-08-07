@@ -1,0 +1,23 @@
+```rust
+fn main() {
+    let nums = push(push(push(vec(), 3), 8), push(push(push(vec(), -2), 12), 7));
+    let mut count = 0;
+    let mut max = None;
+
+    for x in &nums {
+        if *x > 0 {
+            count += 1;
+        }
+        match max {
+            Some(m) => { max = Some(if *x > m { *x } else { m }); },
+            None => { max = Some(*x); },
+        }
+    }
+
+    print(count);
+    match max {
+        Some(m) => print(m),
+        None => print(0),
+    }
+}
+```

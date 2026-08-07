@@ -1,0 +1,25 @@
+To correct the error in the provided Rust program, we need to ensure that the loop condition correctly identifies when a number needs to be halved or tripled. Here's the corrected version:
+
+```rust
+fn main() {
+    let mut n = 27;
+    
+    while n > 1 {
+        if n % 2 == 0 {
+            n /= 2;
+        } else {
+            n *= 3 + 1;
+        }
+    }
+    
+    println!("Total transformations: {}", n);
+}
+```
+
+### Explanation:
+- The loop condition `n > 1` ensures that the loop continues until `n` becomes 1.
+- Inside the loop, we check if `n` is even or odd.
+  - If `n % 2 == 0`, we halve `n` by dividing it by 2.
+  - If `n % 2 != 0`, we triple `n` by adding 1 to it.
+
+This ensures that the loop only runs as long as `n` is greater than 1, and the transformation process correctly handles the numbers 27 and its transformations.

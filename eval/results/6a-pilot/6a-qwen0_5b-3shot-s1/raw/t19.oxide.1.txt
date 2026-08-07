@@ -1,0 +1,32 @@
+```
+use std::cell::RefCell;
+
+#[derive(Debug)]
+struct Rectangle {
+    width: RefCell<i32>,
+    height: RefCell<i32>,
+}
+
+impl Rectangle {
+    pub fn new(width: i32, height: i32) -> Self {
+        Rectangle {
+            width: RefCell::new(width),
+            height: RefCell::new(height),
+        }
+    }
+
+    pub fn area(&self) -> i32 {
+        self.width.borrow() * self.height.borrow()
+    }
+
+    pub fn perimeter(&self) -> i32 {
+        2 * (self.width.borrow() + self.height.borrow())
+    }
+}
+
+fn main() {
+    let r = Rectangle::new(7, 4);
+    println!("Area: {}", r.area());
+    println!("Perimeter: {}", r.perimeter());
+}
+```

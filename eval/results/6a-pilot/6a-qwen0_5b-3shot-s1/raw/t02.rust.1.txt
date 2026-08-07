@@ -1,0 +1,13 @@
+```
+fn main() {
+    let n = 27;
+    for _ in 0..n {
+        if n % 2 == 0 {
+            n /= 2;
+        } else {
+            n *= 3 + 1;
+        }
+    }
+    println!("Total transformations: {}", n);
+}
+```

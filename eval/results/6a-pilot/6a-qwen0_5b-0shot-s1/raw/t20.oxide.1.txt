@@ -1,0 +1,29 @@
+```
+// Item::new(3, 4) -> Reading { label: "pen", values: vec![] }
+let mut pen = Item::new(3, 4);
+println!("cost of pen: {}", pen.price * pen.quantity);
+
+// Item::new(9, 2) -> Reading { label: "pad", values: vec![1] }
+let mut pad = Item::new(9, 2);
+println!("cost of pad: {}", pad.price * pad.quantity);
+
+// Item::new(5, 3) -> Reading { label: "ink", values: vec![2] }
+let mut ink = Item::new(5, 3);
+println!("cost of ink: {}", ink.price * ink.quantity);
+
+// let r1 = Reading::from((pen.clone(), pad.clone())); // move pen to r1
+// let r2 = Reading::from((ink.clone(), pad.clone())); // move pad to r2
+
+let mut total_cost = 0;
+for (p, q) in &[(&pen, &pad), (&ink, &pad)] {
+    total_cost += p.price * q;
+}
+
+println!("total cost: {}", total_cost);
+```
+
+## References
+
+- [Rust Language Specification](https://doc.rust-lang.org/book/ch10/ownership.html)
+- [Oxide API Documentation](https://docs.oxide.rs/oxy/)
+- [Type Annotations in Rust](https://docs.rust-lang.org/reference/type-annotations.html)

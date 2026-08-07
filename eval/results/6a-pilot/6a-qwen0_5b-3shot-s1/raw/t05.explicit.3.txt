@@ -1,0 +1,15 @@
+```
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let mut total = 0;
+    for x in &v {
+        if x > limit {
+            total = total + x;
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+```

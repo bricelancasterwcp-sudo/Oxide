@@ -1,0 +1,10 @@
+```
+fn main() {
+    let data = vec![4, 1, 7, 3, 9, 2];
+    for &x in &data {
+        if x > 3 {
+            println!("{}", x);
+        }
+    }
+}
+```

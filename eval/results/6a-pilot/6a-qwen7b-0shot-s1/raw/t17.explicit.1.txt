@@ -1,0 +1,15 @@
+```
+fn get_element(lst: &Vec<Int>, pos: Int) -> Int {
+    match get(lst, pos) {
+        Some(val) => val,
+        None => -1,
+    }
+}
+
+fn main() {
+    let lst = vec(10, 20, 30);
+    print(get_element(&lst, 1));
+    print(get_element(&lst, 5));
+    drop lst;
+}
+```

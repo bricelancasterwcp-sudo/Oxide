@@ -1,0 +1,8 @@
+```rust
+fn main() {
+    let is_palindrome = |s: &Str| s == &s.chars().rev().collect::<String>();
+    print(is_palindrome("level\n"));
+    print(is_palindrome("stereo\n"));
+    print(is_palindrome("rotor\n"));
+}
+```

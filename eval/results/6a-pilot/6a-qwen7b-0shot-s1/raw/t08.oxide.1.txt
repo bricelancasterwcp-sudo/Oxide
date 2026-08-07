@@ -1,0 +1,33 @@
+```
+struct List { nums: Vec<Int> }
+
+fn count_positives(l: Vec<Int>) -> Int {
+    let mut count = 0
+    for x in l {
+        if x > 0 {
+            count += 1
+        }
+    }
+    count
+}
+
+fn max_value(v: Vec<Int>) -> Option<Int> {
+    let mut max = None
+    for &x in v.iter() {
+        match max {
+            Some(m) => if x > m { max = Some(x) } else {},
+            None => max = Some(x),
+        }
+    }
+    max
+}
+
+fn main() {
+    let l = List { nums: push(push(push(push(vec(), 3), 8), -2), 12), 7 ) };
+    print(count_positives(l.nums))
+    match max_value(l.nums) {
+        Some(n) => print(n),
+        None => print_str("no values"),
+    }
+}
+```

@@ -1,0 +1,13 @@
+```
+fn main() {
+    let mut total = 1;
+    for i in 5..=4 {
+        if i == 0 {
+            println!("undefined");
+        } else {
+            total /= i;
+        }
+    }
+    println!("{}", total);
+}
+```

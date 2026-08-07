@@ -1,0 +1,13 @@
+```
+// level.py
+def is_backwards(text):
+    return text == text[::-1]
+
+# stereo.py
+def is_reversed(text):
+    return text == text[::-1]
+
+# rotor.py
+def is_reversed(text):
+    return text == text[::-1]
+```

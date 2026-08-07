@@ -1,0 +1,32 @@
+```
+fn main() {
+    let mut perfect_numbers = vec![];
+    for i in range(2, 1000) {
+        if perfect(i) {
+            perfect_numbers.push(i);
+        }
+    }
+    perfect_numbers.sort();
+    for n in &perfect_numbers {
+        println!("{}", n);
+    }
+}
+fn perfect(n: u32) -> bool {
+    let mut sum = 0;
+    for i in 1..=n / 2 {
+        if n % i == 0 {
+            sum += i;
+        }
+    }
+    sum == n
+}
+
+Diagnostics:
+4:30: OX0001: unexpected character ';'
+10:20: OX0001: unexpected character ';'
+13:21: OX0001: unexpected character ';'
+4:20: OX0101: expected end of statement, found BANG
+10:13: OX0101: expected '=', found IDENT
+13:18: OX0100: expected expression, found EQ
+16:5: OX0102: expected item at module level, found IDENT
+```

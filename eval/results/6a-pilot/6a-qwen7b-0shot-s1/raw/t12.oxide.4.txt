@@ -1,0 +1,15 @@
+```rust
+fn reverse(s: Str) -> Str {
+    let chars = chars(s);
+    let mut reversed = String::new();
+    for c in chars {
+        reversed.insert(0, c);
+    }
+    reversed.into()
+}
+
+fn main() {
+    let s = "stack";
+    print(reverse(s));
+}
+```

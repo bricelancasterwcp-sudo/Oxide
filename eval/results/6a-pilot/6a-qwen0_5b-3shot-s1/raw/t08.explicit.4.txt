@@ -1,0 +1,31 @@
+```
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let mut total = 0;
+    for x in v {
+        if x > limit {
+            total += x;
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn main() {
+    let nums = push(push(vec(), 2), 5);
+    let bigger = extend(clone(&nums), 7);
+    print(sum_big(&nums, 6));
+    drop nums
+    print(sum_big(&bigger, 6));
+    drop bigger
+}
+```
+
+## Explanation
+
+1. The `sum_big` function reads integers from the vector and prints their sum.
+2. The `extend` function appends an integer to the vector.
+3. The `main` function creates a vector with elements 2, 5, 1, 6, and then calls `sum_big` to compute the sum of these integers.
+4. The `print` function is used to print the results.

@@ -1,0 +1,28 @@
+```
+fn is_prime(n: isize) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    for i in 2..=((n as f64).sqrt() as isize) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+
+#[derive(Debug)]
+struct Circle<T> {
+    x: T,
+}
+
+fn main() {
+    let mut primes = Vec::new();
+    for i in 2..99 {
+        if is_prime(i) {
+            primes.push(Circle { x: i });
+        }
+    }
+    println!("{:?}", primes);
+}
+```

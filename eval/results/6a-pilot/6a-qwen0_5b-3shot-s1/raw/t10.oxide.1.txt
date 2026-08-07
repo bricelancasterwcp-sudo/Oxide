@@ -1,0 +1,15 @@
+```
+struct Reading { label: Str, values: Vec<Int> }
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(push(push(vec(), 4), 1), 7), 3) }
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+```
+
+This Rust program defines a `Reading` struct and prints the sum of its elements, then the smallest element. It also includes functions to read a list of integers, print their numbers of characters, and count how many values were kept.

@@ -1,0 +1,33 @@
+Certainly! Below is the completed Rust code that solves all the task examples provided:
+
+```rust
+fn main() {
+    // Example 1: Print the product of numbers from 1 to 6
+    println!("{}", 1 * 2 * 3 * 4 * 5 * 6);
+
+    // Example 2: Print the sum of elements in a vector [2, 5, 1, 6]
+    let v = vec![2, 5, 1, 6];
+    let sum: i64 = v.iter().sum();
+    println!("{}", sum);
+
+    // Example 3: Print the smallest element in a vector [2, 5, 1, 6]
+    let min = v.iter().min().unwrap();
+    println!("{}", min);
+
+    // Example 4: Print the number of characters in the string "flame"
+    let s = String::from("flame");
+    println!("{}", s.chars().count());
+
+    // Example 5: Print the largest value in the vector [3, 8, -2, 12, 7]
+    let v = vec![3, 8, -2, 12, 7];
+    let max: i64 = v.iter().max().unwrap();
+    println!("{}", max);
+}
+```
+
+### Explanation:
+- **Example 1**: The product of numbers from 1 to 6 is calculated and printed.
+- **Example 2**: The sum of elements in the vector `[2, 5, 1, 6]` is calculated and printed.
+- **Example 3**: The smallest element in the vector `[2, 5, 1, 6]` is found using `min` and printed.
+- **Example 4**: The number of characters in the string `"flame"` is calculated and printed.
+- **Example 5**: The largest value in the vector `[3, 8, -2, 12, 7]` is found using `max` and printed.

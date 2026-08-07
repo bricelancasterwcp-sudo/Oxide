@@ -1,0 +1,21 @@
+```rust
+fn find_perfect(n: Int) -> Bool {
+    let mut sum = 0;
+    for i in range(1, n) {
+        if n % i == 0 {
+            sum += i;
+        }
+    }
+    sum == n
+}
+
+fn main() {
+    for num in range(2, 1000) {
+        if find_perfect(num) {
+            print(&num);
+            // No need to drop num here; it's not owned by the loop
+            print_str("\n");
+        }
+    }
+}
+```

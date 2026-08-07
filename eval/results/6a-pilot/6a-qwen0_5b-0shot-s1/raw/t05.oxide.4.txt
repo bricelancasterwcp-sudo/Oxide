@@ -1,0 +1,12 @@
+```
+fn main() {
+    let mut sequence = vec![1, 1];
+    for _ in 1..20 {
+        let next_term = sequence[0] + sequence[1];
+        sequence.push(next_term);
+    }
+    println(sequence[19]);
+}
+```
+
+This program correctly initializes the `sequence` vector with two elements (1 and 1) and iterates through it to compute the 20th term.

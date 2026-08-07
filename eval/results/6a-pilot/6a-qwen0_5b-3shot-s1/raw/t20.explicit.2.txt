@@ -1,0 +1,22 @@
+```
+fn main() {
+    let pen = 3;
+    let pad = 9;
+    let ink = 5;
+
+    println!("Pen: {}", pen);
+    println!("Pad: {}", pad);
+    println!("Ink: {}", ink);
+
+    let total_cost = pen * pad + ink;
+    println!("Combined cost of all items: {}", total_cost);
+
+    let item_with_highest_cost = match &item1 {
+        "pen" => item2,
+        "pad" => item3,
+        _ => "",
+    };
+
+    println!("Item with the highest cost: {}", item_with_highest_cost);
+}
+```

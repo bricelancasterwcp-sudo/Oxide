@@ -1,0 +1,26 @@
+To correct the issues in the provided Rust program and print "true" if the text reads the same backward as forward and "false" otherwise, one result per line, you can modify the `main` function as follows:
+
+```rust
+fn main() {
+    let texts = vec![
+        "level", "stereo", "rotor",
+        "level is a word", "not reverse",
+        "hello world", "Hello World",
+        "a man a plan a canal Panama",
+        "Listen, listen, listen, Panama"
+    ];
+
+    for text in texts {
+        let reversed = text.chars().rev().collect();
+        let original = text.chars().rev().collect();
+
+        if reversed == original {
+            println!("true");
+        } else {
+            println!("false");
+        }
+    }
+}
+```
+
+This program reads the input text and checks if it is a palindrome by comparing characters from the end of the string to the beginning. If they are identical, it prints "true"; otherwise, it prints "false".

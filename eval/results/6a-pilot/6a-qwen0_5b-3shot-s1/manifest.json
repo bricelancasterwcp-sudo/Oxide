@@ -1,0 +1,18 @@
+{
+  "aborted_reason": null,
+  "digest": "4270293369d416e9a71511e1479d35e1abe46d89922f8a9d3f8fa1781602064b",
+  "ended_at": "2026-08-07T18:22:12.771725+00:00",
+  "model": "qwen2.5-coder:0.5b-instruct-q8_0",
+  "model_context_length": 32768,
+  "model_slug": "qwen0_5b",
+  "num_ctx": 8192,
+  "num_predict": 2048,
+  "ollama_version": "0.32.4",
+  "quantization_level": "Q8_0",
+  "run_id": "6a-qwen0_5b-3shot-s1",
+  "seed": 1,
+  "shots": 3,
+  "started_at": "2026-08-07T18:14:52.302523+00:00",
+  "temperature": 0.8,
+  "top_p": 0.95
+}

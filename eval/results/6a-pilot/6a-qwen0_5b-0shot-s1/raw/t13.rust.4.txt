@@ -1,0 +1,18 @@
+```
+fn main() {
+    let (level, stereo, rotor) = ("level".to_string(), "stereo".to_string(), "rotor".to_string());
+    println!("{}", is_palindrome(level)); // true
+    println!("{}", is_palindrome(stereo)); // false
+    println!("{}", is_palindrome(rotor)); // false
+}
+
+fn is_palindrome(s: String) -> bool {
+    let len = s.len();
+    for i in 0..len / 2 {
+        if s[i] != s[len - 1 - i] {
+            return false;
+        }
+    }
+    true
+}
+```

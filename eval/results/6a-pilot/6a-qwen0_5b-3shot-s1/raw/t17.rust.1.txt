@@ -1,0 +1,11 @@
+```
+fn main() {
+    let list = [10, 20, 30];
+    if list.len() > 1 && list[1] != -1 && list[5] != -1 {
+        println!("Element at position 1: {}", list[1]);
+        println!("Element at position 5: {}", list[5]);
+    } else {
+        println!("-1");
+    }
+}
+```

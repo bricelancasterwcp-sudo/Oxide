@@ -1,0 +1,15 @@
+```
+fn main() {
+    let num1 = parse_int(&"2")
+    let sum = num1 + parse_int(&"5") + parse_int(&"30")
+    print(sum)
+}
+
+fn parse_int(s: &str) -> Option<Int> {
+    if s.chars().all(|c| c.is_digit(10)) {
+        Some(f64::from_str(s).unwrap() as Int)
+    } else {
+        None
+    }
+}
+```

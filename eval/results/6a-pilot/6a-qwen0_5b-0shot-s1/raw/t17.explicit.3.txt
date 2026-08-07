@@ -1,0 +1,12 @@
+```
+fn main() {
+    let nums = vec![10, 20, 30];
+    if let Some(&x) = &nums[1] {
+        print!("{}", x);
+    }
+    match &nums[5] {
+        Some(&y) => print!("{}", y),
+        None => -1,
+    }
+}
+```

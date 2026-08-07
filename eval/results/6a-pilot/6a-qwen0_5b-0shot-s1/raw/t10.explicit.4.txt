@@ -1,0 +1,25 @@
+```
+fn main() {
+    let mut data = vec![4, 1, 7, 3, 9, 2];
+
+    for x in &data {
+        if x > 3 {
+            println!("{}", x);
+        }
+    }
+
+    println!("{} values kept.", data.len());
+}
+
+// OX0002: `&x` is expected after a read but it's followed by an assignment.
+// OX0001: unexpected character '['
+// OX0001: unexpected character ']'
+// OX0001: unexpected character ';'
+6:30: OX0001: unexpected character ';'
+10:44: OX0001: unexpected character ';'
+2:13: OX0101: expected '=', found IDENT
+6:20: OX0101: expected end of statement, found BANG
+10:5: OX0102: expected item at module level, found IDENT
+```
+
+The corrected program checks each element in the `data` vector and prints them if they are greater than 3.

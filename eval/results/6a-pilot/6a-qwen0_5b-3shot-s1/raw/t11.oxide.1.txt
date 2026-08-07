@@ -1,0 +1,10 @@
+```
+use std::cell::RefCell;
+fn main() {
+    let v = push(push(push(push(vec(), 5), 3), 8), 1), 9);
+    print_str(str_len(v))
+    for x in v {
+        print(x)
+    }
+}
+```

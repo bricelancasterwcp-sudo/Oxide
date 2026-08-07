@@ -1,0 +1,16 @@
+```
+fn main() {
+    let text = "mississippi";
+    println!("{}", text.chars().count());
+    let chars: Vec<char> = text.chars().collect();
+    let mut count_s = 0;
+    for &c in &chars {
+        if c == 's' {
+            count_s += 1;
+        }
+    }
+    let distinct_chars = chars.drain(..).collect::<Vec<char>>();
+    println!("Number of times 's' occurs: {}", count_s);
+    println!("Distinct characters: {:?}", distinct_chars);
+}
+```

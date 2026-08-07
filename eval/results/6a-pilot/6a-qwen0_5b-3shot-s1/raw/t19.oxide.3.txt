@@ -1,0 +1,26 @@
+```
+#[derive(Debug)]
+struct Rectangle {
+    width: RefCell<i32>,
+    height: RefCell<i32>,
+}
+
+impl Rectangle {
+    pub fn new(width: i32, height: i32) -> Self {
+        Rectangle {
+            width: RefCell::new(width),
+            height: RefCell::new(height),
+        }
+    }
+
+    pub fn area(&self) -> i32 {
+        let w = self.width.borrow();
+        let h = self.height.borrow();
+        w * h
+    }
+
+    pub fn perimeter(&self) -> i32 {
+        2 * (self.width.borrow() + self.height.borrow())
+    }
+}
+```

@@ -1,0 +1,5 @@
+```
+let a: Int = 252;
+let b: Int = 105;
+println!("{}", gcd(a, b));
+```

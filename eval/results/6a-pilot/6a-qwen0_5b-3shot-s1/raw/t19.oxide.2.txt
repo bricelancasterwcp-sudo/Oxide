@@ -1,0 +1,13 @@
+```
+fn main() {
+    let r = Rectangle::new(7, 4);
+    println!("Area: {}", r.area());
+    println!("Perimeter: {}", r.perimeter());
+}
+
+#[derive(Debug)]
+struct Rectangle {
+    width: RefCell<i32>,
+    height: RefCell<i32>,
+}
+```

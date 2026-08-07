@@ -1,0 +1,22 @@
+```
+fn main() {
+    let nums = vec![4, 1, 7, 3, 9, 2];
+    
+    // Filter out numbers greater than 3
+    let mut filtered_nums: Vec<i32> = nums.into_iter()
+        .filter(|&n| n > 3)
+        .collect();
+    
+    // Sort the remaining numbers in descending order
+    filtered_nums.sort_unstable_by(|a, b| b.cmp(a));
+    
+    // Print each kept value on its own line preserving their original order
+    for &num in filtered_nums {
+        println!("{}", num);
+    }
+    
+    // Count how many values were kept
+    let count = filtered_nums.len();
+    println!("Number of values kept: {}", count);
+}
+```

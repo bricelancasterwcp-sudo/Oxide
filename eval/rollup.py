@@ -25,7 +25,23 @@ from eval.driver import (
 
 BAND_PP = 5.0
 INSUFFICIENT = "insufficient-data"
+AT_FLOOR = "no-signal-at-floor"
+AT_CEILING = "no-signal-at-ceiling"
 DASH = "—"
+
+# Section 47's +/-5pp band was derived from a power calculation at p~=0.5,
+# where the across-seed SE of a 20-task pass rate is ~5pp. That derivation
+# does not hold at the extremes: at p~=0.05 two tasks out of twenty is a
+# 10pp delta that clears the band on almost no evidence. The 6a pilot hit
+# exactly this -- 7B 0-shot scored oxide 2/20 vs explicit 0/20 first-compile
+# and would have printed "supports" off two programs.
+#
+# This guard refuses to classify where the design has no resolution rather
+# than changing the band or either direction. It honours section 47's
+# stated limits; it does not renegotiate its conclusions. Fixed from PILOT
+# data written outside eval/results/ and before any grid run, so no
+# reported result informed it.
+EXTREME_PP = 10.0
 
 
 def _by_task(cells: list[dict]) -> dict[str, list[bool]]:
@@ -129,12 +145,42 @@ def unpaired_se(oxide_cells: list[dict], explicit_cells: list[dict]) -> float:
 
 
 def classify(delta_pp: float) -> str:
-    """The section-3 partition: exhaustive and non-overlapping."""
+    """The section-3 partition: exhaustive and non-overlapping.
+
+    Callers should prefer ``_verdict``, which additionally refuses to
+    classify where the band's power calculation does not hold (see
+    ``EXTREME_PP``). This function implements the partition alone.
+    """
     if delta_pp >= BAND_PP:
         return "supports"
     if delta_pp <= -BAND_PP:
         return "disconfirms"
     return "no-detectable-difference"
+
+
+def _both_arms_extreme(arms: dict) -> str | None:
+    """Name the extreme both arms sit at, or None if neither applies.
+
+    At a floor or ceiling the section-47 band has no resolution: a
+    two-task difference out of twenty is a 10pp delta on almost no
+    evidence. Returning a distinct verdict keeps such a point in the
+    report -- with its delta and SE still printed -- while refusing to
+    attach a pre-registered reading to it.
+    """
+    rates = []
+    for arm in ("oxide", "explicit"):
+        stats = arms.get(arm, {})
+        if not stats.get("n"):
+            return None
+        rate = stats.get("first_pass_rate")
+        if rate is None:
+            return None
+        rates.append(float(rate))
+    if all(rate <= EXTREME_PP for rate in rates):
+        return AT_FLOOR
+    if all(rate >= 100.0 - EXTREME_PP for rate in rates):
+        return AT_CEILING
+    return None
 
 
 def _load_jsonl(path: Path) -> list[dict]:
@@ -239,6 +285,9 @@ def _verdict(delta: float | None, arms: dict) -> str:
         return INSUFFICIENT
     if any(arms.get(arm, {}).get("n", 0) == 0 for arm in ("oxide", "explicit")):
         return INSUFFICIENT
+    extreme = _both_arms_extreme(arms)
+    if extreme is not None:
+        return extreme
     return classify(delta)
 
 
@@ -448,6 +497,12 @@ def render_report(grid: dict) -> str:
         "absence). Rust is a reference arm carrying a large pretraining-",
         "exposure advantage and a ~22× smaller prompt; Oxide-vs-Rust is not",
         "evidence about language design.",
+        "",
+        "A point where BOTH primary arms sit within 10pp of 0% or of 100%",
+        "is reported as `no-signal-at-floor` / `no-signal-at-ceiling` and",
+        "carries no pre-registered reading: the band was derived at p≈0.5,",
+        "and at the extremes two tasks out of twenty clear it on almost no",
+        "evidence. The delta and SE are still printed for inspection.",
         "",
     ]
     if grid["missing"]:

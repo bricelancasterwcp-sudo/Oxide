@@ -1,0 +1,7 @@
+```
+fn main() {
+    let s = String::from("flame");
+    println!("{}", s.len());
+    print_str(s.chars().collect::<Vec<_>>());
+}
+```

@@ -1,0 +1,54 @@
+ ```rust
+struct List {
+    head: Option<Box<Node>>,
+}
+
+struct Node {
+    value: Int,
+    tail: Box<List>,
+}
+
+fn sort(list: Box<List>) -> Box<List> {
+    let mut sorted = Box::new(List { head: None });
+    let mut current = list.head.take();
+
+    while let Some(mut node) = current {
+        current = node.tail.head.take();
+        sorted = insert(sorted, node.value);
+    }
+
+    sorted
+}
+
+fn insert(mut list: Box<List>, value: Int) -> Box<List> {
+    if list.head.is_none() || list.head.as_ref().unwrap().value > value {
+        Box::new(List { head: Some(Box::new(Node { value, tail: list })) })
+    } else {
+        let mut current = &mut list.head;
+        while let Some(ref mut next) = *current {
+            if next.value > value {
+                break;
+            }
+            current = &mut next.tail.head.take();
+        }
+        current.replace(Some(Box::new(Node { value, tail: Box::from(next.unwrap().tail) })));
+        list
+    }
+}
+
+fn print_list(list: &Box<List>) {
+    let mut current = &list.head;
+
+    while let Some(node) = current.as_ref() {
+        print_str(&int_to_str(node.value));
+        println();
+        current = &node.tail.head.take();
+    }
+}
+
+fn main() {
+    let list = Box::new(List { head: Some(Box::new(Node { value: 5, tail: Box::from(List { head: Some(Box::new(Node { value: 3, tail: Box::from(List { head: Some(Box::new(Node { value: 8, tail: Box::from(List { head: Some(Box::new(Node { value: 1, tail: Box::from(List { head: Some(Box::new(Node { value: 9, tail: Box::from(List { head: Some(Box::new(Node { value: 2, tail: Box::from(List { head: None } }) })) })) })) })) })) })) })) })) })) })) })) }));
+    let sorted_list = sort(list);
+    print_list(&sorted_list);
+}
+```

@@ -1,0 +1,7 @@
+```
+fn main() {
+    for i in 1..21 {
+        println!("{}", sum_big(&vec![1], 1));
+    }
+}
+```

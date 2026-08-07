@@ -1,0 +1,9 @@
+```
+fn main() {
+    let v = push(push(vec(), 5), 3), 8)
+    print_str(str_len(v))
+    for x in v {
+        print(x)
+    }
+}
+```

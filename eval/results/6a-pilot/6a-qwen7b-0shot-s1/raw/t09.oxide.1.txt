@@ -1,0 +1,26 @@
+```
+struct List {
+    head: Option<i32>,
+    tail: List,
+}
+
+fn push_back(mut list: List, value: i32) -> List {
+    let new_list = List { head: Some(value), tail: list };
+    new_list
+}
+
+fn reverse_print(list: &List) {
+    match list.head {
+        Some(head) => {
+            reverse_print(&list.tail);
+            println!("{}", head);
+        },
+        None => ()
+    }
+}
+
+fn main() {
+    let mut list = List { head: None, tail: List { head: None, tail: List { head: None, tail: List { head: None, tail: List { head: None, tail: List { head: None, tail: List { head: None, tail: List { head: None, tail: List { head: Some(5), tail: List { head: Some(4), tail: List { head: Some(3), tail: List { head: Some(2), tail: List { head: Some(1), tail: List { head: None, tail: List { head: None, tail: List { head: None, tail: List { head: None, tail: List { head: None, tail: List { } } } } } } } } } } } } } } } } } } } } } } } };
+    reverse_print(&list);
+}
+```

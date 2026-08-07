@@ -1,0 +1,25 @@
+```
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let mut total = 0;
+    for x in &v {
+        if x > limit {
+            total = total + x.pow(2);
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn main() {
+    let nums = push(push(vec(), 0..10), 10);
+    println(sum_big(&nums, 10));
+}
+```
+
+**Diagnostics:**  
+2:26: OX0001: unexpected character '['
+2:32: OX0001: unexpected character ']'
+2:25: OX0101: expected ')', found BANG

@@ -1,0 +1,9 @@
+```
+fn main() {
+    let mut v = vec![1];
+    for _ in range(3) {
+        v.push(v.last().unwrap_or(&0));
+    }
+    println(v[19])
+}
+```

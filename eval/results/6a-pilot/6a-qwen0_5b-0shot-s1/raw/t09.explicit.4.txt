@@ -1,0 +1,8 @@
+```
+fn main() {
+    let mut items = vec![5, 4, 3, 2, 1];
+    for i in items.iter_mut().rev() {
+        println!("{:?}", *i);
+    }
+}
+```

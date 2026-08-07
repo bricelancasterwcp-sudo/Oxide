@@ -1,0 +1,18 @@
+```
+fn main() {
+    let fives = push(vec!(1, 2, 3), 5);
+    let zero_divisors = vec![0];
+    for &x in &fives {
+        let quotient = x / 5;
+        if quotient != 0 {
+            print!("{}", quotient);
+        } else {
+            println!("undefined");
+        }
+        drop fives;
+        fives.clear();
+    }
+    println!("undefined");
+    drop zero_divisors;
+}
+```

@@ -1,0 +1,37 @@
+Certainly! Let's correct and complete the Rust program to ensure it behaves as expected. The program should only keep the elements greater than 3 and print them on their own line, preserving their order, and count how many values were kept.
+
+Here's the corrected version of the program:
+
+```rust
+fn main() {
+    let mut elements = vec![4, 1, 7, 3, 9, 2];
+    let mut keepers: Vec<i32> = Vec::new();
+
+    while let Some(value) = elements.pop() {
+        if value > 3 {
+            keepers.push(value);
+        }
+    }
+
+    // Print each kept value on its own line
+    for &value in &keepers {
+        println!("{}", value);
+    }
+
+    // Print the total number of values kept
+    println!("Total values kept: {}", keepers.len());
+}
+```
+
+### Explanation:
+1. **Initialization**: The program initializes a vector `elements` with the given list `[4, 1, 7, 3, 9, 2]`. It also initializes an empty vector `keepers`.
+
+2. **While Loop**: The program enters a loop that continues until all elements from `elements` are removed.
+
+3. **Pop Operation**: Inside the loop, it pops an element from `elements` and checks if it is greater than 3. If it is, the element is added to `keepers`.
+
+4. **Printing Values**: After popping an element, it prints that value on its own line using `println!()`.
+
+5. **Counting Keepers**: After printing all elements, it counts the number of elements in `keepers` and prints this count.
+
+This program should now correctly output the desired results for the given input.

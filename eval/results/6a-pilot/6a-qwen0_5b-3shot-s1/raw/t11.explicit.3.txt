@@ -1,0 +1,14 @@
+```
+fn main() {
+    let mut v = Vec::new();
+    for i in 1..=6 {
+        v.push(i);
+    }
+    let mut rev = String::from("flame");
+    for c in &rev.chars() {
+        rev = concat(c, rev);
+    }
+    drop v
+    print_str(&rev)
+}
+```

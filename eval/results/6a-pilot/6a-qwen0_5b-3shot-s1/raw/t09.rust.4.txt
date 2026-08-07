@@ -1,0 +1,22 @@
+```
+fn main() {
+    let mut p = 1;
+    for i in 1..7 {
+        p *= i;
+    }
+    println!("{}", p);
+}
+
+let v = vec![2, 5, 1, 6];
+let sum: i64 = v.iter().sum();
+println!("{}", sum);
+println!("{}", min);
+
+for num in v.iter() {
+    print!("{num}, ");
+}
+println!("");
+println!("{}", min);
+```
+
+This corrected version now uses a `for` loop to iterate over the vector `v`, calculates the product, and prints both the product and the smallest element.

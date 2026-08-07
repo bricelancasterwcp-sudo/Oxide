@@ -1,0 +1,58 @@
+```
+use std::mem;
+
+fn main() {
+    let rect = Rectangle { width: 3, height: 4 };
+    let triangle = Triangle { sides: vec![3, 4, 5] };
+
+    print_perimeter(&rect);
+    println_perimeter(&triangle);
+
+    fn print_perimeter(shape: &Shape) {
+        let perimeter = shape.calculate_perimeter();
+        println!("Perimeter of {}: {}", shape.label, perimeter);
+    }
+}
+```
+
+```rust
+struct Shape<T> {
+    label: String,
+    sides: Vec<isize>,
+}
+
+impl<T: Copy + PartialEq> Shape<T> {
+    fn calculate_perimeter(&self) -> isize {
+        self.sides.iter().map(|&side| side).sum()
+    }
+}
+
+struct Rectangle<T> {
+    width: T,
+    height: T,
+}
+
+impl Rectangle<T> {
+    fn calculate_perimeter(&self) -> isize {
+        2 * (self.width + self.height)
+    }
+}
+
+struct Triangle<T> {
+    sides: Vec<isize>,
+}
+
+impl Triangle<T> {
+    fn calculate_perimeter(&self) -> isize {
+        let mut sum = 0;
+        for &side in &self.sides {
+            if side == 3 {
+                sum += 2 * (side + side);
+            } else {
+                sum += side;
+            }
+        }
+        sum
+    }
+}
+```

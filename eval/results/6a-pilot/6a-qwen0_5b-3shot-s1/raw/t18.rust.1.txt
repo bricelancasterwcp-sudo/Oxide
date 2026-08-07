@@ -1,0 +1,7 @@
+```
+fn main() {
+    println!("perimeter of rectangle: {}", (3 * 4 + 3) * 2);
+    println!("perimeter of triangle: {}", 3 * (3 + 4 + 5));
+    println!("perimeter of rectangle: {}", (2 * 5 + 5) * 2);
+}
+```

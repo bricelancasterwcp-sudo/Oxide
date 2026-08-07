@@ -1,0 +1,12 @@
+```
+struct Shape {
+    label: String,
+    values: Vec<Int>,
+}
+
+impl Shape {
+    fn perimeter(&self) -> Int {
+        self.values.iter().sum()
+    }
+}
+```

@@ -1,0 +1,12 @@
+To solve this error, we need to fix the way the `for` loop iterates over the characters in the string and counts occurrences of 's'. Here's the corrected code:
+
+```rust
+let s: String = "mississippi";
+for x in s.chars() {
+    if x == 's' {
+        print!("{}", x);
+    }
+}
+```
+
+This changes the `for` loop to iterate over each character in the string, and then checks if it's equal to 's'. If it is, it prints the character using `print!`.

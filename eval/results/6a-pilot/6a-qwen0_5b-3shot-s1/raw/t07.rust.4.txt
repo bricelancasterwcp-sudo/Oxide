@@ -1,0 +1,24 @@
+To complete the example task, we need to modify the Rust program to correctly print the product of integers from 1 to 6, and then calculate the sum of their elements. Additionally, we need to ensure that the output is formatted as specified in the examples.
+
+Here's the corrected program:
+
+```rust
+fn main() {
+    let mut p = 1;
+    for i in 1..7 {
+        p *= i;
+    }
+    println!("{}", p);
+
+    // Correct way to print the sum of the elements
+    let sum = (1..=6).sum::<i32>();
+    println!("Sum: {}", sum);
+}
+```
+
+### Explanation:
+- **Product Calculation**: We calculate the product of integers from 1 to 6 using a `for` loop.
+- **Sum Calculation**: We use Rust's `sum` method with a generic type (`<i32>` for integers) to sum up all elements in the range `[1..=6]`.
+- **Output Formatting**: The program prints the product and the sum of the numbers from 1 to 6, formatted as specified in the examples.
+
+This should produce the correct output when run.

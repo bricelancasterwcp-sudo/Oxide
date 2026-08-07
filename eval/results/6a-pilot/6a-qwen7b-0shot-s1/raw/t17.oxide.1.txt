@@ -1,0 +1,19 @@
+```
+struct List { value: Int, next: Option<Box<List>> }
+
+fn get_elem(lst: &List, pos: Int) -> Int {
+    if pos == 0 {
+        lst.value
+    } else if let Some(nxt) = &lst.next {
+        get_elem(nxt, pos - 1)
+    } else {
+        -1
+    }
+}
+
+fn main() {
+    let lst = Box::new(List { value: 30, next: Some(Box::new(List { value: 20, next: Some(Box::new(List { value: 10, next: None })) })) });
+    print(get_elem(lst.as_ref(), 1)); // 20
+    print(get_elem(lst.as_ref(), 5)); // -1
+}
+```

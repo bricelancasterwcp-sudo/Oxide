@@ -1,0 +1,25 @@
+```
+fn main() {
+    fn is_reverse(text: &str) -> bool {
+        for i in 0..text.len() / 2 {
+            if text[i] != text[text.len() - 1 - i] {
+                return false;
+            }
+        }
+        true
+    }
+
+    println!("{}", is_reverse("level")); // true
+    println!("{}", is_reverse("stereo")); // true
+    println!("{}", is_reverse("rotor")); // true
+
+    for t in ["level", "stereo", "rotor"] {
+        let text = t.to_string();
+        if is_reverse(&text) {
+            println!("true");
+        } else {
+            println!("false");
+        }
+    }
+}
+```

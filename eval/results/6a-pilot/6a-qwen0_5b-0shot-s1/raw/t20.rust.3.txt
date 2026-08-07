@@ -1,0 +1,34 @@
+Certainly! Let's correct and complete the Rust program to produce the expected output. The program will correctly calculate the total cost of all three items and determine which item has the highest cost.
+
+```rust
+fn main() {
+    let mut pen = 3;
+    let pad = 9;
+    let ink = 5;
+
+    // Calculate the total cost of the items
+    let total_cost = pen * 4 + pad * 2 + ink * 3;
+
+    // Determine which item has the highest cost
+    let max_cost_item = if pen > pad && pen > ink { "pen" } else if pad > pen && pad > ink { "pad" } else { "ink" };
+
+    // Print the results
+    println!("Total cost: {}", total_cost);
+    println!("Item with the highest cost: {}", max_cost_item);
+}
+```
+
+### Explanation:
+1. **Variables**: We define three variables, `pen`, `pad`, and `ink`, to store the unit prices of each item.
+2. **Total Cost Calculation**: The `total_cost` is calculated by multiplying the unit prices of the pen, pad, and ink together: `3 * 4 + 9 * 2 + 5 * 3`.
+3. **Finding the Item with the Highest Cost**: We use a simple conditional statement to determine which item has the highest cost:
+   - If `pen` is greater than both `pad` and `ink`, `max_cost_item` is set to "pen".
+   - If `pad` is greater than both `pen` and `ink`, `max_cost_item` is set to "pad".
+   - If neither condition is met, `max_cost_item` is set to "ink".
+4. **Output**: The program prints the total cost and the item with the highest cost.
+
+This program will correctly output:
+```
+Total cost: 45
+Item with the highest cost: pad
+```

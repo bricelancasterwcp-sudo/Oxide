@@ -1,0 +1,20 @@
+```rust
+fn parse_int(s: Str) -> Option<Int> { s.parse().ok() }
+fn to_float(n: Int) -> Float { n.to_float() }
+fn trunc(x: Float) -> Int { x.trunc() as Int }
+fn print(x: Int)
+fn main() {
+    let a = "12"
+    let b = "x"
+    let c = "30"
+    
+    let parsed_a = parse_int(a)?
+    let parsed_c = parse_int(c)?
+    
+    let sum = parsed_a + parsed_c
+    let count = if parse_int(b).is_none() { 1 } else { 2 }
+    
+    print(sum)
+    print(count)
+}
+```

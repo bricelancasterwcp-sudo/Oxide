@@ -1,0 +1,9 @@
+```
+fn main() {
+    let nums = push(push(push(push(vec(), 5), 3), 8), 1)
+    nums.sort()
+    for x in &nums {
+        print(x)
+    }
+}
+```

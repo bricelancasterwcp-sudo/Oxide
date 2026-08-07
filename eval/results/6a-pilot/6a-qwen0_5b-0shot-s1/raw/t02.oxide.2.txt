@@ -1,0 +1,36 @@
+```
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let mut found = -1;
+    for x in v {
+        if x > 10 {
+            found = x;
+            break;
+        }
+    }
+    return if found != -1 { found } else { print_str("too short") };
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?;
+    Some(x + 1)
+}
+
+fn main() {
+    let mut r = Reading { label: "lab", values: push(push(vec(), 3), 42) };
+    for _ in first_big(r.values).to_string().chars().enumerate() {
+        if _ == '0' || _ == '2' || _ == '4' || _ == '6' || _ == '8' {
+            r.values.push(1);
+        } else {
+            break;
+        }
+    }
+    print(first_big(r.values));           // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r };
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+```

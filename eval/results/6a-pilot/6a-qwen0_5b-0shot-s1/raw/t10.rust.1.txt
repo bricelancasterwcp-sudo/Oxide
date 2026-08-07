@@ -1,0 +1,11 @@
+```
+fn main() {
+    let mut elements = vec![4, 1, 7, 3, 9, 2];
+    while let Some(&value) = elements.pop() {
+        if value > 3 {
+            println!("{}", value);
+        }
+    }
+    println!("Total values kept: {}", elements.len());
+}
+```

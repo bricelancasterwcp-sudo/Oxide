@@ -1,0 +1,47 @@
+To correct the above code and fix the error in the `main` function, we need to modify the line `println!("cost of ink: {}", ink.price * ink.quantity);`. The type error here is due to trying to access an element of a `Vec<Int>` using `ink.values[3]`, which doesn't exist. We need to first create a new vector of integers and then retrieve the third element from it.
+
+Here's the corrected code:
+
+```rust
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1;
+    for x in v {
+        if x > 10 {
+            found = x;
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    // Item::new(3, 4) -> Reading { label: "pen", values: vec![] }
+    let mut pen = Item::new(3, 4);
+    println!("cost of pen: {}", pen.price * pen.quantity);
+
+    // Create a new vector of integers
+    let mut ink_values: Vec<Int> = Vec::with_capacity(2); // Assuming we only need 2 elements
+
+    // Fill the vector with ink values
+    for _ in 0..3 {
+        ink_values.push(5);
+    }
+
+    // Retrieve the third element from the vector
+    if !ink_values.is_empty() {
+        let ink = ink_values[2];
+        println!("cost of ink: {}", ink.price * ink.quantity);
+    } else {
+        println!("No ink available.");
+    }
+}
+```
+
+This program creates a new vector `ink_values` with 3 elements, fills it with the desired values (5), and then prints the cost of the third element from this vector.

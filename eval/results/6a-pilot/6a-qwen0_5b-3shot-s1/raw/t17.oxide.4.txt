@@ -1,0 +1,47 @@
+```
+fn main() {
+    let v = push(push(vec![1, 2, 5, 6], 3), 42);
+    println(str_len(&v));
+    let rev = "";
+    for c in &v[1..] {
+        rev = concat(c, rev);
+    }
+    print_str(rev);
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1;
+    for x in v {
+        if x > 10 {
+            found = x;
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(push(vec(), 2), 5), 6) };
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+
+fn main() {
+    let v = vec![1, 2, 5, 6];
+    println(str_len(&v));
+    let rev = "";
+    for c in &v[1..] {
+        rev = concat(c, rev);
+    }
+    print_str(rev);
+}
+```

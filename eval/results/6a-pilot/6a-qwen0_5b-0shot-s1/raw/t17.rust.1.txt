@@ -1,0 +1,17 @@
+```
+fn main() {
+    let numbers: [i32; 3] = [10, 20, 30];
+    
+    if numbers[1] == -1 {
+        println!("Element not found at position 1");
+    } else {
+        println!("Element found at position 1: {}", numbers[1]);
+    }
+    
+    if numbers[5] == -1 {
+        println!("Element not found at position 5");
+    } else {
+        println!("Element found at position 5: {}", numbers[5]);
+    }
+}
+```

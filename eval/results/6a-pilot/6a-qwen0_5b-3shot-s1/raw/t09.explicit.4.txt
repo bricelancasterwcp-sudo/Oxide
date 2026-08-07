@@ -1,0 +1,12 @@
+```
+fn main() {
+    let s = "flame";
+    println!("{}", str_len(&s));
+    for x in &s {
+        print_str(x);
+        if x > 5 {
+            print()
+        }
+    }
+}
+```

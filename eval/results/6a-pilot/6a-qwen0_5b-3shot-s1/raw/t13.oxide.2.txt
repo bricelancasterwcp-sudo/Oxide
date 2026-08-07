@@ -1,0 +1,23 @@
+```
+fn main() {
+    let s = "level";
+    if is_reverse(s) {
+        println!("true");
+    } else {
+        println!("false");
+    }
+}
+
+fn is_reverse(text: &str) -> bool {
+    let mut left = 0;
+    let mut right = text.len() - 1;
+    while left < right {
+        if text[left] != text[right] {
+            return false;
+        }
+        left += 1;
+        right -= 1;
+    }
+    true
+}
+```

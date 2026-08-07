@@ -1,0 +1,18 @@
+```rust
+fn fibonacci(n: Int) -> Int {
+    let a = 1;
+    let b = 1;
+    for _ in range(0, n - 2) {
+        let temp = a + b;
+        drop(a);
+        a = b;
+        b = temp;
+    }
+    b
+}
+
+fn main() {
+    let term_20 = fibonacci(20);
+    print(term_20);
+}
+```

@@ -1,0 +1,13 @@
+```
+use std::num::Int;
+
+fn main() {
+    let n = push(push(vec(), 0), 1).len()
+    println!("{}", n)
+    let rev = ""
+    for c in chars("flame") {
+        rev = concat(c, rev)
+    }
+    print_str(rev)
+}
+```

@@ -1,0 +1,9 @@
+```
+fn main() {
+    let nums = push(range(4, 7), 3)
+    let greater_than_three = nums.into_iter()
+        .filter(|&x| x > 3)
+        .collect::<Vec<_>>()
+    println!("Number of values greater than 3:", greater_than_three.len())
+}
+```

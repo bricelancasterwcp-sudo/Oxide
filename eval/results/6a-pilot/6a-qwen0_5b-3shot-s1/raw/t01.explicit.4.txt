@@ -1,0 +1,17 @@
+```
+fn main() {
+    let p = 0;
+    for i in range(0, 10) {
+        p += i * i;
+    }
+    print(p);
+}
+
+fn sum_of_squares() {
+    let mut s = 0;
+    for i in 0..=9 {
+        s += i * i;
+    }
+    print(s);
+}
+```

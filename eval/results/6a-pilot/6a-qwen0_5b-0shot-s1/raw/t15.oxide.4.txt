@@ -1,0 +1,12 @@
+```
+fn main() {
+    let x = String::from("12");
+    println!("{}", x + 3);
+    
+    let y = "x";
+    match String::parse(y) {
+        Ok(i) => println!("{}", i),
+        Err(_) => println!("invalid input"),
+    }
+}
+```

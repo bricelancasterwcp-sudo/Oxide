@@ -1,0 +1,6 @@
+```
+fn main() {
+    let txt = String::from("stack");
+    println!("{}", txt.chars().rev().collect::<String>());
+}
+```

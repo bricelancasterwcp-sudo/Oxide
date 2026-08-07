@@ -1,0 +1,17 @@
+```
+fn main() {
+    let product = 1;
+    for i in 1..7 {
+        p *= i;
+    }
+    println!("{}", p);
+
+    let sum: i64 = v.iter().sum();
+    let min = v.iter().min().unwrap();
+    println!("{}", sum);
+    println!("{}", min);
+
+    let gcd = product / sum * min;
+    println!("GCD: {}", gcd);
+}
+```

@@ -1,0 +1,6 @@
+```
+fn main() {
+    let num = 1 + 2 * 5 + 6;
+    println!("{}", num);
+}
+```

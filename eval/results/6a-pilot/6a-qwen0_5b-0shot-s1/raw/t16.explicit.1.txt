@@ -1,0 +1,13 @@
+```
+fn main() {
+    // Division of 100 by each of 5, 0, and 4 in order
+    let quotient_1 = 100 / 5;
+    println!("Quotient 1: {}", quotient_1);
+
+    let quotient_2 = 100 / 0;
+    println!("Quotient 2: undefined");
+
+    let quotient_3 = 100 / 4;
+    println!("Quotient 3: {}", quotient_3);
+}
+```

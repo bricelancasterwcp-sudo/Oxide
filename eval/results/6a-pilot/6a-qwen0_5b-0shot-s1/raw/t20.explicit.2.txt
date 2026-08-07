@@ -1,0 +1,27 @@
+```
+fn main() {
+    let pen = 3;
+    let quantity = 4;
+    let pad = 9;
+    let ink = 5;
+    let quantity = 3;
+
+    let cost_pen = pen * quantity;
+    let cost_pad = pad * quantity;
+    let cost_ink = ink * quantity;
+
+    println!("The combined cost of all items is: {}", cost_pen + cost_pad + cost_ink);
+
+    let item_with_highest_cost: Option<&str> = if cost_pen > cost_pad && cost_pen > cost_ink {
+        "pen"
+    } else if cost_pad > cost_pen && cost_pad > cost_ink {
+        "pad"
+    } else {
+        "ink"
+    };
+
+    println!("The name of the item with the highest cost is: {}", item_with_highest_cost.unwrap_or("none"));
+}
+```
+
+This version adheres to Rust's explicit linear types and ownership rules, ensuring that the compiler can identify errors early.

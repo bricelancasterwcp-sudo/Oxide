@@ -1,0 +1,35 @@
+Certainly! Let's correct and complete the Rust program to count how many prime numbers are strictly less than 100. We'll use the `is_prime` function provided in your code.
+
+```rust
+fn main() {
+    let mut prime_count = 0;
+    
+    for i in 2..=99 {
+        if is_prime(i) {
+            prime_count += 1;
+        }
+    }
+    
+    println!("There are {} prime numbers less than 100.", prime_count);
+}
+
+// Function to check if a number is prime
+fn is_prime(n: isize) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    for i in 2..=((n as f64).sqrt() as isize) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+```
+
+### Explanation:
+- The `is_prime` function checks if a number is prime. It returns `false` for numbers less than or equal to 1, and it uses a loop to check divisibility starting from 2 up to the square root of the number.
+- The main function iterates over all numbers from 2 to 99 and calls `is_prime` to determine if each number is prime. If it is, it increments the `prime_count`.
+- Finally, it prints the count of prime numbers less than 100.
+
+This program should now correctly output "There are 25 prime numbers less than 100."

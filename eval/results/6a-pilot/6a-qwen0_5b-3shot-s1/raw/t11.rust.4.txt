@@ -1,0 +1,18 @@
+```
+fn main() {
+    let mut p = 1;
+    for i in 1..7 {
+        p *= i;
+    }
+    println!("{}", p);
+
+    let min = min_element(&vec![2, 5, 1, 6]);
+    println!("The minimum element is: {}", min);
+
+    let mut sum: i32 = 0;
+    for i in 1..7 {
+        sum += i;
+    }
+    println!("{}", sum);
+}
+```

@@ -1,0 +1,12 @@
+```
+struct Reading { label: Str, values: Vec<Int> }
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(vec(), 3), }
+    println(first_big(r.values))
+}
+```

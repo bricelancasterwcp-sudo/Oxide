@@ -1,0 +1,18 @@
+Certainly! The issue with your code is that the line `a.push(a[i - 1] + a[i - 2]);` is trying to push a value into an array, but you are using a vector (which is a mutable array) instead. To fix this, you need to use the `push_back` method on the vector.
+
+Here's the corrected program:
+
+```rust
+fn main() {
+    let n = 20;
+    let mut a = Vec::new();
+    a.push(1);
+    a.push(1);
+    for i in 2..n {
+        a.push_back(a[i - 1] + a[i - 2]);
+    }
+    println!("{}", a[n - 1]);
+}
+```
+
+This program will correctly compute the 20th term by pushing each subsequent term to the vector.

@@ -1,0 +1,20 @@
+```rust
+fn div(a: Int, b: Int) -> Result<Int, Str> {
+    if b == 0 {
+        Err("undefined".into())
+    } else {
+        Ok(a / b)
+    }
+}
+
+fn main() {
+    let nums = vec!(5, 0, 4);
+    for n in nums.iter() {
+        match div(100, *n) {
+            Ok(q) => print(q),
+            Err(e) => print_str(e),
+        }
+        print_str("\n")
+    }
+}
+```

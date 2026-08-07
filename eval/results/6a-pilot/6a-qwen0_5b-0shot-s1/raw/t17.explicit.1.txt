@@ -1,0 +1,9 @@
+```
+fn main() {
+    let nums: Vec<Int> = vec![10, 20, 30];
+    let x = nums[1];
+    let y = nums[5];
+    print!("{}", x);
+    print!("{}", y);
+}
+```

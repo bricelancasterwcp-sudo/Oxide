@@ -1,0 +1,23 @@
+fn main() {
+    struct Item { name: Str, unit_price: Int, quantity: Int }
+
+    let pen = Item { name: "pen", unit_price: 3, quantity: 4 };
+    let pad = Item { name: "pad", unit_price: 9, quantity: 2 };
+    let ink = Item { name: "ink", unit_price: 5, quantity: 3 };
+
+    fn cost(item: &Item) -> Int {
+        item.unit_price * item.quantity
+    }
+
+    let total_cost = cost(&pen) + cost(&pad) + cost(&ink);
+    print(total_cost);
+
+    fn highest_cost_item(items: &[&Item]) -> Option<&Item> {
+        items.iter().max_by_key(|item| cost(item)).cloned()
+    }
+
+    match highest_cost_item(&[&pen, &pad, &ink]) {
+        Some(item) => print(item.name),
+        None => print("No items"),
+    }
+}

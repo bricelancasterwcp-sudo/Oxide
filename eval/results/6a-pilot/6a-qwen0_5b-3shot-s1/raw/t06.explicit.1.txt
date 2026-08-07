@@ -1,0 +1,42 @@
+```
+fn main() {
+    let mut perfect_numbers = vec![];
+    for i in 2..=1000 {
+        if i.is_perfect_number() {
+            perfect_numbers.push(i);
+        }
+    }
+
+    perfect_numbers.sort_unstable();
+    for x in &perfect_numbers {
+        println!("{}", x);
+    }
+}
+
+fn is_perfect_number(n: isize) -> bool {
+    let mut sum = 1;
+    for i in 2..=n / 2 {
+        if n % i == 0 {
+            sum += i;
+            if i != n / i {
+                sum += n / i;
+            }
+        }
+    }
+    sum == n
+}
+
+fn main() {
+    let mut perfect_numbers = vec![];
+    for i in 2..=1000 {
+        if i.is_perfect_number() {
+            perfect_numbers.push(i);
+        }
+    }
+
+    perfect_numbers.sort_unstable();
+    for x in &perfect_numbers {
+        println!("{}", x);
+    }
+}
+```

@@ -1,0 +1,12 @@
+To fix the issue, you need to calculate the area using `7 * 4` and then compute the perimeter as `2 * (area + 4)` in Rust. Here's the correct code:
+
+```rust
+fn main() {
+    let area = 7 * 4;
+    let perimeter = 2 * (area + 4);
+    println!("Area: {}", area);
+    println!("Perimeter: {}", perimeter);
+}
+```
+
+This program will correctly compute and print the area and perimeter of a rectangle with width 7 and height 4.

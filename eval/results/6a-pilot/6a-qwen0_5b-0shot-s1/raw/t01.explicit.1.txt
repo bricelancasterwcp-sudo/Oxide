@@ -1,0 +1,5 @@
+```
+fn main() {
+    println(sum_big(&vec![0..10], 10))
+}
+```

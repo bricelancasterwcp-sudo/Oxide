@@ -1,0 +1,14 @@
+```
+fn sum_of_squares(n: u32) -> u32 {
+    let mut s = 0;
+    for i in range(0, n + 1) {
+        s += i * i;
+    }
+    s
+}
+
+fn main() {
+    let p = sum_of_squares(9);
+    print(p);
+}
+```

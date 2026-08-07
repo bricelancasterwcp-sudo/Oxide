@@ -1,0 +1,6 @@
+```
+fn main() {
+    let p = sum_of_squares(10);
+    print(p);
+}
+```

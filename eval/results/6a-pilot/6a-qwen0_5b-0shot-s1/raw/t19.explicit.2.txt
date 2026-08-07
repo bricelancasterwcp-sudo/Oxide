@@ -1,0 +1,19 @@
+```
+fn main() {
+    println!("Area: {}", rect_area(7, 4));
+    println!("Perimeter: {}", rect_perimeter(7, 4));
+}
+
+fn rect_area(w: i32, h: i32) -> i32 {
+    w * h
+}
+
+fn rect_perimeter(w: i32, h: i32) -> i32 {
+    2 * (w + h)
+}
+
+Diagnostics:
+2:42: OX0001: unexpected character ';'
+3:52: OX0001: unexpected character ';'
+2:12: OX0101: expected end of statement, found BANG
+```

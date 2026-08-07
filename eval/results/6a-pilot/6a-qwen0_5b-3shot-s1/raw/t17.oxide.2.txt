@@ -1,0 +1,14 @@
+```
+use std::vec;
+use std::str;
+
+fn main() {
+    let v = vec![1, 2, 5, 6];
+    print(str_len(&v));
+    let rev = "";
+    for c in &v[1..] {
+        rev = concat(c, rev);
+    }
+    print_str(rev);
+}
+```

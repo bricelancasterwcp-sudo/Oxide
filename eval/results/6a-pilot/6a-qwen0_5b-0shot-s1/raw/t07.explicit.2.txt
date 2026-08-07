@@ -1,0 +1,12 @@
+```
+fn main() {
+    let mut res = 0;
+    for i in 1..=9 {
+        println!("{}", 3 * i);
+        if (i % 2 == 0) {
+            res += i;
+        }
+    }
+    println!("Sum: {}", res);
+}
+```

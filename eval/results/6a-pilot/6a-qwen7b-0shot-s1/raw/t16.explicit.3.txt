@@ -1,0 +1,26 @@
+```rust
+fn divide(dividend: Int) -> Option<Int> {
+    if dividend == 0 {
+        None
+    } else {
+        Some(100 / dividend)
+    }
+}
+
+fn main() {
+    match divide(5) {
+        Some(q) => print_str(&int_to_str(q)),
+        None => print_str("undefined"),
+    }
+
+    match divide(0) {
+        Some(q) => print_str(&int_to_str(q)),
+        None => print_str("undefined"),
+    }
+
+    match divide(4) {
+        Some(q) => print_str(&int_to_str(q)),
+        None => print_str("undefined"),
+    }
+}
+```

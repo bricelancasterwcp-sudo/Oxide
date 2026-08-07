@@ -1,0 +1,15 @@
+```rust
+fn sum_squares(v: &Vec<Int>) -> Int {
+    let total = 0;
+    for x in &v {
+        total = total + (x * x);
+    }
+    total
+}
+
+fn main() {
+    let nums = range(0, 10);
+    print(sum_squares(&nums));
+    drop(nums);
+}
+```

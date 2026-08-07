@@ -1,0 +1,46 @@
+To correct the example task and the Rust code for printing prime numbers less than 100, we need to:
+
+1. Implement the `is_prime` function to determine if a number is prime.
+2. Modify the `main` function to iterate over the numbers from 2 to 99 and print only those that are prime.
+3. Print the count of prime numbers.
+
+Here's the corrected Rust code:
+
+```rust
+fn main() {
+    let n = 100;
+    for i in 2..n {
+        if is_prime(i) {
+            println!("{}", i);
+        }
+    }
+
+    fn is_prime(num: isize) -> bool {
+        if num <= 1 {
+            return false;
+        }
+        
+        // Check divisibility from 2 to sqrt(num)
+        for i in 2..=((num as f64).sqrt() as isize + 1) {
+            if num % i == 0 {
+                return false;
+            }
+        }
+        true
+    }
+}
+```
+
+### Explanation:
+
+1. **`is_prime` Function**: 
+   - This function checks if a number is prime.
+   - It first handles numbers less than or equal to 1, returning `false` for these cases.
+   - It then iterates over potential divisors from 2 up to the square root of the number, checking if any divisor divides the number evenly. If it does, the function returns `false`.
+   - If no divisors are found, the function returns `true`.
+
+2. **`main` Function**:
+   - This function iterates over the numbers from 2 to 99.
+   - It uses the `is_prime` function to filter out prime numbers and prints them.
+
+This code will correctly print the prime numbers less than 100, count them, and then print their sum.

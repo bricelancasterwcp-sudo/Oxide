@@ -1,0 +1,24 @@
+```
+fn main() {
+    let num = 100;
+    for i in range(1, num + 1) {
+        print(num);
+    }
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1;
+    for x in v {
+        if x > 10 {
+            found = x;
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+```

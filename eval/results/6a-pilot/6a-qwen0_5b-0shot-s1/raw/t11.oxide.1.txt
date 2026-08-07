@@ -1,0 +1,5 @@
+```
+let mut r = Reading { label: "lab", values: push(vec![3, 8, 1, 9, 2], 0) }
+print(first_big(r.values))            // field access copies: r stays usable
+println("second:", second(r.values).unwrap())
+```

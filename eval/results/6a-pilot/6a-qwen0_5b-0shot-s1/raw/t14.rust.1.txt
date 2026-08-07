@@ -1,0 +1,9 @@
+```
+fn main() {
+    let text = String::from("mississippi");
+    let count_s = text.chars().filter(|&c| c == 's').count();
+    let distinct_chars: HashSet<char> = text.chars().collect();
+    println!("Character 's' appears {} times.", count_s);
+    println!("Distinct characters in the string are: {:?}", distinct_chars);
+}
+```

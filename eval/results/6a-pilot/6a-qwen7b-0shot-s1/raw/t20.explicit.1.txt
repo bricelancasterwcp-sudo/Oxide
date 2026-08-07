@@ -1,0 +1,31 @@
+```
+fn main() {
+    struct Item { name: Str, unit_price: Int, quantity: Int }
+
+    let pen = Item { name: "pen", unit_price: 3, quantity: 4 }
+    let pad = Item { name: "pad", unit_price: 9, quantity: 2 }
+    let ink = Item { name: "ink", unit_price: 5, quantity: 3 }
+
+    fn cost(item: &Item) -> Int {
+        item.unit_price * item.quantity
+    }
+
+    let total_cost = cost(&pen) + cost(&pad) + cost(&ink)
+    print(total_cost)
+
+    fn highest_cost_item(items: &[&Item]) -> &Item {
+        let mut max_cost = 0;
+        let mut max_item = &items[0];
+        for item in items {
+            if cost(item) > max_cost {
+                max_cost = cost(item);
+                max_item = item;
+            }
+        }
+        max_item
+    }
+
+    let items = [&pen, &pad, &ink];
+    print(highest_cost_item(&items).name)
+}
+```

@@ -1,0 +1,15 @@
+```rust
+fn reverse(s: Str) -> Str {
+    let mut chars = chars(s);
+    let mut reversed = vec![];
+    while let Some(c) = chars.next() {
+        reversed.insert(0, c);
+    }
+    concat(reversed)
+}
+
+fn main() {
+    let s = "stack";
+    print(reverse(s))
+}
+```

@@ -1,0 +1,38 @@
+```
+pub fn to_float(n: f64) -> i32 {
+    n as i32
+}
+
+pub fn trunc(x: f64) -> i32 {
+    x.floor() as i32
+}
+
+#[derive(Debug)]
+struct Reading { label: String, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let mut found = -1;
+    for x in v {
+        if x > 10 {
+            found = x;
+            break;
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?;
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) };
+    println!("{}", first_big(r.values)); // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r };
+    match second(r2.values) {
+        Some(n) => print!(n),
+        None => print!("too short"),
+    }
+}
+```

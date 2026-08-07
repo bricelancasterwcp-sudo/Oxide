@@ -1,0 +1,20 @@
+Certainly! The issue in your code is due to a misunderstanding of how Vec<T> is used. `push_back` is not a method available on Vec<T> for integer types. Instead, you should use the `push` method.
+
+Here's the corrected program:
+
+```rust
+fn main() {
+    let n = 20;
+    let mut a = Vec::new();
+    a.push(1);
+    a.push(1);
+
+    for i in 2..n {
+        a.push(a[i - 1] + a[i - 2]);
+    }
+
+    println!("{}", a[n - 1]);
+}
+```
+
+In this corrected version, we use `push` to add each subsequent term to the vector `a`.

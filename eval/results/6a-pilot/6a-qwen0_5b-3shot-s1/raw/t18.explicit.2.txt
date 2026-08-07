@@ -1,0 +1,16 @@
+```
+fn main() {
+    let shape1 = Rectangle { width: 3, height: 4 };
+    println!("{}", shape1.perimeter());
+    
+    let shape2 = Triangle { base: 3, side_a: 4, side_b: 5 };
+    println!("{}", shape2.perimeter());
+    
+    let shape3 = Rectangle { width: 2, height: 5 };
+    println!("{}", shape3.perimeter());
+}
+
+fn perimeter(s: &Shape) -> Int {
+    s.width * (s.height + 1)
+}
+```

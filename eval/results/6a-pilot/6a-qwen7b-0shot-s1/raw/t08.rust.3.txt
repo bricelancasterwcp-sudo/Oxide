@@ -1,0 +1,20 @@
+```rust
+fn main() {
+    let nums = vec![3, 8, -2, 12, 7];
+    
+    let mut pos_count = 0;
+    let mut max_val = i32::MIN;
+    
+    for &num in &nums {
+        if num > 0 {
+            pos_count += 1;
+        }
+        if num > max_val {
+            max_val = num;
+        }
+    }
+    
+    println!("Positive values: {}", pos_count);
+    println!("Largest value: {}", max_val);
+}
+```

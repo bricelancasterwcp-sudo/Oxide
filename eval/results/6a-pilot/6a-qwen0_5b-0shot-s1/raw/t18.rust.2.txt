@@ -1,0 +1,27 @@
+Certainly! Let's correct and complete the Rust program as requested:
+
+```rust
+fn main() {
+    let side1 = 3;
+    let side2 = 4;
+
+    // Rectangle
+    println!("Rectangle's perimeter: {}", 2 * (side1 + side2));
+
+    // Triangle
+    let base_triangle = 3;
+    let height_triangle = 4;
+    println!("Triangle's perimeter: {}", 2 * (base_triangle + height_triangle));
+
+    // Rectangle
+    let side3 = 2;
+    let side4 = 5;
+
+    println!("Rectangle's perimeter: {}", 2 * (side3 + side4));
+}
+```
+
+### Explanation:
+- The first two lines of the program define three variables, `side1` and `side2`, which represent the dimensions of a rectangle.
+- For each shape, we calculate its perimeter using the formula \( P = 2 \times (\text{base} + \text{height}) \).
+- We then print the perimeter for each shape.

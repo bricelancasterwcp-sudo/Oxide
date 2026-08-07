@@ -1,0 +1,21 @@
+fn main() {
+    let mut p = 1;
+    for i in 1..7 {
+        p *= i;
+    }
+    println!("{}", p);
+
+    let v = vec![2, 5, 1, 6];
+    let sum: i64 = v.iter().sum();
+    let min = v.iter().min().unwrap();
+
+    let s = "flame";
+    println!("{}", s.chars().count());
+    let rev: String = s.chars().rev().collect::<String>();
+
+    println!("{}", sum);
+    println!("{}", min);
+}
+```
+
+This program defines a function `main` that calculates the product of integers 1 through 6, prints it, and then finds the smallest element in the list. The result is printed twice to demonstrate printing the count and string reversal separately.

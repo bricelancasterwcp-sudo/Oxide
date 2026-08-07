@@ -1,0 +1,25 @@
+```
+fn main() {
+    let data = vec!["12", "x", "30"];
+    let mut success_count = 0;
+    let mut failure_count = 0;
+
+    for &str_val in data {
+        match str_val.parse::<i32>() {
+            Ok(val) => {
+                println!("Parsed: {}", val);
+                success_count += 1;
+            }
+            Err(_) => {
+                println!("Failed to parse: {}", str_val);
+                failure_count += 1;
+            }
+        }
+    }
+
+    println!("Successes: {}", success_count);
+    println!("Failures: {}", failure_count);
+}
+```
+
+This Rust program defines a `main` function that iterates over the list of strings "12", "x", and "30". It uses `match` to attempt to parse each string as an integer. If successful, it prints the parsed value and increments the success count; if not, it prints the error message and increments the failure count. Finally, it prints out the total number of successes and failures.

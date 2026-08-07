@@ -1,0 +1,7 @@
+```
+fn main() {
+    let numbers: [i32; 5] = [3, 8, -2, 12, 7];
+    println!("There are {} positive values in the list.", numbers.iter().filter(|&x| x > 0).count());
+    println!("The largest value is {}", numbers.iter().max().unwrap_or(0));
+}
+```

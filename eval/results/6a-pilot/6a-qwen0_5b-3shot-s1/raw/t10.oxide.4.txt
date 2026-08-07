@@ -1,0 +1,37 @@
+```
+use std::vec;
+use std::str;
+
+struct Reading {
+    label: String,
+    values: Vec<Int>,
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    if v.is_empty() {
+        return 0;
+    }
+    let mut max = -1;
+    for x in v.iter() {
+        if x > max {
+            max = x;
+        }
+    }
+    max
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let max = get(v, 1)?;
+    Some(max + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(push(vec(), 2), 5), 1) };
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+```

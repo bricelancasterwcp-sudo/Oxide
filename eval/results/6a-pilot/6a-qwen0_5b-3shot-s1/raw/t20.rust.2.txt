@@ -1,0 +1,18 @@
+```
+fn main() {
+    let pen_cost = 3 * 4;
+    let pad_cost = 9 * 2;
+    let ink_cost = 5 * 3;
+
+    let combined_cost: i64 = pen_cost + pad_cost + ink_cost;
+
+    let item_with_highest_cost = if pen_cost > pad_cost && pen_cost > ink_cost { pen } else if pad_cost > pen_cost && pad_cost > ink_cost { pad } else if ink_cost > pen_cost && ink_cost > pad_cost {
+        ink
+    };
+
+    println!("{}", combined_cost);
+    println!("{}", item_with_highest_cost);
+}
+```
+
+This code now correctly prints the combined cost of all items and identifies the item with the highest cost.

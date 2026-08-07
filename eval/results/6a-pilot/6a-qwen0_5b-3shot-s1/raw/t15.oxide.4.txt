@@ -1,0 +1,14 @@
+```
+fn main() {
+    let numbers = vec![1, 2, 5, 30];
+    let sum = numbers.iter().map(|x| x * x).sum();
+    print(sum);
+}
+
+fn parse_int(s: &str) -> Option<i32> {
+    match s.parse::<i32>() {
+        Ok(i) => Some(i),
+        Err(_) => None,
+    }
+}
+```

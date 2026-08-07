@@ -1,0 +1,10 @@
+```
+fn main() {
+    let v = vec![5, 3, 8, 1, 9, 2];
+    let mut sorted_v = Vec::new();
+    sorted_v.extend(v.iter().sorted_by(|a, b| a.partial_cmp(b).unwrap()));
+    for x in &sorted_v {
+        println!("{}", x);
+    }
+}
+```

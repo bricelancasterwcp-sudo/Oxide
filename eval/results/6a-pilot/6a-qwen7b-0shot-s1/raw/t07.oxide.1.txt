@@ -1,0 +1,10 @@
+```
+fn main() {
+    let mut mults = vec![];
+    for i in range(1, 9) {
+        push(mults, i * 3);
+    }
+    let sum: Int = fold(mults, 0, |a, b| a + b);
+    print(sum);
+}
+```

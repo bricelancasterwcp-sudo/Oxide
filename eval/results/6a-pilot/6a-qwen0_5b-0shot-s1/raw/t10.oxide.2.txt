@@ -1,0 +1,17 @@
+```
+use std::mem;
+
+fn main() {
+    let mut x = vec![4, 1, 7, 3, 9, 2];
+    let mut y: Vec<Str> = vec![];
+    for x in &mut x {
+        if *x > 3 {
+            y.push(x.to_string());
+        }
+    }
+    for y in &y {
+        print!("{}", y);
+    }
+    println!("kept values: {}", y.len());
+}
+```

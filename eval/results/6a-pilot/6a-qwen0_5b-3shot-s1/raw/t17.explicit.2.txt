@@ -1,0 +1,11 @@
+```
+fn main() {
+    let v = range(1, 5);
+    let first = &v[0];
+    if first == &20 && first == &30 {
+        println!("{}", first);
+    } else {
+        print!("-1");
+    }
+}
+```

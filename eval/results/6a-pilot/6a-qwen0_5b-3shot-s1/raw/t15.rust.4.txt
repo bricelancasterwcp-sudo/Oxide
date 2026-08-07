@@ -1,0 +1,21 @@
+Certainly! Here's a complete Rust program that solves all your tasks:
+
+```rust
+fn main() {
+    let sum = (1..=6).sum();
+    println!("{}", sum);
+
+    let mut smallest = i32::MAX;
+    for &n in &[1, 2, 3, 4, 5, 6] {
+        if n < smallest {
+            smallest = n;
+        }
+    }
+    println!("The smallest element is: {}", smallest);
+}
+```
+
+### Explanation:
+- **Sum Calculation**: The `sum` variable is initialized to the sum of numbers from 1 to 6 using Rust's built-in `sum` function.
+- **Smallest Element Find**: A mutable variable `smallest` is initialized to the maximum possible integer value (`i32::MAX`). It iterates over the vector `[1, 2, 3, 4, 5, 6]`, updating `smallest` whenever a smaller number is found.
+- **Output**: The program prints both the sum and the smallest element.

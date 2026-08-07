@@ -1,0 +1,25 @@
+```
+struct List {
+    values: Vec<Int>
+}
+
+fn filter_greater_than(l: List, threshold: Int) -> Vec<Int> {
+    let mut result = vec();
+    for x in l.values {
+        if x > threshold {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let list = List { values: vec(4, 1, 7, 3, 9, 2) };
+    let filtered = filter_greater_than(list, 3);
+    for x in filtered {
+        print(x)
+        println()
+    }
+    print(len(filtered))
+}
+```

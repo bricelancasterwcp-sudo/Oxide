@@ -1,0 +1,13 @@
+fn main() {
+    let rect_a = Rectangle { width: 3, height: 4 };
+    let triangle_b = Triangle { base: 3, height: 4, angle: 90.0 };
+    let rectangle_c = Rectangle { width: 2, height: 5 };
+
+    println!("perimeter of rectangle a: {}", rect_a.perimeter());
+    println!("perimeter of triangle b: {}", triangle_b.perimeter());
+    println!("perimeter of rectangle c: {}", rectangle_c.perimeter());
+}
+```
+
+Explanation:
+The `Rectangle` and `Triangle` structs are defined with fields for width, height, and angle. The methods `perimeter()` are used to calculate the perimeter of each shape. Each shape is then printed on a new line.

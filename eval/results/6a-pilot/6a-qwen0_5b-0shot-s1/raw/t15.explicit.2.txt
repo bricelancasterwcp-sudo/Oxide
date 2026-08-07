@@ -1,0 +1,17 @@
+```
+fn main() {
+    let nums = vec![
+        "12".to_string(),
+        "x".to_string(),
+        "30".to_string()
+    ];
+
+    for str in &nums {
+        if char::is_digit(str.chars().next().unwrap()) {
+            let num = str.parse::<i32>().unwrap();
+            println!("Sum: {}", num);
+            print!("{}", num == 120 ? "Success" : "Fail");
+        }
+    }
+}
+```

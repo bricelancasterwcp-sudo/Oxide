@@ -1,0 +1,11 @@
+```
+fn main() {
+    let v = push(push(vec(), 4), 1)
+    for x in &v {
+        if x > 3 {
+            print!("{}", x)
+        }
+    }
+    println("Number of values greater than 3:", v.len())
+}
+```

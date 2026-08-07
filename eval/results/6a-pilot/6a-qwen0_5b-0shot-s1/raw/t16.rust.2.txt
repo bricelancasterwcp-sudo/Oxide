@@ -1,0 +1,35 @@
+To solve the error and correctly divide 100 by each of the given divisors (5, 0, and 4), we need to make a few changes:
+
+1. Ensure that all operations are performed as whole numbers using integer division.
+2. Handle the case where the divisor is zero separately.
+
+Here's the corrected Rust program:
+
+```rust
+fn main() {
+    let one_hundred = 100;
+    for divisor in [5, 0, 4] {
+        match divisor {
+            0 => println!("undefined"),
+            _ => {
+                let quotient = one_hundred / divisor as i32;
+                if quotient == f64::INFINITY { // Check if division would result in infinity
+                    println!("Division by zero is undefined.");
+                } else {
+                    println!("{}", quotient);
+                }
+            }
+        }
+    }
+}
+```
+
+### Explanation:
+
+1. **Whole Number Division**: We use `divisor as i32` to perform integer division, which works correctly for both positive and negative numbers.
+
+2. **Handle Zero Divisor**: When the divisor is zero, we check if the result of the division would be infinity using `f64::INFINITY`. If it is, we print "Division by zero is undefined." Otherwise, we print the quotient.
+
+3. **Output Conversion**: We use `println!("{}", quotient)` to print the result as a string.
+
+This program should now correctly handle the division and output the results for the given divisors.

@@ -1,0 +1,29 @@
+```
+fn main() {
+    let pen = 3;
+    let quantity = 4;
+    let pad = 9;
+    let ink = 5;
+    let quantity = 3;
+
+    let cost_pen = pen * quantity;
+    let cost_pad = pad * quantity;
+    let cost_ink = ink * quantity;
+
+    println!("The combined cost of all items is: {}", cost_pen + cost_pad + cost_ink);
+
+    let item_with_highest_cost: Option<&str> = match (cost_pen, cost_pad, cost_ink) {
+        (p1, p2, p3) => if p1 > p2 && p1 > p3 {
+            "pen"
+        } else if p2 > p1 && p2 > p3 {
+            "pad"
+        } else {
+            "ink"
+        },
+    };
+
+    println!("The name of the item with the highest cost is: {}", item_with_highest_cost.unwrap_or("none"));
+}
+```
+
+This program now correctly computes and prints the combined cost of all items, then determines which item has the highest cost based on its unit price.

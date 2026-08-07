@@ -1,0 +1,9 @@
+```
+fn main() {
+    let s = "flame";
+    print_str(s);
+    for x in chars(s) {
+        print(x);
+    }
+}
+```

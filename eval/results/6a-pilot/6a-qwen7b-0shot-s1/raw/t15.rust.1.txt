@@ -1,0 +1,15 @@
+fn main() {
+    let s1 = "12";
+    let s2 = "x";
+    let s3 = "30";
+
+    let (sum, fail_count) = [s1, s2, s3].iter().fold((0, 0), |(acc, mut fails), s| {
+        match s.parse::<i32>() {
+            Ok(n) => (acc + n, fails),
+            Err(_) => (acc, fails + 1),
+        }
+    });
+
+    println!("Sum: {}", sum);
+    println!("Failed to parse: {}", fail_count);
+}

@@ -1,0 +1,64 @@
+```
+// Item.rs
+struct Reading {
+    label: String,
+    values: Vec<Int>,
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1;
+    for x in v {
+        if x > 10 {
+            found = x;
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?;
+    Some(x + 1)
+}
+
+// ink.rs
+struct Reading {
+    label: Str,
+    values: Vec<Int>,
+}
+
+impl Reading {
+    fn new(ink_price: Int, quantity: Int) -> Self {
+        Self { label: "ink", values: vec![ink_price * quantity] }
+    }
+
+    fn price(&self) -> Int {
+        self.values[0]
+    }
+
+    fn quantity(&self) -> Int {
+        self.values[1]
+    }
+}
+
+fn main() {
+    // Example usage
+    let ink = Reading::new(5, 3);
+    println!("Cost of ink: {}", ink.price * ink.quantity);
+
+    let mut ink_values: Vec<Int> = Vec::with_capacity(2); // Assuming we only need 2 elements
+
+    // Fill the vector with ink values
+    for _ in 0..3 {
+        ink_values.push(5);
+    }
+
+    // Retrieve the third element from the vector
+    if !ink_values.is_empty() {
+        let ink = ink_values[2];
+        println!("Cost of ink: {}", ink.price * ink.quantity);
+    } else {
+        println!("No ink available.");
+    }
+}
+```

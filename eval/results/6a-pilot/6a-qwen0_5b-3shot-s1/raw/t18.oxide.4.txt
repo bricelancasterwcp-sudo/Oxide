@@ -1,0 +1,15 @@
+```
+fn main() {
+    let v = push(push(push(vec![Rectangle { label: "rect", values: vec![3, 4] }, Triangle { label: "tri", values: vec![3, 4, 5], ..Point { x: 2, y: 5 } }), 1), 6)
+    let sum = 0
+    let min = 1000000
+    for x in v {
+        sum = sum + x.perimeter()
+        if x.perimeter() < min {
+            min = x.perimeter()
+        }
+    }
+    print(sum)
+    print(min)
+}
+```

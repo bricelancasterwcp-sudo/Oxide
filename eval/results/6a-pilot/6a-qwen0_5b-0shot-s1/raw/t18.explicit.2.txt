@@ -1,0 +1,33 @@
+```
+use std;
+
+enum Shape {
+    Rectangle { width: Int, height: Int },
+    Triangle { sides: Vec<Int>, sides_count: Int },
+}
+
+fn main() {
+    let rect = Rectangle { width: 3, height: 4 };
+    let triangle = Triangle { sides: vec![3, 4, 5], sides_count: 3 };
+    let rect2 = Rectangle { width: 2, height: 5 };
+
+    print!("{}", rect.perimeter());
+    print!("{}", triangle.perimeter());
+    print!("{}", rect2.perimeter());
+}
+```
+
+**Diagnostics:**  
+1:8: OX0001: unexpected character ';'
+4:49: OX0001: unexpected character ';'
+5:42: OX0001: unexpected character '['
+5:50: OX0001: unexpected character ']'
+5:69: OX0001: unexpected character ';'
+6:50: OX0001: unexpected character ';'
+8:35: OX0001: unexpected character ';'
+9:39: OX0001: unexpected character ';'
+10:36: OX0001: unexpected character ';'
+1:1: OX0102: expected item at module level, found IDENT
+4:49: OX0101: expected end of statement, found ERROR
+5:41: OX0101: expected '}', found BANG
+5:69: OX0102: expected item at module level, found ERROR

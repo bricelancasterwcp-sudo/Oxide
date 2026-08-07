@@ -1,0 +1,51 @@
+```
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let mut found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+
+fn is_prime(n: Int) -> bool {
+    if n <= 1 {
+        return false
+    }
+    for i in 2..=((n as f64).sqrt() as u32) {
+        if n % i == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn main() {
+    let mut primes = Vec::new();
+    for i in 2..100 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    println!("{}", primes.len());
+}
+```

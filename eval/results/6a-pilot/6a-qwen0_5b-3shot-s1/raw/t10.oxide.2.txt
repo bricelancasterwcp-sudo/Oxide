@@ -1,0 +1,13 @@
+```
+fn main() {
+    let values = push(push(push(push(vec(), 4), 1), 7), 3)
+    print(first_big(values))            // field access copies: r stays usable
+    let result = second(values)?
+    match result {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+```
+
+This program defines a `Reading` struct with fields for label and values. It uses the `push` function to create a vector of integers from 1 through 6, then calls two functions: `first_big` to find the smallest number in the vector and `second` to print both the sum of the numbers and the smallest number.

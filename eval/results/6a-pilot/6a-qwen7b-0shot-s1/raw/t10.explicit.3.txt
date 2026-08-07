@@ -1,0 +1,28 @@
+fn filter(v: &Vec<Int>, threshold: Int) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if *x > threshold {
+            push(result, *x)
+        }
+    }
+    result
+}
+
+fn print_and_count(v: &Vec<Int>) -> Int {
+    let count = 0;
+    for x in v {
+        print(x);
+        println();
+        count = count + 1;
+    }
+    count
+}
+
+fn main() {
+    let nums = vec!(4, 1, 7, 3);
+    let filtered_nums = filter(&nums, 3);
+    drop nums;
+    let kept_count = print_and_count(&filtered_nums);
+    println("Kept values count: {}", kept_count);
+    drop filtered_nums;
+}

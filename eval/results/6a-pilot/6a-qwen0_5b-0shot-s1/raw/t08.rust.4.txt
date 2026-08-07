@@ -1,0 +1,18 @@
+```
+fn main() {
+    let numbers: [i32; 5] = [3, 8, -2, 12, 7];
+
+    // Use a for loop to iterate over the array
+    for (index, &value) in numbers.iter().enumerate() {
+        if value > 0 {
+            println!("There are {} positive values in the list.", index + 1);
+        }
+    }
+
+    // Determine the largest value
+    let max_value = *numbers.iter().max().unwrap_or(&0);
+
+    // Print the largest value
+    println!("The largest value is {}", max_value);
+}
+```

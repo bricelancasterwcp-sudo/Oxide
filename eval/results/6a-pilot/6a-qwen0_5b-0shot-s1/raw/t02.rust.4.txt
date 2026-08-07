@@ -1,0 +1,33 @@
+To fix the error related to immutability in Rust and achieve the desired transformation, we need to make sure that `num` is mutable during each iteration of the loop. Here's the corrected program:
+
+```rust
+fn main() {
+    let mut count = 0;
+    let num = 27;
+
+    while num != 1 {
+        let mut temp = num; // Store the current value of num
+
+        if temp % 2 == 0 {
+            num /= 2;
+        } else {
+            num *= 3;
+            num += 1;
+        }
+
+        count += 1;
+        temp = num; // Restore the original value of num
+    }
+
+    println!("Total transformation steps: {}", count);
+}
+```
+
+### Explanation:
+- We use a mutable variable `temp` to store the current value of `num`.
+- During each iteration, we check if `temp` is even or odd.
+  - If `temp % 2 == 0`, it means `temp` is even. So, we divide `temp` by 2 and update `temp`.
+  - If `temp % 2 != 0`, it means `temp` is odd. So, we multiply `temp` by 3 and add 1.
+- We increment the transformation count each time we make a change to `num`.
+
+This ensures that we can safely modify `num` during each iteration of the loop, avoiding the error "cannot assign twice to immutable variable".

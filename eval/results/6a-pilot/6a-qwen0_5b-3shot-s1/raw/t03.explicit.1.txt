@@ -1,0 +1,15 @@
+```
+fn gcd(mut a: Int, mut b: Int) -> Int {
+    while b != 0 {
+        let t = b;
+        b = a % b;
+        a = t;
+    }
+    a
+}
+
+fn main() {
+    let a = gcd(252, 105)
+    print(a)
+}
+```

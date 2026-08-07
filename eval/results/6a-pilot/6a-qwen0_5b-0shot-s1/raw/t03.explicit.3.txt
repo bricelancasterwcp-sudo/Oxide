@@ -1,0 +1,28 @@
+```
+fn gcd(mut a: Int, mut b: Int) -> Int {
+    while b != 0 {
+        let t = b;
+        b = a % b;
+        a = t;
+    }
+    a
+}
+
+fn main() {
+    println!("{}", gcd(252, 105));
+}
+```
+
+### Explanation:
+
+1. **Function Definition**: The function `gcd` is defined to take two integer parameters, `a` and `b`.
+
+2. **While Loop**: The loop continues as long as `b` is not zero.
+
+3. **Division**: Inside the loop, the value of `b` is divided by `a` using the modulus operator `%`. This results in a new value `t`, which we store in `b` and then update `a` to `t`.
+
+4. **Termination**: The loop continues until `b` becomes zero.
+
+5. **Result**: After the loop completes, the function returns the value of `a`, which is the greatest common divisor (GCD) of the two numbers.
+
+This corrected program defines a function `gcd` that computes the GCD of two integers using a while loop to divide them and update the values accordingly.

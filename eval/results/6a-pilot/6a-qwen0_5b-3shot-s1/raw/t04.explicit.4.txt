@@ -1,0 +1,25 @@
+```
+fn is_prime(n: isize) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    for i in 2..=((n as f64).sqrt() as isize) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+
+for i in range(2, 99) {
+    if is_prime(i) {
+        print!("{}", i);
+    }
+}
+```
+
+### Explanation:
+- `is_prime` function checks if a number `n` is prime.
+- The loop iterates from 2 to the square root of `n`. If any divisor is found, it is not prime.
+- The loop increments by 1 after checking the current number, effectively skipping even numbers.
+- `main` function uses `is_prime` to print the prime numbers less than 100.

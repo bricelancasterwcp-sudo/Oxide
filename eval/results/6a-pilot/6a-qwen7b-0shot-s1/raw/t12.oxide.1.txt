@@ -1,0 +1,1 @@
+fn reverse(s: Str) -> Str { concat(chars(s).iter().rev().map(|c| *c).collect(), "") } fn main() { let s = "stack"; print(reverse(s)) }

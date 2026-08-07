@@ -1,0 +1,28 @@
+```
+use std::string::String;
+
+fn main() {
+    let v = vec!["12", "x", "30"];
+    let first: Option<_> = parse_int(v[0]);
+    let second: Option<_> = parse_int(v[1]);
+    let third: Option<_> = parse_int(v[2]);
+
+    if let Some(x) = first {
+        print!("{}", x);
+    }
+    if let Some(y) = second {
+        print!("{}", y);
+    }
+    if let Some(z) = third {
+        print!("{}", z);
+    }
+
+    println!("Sum: {}", first.unwrap() + second.unwrap() + third.unwrap());
+    println!("Count of failures: {}", match (first, second, third) {
+        (Some(_), None, None) => 0,
+        (None, Some(_, _), None) => 1,
+        (None, None, Some(_)) => 2,
+        (Some(a), Some(b), Some(c)) => a + b + c,
+    });
+}
+```

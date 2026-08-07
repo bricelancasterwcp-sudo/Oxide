@@ -1,0 +1,32 @@
+```
+fn main() {
+    let (level, stereo, rotor) = ("level".to_string(), "stereo".to_string(), "rotor".to_string());
+    println!("{}", is_palindrome(level)); // true
+    println!("{}", is_palindrome(stereo)); // false
+    println!("{}", is_palindrome(rotor)); // false
+}
+
+fn is_palindrome(s: String) -> bool {
+    let mut i = 0;
+    let mut j = s.len() - 1;
+
+    while i < j {
+        if s[i] != s[j] {
+            return false;
+        }
+        i += 1;
+        j -= 1;
+    }
+
+    true
+}
+
+fn main() {
+    let (level, stereo, rotor) = ("level".to_string(), "stereo".to_string(), "rotor".to_string());
+    println!("{}", is_palindrome(level)); // true
+    println!("{}", is_palindrome(stereo)); // false
+    println!("{}", is_palindrome(rotor)); // false
+}
+```
+
+This program defines a function `is_palindrome` that checks if a given string is the same backward as forward. It uses two pointers to compare characters from the start and end of the string, moving towards the center. If any pair of characters does not match, it returns `false`. Otherwise, it returns `true`. The `main` function tests this functionality with the specified strings.

@@ -1,0 +1,9 @@
+```rust
+fn main() {
+    let s = "mississippi";
+    let occurrences_of_s = s.matches('s').count();
+    let distinct_chars: std::collections::HashSet<char> = s.chars().collect();
+    println!("Occurrences of 's': {}", occurrences_of_s);
+    println!("Distinct characters: {}", distinct_chars.len());
+}
+```

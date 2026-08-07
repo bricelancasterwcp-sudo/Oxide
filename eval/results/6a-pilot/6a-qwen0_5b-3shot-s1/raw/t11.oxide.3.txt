@@ -1,0 +1,7 @@
+fn main() {
+    let s = "flame";
+    print(str_len(s));
+    for x in chars(s) {
+        print(x);
+    }
+}

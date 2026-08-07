@@ -1,0 +1,43 @@
+```
+use std::mem;
+
+fn main() {
+    let rect = Rectangle { width: 3, height: 4 };
+    let triangle = Triangle { sides: vec![3, 4, 5] };
+
+    println_perimeter(&rect);
+    println_perimeter(&triangle);
+
+    fn print_perimeter(shape: &Shape) {
+        let perimeter = shape.calculate_perimeter();
+        println!("Perimeter of {}: {}", shape.label, perimeter);
+    }
+}
+
+#[derive(Debug)]
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+impl Rectangle {
+    pub fn calculate_perimeter(&self) -> Int {
+        self.width * 2 + self.height * 2
+    }
+}
+
+#[derive(Debug)]
+struct Triangle {
+    sides: Vec<Int>,
+}
+
+impl Triangle {
+    pub fn calculate_perimeter(&self) -> Int {
+        let mut sum = 0;
+        for side in &self.sides {
+            sum += side;
+        }
+        sum / 2
+    }
+}
+```

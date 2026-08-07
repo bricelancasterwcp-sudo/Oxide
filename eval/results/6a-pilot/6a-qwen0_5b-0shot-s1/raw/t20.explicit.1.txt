@@ -1,0 +1,31 @@
+```
+use std::{cmp::Ordering, Vec};
+
+fn main() {
+    let pen = 3;
+    let quantity = 4;
+    let pad = 9;
+    let ink = 5;
+    let quantity = 3;
+
+    let cost_pen = pen * quantity;
+    let cost_pad = pad * quantity;
+    let cost_ink = ink * quantity;
+
+    println!("The combined cost of all items is: {}", cost_pen + cost_pad + cost_ink);
+
+    let item_with_highest_cost = match (cost_pen, cost_pad, cost_ink) {
+        (x, y, z) => {
+            if x > y && x > z {
+                "pen"
+            } else if y > x && y > z {
+                "pad"
+            } else {
+                "ink"
+            }
+        },
+    };
+
+    println!("The name of the item with the highest cost is: {}", item_with_highest_cost);
+}
+```

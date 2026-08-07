@@ -1,0 +1,8 @@
+```
+fn main() {
+    let s = "mississippi"
+    print(str_len(&s))
+    let distinct_chars = set_of_chars(s);
+    print(distinct_chars.len());
+}
+```

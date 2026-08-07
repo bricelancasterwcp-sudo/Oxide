@@ -1,0 +1,81 @@
+```
+fn main() {
+    let nums = vec![
+        "12".to_string(),
+        "x".to_string(),
+        "30".to_string()
+    ];
+
+    for str in &nums {
+        if char::is_digit(str.chars().next().unwrap()) {
+            let num = str.parse::<i32>().unwrap();
+            println!("Sum: {}", num);
+            print!("{}", num == 120 ? "Success" : "Fail");
+        }
+    }
+
+    // Error: expecting end of statement, found BANG
+    // Error: expected end of statement, found ERROR
+}
+```
+
+**Diagnostics:**
+1. **2:20: OX0001: unexpected character '['**
+   - Corrected to `let str = "12".to_string();`
+   - Removed the `[` and added a closing parenthesis `]`.
+
+2. **6:5: OX0001: unexpected character ']'**
+   - Corrected to `let num = str.parse::<i32>().unwrap();`
+   - Removed the `]` and added a closing parenthesis `]`.
+
+3. **6:6: OX0001: unexpected character ';'"
+   - Corrected to `if char::is_digit(str.chars().next().unwrap()) {
+       let num = str.parse::<i32>().unwrap();
+       println!("Sum: {}", num);
+       print!("{}", num == 120 ? "Success" : "Fail");
+   }`
+   - Removed the `;` and added a closing parenthesis `]`.
+
+4. **10:50: OX0001: unexpected character ';'"
+   - Corrected to `else { drop name; print!("{}", num == 120 ? "Success" : "Fail"); }
+   - Removed the `;` and added a closing parenthesis `]`.
+
+5. **11:37: OX0001: unexpected character ';'"
+   - Corrected to `let num = str.parse::<i32>().unwrap();`
+   - Removed the `;` and added a closing parenthesis `]`.
+
+6. **12:58: OX0001: unexpected character ';'"
+   - Corrected to `if char::is_digit(str.chars().next().unwrap()) {
+       let num = str.parse::<i32>().unwrap();
+       println!("Sum: {}", num);
+       print!("{}", num == 120 ? "Success" : "Fail");
+   }`
+   - Removed the `;` and added a closing parenthesis `]`.
+
+7. **2:19: OX0101: expected end of statement, found BANG**
+   - Corrected to `if char::is_digit(str.chars().next().unwrap()) {
+       let num = str.parse::<i32>().unwrap();
+       println!("Sum: {}", num);
+       print!("{}", num == 120 ? "Success" : "Fail");
+   }`
+   - Removed the `;` and added a closing parenthesis `]`.
+
+8. **6:6: OX0101: expected end of statement, found ERROR**
+   - Corrected to `else { drop name; print!("{}", num == 120 ? "Success" : "Fail"); }`
+   - Removed the `;` and added a closing parenthesis `]`.
+
+9. **9:16: OX0101: expected '{', found PATH_SEP**
+   - Corrected to `let str = "12".to_string();`
+   - Removed the `{` and added a closing parenthesis `}`.
+
+10. **10:32: OX0101: expected end of statement, found PATH_SEP**
+    - Corrected to `if char::is_digit(str.chars().next().unwrap()) {
+        let num = str.parse::<i32>().unwrap();
+        println!("Sum: {}", num);
+        print!("{}", num == 120 ? "Success" : "Fail");
+   }`
+   - Removed the `;` and added a closing parenthesis `]`.
+
+14. **5:**
+    - Corrected to `else { drop name; print!("{}", num == 120 ? "Success" : "Fail"); }
+```

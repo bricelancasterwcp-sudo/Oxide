@@ -1,0 +1,34 @@
+```
+fn is_prime(n: usize) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    for i in 2..=((n as f64).sqrt() as usize) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+
+fn print(x: usize) {
+    println!("{}", x);
+}
+
+fn extend(v: Vec<usize>, x: usize) -> Vec<usize> {
+    push(v, x)
+}
+
+fn main() {
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+}
+```

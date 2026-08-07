@@ -1,0 +1,10 @@
+```
+let v: Vec<Int> = vec![3, 8, -2, 12, 7];
+if !v.is_empty() {
+    let count_positive = v.iter().filter(|&&x| x > 0).count();
+    println!("Number of positive values: {}", count_positive);
+}
+if v.iter().max().is_some() {
+    println!("Largest value: {}", v.iter().max().unwrap());
+}
+```

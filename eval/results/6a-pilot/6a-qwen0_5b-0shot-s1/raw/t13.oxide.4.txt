@@ -1,0 +1,16 @@
+Certainly! Here's a corrected version of the provided Python programs:
+
+```python
+def is_backwards(text):
+    return text == text[::-1]
+
+# stereo.py
+def is_reversed(text):
+    return text == text[::-1]
+
+# rotor.py
+def is_reversed(text):
+    return text == text[::-1]
+```
+
+The program checks if a given string reads the same backward as forward. The corrected version ensures that each line of code is valid and follows the language's syntax rules.

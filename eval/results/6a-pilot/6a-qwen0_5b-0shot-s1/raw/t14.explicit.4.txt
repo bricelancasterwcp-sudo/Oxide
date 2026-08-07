@@ -1,0 +1,7 @@
+```
+fn main() {
+    let x = String::from("mississippi");
+    println!("Count of 's': {}", x.chars().filter(|&c| c == 's').count());
+    println!("Number of distinct characters: {}", x.chars().collect::<Vec<char>>().unique().len());
+}
+```

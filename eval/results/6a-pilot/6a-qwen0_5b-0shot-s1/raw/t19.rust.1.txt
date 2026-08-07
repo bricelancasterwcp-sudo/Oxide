@@ -1,0 +1,8 @@
+```
+fn main() {
+    let area = 7 * 4;
+    let perimeter = 2 * (area + 4);
+    println!("Area: {}", area);
+    println!("Perimeter: {}", perimeter);
+}
+```

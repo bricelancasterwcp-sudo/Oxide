@@ -1,0 +1,34 @@
+fn main() {
+    let s = String::from("stack")
+    print_str(&s)
+}
+
+Diagnostics:
+2:19: OX0101: expected end of statement, found PATHSEP
+
+```text
+fn main() {
+    let s = String::from("stack")
+    print_str(&s)
+}
+```
+
+Diagnostics:
+2:19: OX0101: expected end of statement, found PATHSEP
+
+```text
+fn main() {
+    let s = String::from("stack")
+    print_str(&s)
+}
+```
+
+Diagnostics:
+2:19: OX0101: expected end of statement, found PATHSEP
+
+```text
+fn main() {
+    let s = String::from("stack")
+    print_str(&s)
+}
+```

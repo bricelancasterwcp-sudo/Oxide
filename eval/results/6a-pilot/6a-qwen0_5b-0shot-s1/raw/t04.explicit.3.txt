@@ -1,0 +1,60 @@
+```
+fn is_prime(n: isize) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    for i in 2..=((n as f64).sqrt() as isize) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+
+fn main() {
+    let mut primes = Vec::new();
+    for i in 2..99 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    println!("{:?}", primes);
+}
+```
+
+**Corrected program source:**
+
+```rust
+fn is_prime(n: isize) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    for i in 2..=((n as f64).sqrt() as isize) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+
+fn main() {
+    let mut primes = Vec::new();
+    for i in 2..99 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    println!("{:?}", primes);
+}
+```
+
+**Diagnostics:**
+
+1:32: OX0001: unexpected character ';'
+5:27: OX0001: unexpected character ';'
+8:29: OX0001: unexpected character ';'
+2:13: OX0101: expected '=', found IDENT
+5:27: OX0101: expected end of statement, found ERROR
+8:5: OX0102: expected item at module level, found IDENT
+
+**Corrected program source:**

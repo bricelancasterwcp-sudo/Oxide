@@ -1,0 +1,13 @@
+```
+fn main() {
+    let p = -2
+    for i in range(3, 8) {
+        p = p + i
+    }
+    if p > 0 {
+        print(sum_big(&vec(), 6))
+    } else {
+        print(sum_big(&v, 6))
+    }
+}
+```

@@ -1,0 +1,11 @@
+Certainly! Let's correct and complete the Rust program as requested.
+
+```rust
+fn main() {
+    for i in 0..=9 {
+        println!("{}", i * i);
+    }
+}
+```
+
+This program uses a `for` loop to iterate over the range from 0 to 9 (inclusive) and prints the square of each number using the expression `i * i`.

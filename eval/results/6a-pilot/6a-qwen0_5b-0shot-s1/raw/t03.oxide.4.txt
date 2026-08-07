@@ -1,0 +1,11 @@
+```
+fn gcd(a: Int, b: Int) -> Int {
+    if a > b {
+        (a, b).1
+    } else {
+        (b, a).0
+    }
+}
+```
+
+This code correctly calculates the greatest common divisor (GCD) of 252 and 105 using recursion.

@@ -1,0 +1,17 @@
+```
+fn main() {
+    for n in 2..=999 {
+        let mut sum = 0;
+        for i in 1..n {
+            if n % i == 0 && i != n {
+                sum += i;
+            }
+        }
+        if sum == n {
+            println!("{}", n);
+        }
+    }
+}
+```
+
+This program iterates over all numbers from 2 to 999, calculates the sum of their positive divisors other than themselves, and prints each perfect number that meets this criteria.

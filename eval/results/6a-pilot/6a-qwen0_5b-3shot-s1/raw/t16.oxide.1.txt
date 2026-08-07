@@ -1,0 +1,14 @@
+```
+use std::mem;
+
+fn main() {
+    let result = [
+        first_big(vec![1, 2, 3, 4, 5]), // field access copies: r stays usable
+        second(vec![6]),
+    ];
+
+    for x in &result {
+        print(x);
+    }
+}
+```

@@ -1,0 +1,41 @@
+```
+struct Reading {
+    label: Str,
+    values: Vec<Int>,
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) };
+    print(first_big(r.values));            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+
+    let x1 = 5;
+    let x2 = 0;
+    let x3 = 4;
+
+    println!("Division of 100 by each of 5, 0, and 4:");
+    for i in 0..=4 {
+        print!("{}/{}", x1 / (i + 1), x2 == 0 && x3 != 0 ? "undefined" : x3);
+    }
+}
+```

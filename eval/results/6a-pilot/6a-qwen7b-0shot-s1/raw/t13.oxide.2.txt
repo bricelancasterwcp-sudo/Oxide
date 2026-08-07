@@ -1,0 +1,23 @@
+```rust
+fn main() {
+    let text1 = "level";
+    let text2 = "stereo";
+    let text3 = "rotor";
+
+    fn is_palindrome(s: Str) -> Bool {
+        let len = str_len(s);
+        for i in range(0, len / 2) {
+            if s[i] != s[len - i - 1] {
+                return False;
+            }
+        }
+        True
+    }
+
+    print(is_palindrome(text1));
+    print_str("\n");
+    print(is_palindrome(text2));
+    print_str("\n");
+    print(is_palindrome(text3));
+}
+```

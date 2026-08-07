@@ -1,0 +1,11 @@
+```
+fn main() {
+    let mut v = Vec::new();
+    for i in 1..=6 {
+        v.push(i);
+    }
+    for x in &v {
+        print(x);
+    }
+}
+```

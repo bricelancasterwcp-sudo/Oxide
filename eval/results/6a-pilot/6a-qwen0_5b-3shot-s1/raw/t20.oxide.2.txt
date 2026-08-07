@@ -1,0 +1,29 @@
+```
+use std::rc::Rc;
+use std::vec::Vec;
+
+fn main() {
+    let pen = Rc::new(3);
+    let pad = Rc::new(9);
+    let ink = Rc::new(5);
+
+    let total_cost = {
+        pen.value * pen.quantity + 
+        pad.value * pad.quantity + 
+        ink.value * ink.quantity
+    };
+
+    let item_with_highest_cost: Option<Rc<()>> = match {
+        Some(pen) => if pen.value > *pen.owner.get() { Rc::new(pen) } else { panic!("Pen has too many units") },
+        None => match {
+            Some(pad) => if pad.value > *pad.owner.get() { Rc::new(pad) } else { panic!("Pad has too many units") },
+            None => match {
+                Some(ink) => if ink.value > *ink.owner.get() { Rc::new(ink) } else { panic!("Ink has too many units") }
+            }
+        }
+    };
+
+    println!("{}", total_cost);
+    println!("{:?}", item_with_highest_cost);
+}
+```

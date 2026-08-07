@@ -1,0 +1,15 @@
+To fix the error related to mismatched types in your Rust code, you need to remove the `&` from the pattern matching. Here's the corrected version of your code:
+
+```rust
+fn main() {
+    let mut elements = vec![4, 1, 7, 3, 9, 2];
+    while let Some(value) = elements.pop() {
+        if value > 3 {
+            println!("{}", value);
+        }
+    }
+    println!("Total values kept: {}", elements.len());
+}
+```
+
+This code will correctly iterate over the list and print only the values greater than 3, preserving their order.

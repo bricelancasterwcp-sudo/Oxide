@@ -1,0 +1,14 @@
+```
+fn main() {
+    let rectangle = Rectangle { width: 3, height: 4 };
+    let triangle = Triangle { sides: vec![3, 4, 5], sides_count: 3 };
+    let rect2 = Rectangle { width: 2, height: 5 };
+
+    println!("{}", rectangle.perimeter());
+    print!("{}", triangle.perimeter());
+    print!("{}", rect2.perimeter());
+}
+```
+
+Explanation:
+The `Rectangle` and `Triangle` structs are defined, followed by a loop that prints their perimeters. The program contains syntax errors in the comments and uses unexpected characters to mark invalid positions.

@@ -1,0 +1,13 @@
+```
+fn main() {
+    let x = 1;
+    for _ in range(1, 7) {
+        x *= i;
+    }
+    print(x);
+}
+
+fn parse_int(s: &str) -> Option<usize> {
+    s.chars().map(|c| c.to_digit(10).unwrap()).collect()
+}
+```

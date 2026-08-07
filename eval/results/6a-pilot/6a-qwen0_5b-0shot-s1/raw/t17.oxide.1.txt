@@ -1,0 +1,10 @@
+```
+let v: Vec<Int> = vec![10, 20, 30];
+
+print(first_big(v));            // field access copies: r stays usable
+let r2 = Reading { label: "lab2", ..r };
+match second(r2.values) {
+    Some(n) => print(n),
+    None => print_str("too short"),
+}
+```

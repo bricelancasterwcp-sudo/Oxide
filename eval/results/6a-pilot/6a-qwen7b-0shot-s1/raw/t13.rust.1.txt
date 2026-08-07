@@ -1,0 +1,7 @@
+fn main() {
+    let texts = vec!["level", "stereo", "rotor"];
+    for text in texts {
+        let reversed: String = text.chars().rev().collect();
+        println!("{}", text == reversed);
+    }
+}

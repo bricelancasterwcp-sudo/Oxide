@@ -1,0 +1,25 @@
+Certainly! Below is the fully correct Rust program that satisfies all the given tasks:
+
+```rust
+fn main() {
+    let mut p = 1;
+    for i in 1..7 {
+        p *= i;
+    }
+    println!("{}", p);
+
+    let v = vec![2, 5, 1, 6];
+    let sum: i64 = v.iter().sum();
+    let min = v.iter().min().unwrap();
+    println!("{}", sum);
+    println!("{}", min);
+
+    let s = "flame";
+    println!("{}", s.chars().eq(s.chars().rev()));
+}
+```
+
+### Explanation:
+- **Task 1**: Prints the product of the integers from 1 to 6.
+- **Task 2**: Prints the sum of the elements in the list `[2, 5, 1, 6]`.
+- **Task 3**: Prints whether the text "flame" is a palindrome (reads the same backward as forward) or not.

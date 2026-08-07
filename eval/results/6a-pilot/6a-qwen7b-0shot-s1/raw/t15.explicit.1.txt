@@ -1,0 +1,21 @@
+```
+fn parse_int(s: Str) -> Option<Int>
+fn to_float(n: Int) -> Float
+fn trunc(x: Float) -> Int
+fn print(x: Int)
+fn main() {
+    let a = "12"
+    let b = "x"
+    let c = "30"
+    
+    let parsed_a = parse_int(a)?
+    let parsed_b = parse_int(b)?
+    let parsed_c = parse_int(c)?
+    
+    let sum = parsed_a + parsed_c
+    let count = 2
+    
+    print(sum)
+    print(count)
+}
+```

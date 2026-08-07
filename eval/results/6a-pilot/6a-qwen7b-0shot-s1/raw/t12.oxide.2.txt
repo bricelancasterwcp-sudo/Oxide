@@ -1,0 +1,7 @@
+```rust
+fn reverse(s: Str) -> Str { concat(vec![c for c in chars(s).iter().rev().map(|c| *c)]).join("") }
+fn main() {
+    let s = "stack";
+    print(reverse(s))
+}
+```

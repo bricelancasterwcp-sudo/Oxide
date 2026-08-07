@@ -1,0 +1,7 @@
+fn main() {
+    let mut terms = [1, 1];
+    for i in 2..20 {
+        terms[i % 2] += terms[(i - 1) % 2];
+    }
+    println!("{}", terms[1]);
+}

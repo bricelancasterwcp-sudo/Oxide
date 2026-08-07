@@ -1,0 +1,16 @@
+```
+fn main() {
+    println!("{}", is_reverse("level")); // true
+    println!("{}", is_reverse("stereo")); // true
+    println!("{}", is_reverse("rotor")); // true
+
+    for t in ["level", "stereo", "rotor"] {
+        let text = t.to_string();
+        if is_reverse(&text) {
+            println!("true");
+        } else {
+            println!("false");
+        }
+    }
+}
+```

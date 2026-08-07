@@ -1,0 +1,11 @@
+```
+fn main() {
+    let n = 9
+    println!("{}", n)
+    let rev = ""
+    for c in chars("flame") { // print the string in the opposite order
+        rev = concat(c, rev)
+    }
+    print_str(rev)
+}
+```

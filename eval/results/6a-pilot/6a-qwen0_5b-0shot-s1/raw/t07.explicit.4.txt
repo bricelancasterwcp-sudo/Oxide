@@ -1,0 +1,21 @@
+```
+fn main() {
+    let mut res = 0;
+    for i in 1..=9 {
+        println!("{}", 3 * i);
+        if (i % 2 == 0) {
+            res += i;
+        }
+    }
+    println!("Sum: {}", res);
+}
+
+// Error messages
+ex("OX0001: unexpected character ';'")
+ex("OX0001: unexpected character ';'")
+ex("OX0001: unexpected character ';'")
+ex("OX0001: unexpected character ';'")
+ex("OX0002: expected '=', found IDENT")
+ex("OX0003: unexpected character ';'")
+ex("OX0004: expected item at module level, found IDENT")
+```

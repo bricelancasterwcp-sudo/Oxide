@@ -1,0 +1,8 @@
+```
+fn main() {
+    let x = parse_int("1");
+    if let Some(i) = x {
+        print(i);
+    }
+}
+```

@@ -1,0 +1,7 @@
+```
+fn main() {
+    let n = 1 + parse_int(&"2")
+    let sum = n + parse_int(&"5") + parse_int(&"30")
+    print(sum)
+}
+```

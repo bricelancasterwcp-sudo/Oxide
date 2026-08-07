@@ -1,0 +1,13 @@
+```
+fn main() {
+    let v = push(push(push(vec![27], 2), 5), 1)
+    while v.len() != 1 {
+        if v.last().unwrap() % 2 == 0 {
+            v.pop()
+        } else {
+            v.push(v.pop().unwrap() * 3 + 1)
+        }
+    }
+    print(v.len())
+}
+```

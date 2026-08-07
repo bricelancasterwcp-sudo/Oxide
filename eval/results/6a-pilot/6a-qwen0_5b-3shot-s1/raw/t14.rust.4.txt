@@ -1,0 +1,28 @@
+Certainly! Below is the fully correct Rust program that prints the product of numbers from 1 to 6, the sum of its elements in a vector, and the smallest element.
+
+```rust
+fn main() {
+    // Print the product of numbers from 1 to 6
+    let mut p = 1;
+    for i in 1..7 {
+        p *= i;
+    }
+    println!("{}", p);
+
+    // Print the sum of elements in a vector {2, 5, 1, 6}
+    let v = vec![2, 5, 1, 6];
+    let sum: i64 = v.iter().sum();
+    println!("{}", sum);
+
+    // Print the smallest element in a vector {2, 5, 1, 6}
+    let min = v.iter().min().unwrap();
+    println!("{}", min);
+}
+```
+
+### Explanation:
+- **Product Calculation**: The program initializes `p` to 1 and iterates from 1 to 6, multiplying each number together.
+- **Sum Calculation**: It uses the `iter()` method to get an iterator over the vector and applies the `sum()` method to compute the total sum of its elements.
+- **Smallest Element**: It finds the minimum element in the vector using the `min()` method.
+
+This program should work as expected.

@@ -1,0 +1,20 @@
+```
+fn main() {
+    let mut count = 0;
+    let mut num = 27;
+
+    while num != 1 {
+        if num % 2 == 0 {
+            num /= 2;
+        } else {
+            num *= 3;
+            num += 1;
+        }
+        count += 1;
+    }
+
+    println!("Total transformation steps: {}", count);
+}
+```
+
+This Rust program initializes a counter `count` and starts with the number 27. It then enters a loop that continues until the number becomes 1. Inside the loop, it checks if the current number is even or odd using the modulus operator `%`. If the number is even, it divides it by 2. If it is odd, it triples the number and adds 1 to it. The counter `count` keeps track of how many transformations were performed. Finally, it prints the total count of transformation steps.

@@ -1,0 +1,9 @@
+```
+fn main() {
+    let p = 0;
+    for i in range(0, 10) {
+        p += i * i;
+    }
+    print(p);
+}
+```

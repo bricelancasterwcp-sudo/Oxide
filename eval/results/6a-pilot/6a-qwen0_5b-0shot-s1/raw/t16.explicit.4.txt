@@ -1,0 +1,16 @@
+```
+fn main() {
+    let quotient_1 = 100 / 5;
+    println!("Quotient 1: {}", quotient_1);
+
+    // This line should not cause a compiler error because it's inside an if statement without matching statements or else clauses.
+    if quotient_2 == 0 {
+        println!("Quotient 2: undefined");
+    } else {
+        let quotient_3 = 100 / 4;
+        println!("Quotient 3: {}", quotient_3);
+    }
+
+    drop quotient_1;
+}
+```

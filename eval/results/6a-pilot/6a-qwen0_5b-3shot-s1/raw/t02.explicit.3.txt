@@ -1,0 +1,13 @@
+```
+fn main() {
+    let mut v = Vec::new();
+    while !v.is_empty() {
+        if v.last().unwrap() % 2 == 0 {
+            v.pop();
+        } else {
+            v.push(v.pop().unwrap() * 3 + 1);
+        }
+    }
+    println(v.len())
+}
+```

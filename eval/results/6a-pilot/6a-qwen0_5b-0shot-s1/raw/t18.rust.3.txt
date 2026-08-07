@@ -1,0 +1,33 @@
+Certainly! Let's correct and complete the Rust program as requested:
+
+```rust
+fn main() {
+    let side1 = 3;
+    let side2 = 4;
+
+    // Rectangle
+    println!("Rectangle's perimeter: {}", 2 * (side1 + side2));
+
+    // Triangle
+    let base_triangle = 3;
+    let height_triangle = 4;
+    println!("Triangle's perimeter: {}", 2 * (base_triangle + height_triangle));
+
+    // Rectangle
+    let side3 = 2;
+    let side4 = 5;
+
+    println!("Rectangle's perimeter: {}", 2 * (side3 + side4));
+}
+```
+
+### Explanation:
+- The correct formula for the perimeter of a rectangle is \( P_{\text{rectangle}} = 2 \times (\text{length} + \text{width}) \).
+- Similarly, the formula for the perimeter of a triangle is \( P_{\text{triangle}} = 2 \times (\text{base} + \text{height}) \).
+
+This corrected program will output:
+```
+Rectangle's perimeter: 14
+Triangle's perimeter: 14
+Rectangle's perimeter: 14
+```

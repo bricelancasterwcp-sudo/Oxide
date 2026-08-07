@@ -1,0 +1,42 @@
+To fix the program's errors, we need to ensure that indices are within the valid range for accessing the list. Specifically, the index `5` should be checked before attempting to access it.
+
+Here's the corrected version of the program:
+
+```rust
+fn main() {
+    let numbers: [i32; 3] = [10, 20, 30];
+
+    if numbers[1] == -1 {
+        println!("Element not found at position 1");
+    } else {
+        println!("Element found at position 1: {}", numbers[1]);
+    }
+
+    if numbers[5] < 0 || numbers[5] >= 3 {
+        println!("Index out of bounds: position {} is out of range", 5);
+    } else {
+        println!("Element found at position 5: {}", numbers[5]);
+    }
+}
+
+// Example usage
+fn main() {
+    let numbers: [i32; 3] = [10, 20, 30];
+    if numbers[1] == -1 {
+        println!("Element not found at position 1");
+    } else {
+        println!("Element found at position 1: {}", numbers[1]);
+    }
+
+    if numbers[5] < 0 || numbers[5] >= 3 {
+        println!("Index out of bounds: position {} is out of range", 5);
+    } else {
+        println!("Element found at position 5: {}", numbers[5]);
+    }
+}
+```
+
+### Explanation:
+- **Indices Check**: Before accessing the list, we check if `numbers[5]` is within the valid range (1 to 3).
+- **Conditional Panic**: We use `println!` inside a conditional block with an error message to handle cases where the index is out of bounds.
+- **Example Usage**: The example usage part demonstrates how to call the function and handle the condition checks.

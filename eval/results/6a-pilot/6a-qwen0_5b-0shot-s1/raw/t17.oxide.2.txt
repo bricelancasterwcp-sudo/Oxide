@@ -1,0 +1,12 @@
+```
+use std::ops::{Add, Mul};
+fn main() {
+    let v = vec![10, 20, 30];
+    println(first_big(v));
+    let r2 = Reading { label: "lab2", ..r };
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+```

@@ -1,0 +1,26 @@
+```rust
+fn main() {
+    let items = [
+        ("pen", 3, 4),
+        ("pad", 9, 2),
+        ("ink", 5, 3)
+    ];
+
+    let mut total_cost = 0;
+    let mut max_cost_item = "";
+    let mut max_cost = 0;
+
+    for item in items.iter() {
+        let (name, &unit_price, &quantity) = item;
+        let cost = unit_price * quantity;
+        total_cost += cost;
+        if cost > max_cost {
+            max_cost = cost;
+            max_cost_item = name;
+        }
+    }
+
+    println!("Combined cost of all items: {}", total_cost);
+    println!("Item with the highest cost: {}", max_cost_item);
+}
+```

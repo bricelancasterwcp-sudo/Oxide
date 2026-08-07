@@ -1,0 +1,9 @@
+```
+struct Rectangle { width: Int, height: Int }
+
+fn main() {
+    let rect = Rectangle { width: 7, height: 4 }
+    print(rect.width * rect.height)
+    print(2 * (rect.width + rect.height))
+}
+```

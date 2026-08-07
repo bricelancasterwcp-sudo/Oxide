@@ -1,0 +1,5 @@
+fn main() {
+    let s = "stack";
+    print!("{}", s.chars().count());
+    println!("{}", s.chars().rev().collect::<String>());
+}

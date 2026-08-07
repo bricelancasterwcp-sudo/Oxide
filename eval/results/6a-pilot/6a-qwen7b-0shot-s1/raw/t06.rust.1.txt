@@ -1,0 +1,19 @@
+```rust
+fn main() {
+    for n in 2..1000 {
+        if is_perfect(n) {
+            println!("{}", n);
+        }
+    }
+}
+
+fn is_perfect(num: u32) -> bool {
+    let mut sum = 1;
+    for i in 2..=(num / 2) {
+        if num % i == 0 {
+            sum += i;
+        }
+    }
+    sum == num
+}
+```

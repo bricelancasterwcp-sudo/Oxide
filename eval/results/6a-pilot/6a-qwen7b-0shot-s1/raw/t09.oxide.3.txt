@@ -1,0 +1,24 @@
+struct List {
+    head: Option<i32>,
+    tail: List,
+}
+
+fn push_back(mut list: List, value: i32) -> List {
+    let new_list = List { head: Some(value), tail };
+    new_list
+}
+
+fn reverse_print(list: List) {
+    match list.head {
+        Some(head) => {
+            reverse_print(list.tail);
+            println!("{}", head);
+        },
+        None => ()
+    }
+}
+
+fn main() {
+    let mut list = push_back(push_back(push_back(push_back(List { head: None, tail: List }, 5), 4), 3), 2), 1);
+    reverse_print(list);
+}

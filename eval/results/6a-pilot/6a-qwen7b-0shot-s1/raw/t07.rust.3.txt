@@ -1,0 +1,8 @@
+fn main() {
+    let mut sum = 0;
+    for i in (0..=7).map(|x| x * 3) {
+        sum += i;
+        println!("{}", i);
+    }
+    println!("Sum: {}", sum);
+}

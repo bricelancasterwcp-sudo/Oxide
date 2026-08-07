@@ -1,0 +1,21 @@
+```rust
+fn main() {
+    let s = "mississippi";
+    let mut count_s = 0;
+    let mut chars_set = Vec::new();
+    
+    for c in s.chars() {
+        if c == 's' {
+            count_s += 1;
+        }
+        if !chars_set.contains(&c) {
+            chars_set.push(c);
+        }
+    }
+    
+    print(count_s);
+    drop(chars_set);
+    let len_chars_set = chars_set.len();
+    print(len_chars_set);
+}
+```

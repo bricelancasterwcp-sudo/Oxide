@@ -1,0 +1,12 @@
+```
+fn gcd(mut a: Int, mut b: Int) -> Int {
+    while b != 0 {
+        let t = b;
+        b = a % b;
+        a = t;
+    }
+    a
+}
+```
+
+This corrected program reads and calculates the greatest common divisor of two integers using recursion.

@@ -1,0 +1,6 @@
+fn main() {
+    for i in 0..9 {
+        let mut p = (3 * i) as i64;
+        println!("{}", p);
+    }
+}

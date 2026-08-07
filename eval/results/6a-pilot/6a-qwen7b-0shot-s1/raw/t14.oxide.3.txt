@@ -1,0 +1,25 @@
+```
+let s = "mississippi"
+let mut count_s = 0
+for c in chars(s) {
+    if c == 's' {
+        count_s += 1
+    }
+}
+print(count_s)
+
+let mut distinct_chars = vec()
+for c in chars(s) {
+    let mut found = false
+    for d in chars(&distinct_chars) {
+        if d == c {
+            found = true
+            break
+        }
+    }
+    if !found {
+        push(distinct_chars, c)
+    }
+}
+print(len(distinct_chars))
+```

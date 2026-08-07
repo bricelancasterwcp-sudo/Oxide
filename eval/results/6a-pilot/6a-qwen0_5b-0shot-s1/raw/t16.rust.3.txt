@@ -1,0 +1,29 @@
+To fix the error related to mismatched types in your Rust code, you need to ensure that the division of an integer by a floating-point number results in a valid floating-point value. In this case, the expected type for `quotient` is `i32`, but the actual result is `f64`.
+
+Here's the corrected program:
+
+```rust
+fn main() {
+    let one_hundred = 100;
+    for divisor in [5, 0, 4] {
+        match divisor {
+            0 => println!("undefined"),
+            _ => {
+                // Corrected division by a float
+                let quotient = (one_hundred as f64) / divisor as f64;
+                if quotient == f64::INFINITY { // Check if division would result in infinity
+                    println!("Division by zero is undefined.");
+                } else {
+                    println!("{}", quotient);
+                }
+            }
+        }
+    }
+}
+```
+
+### Key Changes:
+1. **Type Correction**: Changed `f64::INFINITY` to `f64` because the actual result of `(one_hundred as f64) / divisor as f64` is `f64`.
+2. **Division Operator**: Corrected the division operator from `/` to `as` and `divisor as`.
+
+This should now compile without errors, and it correctly divides 100 by each of the specified divisors in order.

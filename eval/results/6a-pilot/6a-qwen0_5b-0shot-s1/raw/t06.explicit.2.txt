@@ -1,0 +1,52 @@
+```
+fn is_prime(n: usize) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    for i in 2..=((n as f64).sqrt() as usize) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+
+fn print(x: usize) {
+    println!("{}", x);
+}
+
+fn extend(v: Vec<usize>, x: usize) -> Vec<usize> {
+    push(v, x)
+}
+
+fn main() {
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        println!("{}", prime);
+    }
+}
+```
+
+```error
+2:41: OX0001: unexpected character ';'
+5:27: OX0001: unexpected character ';'
+8:29: OX0001: unexpected character '|'
+8:34: OX0001: unexpected character '|'
+8:45: OX0001: unexpected character ';'
+10:30: OX0001: unexpected character ';'
+16:21: OX0001: unexpected character ';'
+20:25: OX0001: unexpected character ';'
+2:13: OX0101: expected '=', found IDENT
+5:27: OX0101: expected end of statement, found ERROR
+8:5: OX0102: expected item at module level, found IDENT
+16:21: OX0101: expected end of statement, found ERROR
+18:16: OX0101: expected field name, found DOT
+20:25: OX0101: expected end of statement, found ERROR
+23:5: OX0102: expected item at module level, found KW_TRUE
+```

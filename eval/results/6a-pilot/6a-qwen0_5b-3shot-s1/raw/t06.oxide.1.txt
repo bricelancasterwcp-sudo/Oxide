@@ -1,0 +1,26 @@
+```
+use std::convert::TryInto;
+
+fn is_perfect(n: u32) -> bool {
+    let mut sum = 0;
+    for i in 1..=((n as f64).sqrt() as u32) {
+        if n % i == 0 && (i * i != n) {
+            sum += i;
+        }
+    }
+    sum == n
+}
+
+fn main() {
+    let mut perfect_numbers = Vec::new();
+    for num in 2..1000 {
+        if is_perfect(num) {
+            perfect_numbers.push(num);
+        }
+    }
+
+    for x in perfect_numbers {
+        println!("{}", x);
+    }
+}
+```

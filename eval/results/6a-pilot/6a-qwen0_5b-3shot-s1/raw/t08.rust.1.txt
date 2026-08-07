@@ -1,0 +1,35 @@
+```
+fn main() {
+    let n = 7;
+    println!("{}", n);
+    
+    let mut p = 1;
+    for i in 1..n + 1 {
+        p *= i;
+    }
+    println!("{}", p);
+
+    let sum: i64 = v.iter().sum();
+    let min = v.iter().min().unwrap();
+    println!("{}", sum);
+    println!("{}", min);
+}
+```
+
+```rust
+fn main() {
+    let n = 7;
+    println!("{}", n);
+    
+    let mut p = 1;
+    for i in 1..n + 1 {
+        p *= i;
+    }
+    println!("{}", p);
+
+    let sum: i64 = v.iter().sum();
+    let min = v.iter().min().unwrap();
+    println!("{}", sum);
+    println!("{}", min);
+}
+```

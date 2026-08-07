@@ -1,0 +1,15 @@
+```rust
+fn area(w: Int, h: Int) -> Int {
+    w * h
+}
+
+fn perimeter(w: Int, h: Int) -> Int {
+    2 * (w + h)
+}
+
+fn main() {
+    let rec = (7, 4);
+    print(area(rec.0, rec.1));
+    print(perimeter(rec.0, rec.1)); // Fix the parameters
+}
+```

@@ -1,0 +1,14 @@
+```
+fn main() {
+    let mut num = 27;
+    while num > 0 {
+        if num % 2 == 0 {
+            num /= 2;
+        } else {
+            num *= 3;
+            num += 1;
+        }
+    }
+    println!("{}", num);
+}
+```

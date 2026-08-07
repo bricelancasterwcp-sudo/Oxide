@@ -1,0 +1,7 @@
+```
+fn main() {
+    let multiples_of_3 = (1..=8).map(|i| i * 3);
+    let total_sum: i32 = multiples_of_3.sum();
+    println!("{}", total_sum);
+}
+```

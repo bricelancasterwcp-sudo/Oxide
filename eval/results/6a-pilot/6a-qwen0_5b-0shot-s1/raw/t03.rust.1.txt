@@ -1,0 +1,12 @@
+```
+fn gcd(x: isize, y: isize) -> isize {
+    if y == 0 {
+        return x;
+    }
+    gcd(y, x % y)
+}
+
+fn main() {
+    println!("{}", gcd(252, 105));
+}
+```

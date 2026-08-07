@@ -1,0 +1,11 @@
+```
+fn main() {
+    let v = vec![5, 3, 8, 1, 9, 2];
+    let mut sorted_v: Vec<Int> = v.iter().sorted_by(|a, b| a.partial_cmp(b).unwrap());
+    for x in &sorted_v {
+        println!("{}", x);
+    }
+}
+```
+
+This corrected program reads the input vector `v` and sorts it in increasing order using the `sort_by` method with a custom comparator. The resulting sorted vector is then printed to the console.

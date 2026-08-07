@@ -1,0 +1,9 @@
+fn main() {
+    let sum: i64 = 0;
+    for &n in &[1, 2, 3, 4, 5, 6] {
+        if n.is_ascii_digit() {
+            sum += n as i64;
+        }
+    }
+    println!("{}", sum);
+}

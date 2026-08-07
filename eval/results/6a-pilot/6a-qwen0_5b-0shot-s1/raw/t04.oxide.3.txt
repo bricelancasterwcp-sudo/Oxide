@@ -1,0 +1,45 @@
+```
+fn is_prime(n: Int) -> bool {
+    if n <= 1 {
+        return false
+    }
+    for i in 2..=((n as f64).sqrt() as u32) {
+        if n % i == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let mut found = -1;
+    for x in v {
+        if x > 10 {
+            found = x;
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let mut primes = Vec::new();
+    for i in 2..100 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    println!("{}", primes.len());
+}
+```
+
+### Explanation:
+- `is_prime` checks if a number is prime.
+- `first_big` finds the first element of a vector that is greater than 10.
+- `second` finds the second largest element in the vector.
+- The program uses these functions and prints the lengths of the primes found.

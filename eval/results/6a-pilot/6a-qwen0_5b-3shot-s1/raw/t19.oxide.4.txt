@@ -1,0 +1,43 @@
+```
+mod main;
+
+use std::cell::{RefCell};
+
+struct Rectangle {
+    width: RefCell<i32>,
+    height: RefCell<i32>,
+}
+
+impl Rectangle {
+    pub fn new(width: i32, height: i32) -> Self {
+        Rectangle {
+            width: RefCell::new(width),
+            height: RefCell::new(height),
+        }
+    }
+
+    pub fn area(&self) -> i32 {
+        let w = self.width.borrow();
+        let h = self.height.borrow();
+        w * h
+    }
+
+    pub fn perimeter(&self) -> i32 {
+        2 * (self.width.borrow() + self.height.borrow())
+    }
+}
+
+fn main() {
+    let r = Rectangle::new(7, 4);
+    println!("The area of the rectangle is: {}", r.area());
+    println!("The perimeter of the rectangle is: {}", r.perimeter());
+}
+```
+
+**Explanation**:
+- **Struct Definition**: The `Rectangle` struct has two fields: `width` and `height`, both of which are `RefCell<i32>`.
+- **Constructor**: A `new` method initializes these fields when a new instance of `Rectangle` is created.
+- **Area Method**: The `area` method returns the product of `width` and `height`.
+- **Perimeter Method**: The `perimeter` method calculates the perimeter by adding twice the sum of `width` and `height`.
+
+This program correctly processes the input data and prints the expected results.

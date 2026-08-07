@@ -1,0 +1,36 @@
+```
+struct Reading {
+    label: Str,
+    values: Vec<Int>,
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let mut max = 0;
+    for x in v {
+        if x > max {
+            max = x
+        }
+    }
+    max
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let min = v[0];
+    for x in v.iter().skip(1) {
+        if x < min {
+            min = x
+        }
+    }
+    Some(min)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(push(push(vec(), 2), 5), 1), 6) };
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+```

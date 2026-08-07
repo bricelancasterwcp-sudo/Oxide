@@ -1,0 +1,14 @@
+```
+fn main() {
+    let v = push(vec!(1, 2, 3), 5);
+    for &x in &v {
+        let quotient = x / 5;
+        if quotient != 0 {
+            print!("{}", quotient);
+        } else {
+            println!("undefined");
+        }
+    }
+    println!("undefined");
+}
+```

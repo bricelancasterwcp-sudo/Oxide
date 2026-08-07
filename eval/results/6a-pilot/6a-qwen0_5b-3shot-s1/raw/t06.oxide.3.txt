@@ -1,0 +1,11 @@
+```
+fn is_perfect(n: usize) -> bool {
+    let mut sum = 0;
+    for i in range(2..=n / 2) {
+        if n % i == 0 {
+            sum += i;
+        }
+    }
+    n == sum
+}
+```

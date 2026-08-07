@@ -1,0 +1,7 @@
+```
+fn main() {
+    print!("{}", is_reverse("level")); // true
+    println!("{}", is_reverse("stereo")); // true
+    println!("{}", is_reverse("rotor")); // true
+}
+```

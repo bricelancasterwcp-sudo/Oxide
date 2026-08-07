@@ -1,0 +1,26 @@
+```
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0;
+    for x in &v {
+        if x > limit {
+            total = total + x;
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn main() {
+    let nums = push(push(push(vec(), 2), 5), 1);
+    let bigger = extend(clone(&nums), 7);
+    print(sum_big(&nums, 6));
+    drop nums
+    print(sum_big(&bigger, 6));
+    drop bigger
+}
+```
+
+This program defines a function `sum_big` that sums up the integers in a vector and prints the result along with the largest element if present. The use of borrowing ensures proper memory management.

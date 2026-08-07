@@ -1,0 +1,20 @@
+fn collatz_steps(x: Int) -> Int {
+    let mut count = 0;
+    let mut current = x;
+
+    while current != 1 {
+        if current % 2 == 0 {
+            current = current / 2;
+        } else {
+            current = current * 3 + 1;
+        }
+        count = count + 1;
+    }
+
+    count
+}
+
+fn main() {
+    let steps = collatz_steps(27);
+    print(steps);
+}

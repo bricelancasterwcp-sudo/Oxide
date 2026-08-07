@@ -1,0 +1,20 @@
+```
+use std::f64;
+
+fn gcd(a: isize, b: isize) -> isize {
+    while a != 0 && b != 0 {
+        if a > b {
+            a %= b;
+        } else {
+            b %= a;
+        }
+    }
+    a
+}
+
+fn main() {
+    let n1 = 252;
+    let n2 = 105;
+    print!("{}", gcd(n1, n2))
+}
+```

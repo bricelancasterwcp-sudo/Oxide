@@ -1,0 +1,33 @@
+```
+fn main() {
+    // Initialize a counter for prime numbers
+    let mut prime_count = 0;
+
+    // Iterate through numbers from 2 to 99
+    for i in 2..=99 {
+        // Check if the number is prime
+        if is_prime(i) {
+            // Increment the counter if it is prime
+            prime_count += 1;
+        }
+    }
+
+    // Print the count of prime numbers
+    println!("There are {} prime numbers less than 100.", prime_count);
+}
+
+// Function to check if a number is prime
+fn is_prime(n: isize) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    for i in 2..=((n as f64).sqrt() as isize) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+```
+
+This Rust program defines a function `is_prime` that checks if a given number is prime. The main function iterates through numbers from 2 to 99, using the `is_prime` function to determine if each number is prime. It then counts how many such numbers exist and prints the result.

@@ -1,0 +1,26 @@
+```
+use std::rc::Rc;
+use std::vec::Vec;
+
+fn main() {
+    let pen = Rc::new(3);
+    let pad = Rc::new(9);
+    let ink = Rc::new(5);
+
+    let total_cost: i32 = {
+        pen.value * pen.quantity +
+        pad.value * pad.quantity +
+        ink.value * ink.quantity
+    };
+
+    println!("{}", total_cost);
+    println!("{:?}", item_with_highest_cost);
+}
+```
+
+**Explanation**:
+- **Imports**: Imported necessary packages like `std::rc::Rc` for cloning references and `std::vec::Vec` for vector manipulation.
+- **Variables**: Declared variables for the pen, pad, and ink prices, along with a reference to each.
+- **Total Cost Calculation**: Calculated the total cost by summing the values of the pen, pad, and ink using multiplication.
+- **Item Check**: Used a `match` statement to check which item has more units. If the first item has more units, returned it; otherwise, used `panic!` for an error handling mechanism if any item is out of stock.
+- **Output**: Printed the total cost and the item with the highest cost.

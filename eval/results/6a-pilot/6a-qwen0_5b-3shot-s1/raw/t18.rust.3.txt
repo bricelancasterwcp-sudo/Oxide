@@ -1,0 +1,25 @@
+Certainly! Below is a complete Rust program with the specified tasks:
+
+```rust
+fn main() {
+    // Print the product of the integers from 1 to 6
+    let mut p = 1;
+    for i in 1..7 {
+        p *= i;
+    }
+    println!("{}", p);
+
+    // Calculate the sum of the elements in the list [2, 5, 1, 6]
+    let v = vec![2, 5, 1, 6];
+    let sum: i64 = v.iter().sum();
+    println!("{}", sum);
+
+    // Print the smallest element in the list [2, 5, 1, 6]
+    let min = v.iter().min().unwrap();
+    println!("{}", min);
+}
+```
+
+### Explanation:
+- **Product of Integers**: The program calculates the product of all integers from 1 to 6.
+- **Sum and Minimum**: It uses Rust's `iter()` method to access each element in the list, then `sum()` to calculate the sum, and `min()` to find the smallest element.

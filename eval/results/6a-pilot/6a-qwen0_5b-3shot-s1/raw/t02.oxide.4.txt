@@ -1,0 +1,16 @@
+```
+fn main() {
+    let mut v = vec![27];
+    while !v.is_empty() {
+        if v.pop().unwrap() % 2 == 0 {
+            sum += v.pop().unwrap();
+        } else {
+            sum += v.pop().unwrap() * 3 + 1;
+        }
+        steps += 1;
+    }
+
+    println(sum);
+    println(steps);
+}
+```

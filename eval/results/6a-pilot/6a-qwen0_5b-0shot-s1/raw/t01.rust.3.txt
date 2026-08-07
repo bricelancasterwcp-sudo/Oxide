@@ -1,0 +1,11 @@
+Certainly! Let's fix the missing closing brace in the provided Rust code. Here is the corrected program:
+
+```rust
+fn main() {
+    for i in 0..=9 {
+        println!("{}", i * i);
+    }
+}
+```
+
+This version now properly closes the `for` loop, and all other parts of the code are correctly formatted.

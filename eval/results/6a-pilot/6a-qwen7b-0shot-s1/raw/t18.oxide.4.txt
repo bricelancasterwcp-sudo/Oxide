@@ -1,0 +1,24 @@
+enum Shape {
+    Rectangle { width: Int, height: Int },
+    Triangle { sides: Vec<Int> }
+}
+
+fn perimeter(s: Shape) -> Int {
+    match s {
+        Shape::Rectangle { width, height } => 2 * (width + height),
+        Shape::Triangle { sides: vec } => vec[0] + vec[1] + vec[2]
+    }
+}
+
+fn main() {
+    let shapes = vec![
+        Shape::Rectangle { width: 3, height: 4 },
+        Shape::Triangle { sides: vec![3, 4, 5] },
+        Shape::Rectangle { width: 2, height: 5 }
+    ];
+
+    for shape in shapes {
+        print(perimeter(shape));
+        print_str("\n");
+    }
+}

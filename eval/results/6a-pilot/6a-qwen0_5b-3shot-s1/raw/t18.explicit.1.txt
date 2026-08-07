@@ -1,0 +1,17 @@
+```
+fn main() {
+    let t1 = Rectangle { width: 3, height: 4 };
+    println!("{}", t1.perimeter());
+    
+    let t2 = Triangle { base: 3, side_a: 4, side_b: 5 };
+    println!("{}", t2.perimeter());
+    
+    let t3 = Rectangle { width: 2, height: 5 };
+    println!("{}", t3.perimeter());
+}
+```
+
+Explanation:
+- The `Rectangle` and `Triangle` structs are defined with their respective fields (`width` and `height`) and methods (`perimeter()`).
+- Each shape is created with its own instance of each field.
+- The perimeters of the shapes are printed on separate lines.

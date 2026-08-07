@@ -1,0 +1,8 @@
+```
+fn main() {
+    let w = 7;
+    let h = 4;
+    print(w * h);
+    println(h * w);
+}
+```

@@ -1,0 +1,16 @@
+```
+use std::iter;
+
+fn main() {
+    let s1 = Shape::Rectangle(3, 4);
+    let s2 = Shape::Triangle(3, 4, 5);
+    let s3 = Shape::Rectangle(2, 5);
+
+    let shapes: Vec<&Shape> = vec![&s1, &s2, &s3];
+    for shape in shapes {
+        println!("Perimeter of {}: {}", shape.label(), shape.perimeter());
+    }
+}
+```
+
+This program defines a `Shape` struct with methods to get its perimeter and print it on the console. It also demonstrates how to create a vector of `Shape` references, iterate over them, and print each shape's perimeter.

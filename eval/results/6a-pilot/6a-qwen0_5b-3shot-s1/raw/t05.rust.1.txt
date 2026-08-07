@@ -1,0 +1,11 @@
+```
+fn main() {
+    let s = "1111";
+    for i in 0..20 {
+        println!("{}", s[i]);
+        if i % 2 == 0 {
+            s.insert(i, ' ');
+        }
+    }
+}
+```

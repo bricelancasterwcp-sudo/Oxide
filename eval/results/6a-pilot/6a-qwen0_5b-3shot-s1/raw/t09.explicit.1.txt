@@ -1,0 +1,12 @@
+```
+fn main() {
+    let v = range(1, 6)
+    print(str_len(&v))
+    for x in &v {
+        print_str(x)
+        if x > 5 {
+            print()
+        }
+    }
+}
+```

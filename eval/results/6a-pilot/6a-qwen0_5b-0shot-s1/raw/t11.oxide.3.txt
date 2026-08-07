@@ -1,0 +1,25 @@
+```
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let mut found = -1;
+    for x in v {
+        if x > 10 {
+            found = x;
+            break;
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let mut r = Reading { label: "lab", values: push(vec![3, 8, 1, 9, 2], 0) };
+    print(first_big(r.values));            // field access copies: r stays usable
+    println!("second:", second(r.values).unwrap())
+}
+```

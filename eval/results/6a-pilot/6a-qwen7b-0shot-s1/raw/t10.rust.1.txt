@@ -1,0 +1,9 @@
+```rust
+fn main() {
+    let mut list = vec![4, 1, 7, 3, 9, 2];
+    for &value in list.iter().filter(|&&x| x > 3) {
+        println!("{}", value);
+    }
+    println!("{}", list.into_iter().filter(|&x| x > 3).count());
+}
+```

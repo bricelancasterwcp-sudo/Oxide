@@ -1,0 +1,15 @@
+struct List { value: Int, next: Option<Box<List>> }
+
+fn get_elem(lst: Box<List>, pos: Int) -> Int {
+    match lst.next {
+        Some(nxt) if pos == 0 => nxt.value,
+        Some(nxt) => get_elem(*nxt, pos - 1),
+        None => -1
+    }
+}
+
+fn main() {
+    let lst = Box::new(List { value: 10, next: Some(Box::new(List { value: 20, next: Some(Box::new(List { value: 30, next: None })) })) });
+    print(get_elem(lst, 1)); // 20
+    print(get_elem(Box::new(List { value: 0, next: None }), 5)); // -1
+}

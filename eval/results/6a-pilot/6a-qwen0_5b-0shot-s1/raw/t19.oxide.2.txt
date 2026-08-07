@@ -1,0 +1,7 @@
+```
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) };
+    print!("Area: {}", (r.values[0] * r.values[1]) as f64);
+    println!("Perimeter: {}", 2 * (r.values[0] + r.values[1]));
+}
+```

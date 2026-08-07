@@ -1,0 +1,30 @@
+```
+fn main() {
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        println!("{}", prime);
+    }
+}
+
+fn is_prime(n: usize) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    for i in 2..=((n as f64).sqrt() as usize) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+```
+
+## Explanation
+
+This Rust program defines a function `is_prime` to check if a number is prime and another function `main` to print every perfect number greater than 0 and less than 1000. The `main` function initializes an empty vector of primes, iterates over all numbers from 2 to 999 (inclusive), checks if each number is prime using the `is_prime` function, and appends it to the vector only if it is. Finally, it sorts the vector in ascending order and prints each prime number on a new line.

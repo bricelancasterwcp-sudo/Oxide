@@ -1,0 +1,9 @@
+```
+fn main() {
+    let x = String::from("mississippi");
+    println!("Count of 's': {}", x.chars().filter(|&c| c == 's').count());
+    println!("Number of distinct characters: {}", x.chars().collect::<Vec<char>>().unique().len());
+}
+```
+
+The program now correctly handles the input string "mississippi" and outputs the count of 's' and the number of distinct characters.

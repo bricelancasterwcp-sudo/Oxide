@@ -1,0 +1,28 @@
+```
+fn main() {
+    for i in 2..99 {
+        if is_prime(i) {
+            println!("{}", i);
+        }
+    }
+}
+
+fn is_prime(n: usize) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    if n == 2 {
+        return true;
+    }
+    if n % 2 == 0 {
+        return false;
+    }
+    let boundary = (n as f64).sqrt() as usize + 1;
+    for i in 3..boundary {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+```

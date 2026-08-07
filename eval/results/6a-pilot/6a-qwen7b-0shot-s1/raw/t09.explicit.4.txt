@@ -1,0 +1,12 @@
+```rust
+fn print_reverse(v: Vec<Int>) {
+    for x in v.into_iter().rev() {
+        println!("{}", x);
+    }
+}
+
+fn main() {
+    let nums = push(push(push(push(vec(), 1), 2), 3), 4);
+    print_reverse(nums.clone());
+}
+```

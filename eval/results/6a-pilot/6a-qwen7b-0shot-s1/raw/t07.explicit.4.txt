@@ -1,0 +1,23 @@
+fn sum_multiples(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0;
+    for x in v {
+        if *x % 3 == 0 && *x <= limit {
+            total += *x;
+        }
+    }
+    total
+}
+
+fn main() {
+    let mut multiples = vec();
+    let mut result = 0;
+    for i in range(1, 9) {
+        let multiple = i * 3;
+        if multiple <= 24 {
+            push(multiples, multiple);
+        }
+    }
+    result = sum_multiples(&multiples, 24);
+    print(result);
+    drop multiples
+}

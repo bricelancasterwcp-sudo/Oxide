@@ -1,0 +1,5 @@
+```
+fn main() {
+    println!("{}", s.chars().eq(s.chars().rev()));
+}
+```

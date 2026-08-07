@@ -1,0 +1,9 @@
+```
+fn main() {
+    let v = vec![5, 3, 8, 1, 9, 2];
+    v.sort();
+    for i in v {
+        println!("{}", i);
+    }
+}
+```

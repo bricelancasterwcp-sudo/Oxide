@@ -1,0 +1,293 @@
+```
+fn is_prime(n: usize) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    for i in 2..=((n as f64).sqrt() as usize) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+
+fn print(x: usize) {
+    println!("{}", x);
+}
+
+fn extend(v: Vec<usize>, x: usize) -> Vec<usize> {
+    push(v, x)
+}
+
+fn main() {
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Incorrect annotation
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop at the value's last-use point
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Wrong parameter mode (read-only is name: &Type, consumed is name: Type)
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));
+    for prime in primes.iter() {
+        print!("{}", prime);
+    }
+
+    // Fix: Missing drop where the value is not owned or not dead
+    let mut primes = Vec::<usize>::new();
+    for i in 2..1000 {
+        if is_prime(i) {
+            primes.push(i);
+        }
+    }
+    primes.sort_unstable_by(|a, b| a.cmp(b));

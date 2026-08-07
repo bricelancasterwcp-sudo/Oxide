@@ -1,0 +1,10 @@
+fn main() {
+    for &d in &[5, 0, 4] {
+        if d == 0 {
+            println!("undefined");
+        } else {
+            let quotient = 100 / d;
+            println!("{}", quotient);
+        }
+    }
+}

@@ -29,7 +29,10 @@ from eval.models import (
 )
 from eval.repair import RepairPromptError, build_repair_prompt
 from eval.rollup import (
+    AT_CEILING,
+    AT_FLOOR,
     INSUFFICIENT,
+    _verdict,
     across_seed_se,
     aggregate,
     classify,
@@ -1252,6 +1255,48 @@ def test_wait_for_health_raises_after_cap_exhausted_without_looping_forever():
     with pytest.raises(ModelError, match="600s"):
         wait_for_health(_NeverHealthy(), sleep=sleeps.append)
     assert sleeps == [5] * 120
+
+
+def _arms(oxide_rate: float, explicit_rate: float, n: int = 20) -> dict:
+    return {
+        "oxide": {"n": n, "first_pass_rate": oxide_rate},
+        "explicit": {"n": n, "first_pass_rate": explicit_rate},
+        "rust": {"n": n, "first_pass_rate": 60.0},
+    }
+
+
+def test_verdict_refuses_a_reading_when_both_arms_are_at_the_floor():
+    # The 6a pilot's real numbers: 7B 0-shot scored oxide 2/20 vs
+    # explicit 0/20 first-compile. That is a +10pp delta, which clears
+    # the pre-registered +5pp band and would have printed "supports" off
+    # two programs. The band was derived at p~=0.5 and has no resolution
+    # here, so the point must carry no reading.
+    assert classify(10.0) == "supports"          # the partition alone
+    assert _verdict(10.0, _arms(10.0, 0.0)) == AT_FLOOR
+
+
+def test_verdict_refuses_a_reading_when_both_arms_are_at_the_ceiling():
+    # The mirror case, and the shape run 1 actually produced: everything
+    # saturated, so a delta between two near-perfect arms is noise.
+    assert _verdict(-10.0, _arms(95.0, 100.0)) == AT_CEILING
+
+
+def test_verdict_classifies_normally_away_from_the_extremes():
+    assert _verdict(12.0, _arms(50.0, 38.0)) == "supports"
+    assert _verdict(-12.0, _arms(38.0, 50.0)) == "disconfirms"
+    assert _verdict(1.0, _arms(50.0, 49.0)) == "no-detectable-difference"
+
+
+def test_verdict_floor_guard_needs_BOTH_arms_low():
+    # One arm at the floor and the other genuinely working is a real
+    # signal, not a resolution failure — it must still be classified.
+    assert _verdict(40.0, _arms(45.0, 5.0)) == "supports"
+
+
+def test_insufficient_data_still_takes_precedence_over_the_floor_guard():
+    assert _verdict(None, _arms(0.0, 0.0)) == INSUFFICIENT
+    empty = {"oxide": {"n": 0}, "explicit": {"n": 0}, "rust": {"n": 0}}
+    assert _verdict(0.0, empty) == INSUFFICIENT
 
 
 def _cell(task: str, arm: str, passed: bool, *, final: bool | None = None,

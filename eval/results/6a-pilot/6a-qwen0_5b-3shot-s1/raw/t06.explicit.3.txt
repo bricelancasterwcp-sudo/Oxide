@@ -1,0 +1,17 @@
+```
+fn main() {
+    let mut perfect_numbers = vec![];
+    for i in 2..=1000 {
+        if is_perfect_number(i) {
+            perfect_numbers.push(i);
+        }
+    }
+
+    perfect_numbers.sort_unstable();
+    for x in &perfect_numbers {
+        println!("{}", x);
+    }
+}
+```
+
+This program correctly prints every perfect number greater than 0 and less than 1000 in increasing order, one per line.

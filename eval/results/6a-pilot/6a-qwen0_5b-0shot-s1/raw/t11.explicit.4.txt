@@ -1,0 +1,9 @@
+```
+fn main() {
+    let mut v = vec![5, 3, 8, 1, 9, 2];
+    let sorted_v = v.iter().sorted_by(|a, b| a.partial_cmp(b).unwrap());
+    for x in &sorted_v {
+        println!("{}", x);
+    }
+}
+```

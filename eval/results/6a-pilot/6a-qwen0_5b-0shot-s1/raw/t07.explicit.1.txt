@@ -1,0 +1,9 @@
+```
+fn main() {
+    for i in 1..=9 {
+        println!("{}", 3 * i);
+    }
+    let sum = nums.iter().sum();
+    println!("Sum: {}", sum);
+}
+```

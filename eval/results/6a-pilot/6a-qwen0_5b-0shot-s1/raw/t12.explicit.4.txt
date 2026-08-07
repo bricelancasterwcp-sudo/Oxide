@@ -1,0 +1,32 @@
+```
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let mut v = Vec::new();
+    for x in v.iter() {
+        if *x > limit {
+            v.push(x);
+        }
+    }
+    let mut total = 0;
+    for x in v.iter() {
+        if *x > limit {
+            total = total + x;
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn main() {
+    let nums = push(vec(), 5);
+    let bigger = extend(clone(&nums), 70);
+    print(sum_big(&nums, 10));
+    drop nums;
+    print(sum_big(&bigger, 10));
+    drop bigger;
+}
+```
+
+This program reads `v` (declared `&Vec<Int>`, used `&v`); `extend` consumes it (bare). Each `drop` follows its variable's last-read statement.

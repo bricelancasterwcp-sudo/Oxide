@@ -1,0 +1,12 @@
+```
+fn main() {
+    let s = Shape::Rectangle(3, 4);
+    let s2 = Shape::Triangle(3, 4, 5);
+    let s3 = Shape::Rectangle(2, 5);
+
+    let shapes: Vec<&Shape> = vec![&s1, &s2, &s3];
+    for shape in shapes {
+        println!("Perimeter of {}: {}", shape.label(), shape.perimeter());
+    }
+}
+```
