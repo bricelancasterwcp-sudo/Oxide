@@ -889,6 +889,57 @@ def test_run_grid_aborts_one_run_and_continues(tmp_path):
     assert result["completed"] == [build_run_id("qwen1_5b", 0, 2)]
 
 
+def test_run_grid_aborts_one_run_on_harness_error_not_the_whole_grid(tmp_path):
+    # A HarnessError (unreadable card, session-claim collision) is a
+    # per-run environment fault. Letting it escape would end an unattended
+    # multi-hour grid on a fault that costs one run id to retry.
+    seen: list[str] = []
+
+    def fake_run_one(client, *, run_id, **kwargs):
+        seen.append(run_id)
+        if run_id.endswith("s1"):
+            raise harness.HarnessError("cannot read language card")
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr("eval.driver.run_one", fake_run_one)
+    result = run_grid(
+        lambda tag: _StubClient(),
+        slugs=["qwen1_5b"],
+        shot_counts=[0],
+        seeds=[1, 2],
+        results_root=tmp_path,
+    )
+    monkeypatch.undo()
+    assert len(seen) == 2  # did not stop at the failure
+    assert result["aborted"] == [build_run_id("qwen1_5b", 0, 1)]
+    assert result["completed"] == [build_run_id("qwen1_5b", 0, 2)]
+    aborted_dir = tmp_path / build_run_id("qwen1_5b", 0, 1)
+    manifest = json.loads((aborted_dir / "manifest.json").read_text())
+    assert "cannot read language card" in manifest["aborted_reason"]
+
+
+def test_run_grid_does_not_swallow_a_repair_prompt_error(tmp_path):
+    # RepairPromptError means the frozen harness stopped ending prompts
+    # with OUTPUT_CONTRACT, so EVERY later repair prompt would be
+    # malformed. That must stop the grid loudly rather than abort one run.
+    from eval.repair import RepairPromptError
+
+    def fake_run_one(client, *, run_id, **kwargs):
+        raise RepairPromptError("OUTPUT_CONTRACT missing from build_prompt")
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr("eval.driver.run_one", fake_run_one)
+    with pytest.raises(RepairPromptError):
+        run_grid(
+            lambda tag: _StubClient(),
+            slugs=["qwen1_5b"],
+            shot_counts=[0],
+            seeds=[1, 2],
+            results_root=tmp_path,
+        )
+    monkeypatch.undo()
+
+
 def test_run_grid_stops_after_three_consecutive_aborts(tmp_path):
     # Without this backstop a systematically broken configuration burns
     # silently through every remaining run id and leaves a grid that

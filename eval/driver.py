@@ -251,7 +251,7 @@ def _run_grid_cell(
     tasks_path: Path | None,
     health_check: Callable[[object], None] | None,
     preflight: dict | None = None,
-) -> ModelError | None:
+) -> Exception | None:
     """Run one grid cell (one run id) start to finish.
 
     Ordering is load-bearing (section 6.4): health check, THEN the
@@ -263,6 +263,17 @@ def _run_grid_cell(
     On abort the manifest is rewritten with the reason, and the exception is
     returned (not raised) so the caller decides whether the
     consecutive-abort backstop fires.
+
+    ``HarnessError`` is caught alongside ``ModelError``: an unreadable
+    language card or a session-claim collision is a per-run environment
+    fault, not a reason to end an unattended multi-hour grid. Preflight
+    now checks the corpus, the shots, and rustc, so this is a backstop
+    rather than an expected path.
+
+    ``RepairPromptError`` is deliberately NOT caught. It fires only when
+    the frozen harness stops ending prompts with its own OUTPUT_CONTRACT,
+    which means every subsequent repair prompt would be malformed -- that
+    must stop the grid loudly, not abort one run and carry on.
     """
     fields = _manifest_fields(client, preflight)
     started_at = _timestamp()
@@ -283,7 +294,7 @@ def _run_grid_cell(
             results_root=results_root,
             tasks_path=tasks_path,
         )
-    except ModelError as exc:
+    except (ModelError, harness.HarnessError) as exc:
         write(ended_at=_timestamp(), aborted_reason=str(exc))
         return exc
     write(ended_at=_timestamp())
