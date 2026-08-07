@@ -98,3 +98,73 @@ compiles, or retired.
 ## Raw data
 
 `results.json` — per-cell scores. `answers/` — every submitted repair verbatim.
+
+---
+
+## Addendum — the p17 rewrite failed, and why that matters more
+
+p17 was rewritten (`651dfff`) to remove the accumulate-vs-clone ambiguity: the
+print moved outside the loop so a clone-based repair could no longer be
+satisfied locally, and only reassignment produces `10` then `13`.
+
+**The frontier subject clones anyway.** Re-tested against the rewritten probe:
+
+```
+let grown = push(clone(acc), i)      → prints 10, 10   (expected 10, 13)
+```
+
+Both Oxide arms, strict-fail. Rust: correct. The rewrite made the error
+visible to a *reader* — `grown` is now conspicuously unused — without changing
+model behaviour at all.
+
+### The actual cause is diagnostic richness, not probe ambiguity
+
+Both languages' diagnostics recommend cloning. rustc's is *more* explicit,
+printing the exact edit:
+
+```
+help: consider cloning the value if the performance cost is acceptable
+10 |         let grown = push_back(acc.clone(), i);
+```
+
+The model ignored that advice for Rust and took it for Oxide. The difference
+is everything else in the message:
+
+| | Oxide `OX0403` | rustc `E0382` |
+|---|---|---|
+| move site | line 5 col 26 | line 10, `value moved here, in previous iteration of loop` |
+| **the later use that makes it fatal** | **absent** | **line 12, `value borrowed here after move`** |
+| loop context | absent | `inside of this loop` |
+| why the type moves | absent | `does not implement the Copy trait` |
+| `note` | repeats the error position | three distinct sites |
+
+rustc shows **both ends of the conflict**. Oxide shows only the move. A model
+that cannot see that `acc` is read after the loop has no way to know cloning
+inside the loop defeats the purpose — so it follows the suggestion literally.
+
+**This is an actionable defect in Oxide's diagnostics, found by the probe.**
+`OX0403`'s note points at the same position as the error, which carries no
+information. It should point at the *later use*, as `OX0400`'s note already
+does for the non-loop case ("includes a note pointing at the earlier move").
+The suggestion should also not offer "or clone it" as a co-equal option in the
+accumulator case, where cloning silently breaks the program.
+
+### Scope of the confound
+
+SPEC §45 gives the Rust arm rustc's full diagnostic text deliberately — it is
+part of the null hypothesis. But this shows Oxide-vs-Rust comparisons are
+partly measuring *diagnostic quality*, not language design, and the gap is
+larger than "Rust has more pretraining exposure" alone accounts for.
+
+**The primary comparison is unaffected.** Oxide and explicit-Oxide receive the
+identical `OX0403` diagnostic, so this cannot bias the +18.3pp result. It bears
+on the Rust reference column only — which the standing rule already says is not
+evidence about language design.
+
+### Corpus status
+
+p17 is retained in its rewritten form. It is a *sound* probe — one intended
+code, verified fix, unambiguous to a reader — that both Oxide arms fail for a
+reason now understood. That makes it a useful regression target for any future
+improvement to `OX0403`: if the diagnostic is fixed to name the later use, this
+probe should start passing.
