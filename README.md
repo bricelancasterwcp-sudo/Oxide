@@ -171,3 +171,7 @@ sit at a floor or ceiling where the design has no resolution.
 
 `eval/results/*/REPORT.md` is the place to start if you want the full picture
 rather than the summary.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
