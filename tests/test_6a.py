@@ -14,6 +14,14 @@ from eval.driver import (
 )
 from eval.extract import Extraction, extract
 from eval.models import Generation, ModelError, OllamaClient
+from eval.rollup import (
+    aggregate,
+    classify,
+    paired_delta,
+    paired_se,
+    render_report,
+    unpaired_se,
+)
 
 
 def test_extract_returns_unfenced_text_verbatim():
@@ -689,3 +697,108 @@ def test_wait_for_health_raises_after_cap_exhausted_without_looping_forever():
     with pytest.raises(ModelError, match="600s"):
         wait_for_health(_NeverHealthy(), sleep=sleeps.append)
     assert sleeps == [5] * 120
+
+
+def _cell(task: str, arm: str, passed: bool) -> dict:
+    return {
+        "task": task, "arm": arm, "attempts": 1,
+        "first_compiled": passed, "first_passed": passed,
+        "final_passed": passed, "attempts_to_pass": 1 if passed else 5,
+        "tokens_in": 10, "tokens_out": 5, "ms": 100,
+        "contract_compliant": [True], "truncated": [False],
+    }
+
+
+def test_paired_delta_is_zero_when_arms_match():
+    ox = [_cell("t01", "oxide", True), _cell("t02", "oxide", False)]
+    ex = [_cell("t01", "explicit", True), _cell("t02", "explicit", False)]
+    assert paired_delta(ox, ex) == 0.0
+
+
+def test_paired_delta_positive_when_oxide_wins_a_task():
+    ox = [_cell("t01", "oxide", True), _cell("t02", "oxide", True)]
+    ex = [_cell("t01", "explicit", True), _cell("t02", "explicit", False)]
+    assert paired_delta(ox, ex) == 50.0
+
+
+def test_paired_delta_equals_marginal_difference_on_balanced_grid():
+    # With every task present in both arms these are algebraically the
+    # same number. Pairing does NOT change the point estimate -- it
+    # changes the interval (see the paired_se tests below). Asserting
+    # this equality documents the fact so nobody "fixes" it later.
+    ox = [_cell("t01", "oxide", True), _cell("t02", "oxide", False)]
+    ex = [_cell("t01", "explicit", False), _cell("t02", "explicit", True)]
+    marginal = 100.0 * (
+        sum(c["first_passed"] for c in ox) / len(ox)
+        - sum(c["first_passed"] for c in ex) / len(ex)
+    )
+    assert paired_delta(ox, ex) == marginal == 0.0
+
+
+def test_paired_delta_diverges_from_marginal_when_a_task_is_unpaired():
+    # The only case where the two estimators genuinely disagree.
+    ox = [_cell("t01", "oxide", True), _cell("t02", "oxide", True)]
+    ex = [_cell("t01", "explicit", False)]
+    assert paired_delta(ox, ex) == 100.0  # only t01 is paired
+    marginal = 100.0 * (2 / 2 - 0 / 1)
+    assert marginal == 100.0  # coincides here; the SE is what differs
+
+
+def test_paired_se_is_smaller_than_unpaired_when_arms_correlate():
+    # THIS is what pairing buys. Both arms find t01/t02 easy and
+    # t03/t04 hard, so the per-task differences are near-constant and
+    # their SD collapses, even though each arm's own rate varies a lot.
+    ox, ex = [], []
+    for task, both_pass in (("t01", True), ("t02", True),
+                            ("t03", False), ("t04", False)):
+        ox.append(_cell(task, "oxide", both_pass))
+        ex.append(_cell(task, "explicit", both_pass))
+    assert paired_se(ox, ex) == 0.0  # differences are all zero
+    assert unpaired_se(ox, ex) > 0.0
+
+
+def test_paired_se_is_zero_for_a_single_paired_task():
+    ox = [_cell("t01", "oxide", True)]
+    ex = [_cell("t01", "explicit", False)]
+    assert paired_se(ox, ex) == 0.0  # n=1: no spread to estimate
+
+
+def test_classify_partitions_at_the_five_point_boundaries():
+    assert classify(5.0) == "supports"
+    assert classify(5.1) == "supports"
+    assert classify(4.9) == "no-detectable-difference"
+    assert classify(0.0) == "no-detectable-difference"
+    assert classify(-4.9) == "no-detectable-difference"
+    assert classify(-5.0) == "disconfirms"
+    assert classify(-5.1) == "disconfirms"
+
+
+def test_aggregate_refuses_incomplete_grid_without_partial(tmp_path):
+    with pytest.raises(RuntimeError, match="incomplete"):
+        aggregate(tmp_path, slugs=["qwen1_5b"], shot_counts=[0], seeds=[1])
+
+
+def test_aggregate_reports_missing_runs_with_partial(tmp_path):
+    grid = aggregate(
+        tmp_path, slugs=["qwen1_5b"], shot_counts=[0], seeds=[1], partial=True
+    )
+    assert grid["missing"] == ["6a-qwen1_5b-0shot-s1"]
+
+
+def test_render_report_states_band_alongside_delta():
+    grid = {
+        "missing": [],
+        "points": [
+            {
+                "model_slug": "qwen1_5b", "shots": 0,
+                "paired_delta_pp": 1.0, "paired_se_pp": 2.4,
+                "unpaired_se_pp": 4.8,
+                "verdict": "no-detectable-difference",
+                "arms": {},
+            }
+        ],
+    }
+    out = render_report(grid)
+    assert "no-detectable-difference" in out
+    assert "±5pp" in out
+    assert "2.4" in out  # the interval is never omitted
