@@ -54,12 +54,21 @@ design and must not be reported as such.
 **Statistics.** Tasks are a fixed corpus, not a sample; generalization
 beyond the corpus is not claimed.
 
-The primary statistic is the **paired-by-task** delta. Both arms run the
-same 20 tasks, and task difficulty is the dominant variance source, so
-pairing cancels it: for each task, compare the Oxide pass count (out of 5
-seeds) against the explicit-Oxide pass count, then average the 20
-per-task differences. Comparing marginal arm rates instead discards the
-pairing and is **prohibited** as the primary readout.
+The primary statistic is the **paired-by-task** delta: for each task,
+subtract explicit-Oxide's pass rate (over 5 seeds) from Oxide's, then
+average those 20 per-task differences.
+
+**Precisely what pairing buys.** With every task present in both arms,
+the paired mean difference is *algebraically identical* to the difference
+of marginal arm rates. Pairing does **not** change the point estimate.
+What it changes is the **interval**: the paired standard error is
+`SD(per-task differences) / √20`, which shrinks in proportion to how
+strongly the two arms' per-task performance correlates. That correlation
+will be high — a task hard in Oxide is hard in explicit-Oxide — so the
+paired SE is expected to be roughly half the unpaired one. The delta is
+therefore reported with its **paired SE**, and quoting the delta without
+it is prohibited. (The point estimates diverge only when a task is
+missing from one arm, which should not occur in a complete grid.)
 
 Pooling all 100 task×seed trials into a single binomial CI is likewise
 **prohibited** — it treats fixed tasks as random draws and understates
@@ -197,6 +206,7 @@ class Generation:
     tokens_in: int
     tokens_out: int
     ms: int
+    truncated: bool          # done_reason == "length"
 
 class OllamaClient:
     def __init__(self, model: str, *, temperature: float, top_p: float,
@@ -226,8 +236,14 @@ Pinned, arm-identical, deliberately **not** syntax-aware:
 1. Normalize line endings to `\n`.
 2. If the text contains a ``` fence, take the content of the **first**
    fenced block, dropping the fence lines and any language tag.
-3. Otherwise use the text with leading/trailing blank lines stripped.
-4. `contract_compliant = (raw.strip() == source.strip())`.
+3. If that fence is never closed — the characteristic shape of a
+   generation cut off at `num_predict` — take everything after the
+   opener. Salvaging it is arm-neutral, and the truncated source then
+   fails to compile on its own merits rather than being discarded.
+4. Otherwise use the text with leading/trailing blank lines stripped.
+5. `contract_compliant = (raw.strip() == source.strip())`. Note this
+   makes empty output trivially "compliant"; it is a formatting metric
+   only, and empty submissions still fail compilation as model failures.
 
 No prose-stripping heuristics. Unfenced commentary simply fails to
 compile, which is honest and arm-neutral; any smarter recovery risks
@@ -282,8 +298,16 @@ long-context ability, which 0.5B lacks.
 ### 6.4 `eval/driver.py`
 
 Preflight (whole grid, before any generation): Ollama reachable, all three
-tags present with digests, `rustc` invocable, corpus loads, shots
-available for every arm at 3-shot. Fail fast, listing everything missing.
+tags present, `rustc` invocable, corpus loads, shots available for every
+arm at 3-shot. Fail fast, listing everything missing.
+
+Preflight reads `/api/tags` and records each model's `digest`,
+`details.quantization_level`, and `details.context_length` into the
+manifest. It **asserts `quantization_level == "Q8_0"` for all three
+models** — this is what actually enforces §4's uniform-quantization
+control, rather than trusting that the right tag was pulled. (The
+`qwen2.5-coder:1.5b` currently on this machine is Q4_K_M and must be
+rejected by name.)
 
 Per run id: health-check Ollama (poll until healthy, cap 10 min) → write
 `manifest.json` → 60 sessions → mark the run complete. On persistent
@@ -398,10 +422,13 @@ New `tests/test_6a.py`, plus the existing 717 staying green (nothing in
    three consecutive aborts stop the grid non-zero; health-check waits
    then proceeds when Ollama returns.
 6. **Rollup** — paired-by-task delta computed per §3 on synthetic run
-   dirs, including a fixture whose marginal-rate and paired-delta answers
-   differ (proving the pairing is real); partition classification correct
-   at the ±5pp boundaries; across-seed SE as specified; pooled-binomial
-   CI absent; incomplete grid refused without `--partial`.
+   dirs; **paired SE** = `SD(per-task differences)/√n`, asserted smaller
+   than the unpaired SE on a positively-correlated fixture (this, not a
+   point-estimate difference, is what pairing actually buys); the two
+   estimators asserted *equal* on a balanced fixture and *divergent* only
+   when a task is missing from one arm; partition classification correct
+   at the ±5pp boundaries; pooled-binomial CI absent; incomplete grid
+   refused without `--partial`.
 7. **Live smoke** — one task, 0.5B, marked so it can be deselected when
    Ollama is unavailable.
 
