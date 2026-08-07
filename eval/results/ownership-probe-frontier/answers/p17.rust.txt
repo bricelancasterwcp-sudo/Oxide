@@ -1,0 +1,13 @@
+fn push_back(mut v: Vec<i32>, x: i32) -> Vec<i32> {
+    v.push(x);
+    v
+}
+
+fn main() {
+    let mut acc: Vec<i32> = (0..10).collect();
+    for i in 0..3 {
+        let grown = push_back(acc, i);
+        println!("{}", grown.len());
+        acc = grown;
+    }
+}

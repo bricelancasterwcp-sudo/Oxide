@@ -1,0 +1,9 @@
+fn main() {
+    let s = String::from("hello");
+    let n = 5;
+    if n > 3 {
+        let t = s.clone();
+        println!("{}", t.len());
+    }
+    println!("{}", s.len());
+}

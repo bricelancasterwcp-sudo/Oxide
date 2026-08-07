@@ -1,0 +1,16 @@
+fn f(o: Option<Vec<i32>>) -> Option<usize> {
+    let v = o.clone()?;
+    let w = o?;
+    Some(v.len() * 10 + w.len())
+}
+
+fn main() {
+    match f(Some(vec![1, 2])) {
+        Some(n) => println!("{}", n),
+        None => println!("0"),
+    }
+    match f(None) {
+        Some(n) => println!("{}", n),
+        None => println!("99"),
+    }
+}

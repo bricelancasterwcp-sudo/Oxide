@@ -1,0 +1,8 @@
+struct Bag { items: Vec<Int>, label: Str }
+
+fn main() {
+    let b = Bag { items: push(push(vec(), 1), 2), label: "x" }
+    let c = clone(b)
+    print(len(b.items))
+    print(len(c.items))
+}

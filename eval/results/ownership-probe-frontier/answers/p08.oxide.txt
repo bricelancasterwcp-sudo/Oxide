@@ -1,0 +1,13 @@
+fn size(o: Option<Vec<Int>>) -> Int {
+    match o {
+        Some(w) => len(w),
+        None => 0,
+    }
+}
+
+fn main() {
+    let v = push(push(vec(), 1), 2)
+    print(len(v))
+    let o = Some(v)
+    print(size(o))
+}

@@ -1,0 +1,9 @@
+fn main() {
+    let s = "hello"
+    let n = 5
+    if n > 3 {
+        let t = clone(s)
+        print(str_len(t))
+    }
+    print(str_len(s))
+}

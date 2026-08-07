@@ -1,0 +1,18 @@
+fn push_back(mut v: Vec<i32>, x: i32) -> Vec<i32> {
+    v.push(x);
+    v
+}
+
+fn main() {
+    let v: Vec<i32> = (0..10).collect();
+    println!("{}", v.len());
+    let mut total = 0;
+    for x in &v {
+        if *x > 4 {
+            let w = push_back(v.clone(), *x);
+            total = w.len();
+            break;
+        }
+    }
+    println!("{}", total);
+}

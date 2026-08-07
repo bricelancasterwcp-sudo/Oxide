@@ -1,0 +1,12 @@
+#[derive(Clone)]
+struct Bag {
+    items: Vec<i32>,
+    label: String,
+}
+
+fn main() {
+    let b = Bag { items: vec![1, 2], label: String::from("x") };
+    let c = b.clone();
+    println!("{}", b.items.len());
+    println!("{}", c.items.len());
+}

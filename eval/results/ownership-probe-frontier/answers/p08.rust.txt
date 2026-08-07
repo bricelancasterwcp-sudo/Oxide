@@ -1,0 +1,13 @@
+fn size(o: Option<Vec<i32>>) -> usize {
+    match o {
+        Some(w) => w.len(),
+        None => 0,
+    }
+}
+
+fn main() {
+    let v = vec![1, 2];
+    let o = Some(v.clone());
+    println!("{}", v.len());
+    println!("{}", size(o));
+}
