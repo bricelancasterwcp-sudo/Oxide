@@ -779,11 +779,13 @@ class _StubClient:
         return "not a program"
 
 
-_GOOD_OXIDE = 'fn main() {\n    print("hi")\n}\n'
+# Verified against the real pipeline: Oxide's print() quotes STRINGS, so
+# print("hi") emits '"hi"\n', not 'hi\n'. Printing an Int avoids that.
+_GOOD_OXIDE = "fn main() {\n    print(42)\n}\n"
 
 
 def test_run_session_records_a_pass_on_first_attempt(tmp_path):
-    task = {"id": "tX", "prompt": "Print hi.", "expected_stdout": "hi\n"}
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
     tasks = tmp_path / "tasks.jsonl"
     tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
     cell = run_session(
@@ -803,7 +805,7 @@ def test_run_session_records_a_pass_on_first_attempt(tmp_path):
 
 
 def test_run_session_repairs_after_a_failure(tmp_path):
-    task = {"id": "tX", "prompt": "Print hi.", "expected_stdout": "hi\n"}
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
     tasks = tmp_path / "tasks.jsonl"
     tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
     client = _StubClient("this is not a program", _GOOD_OXIDE)
@@ -825,7 +827,7 @@ def test_run_session_repairs_after_a_failure(tmp_path):
 
 
 def test_run_session_stops_at_the_attempt_cap(tmp_path):
-    task = {"id": "tX", "prompt": "Print hi.", "expected_stdout": "hi\n"}
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
     tasks = tmp_path / "tasks.jsonl"
     tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
     cell = run_session(
@@ -844,7 +846,7 @@ def test_run_session_stops_at_the_attempt_cap(tmp_path):
 
 
 def test_run_session_persists_raw_output_per_attempt(tmp_path):
-    task = {"id": "tX", "prompt": "Print hi.", "expected_stdout": "hi\n"}
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
     tasks = tmp_path / "tasks.jsonl"
     tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
     raw_dir = tmp_path / "raw"
@@ -866,7 +868,7 @@ def test_run_session_records_truncation_as_a_model_failure(tmp_path):
     # Section 7's governing rule, direction one: a generation cut off at
     # num_predict is a MODEL result. It must be submitted and counted,
     # never raised as infrastructure.
-    task = {"id": "tX", "prompt": "Print hi.", "expected_stdout": "hi\n"}
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
     tasks = tmp_path / "tasks.jsonl"
     tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
     cell = run_session(
@@ -891,7 +893,7 @@ def test_run_session_lets_model_error_propagate(tmp_path):
         def generate(self, prompt: str, *, seed: int) -> Generation:
             raise ModelError("ollama down")
 
-    task = {"id": "tX", "prompt": "Print hi.", "expected_stdout": "hi\n"}
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
     tasks = tmp_path / "tasks.jsonl"
     tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
     with pytest.raises(ModelError):
@@ -1996,6 +1998,6 @@ Watch for: a `truncation_rate` above ~20% at 0.5B (consider whether `num_predict
 
 **Type consistency.** `Generation` is 5 fields everywhere (Tasks 3, 4, 7). `run_session` is keyword-only after `client` in the implementation and in every test. `build_repair_prompt(arm, source, verdict)` matches its call in `driver.run_session`. `is_complete`/`reset_run`/`build_run_id`/`MODELS` are defined in Task 5 and imported by Task 6. Cell-record keys are identical in Task 4's producer, Task 6's `_arm_stats` consumer, and Task 6's `_cell` fixture.
 
-**Known deviation to flag at execution:** Task 4's test `test_run_session_records_a_pass_on_first_attempt` uses a hand-written `_GOOD_OXIDE` program. If it does not compile under the real pipeline the test will fail for the wrong reason — the implementer should substitute a verified program from `eval/solutions/oxide/` rather than editing the assertion.
+**Resolved before execution (was a flagged deviation):** Task 4's `_GOOD_OXIDE` fixture was probed against the real pipeline. `print("hi")` compiles but emits `'"hi"\n'` — Oxide's `print()` quotes strings — so every Task 4 test asserting a pass would have failed for the wrong reason. The fixture is now `print(42)` against `expected_stdout` `"42\n"`, verified `compiled=True, passed=True`. Do not revert it to a string print.
 
 **Correction made during self-review (spec amended to match).** An earlier draft claimed the paired-by-task delta would differ from the marginal-rate comparison, and the spec's test plan asked for a fixture proving it. That is false: on a balanced grid the two are algebraically identical. Pairing's benefit is entirely in the **interval** — `SD(per-task differences)/√n` shrinks as the arms correlate across tasks. `paired_se`/`unpaired_se` and their tests exist to make that concrete, and the spec's §3 and §8 were corrected. If a future reviewer sees the delta match the marginal number, that is the design working, not a bug.
