@@ -7,7 +7,7 @@ from datetime import datetime
 
 import pytest
 
-from eval import harness
+from eval import harness, rollup
 from eval.driver import (
     MODELS,
     build_run_id,
@@ -24,8 +24,11 @@ from eval.extract import Extraction, extract
 from eval.models import Generation, ModelError, OllamaClient
 from eval.repair import build_repair_prompt
 from eval.rollup import (
+    INSUFFICIENT,
+    across_seed_se,
     aggregate,
     classify,
+    diagnostic_histogram,
     paired_delta,
     paired_se,
     render_report,
@@ -920,14 +923,24 @@ def test_wait_for_health_raises_after_cap_exhausted_without_looping_forever():
     assert sleeps == [5] * 120
 
 
-def _cell(task: str, arm: str, passed: bool) -> dict:
+def _cell(task: str, arm: str, passed: bool, *, final: bool | None = None,
+          compiled: bool | None = None) -> dict:
     return {
         "task": task, "arm": arm, "attempts": 1,
-        "first_compiled": passed, "first_passed": passed,
-        "final_passed": passed, "attempts_to_pass": 1 if passed else 5,
+        "first_compiled": passed if compiled is None else compiled,
+        "first_passed": passed,
+        "final_passed": passed if final is None else final,
+        "attempts_to_pass": 1 if passed else 5,
         "tokens_in": 10, "tokens_out": 5, "ms": 100,
         "contract_compliant": [True], "truncated": [False],
     }
+
+
+def test_rollup_fixture_matches_the_drivers_real_cell_schema():
+    # Binds this fixture to the schema run_one actually writes, so a
+    # driver-side field change cannot leave the rollup tests passing
+    # against a stale record shape.
+    assert set(_cell("t", "oxide", True)) == _CELL_SCHEMA
 
 
 def test_paired_delta_is_zero_when_arms_match():
@@ -994,6 +1007,135 @@ def test_classify_partitions_at_the_five_point_boundaries():
     assert classify(-5.1) == "disconfirms"
 
 
+def test_paired_delta_is_none_on_an_empty_pairing():
+    # Emptiness must propagate, not be laundered into 0.0 -- which
+    # classify() then reads as a pre-registered "no-detectable-difference".
+    assert paired_delta([], []) is None
+    assert paired_delta([_cell("t01", "oxide", True)], []) is None
+
+
+def test_paired_se_is_none_on_an_empty_pairing():
+    assert paired_se([], []) is None
+
+
+def test_across_seed_se_measures_seed_to_seed_spread():
+    # Section 47 requires it alongside the paired SE: different question,
+    # different denominator.
+    steady = [[_cell("t01", "oxide", True)] for _ in range(5)]
+    assert across_seed_se(steady) == 0.0
+    mixed = [[_cell("t01", "oxide", i % 2 == 0)] for i in range(4)]
+    assert across_seed_se(mixed) > 0.0
+    assert across_seed_se([]) is None
+    assert across_seed_se([[]]) is None
+
+
+def test_diagnostic_histogram_counts_codes_per_arm():
+    triples = [
+        {"arm": "oxide", "diagnostics": [{"code": "OX0400"}, {"code": "OX0401"}]},
+        {"arm": "oxide", "diagnostics": [{"code": "OX0400"}]},
+        {"arm": "rust", "diagnostics": [{"code": "E0382"}]},
+        {"arm": "rust", "diagnostics": []},
+    ]
+    hist = diagnostic_histogram(triples)
+    assert hist["oxide"] == {"OX0400": 2, "OX0401": 1}
+    assert hist["rust"] == {"E0382": 1}
+
+
+def _write_run(root, slug, shots, seed, cells, triples=()) -> None:
+    run_dir = root / build_run_id(slug, shots, seed)
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "cells.jsonl").write_text(
+        "".join(json.dumps(c, sort_keys=True) + "\n" for c in cells),
+        encoding="utf-8",
+    )
+    if triples:
+        (run_dir / "triples.jsonl").write_text(
+            "".join(json.dumps(t, sort_keys=True) + "\n" for t in triples),
+            encoding="utf-8",
+        )
+
+
+def _full_run(**overrides) -> list[dict]:
+    """60 cells: the pinned 20 tasks x 3 arms, all failing by default."""
+    return [
+        _cell(f"t{i:02d}", arm, False, **overrides)
+        for i in range(1, 21)
+        for arm in harness.ARMS
+    ]
+
+
+def _one_point(tmp_path, cells, triples=()) -> dict:
+    _write_run(tmp_path, "qwen1_5b", 0, 1, cells, triples)
+    grid = aggregate(tmp_path, slugs=["qwen1_5b"], shot_counts=[0], seeds=[1])
+    return grid["points"][0]
+
+
+def test_aggregate_reports_first_compile_rate(tmp_path):
+    # At 0.5B pass@1 saturates at zero long before compile rate does, so
+    # this is the only metric that can show whether the arms differ there.
+    cells = _full_run(compiled=True)
+    point = _one_point(tmp_path, cells)
+    assert point["arms"]["oxide"]["first_pass_rate"] == 0.0
+    assert point["arms"]["oxide"]["first_compile_rate"] == 100.0
+
+
+def test_aggregate_reports_repair_lift(tmp_path):
+    point = _one_point(tmp_path, _full_run(final=True))
+    oxide = point["arms"]["oxide"]
+    assert (oxide["first_pass_rate"], oxide["final_pass_rate"]) == (0.0, 100.0)
+    assert oxide["repair_lift_pp"] == 100.0
+
+
+def test_aggregate_reports_across_seed_se_per_arm(tmp_path):
+    for seed, passing in ((1, True), (2, False)):
+        _write_run(
+            tmp_path, "qwen1_5b", 0, seed,
+            [_cell(f"t{i:02d}", arm, passing)
+             for i in range(1, 21) for arm in harness.ARMS],
+        )
+    grid = aggregate(tmp_path, slugs=["qwen1_5b"], shot_counts=[0], seeds=[1, 2])
+    assert grid["points"][0]["arms"]["oxide"]["across_seed_se_pp"] == 50.0
+
+
+def test_aggregate_reports_per_task_pass_counts(tmp_path):
+    cells = [
+        _cell(f"t{i:02d}", arm, arm == "rust" and i <= 5)
+        for i in range(1, 21)
+        for arm in harness.ARMS
+    ]
+    per_task = _one_point(tmp_path, cells)["arms"]["rust"]["per_task"]
+    assert per_task["t01"] == {"trials": 1, "first_passed": 1, "final_passed": 1}
+    assert per_task["t20"]["first_passed"] == 0
+    assert len(per_task) == 20
+
+
+def test_aggregate_reports_prompt_tokens_and_wall_clock(tmp_path):
+    oxide = _one_point(tmp_path, _full_run())["arms"]["oxide"]
+    assert oxide["tokens_in"] == 20 * 10  # collected in cells, was dropped
+    assert oxide["ms"] == 20 * 100
+    assert oxide["mean_tokens_in"] == 10.0
+    assert oxide["mean_ms"] == 100.0
+
+
+def test_aggregate_builds_the_diagnostic_histogram_from_triples(tmp_path):
+    # Section 50.5 calls the per-code histogram the v0.3 gate deliverable.
+    triples = [
+        {"task": "t01", "arm": "oxide", "attempt": 1,
+         "diagnostics": [{"code": "OX0400"}], "compiled": False,
+         "passed": False},
+        {"task": "t02", "arm": "oxide", "attempt": 1,
+         "diagnostics": [{"code": "OX0400"}, {"code": "OX0101"}],
+         "compiled": False, "passed": False},
+    ]
+    point = _one_point(tmp_path, _full_run(), triples)
+    assert point["diagnostics"]["oxide"] == {"OX0400": 2, "OX0101": 1}
+
+
+def test_aggregate_covers_every_harness_arm(tmp_path):
+    point = _one_point(tmp_path, _full_run())
+    assert set(point["arms"]) == set(harness.ARMS)
+
+
 def test_aggregate_refuses_incomplete_grid_without_partial(tmp_path):
     with pytest.raises(RuntimeError, match="incomplete"):
         aggregate(tmp_path, slugs=["qwen1_5b"], shot_counts=[0], seeds=[1])
@@ -1004,6 +1146,66 @@ def test_aggregate_reports_missing_runs_with_partial(tmp_path):
         tmp_path, slugs=["qwen1_5b"], shot_counts=[0], seeds=[1], partial=True
     )
     assert grid["missing"] == ["6a-qwen1_5b-0shot-s1"]
+
+
+def test_a_point_with_no_data_is_not_a_completed_null_result(tmp_path):
+    # Verified failure before the fix: paired_delta([], []) -> 0.0,
+    # classify(0.0) -> "no-detectable-difference", and an {"n": 0} arm
+    # printed 0% -- a row asserting a pre-registered verdict on zero
+    # observations, indistinguishable from a genuine 0% pass rate.
+    grid = aggregate(
+        tmp_path, slugs=["qwen7b"], shot_counts=[0], seeds=[1], partial=True
+    )
+    point = grid["points"][0]
+    assert point["verdict"] == INSUFFICIENT
+    assert point["paired_delta_pp"] is None
+    assert point["paired_se_pp"] is None
+    assert point["arms"]["oxide"]["n"] == 0
+
+
+def test_render_report_dashes_an_empty_point_instead_of_printing_zeros():
+    grid = {
+        "missing": ["6a-qwen7b-0shot-s1"],
+        "points": [
+            {
+                "model_slug": "qwen7b", "shots": 0,
+                "paired_delta_pp": None, "paired_se_pp": None,
+                "unpaired_se_pp": 0.0, "verdict": INSUFFICIENT,
+                "arms": {arm: {"n": 0} for arm in harness.ARMS},
+                "diagnostics": {},
+            }
+        ],
+    }
+    row = [ln for ln in render_report(grid).splitlines()
+           if ln.startswith("| qwen7b | 0 |")][0]
+    assert "0%" not in row
+    assert "+0.0" not in row
+    assert row.count("—") == 5  # delta, SE, and all three arm rates
+
+
+def test_render_report_surfaces_the_new_metrics(tmp_path):
+    triples = [{"task": "t01", "arm": "oxide", "attempt": 1,
+                "diagnostics": [{"code": "OX0400"}], "compiled": False,
+                "passed": False}]
+    _write_run(tmp_path, "qwen1_5b", 0, 1, _full_run(compiled=True, final=True),
+               triples)
+    grid = aggregate(tmp_path, slugs=["qwen1_5b"], shot_counts=[0], seeds=[1])
+    out = render_report(grid)
+    assert "first-compile" in out
+    assert "v0.3 gate deliverable" in out
+    assert "OX0400" in out
+    assert "Per-task first-attempt passes" in out
+    assert "seed SE" in out
+    assert "repair lift" in out
+    # The pre-existing primary presentation is untouched.
+    assert "Paired Δ (pp)" in out
+    assert "±5pp" in out
+
+
+def test_rollup_rejects_an_unknown_model_slug(tmp_path, capsys):
+    code = rollup.main(["--models", "qwen3b", "--results-root", str(tmp_path)])
+    assert code == 2
+    assert "unknown model slug" in capsys.readouterr().err
 
 
 def test_render_report_states_band_alongside_delta():

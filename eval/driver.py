@@ -144,6 +144,12 @@ def build_run_id(slug: str, shots: int, seed: int) -> str:
     return f"6a-{slug}-{shots}shot-s{seed}"
 
 
+def unknown_slugs(slugs: list[str]) -> list[str]:
+    """Model slugs with no pinned tag. Shared with the rollup CLI so both
+    entry points reject the same typos the same way."""
+    return [slug for slug in slugs if slug not in MODELS]
+
+
 def is_complete(run_dir: Path) -> bool:
     """A run is complete only with all 60 cell records on disk."""
     cells = Path(run_dir) / "cells.jsonl"
@@ -183,12 +189,9 @@ def run_grid(
     tasks_path: Path | None = None,
     preflight: dict[str, dict] | None = None,
 ) -> dict:
-    """Walk the grid, one run id at a time.
-
-    ``preflight`` maps slug -> the provenance payload from
-    ``OllamaClient.preflight``; section 48 requires it in every manifest,
-    the only artifact proving which weights produced the result.
-    """
+    """Walk the grid, one run id at a time. ``preflight`` maps slug -> the
+    payload from ``OllamaClient.preflight``; section 48 requires it in every
+    manifest, the only artifact proving which weights produced the result."""
     completed: list[str] = []
     aborted: list[str] = []
     consecutive = 0
@@ -418,7 +421,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     slugs = [s for s in args.models.split(",") if s]
-    unknown = [s for s in slugs if s not in MODELS]
+    unknown = unknown_slugs(slugs)
     if unknown:
         print(f"unknown model slug(s): {unknown}; known: {sorted(MODELS)}",
               file=sys.stderr)
