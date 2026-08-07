@@ -11,19 +11,18 @@ Written blind against SPEC.md sections 21-25 (Part IV, as amended) and 26-31
 from __future__ import annotations
 
 import os
-import shutil
 import subprocess
 
 import pytest
 
+from eval.rustc_adapter import find_rustc
 from src.codegen.rust import emit_rust, transpile
 from src.sema.analyze import analyze, diag_codes, drop_list
 
-RUSTC = shutil.which("rustc") or (
-    "/home/brice/.cargo/bin/rustc"
-    if os.path.exists("/home/brice/.cargo/bin/rustc")
-    else None
-)
+# rustc discovery via find_rustc() -- the project's single source of truth
+# for locating the compiler -- instead of a hardcoded machine-specific path.
+_rustc_candidate = find_rustc()
+RUSTC = _rustc_candidate if os.path.exists(_rustc_candidate) else None
 
 needs_rustc = pytest.mark.skipif(RUSTC is None, reason="rustc not available")
 

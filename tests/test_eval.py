@@ -29,7 +29,7 @@ from pathlib import Path
 
 import pytest
 
-ROOT = Path("/home/brice/workspace/oxide")
+ROOT = Path(__file__).resolve().parent.parent
 PYTHON = str(ROOT / ".venv" / "bin" / "python")
 TASKS_PATH = ROOT / "eval" / "tasks.jsonl"
 SOLUTIONS = ROOT / "eval" / "solutions"

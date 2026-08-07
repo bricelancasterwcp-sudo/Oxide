@@ -16,10 +16,11 @@ Nothing from src/ is imported (blind TDD). Assertions pin:
 
 import json
 import subprocess
+from pathlib import Path
 
 import pytest
 
-ROOT = "/home/brice/workspace/oxide"
+ROOT = str(Path(__file__).resolve().parent.parent)
 PYTHON = ROOT + "/.venv/bin/python"
 MAIN = ROOT + "/main.py"
 
@@ -92,7 +93,9 @@ SUGGESTIONS = {
     ),
     "OX0403": (
         "This value is consumed by a previous loop iteration. Reassign it "
-        "inside the loop (x = ...) before the iteration ends, or clone it."
+        "inside the loop (x = ...) before the iteration ends. If the value "
+        "is read after the loop (see the later-use note), cloning inside "
+        "the loop will not help \u2014 the original never grows."
     ),
     "OX0406": (
         "The loop is iterating this vector; assigning to it inside the "

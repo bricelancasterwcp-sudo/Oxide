@@ -44,7 +44,7 @@ error detection, and mode inference are unchanged.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 from src.diagnostics import Diagnostic, Span
 from src.parser import ast
@@ -79,6 +79,11 @@ class LinearResult:
 # Ownership states: ('owned', None, False) or ('moved', move_span, prev_iter).
 _State = tuple[str, Span | None, bool]
 _OWNED: _State = ("owned", None, False)
+
+#: Note text for the use that makes a move fatal. In a loop the move
+#: site and the conflicting use are the same syntax, so without this
+#: the diagnostic names only one location.
+_LATER_USE = "later used here"
 
 # Sentinel: this path never falls through — it ended at a return, break,
 # or continue. break/continue record their outer-var state in the
@@ -160,6 +165,9 @@ class _Checker:
         self.diags: list[Diagnostic] = []
         self.drops: dict[DropPoint, None] = {}  # ordered, deduplicated
         self.poisoned: set[int] = set()
+        #: var_id -> index of the diagnostic that poisoned it, so a
+        #: suppressed later use can still be recorded as a note.
+        self._reported: dict[int, int] = {}
         # Vars whose after-stmt anchor statement has completed on the
         # current path: their drop already fired before any later return.
         self._anchored: set[int] = set()
@@ -343,8 +351,39 @@ class _Checker:
 
     # -------------------------------------------------------- state machine
 
+    def _note_later_use(self, node: cfg.Use) -> None:
+        """Attach the first suppressed later use to the diagnostic that
+        poisoned this variable.
+
+        Poisoning stops one move cascading into a diagnostic at every
+        later use, which is right. But it also hid the use that makes the
+        move *fatal*. In a loop the move site and the conflicting use are
+        the same syntax, so OX0403 reported a span and a note pointing at
+        the same place, and never mentioned that the value is read after
+        the loop -- leaving no way to tell that cloning inside the loop
+        defeats the purpose. rustc names both ends of the conflict; this
+        makes Oxide do the same.
+
+        Only the FIRST suppressed use is recorded, and only when it
+        points somewhere the diagnostic does not already mention, so the
+        noise poisoning exists to prevent stays prevented.
+        """
+        index = self._reported.get(node.var_id)
+        if index is None:
+            return
+        diag = self.diags[index]
+        if any(text == _LATER_USE for text, _span in diag.notes):
+            return  # first suppressed use only; the rest stay suppressed
+        known = {diag.span} | {span for _text, span in diag.notes}
+        if node.span in known:
+            return  # points somewhere the diagnostic already names
+        self.diags[index] = replace(
+            diag, notes=diag.notes + ((_LATER_USE, node.span),)
+        )
+
     def _use(self, node: cfg.Use, state: dict[int, _State]) -> None:
         if node.var_id in self.poisoned:
+            self._note_later_use(node)
             return
         var_state = state.get(node.var_id, _OWNED)
         if var_state[0] == "owned":
@@ -366,6 +405,7 @@ class _Checker:
         if move_span is not None:
             notes = (("value moved here", move_span),)
         self.diags.append(Diagnostic(code, message, node.span, notes))
+        self._reported[node.var_id] = len(self.diags) - 1
         self.poisoned.add(node.var_id)
 
     # ------------------------------------------------------------- branches

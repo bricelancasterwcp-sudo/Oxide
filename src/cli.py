@@ -74,7 +74,9 @@ SUGGESTIONS: dict[str, str] = {
     ),
     "OX0403": (
         "This value is consumed by a previous loop iteration. Reassign it "
-        "inside the loop (x = ...) before the iteration ends, or clone it."
+        "inside the loop (x = ...) before the iteration ends. If the value "
+        "is read after the loop (see the later-use note), cloning inside "
+        "the loop will not help \u2014 the original never grows."
     ),
     "OX0406": (
         "The loop is iterating this vector; assigning to it inside the "

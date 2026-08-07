@@ -11,13 +11,14 @@ import subprocess
 
 import pytest
 
+from eval.rustc_adapter import find_rustc
 from src.codegen.rust import emit_rust, transpile
 from src.sema.analyze import analyze
 
-# rustc discovery (section 25: PATH first, then the pinned absolute path).
-RUSTC: str | None = shutil.which("rustc") or shutil.which(
-    "/home/brice/.cargo/bin/rustc"
-)
+# rustc discovery (section 25: PATH first, then the pinned absolute path),
+# resolved through find_rustc() -- the project's single source of truth for
+# locating the compiler -- instead of a hardcoded machine-specific path.
+RUSTC: str | None = shutil.which(find_rustc())
 requires_rustc = pytest.mark.skipif(RUSTC is None, reason="rustc not available")
 
 # ---- Oxide sources (SPEC sections 19, 20, 24, 25) ----

@@ -405,3 +405,61 @@ def test_last_use_then_return_still_gets_an_after_stmt_drop():
         ("f", "v", "after-stmt"),
         ("f", "v", "before-return"),
     ]
+
+
+def test_ox0403_note_points_at_the_later_use_not_just_the_move():
+    """OX0403 must name BOTH ends of the conflict.
+
+    In a loop the move site and the conflicting use are the same syntax,
+    so OX0403's span and its move note pointed at the same place and the
+    diagnostic never mentioned the use AFTER the loop -- the thing that
+    makes the move fatal rather than merely repeated. Poisoning suppressed
+    that use to keep diagnostics quiet, and suppressed the information
+    with it.
+
+    Empirically this misled real models: given the old diagnostic, a
+    frontier subject cloned inside the loop (which OX0403's own
+    suggestion recommended) in both Oxide dialects, producing a program
+    that compiles, silences the error, and never accumulates. rustc names
+    both ends and the same subject repaired the Rust version correctly.
+    See eval/results/ownership-probe-frontier/REPORT.md.
+    """
+    src = (
+        "fn main() {\n"
+        "    let acc = range(0, 10)\n"
+        "    print(len(acc))\n"
+        "    for i in range(0, 3) {\n"
+        "        let grown = push(acc, i)\n"
+        "    }\n"
+        "    print(len(acc))\n"
+        "}\n"
+    )
+    diags = diags_with_code(analyze(src), "OX0403")
+    assert len(diags) == 1, diags
+    diag = diags[0]
+    spans = {diag.span} | {span for _text, span in diag.notes}
+    assert len(spans) >= 2, (
+        "OX0403 still points at only one location; the later use that makes "
+        "the move fatal is not named"
+    )
+    assert any(text == "later used here" for text, _ in diag.notes), diag.notes
+
+
+def test_later_use_note_is_recorded_once_not_per_use():
+    """Poisoning exists to stop one move cascading into a diagnostic at
+    every later use. Recording the later use must not undo that."""
+    src = (
+        "fn main() {\n"
+        "    let acc = range(0, 10)\n"
+        "    for i in range(0, 3) {\n"
+        "        let grown = push(acc, i)\n"
+        "    }\n"
+        "    print(len(acc))\n"
+        "    print(len(acc))\n"
+        "    print(len(acc))\n"
+        "}\n"
+    )
+    diags = diags_with_code(analyze(src), "OX0403")
+    assert len(diags) == 1, diags
+    later = [t for t, _ in diags[0].notes if t == "later used here"]
+    assert len(later) == 1, f"expected exactly one later-use note, got {len(later)}"
