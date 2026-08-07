@@ -341,3 +341,34 @@ class TestScoringHelpers:
             probe.score({"arm": "nope", "expected_stdout": ""}, "fn main() {}")
         with pytest.raises(probe.ProbeError):
             probe.language_card("nope")
+
+
+# The lenient score's parse-and-non-blank preconditions. Without them the
+# metric is trivially gameable in exactly the regime it exists for: a
+# small model emitting nothing usable produces no ownership diagnostic and
+# would have read ~100% lenient. Verified against the pre-guard code --
+# an empty string and "!!! not a program !!!" both scored lenient-pass.
+@pytest.mark.parametrize("arm", ["oxide", "explicit", "rust"])
+@pytest.mark.parametrize(
+    "junk", ["", "   \n\n  ", "!!! not a program !!!", "%%%%"],
+    ids=["empty", "blank", "garbage", "symbols"],
+)
+def test_degenerate_submissions_never_score_lenient(arm, junk):
+    record = next(r for r in PROBES if r["arm"] == arm)
+    result = probe.score(record, junk)
+    assert result["lenient"] is False, result
+    assert result["strict"] is False, result
+
+
+def test_empty_submission_is_judged_identically_across_arms():
+    # The Oxide transpiler emits `fn main() {}` for empty input, so empty
+    # parses cleanly there while rustc rejects it with E0601. Left
+    # unguarded that asymmetry inflates the Oxide arms specifically, in
+    # the primary comparison -- worse than a symmetric loophole.
+    verdicts = {
+        arm: probe.score(
+            next(r for r in PROBES if r["arm"] == arm), ""
+        )["lenient"]
+        for arm in ("oxide", "explicit", "rust")
+    }
+    assert set(verdicts.values()) == {False}, verdicts

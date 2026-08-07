@@ -210,6 +210,25 @@ def is_ownership_code(arm: str, code: str) -> bool:
     return code.startswith(OXIDE_OWNERSHIP_PREFIX)
 
 
+#: Codes meaning "rustc never reached borrow checking". Determined
+#: empirically: unparseable input yields the uncoded `E????`, an empty file
+#: yields E0601 (no main). `E????` also covers some non-parse errors, so
+#: this OVER-approximates "did not parse" -- which only makes the lenient
+#: score stricter, the safe direction for a metric whose whole risk is
+#: reading too high.
+RUST_SYNTAX_CODES = frozenset({"E????", "E0601"})
+
+
+def is_syntax_code(arm: str, code: str) -> bool:
+    """Whether a diagnostic code means the submission did not parse.
+
+    Oxide/explicit: OX0001 is the lexer, OX01xx the parser.
+    """
+    if arm == "rust":
+        return code in RUST_SYNTAX_CODES
+    return code == "OX0001" or code.startswith("OX01")
+
+
 def score(record: dict, submitted_source: str) -> dict:
     """Both design scores for one submitted repair.
 
@@ -219,12 +238,22 @@ def score(record: dict, submitted_source: str) -> dict:
     otherwise be counted as a repair while silently changing what the
     program does.
 
-    `lenient` -- the ownership diagnostic class is gone, whatever else the
-    repair broke. This separates "understood the ownership fix" from
-    "could also still write valid code", which matters at small scale. It
-    is a LOOSE bound by construction: a submission that fails to parse
-    also emits no ownership diagnostic and so scores lenient-pass. Read it
-    only alongside `strict`, never on its own.
+    `lenient` -- the submission PARSES and the ownership diagnostic class
+    is gone, whatever else the repair broke. This separates "understood
+    the ownership fix" from "could also still write valid code", which
+    matters at small scale.
+
+    The parse precondition is load-bearing. Without it the metric is
+    trivially gameable in the exact regime it exists for: an empty or
+    garbage submission emits no ownership diagnostic and so would score
+    lenient-pass, and the transpiler emits `fn main() {}` for empty input.
+    A 0.5B model producing nothing usable would have read ~100% lenient.
+    Verified before this guard existed: an empty string and the literal
+    "!!! not a program !!!" both scored lenient-pass.
+
+    It remains a loose bound -- a program that parses but is semantically
+    wrong still counts -- so report it alongside `strict` and the
+    diagnostic histogram, never on its own.
     """
     arm = record["arm"]
     if arm not in harness.ARMS:
@@ -240,7 +269,21 @@ def score(record: dict, submitted_source: str) -> dict:
         "arm": arm,
         "defect": record["defect"],
         "strict": bool(verdict["compiled"] and verdict["passed"]),
-        "lenient": not any(is_ownership_code(arm, code) for code in codes),
+        # A blank submission is judged non-parsing regardless of arm. The
+        # Oxide transpiler emits `fn main() {}` for empty input, so empty
+        # would otherwise parse cleanly, carry no ownership code, and score
+        # lenient-pass -- while rustc rejects it with E0601. That asymmetry
+        # would inflate the Oxide arms specifically, in the primary
+        # comparison, which is worse than a symmetric loophole.
+        "lenient": (
+            bool(submitted_source.strip())
+            and not any(is_syntax_code(arm, code) for code in codes)
+            and not any(is_ownership_code(arm, code) for code in codes)
+        ),
+        "parsed": (
+            bool(submitted_source.strip())
+            and not any(is_syntax_code(arm, code) for code in codes)
+        ),
         "compiled": bool(verdict["compiled"]),
         "stdout": verdict["stdout"],
         "codes": codes,
