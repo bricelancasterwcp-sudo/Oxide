@@ -141,6 +141,68 @@ Two caveats that belong in the analysis plan up front:
    so this requires `llama.cpp`. The `ModelClient` protocol was built for that
    swap.
 
+## Addendum — grammar-constrained decoding was built, and moved the wall
+
+The recommendation above was implemented (`3aa4e6d`): a generated GBNF grammar
+(`eval/grammar/`) plus a `llama.cpp`-backed `ModelClient` (`eval/llamacpp.py`).
+The soundness property holds — constrained output parses.
+
+Independent probes, 24 generations each over 12 corpus tasks, 0-shot:
+
+| | unconstrained 7B | constrained 0.5B | constrained 7B |
+|---|---|---|---|
+| lexer `OX0001` | 915 | **0** | **0** |
+| parser `OX01xx` | 629 | 1 | 3 |
+| resolve `OX02xx` | ~3 | 37 | **77** |
+| types `OX03xx` | ~1 | 23 | 6 |
+| **linearity `OX04xx`** | **0** | **0** | **0** |
+| compile-clean | 2/20 | 3/24 | 3/24 |
+
+The remaining `OX01xx` are `found EOF` on generations truncated at
+`num_predict`, not grammar unsoundness.
+
+**The grammar worked and the thesis is still unreachable.** `analyze.py` is
+strictly staged, so removing the syntax barrier moved the population to the
+next one: name resolution. A constrained **0.5B** now compiles clean more often
+than an unconstrained **7B** did — but no linearity diagnostic has ever been
+observed, in any configuration, at any capability point tested.
+
+Raising capability does not help: constrained 7B has *more* `OX0200` than
+constrained 0.5B (66 vs 27), because it writes longer programs with more
+unbound references. The names it fails on are `x`, `acc`, `current_state`,
+`value`, `_count` — **local variables used before binding.** The models write
+`acc = acc + i` with no `let acc = 0`, i.e. Python-style implicit declaration.
+That is a scoping-discipline failure, not a missing standard library, so no
+prelude or card addition fixes it.
+
+### Conclusion
+
+The barrier is a stack, and every layer removed reveals the next:
+
+1. **Syntax** — removed by the grammar.
+2. **Name binding** — now the binding constraint, and worse at higher capability.
+3. **Types** — behind that.
+4. **Linearity** — never reached, in ~530 Oxide-arm attempts across five
+   configurations.
+
+At ≤7B, with or without grammar constraint, these models cannot exercise the
+behaviour Oxide exists to test. This is a clean negative result for the
+small-model track as an instrument for the v0.3 gate: the gate needs either a
+substantially more capable subject, or a different instrument that probes
+linearity directly rather than waiting for it to surface behind three other
+competencies.
+
+### Two caveats on the constrained arm, before it is used for anything
+
+1. **Constrained-Oxide vs unconstrained-Rust is a new asymmetry.** The Oxide
+   arms receive help Rust does not need. This must be pre-registered before any
+   result, not rationalised after.
+2. **The explicit-Oxide grammar can make `&` and `drop` *available*, never
+   *correct*.** Under constraint the two primary arms are therefore no longer
+   symmetric in how much burden the grammar removes. Whether the residual is
+   "the treatment" (the annotation burden the thesis is about) or "a confound"
+   is a judgement that belongs in the analysis plan, settled in advance.
+
 ## Provenance
 
 Raw data under `eval/results/6a-pilot/`: three `run_id` directories, 653 raw
