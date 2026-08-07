@@ -1,12 +1,19 @@
+import inspect
 import json
 import shutil
+import subprocess
 import urllib.error
+from datetime import datetime
+
+import pytest
 
 from eval import harness
 from eval.driver import (
     MODELS,
     build_run_id,
     is_complete,
+    parse_seeds,
+    preflight_environment,
     reset_run,
     run_grid,
     run_one,
@@ -15,6 +22,7 @@ from eval.driver import (
 )
 from eval.extract import Extraction, extract
 from eval.models import Generation, ModelError, OllamaClient
+from eval.repair import build_repair_prompt
 from eval.rollup import (
     aggregate,
     classify,
@@ -73,12 +81,6 @@ def test_extract_empty_output_is_trivially_compliant():
     # still fail compilation as genuine model failures.
     assert extract("").contract_compliant is True
 
-
-import inspect
-
-import pytest
-
-from eval.repair import build_repair_prompt
 
 _BAD_DIAG = {
     "code": "OX0400",
@@ -262,9 +264,14 @@ def test_preflight_returns_digest_and_quantization(monkeypatch):
             }
         ]
     }
-    info = _client(monkeypatch, _FakeHTTP(tags)).preflight()
+    http = _FakeHTTP(tags, {"version": "0.6.8"})
+    info = _client(monkeypatch, http).preflight()
     assert info["digest"] == "abc123def456"
     assert info["quantization_level"] == "Q8_0"
+    assert info["context_length"] == 32768
+    # Section 48 pins "Backend: Ollama HTTP, version recorded".
+    assert info["ollama_version"] == "0.6.8"
+    assert http.calls[1][0].endswith("/api/version")
 
 
 def test_preflight_rejects_missing_model(monkeypatch):
@@ -287,6 +294,46 @@ def test_preflight_rejects_wrong_quantization(monkeypatch):
     }
     with pytest.raises(ModelError, match="Q4_K_M"):
         _client(monkeypatch, _FakeHTTP(tags)).preflight()
+
+
+def test_generate_rejects_a_malformed_200_body(monkeypatch):
+    # Section 51's governing rule: a 200 that is not a well-formed chat
+    # completion is INFRASTRUCTURE. Defaulting it to "" would ship an
+    # empty Generation through extract -> submit -> cells.jsonl as a
+    # genuine model failure, biasing the arm toward the null.
+    http = _FakeHTTP({"error": "model runner has terminated"})
+    with pytest.raises(ModelError, match="malformed"):
+        _client(monkeypatch, http).generate("hi", seed=1)
+
+
+def test_generate_rejects_a_200_body_with_no_message(monkeypatch):
+    http = _FakeHTTP({"done": True, "eval_count": 0})
+    with pytest.raises(ModelError, match="malformed"):
+        _client(monkeypatch, http).generate("hi", seed=1)
+
+
+def test_malformed_body_is_not_retried_as_transport(monkeypatch):
+    # It is a hard stop, not a transient: one call, then ModelError.
+    http = _FakeHTTP({"error": "boom"})
+    with pytest.raises(ModelError):
+        _client(monkeypatch, http).generate("hi", seed=1)
+    assert len(http.calls) == 1
+
+
+def test_configured_timeout_reaches_the_request_layer(monkeypatch):
+    # The defect class this plan already caught once: a non-default value
+    # that never leaves the constructor. Only a non-default proves it.
+    seen: list[int] = []
+
+    def fake_request(url: str, payload: dict | None = None,
+                     timeout_s: int = 120) -> dict:
+        seen.append(timeout_s)
+        return json.loads(_chat_response())
+
+    monkeypatch.setattr("eval.models._request", fake_request)
+    client = OllamaClient("m", timeout_s=37, sleep=lambda _s: None)
+    client.generate("hi", seed=1)
+    assert seen == [37]
 
 
 def test_healthy_is_false_when_unreachable(monkeypatch):
@@ -652,6 +699,179 @@ def test_run_grid_waits_for_health_between_runs(tmp_path):
     )
     monkeypatch.undo()
     assert waits == ["checked", "checked"]
+
+
+def _drive_one_cell(tmp_path, client, *, preflight=None, health_check=None,
+                    seeds=(1,), fake_run_one=None):
+    """Walk one grid cell with run_one stubbed out (no generation)."""
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr(
+        "eval.driver.run_one", fake_run_one or (lambda client, **kw: None)
+    )
+    try:
+        return run_grid(
+            lambda tag: client,
+            slugs=["qwen1_5b"],
+            shot_counts=[0],
+            seeds=list(seeds),
+            results_root=tmp_path,
+            preflight=preflight,
+            health_check=health_check,
+        )
+    finally:
+        monkeypatch.undo()
+
+
+def _manifest(tmp_path, seed: int = 1) -> dict:
+    path = tmp_path / build_run_id("qwen1_5b", 0, seed) / "manifest.json"
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def test_manifest_records_the_client_s_real_sampling_params(tmp_path):
+    # Non-default values are the point: the pinned defaults would pass
+    # against a getattr fallback literal and prove nothing.
+    client = OllamaClient(
+        MODELS["qwen1_5b"], temperature=0.3, top_p=0.5, num_predict=99
+    )
+    _drive_one_cell(tmp_path, client)
+    m = _manifest(tmp_path)
+    assert (m["temperature"], m["top_p"], m["num_predict"]) == (0.3, 0.5, 99)
+
+
+def test_manifest_records_the_preflight_provenance_payload(tmp_path):
+    # Section 48: "Exact tags AND digests are recorded in the run manifest
+    # at preflight." The manifest is the only artifact proving which
+    # weights produced a 14-hour result.
+    info = {
+        "model": MODELS["qwen1_5b"],
+        "digest": "deadbeefcafe",
+        "quantization_level": "Q8_0",
+        "context_length": 32768,
+        "ollama_version": "0.6.8",
+    }
+    _drive_one_cell(tmp_path, _StubClient(), preflight={"qwen1_5b": info})
+    m = _manifest(tmp_path)
+    assert m["digest"] == "deadbeefcafe"
+    assert m["quantization_level"] == "Q8_0"
+    assert m["context_length"] == 32768
+    assert m["ollama_version"] == "0.6.8"
+
+
+def test_manifest_records_start_and_end_timestamps(tmp_path):
+    _drive_one_cell(tmp_path, _StubClient())
+    m = _manifest(tmp_path)
+    # Section 49: the manifest carries "start/end".
+    assert datetime.fromisoformat(m["started_at"]).tzinfo is not None
+    assert datetime.fromisoformat(m["ended_at"]) >= datetime.fromisoformat(
+        m["started_at"]
+    )
+
+
+def test_manifest_records_null_not_a_guess_for_unknown_client_params(tmp_path):
+    # run_grid takes any ModelClient and the Protocol declares only
+    # generate. An API-backed client carrying max_tokens instead of
+    # num_predict must not have "2048" recorded against it with total
+    # confidence: null is an honest "unknown", 0.8 is a lie.
+    _drive_one_cell(tmp_path, _StubClient())
+    m = _manifest(tmp_path)
+    assert m["temperature"] is None
+    assert m["top_p"] is None
+    assert m["num_predict"] is None
+    assert m["digest"] is None
+
+
+def test_health_check_timeout_aborts_the_run_id_and_records_it(tmp_path):
+    # Section 51: a transport-class failure aborts THIS run id, records
+    # the cause in THAT run's manifest, and the driver proceeds. Raised
+    # outside the try it would lose the grid dict entirely, count nothing
+    # as aborted, and write no manifest.
+    def timed_out(client: object) -> None:
+        raise ModelError("ollama did not become healthy within 600s")
+
+    result = _drive_one_cell(
+        tmp_path, _StubClient(), health_check=timed_out, seeds=(1, 2)
+    )
+    assert result["aborted"] == [
+        build_run_id("qwen1_5b", 0, 1),
+        build_run_id("qwen1_5b", 0, 2),
+    ]
+    assert result["completed"] == []
+    assert "healthy" in _manifest(tmp_path)["aborted_reason"]
+
+
+def test_three_health_check_timeouts_hit_the_consecutive_abort_backstop(tmp_path):
+    def timed_out(client: object) -> None:
+        raise ModelError("ollama did not become healthy within 600s")
+
+    with pytest.raises(RuntimeError, match="consecutive"):
+        _drive_one_cell(
+            tmp_path, _StubClient(), health_check=timed_out, seeds=(1, 2, 3)
+        )
+
+
+def test_completed_run_manifest_carries_no_abort_reason(tmp_path):
+    _drive_one_cell(tmp_path, _StubClient())
+    assert _manifest(tmp_path)["aborted_reason"] is None
+
+
+def test_preflight_environment_passes_on_the_real_corpus_and_shots():
+    problems = [p for p in preflight_environment([0, 3]) if "rustc" not in p]
+    assert problems == []
+
+
+def test_preflight_reports_an_uninvocable_rustc(monkeypatch):
+    # rustc_adapter never raises: it returns a fallback diagnostic that
+    # lands in cells.jsonl as first_compiled=false, i.e. infrastructure
+    # recorded as a model failure. Preflight is where that gets caught.
+    monkeypatch.setattr(
+        "eval.driver.rustc_adapter.find_rustc", lambda: "/nonexistent/rustc"
+    )
+    problems = preflight_environment([0])
+    assert any("rustc is not invocable" in p for p in problems)
+
+
+def test_preflight_reports_a_failing_rustc(monkeypatch):
+    def fake_run(*args, **kwargs):
+        return subprocess.CompletedProcess(args, 101, b"", b"boom")
+
+    monkeypatch.setattr("eval.driver.subprocess.run", fake_run)
+    assert any("rustc exited 101" in p for p in preflight_environment([0]))
+
+
+def test_preflight_reports_a_corpus_that_does_not_load(tmp_path):
+    problems = preflight_environment([0], tasks_path=tmp_path / "gone.jsonl")
+    assert any("corpus" in p for p in problems)
+
+
+def test_preflight_reports_a_corpus_size_decoupled_from_sessions_per_run(tmp_path):
+    # SESSIONS_PER_RUN=60 is what is_complete judges a run against. If the
+    # corpus ever changes size, every run would be mis-judged complete.
+    tasks_path = tmp_path / "tasks.jsonl"
+    tasks_path.write_text(
+        json.dumps({"id": "tA", "prompt": "p", "expected_stdout": "1\n"}) + "\n",
+        encoding="utf-8",
+    )
+    problems = preflight_environment([0], tasks_path=tasks_path)
+    assert any("SESSIONS_PER_RUN" in p for p in problems)
+
+
+def test_preflight_reports_arms_short_of_shots_for_the_3shot_condition(monkeypatch):
+    monkeypatch.setattr("eval.driver.harness.load_shots", lambda arm: [("t", "s")])
+    problems = preflight_environment([0, 3])
+    assert sorted(p for p in problems if "shot(s)" in p) == [
+        f"arm '{arm}' has 1 shot(s), needs 3" for arm in sorted(harness.ARMS)
+    ]
+
+
+def test_preflight_skips_the_shot_check_when_no_shot_condition_needs_it(monkeypatch):
+    monkeypatch.setattr("eval.driver.harness.load_shots", lambda arm: [])
+    assert not any("shot(s)" in p for p in preflight_environment([0]))
+
+
+def test_parse_seeds_accepts_ranges_and_lists():
+    assert parse_seeds("1-5") == [1, 2, 3, 4, 5]
+    assert parse_seeds("2,4") == [2, 4]
+    assert parse_seeds("3") == [3]
 
 
 class _AlwaysHealthy:

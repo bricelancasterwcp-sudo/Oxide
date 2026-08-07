@@ -112,6 +112,15 @@ class OllamaClient:
                 },
             },
         )
+        if "message" not in body or body.get("error"):
+            # A 200 that is not a well-formed chat completion would
+            # otherwise become an empty Generation: extracted, submitted,
+            # failed to compile, and written as a genuine MODEL failure.
+            # That is infrastructure misclassified as model -- section 7's
+            # governing rule, in the direction that biases toward the null.
+            raise ModelError(
+                f"{self.model}: malformed 200 response: {body!r}"
+            )
         return Generation(
             text=body.get("message", {}).get("content", ""),
             tokens_in=int(body.get("prompt_eval_count", 0)),
@@ -121,7 +130,13 @@ class OllamaClient:
         )
 
     def preflight(self) -> dict:
-        """Assert the model is pulled at the pinned quantization."""
+        """Assert the model is pulled at the pinned quantization.
+
+        Returns the provenance payload section 49 requires in the run
+        manifest: which weights, at what precision, served by which
+        daemon. Without it a 14-hour result cannot be traced back to the
+        bytes that produced it.
+        """
         body = self._call(f"{self.host}/api/tags")
         for entry in body.get("models", []):
             if entry.get("name") != self.model:
@@ -139,8 +154,13 @@ class OllamaClient:
                 "digest": entry.get("digest", ""),
                 "quantization_level": quant,
                 "context_length": details.get("context_length"),
+                "ollama_version": self.version(),
             }
         raise ModelError(f"{self.model} is not pulled: ollama pull {self.model}")
+
+    def version(self) -> str | None:
+        """The daemon's reported version (section 48: 'version recorded')."""
+        return self._call(f"{self.host}/api/version").get("version")
 
     def healthy(self) -> bool:
         """True when the daemon answers. Never raises."""

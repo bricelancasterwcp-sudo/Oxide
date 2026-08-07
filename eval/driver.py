@@ -11,14 +11,16 @@ from __future__ import annotations
 import argparse
 import json
 import shutil
+import subprocess
 import sys
 import time
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Callable
 
-from eval import harness
+from eval import harness, rustc_adapter
 from eval.extract import extract
-from eval.models import ModelClient, ModelError
+from eval.models import ModelClient, ModelError, OllamaClient
 from eval.repair import build_repair_prompt
 
 
@@ -135,6 +137,7 @@ SHOT_COUNTS = (0, 3)
 SESSIONS_PER_RUN = 60
 MAX_CONSECUTIVE_ABORTS = 3
 HEALTH_WAIT_CAP_S = 600
+RUSTC_PROBE_TIMEOUT_S = 60
 
 
 def build_run_id(slug: str, shots: int, seed: int) -> str:
@@ -178,8 +181,14 @@ def run_grid(
     results_root: Path,
     health_check: Callable[[object], None] | None = None,
     tasks_path: Path | None = None,
+    preflight: dict[str, dict] | None = None,
 ) -> dict:
-    """Walk the grid, one run id at a time."""
+    """Walk the grid, one run id at a time.
+
+    ``preflight`` maps slug -> the provenance payload from
+    ``OllamaClient.preflight``; section 48 requires it in every manifest,
+    the only artifact proving which weights produced the result.
+    """
     completed: list[str] = []
     aborted: list[str] = []
     consecutive = 0
@@ -202,6 +211,7 @@ def run_grid(
                     results_root=results_root,
                     tasks_path=tasks_path,
                     health_check=health_check,
+                    preflight=(preflight or {}).get(slug),
                 )
                 if exc is not None:
                     aborted.append(run_id)
@@ -230,24 +240,31 @@ def _run_grid_cell(
     results_root: Path,
     tasks_path: Path | None,
     health_check: Callable[[object], None] | None,
+    preflight: dict | None = None,
 ) -> ModelError | None:
     """Run one grid cell (one run id) start to finish.
 
     Ordering is load-bearing (section 6.4): health check, THEN the
     manifest, THEN the sessions, so an interrupted run still records what
-    it was running. On abort the manifest is rewritten with the reason,
-    and the exception is returned (not raised) so the caller decides
-    whether the consecutive-abort backstop fires.
+    it was running. The health check runs INSIDE the try: ``wait_for_health``
+    raises ModelError once its 600s cap expires, and section 51 scopes that
+    abort to this run id with the cause in this run's manifest -- letting it
+    escape would lose the grid entirely and count nothing as aborted.
+    On abort the manifest is rewritten with the reason, and the exception is
+    returned (not raised) so the caller decides whether the
+    consecutive-abort backstop fires.
     """
-    if health_check is not None:
-        health_check(client)
-    temperature = getattr(client, "temperature", 0.8)
-    top_p = getattr(client, "top_p", 0.95)
-    num_predict = getattr(client, "num_predict", 2048)
-    _write_manifest(run_dir, run_id, slug, shots, seed,
-                    temperature=temperature, top_p=top_p,
-                    num_predict=num_predict)
+    fields = _manifest_fields(client, preflight)
+    started_at = _timestamp()
+
+    def write(**extra: object) -> None:
+        _write_manifest(run_dir, run_id, slug, shots, seed, fields=fields,
+                        started_at=started_at, **extra)
+
     try:
+        if health_check is not None:
+            health_check(client)
+        write()
         run_one(
             client,
             run_id=run_id,
@@ -257,16 +274,40 @@ def _run_grid_cell(
             tasks_path=tasks_path,
         )
     except ModelError as exc:
-        _write_manifest(run_dir, run_id, slug, shots, seed,
-                        temperature=temperature, top_p=top_p,
-                        num_predict=num_predict, aborted_reason=str(exc))
+        write(ended_at=_timestamp(), aborted_reason=str(exc))
         return exc
+    write(ended_at=_timestamp())
     return None
 
 
+def _timestamp() -> str:
+    return datetime.now(UTC).isoformat()
+
+
+def _manifest_fields(client: ModelClient, preflight: dict | None) -> dict:
+    """Sampling params and provenance for the manifest.
+
+    Absent attributes read as ``None``, never as the pinned defaults.
+    ``run_grid`` takes any ``ModelClient`` and the Protocol declares only
+    ``generate``; an API-backed client carrying ``max_tokens`` instead of
+    ``num_predict`` would otherwise have '2048' recorded against it with
+    total confidence. ``null`` is an honest 'unknown'.
+    """
+    info = preflight or {}
+    return {
+        "temperature": getattr(client, "temperature", None),
+        "top_p": getattr(client, "top_p", None),
+        "num_predict": getattr(client, "num_predict", None),
+        "digest": info.get("digest"),
+        "quantization_level": info.get("quantization_level"),
+        "context_length": info.get("context_length"),
+        "ollama_version": info.get("ollama_version"),
+    }
+
+
 def _write_manifest(run_dir: Path, run_id: str, slug: str, shots: int,
-                    seed: int, *, temperature: float, top_p: float,
-                    num_predict: int,
+                    seed: int, *, fields: dict, started_at: str,
+                    ended_at: str | None = None,
                     aborted_reason: str | None = None) -> None:
     run_dir.mkdir(parents=True, exist_ok=True)
     payload = {
@@ -275,26 +316,99 @@ def _write_manifest(run_dir: Path, run_id: str, slug: str, shots: int,
         "model": MODELS[slug],
         "shots": shots,
         "seed": seed,
-        "temperature": temperature,
-        "top_p": top_p,
-        "num_predict": num_predict,
+        "started_at": started_at,
+        "ended_at": ended_at,
         "aborted_reason": aborted_reason,
+        **fields,
     }
     (run_dir / "manifest.json").write_text(
         json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
 
 
-def _parse_seeds(text: str) -> list[int]:
+def parse_seeds(text: str) -> list[int]:
     if "-" in text:
         low, high = text.split("-", 1)
         return list(range(int(low), int(high) + 1))
     return [int(part) for part in text.split(",") if part]
 
 
-def main(argv: list[str] | None = None) -> int:
-    from eval.models import ModelError as _ModelError, OllamaClient
+def _rustc_problem() -> str | None:
+    """rustc must be invocable BEFORE any generation.
 
+    ``eval/rustc_adapter`` never raises: on OSError or TimeoutExpired it
+    returns a fallback diagnostic, which flows through run_file ->
+    session.submit -> cells.jsonl as ``first_compiled: false``. That is an
+    infrastructure failure recorded as a model failure -- section 51's
+    governing rule, in the direction that biases every arm toward the null.
+    An absent rustc gives all-zeros and would be noticed; a compile
+    timeout under memory pressure would be partial, plausible, and
+    non-randomly correlated with the 7B rung.
+    """
+    rustc = rustc_adapter.find_rustc()
+    try:
+        proc = subprocess.run(
+            [rustc, "--version"],
+            capture_output=True,
+            timeout=RUSTC_PROBE_TIMEOUT_S,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return f"rustc is not invocable ({rustc}): {exc}"
+    if proc.returncode != 0:
+        return f"rustc exited {proc.returncode} ({rustc}): rust arm cannot run"
+    return None
+
+
+def _corpus_problems(tasks_path: Path | None = None) -> list[str]:
+    """Corpus loads, and its size still matches the pinned run length."""
+    try:
+        tasks = harness.load_tasks(tasks_path)
+    except Exception as exc:  # HarnessError, OSError, JSON decode
+        return [f"task corpus does not load: {exc}"]
+    if not tasks:
+        return ["task corpus is empty"]
+    sessions = len(tasks) * len(harness.ARMS)
+    if sessions != SESSIONS_PER_RUN:
+        return [
+            f"corpus is {len(tasks)} tasks x {len(harness.ARMS)} arms = "
+            f"{sessions} sessions, but SESSIONS_PER_RUN is "
+            f"{SESSIONS_PER_RUN}; is_complete would mis-judge every run"
+        ]
+    return []
+
+
+def _shot_problems(shot_counts: list[int]) -> list[str]:
+    """Every arm must carry enough shots for the deepest shot condition."""
+    needed = max(shot_counts) if shot_counts else 0
+    if needed <= 0:
+        return []
+    problems: list[str] = []
+    for arm in harness.ARMS:
+        try:
+            pairs = harness.load_shots(arm)
+        except Exception as exc:
+            problems.append(f"arm '{arm}' shots do not load: {exc}")
+            continue
+        if len(pairs) < needed:
+            problems.append(
+                f"arm '{arm}' has {len(pairs)} shot(s), needs {needed}"
+            )
+    return problems
+
+
+def preflight_environment(shot_counts: list[int],
+                          tasks_path: Path | None = None) -> list[str]:
+    """Section 50.4's non-Ollama preflight checks, as a problem list."""
+    problems: list[str] = []
+    rustc = _rustc_problem()
+    if rustc is not None:
+        problems.append(rustc)
+    problems.extend(_corpus_problems(tasks_path))
+    problems.extend(_shot_problems(shot_counts))
+    return problems
+
+
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="python -m eval.driver")
     parser.add_argument("--models", default=",".join(MODELS))
     parser.add_argument("--shots", default="0,3")
@@ -310,12 +424,15 @@ def main(argv: list[str] | None = None) -> int:
               file=sys.stderr)
         return 2
 
+    shot_counts = [int(s) for s in args.shots.split(",") if s]
     problems: list[str] = []
+    preflight: dict[str, dict] = {}
     for slug in slugs:
         try:
-            OllamaClient(MODELS[slug]).preflight()
-        except _ModelError as exc:
+            preflight[slug] = OllamaClient(MODELS[slug]).preflight()
+        except ModelError as exc:
             problems.append(str(exc))
+    problems.extend(preflight_environment(shot_counts))
     if problems:
         for problem in problems:
             print(problem, file=sys.stderr)
@@ -327,10 +444,11 @@ def main(argv: list[str] | None = None) -> int:
     result = run_grid(
         lambda tag: OllamaClient(tag),
         slugs=slugs,
-        shot_counts=[int(s) for s in args.shots.split(",") if s],
-        seeds=_parse_seeds(args.seeds),
+        shot_counts=shot_counts,
+        seeds=parse_seeds(args.seeds),
         results_root=Path(args.results_root),
         health_check=wait_for_health,
+        preflight=preflight,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 1 if result["aborted"] else 0
