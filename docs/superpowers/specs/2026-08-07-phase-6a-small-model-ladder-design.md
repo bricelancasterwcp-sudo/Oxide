@@ -115,6 +115,7 @@ not be renegotiated after seeing results.
 | Temperature | 0.8 |
 | top_p | 0.95 |
 | `num_predict` (max gen tokens) | 2048 |
+| `num_ctx` (context window) | 8192 |
 | Seeds | 1, 2, 3, 4, 5 |
 | Shot conditions | 0 and 3 |
 | Attempt cap | 4 (existing `MAX_ATTEMPTS`) |
@@ -141,6 +142,38 @@ generation terminates as a **model** result: the truncated output fails
 to compile and counts as a real failed attempt. 2048 tokens is generous
 against reference solutions of 50–150 tokens. Truncation (`done_reason ==
 "length"`) is recorded per attempt so its frequency is auditable.
+
+`num_ctx` is **load-bearing for the opposite reason**, and must be
+pinned explicitly. Ollama does *not* default it to the model's
+advertised capability: with `OLLAMA_CONTEXT_LENGTH` unset the daemon
+serves qwen2.5-coder at **4096** tokens, not its 32768 maximum
+(confirmed against `/api/ps` after load). Repair prompts carry each
+arm's full initial context — language card, few-shot examples, task
+statement (§6.3) — so the Oxide arms' carried context runs
+~1400–1660 tokens against the Rust arm's ~110–300. A repair prompt also
+carries the rejected program, so the binding quantity is
+context + program + `num_predict`. Measured: for a rejected program
+anywhere in the ~1.6k–7k character band — the realistic range for a
+small model's failing output — the `oxide` and `explicit` arms exceed
+4096 and `rust` does not. The carried card is exactly what pushes them
+over. On overflow llama.cpp truncates the prompt **from the front**,
+dropping that card — the only place Oxide syntax ever appears — from
+those two arms specifically. That is a silent, non-random bias against
+exactly the pair §3 names as the primary comparison, and nothing
+in the artifacts would reveal it: wrong-but-plausible numbers, the worst
+failure mode this project recognises.
+
+8192 clears the true worst case this grid can produce — the largest
+carried context (~1670 tok) wrapped around a `num_predict`-truncated
+2048-token program, plus 2048 reserved for the fix, ≈5740 tokens — with
+~30% headroom still free. It is deliberately **not** raised to 32768,
+which would inflate the KV cache for no benefit and risk OOM on the 7B
+rung, §7's memory-pressure case. The pinned value is recorded in
+every manifest as `num_ctx`, kept lexically distinct from
+`model_context_length` (the capability read off `/api/tags`) so the two
+cannot be confused, and `OllamaClient.generate` **refuses** any prompt
+whose estimated tokens plus `num_predict` exceed it rather than letting
+the daemon truncate silently (§7).
 
 **Grid:** 3 models × 2 shot conditions × 5 seeds × 20 tasks × 3 arms =
 **1800 sessions**, at most **7200 generations**. Estimated 8–14h wall
@@ -210,8 +243,10 @@ class Generation:
 
 class OllamaClient:
     def __init__(self, model: str, *, temperature: float, top_p: float,
+                 num_predict: int = 2048, num_ctx: int = 8192,
                  host: str = "http://localhost:11434",
                  timeout_s: int = 120, retries: int = 3) -> None: ...
+    def check_context(self, prompt: str) -> None: ...  # raises ContextOverflowError
     def preflight(self) -> dict: ...   # version + model digest; raises if absent
 ```
 
@@ -310,7 +345,7 @@ Worse, the task statement appeared in **no** repair prompt, so after a
 runtime failure the model was told its output was wrong with no
 statement of what it should have produced; it could only guess.
 
-That asymmetry would have turned §7's repair-lift *secondary* metric
+That asymmetry would have turned §3's repair-lift *secondary* metric
 ("whether an arm's diagnostics teach") into a measure of card recall
 for the Oxide arms. The *primary* pass@1 metric is first-attempt-only
 and was never at stake. The change was decided by the project owner
@@ -354,7 +389,10 @@ arm at 3-shot. Fail fast, listing everything missing.
 
 Preflight reads `/api/tags` and records each model's `digest`,
 `details.quantization_level`, and `details.context_length` into the
-manifest. It **asserts `quantization_level == "Q8_0"` for all three
+manifest. The last is recorded as **`model_context_length`** — the
+model's *capability* — and is not to be confused with **`num_ctx`**, the
+window the run actually used, which is recorded separately from the
+client. Both appear in every manifest. It **asserts `quantization_level == "Q8_0"` for all three
 models** — this is what actually enforces §4's uniform-quantization
 control, rather than trusting that the right tag was pulled. (The
 `qwen2.5-coder:1.5b` currently on this machine is Q4_K_M and must be
@@ -418,10 +456,23 @@ comparison, in opposite directions.
 |---|---|---|
 | Ollama down / tag missing at start | infrastructure | preflight abort, before any generation |
 | Transport error or HTTP timeout | infrastructure | 3 retries with backoff, then **abort this `run_id`** (below) |
+| Prompt + `num_predict` exceeds `num_ctx` | infrastructure | **refused before the request**, not retried; aborts this `run_id` with the cause in its manifest |
 | Generation hits `num_predict` | **model** | truncated source submitted; real failed attempt; `truncated: true` logged |
 | Empty or malformed generation | **model** | real failure, consumes an attempt |
 | Non-UTF8 source | **model** | existing `_unencodable_source_verdict` |
 | Program nontermination | **model** | existing `timeout 10` |
+
+**Prompt overflow is refused, never truncated.** `OllamaClient.generate`
+estimates the prompt at ~4 chars/token and refuses when that estimate plus
+`num_predict` exceeds `num_ctx`. The estimate is deliberately crude: it
+exists to catch a 2x overrun, not to shave a token, and a real tokenizer
+is a dependency the eval venv does not have. Classifying overflow as
+infrastructure is the whole point — a silently front-truncated prompt
+loses the language card from the `oxide` and `explicit` arms only, and
+would be recorded as an ordinary model failure in exactly the two arms
+the primary comparison rests on. Refusing before the request means the
+retry loop never sees it (overflow is deterministic) and the
+consecutive-abort backstop below still fires if it is systematic.
 
 **Run-id-scoped abort.** A persistent transport failure aborts only the
 current `run_id` — at most 60 sessions, ~20–30 min — records the cause in
@@ -497,22 +548,36 @@ New `tests/test_6a.py`, plus the existing 717 staying green (nothing in
 - **Floor effect.** 0.5B may score 0 across all arms at both shot counts,
   making the smallest rung uninformative. Mitigated by the 3-shot
   condition and by 1.5B/7B carrying the curve. Accepted.
-- **Card length vs context.** Measured prompt sizes (t01, ~4 chars/token):
+- **Card length vs context.** Measured prompt sizes (t01, ~4 chars/token).
+  Initial prompts, and — since repair prompts now carry each arm's full
+  initial context (§6.3) — repair prompts too:
 
-  | Arm | 0-shot | 3-shot |
-  |---|---|---|
-  | oxide | ~1326 tok | ~1531 tok |
-  | explicit | ~1398 tok | ~1613 tok |
-  | rust | ~61 tok | ~251 tok |
+  | Arm | initial 0-shot | initial 3-shot | repair 0-shot | repair 3-shot |
+  |---|---|---|---|---|
+  | oxide | ~1326 tok | ~1531 tok | ~1400 tok | ~1580 tok |
+  | explicit | ~1398 tok | ~1613 tok | ~1450 tok | ~1660 tok |
+  | rust | ~61 tok | ~251 tok | ~110 tok | ~300 tok |
 
-  The Oxide arms carry a **~22× larger prompt** than Rust at 0-shot. All
-  fit Qwen2.5-Coder's context window, so this is not a truncation risk —
-  but attention dilution over a 1.3k-token card is a real burden at 0.5B
-  that the one-line Rust preamble does not pay. This asymmetry favors
-  Rust, compounds with the pretraining-exposure advantage in the same
-  direction, and is a further reason Oxide-vs-Rust is not the headline.
-  Per-cell prompt token counts are logged and the comparison is restated
-  in the report rather than hand-waved.
+  The Oxide arms carry a **~22× larger prompt** than Rust at 0-shot.
+
+  These fit Qwen2.5-Coder's *advertised* 32768 window, but that was
+  never the binding constraint: Ollama serves the model at `num_ctx`,
+  which defaults to **4096** and is not derived from the model's
+  capability. Against 4096, an Oxide repair prompt (~1660 tok) plus the
+  failing program plus `num_predict` 2048 reaches or exceeds the window,
+  while the Rust arm never does — and llama.cpp truncates from the front,
+  taking the language card with it. That would have been a silent,
+  arm-correlated corruption of the primary comparison, not a shared
+  overhead. **Resolved, not accepted:** §4 pins `num_ctx` to 8192, the
+  manifest records it, and the client refuses an overflowing prompt
+  instead of letting the daemon truncate one.
+
+  What remains is attention dilution: a 1.3k-token card is a real burden
+  at 0.5B that the one-line Rust preamble does not pay. That asymmetry
+  favors Rust, compounds with the pretraining-exposure advantage in the
+  same direction, and is a further reason Oxide-vs-Rust is not the
+  headline. Per-cell prompt token counts are logged and the comparison is
+  restated in the report rather than hand-waved.
 - **Ollama chat templating** may differ across model sizes. Templates are
   recorded in the manifest and confirmed identical in family before the
   run.

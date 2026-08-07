@@ -302,15 +302,23 @@ def _manifest_fields(client: ModelClient, preflight: dict | None) -> dict:
     ``generate``; an API-backed client carrying ``max_tokens`` instead of
     ``num_predict`` would otherwise have '2048' recorded against it with
     total confidence. ``null`` is an honest 'unknown'.
+
+    ``num_ctx`` and ``model_context_length`` are DIFFERENT numbers and are
+    named so they cannot be confused. ``model_context_length`` is the
+    model's advertised capability read off /api/tags (32768). ``num_ctx``
+    is the window the run actually used -- pinned by the client, because
+    Ollama's own default is 4096 and would silently truncate the Oxide
+    arms' prompts from the front (section 48).
     """
     info = preflight or {}
     return {
         "temperature": getattr(client, "temperature", None),
         "top_p": getattr(client, "top_p", None),
         "num_predict": getattr(client, "num_predict", None),
+        "num_ctx": getattr(client, "num_ctx", None),
         "digest": info.get("digest"),
         "quantization_level": info.get("quantization_level"),
-        "context_length": info.get("context_length"),
+        "model_context_length": info.get("context_length"),
         "ollama_version": info.get("ollama_version"),
     }
 

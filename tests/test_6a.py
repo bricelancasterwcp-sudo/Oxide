@@ -6,7 +6,7 @@ from datetime import datetime
 
 import pytest
 
-from eval import harness, rollup
+from eval import harness, repair, rollup
 from eval.driver import (
     MODELS,
     build_run_id,
@@ -20,7 +20,13 @@ from eval.driver import (
     wait_for_health,
 )
 from eval.extract import Extraction, extract
-from eval.models import Generation, ModelError, OllamaClient
+from eval.models import (
+    ContextOverflowError,
+    Generation,
+    ModelError,
+    OllamaClient,
+    estimate_tokens,
+)
 from eval.repair import RepairPromptError, build_repair_prompt
 from eval.rollup import (
     INSUFFICIENT,
@@ -189,6 +195,21 @@ def test_repair_prompt_raises_if_harness_tail_moves(monkeypatch):
         _repair("oxide", "src", _COMPILE_FAIL)
 
 
+def test_repair_prompt_raises_if_the_contract_is_empty(monkeypatch):
+    # An empty contract satisfies both clauses of the tail check, and
+    # then prompt[:-0] is "" -- a zero-length context shipped silently
+    # as the arm's retained material.
+    monkeypatch.setattr("eval.harness.OUTPUT_CONTRACT", "")
+    with pytest.raises(RepairPromptError, match="empty"):
+        _repair("oxide", "src", _COMPILE_FAIL)
+
+
+def test_repair_prompt_arms_track_the_frozen_harness():
+    # repair must not keep its own copy of the arm list: a harness arm
+    # added later would be rejected here as "unknown".
+    assert not hasattr(repair, "ARMS")
+
+
 def test_repair_prompt_runtime_failure_reports_own_output():
     out = _repair("oxide", "print(41)", _RUNTIME_FAIL)
     assert "compiled and ran, but produced incorrect output" in out
@@ -312,6 +333,11 @@ def test_generate_sends_pinned_sampling_options(monkeypatch):
         "top_p": 0.95,
         "seed": 4,
         "num_predict": 2048,
+        # Section 48: pinned explicitly because Ollama's own default is
+        # 4096 -- not the model's 32768 capability -- and an overflowing
+        # prompt is truncated from the FRONT, dropping the language card
+        # from the oxide and explicit arms only.
+        "num_ctx": 8192,
     }
 
 
@@ -398,12 +424,128 @@ def test_generate_rejects_a_200_body_with_no_message(monkeypatch):
         _client(monkeypatch, http).generate("hi", seed=1)
 
 
+def test_generate_rejects_a_non_dict_message(monkeypatch):
+    # {"message": "text"} passes a bare `"message" in body` and then
+    # raises AttributeError on .get -- which is NOT a ModelError, so it
+    # escapes _run_grid_cell's handler and kills the whole grid instead
+    # of aborting one run id.
+    http = _FakeHTTP({"message": "just a string"})
+    with pytest.raises(ModelError, match="malformed"):
+        _client(monkeypatch, http).generate("hi", seed=1)
+
+
+def test_generate_rejects_a_null_message(monkeypatch):
+    http = _FakeHTTP({"message": None})
+    with pytest.raises(ModelError, match="malformed"):
+        _client(monkeypatch, http).generate("hi", seed=1)
+
+
+def test_generate_rejects_a_non_string_content(monkeypatch):
+    http = _FakeHTTP({"message": {"content": None}})
+    with pytest.raises(ModelError, match="malformed"):
+        _client(monkeypatch, http).generate("hi", seed=1)
+
+
 def test_malformed_body_is_not_retried_as_transport(monkeypatch):
     # It is a hard stop, not a transient: one call, then ModelError.
     http = _FakeHTTP({"error": "boom"})
     with pytest.raises(ModelError):
         _client(monkeypatch, http).generate("hi", seed=1)
     assert len(http.calls) == 1
+
+
+def test_generate_refuses_a_prompt_that_overflows_the_window(monkeypatch):
+    # The defect this guard exists for, reproduced at Ollama's own
+    # default window: ~2000 prompt tokens + num_predict 2048 > 4096.
+    # llama.cpp would truncate from the FRONT and drop the language card
+    # from the oxide/explicit arms only -- wrong-but-plausible numbers
+    # with nothing in the artifacts to reveal it.
+    http = _FakeHTTP(json.loads(_chat_response()))
+    monkeypatch.setattr("eval.models._request", http)
+    client = OllamaClient("m", num_ctx=4096, num_predict=2048,
+                          sleep=lambda _s: None)
+    with pytest.raises(ContextOverflowError, match="num_ctx"):
+        client.generate("x" * 9000, seed=1)
+    # Refused BEFORE the request: no generation burned, no retry storm.
+    assert http.calls == []
+
+
+def test_context_overflow_is_a_model_error():
+    # Subclassing ModelError is what scopes the abort to one run id with
+    # the cause in that run's manifest, and lets three in a row trip the
+    # consecutive-abort backstop. A bare Exception would kill the grid.
+    assert issubclass(ContextOverflowError, ModelError)
+
+
+def test_overflow_guard_counts_num_predict_not_just_the_prompt(monkeypatch):
+    # A prompt that fits on its own but cannot fit alongside the
+    # generation it reserves. Ignoring num_predict is the subtle version
+    # of this bug.
+    http = _FakeHTTP(json.loads(_chat_response()))
+    monkeypatch.setattr("eval.models._request", http)
+    client = OllamaClient("m", num_ctx=1000, num_predict=900,
+                          sleep=lambda _s: None)
+    client.check_context("x" * 396)          # 99 + 900 <= 1000
+    with pytest.raises(ContextOverflowError):
+        client.check_context("x" * 800)      # 200 + 900 > 1000
+
+
+_WORST_REJECTED_PROGRAM = "x" * (2048 * 4)
+"""A generation that ran to num_predict and was fed back as the rejected
+program -- the largest thing a repair prompt can ever carry, and the
+characteristic small-model failure mode (degenerate repetition)."""
+
+
+def _worst_repair_prompt() -> str:
+    """The largest prompt this grid can send: the explicit arm's 3-shot
+    repair prompt around a num_predict-truncated program."""
+    return _repair(
+        "explicit", _WORST_REJECTED_PROGRAM, _COMPILE_FAIL, shots=3
+    )
+
+
+def test_pinned_window_clears_the_worst_real_repair_prompt(monkeypatch):
+    # The pin is only worth anything if 8192 actually fits the worst
+    # case: ~1670 tok of carried context + a 2048-tok rejected program +
+    # 2048 reserved for the fix.
+    http = _FakeHTTP(json.loads(_chat_response()))
+    monkeypatch.setattr("eval.models._request", http)
+    OllamaClient("m", sleep=lambda _s: None).generate(
+        _worst_repair_prompt(), seed=1
+    )
+    assert http.calls[0][1]["options"]["num_ctx"] == 8192
+
+
+def test_the_ollama_default_window_would_have_overflowed():
+    # The measured defect: that same prompt against the daemon's
+    # unpinned 4096 default is refused. If this ever stops holding, the
+    # pin's justification in section 48 has gone stale.
+    with pytest.raises(ContextOverflowError):
+        OllamaClient("m", num_ctx=4096).check_context(_worst_repair_prompt())
+
+
+def test_the_default_window_biases_against_the_oxide_arms_specifically():
+    # The heart of the defect. For a rejected program in the realistic
+    # ~1.6k-7k char band, the carried language card is exactly what
+    # pushes the oxide/explicit arms over the daemon's 4096 default
+    # while the one-line Rust preamble stays under it. The lost tokens
+    # come off the FRONT -- the card itself. That is a non-random bias
+    # against the two arms section 47 makes primary, not a shared
+    # overhead that cancels in the comparison.
+    program = "x" * 2000
+    at_default = OllamaClient("m", num_ctx=4096)
+    for arm in ("oxide", "explicit"):
+        prompt = _repair(arm, program, _COMPILE_FAIL, shots=3)
+        with pytest.raises(ContextOverflowError):
+            at_default.check_context(prompt)
+    at_default.check_context(_repair("rust", program, _COMPILE_FAIL, shots=3))
+
+
+def test_pinned_window_clears_that_same_case_for_every_arm():
+    program = "x" * 2000
+    pinned = OllamaClient("m")
+    for arm in harness.ARMS:
+        pinned.check_context(_repair(arm, program, _COMPILE_FAIL, shots=3))
 
 
 def test_configured_timeout_reaches_the_request_layer(monkeypatch):
@@ -817,11 +959,38 @@ def test_manifest_records_the_client_s_real_sampling_params(tmp_path):
     # Non-default values are the point: the pinned defaults would pass
     # against a getattr fallback literal and prove nothing.
     client = OllamaClient(
-        MODELS["qwen1_5b"], temperature=0.3, top_p=0.5, num_predict=99
+        MODELS["qwen1_5b"],
+        temperature=0.3,
+        top_p=0.5,
+        num_predict=99,
+        num_ctx=1234,
     )
     _drive_one_cell(tmp_path, client)
     m = _manifest(tmp_path)
     assert (m["temperature"], m["top_p"], m["num_predict"]) == (0.3, 0.5, 99)
+    # num_ctx is the window ACTUALLY USED. Recorded off the client, not
+    # assumed, and distinct from model_context_length (the capability).
+    assert m["num_ctx"] == 1234
+
+
+def test_manifest_records_the_pinned_num_ctx_by_default(tmp_path):
+    _drive_one_cell(tmp_path, OllamaClient(MODELS["qwen1_5b"]))
+    assert _manifest(tmp_path)["num_ctx"] == 8192
+
+
+def test_manifest_keeps_num_ctx_and_model_context_length_distinct(tmp_path):
+    # The two numbers a reader could conflate: 32768 is what the weights
+    # can do, 8192 is what the run did. Conflating them is how a
+    # front-truncated Oxide prompt would look fine in the artifacts.
+    info = {"context_length": 32768, "quantization_level": "Q8_0"}
+    _drive_one_cell(
+        tmp_path, OllamaClient(MODELS["qwen1_5b"]),
+        preflight={"qwen1_5b": info},
+    )
+    m = _manifest(tmp_path)
+    assert m["model_context_length"] == 32768
+    assert m["num_ctx"] == 8192
+    assert "context_length" not in m
 
 
 def test_manifest_records_the_preflight_provenance_payload(tmp_path):
@@ -839,7 +1008,9 @@ def test_manifest_records_the_preflight_provenance_payload(tmp_path):
     m = _manifest(tmp_path)
     assert m["digest"] == "deadbeefcafe"
     assert m["quantization_level"] == "Q8_0"
-    assert m["context_length"] == 32768
+    # The model's CAPABILITY, under a name that cannot be mistaken for
+    # num_ctx (the window actually used). Section 48 requires both.
+    assert m["model_context_length"] == 32768
     assert m["ollama_version"] == "0.6.8"
 
 
@@ -863,7 +1034,33 @@ def test_manifest_records_null_not_a_guess_for_unknown_client_params(tmp_path):
     assert m["temperature"] is None
     assert m["top_p"] is None
     assert m["num_predict"] is None
+    assert m["num_ctx"] is None
     assert m["digest"] is None
+
+
+def test_context_overflow_aborts_the_run_id_and_records_it(tmp_path):
+    # End to end: an overflowing prompt must reach the manifest as an
+    # abort reason, not vanish into a truncated generation. Section 51.
+    class _OverflowingClient:
+        def generate(self, prompt: str, *, seed: int) -> Generation:
+            raise ContextOverflowError("prompt exceeds num_ctx 8192")
+
+    def boom(client, **kwargs) -> None:
+        _OverflowingClient().generate("x", seed=1)
+
+    result = _drive_one_cell(tmp_path, _StubClient(), fake_run_one=boom)
+    assert result["completed"] == []
+    assert result["aborted"] == [build_run_id("qwen1_5b", 0, 1)]
+    assert "num_ctx" in _manifest(tmp_path)["aborted_reason"]
+
+
+def test_estimate_tokens_rounds_up():
+    # Rounding down would let a prompt sit exactly on the boundary and
+    # still overflow. Crude is fine; optimistic is not.
+    assert estimate_tokens("") == 0
+    assert estimate_tokens("x") == 1
+    assert estimate_tokens("x" * 4) == 1
+    assert estimate_tokens("x" * 5) == 2
 
 
 def test_health_check_timeout_aborts_the_run_id_and_records_it(tmp_path):

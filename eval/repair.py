@@ -19,8 +19,6 @@ from pathlib import Path
 
 from eval import harness
 
-ARMS = ("oxide", "explicit", "rust")
-
 FIX_INSTRUCTION = (
     "Reply with ONLY the complete corrected program source, "
     "no fences, no commentary."
@@ -67,6 +65,14 @@ def initial_context(
         arm, task_id, shots=shots, tasks_path=tasks_path
     )
     contract = harness.OUTPUT_CONTRACT
+    if not contract:
+        # An empty contract satisfies both clauses below, and then
+        # prompt[:-0] is "" -- a zero-length context silently shipped as
+        # the arm's retained material. Refuse before that can happen.
+        raise RepairPromptError(
+            "harness.OUTPUT_CONTRACT is empty; eval/repair.py would strip "
+            "the whole prompt and emit a zero-length context"
+        )
     if contract not in prompt or not prompt.rstrip("\n").endswith(contract):
         raise RepairPromptError(
             "harness.build_prompt no longer ends with harness.OUTPUT_CONTRACT; "
@@ -104,7 +110,7 @@ def build_repair_prompt(
     metric is only about diagnostic quality if the context an arm
     retains between attempts does not itself vary by arm.
     """
-    if arm not in ARMS:
+    if arm not in harness.ARMS:
         raise ValueError(f"unknown arm '{arm}'")
     context = initial_context(arm, task_id, shots=shots, tasks_path=tasks_path)
     return (

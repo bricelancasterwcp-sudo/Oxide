@@ -1746,6 +1746,7 @@ not be renegotiated after seeing results.
 | Temperature | 0.8 |
 | top_p | 0.95 |
 | `num_predict` (max gen tokens) | 2048 |
+| `num_ctx` (context window) | 8192 |
 | Seeds | 1, 2, 3, 4, 5 |
 | Shot conditions | 0 and 3 |
 | Attempt cap | 4 (existing `MAX_ATTEMPTS`) |
@@ -1772,6 +1773,38 @@ generation terminates as a **model** result: the truncated output fails
 to compile and counts as a real failed attempt. 2048 tokens is generous
 against reference solutions of 50–150 tokens. Truncation (`done_reason
 == "length"`) is recorded per attempt so its frequency is auditable.
+
+`num_ctx` is **load-bearing for the opposite reason**, and must be
+pinned explicitly. Ollama does *not* default it to the model's
+advertised capability: with `OLLAMA_CONTEXT_LENGTH` unset the daemon
+serves qwen2.5-coder at **4096** tokens, not its 32768 maximum
+(confirmed against `/api/ps` after load). Repair prompts carry each
+arm's full initial context — language card, few-shot examples, task
+statement (§50.3) — so the Oxide arms' carried context runs
+~1400–1660 tokens against the Rust arm's ~110–300. A repair prompt also
+carries the rejected program, so the binding quantity is
+context + program + `num_predict`. Measured: for a rejected program
+anywhere in the ~1.6k–7k character band — the realistic range for a
+small model's failing output — the `oxide` and `explicit` arms exceed
+4096 and `rust` does not. The carried card is exactly what pushes them
+over. On overflow llama.cpp truncates the prompt **from the front**,
+dropping that card — the only place Oxide syntax ever appears — from
+those two arms specifically. That is a silent, non-random bias against
+exactly the pair §47 names as the primary comparison, and nothing
+in the artifacts would reveal it: wrong-but-plausible numbers, the worst
+failure mode this project recognises.
+
+8192 clears the true worst case this grid can produce — the largest
+carried context (~1670 tok) wrapped around a `num_predict`-truncated
+2048-token program, plus 2048 reserved for the fix, ≈5740 tokens — with
+~30% headroom still free. It is deliberately **not** raised to 32768,
+which would inflate the KV cache for no benefit and risk OOM on the 7B
+rung, §51's memory-pressure case. The pinned value is recorded in
+every manifest as `num_ctx`, kept lexically distinct from
+`model_context_length` (the capability read off `/api/tags`) so the two
+cannot be confused, and `OllamaClient.generate` **refuses** any prompt
+whose estimated tokens plus `num_predict` exceed it rather than letting
+the daemon truncate silently (§51).
 
 **Grid:** 3 models × 2 shot conditions × 5 seeds × 20 tasks × 3 arms =
 **1800 sessions**, at most **7200 generations**. Estimated 8–14h wall
@@ -1841,8 +1874,10 @@ class Generation:
 
 class OllamaClient:
     def __init__(self, model: str, *, temperature: float, top_p: float,
+                 num_predict: int = 2048, num_ctx: int = 8192,
                  host: str = "http://localhost:11434",
                  timeout_s: int = 120, retries: int = 3) -> None: ...
+    def check_context(self, prompt: str) -> None: ...  # raises ContextOverflowError
     def preflight(self) -> dict: ...   # version + model digest; raises if absent
 ```
 
@@ -1985,7 +2020,10 @@ every arm at 3-shot. Fail fast, listing everything missing.
 
 Preflight reads `/api/tags` and records each model's `digest`,
 `details.quantization_level`, and `details.context_length` into the
-manifest. It **asserts `quantization_level == "Q8_0"` for all three
+manifest. The last is recorded as **`model_context_length`** — the
+model's *capability* — and is not to be confused with **`num_ctx`**, the
+window the run actually used, which is recorded separately from the
+client. Both appear in every manifest. It **asserts `quantization_level == "Q8_0"` for all three
 models** — this is what actually enforces §48's uniform-quantization
 control, rather than trusting that the right tag was pulled. (The
 `qwen2.5-coder:1.5b` currently on this machine is Q4_K_M and must be
@@ -2050,10 +2088,23 @@ comparison, in opposite directions.
 |---|---|---|
 | Ollama down / tag missing at start | infrastructure | preflight abort, before any generation |
 | Transport error or HTTP timeout | infrastructure | 3 retries with backoff, then **abort this `run_id`** (below) |
+| Prompt + `num_predict` exceeds `num_ctx` | infrastructure | **refused before the request**, not retried; aborts this `run_id` with the cause in its manifest |
 | Generation hits `num_predict` | **model** | truncated source submitted; real failed attempt; `truncated: true` logged |
 | Empty or malformed generation | **model** | real failure, consumes an attempt |
 | Non-UTF8 source | **model** | existing `_unencodable_source_verdict` |
 | Program nontermination | **model** | existing `timeout 10` |
+
+**Prompt overflow is refused, never truncated.** `OllamaClient.generate`
+estimates the prompt at ~4 chars/token and refuses when that estimate plus
+`num_predict` exceeds `num_ctx`. The estimate is deliberately crude: it
+exists to catch a 2x overrun, not to shave a token, and a real tokenizer
+is a dependency the eval venv does not have. Classifying overflow as
+infrastructure is the whole point — a silently front-truncated prompt
+loses the language card from the `oxide` and `explicit` arms only, and
+would be recorded as an ordinary model failure in exactly the two arms
+the primary comparison rests on. Refusing before the request means the
+retry loop never sees it (overflow is deterministic) and the
+consecutive-abort backstop below still fires if it is systematic.
 
 **Run-id-scoped abort.** A persistent transport failure aborts only the
 current `run_id` — at most 60 sessions, ~20–30 min — records the cause
