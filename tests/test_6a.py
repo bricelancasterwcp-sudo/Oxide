@@ -1,4 +1,8 @@
+import json
+import urllib.error
+
 from eval.extract import Extraction, extract
+from eval.models import Generation, ModelError, OllamaClient
 
 
 def test_extract_returns_unfenced_text_verbatim():
@@ -146,6 +150,128 @@ def test_repair_prompt_preserves_rustc_help_text_verbatim():
     diag = dict(_BAD_DIAG, code="E0382", message=message, suggestion="")
     verdict = dict(_COMPILE_FAIL, diagnostics=[diag])
     assert message in build_repair_prompt("rust", "fn main(){}", verdict)
+
+
+def _chat_response(content: str = "ok", done_reason: str = "stop") -> bytes:
+    return json.dumps(
+        {
+            "message": {"role": "assistant", "content": content},
+            "done": True,
+            "done_reason": done_reason,
+            "prompt_eval_count": 34,
+            "eval_count": 12,
+            "total_duration": 2_406_012_500,
+        }
+    ).encode()
+
+
+class _FakeHTTP:
+    """Scripted replacement for eval.models._post/_get."""
+
+    def __init__(self, *responses: object) -> None:
+        self.responses = list(responses)
+        self.calls: list[tuple[str, dict | None]] = []
+
+    def __call__(self, url: str, payload: dict | None = None, timeout_s: int = 120) -> dict:
+        self.calls.append((url, payload))
+        item = self.responses.pop(0)
+        if isinstance(item, Exception):
+            raise item
+        return item
+
+
+def _client(monkeypatch, http: _FakeHTTP) -> OllamaClient:
+    monkeypatch.setattr("eval.models._request", http)
+    return OllamaClient(
+        "qwen2.5-coder:1.5b-instruct-q8_0", sleep=lambda _s: None
+    )
+
+
+def test_generate_returns_populated_generation(monkeypatch):
+    http = _FakeHTTP(json.loads(_chat_response("hello")))
+    gen = _client(monkeypatch, http).generate("hi", seed=3)
+    assert gen == Generation(
+        text="hello", tokens_in=34, tokens_out=12, ms=2406, truncated=False
+    )
+
+
+def test_generate_sends_pinned_sampling_options(monkeypatch):
+    http = _FakeHTTP(json.loads(_chat_response()))
+    _client(monkeypatch, http).generate("hi", seed=4)
+    options = http.calls[0][1]["options"]
+    assert options == {
+        "temperature": 0.8,
+        "top_p": 0.95,
+        "seed": 4,
+        "num_predict": 2048,
+    }
+
+
+def test_generate_marks_length_stop_as_truncated(monkeypatch):
+    http = _FakeHTTP(json.loads(_chat_response(done_reason="length")))
+    assert _client(monkeypatch, http).generate("hi", seed=1).truncated is True
+
+
+def test_generate_retries_then_succeeds(monkeypatch):
+    http = _FakeHTTP(
+        urllib.error.URLError("connection refused"),
+        json.loads(_chat_response("recovered")),
+    )
+    gen = _client(monkeypatch, http).generate("hi", seed=1)
+    assert gen.text == "recovered"
+    assert len(http.calls) == 2
+
+
+def test_generate_raises_model_error_after_exhausting_retries(monkeypatch):
+    http = _FakeHTTP(*[urllib.error.URLError("down")] * 3)
+    with pytest.raises(ModelError):
+        _client(monkeypatch, http).generate("hi", seed=1)
+    assert len(http.calls) == 3
+
+
+def test_preflight_returns_digest_and_quantization(monkeypatch):
+    tags = {
+        "models": [
+            {
+                "name": "qwen2.5-coder:1.5b-instruct-q8_0",
+                "digest": "abc123def456",
+                "details": {
+                    "quantization_level": "Q8_0",
+                    "context_length": 32768,
+                },
+            }
+        ]
+    }
+    info = _client(monkeypatch, _FakeHTTP(tags)).preflight()
+    assert info["digest"] == "abc123def456"
+    assert info["quantization_level"] == "Q8_0"
+
+
+def test_preflight_rejects_missing_model(monkeypatch):
+    tags = {"models": [{"name": "other:latest", "digest": "x", "details": {}}]}
+    with pytest.raises(ModelError, match="not pulled"):
+        _client(monkeypatch, _FakeHTTP(tags)).preflight()
+
+
+def test_preflight_rejects_wrong_quantization(monkeypatch):
+    # This is what actually enforces the uniform-quantization control:
+    # the 1.5b already on this machine is Q4_K_M and must be rejected.
+    tags = {
+        "models": [
+            {
+                "name": "qwen2.5-coder:1.5b-instruct-q8_0",
+                "digest": "abc",
+                "details": {"quantization_level": "Q4_K_M"},
+            }
+        ]
+    }
+    with pytest.raises(ModelError, match="Q4_K_M"):
+        _client(monkeypatch, _FakeHTTP(tags)).preflight()
+
+
+def test_healthy_is_false_when_unreachable(monkeypatch):
+    http = _FakeHTTP(urllib.error.URLError("down"))
+    assert _client(monkeypatch, http).healthy() is False
 
 
 def test_repair_prompt_rejects_unknown_arm():
