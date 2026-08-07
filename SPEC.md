@@ -7,7 +7,7 @@ deviating side.
 ## 1. Project layout (create exactly this)
 
 ```
-oxide/                      # repo root = /home/brice/workspace/oxide
+oxide/                      # repo root
 ├── main.py                 # minimal entry stub: docstring + main() that passes
 ├── conftest.py             # empty (makes repo root importable under pytest)
 ├── SPEC.md                 # this file
@@ -781,7 +781,8 @@ lands concurrently).
 
 Parts I–III (as amended) remain binding. Part IV governs `src/codegen/rust.py`,
 `main.py`, and `tests/test_codegen.py`. rustc 1.96.0 is at
-`/home/brice/.cargo/bin/rustc` (not necessarily on PATH).
+the toolchain's rustc, located via `eval/rustc_adapter.find_rustc()` (it is not necessarily on PATH; the reference machine has it at
+`~/.cargo/bin/rustc`).
 
 ## 21. API
 
@@ -929,7 +930,7 @@ Compiled and run: stdout `42`.
 
 ## 25. Test plan (tests/test_codegen.py — pytest)
 
-`RUSTC = shutil.which('rustc') or '/home/brice/.cargo/bin/rustc' if it
+`RUSTC = shutil.which('rustc') or '~/.cargo/bin/rustc' (expanded) if it
 exists`; rustc-dependent tests use
 `@pytest.mark.skipif(RUSTC is None, ...)`. Compile via
 `[RUSTC, '--edition', '2021', file, '-o', out]` in tmp_path; assert

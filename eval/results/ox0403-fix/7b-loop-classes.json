@@ -1,0 +1,338 @@
+[
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0401"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "oxide",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0403"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0403"
+  ]
+ },
+ {
+  "id": "p03",
+  "arm": "explicit",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p03",
+  "arm": "rust",
+  "defect": "loop-carried-move",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "2\n6\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "oxide",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": false,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0403"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "EX0002"
+  ]
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "explicit",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p13",
+  "arm": "rust",
+  "defect": "move-in-while-body",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "20\n30\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "oxide",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0200",
+   "OX0200",
+   "OX0200",
+   "OX0200"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "explicit",
+  "defect": "accumulate-without-reassign",
+  "strict": false,
+  "lenient": true,
+  "parsed": true,
+  "compiled": false,
+  "stdout": "",
+  "codes": [
+   "OX0304"
+  ]
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ },
+ {
+  "id": "p17",
+  "arm": "rust",
+  "defect": "accumulate-without-reassign",
+  "strict": true,
+  "lenient": true,
+  "parsed": true,
+  "compiled": true,
+  "stdout": "10\n13\n",
+  "codes": []
+ }
+]
