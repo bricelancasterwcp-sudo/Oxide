@@ -2,7 +2,15 @@ import json
 import urllib.error
 
 from eval import harness
-from eval.driver import run_one, run_session
+from eval.driver import (
+    MODELS,
+    build_run_id,
+    is_complete,
+    reset_run,
+    run_grid,
+    run_one,
+    run_session,
+)
 from eval.extract import Extraction, extract
 from eval.models import Generation, ModelError, OllamaClient
 
@@ -512,3 +520,125 @@ def test_run_one_writes_one_well_formed_cell_per_task_arm_pair(tmp_path):
     for task in tasks:
         for arm in harness.ARMS:
             assert (raw_dir / f"{task['id']}.{arm}.1.txt").is_file()
+
+
+def test_model_slugs_map_to_pinned_q8_tags():
+    assert MODELS == {
+        "qwen0_5b": "qwen2.5-coder:0.5b-instruct-q8_0",
+        "qwen1_5b": "qwen2.5-coder:1.5b-instruct-q8_0",
+        "qwen7b": "qwen2.5-coder:7b-instruct-q8_0",
+    }
+
+
+def test_build_run_id_matches_pinned_format():
+    assert build_run_id("qwen1_5b", 0, 3) == "6a-qwen1_5b-0shot-s3"
+
+
+def test_is_complete_requires_sixty_cells(tmp_path):
+    run_dir = tmp_path / "6a-qwen1_5b-0shot-s1"
+    run_dir.mkdir()
+    (run_dir / "cells.jsonl").write_text(
+        "".join('{"task":"t"}\n' for _ in range(59)), encoding="utf-8"
+    )
+    assert is_complete(run_dir) is False
+    (run_dir / "cells.jsonl").write_text(
+        "".join('{"task":"t"}\n' for _ in range(60)), encoding="utf-8"
+    )
+    assert is_complete(run_dir) is True
+
+
+def test_reset_run_removes_locks_and_partial_cells(tmp_path):
+    run_dir = tmp_path / "6a-qwen1_5b-0shot-s1"
+    (run_dir / ".sessions").mkdir(parents=True)
+    (run_dir / ".sessions" / "t01.oxide.lock").touch()
+    (run_dir / "cells.jsonl").write_text("{}\n", encoding="utf-8")
+    reset_run(run_dir)
+    assert not run_dir.exists()
+
+
+def test_run_grid_skips_completed_runs(tmp_path):
+    done = tmp_path / build_run_id("qwen1_5b", 0, 1)
+    done.mkdir(parents=True)
+    (done / "cells.jsonl").write_text(
+        "".join('{"task":"t"}\n' for _ in range(60)), encoding="utf-8"
+    )
+    calls: list[str] = []
+
+    def fake_run_one(client, *, run_id, **kwargs):
+        calls.append(run_id)
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr("eval.driver.run_one", fake_run_one)
+    result = run_grid(
+        lambda tag: _StubClient(),
+        slugs=["qwen1_5b"],
+        shot_counts=[0],
+        seeds=[1, 2],
+        results_root=tmp_path,
+    )
+    monkeypatch.undo()
+    assert calls == [build_run_id("qwen1_5b", 0, 2)]
+    assert result["completed"] == [build_run_id("qwen1_5b", 0, 2)]
+
+
+def test_run_grid_aborts_one_run_and_continues(tmp_path):
+    seen: list[str] = []
+
+    def fake_run_one(client, *, run_id, **kwargs):
+        seen.append(run_id)
+        if run_id.endswith("s1"):
+            raise ModelError("transport down")
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr("eval.driver.run_one", fake_run_one)
+    result = run_grid(
+        lambda tag: _StubClient(),
+        slugs=["qwen1_5b"],
+        shot_counts=[0],
+        seeds=[1, 2],
+        results_root=tmp_path,
+    )
+    monkeypatch.undo()
+    assert len(seen) == 2  # did not stop at the failure
+    assert result["aborted"] == [build_run_id("qwen1_5b", 0, 1)]
+    assert result["completed"] == [build_run_id("qwen1_5b", 0, 2)]
+
+
+def test_run_grid_stops_after_three_consecutive_aborts(tmp_path):
+    # Without this backstop a systematically broken configuration burns
+    # silently through every remaining run id and leaves a grid that
+    # looks complete but is not.
+    def fake_run_one(client, *, run_id, **kwargs):
+        raise ModelError("7b will not load")
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr("eval.driver.run_one", fake_run_one)
+    with pytest.raises(RuntimeError, match="consecutive"):
+        run_grid(
+            lambda tag: _StubClient(),
+            slugs=["qwen7b"],
+            shot_counts=[0],
+            seeds=[1, 2, 3, 4, 5],
+            results_root=tmp_path,
+        )
+    monkeypatch.undo()
+
+
+def test_run_grid_waits_for_health_between_runs(tmp_path):
+    waits: list[str] = []
+
+    def fake_run_one(client, *, run_id, **kwargs):
+        return None
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr("eval.driver.run_one", fake_run_one)
+    run_grid(
+        lambda tag: _StubClient(),
+        slugs=["qwen1_5b"],
+        shot_counts=[0],
+        seeds=[1, 2],
+        results_root=tmp_path,
+        health_check=lambda client: waits.append("checked"),
+    )
+    monkeypatch.undo()
+    assert waits == ["checked", "checked"]
