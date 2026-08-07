@@ -1410,12 +1410,12 @@ Add `from eval.models import ModelError` to the module's imports.
 - [ ] **Step 4: Run tests to verify they pass**
 
 Run: `.venv/bin/pytest tests/test_6a.py -q`
-Expected: 42 passed
+Expected: 44 passed
 
 - [ ] **Step 5: Confirm nothing regressed and preflight reports honestly**
 
 Run: `.venv/bin/pytest tests/ -q`
-Expected: 759 passed
+Expected: 761 passed
 
 Run: `.venv/bin/python -m eval.driver --preflight-only`
 Expected: exit 2, listing the three models as not pulled (they are not pulled yet — Task 7 does that). This is the correct answer right now; do not pull to make it pass.
@@ -1847,12 +1847,12 @@ if __name__ == "__main__":
 - [ ] **Step 4: Run tests to verify they pass**
 
 Run: `.venv/bin/pytest tests/test_6a.py -q`
-Expected: 52 passed
+Expected: 54 passed
 
 - [ ] **Step 5: Confirm nothing regressed**
 
 Run: `.venv/bin/pytest tests/ -q`
-Expected: 769 passed
+Expected: 771 passed
 
 - [ ] **Step 6: Commit**
 
@@ -1961,7 +1961,7 @@ Expected: PASS (or a clean skip if the daemon is down).
 - [ ] **Step 8: Full suite**
 
 Run: `.venv/bin/pytest tests/ -q`
-Expected: 770 passed
+Expected: 772 passed
 
 - [ ] **Step 9: Commit**
 
