@@ -1502,7 +1502,7 @@ becomes a thin wrapper); JSON via `json.dumps(..., sort_keys=True)`.
 | OX0300 | `The two sides have incompatible types. Check operand/annotation types; Int and Float never mix implicitly (use to_float / trunc).` |
 | OX0302 | `The type here is ambiguous. Add a use that pins it (e.g. push an element) or an annotation: let x: Vec<Int> = vec().` |
 | OX0303 | `Not callable or wrong argument count. Check the function name and arity.` |
-| OX0304 | `Struct shape mismatch: check field names, duplicates, and that destructuring names every field.` |
+| OX0304 | `If the value is a struct: check field names, duplicates, and that destructuring names every field. If it is NOT a struct there is no field to access at all -- Oxide has no user-defined methods, and only builtins take receiver syntax like v.len(); anything else must be called as a plain function, f(x).` |
 | OX0307 | `This match must cover every variant of the enum. Add the missing arms or a final _ => arm.` |
 | OX0308 | `? requires the function to return the same wrapper: Option-returning fns for Option values, Result-returning fns (matching error type) for Result values.` |
 | OX0400 | `This value was moved at the noted location. Keep it available by cloning at the move site (clone(x)), or reorder so reads happen before the move.` |
