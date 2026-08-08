@@ -778,9 +778,10 @@ def test_run_one_writes_one_well_formed_cell_per_task_arm_pair(tmp_path):
     )
     results_root = tmp_path / "results"
     run_id = "6a-test-run-one"
+    client = _ArmAwareClient()
 
     run_one(
-        _ArmAwareClient(),
+        {arm: client for arm in harness.ARMS},
         run_id=run_id,
         shots=0,
         seed=1,
@@ -808,6 +809,63 @@ def test_run_one_writes_one_well_formed_cell_per_task_arm_pair(tmp_path):
     for task in tasks:
         for arm in harness.ARMS:
             assert (raw_dir / f"{task['id']}.{arm}.1.txt").is_file()
+
+
+# ---------------------------------------------------- per-arm client routing
+# Phase 6c: the llamacpp backend needs a distinct, per-arm grammar-bearing
+# client (oxide/explicit constrained, rust never), while the ollama path must
+# keep sharing exactly one client instance across all three arms -- an
+# existing test (above) relies on that shared identity for prompt ordering.
+
+
+def test_constrained_requires_llamacpp():
+    with pytest.raises(ModelError):
+        driver.make_arm_clients("ollama", "qwen7b", constrained=True,
+                                host="http://localhost:8081")
+
+
+def test_llamacpp_constrained_grammars_by_arm(monkeypatch):
+    monkeypatch.setattr(driver, "_load_grammar", lambda arm: f"G::{arm}")
+    clients = driver.make_arm_clients("llamacpp", "codegemma7b",
+                                      constrained=True,
+                                      host="http://localhost:8081")
+    assert clients["oxide"].grammar == "G::oxide"
+    assert clients["explicit"].grammar == "G::explicit"
+    assert clients["rust"].grammar is None  # rustc is the control, never constrained
+
+
+def test_ollama_backend_shares_one_client():
+    clients = driver.make_arm_clients("ollama", "qwen7b", constrained=False,
+                                      host="http://localhost:8081")
+    assert clients["oxide"] is clients["rust"]  # unchanged legacy behavior
+
+
+def test_grid_cell_routes_the_arm_to_its_client(tmp_path):
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
+    tasks = tmp_path / "tasks.jsonl"
+    tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
+    clients = {
+        "oxide": _StubClient("fn main() {\n    print(42)\n}\n"),
+        "explicit": _StubClient("fn main() {\n    print(42)\n}\n"),
+        "rust": _StubClient('fn main() { println!("42"); }\n'),
+    }
+    driver.run_one(
+        clients,
+        run_id="g0c-test-0shot-s1",
+        shots=0,
+        seed=1,
+        results_root=tmp_path,
+        tasks_path=tasks,
+    )
+    # Every stub answered only its own arm: prompts are non-empty and
+    # carry that arm's lead material.
+    assert clients["oxide"].prompts and all(
+        "Oxide" in p for p in clients["oxide"].prompts
+    )
+    assert clients["rust"].prompts and all(
+        "You are writing Rust" in p for p in clients["rust"].prompts
+    )
+    assert len(clients["explicit"].prompts) >= 1
 
 
 def test_model_slugs_map_to_pinned_q8_tags():
@@ -873,7 +931,7 @@ def test_run_grid_skips_completed_runs(tmp_path):
     monkeypatch = pytest.MonkeyPatch()
     monkeypatch.setattr("eval.driver.run_one", fake_run_one)
     result = run_grid(
-        lambda tag: _StubClient(),
+        lambda tag: {arm: _StubClient() for arm in harness.ARMS},
         slugs=["qwen1_5b"],
         shot_counts=[0],
         seeds=[1, 2],
@@ -893,7 +951,7 @@ def test_run_grid_honors_a_custom_run_prefix(tmp_path):
     monkeypatch = pytest.MonkeyPatch()
     monkeypatch.setattr("eval.driver.run_one", fake_run_one)
     result = run_grid(
-        lambda tag: _StubClient(),
+        lambda tag: {arm: _StubClient() for arm in harness.ARMS},
         slugs=["qwen1_5b"],
         shot_counts=[0],
         seeds=[1],
@@ -916,7 +974,7 @@ def test_run_grid_aborts_one_run_and_continues(tmp_path):
     monkeypatch = pytest.MonkeyPatch()
     monkeypatch.setattr("eval.driver.run_one", fake_run_one)
     result = run_grid(
-        lambda tag: _StubClient(),
+        lambda tag: {arm: _StubClient() for arm in harness.ARMS},
         slugs=["qwen1_5b"],
         shot_counts=[0],
         seeds=[1, 2],
@@ -942,7 +1000,7 @@ def test_run_grid_aborts_one_run_on_harness_error_not_the_whole_grid(tmp_path):
     monkeypatch = pytest.MonkeyPatch()
     monkeypatch.setattr("eval.driver.run_one", fake_run_one)
     result = run_grid(
-        lambda tag: _StubClient(),
+        lambda tag: {arm: _StubClient() for arm in harness.ARMS},
         slugs=["qwen1_5b"],
         shot_counts=[0],
         seeds=[1, 2],
@@ -970,7 +1028,7 @@ def test_run_grid_does_not_swallow_a_repair_prompt_error(tmp_path):
     monkeypatch.setattr("eval.driver.run_one", fake_run_one)
     with pytest.raises(RepairPromptError):
         run_grid(
-            lambda tag: _StubClient(),
+            lambda tag: {arm: _StubClient() for arm in harness.ARMS},
             slugs=["qwen1_5b"],
             shot_counts=[0],
             seeds=[1, 2],
@@ -990,7 +1048,7 @@ def test_run_grid_stops_after_three_consecutive_aborts(tmp_path):
     monkeypatch.setattr("eval.driver.run_one", fake_run_one)
     with pytest.raises(RuntimeError, match="consecutive"):
         run_grid(
-            lambda tag: _StubClient(),
+            lambda tag: {arm: _StubClient() for arm in harness.ARMS},
             slugs=["qwen7b"],
             shot_counts=[0],
             seeds=[1, 2, 3, 4, 5],
@@ -1008,7 +1066,7 @@ def test_run_grid_waits_for_health_between_runs(tmp_path):
     monkeypatch = pytest.MonkeyPatch()
     monkeypatch.setattr("eval.driver.run_one", fake_run_one)
     run_grid(
-        lambda tag: _StubClient(),
+        lambda tag: {arm: _StubClient() for arm in harness.ARMS},
         slugs=["qwen1_5b"],
         shot_counts=[0],
         seeds=[1, 2],
@@ -1028,7 +1086,7 @@ def _drive_one_cell(tmp_path, client, *, preflight=None, health_check=None,
     )
     try:
         return run_grid(
-            lambda tag: client,
+            lambda tag: {arm: client for arm in harness.ARMS},
             slugs=["qwen1_5b"],
             shot_counts=[0],
             seeds=list(seeds),

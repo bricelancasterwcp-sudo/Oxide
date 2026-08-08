@@ -20,6 +20,9 @@ from typing import Callable
 
 from eval import harness, rustc_adapter
 from eval.extract import extract
+from eval.llamacpp import DEFAULT_HOST as LLAMACPP_DEFAULT_HOST
+from eval.llamacpp import LlamaCppClient, grammar_digest
+from eval.llamacpp import load_grammar as _load_grammar  # patchable seam
 from eval.models import ModelClient, ModelError, OllamaClient
 from eval.repair import build_repair_prompt
 
@@ -103,7 +106,7 @@ def run_session(
 
 
 def run_one(
-    client: ModelClient,
+    clients: dict[str, ModelClient],
     *,
     run_id: str,
     shots: int,
@@ -111,7 +114,13 @@ def run_one(
     results_root: Path,
     tasks_path: Path | None = None,
 ) -> None:
-    """All 60 sessions (20 tasks x 3 arms) for one run id."""
+    """All 60 sessions (20 tasks x 3 arms) for one run id.
+
+    ``clients`` maps each arm to the client that answers it. The ollama
+    path passes the SAME client instance under all three keys (legacy
+    behavior, byte-identical prompts and calls); llamacpp passes a
+    distinct grammar-bearing client per arm.
+    """
     run_dir = Path(results_root) / run_id
     cells_path = run_dir / "cells.jsonl"
     raw_dir = run_dir / "raw"
@@ -119,7 +128,7 @@ def run_one(
     for task_id in sorted(tasks):
         for arm in harness.ARMS:
             cell = run_session(
-                client,
+                clients[arm],
                 run_id=run_id,
                 task_id=task_id,
                 arm=arm,
@@ -159,6 +168,28 @@ def unknown_slugs(slugs: list[str]) -> list[str]:
     return [slug for slug in slugs if slug not in MODELS]
 
 
+def make_arm_clients(
+    backend: str, slug: str, *, constrained: bool, host: str
+) -> dict[str, ModelClient]:
+    """One client per arm. Ollama: a single shared client (legacy
+    behavior, byte-identical prompts and calls). llamacpp: per-arm
+    grammar when constrained. The rust arm is NEVER constrained --
+    rustc's own diagnostics are the control (SPEC section 45)."""
+    if backend == "ollama":
+        if constrained:
+            raise ModelError(
+                "--constrained requires --backend llamacpp: Ollama accepts "
+                "a grammar option and silently ignores it"
+            )
+        client = OllamaClient(MODELS[slug])
+        return {arm: client for arm in harness.ARMS}
+    clients: dict[str, ModelClient] = {}
+    for arm in harness.ARMS:
+        grammar = _load_grammar(arm) if constrained and arm != "rust" else None
+        clients[arm] = LlamaCppClient(MODELS[slug], grammar=grammar, host=host)
+    return clients
+
+
 def is_complete(run_dir: Path) -> bool:
     """A run is complete only with all 60 cell records on disk."""
     cells = Path(run_dir) / "cells.jsonl"
@@ -188,7 +219,7 @@ def wait_for_health(client: object, *, cap_s: int = HEALTH_WAIT_CAP_S,
 
 
 def run_grid(
-    make_client: Callable[[str], ModelClient],
+    make_clients: Callable[[str], dict[str, ModelClient]],
     *,
     slugs: list[str],
     shot_counts: list[int],
@@ -198,15 +229,18 @@ def run_grid(
     tasks_path: Path | None = None,
     preflight: dict[str, dict] | None = None,
     prefix: str = "6a",
+    backend: str = "ollama",
 ) -> dict:
-    """Walk the grid, one run id at a time. ``preflight`` maps slug -> the
-    payload from ``OllamaClient.preflight``; section 48 requires it in every
-    manifest, the only artifact proving which weights produced the result."""
+    """Walk the grid, one run id at a time. ``make_clients(slug)`` returns
+    the per-arm client dict for that slug (see ``make_arm_clients``);
+    ``preflight`` maps slug -> the provenance payload from
+    ``ModelClient.preflight``; section 48 requires it in every manifest,
+    the only artifact proving which weights produced the result."""
     completed: list[str] = []
     aborted: list[str] = []
     consecutive = 0
     for slug in slugs:
-        client = make_client(MODELS[slug])
+        clients = make_clients(slug)
         for shots in shot_counts:
             for seed in seeds:
                 run_id = build_run_id(slug, shots, seed, prefix=prefix)
@@ -215,7 +249,7 @@ def run_grid(
                     continue
                 reset_run(run_dir)
                 exc = _run_grid_cell(
-                    client,
+                    clients,
                     run_id=run_id,
                     run_dir=run_dir,
                     slug=slug,
@@ -225,6 +259,7 @@ def run_grid(
                     tasks_path=tasks_path,
                     health_check=health_check,
                     preflight=(preflight or {}).get(slug),
+                    backend=backend,
                 )
                 if exc is not None:
                     aborted.append(run_id)
@@ -243,7 +278,7 @@ def run_grid(
 
 
 def _run_grid_cell(
-    client: ModelClient,
+    clients: dict[str, ModelClient],
     *,
     run_id: str,
     run_dir: Path,
@@ -254,8 +289,15 @@ def _run_grid_cell(
     tasks_path: Path | None,
     health_check: Callable[[object], None] | None,
     preflight: dict | None = None,
+    backend: str = "ollama",
 ) -> Exception | None:
     """Run one grid cell (one run id) start to finish.
+
+    ``clients["rust"]`` stands in as the primary/representative client
+    wherever exactly one is needed (health check, manifest sampling
+    params): for ollama it IS the single shared instance, and for
+    llamacpp it is the one arm that is never grammar-constrained, so its
+    params match the server-level configuration common to all three.
 
     Ordering is load-bearing (section 6.4): health check, THEN the
     manifest, THEN the sessions, so an interrupted run still records what
@@ -278,7 +320,7 @@ def _run_grid_cell(
     which means every subsequent repair prompt would be malformed -- that
     must stop the grid loudly, not abort one run and carry on.
     """
-    fields = _manifest_fields(client, preflight)
+    fields = _manifest_fields(clients, preflight, backend)
     started_at = _timestamp()
 
     def write(**extra: object) -> None:
@@ -287,10 +329,10 @@ def _run_grid_cell(
 
     try:
         if health_check is not None:
-            health_check(client)
+            health_check(clients["rust"])
         write()
         run_one(
-            client,
+            clients,
             run_id=run_id,
             shots=shots,
             seed=seed,
@@ -308,7 +350,10 @@ def _timestamp() -> str:
     return datetime.now(UTC).isoformat()
 
 
-def _manifest_fields(client: ModelClient, preflight: dict | None) -> dict:
+def _manifest_fields(
+    clients: dict[str, ModelClient], preflight: dict | None,
+    backend: str = "ollama",
+) -> dict:
     """Sampling params and provenance for the manifest.
 
     Absent attributes read as ``None``, never as the pinned defaults.
@@ -323,7 +368,15 @@ def _manifest_fields(client: ModelClient, preflight: dict | None) -> dict:
     is the window the run actually used -- pinned by the client, because
     Ollama's own default is 4096 and would silently truncate the Oxide
     arms' prompts from the front (section 48).
+
+    ``grammar_sha256`` is recorded per arm (section 49): a result produced
+    under a grammar cannot be traced without knowing which one, and the
+    rust arm's is always ``None`` by design (it is never constrained).
+    ``preflight`` is embedded verbatim alongside the fields already
+    extracted from it, since llamacpp's payload carries provenance (e.g.
+    ``model_path``) that has no equivalent top-level key here.
     """
+    client = clients["rust"]
     info = preflight or {}
     return {
         "temperature": getattr(client, "temperature", None),
@@ -334,6 +387,12 @@ def _manifest_fields(client: ModelClient, preflight: dict | None) -> dict:
         "quantization_level": info.get("quantization_level"),
         "model_context_length": info.get("context_length"),
         "ollama_version": info.get("ollama_version"),
+        "backend": backend,
+        "preflight": preflight,
+        "grammar_sha256": {
+            arm: grammar_digest(getattr(clients[arm], "grammar", None))
+            for arm in harness.ARMS
+        },
     }
 
 
@@ -448,6 +507,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--results-root", default=str(harness.RESULTS_ROOT))
     parser.add_argument("--preflight-only", action="store_true")
     parser.add_argument("--run-prefix", default="6a")
+    parser.add_argument("--backend", choices=["ollama", "llamacpp"],
+                        default="ollama")
+    parser.add_argument("--constrained", action="store_true")
+    parser.add_argument("--host", default=LLAMACPP_DEFAULT_HOST)
+    parser.add_argument("--expect-model-path", default=None)
     args = parser.parse_args(argv)
 
     slugs = [s for s in args.models.split(",") if s]
@@ -460,14 +524,37 @@ def main(argv: list[str] | None = None) -> int:
     shot_counts = [int(s) for s in args.shots.split(",") if s]
     problems: list[str] = []
     preflight: dict[str, dict] = {}
+    clients: dict[str, dict[str, ModelClient]] = {}
     for slug in slugs:
         try:
-            preflight[slug] = OllamaClient(MODELS[slug]).preflight()
+            arm_clients = make_arm_clients(
+                args.backend, slug, constrained=args.constrained,
+                host=args.host,
+            )
+            info = arm_clients["rust"].preflight()
         except ModelError as exc:
             problems.append(str(exc))
+            continue
+        # Stale-server guard: a llama-server left running from a previous
+        # slug (or restarted on the wrong weights) would otherwise serve
+        # every session under the WRONG model with no visible symptom.
+        model_path = info.get("model_path") or ""
+        if args.expect_model_path and args.expect_model_path not in model_path:
+            problems.append(
+                f"{slug}: --expect-model-path {args.expect_model_path!r} "
+                f"not found in served model_path {model_path!r} -- stale "
+                f"server guard tripped, restart the server on the intended "
+                f"weights"
+            )
+            continue
+        clients[slug] = arm_clients
+        preflight[slug] = info
     problems.extend(preflight_environment(shot_counts))
     if problems:
-        for problem in problems:
+        # dict.fromkeys dedupes while preserving order: a CLI-level
+        # misconfiguration (e.g. --constrained without --backend llamacpp)
+        # raises the identical ModelError once per slug in the loop above.
+        for problem in dict.fromkeys(problems):
             print(problem, file=sys.stderr)
         return 2
     if args.preflight_only:
@@ -475,7 +562,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     result = run_grid(
-        lambda tag: OllamaClient(tag),
+        lambda slug: clients[slug],
         slugs=slugs,
         shot_counts=shot_counts,
         seeds=parse_seeds(args.seeds),
@@ -483,6 +570,7 @@ def main(argv: list[str] | None = None) -> int:
         health_check=wait_for_health,
         preflight=preflight,
         prefix=args.run_prefix,
+        backend=args.backend,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 1 if result["aborted"] else 0
