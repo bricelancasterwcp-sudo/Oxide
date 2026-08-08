@@ -285,6 +285,19 @@ def score(record: dict, submitted_source: str) -> dict:
             and not any(is_syntax_code(arm, code) for code in codes)
         ),
         "compiled": bool(verdict["compiled"]),
+        # A repair that COMPILES, clears the ownership error, and produces
+        # the wrong output -- the program still runs, and now does the
+        # wrong thing silently. This requires `compiled`, and that is the
+        # whole point of having a separate field.
+        #
+        # `lenient and not strict` was previously read as this and is NOT
+        # equivalent: `lenient` requires only that the submission parses
+        # and carries no ownership code, so it also counts a repair that
+        # traded an ownership error for a TYPE error. Those never run at
+        # all. Reading the conjunction as "silenced the error while
+        # changing behaviour" overstated the rate by up to 60 points and
+        # inverted the ranking between arms.
+        "degenerate": bool(verdict["compiled"] and not verdict["passed"]),
         "stdout": verdict["stdout"],
         "codes": codes,
         # The submitted program, verbatim. Without it a result set records

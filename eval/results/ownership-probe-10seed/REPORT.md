@@ -136,10 +136,32 @@ because both arms sat at or below 10% at 3 seeds. At 10 seeds it is 23.5% /
 13.5% — well clear of the floor, and the family with the cleanest sign split
 (+9/−1). **That floor verdict was itself a 3-seed artifact.**
 
-### The finding that did not weaken
+### ~~The finding that did not weaken~~ — WITHDRAWN
 
-The degenerate-fix rate is large, consistent, and robust across all three
-families:
+**The table below is wrong.** It was computed as `lenient AND NOT strict`,
+which does not require the program to COMPILE. Most of those repairs traded
+an ownership error for a type error and never ran. True rates, requiring
+compilation:
+
+| Model | oxide | explicit | rust |
+|---|---|---|---|
+| qwen2.5-coder-7b | **0.0%** | **0.0%** | 3.0% |
+| codegemma-7b | 2.5% | 2.5% | 5.0% |
+| granite-code-8b | **34.0%** | 25.5% | 2.0% |
+
+Two families put Rust highest, one puts Oxide highest. No consistent
+direction, no order-of-magnitude gap. `score()` now emits an explicit
+`degenerate` field requiring compilation, with tests pinning that a type
+error cannot be counted as one.
+
+What the mislabelled repairs actually were: in the qwen Oxide arms the
+dominant codes are `OX0304` (94) and `OX0200` (86) — `.clone()` method
+syntax, which Oxide does not have, and undefined names. Even in a repair
+task with syntax, names and types supplied, these models reach for Rust
+idioms the language lacks. That is consistent with the whole-program result
+and is the durable observation.
+
+The original (incorrect) table follows for the record:
 
 | Model | oxide | explicit | rust |
 |---|---|---|---|

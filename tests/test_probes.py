@@ -457,3 +457,54 @@ class TestP17Disambiguation:
         assert record["expected_stdout"] == "10\n13\n", (
             "the before/after pair is what makes accumulation observable"
         )
+
+
+class TestDegenerateRequiresCompilation:
+    """`degenerate` must mean "runs, and silently does the wrong thing".
+
+    This was previously derived as `lenient and not strict`, which is not
+    the same: `lenient` requires only that the submission parses and
+    carries no ownership code, so it also counts repairs that traded an
+    ownership error for a TYPE error. Those never run. The conflation
+    overstated the reported rate by up to 60 points and inverted the
+    ranking between arms -- qwen's Oxide arms were reported at 60%/68%
+    against Rust's 3% when the true figures are 0%/0% against 3%.
+    """
+
+    def _p(self, arm: str) -> dict:
+        return next(r for r in PROBES if r["id"] == "p01" and r["arm"] == arm)
+
+    @pytest.mark.parametrize("arm", ["oxide", "explicit", "rust"])
+    def test_a_type_error_is_not_degenerate(self, arm):
+        """The exact shape that caused the error: ownership code gone,
+        replaced by a type error. Lenient may pass; degenerate must not."""
+        record = self._p(arm)
+        broken = record["broken"]
+        # `.clone()` is Rust method syntax; Oxide has only `clone(x)`.
+        submitted = (
+            broken.replace("let b = a", "let b = a.clone()")
+            if arm != "rust" else broken.replace("let b = a;", "let b = a.qqq();")
+        )
+        result = probe.score(record, submitted)
+        assert result["compiled"] is False
+        assert result["degenerate"] is False, (
+            "a submission that does not compile cannot be a degenerate "
+            "repair -- it never runs"
+        )
+
+    @pytest.mark.parametrize("arm", ["oxide", "explicit", "rust"])
+    def test_the_reference_fix_is_not_degenerate(self, arm):
+        record = self._p(arm)
+        result = probe.score(record, record["fix"])
+        assert result["strict"] is True
+        assert result["degenerate"] is False
+
+    def test_degenerate_implies_compiled(self):
+        """Structural: no scoring path may report degenerate without
+        compilation."""
+        for arm in ("oxide", "explicit", "rust"):
+            record = self._p(arm)
+            for candidate in ("", "!!! junk !!!", record["broken"], record["fix"]):
+                result = probe.score(record, candidate)
+                if result["degenerate"]:
+                    assert result["compiled"], (arm, candidate[:40])

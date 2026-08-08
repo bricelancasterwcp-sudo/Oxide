@@ -84,7 +84,7 @@ refuted.** Full trajectory in
 [`eval/results/ownership-probe-10seed/`](eval/results/ownership-probe-10seed/).
 
 **Supported:** the direction is consistently positive across three model
-families, and the degenerate-fix gap below is large and robust.
+families. Nothing stronger.
 
 **Not supported:**
 
@@ -117,12 +117,42 @@ types are all supplied; the only thing wrong is the thing under test.
   the reference fix must compile and reproduce the expected output.
 - Scored **strict** (compiles *and* output matches) and **lenient** (parses and
   the ownership diagnostic is gone). The gap between them is the
-  degenerate-fix rate — repairs that silence the error while changing what the
-  program does. Across all three families it runs **38–68%** in the Oxide arms
-  against **3–7%** for Rust. That order-of-magnitude gap held under every
-  increase in data and is the most solid result this instrument has produced.
+  gap between them is *not* a degenerate-fix rate, though it was reported as
+  one here until it was checked directly — see the correction below.
   On lenient alone the three arms are indistinguishable; strict separates them
   completely. Reporting lenient without strict inverts the conclusion.
+
+## A correction
+
+This README previously reported a "degenerate-fix rate" — repairs that
+compile, silence the ownership error, and silently do the wrong thing —
+at **38–68% in the Oxide arms against 3–7% for Rust**, and called it the most
+solid result the instrument had produced. **That was wrong.**
+
+It was computed as `lenient AND NOT strict`. But `lenient` requires only that
+a submission *parses* and carries no ownership code — it does not require the
+program to **compile**. Most of those repairs traded an ownership error for a
+*type* error and never ran at all. Checking directly:
+
+| Model | oxide | explicit | rust |
+|---|---|---|---|
+| qwen2.5-coder-7b | **0%** | **0%** | 3% |
+| codegemma-7b | 2.5% | 2.5% | 5% |
+| granite-code-8b | **34%** | 25.5% | 2% |
+
+Two families put Rust *highest*; one puts Oxide highest. There is no
+consistent direction and no order-of-magnitude gap. The claim is withdrawn.
+
+What the mislabelled repairs actually were is more interesting: in the qwen
+Oxide arms the dominant failures are `OX0304` (94) and `OX0200` (86) — method
+syntax like `v.clone()`, which Oxide does not have, and undefined names. Even
+in a *repair* task, with syntax, names, and types all supplied and only the
+ownership decision missing, these models reach for Rust idioms the language
+does not provide. That matches the whole-program result and is the more
+durable observation.
+
+`score()` now emits an explicit `degenerate` field requiring compilation, with
+tests pinning that a type error can never be counted as one.
 
 ## It found a real bug
 
