@@ -21,9 +21,9 @@ from typing import Callable
 from eval import harness, rustc_adapter
 from eval.extract import extract
 from eval.llamacpp import DEFAULT_HOST as LLAMACPP_DEFAULT_HOST
-from eval.llamacpp import LlamaCppClient, grammar_digest
+from eval.llamacpp import LlamaCppClient, ServerContextOverflowError, grammar_digest
 from eval.llamacpp import load_grammar as _load_grammar  # patchable seam
-from eval.models import ContextOverflowError, ModelClient, ModelError, OllamaClient
+from eval.models import ModelClient, ModelError, OllamaClient
 from eval.repair import build_repair_prompt
 
 
@@ -42,16 +42,27 @@ def run_session(
     """Drive one task/arm to a verdict or the attempt cap.
 
     ModelError is deliberately NOT caught: infrastructure failures must
-    never be recorded as model failures (section 7). ``ContextOverflowError``
-    is the one exception, and it is a RESULT, not infrastructure (SPEC
-    section 45): a repair prompt can grow across attempts and overflow the
-    server's real context window even though the client's own char-count
-    heuristic passed it (that heuristic is deliberately crude -- see
-    ``eval.models.estimate_tokens``). It is the cross-attempt sibling of
-    truncation at ``num_predict``, which is already a result. The session
-    ends there with whatever was submitted so far, marked
-    ``context_exhausted``, and the caller's loop (``run_one``) continues to
-    the next task/arm -- no run abort.
+    never be recorded as model failures (section 7).
+    ``ServerContextOverflowError`` is the one, NARROW exception, and it is
+    a RESULT, not infrastructure (SPEC section 45/51): a repair prompt can
+    grow across attempts and overflow the server's real context window
+    even though the client's own char-count heuristic passed it (that
+    heuristic is deliberately crude -- see ``eval.models.estimate_tokens``).
+    It is the cross-attempt sibling of truncation at ``num_predict``, which
+    is already a result. The session ends there with whatever was
+    submitted so far, marked ``context_exhausted``, and the caller's loop
+    (``run_one``) continues to the next task/arm -- no run abort.
+
+    This is deliberately NOT the same as the base ``ContextOverflowError``
+    raised by ``check_context`` BEFORE a request is ever sent: that is the
+    client's own pre-request refusal, still classified as infrastructure,
+    and it is NOT caught here -- it propagates as a plain ``ModelError``
+    and still aborts the run id exactly as before. Catching the base class
+    here would silently convert that abort into a fabricated zero-attempt
+    "result" for every session sharing the same oversized prompt (e.g. a
+    3-shot condition whose card + shots alone exceed ``num_ctx``), with no
+    abort and no manifest cause -- precisely what routing
+    ``ContextOverflowError`` through ``ModelError`` exists to prevent.
     """
     session = harness.new_session(
         task_id,
@@ -74,12 +85,15 @@ def run_session(
     for attempt in range(1, harness.MAX_ATTEMPTS + 1):
         try:
             generation = client.generate(prompt, seed=seed)
-        except ContextOverflowError:
+        except ServerContextOverflowError:
             # Defensive: this can in principle fire on attempt 1, before
             # ANY submission (attempt-1 prompts are small, so it
             # shouldn't) -- ``first``/``verdict`` simply stay at their
             # initial values and the block below reads that as zero
-            # evidence rather than crashing on it.
+            # evidence rather than crashing on it. A plain
+            # ContextOverflowError (the client's own pre-request refusal)
+            # is NOT this subclass and is not caught here -- see the
+            # docstring above.
             context_exhausted = True
             break
         (raw_dir / f"{task_id}.{arm}.{attempt}.txt").write_text(

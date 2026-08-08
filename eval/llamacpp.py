@@ -78,16 +78,30 @@ def grammar_digest(grammar: str | None) -> str | None:
     return hashlib.sha256(grammar.encode("utf-8")).hexdigest()
 
 
-def _context_overflow_message(exc: urllib.error.HTTPError) -> str | None:
-    """The server's own diagnostic when a 400 IS llama-server's context
-    overflow, or ``None`` for any other 400 (or a non-JSON/unparsable
-    body). ``estimate_tokens``'s chars-per-token heuristic is
+class ServerContextOverflowError(ContextOverflowError):
+    """The prompt PASSED the client's own pre-request estimate
+    (``check_context``) but the server's real tokenizer rejected it
+    anyway. ``estimate_tokens``'s chars-per-token heuristic is
     deliberately crude (section 48's own docstring) and under-counts a
     real prompt often enough that a repair prompt grown across several
-    attempts can pass ``check_context`` client-side and still overflow
-    the server's actual tokenizer -- a cross-attempt sibling of
-    truncation-at-num_predict, and section 45 treats it the same way:
-    a RESULT, not infrastructure.
+    attempts can clear it and still overflow the server -- a
+    cross-attempt sibling of truncation-at-``num_predict``.
+
+    Distinct from the base ``ContextOverflowError``, which is the
+    client's OWN pre-request refusal and still aborts the run (SPEC
+    section 51): this subclass is the SESSION-RESULT sibling section
+    45/51 describes. ``eval.driver.run_session`` catches this subclass
+    specifically -- and only this subclass -- so a plain
+    ``ContextOverflowError`` from ``check_context`` is untouched by that
+    catch and still propagates as a run abort.
+    """
+
+
+def _parse_http_error_body(exc: urllib.error.HTTPError) -> dict | None:
+    """The server's own ``error`` object from a 400 (or other) response
+    body, or ``None`` if it cannot be read/parsed or isn't this JSON
+    shape. Reads the response body exactly once -- callers must not read
+    it again.
 
     Reproduced against the running server on :8081 (SPEC section 45's
     harness host) to pin the actual shapes rather than guess them:
@@ -104,23 +118,21 @@ def _context_overflow_message(exc: urllib.error.HTTPError) -> str | None:
             {"error": {"code": 400, "message": "'messages' is required",
             "type": "invalid_request_error"}}
 
-    ``error.type`` is the honest discriminator between the two. Any 400
-    that isn't ``"exceed_context_size_error"`` -- or isn't this JSON
-    shape at all -- is left alone and falls through to the normal
-    retry-then-ModelError path.
+    ``error.type`` is the honest discriminator between the two.
     """
-    if exc.code != 400:
-        return None
     try:
         body = json.loads(exc.read().decode("utf-8"))
-    except (ValueError, UnicodeDecodeError):
+    except Exception:
+        # The body is a live socket file, not a buffer: IncompleteRead,
+        # socket.timeout, or any other OSError can fire here alongside
+        # the JSON/decode failures, and an unreadable body is
+        # definitionally not overflow-shaped either way. Caught broadly
+        # so a read failure can never escape _call's except clause and
+        # kill the whole grid instead of this one request (would
+        # otherwise bypass the entire ModelError contract).
         return None
     error = body.get("error") if isinstance(body, dict) else None
-    if not isinstance(error, dict):
-        return None
-    if error.get("type") != "exceed_context_size_error":
-        return None
-    return str(error.get("message") or "context size exceeded")
+    return error if isinstance(error, dict) else None
 
 
 class LlamaCppClient:
@@ -160,26 +172,36 @@ class LlamaCppClient:
         deterministic (the server would reject the identical prompt the
         same way three more times), so burning the retry budget on it
         would only delay a result that is already known. It is raised
-        immediately as ``ContextOverflowError`` instead of ``ModelError``
-        -- see ``_context_overflow_message``. ``HTTPError`` must be
-        caught ahead of the general ``URLError`` branch below: it IS a
-        ``URLError`` subclass, so listing it second would let the
+        immediately as ``ServerContextOverflowError`` instead of
+        ``ModelError`` -- see ``_parse_http_error_body`` and that class's
+        docstring for why it is a DISTINCT subclass from the client-side
+        ``ContextOverflowError`` raised by ``check_context``. ``HTTPError``
+        must be caught ahead of the general ``URLError`` branch below: it
+        IS a ``URLError`` subclass, so listing it second would let the
         general branch swallow it first.
         """
-        last: Exception | None = None
+        last: Exception | str | None = None
         for attempt in range(self.retries):
             try:
                 return _request(url, payload, self.timeout_s)
             except urllib.error.HTTPError as exc:
-                overflow = _context_overflow_message(exc)
-                if overflow is not None:
-                    raise ContextOverflowError(
+                error = _parse_http_error_body(exc)
+                overflow = error is not None and (
+                    error.get("type") == "exceed_context_size_error"
+                )
+                if overflow:
+                    raise ServerContextOverflowError(
                         f"{self.model}: server rejected the prompt as "
-                        f"exceeding its context window ({overflow}). "
+                        f"exceeding its context window "
+                        f"({error.get('message') or 'context size exceeded'}). "
                         f"estimate_tokens() under-counted this prompt "
                         f"against the server's real tokenizer."
                     ) from exc
-                last = exc
+                # Not overflow-shaped: retried like any other transport
+                # failure, but surface the server's own message (if any)
+                # in the eventual ModelError instead of discarding it.
+                message = error.get("message") if error else None
+                last = f"{exc} ({message})" if message else exc
                 if attempt < self.retries - 1:
                     self._sleep(self.backoff_s * (2**attempt))
             except (urllib.error.URLError, OSError, ValueError) as exc:

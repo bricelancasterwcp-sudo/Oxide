@@ -1647,11 +1647,15 @@ each attempt appended to `eval/results/<run_id>/triples.jsonl`:
 `{"task", "arm", "attempt", "code", "diagnostics", "compiled",
 "passed"}`) — this file is the verified-repair-triple dataset.
 
-**Context-budget exhaustion is a session result, not infrastructure**
-(§51): if a repair prompt grows across attempts and the server rejects
-it as exceeding its context window, the session ends there with
+**Context-budget exhaustion is a session result, not infrastructure —
+but only when the SERVER is the one that catches it** (§51): if a
+prompt passes the client's own pre-request estimate and the server's
+real tokenizer rejects it anyway, the session ends there with
 attempts-so-far recorded and the cell marked `context_exhausted`; the
-grid proceeds to the next session, not a run abort.
+grid proceeds to the next session, not a run abort. The client's OWN
+pre-request refusal is a different, narrower exception and is
+unaffected: it still aborts the run id exactly as before, because at
+that point there is no session evidence yet to preserve.
 
 Fairness pins: identical task text across arms; caps on attempts (4) and
 exec time identical; the Rust arm receives rustc's own full diagnostic
@@ -2109,8 +2113,8 @@ comparison, in opposite directions.
 |---|---|---|
 | Ollama down / tag missing at start | infrastructure | preflight abort, before any generation |
 | Transport error or HTTP timeout | infrastructure | 3 retries with backoff, then **abort this `run_id`** (below) |
-| Prompt + `num_predict` exceeds `num_ctx` (pre-request estimate) | infrastructure | **refused before the request**, not retried; aborts this `run_id` with the cause in its manifest |
-| Server rejects an in-session (repair) prompt as exceeding context, after ≥1 attempt already submitted this session | **model** | session ends; attempts-so-far recorded; cell marked `context_exhausted` (§45) |
+| Prompt + `num_predict` exceeds `num_ctx`, caught by the CLIENT's own pre-request estimate (`ContextOverflowError`) | infrastructure | **refused before the request**, not retried; aborts this `run_id` with the cause in its manifest |
+| Prompt passes the client's estimate, but the SERVER's real tokenizer rejects it (`ServerContextOverflowError`, a distinct subclass) | **model** | session ends; attempts-so-far recorded; cell marked `context_exhausted` (§45) |
 | Generation hits `num_predict` | **model** | truncated source submitted; real failed attempt; `truncated: true` logged |
 | Empty or malformed generation | **model** | real failure, consumes an attempt |
 | Non-UTF8 source | **model** | existing `_unencodable_source_verdict` |
@@ -2129,12 +2133,19 @@ retry loop never sees it (overflow is deterministic) and the
 consecutive-abort backstop below still fires if it is systematic.
 
 **Cross-attempt context exhaustion is the sibling case, and it is a
-result.** The estimate above is checked per request, not against the
-whole session, so a repair prompt that grows across attempts can pass it
-and still overflow the server's real tokenizer once at least one attempt
-has already been submitted. Aborting there would discard real evidence
-already on record, so the session ends instead — exactly like truncation
-at `num_predict`, not like the pre-request refusal above.
+result — but the two must not be conflated.** The estimate above is
+checked per request, not against the whole session, so a repair prompt
+that grows across attempts can pass it and still overflow the server's
+real tokenizer. That failure is raised as `ServerContextOverflowError`,
+a DISTINCT subclass of the client's own `ContextOverflowError` — not the
+same exception — precisely so the driver can tell the two cases apart
+without guessing from session state. `run_session` catches only the
+subclass; a plain `ContextOverflowError` (the pre-request refusal above)
+still propagates and still aborts the run. Collapsing the two into one
+catch would fabricate a zero-attempt "result" for a prompt that never
+had a chance to produce one — e.g. a 3-shot condition whose card and
+shots alone exceed `num_ctx` — silently dropping what should be a loud,
+manifest-recorded abort.
 
 **Run-id-scoped abort.** A persistent transport failure aborts only the
 current `run_id` — at most 60 sessions, ~20–30 min — records the cause

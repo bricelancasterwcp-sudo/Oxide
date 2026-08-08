@@ -43,7 +43,9 @@ class ModelError(Exception):
 
 
 class ContextOverflowError(ModelError):
-    """The prompt plus its reserved generation exceeds ``num_ctx``.
+    """The prompt plus its reserved generation exceeds ``num_ctx``,
+    caught BEFORE the request is ever sent -- the client's own
+    ``check_context`` estimate refusing a prompt it judges too large.
 
     A ModelError subclass on purpose. Overflow is a *configuration*
     failure, never a model result: llama.cpp silently truncates an
@@ -57,6 +59,15 @@ class ContextOverflowError(ModelError):
     written into that run's manifest, and three in a row trip the
     grid-stop backstop rather than producing 1800 plausible-looking
     sessions built on truncated prompts.
+
+    This classification is for the PRE-REQUEST case only: there is no
+    session evidence yet when it fires, so aborting the run id loses
+    nothing (section 51). ``eval.llamacpp.ServerContextOverflowError`` is
+    the distinct sibling for a prompt that PASSED this estimate and was
+    rejected only by the server's own tokenizer -- ``run_session``
+    catches that subclass specifically, and only that subclass, so a
+    plain ``ContextOverflowError`` raised here still propagates and
+    still aborts the run exactly as described above (section 45/51).
     """
 
 

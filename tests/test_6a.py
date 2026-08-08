@@ -21,6 +21,7 @@ from eval.driver import (
     wait_for_health,
 )
 from eval.extract import Extraction, extract
+from eval.llamacpp import ServerContextOverflowError
 from eval.models import (
     ContextOverflowError,
     Generation,
@@ -727,9 +728,13 @@ def test_run_session_lets_model_error_propagate(tmp_path):
 
 class _ContextExhaustsClient:
     """Answers with an always-failing program up to (not including) call
-    number ``fires_on_attempt``, then raises ``ContextOverflowError`` on
-    that call -- the shape of a repair prompt that grew across attempts
-    and overflowed the server's real context window mid-session."""
+    number ``fires_on_attempt``, then raises
+    ``ServerContextOverflowError`` on that call -- the shape of a repair
+    prompt that grew across attempts, passed the client's OWN pre-request
+    estimate, and overflowed the server's real context window anyway. The
+    base ``ContextOverflowError`` (the client's pre-request refusal) is a
+    DIFFERENT case -- see ``test_context_overflow_aborts_the_run_id_and_records_it``
+    -- and is deliberately not what this stub raises."""
 
     def __init__(self, fires_on_attempt: int) -> None:
         self.fires_on_attempt = fires_on_attempt
@@ -738,7 +743,7 @@ class _ContextExhaustsClient:
     def generate(self, prompt: str, *, seed: int) -> Generation:
         self.calls += 1
         if self.calls == self.fires_on_attempt:
-            raise ContextOverflowError("prompt exceeds num_ctx 8192")
+            raise ServerContextOverflowError("prompt exceeds num_ctx 8192")
         return Generation("this is not a program", 10, 5, 100, False)
 
 
@@ -821,7 +826,7 @@ def test_run_one_continues_to_the_next_session_past_context_exhaustion(tmp_path)
         def generate(self, prompt: str, *, seed: int) -> Generation:
             self.calls += 1
             if self.calls == 1:
-                raise ContextOverflowError("prompt exceeds num_ctx 8192")
+                raise ServerContextOverflowError("prompt exceeds num_ctx 8192")
             if harness.RUST_PREAMBLE in prompt:
                 arm = "rust"
             elif "Oxide Explicit" in prompt:
@@ -1282,12 +1287,19 @@ def test_run_grid_waits_for_health_between_runs(tmp_path):
 
 
 def _drive_one_cell(tmp_path, client, *, preflight=None, health_check=None,
-                    seeds=(1,), fake_run_one=None):
-    """Walk one grid cell with run_one stubbed out (no generation)."""
+                    seeds=(1,), fake_run_one=None, stub_run_one=True):
+    """Walk one grid cell. By default ``run_one`` is stubbed out (no real
+    generation) for speed, since most callers only care about manifest/
+    abort bookkeeping. Pass ``stub_run_one=False`` to exercise the REAL
+    ``run_one``/``run_session`` pipeline instead -- e.g. to prove an
+    exception genuinely escapes them, not a stand-in for the code under
+    test (review finding: a stubbed ``run_one`` cannot prove anything
+    about what real code does or doesn't catch)."""
     monkeypatch = pytest.MonkeyPatch()
-    monkeypatch.setattr(
-        "eval.driver.run_one", fake_run_one or (lambda client, **kw: None)
-    )
+    if stub_run_one:
+        monkeypatch.setattr(
+            "eval.driver.run_one", fake_run_one or (lambda client, **kw: None)
+        )
     try:
         return run_grid(
             lambda tag: {arm: client for arm in harness.ARMS},
@@ -1440,16 +1452,24 @@ def test_manifest_records_null_not_a_guess_for_unknown_client_params(tmp_path):
 
 
 def test_context_overflow_aborts_the_run_id_and_records_it(tmp_path):
-    # End to end: an overflowing prompt must reach the manifest as an
-    # abort reason, not vanish into a truncated generation. Section 51.
+    # End to end, through the REAL run_session/run_one pipeline (not a
+    # stub of the code under test -- a stubbed run_one cannot prove
+    # anything about what run_session does or doesn't catch, which is
+    # exactly how this case going vacuous went unremarked once). The
+    # client's OWN pre-request refusal (a plain ContextOverflowError from
+    # check_context, section 45/51) is the one case that still aborts:
+    # there is no session evidence yet, so there is nothing to lose by
+    # aborting. Its session-result sibling, ServerContextOverflowError,
+    # is covered end to end by
+    # test_run_session_ends_at_context_exhaustion_with_evidence_so_far
+    # and test_run_one_continues_to_the_next_session_past_context_exhaustion.
     class _OverflowingClient:
         def generate(self, prompt: str, *, seed: int) -> Generation:
             raise ContextOverflowError("prompt exceeds num_ctx 8192")
 
-    def boom(client, **kwargs) -> None:
-        _OverflowingClient().generate("x", seed=1)
-
-    result = _drive_one_cell(tmp_path, _StubClient(), fake_run_one=boom)
+    result = _drive_one_cell(
+        tmp_path, _OverflowingClient(), stub_run_one=False
+    )
     assert result["completed"] == []
     assert result["aborted"] == [build_run_id("qwen1_5b", 0, 1)]
     assert "num_ctx" in _manifest(tmp_path)["aborted_reason"]
@@ -2355,8 +2375,14 @@ def test_llamacpp_classifies_overflow_400_as_context_overflow_without_retrying(
 ):
     http = _FakeHTTP(_http_error(400, _OVERFLOW_400_BODY))
     client = _llama(monkeypatch, http)
-    with pytest.raises(ContextOverflowError):
+    with pytest.raises(ServerContextOverflowError) as excinfo:
         client.generate("hi", seed=1)
+    # The DISTINCT subclass, not the base ContextOverflowError raised by
+    # check_context -- run_session catches only this one (review finding
+    # 1: conflating the two would fabricate zero-attempt session results
+    # for what should be a run abort).
+    assert isinstance(excinfo.value, ContextOverflowError)
+    assert type(excinfo.value) is ServerContextOverflowError
     # Deterministic -- retrying would reproduce the identical 400 three
     # times for nothing. Exactly one call, not `client.retries`.
     assert len(http.calls) == 1
@@ -2375,6 +2401,8 @@ def test_llamacpp_classifies_non_overflow_400_as_model_error_after_retries(
     assert not isinstance(excinfo.value, ContextOverflowError)
     # Not overflow-shaped -- retried like any other transport failure.
     assert len(http.calls) == 3
+    # The server's own message is surfaced, not discarded.
+    assert "'messages' is required" in str(excinfo.value)
 
 
 @pytest.mark.parametrize(
