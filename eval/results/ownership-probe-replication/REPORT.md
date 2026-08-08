@@ -1,5 +1,13 @@
 # Ownership Probe — cross-family replication
 
+> **SUPERSEDED (2026-08-07).** Every number below is from 3 seeds per cell.
+> All three families were re-run at 10 seeds on matched code:
+> qwen **+10.0**, codegemma **+4.0** (class signs +4/−6, leaning the other
+> way), granite **+10.0**. No family resolves; the pooled sign test fell to
+> **23 of 34, p = 0.058**. granite's `no-signal-at-floor` verdict here was
+> itself a 3-seed artifact — at 10 seeds it is 23.5%/13.5%, clear of the
+> floor. See [`../ownership-probe-10seed/`](../ownership-probe-10seed/).
+
 **Date:** 2026-08-07
 **Question:** the +18.3pp result rested entirely on qwen2.5-coder-7b. Is the
 ordering a property of implicit linearity, or a quirk of one model family?

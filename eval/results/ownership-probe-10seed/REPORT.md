@@ -84,3 +84,72 @@ after this run; caught by `git status` and repaired with
 should use `git restore --source=HEAD --staged --worktree` for the cleanup.
 
 Raw: `post-fix.json`, `pre-fix.json`.
+
+---
+
+## Addendum — all three families at 10 seeds, matched code
+
+The two replication families were re-run at 10 seeds on current HEAD, so all
+three are now on **matched code at matched seed count**: 600 repairs each,
+1800 total.
+
+| Model | oxide | explicit | rust | delta | SE | 2-SE | clears 2 SE | classes +/− | was (3 seeds) |
+|---|---|---|---|---|---|---|---|---|---|
+| qwen2.5-coder-7b | 25.5% | 15.5% | 89.0% | **+10.0** | 5.8 | `[−1.7, +21.7]` | no | +10/−4 | +18.3 |
+| codegemma-7b | 12.5% | 8.5% | 84.5% | **+4.0** | 4.7 | `[−5.3, +13.3]` | no | **+4/−6** | +13.3 |
+| granite-code-8b | 23.5% | 13.5% | 73.0% | **+10.0** | 5.0 | `[−0.1, +20.1]` | no | +9/−1 | +6.7 |
+
+**No family individually resolves.** Every interval includes zero — granite's
+only barely (`−0.1`). codegemma's class-level signs now lean the *other* way:
+4 classes favour implicit, 6 favour explicit, despite a positive mean.
+
+### The evidence weakened monotonically as data was added
+
+| Stage | pooled sign test |
+|---|---|
+| 3 seeds, all three families | 18 of 21, **p = 0.0015** |
+| 10 seeds qwen, others at 3 | 20 of 26, **p = 0.0094** |
+| **10 seeds, all three, matched code** | **23 of 34, p = 0.0576** |
+
+Three rounds, each adding data, each weakening the result. That trajectory is
+the signature of an effect that is smaller than the first measurement
+suggested — possibly much smaller. **The pooled test no longer clears
+p = 0.05.**
+
+### What can honestly be said
+
+The combined estimate over all 60 (family × class) paired differences is
+**+8.0pp, SE 3.0, 2-SE `[+2.0, +14.0]`** — this does exclude zero, and it is
+the strongest defensible statement available. But it pools across three
+subjects of differing capability and treats 60 correlated cells as
+independent, so it should be read as a summary, not a significance test. The
+sign test, which makes fewer assumptions, sits at p = 0.058.
+
+**Current position: the direction is consistently positive across three model
+families and 23 of 34 non-tied classes, the combined interval excludes zero,
+and the non-parametric test is marginal. The effect is not established at
+conventional significance, and it is not refuted. It is smaller than this
+project's earlier claims.**
+
+Also corrected: granite was previously reported as `no-signal-at-floor`
+because both arms sat at or below 10% at 3 seeds. At 10 seeds it is 23.5% /
+13.5% — well clear of the floor, and the family with the cleanest sign split
+(+9/−1). **That floor verdict was itself a 3-seed artifact.**
+
+### The finding that did not weaken
+
+The degenerate-fix rate is large, consistent, and robust across all three
+families:
+
+| Model | oxide | explicit | rust |
+|---|---|---|---|
+| qwen2.5-coder-7b | 60.0% | 68.0% | **3.0%** |
+| codegemma-7b | 42.5% | 38.5% | **7.0%** |
+| granite-code-8b | 48.0% | 52.5% | **4.0%** |
+
+Between 38% and 68% of Oxide-arm "repairs" silence the ownership diagnostic
+while changing what the program does. Rust does it 3–7% of the time. That is
+an order-of-magnitude gap that held under every increase in data, and it is
+the most solid empirical result this instrument has produced.
+
+Raw: `codegemma-7b.json`, `granite-code-8b.json`.

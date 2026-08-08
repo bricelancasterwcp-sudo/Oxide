@@ -45,12 +45,14 @@ didn't go the thesis's way.
 **Partially supported, with a capability window.** Ordered by how well each
 subject performs the task at all:
 
-| Subject | Oxide | explicit-Oxide | paired delta |
-|---|---|---|---|
-| Claude Opus 5 | 92% | 92% | **0.0pp** — ceiling, arms identical |
-| qwen2.5-coder-7b | 26% | 16% | **+10.0pp**, 2-SE `[−1.7, +21.7]` |
-| codegemma-7b | 17% | 3% | **+13.3pp**, interval spans zero |
-| granite-code-8b | 8% | 2% | **+6.7pp** — both arms at the floor |
+All at 10 seeds, 600 repairs per subject, matched code:
+
+| Subject | Oxide | explicit-Oxide | paired delta | 2-SE |
+|---|---|---|---|---|
+| Claude Opus 5 | 92% | 92% | **0.0pp** | ceiling, arms identical |
+| qwen2.5-coder-7b | 25.5% | 15.5% | **+10.0pp** | `[−1.7, +21.7]` |
+| codegemma-7b | 12.5% | 8.5% | **+4.0pp** | `[−5.3, +13.3]` |
+| granite-code-8b | 23.5% | 13.5% | **+10.0pp** | `[−0.1, +20.1]` |
 
 The comparison that matters is **Oxide vs explicit-Oxide** — a control dialect
 with identical grammar, builtins, and diagnostics, where ownership is written
@@ -58,20 +60,31 @@ out by hand (`&` reads, declared parameter modes, mandatory `drop`). Both are
 languages the model has never seen, taught only by a card of comparable
 length. They differ in exactly one thing: whether ownership is implicit.
 
-Across three independent model families, **20 of 26 non-tied class×model
-comparisons favour implicit linearity** (two-sided exact sign test,
-p = 0.0094). The direction replicates.
+The direction is positive in all three families and in **23 of 34 non-tied
+class×model comparisons**. The combined estimate over all 60 (family × class)
+paired differences is **+8.0pp, 2-SE `[+2.0, +14.0]`**.
 
-The magnitude does not. **No single family resolves it.** An earlier 3-seed
-run put qwen at +18.3pp with an interval excluding zero; re-running at 10
-seeds gave +10.0pp with an interval spanning it, so that "resolved" result was
-an artifact of too few seeds and has been withdrawn. See
+**But no single family resolves it, and the evidence weakened every time data
+was added:**
+
+| Stage | pooled sign test |
+|---|---|
+| 3 seeds, all three families | 18 of 21, p = 0.0015 |
+| 10 seeds qwen, others at 3 | 20 of 26, p = 0.0094 |
+| **10 seeds, all three, matched code** | **23 of 34, p = 0.058** |
+
+A monotone decline across three rounds of added data is the signature of an
+effect smaller than the first measurement suggested. An early 3-seed run put
+qwen at +18.3pp with an interval excluding zero and was reported here as
+"statistically resolved"; that claim was withdrawn when 10 seeds gave +10.0pp
+spanning zero. codegemma's class-level signs now lean the other way (+4/−6).
+
+**The effect is not established at conventional significance, and it is not
+refuted.** Full trajectory in
 [`eval/results/ownership-probe-10seed/`](eval/results/ownership-probe-10seed/).
-The other two families are still at 3 seeds and their numbers should be
-treated as provisional for the same reason.
 
-**Supported:** implicit linearity is an accessibility win, and it is real
-across model families.
+**Supported:** the direction is consistently positive across three model
+families, and the degenerate-fix gap below is large and robust.
 
 **Not supported:**
 
@@ -105,10 +118,11 @@ types are all supplied; the only thing wrong is the thing under test.
 - Scored **strict** (compiles *and* output matches) and **lenient** (parses and
   the ownership diagnostic is gone). The gap between them is the
   degenerate-fix rate — repairs that silence the error while changing what the
-  program does. It runs **32/60** and **40/60** in the Oxide arms against
-  **1/60** for Rust. On lenient alone the three arms are indistinguishable;
-  strict separates them completely. Reporting lenient without strict inverts
-  the conclusion.
+  program does. Across all three families it runs **38–68%** in the Oxide arms
+  against **3–7%** for Rust. That order-of-magnitude gap held under every
+  increase in data and is the most solid result this instrument has produced.
+  On lenient alone the three arms are indistinguishable; strict separates them
+  completely. Reporting lenient without strict inverts the conclusion.
 
 ## It found a real bug
 
@@ -174,9 +188,9 @@ Oxide is a research vehicle, not a usable language. It has no generics,
 traits, closures, modules, tuples, indexing syntax, or sized integer types.
 It is a strict subset of what it compiles to.
 
-Every result here is one shot condition on a 20-class corpus. The primary
-subject is measured at 10 seeds; the two replication families are still at 3
-and should be re-run before their numbers are relied on. The reports in `eval/results/` state their own limits,
+Every result here is one shot condition on a 20-class corpus, with all three
+local subjects at 10 seeds. The frontier subject is at one seed — it ceilinged,
+so more would not discriminate, but the 0.0pp figure rests on 12 classes. The reports in `eval/results/` state their own limits,
 including which conclusions the data does *not* support and which numbers
 sit at a floor or ceiling where the design has no resolution.
 
