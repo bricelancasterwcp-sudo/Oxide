@@ -670,8 +670,12 @@ class _Infer(_EnumOps):
                     )
                     return ERROR_TYPE
                 return fmap[fname]
+        # OX0306, not OX0304: there is no struct here, so struct-shape
+        # guidance ("check field names, duplicates, destructuring") sends
+        # the reader hunting for a field that cannot exist. Measured at 10
+        # of 29 OX0304 emissions before the split.
         self._diag(
-            "OX0304",
+            "OX0306",
             f"field access on non-struct type "
             f"{type_str(self._resolve_full(pruned))}",
             span,

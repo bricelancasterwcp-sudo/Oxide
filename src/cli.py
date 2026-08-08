@@ -51,12 +51,14 @@ SUGGESTIONS: dict[str, str] = {
         "and arity."
     ),
     "OX0304": (
-        "If the value is a struct: check field names, duplicates, and "
-        "that destructuring names every field. If it is NOT a struct "
-        "there is no field to access at all -- Oxide has no "
-        "user-defined methods, and only builtins take receiver syntax "
-        "like v.len(); anything else must be called as a plain "
-        "function, f(x)."
+        "Struct shape mismatch: check field names, duplicates, and that "
+        "destructuring names every field."
+    ),
+    "OX0306": (
+        "This value is not a struct, so it has no fields. Oxide has no "
+        "user-defined methods: only builtins take receiver syntax like "
+        "v.len(), and anything else must be called as a plain function, "
+        "f(x)."
     ),
     "OX0307": (
         "This match must cover every variant of the enum. Add the missing "

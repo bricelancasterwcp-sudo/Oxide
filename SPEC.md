@@ -631,7 +631,8 @@ diagnostic contributes NO DropPoints (its drops are suppressed).
 | OX0301 | infer | infinite type (occurs check) |
 | OX0302 | infer | ambiguous type (unconstrained after solve) |
 | OX0303 | infer | not callable / wrong argument count |
-| OX0304 | infer | struct shape: unknown/missing/duplicate field, incomplete destructure, field access on non-struct |
+| OX0304 | infer | struct shape: unknown/missing/duplicate field, incomplete destructure |
+| OX0306 | infer | field access on a non-struct type |
 | OX0305 | infer | invalid operand type for operator (post-solve check) |
 | OX0400 | linear | use after move (READ-context use of a moved value) |
 | OX0401 | linear | double move (MOVE-context use of a moved value) |
@@ -1502,7 +1503,8 @@ becomes a thin wrapper); JSON via `json.dumps(..., sort_keys=True)`.
 | OX0300 | `The two sides have incompatible types. Check operand/annotation types; Int and Float never mix implicitly (use to_float / trunc).` |
 | OX0302 | `The type here is ambiguous. Add a use that pins it (e.g. push an element) or an annotation: let x: Vec<Int> = vec().` |
 | OX0303 | `Not callable or wrong argument count. Check the function name and arity.` |
-| OX0304 | `If the value is a struct: check field names, duplicates, and that destructuring names every field. If it is NOT a struct there is no field to access at all -- Oxide has no user-defined methods, and only builtins take receiver syntax like v.len(); anything else must be called as a plain function, f(x).` |
+| OX0304 | `Struct shape mismatch: check field names, duplicates, and that destructuring names every field.` |
+| OX0306 | `This value is not a struct, so it has no fields. Oxide has no user-defined methods: only builtins take receiver syntax like v.len(), and anything else must be called as a plain function, f(x).` |
 | OX0307 | `This match must cover every variant of the enum. Add the missing arms or a final _ => arm.` |
 | OX0308 | `? requires the function to return the same wrapper: Option-returning fns for Option values, Result-returning fns (matching error type) for Result values.` |
 | OX0400 | `This value was moved at the noted location. Keep it available by cloning at the move site (clone(x)), or reorder so reads happen before the move.` |

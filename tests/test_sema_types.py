@@ -318,7 +318,7 @@ def test_operand_mismatch_reports_one_code_regardless_of_order(src: str) -> None
         ),
         pytest.param(
             "fn f(a: Int) { let b = a.x }",
-            "OX0304",
+            "OX0306",
             id="field-access-on-int",
         ),
     ],
