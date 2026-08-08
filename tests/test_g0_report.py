@@ -5,10 +5,17 @@ published 6a-pilot numbers (eval/results/6a-pilot/REPORT.md) before it is
 trusted to read new G0 data. ``test_profiler_reproduces_the_pilot_7b_row``
 is that self-check, made a first-class test rather than a one-off manual
 run.
+
+These tests build synthetic run dirs under ``tmp_path`` only -- they must
+never read ``eval/results/g0-generation-baseline/``, which live G0 runs
+are writing to concurrently. ``eval/results/6a-pilot`` is the one
+real/on-disk fixture, and it is finished, published data.
 """
 
 import json
 from pathlib import Path
+
+import pytest
 
 from eval import g0_report
 from eval.driver import build_run_id
@@ -51,50 +58,83 @@ def _minimal_cell(task, arm, passed=False):
     }
 
 
-def test_profiler_buckets_first_attempt_codes_by_stage(tmp_path):
-    # OX0203 is a resolve-stage code (OX02xx); OX0400 is linearity
-    # (OX04xx) -- the stage buckets pinned in the task brief.
-    cells = [
-        _minimal_cell("t01", "oxide"),
-        _minimal_cell("t01", "explicit"),
-        _minimal_cell("t01", "rust", passed=True),
+def _complete_cells():
+    """60 cells (20 per arm) -- satisfies eval.driver.is_complete's
+    pinned SESSIONS_PER_RUN floor. is_complete only counts lines in
+    cells.jsonl, so task/arm content is otherwise irrelevant to it; this
+    fixture exists purely so tests that aren't exercising the
+    completeness guard itself don't trip over it."""
+    return [
+        _minimal_cell(f"t{i:02d}", arm)
+        for i in range(1, 21)
+        for arm in ("oxide", "explicit", "rust")
     ]
+
+
+def test_profiler_buckets_first_attempt_codes_into_all_five_stages(tmp_path):
+    # One positive case per stage bucket -- OX0001 (lexer), OX01xx
+    # (parser), OX02xx (resolve), OX03xx (types), OX04xx (linearity) --
+    # so a bucket boundary regression anywhere in _stage can't hide
+    # behind a fixture that only ever exercises two of the five.
     triples = [
         {"task": "t01", "arm": "oxide", "attempt": 1,
+         "diagnostics": [{"code": "OX0001"}]},
+        {"task": "t02", "arm": "oxide", "attempt": 1,
+         "diagnostics": [{"code": "OX0100"}]},
+        {"task": "t03", "arm": "oxide", "attempt": 1,
          "diagnostics": [{"code": "OX0203"}]},
-        {"task": "t01", "arm": "explicit", "attempt": 1,
+        {"task": "t04", "arm": "oxide", "attempt": 1,
+         "diagnostics": [{"code": "OX0300"}]},
+        {"task": "t05", "arm": "explicit", "attempt": 1,
          "diagnostics": [{"code": "OX0400"}]},
         # rust diagnostics must never land in the stage histogram.
-        {"task": "t01", "arm": "rust", "attempt": 1, "diagnostics": []},
+        {"task": "t01", "arm": "rust", "attempt": 1,
+         "diagnostics": [{"code": "OX0001"}]},
     ]
-    _write_run(tmp_path, "qwen7b", 1, cells, triples)
+    _write_run(tmp_path, "qwen7b", 1, _complete_cells(), triples)
 
     out = g0_report.profile(
         root=tmp_path, models=["qwen7b"], seeds=[1], prefix="g0c"
     )
-    stages = out["qwen7b"]["stage_hist_first"]
-    assert stages["resolve"] == 1
-    assert stages["linearity"] == 1
-    assert stages["lexer"] == 0
-    assert stages["parser"] == 0
-    assert stages["types"] == 0
+    assert out["qwen7b"]["stage_hist_first"] == {
+        "lexer": 1, "parser": 1, "resolve": 1, "types": 1, "linearity": 1,
+    }
+
+
+def test_profiler_all_attempts_histogram_counts_attempt_2_first_does_not(tmp_path):
+    # stage_hist_first is first-attempt only; stage_hist_all is every
+    # attempt. A diagnostic that appears ONLY on attempt 2 must move the
+    # "all" count without moving the "first" count for that stage --
+    # the one behavior nothing in the pilot-reproduction test or the
+    # five-bucket test above actually distinguishes.
+    triples = [
+        {"task": "t01", "arm": "oxide", "attempt": 1,
+         "diagnostics": [{"code": "OX0001"}]},
+        {"task": "t01", "arm": "oxide", "attempt": 2,
+         "diagnostics": [{"code": "OX0001"}]},
+    ]
+    _write_run(tmp_path, "qwen7b", 1, _complete_cells(), triples)
+
+    out = g0_report.profile(
+        root=tmp_path, models=["qwen7b"], seeds=[1], prefix="g0c"
+    )
+    assert out["qwen7b"]["stage_hist_first"]["lexer"] == 1
+    assert out["qwen7b"]["stage_hist_all"]["lexer"] == 2
 
 
 def test_profiler_counts_gate_occurrences_and_sessions_separately(tmp_path):
-    # One session (t01/oxide) carries TWO OX04xx diagnostics; a second
-    # session (t02/oxide) carries ONE. Occurrences must sum the raw
-    # diagnostic count (3); sessions must count distinct sessions (2) --
-    # the two numbers diverge exactly when a session emits more than one
-    # linearity diagnostic, which is the case this test pins down.
-    cells = [
-        _minimal_cell("t01", "oxide"),
-        _minimal_cell("t02", "oxide"),
-        _minimal_cell("t01", "explicit"),
-        _minimal_cell("t01", "rust", passed=True),
-    ]
+    # One session (t01/oxide) carries TWO OX04xx diagnostics ALONGSIDE a
+    # non-OX04xx code (OX0100, parser); the non-OX04xx code must be
+    # excluded from the gate count -- a regression that counts every
+    # diagnostic on the attempt (`ox04 = len(codes)`) would inflate this
+    # session's contribution from 2 to 3 and still pass a fixture where
+    # every diagnostic happens to be OX04xx. A second session (t02/oxide)
+    # carries ONE. Occurrences must sum the raw OX04xx-only diagnostic
+    # count (3); sessions must count distinct sessions (2).
     triples = [
         {"task": "t01", "arm": "oxide", "attempt": 1,
-         "diagnostics": [{"code": "OX0400"}, {"code": "OX0401"}]},
+         "diagnostics": [{"code": "OX0400"}, {"code": "OX0401"},
+                         {"code": "OX0100"}]},
         {"task": "t02", "arm": "oxide", "attempt": 1,
          "diagnostics": [{"code": "OX0402"}]},
         # a second (repair) attempt on the same session must not double
@@ -102,7 +142,7 @@ def test_profiler_counts_gate_occurrences_and_sessions_separately(tmp_path):
         {"task": "t01", "arm": "oxide", "attempt": 2,
          "diagnostics": [{"code": "OX0400"}]},
     ]
-    _write_run(tmp_path, "qwen7b", 1, cells, triples)
+    _write_run(tmp_path, "qwen7b", 1, _complete_cells(), triples)
 
     out = g0_report.profile(
         root=tmp_path, models=["qwen7b"], seeds=[1], prefix="g0c"
@@ -110,3 +150,93 @@ def test_profiler_counts_gate_occurrences_and_sessions_separately(tmp_path):
     gate = out["qwen7b"]["gate"]
     assert gate["occurrences"] == 3
     assert gate["sessions"] == 2
+
+
+# ------------------------------------------- incomplete/partial roots
+
+
+def test_profile_raises_a_clear_error_naming_a_missing_run(tmp_path):
+    # No run dir at all under tmp_path for qwen7b/seed 1 -- the
+    # foreseeable case of pointing --root at an in-progress or
+    # not-yet-started G0 root.
+    with pytest.raises(RuntimeError) as exc_info:
+        g0_report.profile(
+            root=tmp_path, models=["qwen7b"], seeds=[1], prefix="g0c"
+        )
+    message = str(exc_info.value)
+    assert build_run_id("qwen7b", 0, 1, prefix="g0c") in message
+    assert "--partial" in message
+
+
+def test_profile_raises_for_a_run_short_of_the_pinned_session_count(tmp_path):
+    # A run dir exists but cells.jsonl has fewer than the pinned 60
+    # sessions -- still in progress, distinct from "missing entirely".
+    _write_run(tmp_path, "qwen7b", 1, _complete_cells()[:5], [])
+    with pytest.raises(RuntimeError, match="incomplete"):
+        g0_report.profile(
+            root=tmp_path, models=["qwen7b"], seeds=[1], prefix="g0c"
+        )
+
+
+def test_profile_partial_skips_incomplete_runs_and_profiles_the_rest(tmp_path):
+    # seed 1 is complete; seed 2 is entirely missing. Without --partial
+    # this raises (covered above); with it, profiling proceeds using
+    # only seed 1's data.
+    _write_run(tmp_path, "qwen7b", 1, _complete_cells(), [])
+    out = g0_report.profile(
+        root=tmp_path, models=["qwen7b"], seeds=[1, 2], prefix="g0c",
+        partial=True,
+    )
+    assert out["qwen7b"]["oxide"]["n"] == 20  # seed 1 only, not doubled
+
+
+def test_profile_raises_a_clear_error_when_an_arm_has_zero_cells(tmp_path):
+    # 60 total cells (satisfies is_complete's line-count floor) but ZERO
+    # of them are the rust arm -- the ZeroDivisionError this guard
+    # replaces with a named, actionable error.
+    cells = (
+        [_minimal_cell(f"t{i:02d}", "oxide") for i in range(1, 31)]
+        + [_minimal_cell(f"t{i:02d}", "explicit") for i in range(1, 31)]
+    )
+    _write_run(tmp_path, "qwen7b", 1, cells, [])
+    with pytest.raises(RuntimeError, match="rust"):
+        g0_report.profile(
+            root=tmp_path, models=["qwen7b"], seeds=[1], prefix="g0c"
+        )
+
+
+# --------------------------------------------------- --samples output
+
+
+def test_write_samples_does_not_collide_across_seeds_for_the_same_task_arm(
+    tmp_path,
+):
+    # The same (task, arm) pair recurs across every seed of a model.
+    # Each seed's sample must land as its own file, attributable to its
+    # run id, not overwrite the other.
+    for seed in (1, 2):
+        triples = [
+            {"task": "t16", "arm": "explicit", "attempt": 1,
+             "diagnostics": [{"code": "OX0203"}], "compiled": False,
+             "passed": False},
+        ]
+        run_dir = _write_run(tmp_path, "qwen7b", seed, _complete_cells(),
+                             triples)
+        raw_dir = run_dir / "raw"
+        raw_dir.mkdir(parents=True, exist_ok=True)
+        (raw_dir / "t16.explicit.1.txt").write_text(f"seed {seed}\n",
+                                                      encoding="utf-8")
+
+    out = g0_report.profile(
+        root=tmp_path, models=["qwen7b"], seeds=[1, 2], prefix="g0c"
+    )
+    copied = g0_report.write_samples(
+        root=tmp_path, models=["qwen7b"], seeds=[1, 2], prefix="g0c",
+        profiled=out, n=5,
+    )
+    assert copied == 2
+    dest_dir = tmp_path / "samples" / "resolve" / "OX0203"
+    seed1 = dest_dir / f"{build_run_id('qwen7b', 0, 1, prefix='g0c')}.t16.explicit.txt"
+    seed2 = dest_dir / f"{build_run_id('qwen7b', 0, 2, prefix='g0c')}.t16.explicit.txt"
+    assert seed1.read_text(encoding="utf-8") == "seed 1\n"
+    assert seed2.read_text(encoding="utf-8") == "seed 2\n"

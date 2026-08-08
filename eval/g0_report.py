@@ -25,7 +25,7 @@ from collections import Counter
 from pathlib import Path
 
 from eval import rollup
-from eval.driver import MODELS, build_run_id, parse_seeds, unknown_slugs
+from eval.driver import MODELS, build_run_id, is_complete, parse_seeds, unknown_slugs
 
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 PILOT_ROOT = _REPO_ROOT / "eval" / "results" / "6a-pilot"
@@ -61,7 +61,28 @@ def _stage(code: str) -> str | None:
     return None
 
 
-def profile(*, root: Path, models: list[str], seeds: list[int], prefix: str) -> dict:
+def missing_runs(
+    root: Path, models: list[str], seeds: list[int], prefix: str
+) -> list[str]:
+    """Run ids among (models x seeds) that eval.driver.is_complete
+    rejects -- missing entirely, or short of the pinned 60-cell session
+    count. Mirrors eval.rollup.aggregate's grid-completeness guard, for
+    the same reason: profiling an in-progress G0 root as though it were
+    finished silently reports a partial measurement as a complete one.
+    """
+    return [
+        run_id
+        for slug in models
+        for seed in seeds
+        for run_id in (build_run_id(slug, 0, seed, prefix=prefix),)
+        if not is_complete(root / run_id)
+    ]
+
+
+def profile(
+    *, root: Path, models: list[str], seeds: list[int], prefix: str,
+    partial: bool = False,
+) -> dict:
     """Per-model diagnostic profile: arm rates, stage histograms, the
     OX04xx gate count, and the paired oxide/explicit delta.
 
@@ -70,7 +91,23 @@ def profile(*, root: Path, models: list[str], seeds: list[int], prefix: str) -> 
     still included in the per-arm rate table since first_compiled/
     final_passed on the rust arm is the reference point the pilot report
     cites (20/20, 12/20).
+
+    Refuses to profile an incomplete root (see ``missing_runs``) unless
+    ``partial=True``, in which case the missing/incomplete runs are
+    skipped rather than raising. Either way, an arm left with zero cells
+    after the runs that WERE read is a named, actionable error -- not a
+    ``ZeroDivisionError`` -- since dividing by an empty denominator means
+    the profile itself is malformed, not just incomplete.
     """
+    missing = missing_runs(root, models, seeds, prefix)
+    if missing and not partial:
+        raise RuntimeError(
+            f"incomplete G0 root {root}: {len(missing)} run(s) missing or "
+            f"incomplete (first: {missing[0]}). Pass --partial to profile "
+            f"the complete runs only -- a root silently missing "
+            f"in-progress runs reads as a finished measurement."
+        )
+    missing_set = set(missing)
     out: dict[str, dict] = {}
     for slug in models:
         cells: list[dict] = []
@@ -79,7 +116,10 @@ def profile(*, root: Path, models: list[str], seeds: list[int], prefix: str) -> 
         gate_occurrences = 0
         gate_sessions = 0
         for seed in seeds:
-            run_dir = root / build_run_id(slug, 0, seed, prefix=prefix)
+            run_id = build_run_id(slug, 0, seed, prefix=prefix)
+            if run_id in missing_set:
+                continue  # --partial: already validated above
+            run_dir = root / run_id
             with open(run_dir / "cells.jsonl", encoding="utf-8") as handle:
                 cells += [json.loads(line) for line in handle if line.strip()]
             with open(run_dir / "triples.jsonl", encoding="utf-8") as handle:
@@ -96,6 +136,12 @@ def profile(*, root: Path, models: list[str], seeds: list[int], prefix: str) -> 
         by_arm: dict[str, dict] = {}
         for arm in ARMS:
             rows = [c for c in cells if c["arm"] == arm]
+            if not rows:
+                raise RuntimeError(
+                    f"{slug}: zero cells for arm {arm!r} under {root} -- "
+                    f"cannot compute a rate against an empty denominator "
+                    f"({'complete runs only, --partial' if partial else 'all requested runs'})"
+                )
             by_arm[arm] = {
                 "n": len(rows),
                 "first_compiled": sum(c["first_compiled"] for c in rows) / len(rows),
@@ -203,7 +249,12 @@ def write_samples(
                         continue
                     dest_dir = root / "samples" / family / code
                     dest_dir.mkdir(parents=True, exist_ok=True)
-                    dest = dest_dir / f"{slug}.{run_dir.name}.{row['task']}.{row['arm']}.txt"
+                    # run_dir.name (the run id) already carries the slug,
+                    # shots, and seed -- e.g. "g0c-qwen7b-0shot-s3" -- so
+                    # prefixing with it alone (not slug + run id) keeps
+                    # every sample attributable to its exact run without
+                    # a redundant leading model-slug segment.
+                    dest = dest_dir / f"{run_dir.name}.{row['task']}.{row['arm']}.txt"
                     shutil.copy2(raw, dest)
                     counts[key] += 1
                     copied += 1
@@ -264,6 +315,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--run-prefix", default="g0c")
     parser.add_argument("--samples", type=int, default=None)
     parser.add_argument("--validate-pilot", action="store_true")
+    parser.add_argument("--partial", action="store_true",
+                        help="profile the complete runs only, skipping "
+                             "any missing or in-progress ones instead of "
+                             "refusing to run")
     args = parser.parse_args(argv)
 
     if args.validate_pilot:
@@ -294,7 +349,13 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     seeds = parse_seeds(args.seeds)
-    out = profile(root=args.root, models=slugs, seeds=seeds, prefix=args.run_prefix)
+    if args.partial:
+        skipped = missing_runs(args.root, slugs, seeds, args.run_prefix)
+        if skipped:
+            print(f"--partial: skipping {len(skipped)} incomplete run(s): "
+                  + ", ".join(skipped), file=sys.stderr)
+    out = profile(root=args.root, models=slugs, seeds=seeds,
+                  prefix=args.run_prefix, partial=args.partial)
     _print_report(out, slugs)
 
     if args.samples:
