@@ -1301,7 +1301,19 @@ when pinned as a numbered contract part.
    and `trunc(Float) -> Int`; (e) `break`/`continue` (multi-exit loop
    merges in the linear checker — largest item, first); (f) allow a
    newline before `{` and before `else` where unambiguous.
-3. **v0.3 direction, EVAL-GATED (do not implement yet):** invert the
+3. **v0.3 direction — GATE RESOLVED 2026-08-07: REJECTED.** The proposal
+   below was to invert the ownership default. The eval's OX-code
+   distribution was collected (163 OX04xx of 464 diagnostics, 35.1%)
+   and the inversion is **not adopted**: the supporting evidence that
+   cloning is the correct repair proved to be an artifact of how the
+   probe corpus was authored (reordering passes equally), value
+   semantics would execute accumulation bugs as written rather than
+   catching them, the isolated ownership benefit is only ~+10pp and
+   0.0pp at frontier, and the largest measured win in the project came
+   from ERGONOMICS (Part XI method syntax, +42pp) at no semantic cost.
+   Full reasoning: docs/superpowers/specs/2026-08-07-v03-gate-decision.md.
+   The original proposal is retained below for the record:
+   ~~invert the
    ownership default — value semantics for plain data (implicit clone at
    would-be use-after-move), linearity OPT-IN per type (`resource struct`)
    with OX04xx machinery applied only there. The eval's OX-code error
