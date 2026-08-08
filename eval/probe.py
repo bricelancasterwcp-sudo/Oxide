@@ -287,6 +287,12 @@ def score(record: dict, submitted_source: str) -> dict:
         "compiled": bool(verdict["compiled"]),
         "stdout": verdict["stdout"],
         "codes": codes,
+        # The submitted program, verbatim. Without it a result set records
+        # THAT a repair was degenerate but not HOW, which makes the
+        # degenerate-fix rate -- the largest and most robust signal this
+        # instrument produces -- impossible to characterise after the fact.
+        # The driver already persists raw model output for the same reason.
+        "source": submitted_source,
     }
 
 
