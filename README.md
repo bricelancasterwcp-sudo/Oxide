@@ -50,9 +50,13 @@ All at 10 seeds, 600 repairs per subject, matched code:
 | Subject | Oxide | explicit-Oxide | paired delta | 2-SE |
 |---|---|---|---|---|
 | Claude Opus 5 | 92% | 92% | **0.0pp** | ceiling, arms identical |
-| qwen2.5-coder-7b | 25.5% | 15.5% | **+10.0pp** | `[−1.7, +21.7]` |
-| codegemma-7b | 12.5% | 8.5% | **+4.0pp** | `[−5.3, +13.3]` |
-| granite-code-8b | 23.5% | 13.5% | **+10.0pp** | `[−0.1, +20.1]` |
+| qwen2.5-coder-7b | 67.5% | 14.5% | **+53.0pp** | `[+36.2, +69.8]` |
+| codegemma-7b | 43.5% | 11.0% | **+32.5pp** | `[+16.5, +48.5]` |
+| granite-code-8b | 22.0% | 12.0% | **+10.0pp** | `[+3.4, +16.6]` |
+
+**Every family clears 2 SE. Pooled: 41 of 46 non-tied comparisons,
+p < 0.000001.** But see the decomposition below — most of that is
+*ergonomic*, not about ownership reasoning.
 
 The comparison that matters is **Oxide vs explicit-Oxide** — a control dialect
 with identical grammar, builtins, and diagnostics, where ownership is written
@@ -60,40 +64,64 @@ out by hand (`&` reads, declared parameter modes, mandatory `drop`). Both are
 languages the model has never seen, taught only by a card of comparable
 length. They differ in exactly one thing: whether ownership is implicit.
 
-The direction is positive in all three families and in **23 of 34 non-tied
-class×model comparisons**. The combined estimate over all 60 (family × class)
-paired differences is **+8.0pp, 2-SE `[+2.0, +14.0]`**.
+### The effect splits in two, and only one half is about ownership
 
-**But no single family resolves it, and the evidence weakened every time data
-was added:**
+Adding builtin method syntax (SPEC Part XI) moved these numbers enormously —
+and the way it moved them is the finding:
 
-| Stage | pooled sign test |
-|---|---|
-| 3 seeds, all three families | 18 of 21, p = 0.0015 |
-| 10 seeds qwen, others at 3 | 20 of 26, p = 0.0094 |
-| **10 seeds, all three, matched code** | **23 of 34, p = 0.058** |
+| Model | `OX0304` before → after | oxide strict change |
+|---|---|---|
+| qwen | 94 → **0** | **+42.0** |
+| codegemma | 72 → **0** | **+31.0** |
+| granite | 9 → 12 | **−1.5** |
 
-A monotone decline across three rounds of added data is the signature of an
-effect smaller than the first measurement suggested. An early 3-seed run put
-qwen at +18.3pp with an interval excluding zero and was reported here as
-"statistically resolved"; that claim was withdrawn when 10 seeds gave +10.0pp
-spanning zero. codegemma's class-level signs now lean the other way (+4/−6).
+The change helped exactly the families that had the `.clone()` problem and did
+nothing for the one that didn't. A dose-response across independent families
+is strong causal evidence — and the opposite of the pattern that sank three
+earlier headlines here.
 
-**The effect is not established at conventional significance, and it is not
-refuted.** Full trajectory in
-[`eval/results/ownership-probe-10seed/`](eval/results/ownership-probe-10seed/).
+But it means the large deltas are substantially **ergonomic**. Method syntax
+composes with implicit ownership (`v.len()`) and awkwardly with explicit
+(`(&v).len()`, since the receiver still needs its marker), so it lifts one arm
+and not the other.
 
-**Supported:** the direction is consistently positive across three model
-families. Nothing stronger.
+**granite is the clean estimate.** It never used method syntax, so its
+**+10.0pp** isolates ownership from ergonomics — and it is unchanged from
+before the change.
+
+- **ownership effect alone: ≈ +10pp**
+- **ergonomic effect: larger, family-dependent**, up to +42pp
+- the combined **+31.8pp `[+22.7, +41.0]`** mixes the two and should not be
+  quoted as an ownership result
+
+### Why earlier estimates were lower, and three were withdrawn
+
+Before method syntax, *both* primary arms were partly blocked by the same
+`.clone()` barrier — incidental to the question. That floored oxide and
+suppressed the measured difference: the pooled figure was 23 of 34, p = 0.058.
+An ergonomic wart unrelated to ownership was making the eval underestimate its
+own effect.
+
+Three earlier headlines were withdrawn along the way, each a single-subject
+result that dissolved under replication: a 3-seed "+18.3pp, resolved" that
+became +10.0pp spanning zero at 10 seeds; the pooled significance that
+followed it; and a "degenerate-fix rate" whose metric never required the
+program to compile. The trajectory is recorded in
+[`eval/results/ownership-probe-10seed/`](eval/results/ownership-probe-10seed/)
+and [`eval/results/method-syntax/`](eval/results/method-syntax/).
+
+**Supported:** implicit linearity is repaired more reliably than explicit
+linearity in all three families, and the effect resolves. The ownership
+component is around +10pp; the rest is ergonomic.
 
 **Not supported:**
 
 - *"Makes LLMs more reliable"* without qualification. At frontier the delta is
   exactly zero — a model that already reasons about ownership correctly gains
   nothing.
-- Any specific magnitude, and no claim of statistical significance for any
-  single subject. Every per-family interval that has been measured at
-  adequate seed count includes zero.
+- A single magnitude. The per-family deltas span +10 to +53 and track how
+  much the ergonomic change helped each model, not how well it reasons about
+  ownership.
 - Anything about **writing** Oxide. These models cannot. A 7B model scores
   **2/20** first-compile writing Oxide from the card, against 20/20 for Rust.
   That gap is pretraining exposure, not language design.
