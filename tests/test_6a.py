@@ -857,15 +857,82 @@ def test_grid_cell_routes_the_arm_to_its_client(tmp_path):
         results_root=tmp_path,
         tasks_path=tasks,
     )
-    # Every stub answered only its own arm: prompts are non-empty and
-    # carry that arm's lead material.
+    # Every stub answered only its own arm. "Oxide" alone cannot
+    # discriminate oxide from explicit -- LANGUAGE_CARD_EXPLICIT.md's own
+    # title is "Oxide Explicit", so both cards contain "Oxide" and a
+    # swapped assignment would pass a plain substring check. Assert the
+    # marker unique to each card is present on its own client's prompts
+    # and ABSENT from the other's, so a swap fails loudly.
     assert clients["oxide"].prompts and all(
-        "Oxide" in p for p in clients["oxide"].prompts
+        "Oxide" in p and "Oxide Explicit" not in p
+        for p in clients["oxide"].prompts
+    )
+    assert clients["explicit"].prompts and all(
+        "Oxide Explicit" in p for p in clients["explicit"].prompts
     )
     assert clients["rust"].prompts and all(
         "You are writing Rust" in p for p in clients["rust"].prompts
     )
-    assert len(clients["explicit"].prompts) >= 1
+
+
+class _StaleServerStub:
+    """A ``.preflight()`` that reports a model_path NOT matching the one
+    the caller expects -- the shape a llama-server left running from a
+    previous slug (or restarted on the wrong weights) actually returns."""
+
+    def __init__(self, model_path: str) -> None:
+        self._model_path = model_path
+
+    def preflight(self) -> dict:
+        return {"model_path": self._model_path, "build_info": "b1-test"}
+
+
+def test_main_exits_2_when_expect_model_path_does_not_match(monkeypatch, capsys):
+    # The headline safety feature: a stale llama-server serving the WRONG
+    # weights must never run a single session. main() must catch this at
+    # preflight, before run_grid touches anything.
+    stub_clients = {
+        arm: _StaleServerStub("/blobs/sha256-deadbeef0000")
+        for arm in harness.ARMS
+    }
+    monkeypatch.setattr(
+        driver, "make_arm_clients",
+        lambda backend, slug, *, constrained, host: stub_clients,
+    )
+    code = driver.main([
+        "--backend", "llamacpp",
+        "--models", "qwen1_5b",
+        "--shots", "0",
+        "--expect-model-path", "sha256-24b532e5",
+    ])
+    assert code == 2
+    err = capsys.readouterr().err
+    assert "--expect-model-path" in err
+    assert "sha256-24b532e5" in err
+    assert "/blobs/sha256-deadbeef0000" in err
+
+
+def test_main_proceeds_when_expect_model_path_matches(monkeypatch):
+    # The inverse: a served model_path that DOES contain the expected
+    # substring must not trip the guard. Preflight-only exits 0 without
+    # ever reaching run_grid, so nothing beyond make_arm_clients/preflight
+    # needs stubbing.
+    stub_clients = {
+        arm: _StaleServerStub("/blobs/sha256-24b532e52765abcd")
+        for arm in harness.ARMS
+    }
+    monkeypatch.setattr(
+        driver, "make_arm_clients",
+        lambda backend, slug, *, constrained, host: stub_clients,
+    )
+    code = driver.main([
+        "--backend", "llamacpp",
+        "--models", "qwen1_5b",
+        "--shots", "0",
+        "--expect-model-path", "sha256-24b532e5",
+        "--preflight-only",
+    ])
+    assert code == 0
 
 
 def test_model_slugs_map_to_pinned_q8_tags():
