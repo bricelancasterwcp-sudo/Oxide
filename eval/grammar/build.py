@@ -28,8 +28,6 @@ real front end instead of asserted.
 Deliberately omitted, because an omitted construct costs expressiveness
 while a loosely-approximated one costs soundness:
 
-* Comments. Safe (they never update ``prev_kind``) but they invite a
-  degenerate comment loop against the token cap and buy nothing.
 * Non-decimal and separated numerals -- ``0x1F``, ``1_000``, ``2e3``.
 * Multi-line expressions. Every expression is emitted on one line, so no
   NEWLINE token can ever land mid-expression. Legal continuations (an
@@ -48,6 +46,20 @@ while a loosely-approximated one costs soundness:
   OX0105 is a parser diagnostic, and tracking loop depth through arm bodies
   as well as blocks was not worth the extra rule tier.
 * Unannotated parameters; empty blocks; a ``main`` anywhere but last.
+
+Comments were on the omitted list above until LANGUAGE_CARD.md's own
+worked example turned up using a trailing ``//`` comment: SPEC 3.1
+comments never update ``prev_kind``, so admitting one cannot perturb
+NEWLINE emission, and a card-taught construct the grammar cannot emit is
+exactly the completeness gap ``tests/test_grammar_admission.py`` exists
+to catch. The one real hazard from the reversed argument -- a comment run
+degenerating to the token cap -- is closed structurally: both the
+leading-space run and the comment body are ``bounded()`` to a concrete
+maximum (``COMMENT_LEAD_SPACES_MAX`` / ``COMMENT_BODY_MAX``, sized to
+LANGUAGE_CARD.md's own usage) via nested optionals rather than left as
+the open-ended ``*``/``+`` every other repeated leaf here uses, so
+llama.cpp itself -- not just the offline sampler -- sees a comment that
+is guaranteed to terminate.
 
 One caveat the grammar cannot cover: soundness is a claim about *complete*
 derivations. A generation stopped at ``num_predict`` is a prefix of one,
@@ -138,6 +150,30 @@ def star(node: object, sample_max: int = 2) -> Rep:
 
 def plus(node: object, sample_max: int = 2) -> Rep:
     return Rep(node, "+", sample_max)
+
+
+def bounded(node: object, min_count: int, max_count: int) -> object:
+    """``node`` repeated between ``min_count`` and ``max_count`` times.
+
+    GBNF has a native ``{m,n}`` quantifier, but the admission recognizer
+    (``tests/gbnf_recognizer.py``) deliberately models only ``| * + ? ( )``
+    so an unrecognized construct fails loudly instead of silently
+    mis-judging admission. Expanding the bound structurally as nested
+    optionals keeps every construct inside that subset instead of growing
+    it, and -- unlike ``Rep.sample_max``, which bounds only the offline
+    sampler -- actually caps what llama.cpp's real grammar can produce.
+    """
+    if max_count < min_count:
+        raise ValueError(f"max_count {max_count} < min_count {min_count}")
+    tail: object | None = None
+    for _ in range(max_count - min_count):
+        tail = opt(node) if tail is None else opt(seq(node, tail))
+    parts = [node] * min_count
+    if tail is not None:
+        parts.append(tail)
+    if not parts:
+        raise ValueError("bounded() needs min_count > 0 or max_count > 0")
+    return parts[0] if len(parts) == 1 else seq(*parts)
 
 
 def chars(spec: str) -> Chars:
@@ -361,6 +397,14 @@ TIERS = 10
 # expressions only, which is where the deep tiers are actually spent.
 BLOCK_TIERS = 6
 
+# Trailing `//` comment bounds (see the module docstring for why comments
+# are admitted at all). Sized to LANGUAGE_CARD.md's own worked example (12
+# leading spaces, a 36-character body) with a small margin -- concrete
+# maxima, not the open-ended `*`/`+` every other repeated leaf here uses,
+# so a comment cannot degenerate into a token-cap-length run.
+COMMENT_LEAD_SPACES_MAX = 12
+COMMENT_BODY_MAX = 40
+
 
 def _indent(level: int) -> str:
     return " " * (4 * level)
@@ -400,10 +444,16 @@ class _OxideGrammar:
         # Trailing `//` line comment (SPEC 3.1): comments never update
         # `prev_kind`, so this is safe to attach after any statement without
         # perturbing NEWLINE emission. Card-taught (LANGUAGE_CARD.md's own
-        # Example uses one) so completeness requires it be admitted.
+        # Example uses one) so completeness requires it be admitted. Both
+        # runs are `bounded()`, not open-ended -- see COMMENT_LEAD_SPACES_MAX
+        # / COMMENT_BODY_MAX and the module docstring.
         self.add(
             "comment",
-            seq(plus(chars(" "), 2), Lit("//"), star(chars(" -~"), 6)),
+            seq(
+                bounded(chars(" "), 1, COMMENT_LEAD_SPACES_MAX),
+                Lit("//"),
+                bounded(chars(" -~"), 0, COMMENT_BODY_MAX),
+            ),
         )
         self.add("cmp-op", alt(*[Lit(f" {o} ") for o in ("==", "!=", "<", "<=", ">", ">=")]))
         self.add("add-op", alt(Lit(" + "), Lit(" - ")))

@@ -12,6 +12,7 @@ from pathlib import Path
 
 import pytest
 
+from eval.grammar.build import COMMENT_BODY_MAX, COMMENT_LEAD_SPACES_MAX
 from eval.probe import diagnose
 from tests.gbnf_recognizer import admits, load_gbnf
 
@@ -38,6 +39,35 @@ def test_explicit_card_programs_are_admitted():
     assert programs, "explicit card has no fn-main snippet; test would be vacuous"
     for program in programs:
         assert admits(EXPLICIT_RULES, "root", program), program
+
+
+def _commented_program(*, lead_spaces: int, body_len: int) -> str:
+    return f"fn main() {{\n    print(1){' ' * lead_spaces}//{'a' * body_len}\n}}\n"
+
+
+# The `comment` rule (added for the LANGUAGE_CARD.md example's trailing
+# comment) is a bounded run, not the open-ended `*`/`+` every other
+# repeated leaf in the grammar uses -- pin both edges of both runs so a
+# regression back to unbounded fails loudly here instead of only showing
+# up as a degenerate-length generation later.
+def test_comment_body_at_the_cap_is_admitted():
+    program = _commented_program(lead_spaces=1, body_len=COMMENT_BODY_MAX)
+    assert admits(OXIDE_RULES, "root", program)
+
+
+def test_comment_body_over_the_cap_is_rejected():
+    program = _commented_program(lead_spaces=1, body_len=COMMENT_BODY_MAX + 1)
+    assert not admits(OXIDE_RULES, "root", program)
+
+
+def test_comment_leading_spaces_at_the_cap_is_admitted():
+    program = _commented_program(lead_spaces=COMMENT_LEAD_SPACES_MAX, body_len=0)
+    assert admits(OXIDE_RULES, "root", program)
+
+
+def test_comment_leading_spaces_over_the_cap_is_rejected():
+    program = _commented_program(lead_spaces=COMMENT_LEAD_SPACES_MAX + 1, body_len=0)
+    assert not admits(OXIDE_RULES, "root", program)
 
 
 # One canonically-formatted exemplar per taught construct. Each must BOTH
