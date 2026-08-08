@@ -23,7 +23,7 @@ from eval.extract import extract
 from eval.llamacpp import DEFAULT_HOST as LLAMACPP_DEFAULT_HOST
 from eval.llamacpp import LlamaCppClient, ServerContextOverflowError, grammar_digest
 from eval.llamacpp import load_grammar as _load_grammar  # patchable seam
-from eval.models import ModelClient, ModelError, OllamaClient
+from eval.models import DEFAULT_NUM_CTX, ModelClient, ModelError, OllamaClient
 from eval.repair import build_repair_prompt
 
 
@@ -185,6 +185,19 @@ MODELS = {
     "codegemma7b": "codegemma:7b-instruct-q8_0",
     "granite8b": "granite-code:8b-instruct-q8_0",
 }
+
+# Per-slug context window pin (SPEC section 48): min(DEFAULT_NUM_CTX, the
+# model's OWN advertised training context). Every slug defaults to
+# DEFAULT_NUM_CTX (8192) EXCEPT granite-code:8b, whose training context is
+# 4096 -- llama-server refuses (caps the slot) at anything larger than a
+# model was actually trained on ("the slot context (8192) exceeds the
+# training context of the model (4096) -- capping"), so 8192 is physically
+# unsatisfiable for that one model, not a policy choice. Never rope-scaled
+# past what the model was trained on; treated instead as a per-family
+# covariate, arm-fair within granite's own runs (SPEC section 48).
+NUM_CTX = {
+    "granite8b": 4096,
+}
 SEEDS = (1, 2, 3, 4, 5)
 SHOT_COUNTS = (0, 3)
 SESSIONS_PER_RUN = 60
@@ -209,19 +222,28 @@ def make_arm_clients(
     """One client per arm. Ollama: a single shared client (legacy
     behavior, byte-identical prompts and calls). llamacpp: per-arm
     grammar when constrained. The rust arm is NEVER constrained --
-    rustc's own diagnostics are the control (SPEC section 45)."""
+    rustc's own diagnostics are the control (SPEC section 45).
+
+    ``num_ctx`` is pinned per SLUG, not uniformly: every arm of one slug
+    shares the same window (``NUM_CTX``, defaulting to
+    ``DEFAULT_NUM_CTX``), so the pin stays arm-fair within a model while
+    still tracking that model's own capability (SPEC section 48).
+    """
+    num_ctx = NUM_CTX.get(slug, DEFAULT_NUM_CTX)
     if backend == "ollama":
         if constrained:
             raise ModelError(
                 "--constrained requires --backend llamacpp: Ollama accepts "
                 "a grammar option and silently ignores it"
             )
-        client = OllamaClient(MODELS[slug])
+        client = OllamaClient(MODELS[slug], num_ctx=num_ctx)
         return {arm: client for arm in harness.ARMS}
     clients: dict[str, ModelClient] = {}
     for arm in harness.ARMS:
         grammar = _load_grammar(arm) if constrained and arm != "rust" else None
-        clients[arm] = LlamaCppClient(MODELS[slug], grammar=grammar, host=host)
+        clients[arm] = LlamaCppClient(
+            MODELS[slug], grammar=grammar, host=host, num_ctx=num_ctx
+        )
     return clients
 
 

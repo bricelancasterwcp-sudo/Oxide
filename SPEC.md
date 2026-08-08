@@ -1771,7 +1771,7 @@ not be renegotiated after seeing results.
 | Temperature | 0.8 |
 | top_p | 0.95 |
 | `num_predict` (max gen tokens) | 2048 |
-| `num_ctx` (context window) | 8192 |
+| `num_ctx` (context window) | 8192, **per-family** — see below (4096 for `granite-code:8b`) |
 | Seeds | 1, 2, 3, 4, 5 |
 | Shot conditions | 0 and 3 |
 | Attempt cap | 4 (existing `MAX_ATTEMPTS`) |
@@ -1830,6 +1830,24 @@ every manifest as `num_ctx`, kept lexically distinct from
 cannot be confused, and `OllamaClient.generate` **refuses** any prompt
 whose estimated tokens plus `num_predict` exceed it rather than letting
 the daemon truncate silently (§51).
+
+**The window pin is per-family, not universal.** `num_ctx` is
+`min(8192, that model's OWN advertised training context)`, applied
+uniformly across all three arms of one slug (`eval.driver.NUM_CTX`) so
+the pin stays arm-fair *within* a model. Every model in this ladder gets
+8192 except `granite-code:8b`, whose training context is 4096 —
+llama-server refuses (caps) a slot requesting a window larger than the
+model was actually trained on, so 8192 is physically unsatisfiable for
+that one model, not a policy choice, and rope-scaling past it to force
+parity is explicitly rejected. The pin's PURPOSE from the two paragraphs
+above — no front-truncation, the full card always carried — is preserved
+per family at whatever window that family can actually serve. It is NOT
+a claim that granite is otherwise on equal footing with the 8192-pinned
+models: a smaller window is a real capability constraint, granite's
+`num_ctx` is recorded in its own manifests exactly like any other slug,
+and any cross-family comparison involving granite must state the window
+difference as a covariate rather than pooling it silently with the
+8192-pinned rows.
 
 **Grid:** 3 models × 2 shot conditions × 5 seeds × 20 tasks × 3 arms =
 **1800 sessions**, at most **7200 generations**. Estimated 8–14h wall

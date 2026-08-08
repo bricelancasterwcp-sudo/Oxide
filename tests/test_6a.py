@@ -982,6 +982,58 @@ def test_ollama_backend_shares_one_client():
     assert clients["oxide"] is clients["rust"]  # unchanged legacy behavior
 
 
+def test_make_arm_clients_pins_granite_to_its_native_4096_window():
+    # granite-code:8b's OWN training context is 4096; llama-server caps
+    # any larger slot request to that ceiling ("the slot context (8192)
+    # exceeds the training context of the model (4096) -- capping"), so
+    # the shared 8192 pin is physically unsatisfiable for this one model.
+    # All three arms must share the SAME window -- arm-fair within the
+    # family, per SPEC section 48.
+    clients = driver.make_arm_clients("llamacpp", "granite8b",
+                                      constrained=False,
+                                      host="http://localhost:8081")
+    assert {client.num_ctx for client in clients.values()} == {4096}
+
+
+def test_make_arm_clients_pins_other_slugs_to_the_shared_default_window():
+    for slug in ("qwen0_5b", "qwen1_5b", "qwen7b", "codegemma7b"):
+        clients = driver.make_arm_clients("llamacpp", slug, constrained=False,
+                                          host="http://localhost:8081")
+        assert {client.num_ctx for client in clients.values()} == {8192}, slug
+
+
+def test_make_arm_clients_threads_num_ctx_through_the_ollama_path_too():
+    # OllamaClient takes a num_ctx constructor arg; pinned the same way
+    # for consistency even though granite's actual G0 runs are
+    # llamacpp-only (ollama is the legacy 6a path, all qwen, unaffected
+    # in practice).
+    granite = driver.make_arm_clients("ollama", "granite8b", constrained=False,
+                                      host="http://localhost:8081")
+    assert granite["rust"].num_ctx == 4096
+    qwen = driver.make_arm_clients("ollama", "qwen7b", constrained=False,
+                                   host="http://localhost:8081")
+    assert qwen["rust"].num_ctx == 8192
+
+
+def test_granite_preflight_passes_against_its_own_capped_4096_server(monkeypatch):
+    # LlamaCppClient.preflight() already refuses when served n_ctx is
+    # LESS than the client's own num_ctx pin -- verified here rather than
+    # assumed. The boundary case matters: served == pin (both 4096, not
+    # served < pin) must pass, not just "not obviously broken".
+    clients = driver.make_arm_clients("llamacpp", "granite8b",
+                                      constrained=False,
+                                      host="http://localhost:8081")
+    props = {
+        "default_generation_settings": {"n_ctx": 4096},
+        "model_path": "/blobs/sha256-granite8b",
+        "build_info": "b1-granite",
+    }
+    monkeypatch.setattr("eval.llamacpp._request", _FakeHTTP(props))
+    info = clients["rust"].preflight()
+    assert info["server_n_ctx"] == 4096
+    assert info["num_ctx"] == 4096
+
+
 def test_grid_cell_routes_the_arm_to_its_client(tmp_path):
     task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
     tasks = tmp_path / "tasks.jsonl"
