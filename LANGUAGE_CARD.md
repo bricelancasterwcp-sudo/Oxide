@@ -21,6 +21,7 @@ optional everywhere.
   the enclosing function, which must return the same wrapper kind.
 - Functional update: `Point { x: 5, ..p }` builds a new struct taking every
   unlisted field from `p` (consumes `p`; `..p` must be last).
+- `let mut x = e` means `let x = e`; bindings are already reassignable.
 - Builtins accept receiver-first method syntax: `v.clone()` means `clone(v)`,
   `v.push(x)` means `push(v, x)`, and calls chain — `vec().push(1).push(2)`.
   Both forms are identical in meaning and ownership. Only builtins: there are

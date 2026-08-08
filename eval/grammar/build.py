@@ -593,7 +593,14 @@ class _OxideGrammar:
         opens_blocks = t <= BLOCK_TIERS
         flat: list[object] = [
             seq(
+                # `let mut x` is admitted because SPEC 54 accepts and ignores
+                # `mut`. Before that, GBNF could not reject the token models
+                # reflexively emit -- it steered to the nearest valid string,
+                # gluing `let mut acc` into `let mutacc` and turning every
+                # later use of `acc` into OX0200. That artifact was 44% of
+                # OX0200-carrying submissions across three families.
                 Lit("let "),
+                opt(Lit("mut ")),
                 Ref("pattern"),
                 opt(seq(Lit(": "), Ref("type-1"))),
                 Lit(" = "),

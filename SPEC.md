@@ -2223,3 +2223,28 @@ indexing), so the language card successfully taught everything except this.
 Receiver-first calls are near-universal across languages, not specific to
 Rust; a prefix-only builtin surface fights that convention for no
 expressiveness gain.
+
+## 54. `mut` accepted and ignored on `let`
+
+`let mut x = e` parses identically to `let x = e`. Oxide has no mutability
+distinction — every binding is reassignable — so `mut` carries no meaning
+and is discarded at the parser.
+
+`mut` is a **contextual** keyword, not a reserved word: it is consumed only
+when an identifier follows, so `let mut = 1` still binds a variable named
+`mut`.
+
+**Why this exists.** Models write `let mut x` reflexively. Under
+grammar-constrained decoding this was worse than a plain error: GBNF cannot
+reject a token, only steer generation to the nearest valid string, so
+`let mut acc` was silently glued into `let mutacc` and every later use of
+`acc` became `OX0200`. Measured across three model families, that single
+artifact accounted for **44% of OX0200-carrying submissions** — the largest
+cause of the largest remaining error class.
+
+Note the general hazard this exposes, which is not specific to `mut`: a
+constrained decoder never rejects, it *deforms*. Any token the grammar lacks
+is absorbed into an adjacent one, producing a program that parses and means
+something the model did not write. Error counts collected under grammar
+constraint therefore include artifacts of the grammar's own gaps, and should
+be read with that in mind.

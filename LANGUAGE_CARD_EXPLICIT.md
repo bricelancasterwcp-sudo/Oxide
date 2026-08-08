@@ -23,6 +23,7 @@ verifies every annotation. Types are fully inferred; annotations optional.
   `p` (consumes `p`; `..p` last).
 - `&name` marks a read of a linear variable; `name: &Type` a read-only
   parameter.
+- `let mut x = e` means `let x = e`; bindings are already reassignable.
 - Builtins accept receiver-first method syntax, and the receiver carries its
   own ownership marker exactly as it would in prefix form: a read is
   `(&v).len()` — the same `&` you would write in `len(&v)` — and a consuming

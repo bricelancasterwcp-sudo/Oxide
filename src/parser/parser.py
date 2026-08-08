@@ -429,8 +429,34 @@ class Parser(_ExprParserMixin):
             return self._assign_stmt()
         return self._expr_stmt()
 
+    def _skip_optional_mut(self) -> None:
+        """Accept and ignore `mut` after `let` (SPEC.md §54).
+
+        Oxide has no mutability distinction -- every binding is
+        reassignable -- so `mut` carries no meaning and is discarded at
+        the parser. It is a CONTEXTUAL keyword, not a reserved word: it is
+        consumed only when an identifier follows, so `let mut = 1` still
+        binds a variable named `mut`.
+
+        Measured justification. Models write `let mut x` reflexively. Under
+        grammar-constrained decoding this was worse than a plain error: GBNF
+        cannot reject a token, only steer to the nearest valid string, so
+        `let mut acc` was silently glued into `let mutacc` and every later
+        use of `acc` became OX0200. That single artifact accounted for 44%
+        of OX0200-carrying submissions across three model families -- the
+        largest cause of the largest remaining error class.
+        """
+        nxt = self._peek()
+        if (
+            nxt.kind is TokenKind.IDENT
+            and nxt.lexeme == "mut"
+            and self._peek_next().kind is TokenKind.IDENT
+        ):
+            self._advance()
+
     def _let_stmt(self) -> Let:
         kw = self._advance()
+        self._skip_optional_mut()
         pattern = self._pattern()
         ty = self._type() if self._match(TokenKind.COLON) else None
         self._expect(TokenKind.EQ, "'='")
