@@ -1647,6 +1647,12 @@ each attempt appended to `eval/results/<run_id>/triples.jsonl`:
 `{"task", "arm", "attempt", "code", "diagnostics", "compiled",
 "passed"}`) — this file is the verified-repair-triple dataset.
 
+**Context-budget exhaustion is a session result, not infrastructure**
+(§51): if a repair prompt grows across attempts and the server rejects
+it as exceeding its context window, the session ends there with
+attempts-so-far recorded and the cell marked `context_exhausted`; the
+grid proceeds to the next session, not a run abort.
+
 Fairness pins: identical task text across arms; caps on attempts (4) and
 exec time identical; the Rust arm receives rustc's own full diagnostic
 text (its help output is part of the null hypothesis).
@@ -2103,7 +2109,8 @@ comparison, in opposite directions.
 |---|---|---|
 | Ollama down / tag missing at start | infrastructure | preflight abort, before any generation |
 | Transport error or HTTP timeout | infrastructure | 3 retries with backoff, then **abort this `run_id`** (below) |
-| Prompt + `num_predict` exceeds `num_ctx` | infrastructure | **refused before the request**, not retried; aborts this `run_id` with the cause in its manifest |
+| Prompt + `num_predict` exceeds `num_ctx` (pre-request estimate) | infrastructure | **refused before the request**, not retried; aborts this `run_id` with the cause in its manifest |
+| Server rejects an in-session (repair) prompt as exceeding context, after ≥1 attempt already submitted this session | **model** | session ends; attempts-so-far recorded; cell marked `context_exhausted` (§45) |
 | Generation hits `num_predict` | **model** | truncated source submitted; real failed attempt; `truncated: true` logged |
 | Empty or malformed generation | **model** | real failure, consumes an attempt |
 | Non-UTF8 source | **model** | existing `_unencodable_source_verdict` |
@@ -2120,6 +2127,14 @@ would be recorded as an ordinary model failure in exactly the two arms
 the primary comparison rests on. Refusing before the request means the
 retry loop never sees it (overflow is deterministic) and the
 consecutive-abort backstop below still fires if it is systematic.
+
+**Cross-attempt context exhaustion is the sibling case, and it is a
+result.** The estimate above is checked per request, not against the
+whole session, so a repair prompt that grows across attempts can pass it
+and still overflow the server's real tokenizer once at least one attempt
+has already been submitted. Aborting there would discard real evidence
+already on record, so the session ends instead — exactly like truncation
+at `num_predict`, not like the pre-request refusal above.
 
 **Run-id-scoped abort.** A persistent transport failure aborts only the
 current `run_id` — at most 60 sessions, ~20–30 min — records the cause

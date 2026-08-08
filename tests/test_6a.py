@@ -1,4 +1,5 @@
 import inspect
+import io
 import json
 import subprocess
 import urllib.error
@@ -722,6 +723,142 @@ def test_run_session_lets_model_error_propagate(tmp_path):
             raw_dir=tmp_path / "raw",
             tasks_path=tasks,
         )
+
+
+class _ContextExhaustsClient:
+    """Answers with an always-failing program up to (not including) call
+    number ``fires_on_attempt``, then raises ``ContextOverflowError`` on
+    that call -- the shape of a repair prompt that grew across attempts
+    and overflowed the server's real context window mid-session."""
+
+    def __init__(self, fires_on_attempt: int) -> None:
+        self.fires_on_attempt = fires_on_attempt
+        self.calls = 0
+
+    def generate(self, prompt: str, *, seed: int) -> Generation:
+        self.calls += 1
+        if self.calls == self.fires_on_attempt:
+            raise ContextOverflowError("prompt exceeds num_ctx 8192")
+        return Generation("this is not a program", 10, 5, 100, False)
+
+
+def test_run_session_ends_at_context_exhaustion_with_evidence_so_far(tmp_path):
+    # SPEC section 45/51: cross-attempt context exhaustion is a RESULT,
+    # not infrastructure. The session ends with the N-1 attempts already
+    # submitted recorded, not the 4-attempt cap, and does not raise.
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
+    tasks = tmp_path / "tasks.jsonl"
+    tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
+    raw_dir = tmp_path / "raw"
+    cell = run_session(
+        _ContextExhaustsClient(fires_on_attempt=3),
+        run_id="6a-test-0shot-s1",
+        task_id="tX",
+        arm="oxide",
+        shots=0,
+        results_root=tmp_path / "results",
+        raw_dir=raw_dir,
+        tasks_path=tasks,
+    )
+    assert set(cell.keys()) == _CELL_SCHEMA | {"context_exhausted"}
+    assert cell["attempts"] == 2  # two submissions happened before attempt 3
+    assert cell["context_exhausted"] is True
+    assert cell["first_compiled"] is False
+    assert cell["first_passed"] is False
+    assert cell["final_passed"] is False  # last submitted verdict: a failure
+    # Only the two attempts that actually generated wrote raw output.
+    assert (raw_dir / "tX.oxide.1.txt").is_file()
+    assert (raw_dir / "tX.oxide.2.txt").is_file()
+    assert not (raw_dir / "tX.oxide.3.txt").exists()
+
+
+def test_run_session_records_a_failed_cell_when_context_exhausts_before_any_submission(
+    tmp_path,
+):
+    # Defensive case (shouldn't happen -- attempt-1 prompts are small --
+    # but must not crash): zero evidence is still a recorded result.
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
+    tasks = tmp_path / "tasks.jsonl"
+    tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
+    raw_dir = tmp_path / "raw"
+    cell = run_session(
+        _ContextExhaustsClient(fires_on_attempt=1),
+        run_id="6a-test-0shot-s1",
+        task_id="tX",
+        arm="oxide",
+        shots=0,
+        results_root=tmp_path / "results",
+        raw_dir=raw_dir,
+        tasks_path=tasks,
+    )
+    assert set(cell.keys()) == _CELL_SCHEMA | {"context_exhausted"}
+    assert cell["attempts"] == 0
+    assert cell["context_exhausted"] is True
+    assert cell["first_compiled"] is False
+    assert cell["first_passed"] is False
+    assert cell["final_passed"] is False
+    assert cell["attempts_to_pass"] == harness.MAX_ATTEMPTS + 1
+    assert cell["tokens_in"] == 0 and cell["tokens_out"] == 0
+    assert cell["contract_compliant"] == []
+    assert cell["truncated"] == []
+    assert list(raw_dir.glob("*")) == []  # no generation ever wrote output
+
+
+def test_run_one_continues_to_the_next_session_past_context_exhaustion(tmp_path):
+    # Finding: the RUN must continue past an exhausted session -- no
+    # exception escapes run_session, so run_one's task x arm loop keeps
+    # going and every other cell still gets recorded.
+    class _ExhaustsFirstCallThenArmAware:
+        _PROGRAMS = {
+            "rust": 'fn main() { println!("42"); }\n',
+            "explicit": "fn main() {\n    print(42)\n}\n",
+            "oxide": "fn main() {\n    print(42)\n}\n",
+        }
+
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def generate(self, prompt: str, *, seed: int) -> Generation:
+            self.calls += 1
+            if self.calls == 1:
+                raise ContextOverflowError("prompt exceeds num_ctx 8192")
+            if harness.RUST_PREAMBLE in prompt:
+                arm = "rust"
+            elif "Oxide Explicit" in prompt:
+                arm = "explicit"
+            else:
+                arm = "oxide"
+            return Generation(self._PROGRAMS[arm], 10, 5, 100, False)
+
+    tasks = [
+        {"id": "tA", "prompt": "Print 42.", "expected_stdout": "42\n"},
+        {"id": "tB", "prompt": "Print 42, again.", "expected_stdout": "42\n"},
+    ]
+    tasks_path = tmp_path / "tasks.jsonl"
+    tasks_path.write_text(
+        "\n".join(json.dumps(task) for task in tasks) + "\n", encoding="utf-8"
+    )
+    results_root = tmp_path / "results"
+    run_id = "6a-test-context-exhaustion-continues"
+    client = _ExhaustsFirstCallThenArmAware()
+
+    run_one(
+        {arm: client for arm in harness.ARMS},
+        run_id=run_id,
+        shots=0,
+        seed=1,
+        results_root=results_root,
+        tasks_path=tasks_path,
+    )
+
+    cells_path = results_root / run_id / "cells.jsonl"
+    cells = [json.loads(line) for line in cells_path.read_text(encoding="utf-8").splitlines()]
+    # Every task x arm pair still produced a cell: one exhausted session
+    # did not stop the loop or abort anything.
+    assert len(cells) == len(tasks) * len(harness.ARMS)
+    exhausted = [c for c in cells if c.get("context_exhausted")]
+    assert len(exhausted) == 1
+    assert exhausted[0]["attempts"] == 0
 
 
 class _ArmAwareClient:
@@ -2176,6 +2313,68 @@ def test_llamacpp_raises_model_error_after_exhausting_retries(monkeypatch):
     http = _FakeHTTP(*[urllib.error.URLError("down")] * 3)
     with pytest.raises(ModelError):
         _llama(monkeypatch, http).generate("hi", seed=1)
+
+
+def _http_error(code: int, body: dict) -> urllib.error.HTTPError:
+    """A real ``HTTPError`` with a readable JSON body, matching what
+    ``urllib.request.urlopen`` raises for a non-2xx response."""
+    payload = json.dumps(body).encode("utf-8")
+    return urllib.error.HTTPError(
+        url="http://localhost:8081/v1/chat/completions",
+        code=code,
+        msg="Bad Request",
+        hdrs=None,
+        fp=io.BytesIO(payload),
+    )
+
+
+# Bodies reproduced against the real llama-server running on :8081
+# (SPEC section 45/51): an oversized prompt and a malformed request,
+# respectively. See eval.llamacpp._context_overflow_message's docstring
+# for the exact probe transcript.
+_OVERFLOW_400_BODY = {
+    "error": {
+        "code": 400,
+        "message": (
+            "request (15430 tokens) exceeds the available context size "
+            "(8192 tokens), try increasing it"
+        ),
+        "type": "exceed_context_size_error",
+        "n_prompt_tokens": 15430,
+        "n_ctx": 8192,
+    }
+}
+_MALFORMED_400_BODY = {
+    "error": {"code": 400, "message": "'messages' is required",
+              "type": "invalid_request_error"}
+}
+
+
+def test_llamacpp_classifies_overflow_400_as_context_overflow_without_retrying(
+    monkeypatch,
+):
+    http = _FakeHTTP(_http_error(400, _OVERFLOW_400_BODY))
+    client = _llama(monkeypatch, http)
+    with pytest.raises(ContextOverflowError):
+        client.generate("hi", seed=1)
+    # Deterministic -- retrying would reproduce the identical 400 three
+    # times for nothing. Exactly one call, not `client.retries`.
+    assert len(http.calls) == 1
+
+
+def test_llamacpp_classifies_non_overflow_400_as_model_error_after_retries(
+    monkeypatch,
+):
+    # A fresh HTTPError per retry (not `[x] * 3`, which would share one
+    # exhausted BytesIO across pops) -- each retry against a real server
+    # gets its own readable response body.
+    http = _FakeHTTP(*[_http_error(400, _MALFORMED_400_BODY) for _ in range(3)])
+    client = _llama(monkeypatch, http)
+    with pytest.raises(ModelError) as excinfo:
+        client.generate("hi", seed=1)
+    assert not isinstance(excinfo.value, ContextOverflowError)
+    # Not overflow-shaped -- retried like any other transport failure.
+    assert len(http.calls) == 3
 
 
 @pytest.mark.parametrize(

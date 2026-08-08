@@ -27,6 +27,7 @@ Stdlib only.
 from __future__ import annotations
 
 import hashlib
+import json
 import time
 import urllib.error
 from pathlib import Path
@@ -77,6 +78,51 @@ def grammar_digest(grammar: str | None) -> str | None:
     return hashlib.sha256(grammar.encode("utf-8")).hexdigest()
 
 
+def _context_overflow_message(exc: urllib.error.HTTPError) -> str | None:
+    """The server's own diagnostic when a 400 IS llama-server's context
+    overflow, or ``None`` for any other 400 (or a non-JSON/unparsable
+    body). ``estimate_tokens``'s chars-per-token heuristic is
+    deliberately crude (section 48's own docstring) and under-counts a
+    real prompt often enough that a repair prompt grown across several
+    attempts can pass ``check_context`` client-side and still overflow
+    the server's actual tokenizer -- a cross-attempt sibling of
+    truncation-at-num_predict, and section 45 treats it the same way:
+    a RESULT, not infrastructure.
+
+    Reproduced against the running server on :8081 (SPEC section 45's
+    harness host) to pin the actual shapes rather than guess them:
+
+        oversized prompt -> HTTPError 400, body::
+
+            {"error": {"code": 400, "message": "request (15430 tokens)
+            exceeds the available context size (8192 tokens), try
+            increasing it", "type": "exceed_context_size_error",
+            "n_prompt_tokens": 15430, "n_ctx": 8192}}
+
+        malformed request (missing "messages") -> HTTPError 400, body::
+
+            {"error": {"code": 400, "message": "'messages' is required",
+            "type": "invalid_request_error"}}
+
+    ``error.type`` is the honest discriminator between the two. Any 400
+    that isn't ``"exceed_context_size_error"`` -- or isn't this JSON
+    shape at all -- is left alone and falls through to the normal
+    retry-then-ModelError path.
+    """
+    if exc.code != 400:
+        return None
+    try:
+        body = json.loads(exc.read().decode("utf-8"))
+    except (ValueError, UnicodeDecodeError):
+        return None
+    error = body.get("error") if isinstance(body, dict) else None
+    if not isinstance(error, dict):
+        return None
+    if error.get("type") != "exceed_context_size_error":
+        return None
+    return str(error.get("message") or "context size exceeded")
+
+
 class LlamaCppClient:
     """One llama-server instance, optionally under a GBNF grammar."""
 
@@ -108,11 +154,34 @@ class LlamaCppClient:
         self._sleep = sleep
 
     def _call(self, url: str, payload: dict | None = None) -> dict:
-        """Retry transient transport failures, then give up loudly."""
+        """Retry transient transport failures, then give up loudly.
+
+        A context-overflow 400 is the one failure NOT retried: it is
+        deterministic (the server would reject the identical prompt the
+        same way three more times), so burning the retry budget on it
+        would only delay a result that is already known. It is raised
+        immediately as ``ContextOverflowError`` instead of ``ModelError``
+        -- see ``_context_overflow_message``. ``HTTPError`` must be
+        caught ahead of the general ``URLError`` branch below: it IS a
+        ``URLError`` subclass, so listing it second would let the
+        general branch swallow it first.
+        """
         last: Exception | None = None
         for attempt in range(self.retries):
             try:
                 return _request(url, payload, self.timeout_s)
+            except urllib.error.HTTPError as exc:
+                overflow = _context_overflow_message(exc)
+                if overflow is not None:
+                    raise ContextOverflowError(
+                        f"{self.model}: server rejected the prompt as "
+                        f"exceeding its context window ({overflow}). "
+                        f"estimate_tokens() under-counted this prompt "
+                        f"against the server's real tokenizer."
+                    ) from exc
+                last = exc
+                if attempt < self.retries - 1:
+                    self._sleep(self.backoff_s * (2**attempt))
             except (urllib.error.URLError, OSError, ValueError) as exc:
                 last = exc
                 if attempt < self.retries - 1:

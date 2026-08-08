@@ -23,7 +23,7 @@ from eval.extract import extract
 from eval.llamacpp import DEFAULT_HOST as LLAMACPP_DEFAULT_HOST
 from eval.llamacpp import LlamaCppClient, grammar_digest
 from eval.llamacpp import load_grammar as _load_grammar  # patchable seam
-from eval.models import ModelClient, ModelError, OllamaClient
+from eval.models import ContextOverflowError, ModelClient, ModelError, OllamaClient
 from eval.repair import build_repair_prompt
 
 
@@ -42,7 +42,16 @@ def run_session(
     """Drive one task/arm to a verdict or the attempt cap.
 
     ModelError is deliberately NOT caught: infrastructure failures must
-    never be recorded as model failures (section 7).
+    never be recorded as model failures (section 7). ``ContextOverflowError``
+    is the one exception, and it is a RESULT, not infrastructure (SPEC
+    section 45): a repair prompt can grow across attempts and overflow the
+    server's real context window even though the client's own char-count
+    heuristic passed it (that heuristic is deliberately crude -- see
+    ``eval.models.estimate_tokens``). It is the cross-attempt sibling of
+    truncation at ``num_predict``, which is already a result. The session
+    ends there with whatever was submitted so far, marked
+    ``context_exhausted``, and the caller's loop (``run_one``) continues to
+    the next task/arm -- no run abort.
     """
     session = harness.new_session(
         task_id,
@@ -60,9 +69,19 @@ def run_session(
     first: dict | None = None
     verdict: dict = {}
     attempts_to_pass = harness.MAX_ATTEMPTS + 1
+    context_exhausted = False
 
     for attempt in range(1, harness.MAX_ATTEMPTS + 1):
-        generation = client.generate(prompt, seed=seed)
+        try:
+            generation = client.generate(prompt, seed=seed)
+        except ContextOverflowError:
+            # Defensive: this can in principle fire on attempt 1, before
+            # ANY submission (attempt-1 prompts are small, so it
+            # shouldn't) -- ``first``/``verdict`` simply stay at their
+            # initial values and the block below reads that as zero
+            # evidence rather than crashing on it.
+            context_exhausted = True
+            break
         (raw_dir / f"{task_id}.{arm}.{attempt}.txt").write_text(
             generation.text, encoding="utf-8"
         )
@@ -88,14 +107,13 @@ def run_session(
             tasks_path=tasks_path,
         )
 
-    assert first is not None
-    return {
+    cell = {
         "task": task_id,
         "arm": arm,
         "attempts": session.attempts,
-        "first_compiled": bool(first["compiled"]),
-        "first_passed": bool(first["passed"]),
-        "final_passed": bool(verdict["passed"]),
+        "first_compiled": bool(first["compiled"]) if first is not None else False,
+        "first_passed": bool(first["passed"]) if first is not None else False,
+        "final_passed": bool(verdict["passed"]) if verdict else False,
         "attempts_to_pass": attempts_to_pass,
         "tokens_in": tokens_in,
         "tokens_out": tokens_out,
@@ -103,6 +121,9 @@ def run_session(
         "contract_compliant": compliant,
         "truncated": truncated,
     }
+    if context_exhausted:
+        cell["context_exhausted"] = True
+    return cell
 
 
 def run_one(
