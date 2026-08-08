@@ -51,15 +51,14 @@ All at 10 seeds, 600 repairs per subject, matched code:
 |---|---|---|---|---|
 | Claude Opus 5 | 92% | 92% | **0.0pp** | ceiling, arms identical |
 | qwen2.5-coder-7b | 73.0% | 14.0% | **+59.0pp** | `[+42.8, +75.2]` |
-| codegemma-7b | 43.5% | 11.0% | **+32.5pp** | `[+16.5, +48.5]` |
+| codegemma-7b | 46.5% | 11.5% | **+35.0pp** | `[+19.7, +50.3]` |
 | granite-code-8b | 20.5% | 11.0% | **+9.5pp** | `[+3.8, +15.2]` |
 
-qwen and granite are post-`mut` (SPEC §54); codegemma has not been re-run
-since, so its row predates that change.
+All three local families are post-`mut` (SPEC §54), on matched code.
 
-**Every family clears 2 SE. Pooled: 40 of 43 non-tied comparisons,
-p < 10⁻⁸. Combined over all 60 (family × class) pairs: +33.7pp,
-2-SE `[+24.3, +43.0]`.** But see the decomposition below — most of that is
+**Every family clears 2 SE. Pooled: 41 of 43 non-tied comparisons,
+p < 10⁻⁹. Combined over all 60 (family × class) pairs: +34.5pp,
+2-SE `[+25.3, +43.7]`.** But see the decomposition below — most of that is
 *ergonomic*, not about ownership reasoning.
 
 The comparison that matters is **Oxide vs explicit-Oxide** — a control dialect
@@ -96,7 +95,7 @@ before the change.
 - **ownership effect alone: ≈ +10pp** — granite, which benefited from neither
   ergonomic fix, sits at +9.5pp
 - **ergonomic effect: larger, family-dependent**, up to +42pp
-- the combined **+33.7pp `[+24.3, +43.0]`** mixes the two and should not be
+- the combined **+34.5pp `[+25.3, +43.7]`** mixes the two and should not be
   quoted as an ownership result
 
 ### Two ergonomic fixes, and what each was worth
@@ -108,7 +107,7 @@ problem:
 | Fix | mechanism removed | effect |
 |---|---|---|
 | **Method syntax** (§53) | `.clone()` → `OX0304`, 94→0 and 72→0 | **+42pp** (qwen), **+31pp** (codegemma), **−1.5pp** (granite, which never used it) |
-| **`mut` accepted** (§54) | `let mut acc` glued into `let mutacc`, `OX0200` 81→10 | **+5.5pp** (qwen), **0** (granite) |
+| **`mut` accepted** (§54) | `let mut acc` glued into `let mutacc`, `OX0200` 81→10 (qwen) and 42→**0** (codegemma) | **+5.5pp** (qwen), **+3.0pp** (codegemma), **0** (granite) |
 
 The second is the more instructive. Chasing `OX0200` — the largest remaining
 error class — found that its largest single cause was **the measuring
@@ -121,7 +120,9 @@ Every error count this project collected under grammar constraint carried
 that artifact. SPEC §54 records the general hazard.
 
 It also showed the "wall" was two different things: qwen's `OX0200` was 88%
-grammar artifact and vanished; granite's is genuinely undeclared variables —
+grammar artifact and vanished; codegemma's was *entirely* artifact (42 → 0),
+though clearing it bought only +3pp — gluing co-occurred with other defects;
+granite's is genuinely undeclared variables —
 Python-style implicit binding — and did not move at all. That residue is a
 model-competence limit, not an ergonomics or instrument problem, and should
 be expected to yield far less than the two fixes above.
