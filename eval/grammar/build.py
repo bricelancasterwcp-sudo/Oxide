@@ -397,6 +397,14 @@ class _OxideGrammar:
             ),
         )
         self.add("str-lit", seq(Lit('"'), star(Ref("str-char"), 6), Lit('"')))
+        # Trailing `//` line comment (SPEC 3.1): comments never update
+        # `prev_kind`, so this is safe to attach after any statement without
+        # perturbing NEWLINE emission. Card-taught (LANGUAGE_CARD.md's own
+        # Example uses one) so completeness requires it be admitted.
+        self.add(
+            "comment",
+            seq(plus(chars(" "), 2), Lit("//"), star(chars(" -~"), 6)),
+        )
         self.add("cmp-op", alt(*[Lit(f" {o} ") for o in ("==", "!=", "<", "<=", ">", ">=")]))
         self.add("add-op", alt(Lit(" + "), Lit(" - ")))
         self.add("mul-op", alt(Lit(" * "), Lit(" / "), Lit(" % ")))
@@ -639,12 +647,15 @@ class _OxideGrammar:
         body: list[object] = [Ref(f"flat-{t}")]
         if opens_blocks:
             body.append(Ref(f"if-{t}-0"))
-        self.add(f"stmt-{t}", seq(Lit(_indent(t)), Alt(tuple(body)), Lit("\n")))
+        self.add(f"stmt-{t}", seq(Lit(_indent(t)), Alt(tuple(body)), opt(Ref("comment")), Lit("\n")))
 
         loop_body: list[object] = [Ref(f"flat-{t}"), Lit("break"), Lit("continue")]
         if opens_blocks:
             loop_body.append(Ref(f"loop-if-{t}-0"))
-        self.add(f"loop-stmt-{t}", seq(Lit(_indent(t)), Alt(tuple(loop_body)), Lit("\n")))
+        self.add(
+            f"loop-stmt-{t}",
+            seq(Lit(_indent(t)), Alt(tuple(loop_body)), opt(Ref("comment")), Lit("\n")),
+        )
 
         self.add(f"block-{t}", seq(Lit("{\n"), plus(Ref(f"stmt-{t}"), 3), Lit(_indent(t - 1)), Lit("}")))
         self.add(
@@ -693,10 +704,25 @@ class _OxideGrammar:
                 Lit("\n"),
             ),
         )
-        self.add("field-line", seq(Lit("\n    "), Ref("lname"), Lit(": "), Ref("type-1"), Lit(",")))
+        self.add("field", seq(Ref("lname"), Lit(": "), Ref("type-1")))
+        self.add("field-line", seq(Lit("\n    "), Ref("field"), Lit(",")))
+        # Two layouts: the canonical multi-line form, and the single-line
+        # form the parser also accepts (each field is just `name: Type`
+        # separated by `, `, no newlines) -- LANGUAGE_CARD.md's own Example
+        # declares its struct this way, so completeness requires it.
         self.add(
             "struct-decl",
-            seq(Lit("struct "), Ref("uname"), Lit(" {"), plus(Ref("field-line"), 3), Lit("\n}\n")),
+            alt(
+                seq(Lit("struct "), Ref("uname"), Lit(" {"), plus(Ref("field-line"), 3), Lit("\n}\n")),
+                seq(
+                    Lit("struct "),
+                    Ref("uname"),
+                    Lit(" { "),
+                    Ref("field"),
+                    star(seq(Lit(", "), Ref("field")), 2),
+                    Lit(" }\n"),
+                ),
+            ),
         )
         self.add(
             "variant-line",
