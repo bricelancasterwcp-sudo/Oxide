@@ -480,9 +480,13 @@ class TestDegenerateRequiresCompilation:
         replaced by a type error. Lenient may pass; degenerate must not."""
         record = self._p(arm)
         broken = record["broken"]
-        # `.clone()` is Rust method syntax; Oxide has only `clone(x)`.
+        # A TYPE error with the ownership error gone. `clone(a)` is a read,
+        # so nothing is moved; adding a Vec to an Int is an operand-type
+        # error. (An earlier version used `a.clone()`, which stopped being
+        # an error when SPEC 53 added builtin method syntax -- this test
+        # caught that language change invalidating its own premise.)
         submitted = (
-            broken.replace("let b = a", "let b = a.clone()")
+            broken.replace("let b = a", "let b = clone(a) + 1")
             if arm != "rust" else broken.replace("let b = a;", "let b = a.qqq();")
         )
         result = probe.score(record, submitted)

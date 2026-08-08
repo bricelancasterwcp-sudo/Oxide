@@ -21,6 +21,10 @@ optional everywhere.
   the enclosing function, which must return the same wrapper kind.
 - Functional update: `Point { x: 5, ..p }` builds a new struct taking every
   unlisted field from `p` (consumes `p`; `..p` must be last).
+- Builtins accept receiver-first method syntax: `v.clone()` means `clone(v)`,
+  `v.push(x)` means `push(v, x)`, and calls chain — `vec().push(1).push(2)`.
+  Both forms are identical in meaning and ownership. Only builtins: there are
+  no user-defined methods, so `p.area()` is an error.
 - Variant names are global — write `Circle(1.5)`, not `Shape::Circle(1.5)`.
 - Comparison chains like `a < b < c` are not allowed; parenthesize.
 

@@ -2175,3 +2175,37 @@ in `harness.py` or `src/` is touched).
    full-suite run never burns a real generation; run it with
    `pytest -m live`. It still skips cleanly when the daemon is down or
    the model is not pulled.
+
+# Part XI — Builtin Method Syntax (v0.2.2)
+
+## 53. Receiver-first calls to builtins
+
+`recv.name(args)` parses as `name(recv, args)` when `name` is a builtin and
+a `(` follows. This is **sugar only**: the parser emits an ordinary `Call`
+node, so name resolution, use-context classification, linear checking, and
+codegen see exactly what they would have seen for the prefix form. No
+semantics change.
+
+```
+v.clone()          ==  clone(v)          # a read; v stays usable
+v.push(x)          ==  push(v, x)        # consumes v
+vec().push(1).push(2)  ==  push(push(vec(), 1), 2)
+```
+
+Restrictions:
+- Only the names in `src.sema.types.BUILTINS`. `p.area()` is not a method
+  call — Oxide has no user-defined methods and no callable fields, so it
+  remains a field access followed by a call, i.e. an error.
+- Only the call form. `p.clone` without parentheses stays a field access.
+- The parser mirrors the builtin name set rather than importing sema (which
+  would invert the layering); `tests/test_parser.py` asserts the two stay in
+  sync.
+
+**Why this exists.** Measured on the ownership probe (Part X): 82% of failing
+Oxide repairs contained `.clone()` method syntax, producing `OX0304 field
+access on non-struct type` — the single largest failure mode. The other Rust
+idioms appeared **zero** times across 120 failures (`let mut`, `;`, `vec![]`,
+indexing), so the language card successfully taught everything except this.
+Receiver-first calls are near-universal across languages, not specific to
+Rust; a prefix-only builtin surface fights that convention for no
+expressiveness gain.

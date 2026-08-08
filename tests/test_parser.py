@@ -525,3 +525,58 @@ def test_dump_renders_very_long_operator_and_field_chains() -> None:
     assert dump(binop_module).count("(bin +") == 2000
     assert field_diags == []
     assert dump(field_module).count("(field") == 3000
+
+
+# ---------------------------------------------------------------------------
+# §53 builtin method syntax: `recv.name(args)` == `name(recv, args)`
+# ---------------------------------------------------------------------------
+
+
+class TestBuiltinMethodSyntax:
+    """Sugar added because 82% of failing Oxide repairs on the ownership
+    probe contained `.clone()` -- the single largest failure mode, and the
+    only Rust idiom the language card failed to suppress (`let mut`, `;`,
+    `vec![]` and indexing appeared zero times in 120 failures).
+    """
+
+    def test_parser_and_sema_builtin_sets_stay_in_sync(self):
+        """The parser mirrors the builtin names rather than importing sema,
+        which would invert the layering. This is the guard against drift:
+        adding a builtin to sema without adding it here would silently
+        leave it un-callable as a method."""
+        from src.parser.expressions import BUILTIN_METHOD_NAMES
+        from src.sema.types import BUILTINS
+
+        assert BUILTIN_METHOD_NAMES == set(BUILTINS), (
+            "parser/sema builtin sets diverged: "
+            f"sema-only={sorted(set(BUILTINS) - BUILTIN_METHOD_NAMES)}, "
+            f"parser-only={sorted(BUILTIN_METHOD_NAMES - set(BUILTINS))}"
+        )
+
+    def test_method_call_desugars_to_a_plain_call(self):
+        """It must produce an ordinary Call, not a call on a FieldAccess --
+        that is what lets resolution, use-context classification, linearity
+        and codegen all behave exactly as for the prefix form."""
+        assert d("fn main() { let w = v.clone() }") == d(
+            "fn main() { let w = clone(v) }"
+        )
+
+    def test_extra_arguments_follow_the_receiver(self):
+        assert d("fn main() { let w = v.push(1) }") == d(
+            "fn main() { let w = push(v, 1) }"
+        )
+
+    def test_method_calls_chain(self):
+        assert d("fn main() { let v = vec().push(1).push(2) }") == d(
+            "fn main() { let v = push(push(vec(), 1), 2) }"
+        )
+
+    def test_field_access_without_a_call_is_untouched(self):
+        """`p.clone` with no parentheses stays a field access -- only the
+        call form is sugar."""
+        assert "(field " in d("fn main() { let x = p.clone }")
+
+    def test_non_builtin_name_stays_a_field_access(self):
+        """`p.area()` is not sugar: Oxide has no user-defined methods and
+        no callable fields, so this remains what it always was."""
+        assert "(field " in d("fn main() { let x = p.area() }")

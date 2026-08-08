@@ -32,6 +32,30 @@ from src.parser.ast import (
     VariantPat,
 )
 
+#: Builtin names callable with receiver-first method syntax (SPEC.md §53):
+#: `recv.name(args)` parses as `name(recv, args)`. Mirrored from
+#: ``src.sema.types.BUILTINS``; the parser must not import sema (that would
+#: invert the layering), so ``test_parser.py`` asserts the two stay in sync.
+BUILTIN_METHOD_NAMES: frozenset[str] = frozenset(
+    {
+        "chars",
+        "clone",
+        "concat",
+        "get",
+        "int_to_str",
+        "len",
+        "parse_int",
+        "print",
+        "print_str",
+        "push",
+        "range",
+        "str_len",
+        "to_float",
+        "trunc",
+        "vec",
+    }
+)
+
 _BINARY_BP: dict[TokenKind, tuple[int, int]] = {
     TokenKind.OROR: (1, 2),
     TokenKind.ANDAND: (3, 4),
@@ -290,6 +314,38 @@ class _ExprParserMixin:
         span = Span(name_tok.span.start, rbrace.span.end)
         return StructLit(self._new_id(), span, name_tok.lexeme, tuple(fields), rest)
 
+    def _builtin_method(self, receiver: Expr, name_tok: Token) -> Expr:
+        """Desugar `recv.name(args)` to `name(recv, args)` (SPEC.md §53).
+
+        Every mainstream language writes a receiver-first call as
+        `recv.method(...)`; Oxide's builtins are prefix functions. Measured
+        on the ownership probe, 82% of failing Oxide repairs contained
+        `.clone()` -- the single largest failure mode, and the only Rust
+        idiom the language card failed to suppress (`let mut`, `;`,
+        `vec![]` and indexing appeared zero times). This is sugar only:
+        the desugared call is an ordinary Call node, so name resolution,
+        use-context classification, linearity and codegen all see exactly
+        what they would have seen for `name(recv, ...)`.
+
+        Restricted to builtin names. `p.x()` where `x` is a struct field
+        stays a field access followed by a call -- an error, as before,
+        since Oxide has no callable fields.
+        """
+        self._advance()  # LPAREN
+        saved = (self._skip_nl, self._no_struct_lit)
+        self._skip_nl = True
+        self._no_struct_lit = False
+        args: list[Expr] = [receiver]
+        while not self._check(TokenKind.RPAREN):
+            args.append(self._parse_expr(0))
+            if not self._match(TokenKind.COMMA):
+                break
+        rparen = self._expect(TokenKind.RPAREN, "')'")
+        self._skip_nl, self._no_struct_lit = saved
+        span = Span(receiver.span.start, rparen.span.end)
+        callee = Var(self._new_id(), name_tok.span, name_tok.lexeme)
+        return Call(self._new_id(), span, callee, tuple(args))
+
     def _postfix(self, lhs: Expr) -> Expr:
         tok = self._advance()  # DOT, LPAREN, or QUESTION
         if tok.kind is TokenKind.QUESTION:
@@ -297,6 +353,10 @@ class _ExprParserMixin:
             return Try(self._new_id(), Span(lhs.span.start, tok.span.end), lhs)
         if tok.kind is TokenKind.DOT:
             name_tok = self._expect(TokenKind.IDENT, "field name")
+            if name_tok.lexeme in BUILTIN_METHOD_NAMES and self._check(
+                TokenKind.LPAREN
+            ):
+                return self._builtin_method(lhs, name_tok)
             span = Span(lhs.span.start, name_tok.span.end)
             return FieldAccess(self._new_id(), span, lhs, name_tok.lexeme)
         saved = (self._skip_nl, self._no_struct_lit)

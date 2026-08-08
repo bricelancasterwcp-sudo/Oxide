@@ -23,6 +23,10 @@ verifies every annotation. Types are fully inferred; annotations optional.
   `p` (consumes `p`; `..p` last).
 - `&name` marks a read of a linear variable; `name: &Type` a read-only
   parameter.
+- Builtins accept receiver-first method syntax: `v.clone()` means `clone(v)`,
+  `v.push(x)` means `push(v, x)`, and calls chain — `vec().push(1).push(2)`.
+  Both forms are identical in meaning and ownership. Only builtins: there are
+  no user-defined methods, so `p.area()` is an error.
 - Variant names are global — write `Circle(1.5)`, not `Shape::Circle(1.5)`.
 - Comparison chains like `a < b < c` are not allowed; parenthesize.
 
