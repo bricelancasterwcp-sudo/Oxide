@@ -1162,6 +1162,55 @@ def test_manifest_records_the_preflight_provenance_payload(tmp_path):
     assert m["ollama_version"] == "0.6.8"
 
 
+def test_manifest_records_backend_and_per_arm_grammar_sha256(tmp_path):
+    # Section 49: a constrained result cannot be traced without knowing
+    # which grammar (and which backend) produced it. The rust arm is
+    # never constrained, so its digest must read None even though the
+    # other two arms carry one.
+    oxide_client, explicit_client, rust_client = (
+        _StubClient(), _StubClient(), _StubClient()
+    )
+    oxide_client.grammar = 'root ::= "oxide"'
+    explicit_client.grammar = 'root ::= "explicit"'
+    rust_client.grammar = None
+    clients = {
+        "oxide": oxide_client, "explicit": explicit_client, "rust": rust_client,
+    }
+    info = {"model_path": "/blobs/sha256-deadbeef", "build_info": "b1-abc"}
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr("eval.driver.run_one", lambda clients, **kw: None)
+    try:
+        run_grid(
+            lambda tag: clients,
+            slugs=["qwen1_5b"],
+            shot_counts=[0],
+            seeds=[1],
+            results_root=tmp_path,
+            preflight={"qwen1_5b": info},
+            backend="llamacpp",
+        )
+    finally:
+        monkeypatch.undo()
+
+    m = _manifest(tmp_path)
+    assert m["backend"] == "llamacpp"
+    assert m["preflight"] == info
+    assert m["grammar_sha256"] == {
+        "oxide": grammar_digest('root ::= "oxide"'),
+        "explicit": grammar_digest('root ::= "explicit"'),
+        "rust": None,
+    }
+
+
+def test_manifest_defaults_backend_to_ollama_and_preflight_to_none(tmp_path):
+    _drive_one_cell(tmp_path, _StubClient())
+    m = _manifest(tmp_path)
+    assert m["backend"] == "ollama"
+    assert m["preflight"] is None
+    assert m["grammar_sha256"] == {"oxide": None, "explicit": None, "rust": None}
+
+
 def test_manifest_records_start_and_end_timestamps(tmp_path):
     _drive_one_cell(tmp_path, _StubClient())
     m = _manifest(tmp_path)
