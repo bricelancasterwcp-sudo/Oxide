@@ -292,10 +292,13 @@ def _verdict(delta: float | None, arms: dict) -> str:
 
 
 def _collect_point(
-    root: Path, slug: str, shots: int, seeds: list[int]
+    root: Path, slug: str, shots: int, seeds: list[int], *, prefix: str = "6a"
 ) -> dict:
     """Everything section 47 and 50.5 pre-register, for one (model, shots)."""
-    run_dirs = {seed: root / build_run_id(slug, shots, seed) for seed in seeds}
+    run_dirs = {
+        seed: root / build_run_id(slug, shots, seed, prefix=prefix)
+        for seed in seeds
+    }
     by_seed = {seed: _load_cells(path) for seed, path in run_dirs.items()}
     cells = [cell for seed in seeds for cell in by_seed[seed]]
     triples = [rec for path in run_dirs.values() for rec in _load_triples(path)]
@@ -332,15 +335,16 @@ def aggregate(
     shot_counts: list[int],
     seeds: list[int],
     partial: bool = False,
+    prefix: str = "6a",
 ) -> dict:
     """Roll the grid up into points, one per (model, shots)."""
     root = Path(results_root)
     missing = [
-        build_run_id(slug, shots, seed)
+        build_run_id(slug, shots, seed, prefix=prefix)
         for slug in slugs
         for shots in shot_counts
         for seed in seeds
-        if not is_complete(root / build_run_id(slug, shots, seed))
+        if not is_complete(root / build_run_id(slug, shots, seed, prefix=prefix))
     ]
     if missing and not partial:
         raise RuntimeError(
@@ -349,7 +353,7 @@ def aggregate(
             f"silently missing aborted runs reads as a finished result."
         )
     points = [
-        _collect_point(root, slug, shots, seeds)
+        _collect_point(root, slug, shots, seeds, prefix=prefix)
         for slug in slugs
         for shots in shot_counts
     ]
@@ -535,6 +539,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--seeds", default="1-5")
     parser.add_argument("--partial", action="store_true")
     parser.add_argument("--out", default=None)
+    parser.add_argument("--run-prefix", default="6a")
     args = parser.parse_args(argv)
 
     slugs = [s for s in args.models.split(",") if s]
@@ -549,6 +554,7 @@ def main(argv: list[str] | None = None) -> int:
         shot_counts=[int(s) for s in args.shots.split(",") if s],
         seeds=parse_seeds(args.seeds),
         partial=args.partial,
+        prefix=args.run_prefix,
     )
     out_dir = Path(args.out or Path(args.results_root) / "6a-rollup")
     out_dir.mkdir(parents=True, exist_ok=True)

@@ -138,6 +138,8 @@ MODELS = {
     "qwen0_5b": "qwen2.5-coder:0.5b-instruct-q8_0",
     "qwen1_5b": "qwen2.5-coder:1.5b-instruct-q8_0",
     "qwen7b": "qwen2.5-coder:7b-instruct-q8_0",
+    "codegemma7b": "codegemma:7b-instruct-q8_0",
+    "granite8b": "granite-code:8b-instruct-q8_0",
 }
 SEEDS = (1, 2, 3, 4, 5)
 SHOT_COUNTS = (0, 3)
@@ -147,8 +149,8 @@ HEALTH_WAIT_CAP_S = 600
 RUSTC_PROBE_TIMEOUT_S = 60
 
 
-def build_run_id(slug: str, shots: int, seed: int) -> str:
-    return f"6a-{slug}-{shots}shot-s{seed}"
+def build_run_id(slug: str, shots: int, seed: int, prefix: str = "6a") -> str:
+    return f"{prefix}-{slug}-{shots}shot-s{seed}"
 
 
 def unknown_slugs(slugs: list[str]) -> list[str]:
@@ -195,6 +197,7 @@ def run_grid(
     health_check: Callable[[object], None] | None = None,
     tasks_path: Path | None = None,
     preflight: dict[str, dict] | None = None,
+    prefix: str = "6a",
 ) -> dict:
     """Walk the grid, one run id at a time. ``preflight`` maps slug -> the
     payload from ``OllamaClient.preflight``; section 48 requires it in every
@@ -206,7 +209,7 @@ def run_grid(
         client = make_client(MODELS[slug])
         for shots in shot_counts:
             for seed in seeds:
-                run_id = build_run_id(slug, shots, seed)
+                run_id = build_run_id(slug, shots, seed, prefix=prefix)
                 run_dir = Path(results_root) / run_id
                 if is_complete(run_dir):
                     continue
@@ -444,6 +447,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--seeds", default="1-5")
     parser.add_argument("--results-root", default=str(harness.RESULTS_ROOT))
     parser.add_argument("--preflight-only", action="store_true")
+    parser.add_argument("--run-prefix", default="6a")
     args = parser.parse_args(argv)
 
     slugs = [s for s in args.models.split(",") if s]
@@ -478,6 +482,7 @@ def main(argv: list[str] | None = None) -> int:
         results_root=Path(args.results_root),
         health_check=wait_for_health,
         preflight=preflight,
+        prefix=args.run_prefix,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 1 if result["aborted"] else 0

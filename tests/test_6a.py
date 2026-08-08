@@ -6,7 +6,7 @@ from datetime import datetime
 
 import pytest
 
-from eval import harness, repair, rollup
+from eval import driver, harness, repair, rollup
 from eval.driver import (
     MODELS,
     build_run_id,
@@ -815,11 +815,26 @@ def test_model_slugs_map_to_pinned_q8_tags():
         "qwen0_5b": "qwen2.5-coder:0.5b-instruct-q8_0",
         "qwen1_5b": "qwen2.5-coder:1.5b-instruct-q8_0",
         "qwen7b": "qwen2.5-coder:7b-instruct-q8_0",
+        "codegemma7b": "codegemma:7b-instruct-q8_0",
+        "granite8b": "granite-code:8b-instruct-q8_0",
     }
+
+
+def test_g0_model_slugs_are_pinned():
+    assert driver.MODELS["codegemma7b"] == "codegemma:7b-instruct-q8_0"
+    assert driver.MODELS["granite8b"] == "granite-code:8b-instruct-q8_0"
 
 
 def test_build_run_id_matches_pinned_format():
     assert build_run_id("qwen1_5b", 0, 3) == "6a-qwen1_5b-0shot-s3"
+
+
+def test_build_run_id_default_prefix_is_unchanged():
+    assert driver.build_run_id("qwen7b", 0, 3) == "6a-qwen7b-0shot-s3"
+
+
+def test_build_run_id_takes_a_prefix():
+    assert driver.build_run_id("granite8b", 0, 7, prefix="g0c") == "g0c-granite8b-0shot-s7"
 
 
 def test_is_complete_requires_sixty_cells(tmp_path):
@@ -867,6 +882,27 @@ def test_run_grid_skips_completed_runs(tmp_path):
     monkeypatch.undo()
     assert calls == [build_run_id("qwen1_5b", 0, 2)]
     assert result["completed"] == [build_run_id("qwen1_5b", 0, 2)]
+
+
+def test_run_grid_honors_a_custom_run_prefix(tmp_path):
+    calls: list[str] = []
+
+    def fake_run_one(client, *, run_id, **kwargs):
+        calls.append(run_id)
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr("eval.driver.run_one", fake_run_one)
+    result = run_grid(
+        lambda tag: _StubClient(),
+        slugs=["qwen1_5b"],
+        shot_counts=[0],
+        seeds=[1],
+        results_root=tmp_path,
+        prefix="g0c",
+    )
+    monkeypatch.undo()
+    assert calls == ["g0c-qwen1_5b-0shot-s1"]
+    assert result["completed"] == ["g0c-qwen1_5b-0shot-s1"]
 
 
 def test_run_grid_aborts_one_run_and_continues(tmp_path):
@@ -1417,8 +1453,8 @@ def test_diagnostic_histogram_counts_codes_per_arm():
     assert hist["rust"] == {"E0382": 1}
 
 
-def _write_run(root, slug, shots, seed, cells, triples=()) -> None:
-    run_dir = root / build_run_id(slug, shots, seed)
+def _write_run(root, slug, shots, seed, cells, triples=(), prefix="6a") -> None:
+    run_dir = root / build_run_id(slug, shots, seed, prefix=prefix)
     run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / "cells.jsonl").write_text(
         "".join(json.dumps(c, sort_keys=True) + "\n" for c in cells),
@@ -1444,6 +1480,15 @@ def _one_point(tmp_path, cells, triples=()) -> dict:
     _write_run(tmp_path, "qwen1_5b", 0, 1, cells, triples)
     grid = aggregate(tmp_path, slugs=["qwen1_5b"], shot_counts=[0], seeds=[1])
     return grid["points"][0]
+
+
+def test_aggregate_honors_a_custom_run_prefix(tmp_path):
+    _write_run(tmp_path, "qwen1_5b", 0, 1, _full_run(compiled=True, final=True),
+               prefix="g0u")
+    grid = aggregate(tmp_path, slugs=["qwen1_5b"], shot_counts=[0], seeds=[1],
+                      prefix="g0u")
+    assert grid["missing"] == []
+    assert grid["points"][0]["model_slug"] == "qwen1_5b"
 
 
 def test_aggregate_reports_first_compile_rate(tmp_path):
@@ -1582,6 +1627,21 @@ def test_rollup_rejects_an_unknown_model_slug(tmp_path, capsys):
     code = rollup.main(["--models", "qwen3b", "--results-root", str(tmp_path)])
     assert code == 2
     assert "unknown model slug" in capsys.readouterr().err
+
+
+def test_rollup_cli_threads_the_run_prefix(tmp_path):
+    _write_run(tmp_path, "qwen1_5b", 0, 1, _full_run(compiled=True, final=True),
+               prefix="g0c")
+    code = rollup.main([
+        "--models", "qwen1_5b",
+        "--shots", "0",
+        "--seeds", "1",
+        "--run-prefix", "g0c",
+        "--results-root", str(tmp_path),
+    ])
+    assert code == 0
+    grid = json.loads((tmp_path / "6a-rollup" / "grid.json").read_text())
+    assert grid["missing"] == []
 
 
 def test_render_report_states_band_alongside_delta():
