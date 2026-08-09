@@ -560,3 +560,49 @@ def test_dialect_garbage_never_raises_text(tmp_path: Path, source: str) -> None:
     proc = _run_cli(["--dialect=explicit", str(path)])
     assert proc.returncode in (0, 1)
     assert "Traceback" not in proc.stderr
+
+
+# ---- §56 field assignment: the dialect inherits it unchanged ----
+
+FA_CORE = (
+    "struct P { x: Int, y: Int }\n"
+    "fn main() { let p = P { x: 1, y: 2 }\n p.x = 5\n print(p.x) }"
+)
+
+# The dialect is the matched-novelty control: the model must WRITE what core
+# infers. The SAME program therefore needs the `&` read marker and the
+# explicit `drop`. Feeding it the bare core source is EX0003 + EX0002 -- the
+# dialect working correctly, not a §56 failure.
+FA_EXPLICIT = (
+    "struct P { x: Int, y: Int }\n"
+    "fn main() { let p = P { x: 1, y: 2 }\n p.x = 5\n print(&p.x)\n drop p }"
+)
+
+
+def test_field_assignment_accepted_in_the_explicit_dialect(tmp_path: Path) -> None:
+    """ExplicitParser subclasses the core parser, so §56 arrives for free;
+    this pins that it did, rather than assuming it."""
+    _proc, obj = _dialect_json(tmp_path, FA_EXPLICIT)
+    assert _codes(obj) == [], obj
+
+
+def test_field_assignment_rust_is_byte_identical_across_dialects() -> None:
+    """§41: the dialect emits byte-identical Rust to the core program -- the
+    annotations are surface only, and strip must put the FieldAssign node
+    back exactly as the core parser produced it."""
+    from src.explicit.pipeline import run as explicit_run
+
+    core_rust, core_diags = transpile(FA_CORE)
+    assert core_diags == [], core_diags
+    dialect_rust, dialect_diags = explicit_run(FA_EXPLICIT)
+    assert dialect_diags == [], dialect_diags
+    assert dialect_rust == core_rust
+
+
+def test_bare_core_source_is_rejected_by_the_dialect() -> None:
+    """Guards the fixture above: if the dialect ever stopped demanding its
+    annotations, the parity test would pass for the wrong reason."""
+    from src.explicit.pipeline import run as explicit_run
+
+    _rust, diags = explicit_run(FA_CORE)
+    assert [d.code for d in diags] == ["EX0003", "EX0002"], diags
