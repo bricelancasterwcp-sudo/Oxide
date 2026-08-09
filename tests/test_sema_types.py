@@ -693,3 +693,85 @@ def test_annotated_empty_vec_still_pins_the_element_type() -> None:
     # Arrange / Act / Assert — the annotation-or-use escape hatch for
     # `vec()` is untouched by the variadic sugar.
     assert codes("fn f() { let x: Vec<Int> = vec() }") == []
+
+
+# ---------------------------------------------------------------------------
+# §56 field assignment: the place is walked with the same lookup §36 uses
+# ---------------------------------------------------------------------------
+
+
+def test_field_assign_unknown_field_is_ox0304() -> None:
+    src = "struct P { x: Int }\nfn main() { let p = P { x: 1 }\n p.z = 5 }"
+    assert "OX0304" in codes(src)
+
+
+def test_field_assign_into_non_struct_is_ox0306() -> None:
+    src = "fn main() { let n = 1\n n.x = 5 }"
+    assert "OX0306" in codes(src)
+
+
+def test_field_assign_non_struct_mid_path_is_ox0306() -> None:
+    """SPEC.md section 56 says a non-struct at ANY step is OX0306, not just
+    the base position. `o.i.v.z`'s first two steps resolve to structs
+    (`Outer` -> `Inner`), but `v: Int` is not a struct, so the walk must
+    fail on the THIRD segment (`.z`), not the base (`o`, which is a valid
+    struct) and not the second (`.v`, which is a valid field). The base-only
+    test above cannot cover this: it only ever exercises step one."""
+    src = (
+        "struct Inner { v: Int }\n"
+        "struct Outer { i: Inner }\n"
+        "fn main() { let o = Outer { i: Inner { v: 1 } }\n o.i.v.z = 5 }"
+    )
+    assert codes(src) == ["OX0306"]
+
+
+def test_field_assign_type_mismatch_is_ox0300() -> None:
+    src = (
+        "struct P { x: Int }\n"
+        'fn main() { let p = P { x: 1 }\n p.x = "s" }'
+    )
+    assert "OX0300" in codes(src)
+
+
+def test_field_assign_unbound_base_is_ox0200() -> None:
+    assert "OX0200" in codes("fn main() { nope.x = 5 }")
+
+
+def test_nested_path_walks_every_step() -> None:
+    """Pins that each path step is checked against the PREVIOUS step's
+    type, not the base's -- and is built to actually discriminate the two.
+
+    `o.i.i` reuses the field name `i` at both levels: `Outer` has a field
+    `i` (of type `Inner`), but `Inner` itself has no field `i` (only `v`).
+    A correct implementation threads `ty` through the walk, so the second
+    `.i` is checked against `Inner` and correctly reports OX0304 (unknown
+    field `i` on `Inner`). A buggy implementation that checks every step
+    against the BASE type (`Outer`) instead of the previous step's type
+    would resolve the second `.i` against `Outer` again -- which DOES have
+    a field `i` -- succeeding with type `Inner`, and only fail later at the
+    final RHS unify (`Inner` vs the literal `5`'s `Int`), reporting OX0300
+    instead of OX0304.
+
+    A `nope`-style fixture (a field name absent from every struct in the
+    chain) does NOT discriminate: both the correct walk and the base-only
+    bug hit an unknown-field case on some struct and both report OX0304,
+    just for different (undetectable-by-code-alone) reasons. Reusing an
+    outer field name at the inner position is what forces the two
+    implementations to disagree on the emitted CODE, not just on whether
+    one fires."""
+    src = (
+        "struct Inner { v: Int }\n"
+        "struct Outer { i: Inner }\n"
+        "fn main() { let o = Outer { i: Inner { v: 1 } }\n o.i.i = 5 }"
+    )
+    assert codes(src) == ["OX0304"]
+
+
+def test_nested_path_accepts_a_valid_walk() -> None:
+    src = (
+        "struct Inner { v: Int }\n"
+        "struct Outer { i: Inner }\n"
+        "fn main() { let o = Outer { i: Inner { v: 1 } }\n o.i.v = 5\n"
+        " print(o.i.v) }"
+    )
+    assert codes(src) == []

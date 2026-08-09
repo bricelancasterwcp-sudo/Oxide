@@ -677,27 +677,31 @@ Append to `tests/test_linear.py`:
 
 def test_field_write_into_a_moved_base_is_use_after_move():
     """§56: the base is a READ use (§36), so writing a field of a moved
-    struct is OX0400 -- not a silent re-ownership."""
+    struct is OX0400 -- not a silent re-ownership.
+
+    `let q = p` is the move. Passing to a function does NOT move here: a
+    param that is never assigned and never move-used infers mode `read`
+    (§15/§28), so `take(p)` emits `&p` and the base is still owned.
+    """
     src = (
         "struct P { v: Vec<Int> }\n"
-        "fn take(p: P) -> Int { 1 }\n"
-        "fn main() { let p = P { v: vec() }\n let n = take(p)\n"
-        " p.v = vec() }"
+        "fn main() { let p = P { v: vec() }\n let q = p\n p.v = vec() }"
     )
     assert "OX0400" in codes_of(src)
 
 
-def test_field_write_does_not_re_own_a_moved_base():
-    """The contrast that motivates the distinct node: `p = e` re-owns a
-    moved variable and is legal; `p.f = e` must NOT, so a later use still
-    reports use-after-move."""
-    src = (
+def test_whole_assignment_re_owns_a_moved_base_but_a_field_write_does_not():
+    """The contrast that motivates the distinct node, as one paired check:
+    after the same move, `p = e` re-establishes ownership and the program is
+    clean, while `p.f = e` must NOT re-own and stays an error. A widened
+    `Assign` node would have made the second line behave like the first.
+    """
+    moved = (
         "struct P { v: Vec<Int> }\n"
-        "fn take(p: P) -> Int { 1 }\n"
-        "fn main() { let p = P { v: vec() }\n let n = take(p)\n"
-        " p.v = vec()\n let m = take(p) }"
+        "fn main() { let p = P { v: vec() }\n let q = p\n"
     )
-    assert "OX0400" in codes_of(src)
+    assert codes_of(moved + " p = P { v: vec() }\n print(len(p.v)) }") == []
+    assert "OX0400" in codes_of(moved + " p.v = vec()\n print(len(p.v)) }")
 
 
 def test_field_assigned_param_gets_own_mode():
@@ -931,25 +935,43 @@ FA_CORE = (
     "fn main() { let p = P { x: 1, y: 2 }\n p.x = 5\n print(p.x) }"
 )
 
+# The dialect is the matched-novelty control: the model must WRITE what core
+# infers. The SAME program therefore needs the `&` read marker and the
+# explicit `drop`. Feeding it the bare core source is EX0003 + EX0002 -- the
+# dialect working correctly, not a §56 failure.
+FA_EXPLICIT = (
+    "struct P { x: Int, y: Int }\n"
+    "fn main() { let p = P { x: 1, y: 2 }\n p.x = 5\n print(&p.x)\n drop p }"
+)
+
 
 def test_field_assignment_accepted_in_the_explicit_dialect(tmp_path: Path) -> None:
     """ExplicitParser subclasses the core parser, so §56 arrives for free;
     this pins that it did, rather than assuming it."""
-    obj = _dialect_json(tmp_path, FA_CORE)
+    obj = _dialect_json(tmp_path, FA_EXPLICIT)
     assert _codes(obj) == [], obj
 
 
-def test_field_assignment_rust_is_byte_identical_across_dialects(
-    tmp_path: Path,
-) -> None:
-    """§41: the dialect emits the same Rust as the core program."""
-    core_rust, core_diags = transpile(FA_CORE)
-    assert core_diags == [], core_diags
+def test_field_assignment_rust_is_byte_identical_across_dialects() -> None:
+    """§41: the dialect emits byte-identical Rust to the core program -- the
+    annotations are surface only, and strip must put the FieldAssign node
+    back exactly as the core parser produced it."""
     from src.explicit.pipeline import run as explicit_run
 
-    dialect_rust, dialect_diags = explicit_run(FA_CORE)
+    core_rust, core_diags = transpile(FA_CORE)
+    assert core_diags == [], core_diags
+    dialect_rust, dialect_diags = explicit_run(FA_EXPLICIT)
     assert dialect_diags == [], dialect_diags
     assert dialect_rust == core_rust
+
+
+def test_bare_core_source_is_rejected_by_the_dialect() -> None:
+    """Guards the fixture above: if the dialect ever stopped demanding its
+    annotations, the parity test would pass for the wrong reason."""
+    from src.explicit.pipeline import run as explicit_run
+
+    _rust, diags = explicit_run(FA_CORE)
+    assert [d.code for d in diags] == ["EX0003", "EX0002"], diags
 ```
 
 - [ ] **Step 2: Run it**
@@ -1010,8 +1032,20 @@ from eval.deformation import field_assign_deformations
 
 
 def test_discarded_field_comparison_is_the_signature():
-    src = "fn main() {\n    a.values == 5\n}"
+    """A DISCARDED comparison: the trailing statement is what makes it
+    discarded. Without it, tail conversion would make this the block's
+    value -- the ambiguous case the tail column exists for."""
+    src = "fn main() {\n    a.values == 5\n    print(1)\n}"
     assert field_assign_deformations(src) == (1, 0)
+
+
+def test_a_lone_comparison_is_tail_not_statement_position():
+    """Tail conversion is syntactic and unconditional, so a comparison alone
+    in a block is the block's VALUE, not a discarded statement. This is the
+    reason the signature count is a LOWER BOUND: a deformed assignment that
+    happens to fall last is counted in the tail column, not the signature."""
+    src = "fn main() {\n    a.values == 5\n}"
+    assert field_assign_deformations(src) == (0, 1)
 
 
 def test_tail_position_is_counted_separately_not_pooled():
@@ -1237,7 +1271,7 @@ constrained oxide first attempts, 0 of 600 unconstrained."
 
 The measurement is **not** a task here. Per the design, g2 gets no dedicated campaign: its endpoint folds into the g3 (conversion builtins) run, where the pre-registered predictions are
 
-- statement-position signature, constrained: **18 → 0**
+- statement-position signature, constrained: **18 → 0**, cited as a **lower bound**. Tail conversion is syntactic and unconditional, so a deformed field assignment that happens to fall last in a function lands in tail position instead. Tail hits are therefore ambiguous in *both* directions — a legitimate `Bool` return, or a deformation that happened to be last — so some share of the 17 tail occurrences are almost certainly deformations. Pooling the columns overcounts; treating the signature as complete undercounts. This is recorded in `eval/deformation.py`'s docstring.
 - the same signature, unconstrained: **0 → 0**
 - aggregate first-attempt pass rate from g2 alone: **no detectable change** — 1.5% prevalence cannot move it, and apparent movement is noise
 - rust arm: flat at the first-attempt **rate** level, never the byte level

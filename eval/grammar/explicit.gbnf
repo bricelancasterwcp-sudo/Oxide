@@ -193,7 +193,7 @@ post-10 ::= "&" lname | chain-10
 chain-10 ::= atom-10 pfx-10*
 pfx-10 ::= "." lname | "()" | "?"
 atom-10 ::= int-lit | float-lit | str-lit | "true" | "false" | lname | uname
-flat-1 ::= "let " "mut "? pattern (": " type-1)? " = " value-1 | lname " = " value-1 | "return" | "return " value-1 | or-1 | match-1 | "drop " lname | "while " or-2 " " loop-block-2 | "for " lname " in " or-2 " " loop-block-2
+flat-1 ::= "let " "mut "? pattern (": " type-1)? " = " value-1 | lname ("." lname)* " = " value-1 | "return" | "return " value-1 | or-1 | match-1 | "drop " lname | "while " or-2 " " loop-block-2 | "for " lname " in " or-2 " " loop-block-2
 if-1-0 ::= "if " or-2 " " block-2 (" else " (block-2 | if-1-1))?
 if-1-1 ::= "if " or-2 " " block-2 (" else " (block-2 | if-1-2))?
 if-1-2 ::= "if " or-2 " " block-2 (" else " block-2)?
@@ -204,7 +204,7 @@ stmt-1 ::= "    " (flat-1 | if-1-0) comment? "\n"
 loop-stmt-1 ::= "    " (flat-1 | "break" | "continue" | loop-if-1-0) comment? "\n"
 block-1 ::= "{\n" stmt-1+ "}"
 loop-block-1 ::= "{\n" loop-stmt-1+ "}"
-flat-2 ::= "let " "mut "? pattern (": " type-1)? " = " value-2 | lname " = " value-2 | "return" | "return " value-2 | or-2 | match-2 | "drop " lname | "while " or-3 " " loop-block-3 | "for " lname " in " or-3 " " loop-block-3
+flat-2 ::= "let " "mut "? pattern (": " type-1)? " = " value-2 | lname ("." lname)* " = " value-2 | "return" | "return " value-2 | or-2 | match-2 | "drop " lname | "while " or-3 " " loop-block-3 | "for " lname " in " or-3 " " loop-block-3
 if-2-0 ::= "if " or-3 " " block-3 (" else " (block-3 | if-2-1))?
 if-2-1 ::= "if " or-3 " " block-3 (" else " (block-3 | if-2-2))?
 if-2-2 ::= "if " or-3 " " block-3 (" else " block-3)?
@@ -215,7 +215,7 @@ stmt-2 ::= "        " (flat-2 | if-2-0) comment? "\n"
 loop-stmt-2 ::= "        " (flat-2 | "break" | "continue" | loop-if-2-0) comment? "\n"
 block-2 ::= "{\n" stmt-2+ "    " "}"
 loop-block-2 ::= "{\n" loop-stmt-2+ "    " "}"
-flat-3 ::= "let " "mut "? pattern (": " type-1)? " = " value-3 | lname " = " value-3 | "return" | "return " value-3 | or-3 | match-3 | "drop " lname | "while " or-4 " " loop-block-4 | "for " lname " in " or-4 " " loop-block-4
+flat-3 ::= "let " "mut "? pattern (": " type-1)? " = " value-3 | lname ("." lname)* " = " value-3 | "return" | "return " value-3 | or-3 | match-3 | "drop " lname | "while " or-4 " " loop-block-4 | "for " lname " in " or-4 " " loop-block-4
 if-3-0 ::= "if " or-4 " " block-4 (" else " (block-4 | if-3-1))?
 if-3-1 ::= "if " or-4 " " block-4 (" else " (block-4 | if-3-2))?
 if-3-2 ::= "if " or-4 " " block-4 (" else " block-4)?
@@ -226,7 +226,7 @@ stmt-3 ::= "            " (flat-3 | if-3-0) comment? "\n"
 loop-stmt-3 ::= "            " (flat-3 | "break" | "continue" | loop-if-3-0) comment? "\n"
 block-3 ::= "{\n" stmt-3+ "        " "}"
 loop-block-3 ::= "{\n" loop-stmt-3+ "        " "}"
-flat-4 ::= "let " "mut "? pattern (": " type-1)? " = " value-4 | lname " = " value-4 | "return" | "return " value-4 | or-4 | match-4 | "drop " lname | "while " or-5 " " loop-block-5 | "for " lname " in " or-5 " " loop-block-5
+flat-4 ::= "let " "mut "? pattern (": " type-1)? " = " value-4 | lname ("." lname)* " = " value-4 | "return" | "return " value-4 | or-4 | match-4 | "drop " lname | "while " or-5 " " loop-block-5 | "for " lname " in " or-5 " " loop-block-5
 if-4-0 ::= "if " or-5 " " block-5 (" else " (block-5 | if-4-1))?
 if-4-1 ::= "if " or-5 " " block-5 (" else " (block-5 | if-4-2))?
 if-4-2 ::= "if " or-5 " " block-5 (" else " block-5)?
@@ -237,7 +237,7 @@ stmt-4 ::= "                " (flat-4 | if-4-0) comment? "\n"
 loop-stmt-4 ::= "                " (flat-4 | "break" | "continue" | loop-if-4-0) comment? "\n"
 block-4 ::= "{\n" stmt-4+ "            " "}"
 loop-block-4 ::= "{\n" loop-stmt-4+ "            " "}"
-flat-5 ::= "let " "mut "? pattern (": " type-1)? " = " value-5 | lname " = " value-5 | "return" | "return " value-5 | or-5 | match-5 | "drop " lname | "while " or-6 " " loop-block-6 | "for " lname " in " or-6 " " loop-block-6
+flat-5 ::= "let " "mut "? pattern (": " type-1)? " = " value-5 | lname ("." lname)* " = " value-5 | "return" | "return " value-5 | or-5 | match-5 | "drop " lname | "while " or-6 " " loop-block-6 | "for " lname " in " or-6 " " loop-block-6
 if-5-0 ::= "if " or-6 " " block-6 (" else " (block-6 | if-5-1))?
 if-5-1 ::= "if " or-6 " " block-6 (" else " (block-6 | if-5-2))?
 if-5-2 ::= "if " or-6 " " block-6 (" else " block-6)?
@@ -248,7 +248,7 @@ stmt-5 ::= "                    " (flat-5 | if-5-0) comment? "\n"
 loop-stmt-5 ::= "                    " (flat-5 | "break" | "continue" | loop-if-5-0) comment? "\n"
 block-5 ::= "{\n" stmt-5+ "                " "}"
 loop-block-5 ::= "{\n" loop-stmt-5+ "                " "}"
-flat-6 ::= "let " "mut "? pattern (": " type-1)? " = " value-6 | lname " = " value-6 | "return" | "return " value-6 | or-6 | match-6 | "drop " lname | "while " or-7 " " loop-block-7 | "for " lname " in " or-7 " " loop-block-7
+flat-6 ::= "let " "mut "? pattern (": " type-1)? " = " value-6 | lname ("." lname)* " = " value-6 | "return" | "return " value-6 | or-6 | match-6 | "drop " lname | "while " or-7 " " loop-block-7 | "for " lname " in " or-7 " " loop-block-7
 if-6-0 ::= "if " or-7 " " block-7 (" else " (block-7 | if-6-1))?
 if-6-1 ::= "if " or-7 " " block-7 (" else " (block-7 | if-6-2))?
 if-6-2 ::= "if " or-7 " " block-7 (" else " block-7)?
@@ -259,12 +259,12 @@ stmt-6 ::= "                        " (flat-6 | if-6-0) comment? "\n"
 loop-stmt-6 ::= "                        " (flat-6 | "break" | "continue" | loop-if-6-0) comment? "\n"
 block-6 ::= "{\n" stmt-6+ "                    " "}"
 loop-block-6 ::= "{\n" loop-stmt-6+ "                    " "}"
-flat-7 ::= "let " "mut "? pattern (": " type-1)? " = " value-7 | lname " = " value-7 | "return" | "return " value-7 | or-7 | match-7 | "drop " lname
+flat-7 ::= "let " "mut "? pattern (": " type-1)? " = " value-7 | lname ("." lname)* " = " value-7 | "return" | "return " value-7 | or-7 | match-7 | "drop " lname
 stmt-7 ::= "                            " (flat-7) comment? "\n"
 loop-stmt-7 ::= "                            " (flat-7 | "break" | "continue") comment? "\n"
 block-7 ::= "{\n" stmt-7+ "                        " "}"
 loop-block-7 ::= "{\n" loop-stmt-7+ "                        " "}"
-flat-8 ::= "let " "mut "? pattern (": " type-1)? " = " value-8 | lname " = " value-8 | "return" | "return " value-8 | or-8 | match-8 | "drop " lname
+flat-8 ::= "let " "mut "? pattern (": " type-1)? " = " value-8 | lname ("." lname)* " = " value-8 | "return" | "return " value-8 | or-8 | match-8 | "drop " lname
 stmt-8 ::= "                                " (flat-8) comment? "\n"
 loop-stmt-8 ::= "                                " (flat-8 | "break" | "continue") comment? "\n"
 block-8 ::= "{\n" stmt-8+ "                            " "}"

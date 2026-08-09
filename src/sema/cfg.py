@@ -36,7 +36,12 @@ _COPY = "copy"
 
 @dataclass(frozen=True, slots=True)
 class Use:
-    """A read or move of a non-copy local at one ``Var`` node."""
+    """A read or move of a non-copy local at one AST node.
+
+    Almost always a ``Var``. The exception is §56's field assignment,
+    whose base is a READ recorded against the ``FieldAssign`` STATEMENT
+    node -- there is no ``Var`` node for the base to hang it on.
+    """
 
     var_id: int
     node_id: int
@@ -444,6 +449,21 @@ class _Lowerer:
                 var_id = self.resolved.assign_of.get(stmt.node_id)
                 if var_id is not None and not self._is_copy_var(var_id):
                     nodes.append(ReInit(var_id, stmt.span))
+                return nodes
+            case ast.FieldAssign(value=value):
+                # Section 56: the RHS moves first; the base is a READ (§36
+                # already fixes `p.x` as a read of the base) and emits NO
+                # ReInit -- writing a field must not re-establish ownership
+                # of a moved struct, unlike `p = e`, which does. The
+                # overwritten field is consumed implicitly: no DropPoint,
+                # because Rust's assignment drops it.
+                nodes = self._expr(value, _MOVE)
+                var_id = self.resolved.assign_of.get(stmt.node_id)
+                if var_id is not None and not self._is_copy_var(var_id):
+                    # No `use_class` entry: analyze.use_classes() resolves
+                    # its keys through resolve.use_of, which holds Var ids
+                    # only, so an entry under a statement id is unreachable.
+                    nodes.append(Use(var_id, stmt.node_id, stmt.span, _READ))
                 return nodes
             case ast.Return(value=value):
                 inner = self._expr(value, _MOVE) if value is not None else []

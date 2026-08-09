@@ -182,6 +182,8 @@ class _Stripper:
                 return replace(stmt, init=self._expr(init))
             case ast.Assign(value=value):
                 return replace(stmt, value=self._expr(value))
+            case ast.FieldAssign(value=value):
+                return replace(stmt, value=self._expr(value))
             case ast.Return(value=value):
                 if value is None:
                     return stmt

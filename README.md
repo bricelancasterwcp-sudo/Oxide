@@ -240,7 +240,7 @@ Requires Python 3.14 and a Rust toolchain. No third-party Python dependencies.
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install pytest pytest-cov
-.venv/bin/pytest tests/ -q                 # 1240 tests
+.venv/bin/pytest tests/ -q                 # 1408 tests
 ```
 
 ```bash
@@ -256,7 +256,16 @@ Evaluation harness:
 python3 -m eval.harness prompt --arm oxide --task t01
 python3 -m eval.harness run --arm oxide --file solution.ox --task t01
 python3 -m eval.probe --help               # the ownership probe
+
+# the §56 deformation signature over a run root's oxide arm, per family
+python3 -m eval.deformation eval/results/g0-generation-baseline/constrained
 ```
+
+`eval/deformation.py` carries the pinned counting definition for that
+signature; its numbers are a pre-registered endpoint and are reproduced
+over the committed corpus by `tests/test_g0_report.py`. The count is a
+lower bound on deformation, for the reason the module's docstring and
+SPEC §56 both give.
 
 Live-model tests are marked and deselected by default; run them with
 `-m live`.

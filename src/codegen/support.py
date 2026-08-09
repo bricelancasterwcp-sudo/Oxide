@@ -260,6 +260,8 @@ def iter_nodes(root: object):
                 stack.append(init)
             case ast.Assign(value=value):
                 stack.append(value)
+            case ast.FieldAssign(value=value):
+                stack.append(value)
             case ast.Return(value=value):
                 if value is not None:
                     stack.append(value)

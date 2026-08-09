@@ -372,6 +372,16 @@ class _FnEmitter:
                 lines.append(
                     f"{pad}{self.rename[var_id]} = {self._expr(value, indent)};"
                 )
+            case ast.FieldAssign(path=path, value=value):
+                # Section 56: a PLACE write. Deliberately not routed through
+                # the FieldAccess emitter, which appends §36's `.clone()` to
+                # a non-copy field value -- that would write into a
+                # temporary and lose the assignment.
+                var_id = self.assign_of[stmt.node_id]
+                target = ".".join(
+                    (self.rename[var_id], *(escape(f) for f in path))
+                )
+                lines.append(f"{pad}{target} = {self._expr(value, indent)};")
             case ast.Return(value=value):
                 drops = self.before_return.get(span_key(stmt.span))
                 if (

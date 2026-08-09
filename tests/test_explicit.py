@@ -560,3 +560,121 @@ def test_dialect_garbage_never_raises_text(tmp_path: Path, source: str) -> None:
     proc = _run_cli(["--dialect=explicit", str(path)])
     assert proc.returncode in (0, 1)
     assert "Traceback" not in proc.stderr
+
+
+# ---- §56 field assignment: the dialect inherits it unchanged ----
+
+FA_CORE = (
+    "struct P { x: Int, y: Int }\n"
+    "fn main() { let p = P { x: 1, y: 2 }\n p.x = 5\n print(p.x) }"
+)
+
+# The dialect is the matched-novelty control: the model must WRITE what core
+# infers. The SAME program therefore needs the `&` read marker and the
+# explicit `drop`. Feeding it the bare core source is EX0003 + EX0002 -- the
+# dialect working correctly, not a §56 failure.
+FA_EXPLICIT = (
+    "struct P { x: Int, y: Int }\n"
+    "fn main() { let p = P { x: 1, y: 2 }\n p.x = 5\n print(&p.x)\n drop p }"
+)
+
+
+def test_field_assignment_accepted_in_the_explicit_dialect(tmp_path: Path) -> None:
+    """ExplicitParser subclasses the core parser, so §56 arrives for free;
+    this pins that it did, rather than assuming it."""
+    _proc, obj = _dialect_json(tmp_path, FA_EXPLICIT)
+    assert _codes(obj) == [], obj
+
+
+def test_field_assignment_rust_is_byte_identical_across_dialects() -> None:
+    """§41: the dialect emits byte-identical Rust to the core program -- the
+    annotations are surface only, and strip must put the FieldAssign node
+    back exactly as the core parser produced it."""
+    from src.explicit.pipeline import run as explicit_run
+
+    core_rust, core_diags = transpile(FA_CORE)
+    assert core_diags == [], core_diags
+    dialect_rust, dialect_diags = explicit_run(FA_EXPLICIT)
+    assert dialect_diags == [], dialect_diags
+    assert dialect_rust == core_rust
+
+
+def test_bare_core_source_is_rejected_by_the_dialect() -> None:
+    """Guards the fixture above: if the dialect ever stopped demanding its
+    annotations, the parity test would pass for the wrong reason."""
+    from src.explicit.pipeline import run as explicit_run
+
+    _rust, diags = explicit_run(FA_CORE)
+    assert [d.code for d in diags] == ["EX0003", "EX0002"], diags
+
+
+# ---- §56 field assignment: strip must recurse into the RHS value ----
+#
+# FA_EXPLICIT's RHS is the bare literal `5`. `_expr`'s own catch-all is
+# already a no-op on a `Lit`, so `strip._stmt`'s `case ast.FieldAssign(...):
+# return replace(stmt, value=self._expr(value))` and the `case _: return
+# stmt` catch-all produce structurally identical statements on that
+# fixture -- there is nothing inside a bare literal to strip either way.
+# Force the recursion to matter: an RHS that is itself a block-bearing
+# expression (`if`) whose body carries a written `drop`. If strip does not
+# recurse into the FieldAssign's value, `drop w` is never extracted into a
+# WrittenDrop and never removed from the `if`'s then-block.
+
+FA_NESTED_CORE = """\
+struct P { x: Int, y: Int }
+
+fn main() {
+    let p = P { x: 1, y: 2 }
+    let c = true
+    p.x = if c {
+        let w = push(vec(), 1)
+        len(w)
+    } else {
+        0
+    }
+    print(p.x)
+}
+"""
+
+FA_NESTED_EXPLICIT = """\
+struct P { x: Int, y: Int }
+
+fn main() {
+    let p = P { x: 1, y: 2 }
+    let c = true
+    p.x = if c {
+        let w = push(vec(), 1)
+        len(&w)
+        drop w
+    } else {
+        0
+    }
+    print(&p.x)
+    drop p
+}
+"""
+
+
+def test_field_assignment_rhs_nested_drop_accepted_in_the_explicit_dialect(
+    tmp_path: Path,
+) -> None:
+    """The written `drop w` lives inside the `if` that is the FieldAssign's
+    RHS value, not at statement level -- only reachable if strip._stmt's
+    FieldAssign case recurses via `self._expr(value)`."""
+    _proc, obj = _dialect_json(tmp_path, FA_NESTED_EXPLICIT)
+    assert _codes(obj) == [], obj
+
+
+def test_field_assignment_rhs_nested_drop_rust_is_byte_identical_across_dialects() -> None:
+    """§41 byte-identity, on a FieldAssign RHS that actually requires
+    strip to recurse. If `strip._stmt`'s FieldAssign case were removed
+    (falling to the `case _: return stmt` catch-all), the unstripped
+    `DropStmt` inside the `if`'s then-block would reach core analysis
+    directly -- never silently matching FA_NESTED_CORE."""
+    from src.explicit.pipeline import run as explicit_run
+
+    core_rust, core_diags = transpile(FA_NESTED_CORE)
+    assert core_diags == [], core_diags
+    dialect_rust, dialect_diags = explicit_run(FA_NESTED_EXPLICIT)
+    assert dialect_diags == [], dialect_diags
+    assert dialect_rust == core_rust

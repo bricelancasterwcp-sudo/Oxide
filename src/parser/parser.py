@@ -24,6 +24,7 @@ from src.parser.ast import (
     ErrorStmt,
     Expr,
     ExprStmt,
+    FieldAssign,
     FieldDef,
     FnDecl,
     For,
@@ -129,6 +130,15 @@ class Parser(_ExprParserMixin):
         if tok.kind is TokenKind.EOF:
             return tok
         return self.tokens[self.pos + 1]
+
+    def _peek_raw(self) -> Token:
+        """The token at the cursor with NO NEWLINE skipping.
+
+        The §56 field-assignment scan must stop at end of line, for the
+        same reason ``_peek_next`` must: an identifier at end of line is an
+        expression statement, never the start of an assignment.
+        """
+        return self.tokens[self.pos]
 
     def _match(self, kind: TokenKind) -> Token | None:
         if self._check(kind):
@@ -423,6 +433,14 @@ class Parser(_ExprParserMixin):
             return self._break_stmt()
         if kind is TokenKind.KW_CONTINUE:
             return self._continue_stmt()
+        # Field assignment (SPEC.md §56): IDENT (DOT IDENT)+ EQ. Tried
+        # before the §26 IDENT-EQ branch because it starts the same way;
+        # the scan restores the cursor and returns None when the run is
+        # not an assignment, so `p.x` and `p.x == y` stay expressions.
+        if kind is TokenKind.IDENT and self._peek_next().kind is TokenKind.DOT:
+            field_assign = self._try_field_assign()
+            if field_assign is not None:
+                return field_assign
         # Assignment lookahead (SPEC.md §26): IDENT immediately followed by
         # EQ (EQEQ is a distinct token kind, so `x == y` stays a comparison).
         if kind is TokenKind.IDENT and self._peek_next().kind is TokenKind.EQ:
@@ -553,6 +571,34 @@ class Parser(_ExprParserMixin):
         self._expect_term()
         span = Span(name_tok.span.start, value.span.end)
         return Assign(self._new_id(), span, name_tok.lexeme, value)
+
+    def _try_field_assign(self) -> FieldAssign | None:
+        """`a.b.c = e` (SPEC.md §56), or None with the cursor restored.
+
+        Unbounded lookahead: the statement is a field assignment only if
+        the whole `IDENT (DOT IDENT)+` run is followed by EQ. EQEQ is a
+        distinct token kind, so `p.x == y` fails the scan and falls through
+        to an expression statement.
+        """
+        start = self.pos
+        base_tok = self._advance()  # IDENT (verified by _statement)
+        path: list[str] = []
+        while self._peek_raw().kind is TokenKind.DOT:
+            self._advance()  # DOT
+            if self._peek_raw().kind is not TokenKind.IDENT:
+                self.pos = start
+                return None
+            path.append(self._advance().lexeme)
+        if not path or self._peek_raw().kind is not TokenKind.EQ:
+            self.pos = start
+            return None
+        self._advance()  # EQ
+        value = self._parse_expr(0)
+        self._expect_term()
+        span = Span(base_tok.span.start, value.span.end)
+        return FieldAssign(
+            self._new_id(), span, base_tok.lexeme, tuple(path), value
+        )
 
     def _expr_stmt(self) -> ExprStmt:
         start_idx = self.pos

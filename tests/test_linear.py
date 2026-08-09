@@ -11,6 +11,8 @@ Imports only the blind-test surface from ``src.sema.analyze`` (plus pytest).
 
 import pytest
 
+from src.parser.parser import parse_source
+from src.sema import cfg
 from src.sema.analyze import (
     analyze,
     diag_codes,
@@ -19,6 +21,9 @@ from src.sema.analyze import (
     use_classes,
     var_types_by_name,
 )
+from src.sema.infer import infer
+from src.sema.modes import infer_modes
+from src.sema.resolve import resolve
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -502,3 +507,147 @@ def test_moving_distinct_owned_values_into_a_variadic_vec_is_clean():
 
     assert diag_codes(variadic_res) == []
     assert drop_list(variadic_res) == drop_list(chain_res)
+
+
+# ---------------------------------------------------------------------------
+# §56 field assignment: the base is a READ, and never a ReInit
+# ---------------------------------------------------------------------------
+
+
+def test_field_write_into_a_moved_base_is_use_after_move():
+    """§56: the base is a READ use (§36), so writing a field of a moved
+    struct is OX0400 -- not a silent re-ownership.
+
+    `let q = p` is the move. Passing to a function does NOT move here: a
+    param that is never assigned and never move-used infers mode `read`
+    (§15/§28), so `take(p)` emits `&p` and the base is still owned.
+    """
+    src = (
+        "struct P { v: Vec<Int> }\n"
+        "fn main() { let p = P { v: vec() }\n let q = p\n p.v = vec() }"
+    )
+    assert "OX0400" in codes_of(src)
+
+
+def test_whole_assignment_re_owns_a_moved_base_but_a_field_write_does_not():
+    """The contrast that motivates the distinct node, as one paired check:
+    after the same move, `p = e` re-establishes ownership and the program is
+    clean, while `p.f = e` must NOT re-own and stays an error. A widened
+    `Assign` node would have made the second line behave like the first.
+    """
+    moved = (
+        "struct P { v: Vec<Int> }\n"
+        "fn main() { let p = P { v: vec() }\n let q = p\n"
+    )
+    assert codes_of(moved + " p = P { v: vec() }\n print(len(p.v)) }") == []
+    assert "OX0400" in codes_of(moved + " p.v = vec()\n print(len(p.v)) }")
+
+
+def test_field_assigned_param_gets_own_mode():
+    """SOUNDNESS (§56/§28): a read-mode param emits `p: &Point`, and a
+    field write through &T is rustc E0594. An assigned param must be own."""
+    src = (
+        "struct P { x: Int }\n"
+        "fn bump(p: P) -> Int { p.x = 5\n p.x }\n"
+        "fn main() { let p = P { x: 1 }\n print(bump(p)) }"
+    )
+    res = analyze(src)
+    assert res.diagnostics == [], res.diagnostics
+    assert param_modes(res, "bump") == ("own",)
+
+
+def test_field_write_adds_no_drop_for_the_overwritten_value():
+    """§56: the old field value is consumed implicitly. Rust's assignment
+    drops it; a synthesized DropPoint would double-free."""
+    src = (
+        "struct P { v: Vec<Int> }\n"
+        "fn main() { let p = P { v: vec() }\n p.v = push(vec(), 1)\n"
+        " print(len(p.v)) }"
+    )
+    res = analyze(src)
+    assert res.diagnostics == [], res.diagnostics
+    # exactly one drop: `p` itself at block end, none for the replaced field
+    assert len(drop_list(res)) == 1, drop_list(res)
+
+
+def test_write_into_a_loop_binder_is_clean():
+    """The binder is a fresh owned clone per iteration, so the write is
+    local and discarded at iteration end."""
+    src = (
+        "struct P { x: Int }\n"
+        "fn main() { let ps = push(vec(), P { x: 1 })\n"
+        " for p in ps { p.x = 5\n print(p.x) } }"
+    )
+    assert codes_of(src) == []
+
+
+def test_field_write_on_a_vec_is_a_type_error_not_a_borrow_error():
+    """OX0406 cannot arise for §56: a directly iterated variable unifies
+    with Vec<T>, which has no fields."""
+    src = "fn main() { let v = vec()\n for x in v { v.f = 1 } }"
+    assert "OX0306" in codes_of(src)
+    assert "OX0406" not in codes_of(src)
+
+
+# ---------------------------------------------------------------------------
+# §56 white-box coverage: the diagnostic surface alone cannot pin these two
+# rules. A field write's base Use(_READ) fires OX0400 and poisons the var
+# on a moved base; poisoning permanently short-circuits later processing of
+# that var, and check_linear discards every DropPoint for a function that
+# has diagnostics -- so a spurious ReInit appended after that Use corrupts
+# internal state nothing downstream (not even exact diagnostic-list
+# equality) can observe. The rule is stated at the CFG level (SPEC §56:
+# the node "emits no ReInit"), so it is pinned there directly.
+# ---------------------------------------------------------------------------
+
+
+def _lower(src: str, fn_name: str) -> cfg.FnBody:
+    """Parse, resolve, infer, and lower one function via the CFG module's
+    own entry point -- a white-box instrument for a contract stated at
+    the lowered-CFG level, not the diagnostic surface."""
+    module, front_diags = parse_source(src)
+    assert front_diags == [], front_diags
+    resolved = resolve(module)
+    assert resolved.diagnostics == [], resolved.diagnostics
+    inferred = infer(module, resolved)
+    assert inferred.diagnostics == [], inferred.diagnostics
+    modes = infer_modes(module, resolved, inferred)
+    fn = resolved.fns[fn_name]
+    return cfg.lower_fn(fn, resolved, inferred, modes.modes)
+
+
+def _has_reinit(block: cfg.BlockNode) -> bool:
+    return any(
+        isinstance(node, cfg.ReInit)
+        for entry in block.stmts
+        for node in entry.nodes
+    )
+
+
+def test_field_assign_lowers_with_no_reinit_but_whole_assign_does():
+    """SPEC §56: a field write's base "emits no ReInit" -- checked at the
+    lowered-CFG level, where the rule is actually stated, in contrast
+    with whole-variable assignment (§28), which does lower to a ReInit
+    for the same base."""
+    field_src = "struct P { x: Int }\nfn f() { let p = P { x: 1 }\n p.x = 5 }"
+    whole_src = "struct P { x: Int }\nfn g() { let p = P { x: 1 }\n p = P { x: 2 } }"
+
+    field_body = _lower(field_src, "f")
+    whole_body = _lower(whole_src, "g")
+
+    assert not _has_reinit(field_body.block), field_body.block
+    assert _has_reinit(whole_body.block), whole_body.block
+
+
+def test_field_assign_rhs_of_a_bare_variable_is_a_move_context():
+    """SPEC §56 rule 1: the right-hand side is a MOVE context, as in §28.
+    A bare non-copy variable is the only RHS form where MOVE vs READ is
+    observable: a call's argument context is independent of the callee
+    (`cfg._call` takes no `ctx`), and a literal never produces a Use event
+    at all. Moving `w` into the field must poison it for the later use."""
+    src = (
+        "struct P { v: Vec<Int> }\n"
+        "fn main() { let w = vec()\n let p = P { v: vec() }\n"
+        " p.v = w\n print(len(w)) }"
+    )
+    assert "OX0400" in codes_of(src)

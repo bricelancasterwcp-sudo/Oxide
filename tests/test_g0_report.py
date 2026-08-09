@@ -6,10 +6,13 @@ trusted to read new G0 data. ``test_profiler_reproduces_the_pilot_7b_row``
 is that self-check, made a first-class test rather than a one-off manual
 run.
 
-These tests build synthetic run dirs under ``tmp_path`` only -- they must
-never read ``eval/results/g0-generation-baseline/``, which live G0 runs
-are writing to concurrently. ``eval/results/6a-pilot`` is the one
-real/on-disk fixture, and it is finished, published data.
+The profiler's own tests otherwise build synthetic run dirs under
+``tmp_path``. They used to be barred from reading
+``eval/results/g0-generation-baseline/`` because live G0 runs were writing
+to it concurrently; G0 is finished and committed, so that bar is lifted
+and the same reproduce-the-published-number discipline now covers the §56
+deformation counts (``test_deformation_tool_reproduces_*``). Both on-disk
+fixtures are finished, published data.
 """
 
 import json
@@ -17,8 +20,13 @@ from pathlib import Path
 
 import pytest
 
-from eval import g0_report
+from eval import deformation, g0_report
 from eval.driver import build_run_id
+
+G0_ROOT = Path("eval/results/g0-generation-baseline")
+requires_g0 = pytest.mark.skipif(
+    not G0_ROOT.is_dir(), reason="G0 baseline corpus not present"
+)
 
 
 def test_profiler_reproduces_the_pilot_7b_row():
@@ -33,6 +41,50 @@ def test_profiler_reproduces_the_pilot_7b_row():
     assert row["explicit"]["first_compiled"] == 0 / 20
     assert row["rust"]["first_compiled"] == 20 / 20
     assert row["rust"]["final_passed"] == 12 / 20
+
+
+# ---------------------------------------------------------------------------
+# The §56 deformation endpoint, pinned against the committed corpus.
+#
+# eval/deformation.py calls the LIVE parser, so a future parser change can
+# move a pre-registered number with nothing failing. This project has had a
+# published table go permanently irreproducible for exactly that reason (the
+# 6a demand table), which is why the tool lives in the repo at all -- and a
+# tool nothing runs over the committed data is only half the fix.
+#
+# Published: SPEC §56, and the design doc's demand table.
+# ---------------------------------------------------------------------------
+
+
+@requires_g0
+def test_deformation_tool_reproduces_the_constrained_baseline():
+    """18 statement occurrences in 9 of 600, per family. Note this is a
+    LOWER BOUND on deformation, not an exact count -- a deformation
+    falling last lands in the `tail` column, which is ambiguous in both
+    directions. The tail figures are pinned too, so a traversal change
+    that shuffles hits between the columns cannot pass silently."""
+    rows = deformation.scan_oxide_arm(G0_ROOT / "constrained")
+    # (progs, stmt, tail, stmt_progs)
+    assert rows == {
+        "codegemma7b": (200, 10, 1, 3),
+        "granite8b": (200, 6, 12, 4),
+        "qwen7b": (200, 2, 4, 2),
+    }
+    assert sum(r[1] for r in rows.values()) == 18
+    assert sum(r[3] for r in rows.values()) == 9
+    assert sum(r[0] for r in rows.values()) == 600
+
+
+@requires_g0
+def test_deformation_tool_reproduces_the_unconstrained_control():
+    """Exactly 0 of 600. The control is what makes the constrained count
+    attributable to the grammar rather than to the models."""
+    rows = deformation.scan_oxide_arm(G0_ROOT / "unconstrained")
+    assert sorted(rows) == ["codegemma7b", "granite8b", "qwen7b"]
+    for family, (progs, stmt, _tail, stmt_progs) in rows.items():
+        assert progs == 200, family
+        assert stmt == 0, family
+        assert stmt_progs == 0, family
 
 
 def _write_run(root, slug, seed, cells, triples, prefix="g0c"):

@@ -2432,3 +2432,111 @@ was the friction, not the model. Each element push is a linear
 consume-and-return exactly like a hand-written push-chain, so the sugar
 composes with linearity for free — the same design-fit reasoning §53
 already established for receiver-first calls.
+
+## 56. Field assignment (`s.f = e`)
+
+Assignment targets extend from a bare name to a **place**: a name followed
+by one or more field selectors.
+
+```ebnf
+stmt              := let_stmt | assign_stmt | field_assign_stmt
+                   | return_stmt | while_stmt | for_stmt | expr_stmt
+field_assign_stmt := IDENT ("." IDENT)+ "=" expr TERM
+```
+
+The base is a bare name, not an arbitrary expression: `f().x = e` and
+`v[0] = e` remain `OX0101`. Index assignment awaits an indexing decision
+this document has not made.
+
+**Parsing.** At statement start, an `IDENT` followed by `DOT` begins a
+scan of `(DOT IDENT)+`; the statement is a field assignment only if that
+run is followed by `EQ`. `EQEQ` is a distinct token kind, so `p.x == y`
+remains a comparison — the same guarantee §26's `IDENT EQ` lookahead
+rests on. A failed scan restores the cursor and the statement is parsed
+as an expression statement. The scan does not see through a `NEWLINE`,
+for the reason §26 gives: an identifier at end of line is an expression
+statement, never the start of an assignment.
+
+**AST + dump amendment (§7/§8, §27, §35).** New node (same conventions):
+`FieldAssign(base: str, path: tuple[str,...], value)`, with `path`
+non-empty. It is a **distinct node, not a widened `Assign`**: §28 has
+`Assign` emit a `ReInit` that re-establishes ownership, which the
+Linearity rules below make exactly wrong for a field write, so a separate
+node forces every match site to decide rather than silently inherit.
+
+```
+FieldAssign  (field-assign PATH EXPR)   # PATH = BASE "." F1 ["." F2 …]
+```
+
+**Resolution.** The base must be an existing local or parameter;
+otherwise `OX0200`, with the same wording §28 uses for assignment. The
+base's `var_id` is recorded in `assign_of` under the `FieldAssign` node's
+own id — the same map whole-variable assignment uses, so §28's rule "a
+param that is ever assigned gets mode `own`" applies to a field-assigned
+param unchanged. That is a **soundness requirement**, not a convenience:
+a read-mode non-copy param emits `p: &Point`, and `p.x = 5` through a
+`&T` is rustc E0594.
+
+**Typing.** The path is walked left to right through the same field
+lookup §36 uses for field access: an unknown field is `OX0304`, a
+non-struct at any step is `OX0306`. The final field's type unifies with
+the right-hand side (`OX0300` on mismatch). The statement itself is
+`Unit`.
+
+**Linearity.** Three rules, each an existing rule applied to a new node:
+
+- The right-hand side is a **MOVE** context, as in §28.
+- The base is a **READ** use and emits **no `ReInit`**. §36 already fixes
+  `p.x` as a read of the base; writing into an owned struct is that
+  rule's completion. A field write into a moved base is therefore
+  `OX0400`, and it does **not** re-establish ownership — unlike `p = e`,
+  which does.
+- The overwritten field value is **consumed implicitly, with no
+  `DropPoint`** — §28's rule for the old value of an assigned variable.
+  Rust's assignment drops the old field; synthesizing a drop would
+  double-free.
+
+`OX0406` cannot arise here: §28 unifies a `for` iterable with `Vec<T>`,
+so a directly iterated bare variable has no fields (`v.f = e` is
+`OX0306`), and a field-access iterable is cloned under §36, so nothing
+stays borrowed. Writing into a loop binder (`for p in ps { p.x = 1 }`) is
+well defined: the binder is a fresh owned clone per iteration, so the
+write is local and discarded at iteration end.
+
+**Codegen.** `base.f1.f2 = value;`, built from the recorded base rename
+and the path. It is **not** routed through the field-access emitter: that
+appends `.clone()` to a non-copy field value (§36), and a place is not a
+value — cloning the target would write into a temporary and lose the
+assignment.
+
+```
+struct P { x: Int, y: Int }
+fn main() {
+    let p = P { x: 1, y: 2 }
+    p.x = 5                     // let mut p: P = P { x: 1, y: 2 };
+    print(p.x)                  //   p.x = 5;
+}
+```
+
+**Why this exists.** In the v0.3 generation-friction taxonomy (dossier
+2), models assign struct fields in place and the language had no such
+form. Under constrained decoding the want does not fail loudly: `=` is
+inadmissible after a field path, so the decoder settles on `==` and emits
+a **discarded comparison**. Measured over the committed G0 first attempts
+(oxide arm), that signature appears 18 times in 9 of 600 constrained
+programs and **exactly 0 of 600 unconstrained** — the §54 lesson in its
+third demonstrated instance, with a clean control.
+
+**18 is a LOWER BOUND, not an exact count.** The signature is counted in
+statement position only. Tail conversion is syntactic and unconditional,
+and an un-braced match-arm body is a bare expression rather than a block,
+so a deformed assignment falling last in either position is not an
+`ExprStmt` and is never counted. The tail column is therefore ambiguous
+in **both** directions — a tail `f.x == e` may be a legitimate `Bool`
+return, or a deformation that happened to land last — so pooling the two
+columns would overcount and the statement count alone undercounts. The
+counting tool and its pinned definition are `eval/deformation.py`.
+
+The demand is real but small (~1.5%), so no aggregate pass-rate change is
+predicted from this section alone; see
+`docs/superpowers/specs/2026-08-09-v03-g2-field-assignment-design.md`.
