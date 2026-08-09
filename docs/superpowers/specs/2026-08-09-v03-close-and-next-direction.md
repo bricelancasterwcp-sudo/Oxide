@@ -8,13 +8,13 @@ becoming binding.
 ## Assessment the recommendation rests on
 
 - The project's strongest asset is the METHOD: the matched-novelty control
-  (explicit-Oxide), pre-registered dose-response predictions, three-family
+  (explicit Black Oxide), pre-registered dose-response predictions, three-family
   replication, the withdrawn-claims log, and instrument-artifact hunting.
 - Supported findings: implicit linearity beats explicit for repair (~+10pp
   clean); surface ergonomics dominate ownership semantics ~4× for
   writability; grammar-constrained decoding deforms rather than rejects
   (three demonstrated instances); diagnostics are a first-class lever.
-- NOT supported: "LLMs write Oxide more reliably than Rust." G0: rust
+- NOT supported: "LLMs write Black Oxide more reliably than Rust." G0: rust
   first-pass 57/45/42% vs oxide 26/14.5/9%; frontier writes Rust better
   (100 vs 92). Zero-shot from a card, pretraining exposure dominates
   language design. The linearity gate did not populate and the remaining
@@ -38,9 +38,9 @@ becoming binding.
 3. **Pivot to the fine-tune track (SPEC §32.4)** — the real experiment,
    where the thesis is falsifiable rather than pre-decided by pretraining
    exposure: compiler-filtered data factory (the grammar + harness already
-   generate and verify Oxide at scale; triples.jsonl is the verified
+   generate and verify Black Oxide at scale; triples.jsonl is the verified
    repair dataset by design), token-matched LoRA (Qwen-class ~1.5B/~7B)
-   Oxide vs Rust, same eval as endpoint. Corpus expansion matters here
+   Black Oxide vs Rust, same eval as endpoint. Corpus expansion matters here
    (address the t19/t20 concentration and single-author bias).
 4. **In parallel (no GPU): write up two publishable findings** —
    (a) constrained decoding deforms rather than rejects (all error counts
@@ -52,7 +52,7 @@ becoming binding.
    explicit ownership under matched novelty; ergonomics dominate semantics
    for writability; zero-shot generation is pretraining-bound; the open
    question is whether the advantage holds when exposure is equalized.
-   Alternate positioning worth considering: Oxide as the language built
+   Alternate positioning worth considering: Black Oxide as the language built
    for verifier-in-the-loop repair (its fail-closed diagnostics are where
    models shine), rather than the language models write best cold.
 

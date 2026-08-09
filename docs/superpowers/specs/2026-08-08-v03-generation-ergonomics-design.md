@@ -28,7 +28,7 @@ probe runs (320 failing oxide repairs):
 
 Meanwhile whole-program generation — the eval the language was built
 for — has never reached the feature the language exists for: across
-~530 Oxide-arm attempts in five 6a configurations, zero `OX04xx` ever
+~530 Black Oxide-arm attempts in five 6a configurations, zero `OX04xx` ever
 fired. Unconstrained (three configurations, ~480 attempts), models die
 at the lexer/parser; the grammar-constrained follow-up moved the wall
 only to resolve/types (77 `OX02xx` at 7B, compile-clean 3/24). Those
@@ -53,7 +53,7 @@ got §53/§54; generation ergonomics has never had its pass.
    changes then measuring once (destroys attribution; builds from a
    demand table the pilot flags as pretraining-habit leakage), and a
    card-first track (3-shot already made 0.5B worse; card changes touch
-   both Oxide arms at once and muddy the primary comparison). Card
+   both Black Oxide arms at once and muddy the primary comparison). Card
    changes stay available as individual loop candidates.
 
 ## G0 — the baseline instrument
@@ -69,7 +69,7 @@ machinery (`eval/driver.py` sessions, §45 verdicts, max 4 submissions):
 - **Condition 2 — unconstrained (demand channel):** same grid. Under
   constraint the decoder deforms wants into legal tokens, so what models
   reach for is visible only unconstrained; it also refreshes the honest
-  "can a small model write Oxide from a card" answer.
+  "can a small model write Black Oxide from a card" answer.
 - **Collected:** first-attempt compile, first-attempt pass,
   attempts-to-green, per-code histogram by stage
   (lexer/parser/resolve/types/linearity), **`OX04xx` occurrence count
@@ -106,7 +106,7 @@ After G0, before any change:
   SPEC-named feature), and the predicted effect — which code should
   fall, in which families — written **before** the measurement.
 - Confound pinned: unconstrained demand is partly pretraining-habit
-  leakage (§47). The dossier must argue the fix serves Oxide's design,
+  leakage (§47). The dossier must argue the fix serves Black Oxide's design,
   not imitation; the anti-example is semicolon tolerance, tested and
   rejected in the 6a pilot (stripping semicolons surfaces the next
   C-family habit underneath).

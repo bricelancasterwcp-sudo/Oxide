@@ -10,7 +10,7 @@ implementation plan follow from it.
 
 ## Why this exists
 
-Oxide has no field assignment. `p.x = 5` is `OX0101` at HEAD
+Black Oxide has no field assignment. `p.x = 5` is `OX0101` at HEAD
 (`expected end of statement, found EQ`) — the only way to change a field
 is the functional update `P { x: 5, ..p }`. Models write the assignment
 form anyway, and under grammar-constrained decoding the want does not

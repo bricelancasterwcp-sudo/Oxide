@@ -1,13 +1,49 @@
-# Oxide Transpiler — Phase 1 Contract (Scaffolding + Lexer)
+# Black Oxide Transpiler — Phase 1 Contract (Scaffolding + Lexer)
 
 This file is the **binding contract** for Phase 1. Implementation and tests are
 written independently against this document; any deviation is a bug in the
 deviating side.
 
+## 0. Naming, and the surfaces deliberately NOT renamed
+
+The language and project are **Black Oxide** (repo slug `black-oxide`),
+renamed from "Oxide" on 2026-08-09 to resolve a collision with the
+unrelated `oxide-lang` project on GitHub. Prose throughout this document
+says Black Oxide.
+
+Four classes of surface keep the bare string `oxide`. This is deliberate
+and recorded here so a later reader does not "finish" the rename and
+break something:
+
+1. **Model-facing treatment text.** `LANGUAGE_CARD.md` and
+   `LANGUAGE_CARD_EXPLICIT.md`, and the `OX0306` suggestion string in
+   §40. Every committed baseline (`g0c`, `g0u`, `g1c`) was generated
+   conditioned on these exact strings; editing them retokenizes the
+   prompt, so a renamed card is no longer comparable to the baseline the
+   v0.3 dossiers are measured against. `OX0306`'s text is additionally
+   the endpoint g3 measures — renaming it in the run that measures it
+   would confound the result outright.
+2. **Arm data keys.** `ARMS = ("oxide", "explicit", "rust")`, the `arm`
+   field in every `cells.jsonl` / `triples.jsonl`, raw filenames
+   (`t01.oxide.1.txt`), `eval/solutions/{oxide,explicit,rust}/`, and
+   `check --arm oxide`. These are written into the whole committed
+   experimental record.
+3. **Emitted-code identifiers.** The reserved `__oxide_` prefix (§22),
+   including `__oxide_ret` and `__oxide_self`. Changing it changes
+   generated Rust.
+4. **Filenames and literals.** The `.ox` source extension,
+   `eval/grammar/oxide.gbnf`, and the corpus-validation check that
+   prompts contain no occurrence of `"oxide"`/`"rust"` — which still
+   does the right thing, since "black oxide" contains "oxide".
+
+The natural moment to revisit (1) is the fine-tune track (§32.4), where
+the corpus is regenerated and comparability resets anyway. (2), (3) and
+(4) are internal identifiers with no user-visible cost to leaving alone.
+
 ## 1. Project layout (create exactly this)
 
 ```
-oxide/                      # repo root
+black-oxide/                # repo root (local checkout dir may differ)
 ├── main.py                 # minimal entry stub: docstring + main() that passes
 ├── conftest.py             # empty (makes repo root importable under pytest)
 ├── SPEC.md                 # this file
@@ -1284,12 +1320,12 @@ when pinned as a numbered contract part.
 
 ## 32. Adopted decisions
 
-1. **Three-way eval.** Alongside Oxide and Rust, a matched-novelty control
-   language ("explicit Oxide"): same grammar/builtins/diagnostics, but
+1. **Three-way eval.** Alongside Black Oxide and Rust, a matched-novelty control
+   language ("explicit Black Oxide"): same grammar/builtins/diagnostics, but
    ownership EXPLICIT — borrow/move annotations and visible drops the
    checker VERIFIES rather than infers (reusing the existing checker's
-   computed moves/drops). Equal-sized language cards. Oxide-vs-explicit
-   isolates the implicit-vs-explicit axis familiarity-free; Oxide-vs-Rust
+   computed moves/drops). Equal-sized language cards. Black Oxide vs explicit
+   isolates the implicit-vs-explicit axis familiarity-free; Black Oxide vs Rust
    is the deployment measurement (Rust arm uses `rustc
    --error-format=json`). Measure learning curves (0/few/many-shot) and
    per-OX-code error distributions, plus tokens-to-green; persist repair
@@ -1323,8 +1359,8 @@ when pinned as a numbered contract part.
    required signatures at module boundaries.
 4. **Small-model track** (after v0.2.1 + harness): compiler-filtered data
    factory; token-MATCHED LoRA fine-tunes (Qwen-Coder-class ~1.5B/~7B) on
-   Oxide vs Rust; eval pass@1, pass@N-with-`--check`-verifier,
-   repair-iterations-to-green. Headline: small-model-on-Oxide-with-verifier
+   Black Oxide vs Rust; eval pass@1, pass@N-with-`--check`-verifier,
+   repair-iterations-to-green. Headline: small-model-on-Black-Oxide-with-verifier
    vs a much larger model on Rust. Fine-tuning is the entry ticket at
    small scale.
 5. **Backend:** the Rust transpiler stays. Any future native compiler is a
@@ -1466,7 +1502,7 @@ any §20 item updates this part supersedes.
 
 ---
 
-# Part VIII — Phase 5b Contract (AI interface + explicit-Oxide control)
+# Part VIII — Phase 5b Contract (AI interface + explicit Black Oxide control)
 
 Normative. v0.2.1 (Part VII) is complete: 541 tests green.
 
@@ -1513,9 +1549,9 @@ becomes a thin wrapper); JSON via `json.dumps(..., sort_keys=True)`.
 | OX0406 | `The loop is iterating this vector; assigning to it inside the body is not allowed. Accumulate into a separate variable and reassign after the loop.` |
 | other | `` (empty string) |
 
-## 41. Explicit-Oxide dialect (the matched-novelty control)
+## 41. Explicit Black Oxide dialect (the matched-novelty control)
 
-A dialect where the model must WRITE what core Oxide infers. New package
+A dialect where the model must WRITE what core Black Oxide infers. New package
 `src/explicit/` + CLI flag `--dialect=explicit` (composes with
 --json/--check). Surface deltas (dialect-only):
 - `&name` at use sites: a read-class use of a NON-COPY variable MUST be
@@ -1598,7 +1634,7 @@ Normative. Phase 5b is complete: 616 tests green.
 "difficulty": "intro"|"core"|"hard"}`.
 Mix: 6 arithmetic/control-flow, 5 vector/accumulation, 3 strings, 4
 enums/Option/Result-shaped, 2 structs. Prompts are LANGUAGE-NEUTRAL
-(describe behavior + exact required stdout; never mention Oxide/Rust or
+(describe behavior + exact required stdout; never mention Black Oxide/Rust or
 any syntax) and each requires a full program whose entry point prints the
 results. expected_stdout is exact (trailing newline included). Three
 pinned examples (the corpus agent designs the other 17 in the same
@@ -1672,7 +1708,7 @@ text (its help output is part of the null hypothesis).
 2. ALL 60 reference solutions verified: `run` on each → compiled, passed
    (this is the three-arm solvability proof; rustc-heavy — keep timeouts).
 3. `check` JSON shapes per arm incl. the rustc adapter on a known-bad
-   Rust file (E0382 program) and a known-bad Oxide file.
+   Rust file (E0382 program) and a known-bad Black Oxide file.
 4. Session API: cap enforced, triples.jsonl schema, verdict correctness
    on a scripted good/bad/good sequence.
 5. `prompt`: contains card/preamble + task text + output contract;
@@ -1693,7 +1729,7 @@ Normative. Phase 5c (Part IX) is complete: 774 tests green.
 Recorded before any generation, because the thesis under test is the
 author's own.
 
-**Primary comparison.** Oxide vs explicit-Oxide first-attempt pass
+**Primary comparison.** Black Oxide vs explicit Black Oxide first-attempt pass
 (pass@1) at each capability point, read as the **paired-by-task delta**
 defined under *Statistics* below. These two arms are matched on novelty —
 both are languages the subject saw zero times in pretraining, both taught
@@ -1707,14 +1743,14 @@ attempts-to-pass.
 **Reference, not headline.** The Rust arm carries a large, unquantified
 pretraining-exposure advantage at this scale. Rust numbers are reported
 as a descriptive reference point with that advantage stated inline. Any
-Oxide-vs-Rust difference at 0.5B/1.5B is **not** evidence about language
+Black Oxide vs Rust difference at 0.5B/1.5B is **not** evidence about language
 design and must not be reported as such.
 
 **Statistics.** Tasks are a fixed corpus, not a sample; generalization
 beyond the corpus is not claimed.
 
 The primary statistic is the **paired-by-task** delta: for each task,
-subtract explicit-Oxide's pass rate (over 5 seeds) from Oxide's, then
+subtract explicit Black Oxide's pass rate (over 5 seeds) from Black Oxide's, then
 average those 20 per-task differences.
 
 **Precisely what pairing buys.** With every task present in both arms,
@@ -1723,7 +1759,7 @@ difference of marginal arm rates. Pairing does **not** change the point
 estimate. What it changes is the **interval**: the paired standard error
 is `SD(per-task differences) / √20`, which shrinks in proportion to how
 strongly the two arms' per-task performance correlates. That correlation
-will be high — a task hard in Oxide is hard in explicit-Oxide — so the
+will be high — a task hard in Black Oxide is hard in explicit Black Oxide — so the
 paired SE is expected to be roughly half the unpaired one. The delta is
 therefore reported with its **paired SE**, and quoting the delta without
 it is prohibited. (The point estimates diverge only when a task is
@@ -1745,7 +1781,7 @@ percentage points.** That is a property of a 20-task corpus, not
 evidence of absence, and every report from this phase must say so.
 
 **Directional predictions.** Stated in advance, on the paired-by-task
-pass@1 delta (Oxide − explicit-Oxide), as an exhaustive and
+pass@1 delta (Black Oxide − explicit Black Oxide), as an exhaustive and
 non-overlapping partition:
 
 | Paired delta | Pre-registered reading |
@@ -1808,7 +1844,7 @@ advertised capability: with `OLLAMA_CONTEXT_LENGTH` unset the daemon
 serves qwen2.5-coder at **4096** tokens, not its 32768 maximum
 (confirmed against `/api/ps` after load). Repair prompts carry each
 arm's full initial context — language card, few-shot examples, task
-statement (§50.3) — so the Oxide arms' carried context runs
+statement (§50.3) — so the Black Oxide arms' carried context runs
 ~1400–1660 tokens against the Rust arm's ~110–300. A repair prompt also
 carries the rejected program, so the binding quantity is
 context + program + `num_predict`. Measured: for a rejected program
@@ -1816,7 +1852,7 @@ anywhere in the ~1.6k–7k character band — the realistic range for a
 small model's failing output — the `oxide` and `explicit` arms exceed
 4096 and `rust` does not. The carried card is exactly what pushes them
 over. On overflow llama.cpp truncates the prompt **from the front**,
-dropping that card — the only place Oxide syntax ever appears — from
+dropping that card — the only place Black Oxide syntax ever appears — from
 those two arms specifically. That is a silent, non-random bias against
 exactly the pair §47 names as the primary comparison, and nothing
 in the artifacts would reveal it: wrong-but-plausible numbers, the worst
@@ -2032,19 +2068,19 @@ instruction only — retained this much of each arm's initial context:
 | rust (0-shot) | 245 ch | 271 | **110.6%** |
 
 Rust *gained* context on repair, because Rust lives in the model's
-weights and its preamble is one line; the Oxide arms lost 95% of
-theirs, and the language card is the only place Oxide syntax ever
+weights and its preamble is one line; the Black Oxide arms lost 95% of
+theirs, and the language card is the only place Black Oxide syntax ever
 appears. The task statement appeared in **no** repair prompt at all, so
 on a runtime failure the model was told its output was wrong without
 being told what it should have been — it could not repair except by
 guessing. That would have made §47's repair-lift secondary metric
 ("whether an arm's diagnostics teach") measure card recall for the
-Oxide arms instead of diagnostic quality. §47's primary pass@1 metric
+Black Oxide arms instead of diagnostic quality. §47's primary pass@1 metric
 is first-attempt-only and was never affected. The change was decided
 before the grid ran, blind to any results, as §47 requires.
 
 Diagnostics render as `line:col: CODE: message`, notes indented two
-spaces, then `suggestion: <text>` when non-empty. Oxide arms therefore
+spaces, then `suggestion: <text>` when non-empty. Black Oxide arms therefore
 supply OX codes with suggestions; the Rust arm supplies rustc's full
 help text verbatim (SPEC §45 already folds rustc's children into
 `message`). Giving each arm its strongest native diagnostics is the fair
@@ -2121,7 +2157,7 @@ grid.
 
 Aggregates the 30 run dirs into `grid.json` + `REPORT.md`.
 
-**Primary readout:** the paired-by-task Oxide − explicit-Oxide pass@1
+**Primary readout:** the paired-by-task Black Oxide − explicit Black Oxide pass@1
 delta per (model, shots), classified against the §47 partition
 (≥+5pp / −5…+5pp / ≤−5pp) with the band printed alongside the number, so
 an inconclusive result cannot be read as a positive one.
@@ -2306,7 +2342,7 @@ vec().push(1).push(2)  ==  push(push(vec(), 1), 2)
 
 Restrictions:
 - Only the names in `src.sema.types.BUILTINS`. `p.area()` is not a method
-  call — Oxide has no user-defined methods and no callable fields, so it
+  call — Black Oxide has no user-defined methods and no callable fields, so it
   remains a field access followed by a call, i.e. an error.
 - Only the call form. `p.clone` without parentheses stays a field access.
 - The parser mirrors the builtin name set rather than importing sema (which
@@ -2314,7 +2350,7 @@ Restrictions:
   sync.
 
 **Why this exists.** Measured on the ownership probe (Part X): 82% of failing
-Oxide repairs contained `.clone()` method syntax, producing `OX0304 field
+Black Oxide repairs contained `.clone()` method syntax, producing `OX0304 field
 access on non-struct type` — the single largest failure mode. The other Rust
 idioms appeared **zero** times across 120 failures (`let mut`, `;`, `vec![]`,
 indexing), so the language card successfully taught everything except this.
@@ -2324,7 +2360,7 @@ expressiveness gain.
 
 ## 54. `mut` accepted and ignored on `let`
 
-`let mut x = e` parses identically to `let x = e`. Oxide has no mutability
+`let mut x = e` parses identically to `let x = e`. Black Oxide has no mutability
 distinction — every binding is reassignable — so `mut` carries no meaning
 and is discarded at the parser.
 

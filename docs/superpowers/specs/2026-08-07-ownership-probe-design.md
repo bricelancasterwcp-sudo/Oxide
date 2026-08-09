@@ -7,7 +7,7 @@ the v0.3 gate.
 ## 1. Why the existing instrument cannot answer the question
 
 Phase 6a measured whole-program generation across three arms. Across ~530
-Oxide-arm attempts in five configurations — 0.5B and 7B, 0-shot and 3-shot,
+Black Oxide-arm attempts in five configurations — 0.5B and 7B, 0-shot and 3-shot,
 unconstrained and grammar-constrained — **not one `OX04xx` linearity
 diagnostic has ever been observed** (`eval/results/6a-pilot/REPORT.md`).
 
@@ -50,7 +50,7 @@ println!("{}", a.len());           println!("{}", a.len());
 println!("{}", b.len());           println!("{}", b.len());
 ```
 
-explicit-Oxide carries the same defect plus its own annotation burden: `&`
+explicit Black Oxide carries the same defect plus its own annotation burden: `&`
 reads and `drop` statements placed at exactly the checker's computed points
 (`drop a` immediately after `a`'s last use, not at scope end — misplacement is
 `EX0004`, omission is `EX0003`).
@@ -85,7 +85,7 @@ solutions.
 
 ### Defect classes to cover
 
-| Class | Oxide | Rust |
+| Class | Black Oxide | Rust |
 |---|---|---|
 | use-after-move | `OX0400` | `E0382` |
 | double consume | `OX0401` | `E0382` |
@@ -127,10 +127,10 @@ programs.
 
 **Can:** whether a model, handed a correct program with one ownership defect
 and the compiler's explanation, repairs it — and whether implicit linearity
-(Oxide) is repaired more reliably than explicit linearity (explicit-Oxide) at
+(Black Oxide) is repaired more reliably than explicit linearity (explicit Black Oxide) at
 matched novelty. That is the thesis, tested directly.
 
-**Cannot:** whether a model can write Oxide from scratch. Phase 6a already
+**Cannot:** whether a model can write Black Oxide from scratch. Phase 6a already
 answered that — at ≤7B, no. This instrument deliberately supplies everything
 except the ownership decision, so it measures comprehension and repair of
 ownership, not production of programs.

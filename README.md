@@ -1,9 +1,9 @@
-# Oxide
+# Black Oxide
 
 A Rust-like language with **implicit linear types**: ownership works like
 Rust's, but there is no borrow syntax. The compiler infers moves, borrows, and
-destruction points; types are fully inferred. Oxide transpiles to Rust, and
-`rustc` is the oracle — any program Oxide accepts that `rustc` rejects is a
+destruction points; types are fully inferred. Black Oxide transpiles to Rust, and
+`rustc` is the oracle — any program Black Oxide accepts that `rustc` rejects is a
 compiler bug.
 
 ```oxide
@@ -33,7 +33,7 @@ No semicolons, no `&`, no lifetimes, no `mut`, no manual `drop`. The value in
 
 ## Why it exists
 
-The thesis is that **LLMs write Oxide more reliably than Rust**, because the
+The thesis is that **LLMs write Black Oxide more reliably than Rust**, because the
 compiler does the ownership bookkeeping instead of the programmer.
 
 That claim is deliberately falsifiable, and this repository contains the
@@ -47,7 +47,7 @@ subject performs the task at all:
 
 All at 10 seeds, 600 repairs per subject, matched code:
 
-| Subject | Oxide | explicit-Oxide | paired delta | 2-SE |
+| Subject | Black Oxide | explicit Black Oxide | paired delta | 2-SE |
 |---|---|---|---|---|
 | Claude Opus 5 | 92% | 92% | **0.0pp** | ceiling, arms identical |
 | qwen2.5-coder-7b | 73.0% | 14.0% | **+59.0pp** | `[+42.8, +75.2]` |
@@ -61,7 +61,7 @@ p < 10⁻⁹. Combined over all 60 (family × class) pairs: +34.5pp,
 2-SE `[+25.3, +43.7]`.** But see the decomposition below — most of that is
 *ergonomic*, not about ownership reasoning.
 
-The comparison that matters is **Oxide vs explicit-Oxide** — a control dialect
+The comparison that matters is **Black Oxide vs explicit Black Oxide** — a control dialect
 with identical grammar, builtins, and diagnostics, where ownership is written
 out by hand (`&` reads, declared parameter modes, mandatory `drop`). Both are
 languages the model has never seen, taught only by a card of comparable
@@ -155,8 +155,8 @@ component is around +10pp; the rest is ergonomic.
 - A single magnitude. The per-family deltas span +10 to +53 and track how
   much the ergonomic change helped each model, not how well it reasons about
   ownership.
-- Anything about **writing** Oxide. These models cannot. A 7B model scores
-  **2/20** first-compile writing Oxide from the card, against 20/20 for Rust.
+- Anything about **writing** Black Oxide. These models cannot. A 7B model scores
+  **2/20** first-compile writing Black Oxide from the card, against 20/20 for Rust.
   That gap is pretraining exposure, not language design.
 
 ## How it was measured
@@ -187,7 +187,7 @@ types are all supplied; the only thing wrong is the thing under test.
 
 This README previously reported a "degenerate-fix rate" — repairs that
 compile, silence the ownership error, and silently do the wrong thing —
-at **38–68% in the Oxide arms against 3–7% for Rust**, and called it the most
+at **38–68% in the Black Oxide arms against 3–7% for Rust**, and called it the most
 solid result the instrument had produced. **That was wrong.**
 
 It was computed as `lenient AND NOT strict`. But `lenient` requires only that
@@ -201,12 +201,12 @@ program to **compile**. Most of those repairs traded an ownership error for a
 | codegemma-7b | 2.5% | 2.5% | 5% |
 | granite-code-8b | **34%** | 25.5% | 2% |
 
-Two families put Rust *highest*; one puts Oxide highest. There is no
+Two families put Rust *highest*; one puts Black Oxide highest. There is no
 consistent direction and no order-of-magnitude gap. The claim is withdrawn.
 
 What the mislabelled repairs actually were is more interesting: in the qwen
-Oxide arms the dominant failures are `OX0304` (94) and `OX0200` (86) — method
-syntax like `v.clone()`, which Oxide does not have, and undefined names. Even
+Black Oxide arms the dominant failures are `OX0304` (94) and `OX0200` (86) — method
+syntax like `v.clone()`, which Black Oxide does not have, and undefined names. Even
 in a *repair* task, with syntax, names, and types all supplied and only the
 ownership decision missing, these models reach for Rust idioms the language
 does not provide. That matches the whole-program result and is the more
@@ -226,7 +226,7 @@ A frontier model, given the old diagnostic, cloned inside the loop — which
 `OX0403`'s own suggestion recommended — producing a program that compiles,
 silences the error, and never accumulates. It repaired the Rust version
 correctly. Fixing the diagnostic flipped that probe from fail to pass in both
-Oxide dialects.
+Black Oxide dialects.
 
 At 7B the same fix changes nothing — oxide strict is 25.5% before and after,
 across 600 repairs each way. Causal at frontier, inert at 7B; both are
@@ -275,7 +275,7 @@ Live-model tests are marked and deselected by default; run them with
 
 ## Status and honest limits
 
-Oxide is a research vehicle, not a usable language. It has no generics,
+Black Oxide is a research vehicle, not a usable language. It has no generics,
 traits, closures, modules, tuples, indexing syntax, or sized integer types.
 It is a strict subset of what it compiles to.
 

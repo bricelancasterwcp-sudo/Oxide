@@ -27,14 +27,14 @@ future LoRA lift.
 
 **Success:** a populated per-error-code distribution and a defensible
 pass@1 curve with variance estimates — *whatever direction they point*. A
-result showing no Oxide advantage is a successful run of this phase.
+result showing no Black Oxide advantage is a successful run of this phase.
 
 ## 3. Pre-registered analysis plan
 
 Recorded before any generation, because the thesis under test is the
 author's own.
 
-**Primary comparison.** Oxide vs explicit-Oxide first-attempt pass
+**Primary comparison.** Black Oxide vs explicit Black Oxide first-attempt pass
 (pass@1) at each capability point, read as the **paired-by-task delta**
 defined under *Statistics* below. These two arms are matched on novelty —
 both are languages the subject saw zero times in pretraining, both taught
@@ -48,14 +48,14 @@ attempts-to-pass.
 **Reference, not headline.** The Rust arm carries a large, unquantified
 pretraining-exposure advantage at this scale. Rust numbers are reported as
 a descriptive reference point with that advantage stated inline. Any
-Oxide-vs-Rust difference at 0.5B/1.5B is **not** evidence about language
+Black Oxide vs Rust difference at 0.5B/1.5B is **not** evidence about language
 design and must not be reported as such.
 
 **Statistics.** Tasks are a fixed corpus, not a sample; generalization
 beyond the corpus is not claimed.
 
 The primary statistic is the **paired-by-task** delta: for each task,
-subtract explicit-Oxide's pass rate (over 5 seeds) from Oxide's, then
+subtract explicit Black Oxide's pass rate (over 5 seeds) from Black Oxide's, then
 average those 20 per-task differences.
 
 **Precisely what pairing buys.** With every task present in both arms,
@@ -64,7 +64,7 @@ of marginal arm rates. Pairing does **not** change the point estimate.
 What it changes is the **interval**: the paired standard error is
 `SD(per-task differences) / √20`, which shrinks in proportion to how
 strongly the two arms' per-task performance correlates. That correlation
-will be high — a task hard in Oxide is hard in explicit-Oxide — so the
+will be high — a task hard in Black Oxide is hard in explicit Black Oxide — so the
 paired SE is expected to be roughly half the unpaired one. The delta is
 therefore reported with its **paired SE**, and quoting the delta without
 it is prohibited. (The point estimates diverge only when a task is
@@ -86,7 +86,7 @@ percentage points.** That is a property of a 20-task corpus, not evidence
 of absence, and every report from this phase must say so.
 
 **Directional predictions.** Stated in advance, on the paired-by-task
-pass@1 delta (Oxide − explicit-Oxide), as an exhaustive and
+pass@1 delta (Black Oxide − explicit Black Oxide), as an exhaustive and
 non-overlapping partition:
 
 | Paired delta | Pre-registered reading |
@@ -149,7 +149,7 @@ advertised capability: with `OLLAMA_CONTEXT_LENGTH` unset the daemon
 serves qwen2.5-coder at **4096** tokens, not its 32768 maximum
 (confirmed against `/api/ps` after load). Repair prompts carry each
 arm's full initial context — language card, few-shot examples, task
-statement (§6.3) — so the Oxide arms' carried context runs
+statement (§6.3) — so the Black Oxide arms' carried context runs
 ~1400–1660 tokens against the Rust arm's ~110–300. A repair prompt also
 carries the rejected program, so the binding quantity is
 context + program + `num_predict`. Measured: for a rejected program
@@ -157,7 +157,7 @@ anywhere in the ~1.6k–7k character band — the realistic range for a
 small model's failing output — the `oxide` and `explicit` arms exceed
 4096 and `rust` does not. The carried card is exactly what pushes them
 over. On overflow llama.cpp truncates the prompt **from the front**,
-dropping that card — the only place Oxide syntax ever appears — from
+dropping that card — the only place Black Oxide syntax ever appears — from
 those two arms specifically. That is a silent, non-random bias against
 exactly the pair §3 names as the primary comparison, and nothing
 in the artifacts would reveal it: wrong-but-plausible numbers, the worst
@@ -339,21 +339,21 @@ instruction only):
 | rust (0-shot) | 245 ch | 271 | **110.6%** |
 
 Rust *gained* context on repair — it lives in the model's weights and
-its preamble is one line — while the Oxide arms lost 95% of theirs, and
-the language card is the only place Oxide syntax ever appears.
+its preamble is one line — while the Black Oxide arms lost 95% of theirs, and
+the language card is the only place Black Oxide syntax ever appears.
 Worse, the task statement appeared in **no** repair prompt, so after a
 runtime failure the model was told its output was wrong with no
 statement of what it should have produced; it could only guess.
 
 That asymmetry would have turned §3's repair-lift *secondary* metric
 ("whether an arm's diagnostics teach") into a measure of card recall
-for the Oxide arms. The *primary* pass@1 metric is first-attempt-only
+for the Black Oxide arms. The *primary* pass@1 metric is first-attempt-only
 and was never at stake. The change was decided by the project owner
 before the grid ran, blind to any results, as the pre-registration
 requires.
 
 Diagnostics render as `line:col: CODE: message`, notes indented two
-spaces, then `suggestion: <text>` when non-empty. Oxide arms therefore
+spaces, then `suggestion: <text>` when non-empty. Black Oxide arms therefore
 supply OX codes with suggestions; the Rust arm supplies rustc's full help
 text verbatim (SPEC §45 already folds rustc's children into `message`).
 Giving each arm its strongest native diagnostics is the fair form of the
@@ -428,7 +428,7 @@ Completed run ids are skipped on re-entry; the default is the full grid.
 
 Aggregates the 30 run dirs into `grid.json` + `REPORT.md`.
 
-**Primary readout:** the paired-by-task Oxide − explicit-Oxide pass@1
+**Primary readout:** the paired-by-task Black Oxide − explicit Black Oxide pass@1
 delta per (model, shots), classified against the §3 partition
 (≥+5pp / −5…+5pp / ≤−5pp) with the band printed alongside the number, so
 an inconclusive result cannot be read as a positive one.
@@ -558,12 +558,12 @@ New `tests/test_6a.py`, plus the existing 717 staying green (nothing in
   | explicit | ~1398 tok | ~1613 tok | ~1450 tok | ~1660 tok |
   | rust | ~61 tok | ~251 tok | ~110 tok | ~300 tok |
 
-  The Oxide arms carry a **~22× larger prompt** than Rust at 0-shot.
+  The Black Oxide arms carry a **~22× larger prompt** than Rust at 0-shot.
 
   These fit Qwen2.5-Coder's *advertised* 32768 window, but that was
   never the binding constraint: Ollama serves the model at `num_ctx`,
   which defaults to **4096** and is not derived from the model's
-  capability. Against 4096, an Oxide repair prompt (~1660 tok) plus the
+  capability. Against 4096, an Black Oxide repair prompt (~1660 tok) plus the
   failing program plus `num_predict` 2048 reaches or exceeds the window,
   while the Rust arm never does — and llama.cpp truncates from the front,
   taking the language card with it. That would have been a silent,
@@ -575,7 +575,7 @@ New `tests/test_6a.py`, plus the existing 717 staying green (nothing in
   What remains is attention dilution: a 1.3k-token card is a real burden
   at 0.5B that the one-line Rust preamble does not pay. That asymmetry
   favors Rust, compounds with the pretraining-exposure advantage in the
-  same direction, and is a further reason Oxide-vs-Rust is not the
+  same direction, and is a further reason Black Oxide vs Rust is not the
   headline. Per-cell prompt token counts are logged and the comparison is
   restated in the report rather than hand-waved.
 - **Ollama chat templating** may differ across model sizes. Templates are

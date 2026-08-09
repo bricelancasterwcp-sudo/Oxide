@@ -1,8 +1,8 @@
-# Oxide v0.3 — G0 generation-baseline taxonomy evidence
+# Black Oxide v0.3 — G0 generation-baseline taxonomy evidence
 
 **Scope.** Constrained condition, first attempts only, `oxide` + `explicit` arms
 (the `rust` arm is a control and emits rustc `E0xxx` codes, never `OX0xxx`).
-Three families × 10 seeds × 20 tasks × 2 Oxide arms = **400 programs per family**.
+Three families × 10 seeds × 20 tasks × 2 Black Oxide arms = **400 programs per family**.
 Evidence is drawn from every failing program in the corpus, not only from the
 15-file-per-code `samples/` selection; sample `.txt` paths are cited where the
 selection happens to contain the cited program, otherwise the citation is the
@@ -591,7 +591,7 @@ fn main() {
 `C/g0c-qwen7b-0shot-s9` t12.oxide L1–3
 
 *Reaching for:* reverse iteration (`rev`) and positional character access
-(`nth`) — Oxide has neither; `chars()` returns a `Vec<Str>` and there is no
+(`nth`) — Black Oxide has neither; `chars()` returns a `Vec<Str>` and there is no
 reverse.
 
 **Vec index-assignment (qwen-specific, `set`).**
@@ -899,7 +899,7 @@ whole-number division on Ints without a Float detour.
 ```
 `C/g0c-qwen7b-0shot-s3` t13.oxide L4
 
-*Reaching for:* `len`/`get` on `Str` directly (Oxide requires `str_len` and
+*Reaching for:* `len`/`get` on `Str` directly (Black Oxide requires `str_len` and
 `chars`).
 
 **R7 — Str coercion.**
@@ -936,7 +936,7 @@ anything.
 ```
 `C/g0c-qwen7b-0shot-s5` t03.oxide L7
 
-*Reaching for:* **assignment to a field / lvalue path** (`s.values = …`). Oxide
+*Reaching for:* **assignment to a field / lvalue path** (`s.values = …`). Black Oxide
 assignment targets a bare name only, so under constrained decoding `=` is
 unavailable after a field path and the decoder settles on `==`, producing a
 Bool where Unit is expected. Small in count (4) but unambiguous in intent, and
@@ -1057,7 +1057,7 @@ oxide/explicit arms)
 ```
     let sum = range(0, 10).iter().map(|x| x * x).fold(0, |acc, x| acc + x);
 ```
-`U/g0u-codegemma7b-0shot-s7` t01.oxide L2 — note this mixes the *Oxide*
+`U/g0u-codegemma7b-0shot-s7` t01.oxide L2 — note this mixes the *Black Oxide*
 `range(0, 10)` builtin with Rust iterator/closure syntax.
 
 **granite — card echo**

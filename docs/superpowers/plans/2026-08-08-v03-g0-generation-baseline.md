@@ -279,7 +279,7 @@ EXEMPLARS = [
 def test_exemplar_parses_in_the_real_pipeline(name, program):
     codes = [d["code"] for d in diagnose("oxide", program)]
     syntax = [c for c in codes if c == "OX0001" or c.startswith("OX01")]
-    assert not syntax, f"{name} is not valid Oxide at the parse layer: {syntax}"
+    assert not syntax, f"{name} is not valid Black Oxide at the parse layer: {syntax}"
 
 
 @pytest.mark.parametrize("name,program", EXEMPLARS, ids=[e[0] for e in EXEMPLARS])
@@ -291,7 +291,7 @@ def test_exemplar_is_admitted_by_the_grammar(name, program):
 
 Run: `.venv/bin/pytest tests/test_grammar_admission.py -x -q`
 
-Expected: `test_exemplar_parses_in_the_real_pipeline` must pass for every exemplar (if one fails, the exemplar is wrong Oxide — fix the exemplar, e.g. enum variant construction syntax, match-arm commas, against `SPEC.md` and `tests/test_parser.py` fixtures). Admission tests may fail in two distinct ways: (a) the exemplar's *formatting* is off canon (fix the exemplar — the grammar pins exact spacing like `" -> "`, `"\n    "` field indent); (b) a construct that parses in the pipeline is NOT admitted by the grammar — that is a genuine completeness gap: record it (it becomes a taxonomy candidate), and if it is a card-taught construct, fix `eval/grammar/build.py` and regenerate in this task.
+Expected: `test_exemplar_parses_in_the_real_pipeline` must pass for every exemplar (if one fails, the exemplar is wrong Black Oxide — fix the exemplar, e.g. enum variant construction syntax, match-arm commas, against `SPEC.md` and `tests/test_parser.py` fixtures). Admission tests may fail in two distinct ways: (a) the exemplar's *formatting* is off canon (fix the exemplar — the grammar pins exact spacing like `" -> "`, `"\n    "` field indent); (b) a construct that parses in the pipeline is NOT admitted by the grammar — that is a genuine completeness gap: record it (it becomes a taxonomy candidate), and if it is a card-taught construct, fix `eval/grammar/build.py` and regenerate in this task.
 
 - [ ] **Step 4: Reconcile until green, then run the full suite**
 
@@ -406,7 +406,7 @@ def test_grid_cell_routes_the_arm_to_its_client(tmp_path):
     # Every stub answered only its own arm: prompts are non-empty and
     # carry that arm's lead material.
     assert clients["oxide"].prompts and all(
-        "Oxide" in p for p in clients["oxide"].prompts
+        "Black Oxide" in p for p in clients["oxide"].prompts
     )
     assert clients["rust"].prompts and all(
         "You are writing Rust" in p for p in clients["rust"].prompts
@@ -692,7 +692,7 @@ for txt in Path(ROOT).glob("g0u-*/raw/*.explicit.1.txt"):
 print(hist.most_common())
 ```
 
-(For the pilot-validation pass, the glob prefix is `6a-*` and the counts cover all attempts across both Oxide arms — match the pilot REPORT's stated denominator before comparing.)
+(For the pilot-validation pass, the glob prefix is `6a-*` and the counts cover all attempts across both Black Oxide arms — match the pilot REPORT's stated denominator before comparing.)
 - [ ] **Step 3: Write the dossiers.** For every candidate, one paragraph in the template:
 
 ```markdown
@@ -702,7 +702,7 @@ print(hist.most_common())
 - **Class:** sugar | card | diagnostic | SPEC-named feature
 - **Fix:** <one sentence>
 - **Prediction:** <which code falls, in which families, and which should NOT move>
-- **Design fit:** <why this serves Oxide's design, not imitation — the semicolon test>
+- **Design fit:** <why this serves Black Oxide's design, not imitation — the semicolon test>
 ```
 
 - [ ] **Step 4: Rank** by (sessions affected × families affected), gate-relevance first (a resolve-stage fix that unblocks reaching linearity outranks a cosmetic parser one at equal counts). State the ranking rule in the doc.

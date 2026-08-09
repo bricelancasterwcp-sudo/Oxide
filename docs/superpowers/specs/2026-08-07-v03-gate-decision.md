@@ -11,7 +11,7 @@ killed by the eval's OX-code error distribution.
 
 ## The evidence the gate asked for
 
-OX-code distribution across 334 failing Oxide repairs (three model families,
+OX-code distribution across 334 failing Black Oxide repairs (three model families,
 10 seeds, 464 diagnostics):
 
 | Layer | count | share |
@@ -64,11 +64,11 @@ hard-to-reverse change made to serve a capability band that is moving.
 measured improvement in this project came from adding builtin method syntax:
 oxide repair went 25.5% → 67.5% on one family, **+42pp**, four times the
 entire ownership effect. It cost one parser function and changed no
-semantics. If the goal is making Oxide writable by models, surface ergonomics
+semantics. If the goal is making Black Oxide writable by models, surface ergonomics
 dominate ownership defaults by a wide margin, and they are cheap and
 reversible.
 
-**5. Silent deep copies conflict with the language's own pitch.** Oxide
+**5. Silent deep copies conflict with the language's own pitch.** Black Oxide
 transpiles to Rust and inherits its performance model. Implicit cloning
 trades a compile-time error for an invisible runtime cost, in a language
 whose reason for having linear types at all is to make that cost explicit.

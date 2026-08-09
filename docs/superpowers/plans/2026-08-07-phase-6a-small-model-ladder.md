@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Run the existing three-arm Oxide eval against a ladder of local small models so the per-error-code distribution that gates v0.3 stops being empty.
+**Goal:** Run the existing three-arm Black Oxide eval against a ladder of local small models so the per-error-code distribution that gates v0.3 stops being empty.
 
 **Architecture:** Five additive modules under `eval/` that sit *on top of* the frozen `eval/harness.py`. Each (model, shots, seed) combination becomes its own harness `run_id`, which is what lets the whole phase land without editing `harness.py` or `src/`. A driver drives generate → extract → submit → repair loops through Ollama over HTTP; a rollup aggregates 30 run directories into a paired-by-task comparison.
 
@@ -211,7 +211,7 @@ git commit -m "feat(eval): add arm-neutral model-output extraction"
 - Consumes: nothing.
 - Produces: `build_repair_prompt(arm: str, source: str, verdict: dict) -> str`. `verdict` is exactly what `harness.run_file` returns: `{"compiled": bool, "passed": bool, "stdout": str, "diagnostics": list[dict]}`. Diagnostic dicts carry `code`, `message`, `line`, `col`, `end_line`, `end_col`, `notes` (list of `{"line", "col"}`), `suggestion`.
 
-Spec §6.3. This prompt did not previously exist — run 1 passed everything first try, so it was never written or exercised. At 0.5B it fires constantly, and it is where "do Oxide's diagnostics teach better than rustc's?" is actually decided.
+Spec §6.3. This prompt did not previously exist — run 1 passed everything first try, so it was never written or exercised. At 0.5B it fires constantly, and it is where "do Black Oxide's diagnostics teach better than rustc's?" is actually decided.
 
 **The signature deliberately excludes `expected_stdout`.** Leaking it would let a weak model pass by hard-coding a print of the expected string, silently corrupting the headline metric. Structural exclusion beats a filter.
 
@@ -333,7 +333,7 @@ Expected: FAIL — `ModuleNotFoundError: No module named 'eval.repair'`
 # eval/repair.py
 """Repair-prompt construction (SPEC Part X, section 6.3).
 
-Arm-identical STRUCTURE, arm-native CONTENT: Oxide arms supply OX codes
+Arm-identical STRUCTURE, arm-native CONTENT: Black Oxide arms supply OX codes
 with suggestions, the Rust arm supplies rustc's full help text verbatim.
 
 `expected_stdout` is deliberately not a parameter. Disclosing it would
@@ -779,7 +779,7 @@ class _StubClient:
         return "not a program"
 
 
-# Verified against the real pipeline: Oxide's print() quotes STRINGS, so
+# Verified against the real pipeline: Black Oxide's print() quotes STRINGS, so
 # print("hi") emits '"hi"\n', not 'hi\n'. Printing an Int avoids that.
 _GOOD_OXIDE = "fn main() {\n    print(42)\n}\n"
 
@@ -1448,7 +1448,7 @@ git commit -m "feat(eval): add 6a grid orchestration with run-scoped abort polic
 
 Spec §3, §6.5.
 
-**The paired-by-task delta is the primary readout**, always quoted with its paired SE. For each task, subtract explicit-Oxide's pass rate across seeds from Oxide's, then average those 20 per-task differences.
+**The paired-by-task delta is the primary readout**, always quoted with its paired SE. For each task, subtract explicit Black Oxide's pass rate across seeds from Black Oxide's, then average those 20 per-task differences.
 
 Note carefully: on a balanced grid that delta is *algebraically identical* to the difference of marginal arm rates. Pairing does not move the point estimate — it shrinks the interval, because shared task difficulty cancels inside each per-task difference. Quoting the delta without its SE is prohibited.
 
@@ -1763,13 +1763,13 @@ def render_report(grid: dict) -> str:
     """Markdown report. The band is printed beside every delta so an
     inconclusive result cannot be read as a positive one."""
     lines = [
-        "# Oxide Phase 6a — Small-Model Capability Ladder",
+        "# Black Oxide Phase 6a — Small-Model Capability Ladder",
         "",
-        "Primary comparison: **Oxide − explicit-Oxide, paired by task**.",
+        "Primary comparison: **Black Oxide − explicit Black Oxide, paired by task**.",
         "Decision band: **±5pp** (pre-registered; 20 tasks cannot resolve",
         "smaller effects — that is absence of resolution, not evidence of",
         "absence). Rust is a reference arm carrying a large pretraining-",
-        "exposure advantage and a ~22× smaller prompt; Oxide-vs-Rust is not",
+        "exposure advantage and a ~22× smaller prompt; Black Oxide vs Rust is not",
         "evidence about language design.",
         "",
     ]
@@ -1780,7 +1780,7 @@ def render_report(grid: dict) -> str:
             "",
         ]
     lines += [
-        "| Model | Shots | Paired Δ (pp) | ± SE | Verdict | Oxide | Explicit | Rust |",
+        "| Model | Shots | Paired Δ (pp) | ± SE | Verdict | Black Oxide | Explicit | Rust |",
         "|---|---|---|---|---|---|---|---|",
     ]
     for point in grid["points"]:
@@ -1797,7 +1797,7 @@ def render_report(grid: dict) -> str:
         )
     lines += [
         "",
-        "Δ is the mean per-task (Oxide − explicit-Oxide) first-attempt pass",
+        "Δ is the mean per-task (Black Oxide − explicit Black Oxide) first-attempt pass",
         "rate; SE is `SD(per-task differences)/√n`. On a balanced grid the Δ",
         "equals the difference of marginal arm rates — pairing buys the",
         "narrower interval, not a different point estimate.",
@@ -1998,6 +1998,6 @@ Watch for: a `truncation_rate` above ~20% at 0.5B (consider whether `num_predict
 
 **Type consistency.** `Generation` is 5 fields everywhere (Tasks 3, 4, 7). `run_session` is keyword-only after `client` in the implementation and in every test. `build_repair_prompt(arm, source, verdict)` matches its call in `driver.run_session`. `is_complete`/`reset_run`/`build_run_id`/`MODELS` are defined in Task 5 and imported by Task 6. Cell-record keys are identical in Task 4's producer, Task 6's `_arm_stats` consumer, and Task 6's `_cell` fixture.
 
-**Resolved before execution (was a flagged deviation):** Task 4's `_GOOD_OXIDE` fixture was probed against the real pipeline. `print("hi")` compiles but emits `'"hi"\n'` — Oxide's `print()` quotes strings — so every Task 4 test asserting a pass would have failed for the wrong reason. The fixture is now `print(42)` against `expected_stdout` `"42\n"`, verified `compiled=True, passed=True`. Do not revert it to a string print.
+**Resolved before execution (was a flagged deviation):** Task 4's `_GOOD_OXIDE` fixture was probed against the real pipeline. `print("hi")` compiles but emits `'"hi"\n'` — Black Oxide's `print()` quotes strings — so every Task 4 test asserting a pass would have failed for the wrong reason. The fixture is now `print(42)` against `expected_stdout` `"42\n"`, verified `compiled=True, passed=True`. Do not revert it to a string print.
 
 **Correction made during self-review (spec amended to match).** An earlier draft claimed the paired-by-task delta would differ from the marginal-rate comparison, and the spec's test plan asked for a fixture proving it. That is false: on a balanced grid the two are algebraically identical. Pairing's benefit is entirely in the **interval** — `SD(per-task differences)/√n` shrinks as the arms correlate across tasks. `paired_se`/`unpaired_se` and their tests exist to make that concrete, and the spec's §3 and §8 were corrected. If a future reviewer sees the delta match the marginal number, that is the design working, not a bug.
