@@ -1768,9 +1768,9 @@ not be renegotiated after seeing results.
 
 | Parameter | Value |
 |---|---|
-| Models | `qwen2.5-coder` **instruct**, 0.5B / 1.5B / 7B |
+| Models | Phase 6a rungs: `qwen2.5-coder` **instruct**, 0.5B / 1.5B / 7B (slugs `qwen0_5b` / `qwen1_5b` / `qwen7b`). G0 adds two more **instruct** families at `q8_0`: `codegemma:7b` (slug `codegemma7b`) and `granite-code:8b` (slug `granite8b`) — see `eval.driver.MODELS` for the pinned tags. |
 | Quantization | uniform `q8_0` across the ladder |
-| Backend | Ollama HTTP (`http://localhost:11434`), version recorded |
+| Backend | Phase 6a: Ollama HTTP (`http://localhost:11434`), version recorded. G0 (`qwen7b`, `codegemma7b`, `granite8b`) runs on llama.cpp (`llama-server`, `http://localhost:8081`) for both the constrained and unconstrained conditions instead — Ollama accepts a GBNF `grammar` option and silently ignores it, so constrained decoding requires llama.cpp (§50.4/`eval.llamacpp`). |
 | Temperature | 0.8 |
 | top_p | 0.95 |
 | `num_predict` (max gen tokens) | 2048 |
@@ -1867,16 +1867,23 @@ This is what makes the phase additive: the existing session, triple, and
 report layers work unchanged.
 
 ```
-run_id  ::=  6a-<model_slug>-<shots>shot-s<seed>
-             e.g.  6a-qwen1_5b-0shot-s3
-model_slug ::= qwen0_5b | qwen1_5b | qwen7b
+run_id  ::=  <prefix>-<model_slug>-<shots>shot-s<seed>
+             e.g.  6a-qwen1_5b-0shot-s3, g0c-granite8b-0shot-s7
+prefix     ::= 6a (default, `eval.driver.build_run_id`) | g0c (G0 constrained)
+              | g0u (G0 unconstrained)
+model_slug ::= qwen0_5b | qwen1_5b | qwen7b | codegemma7b | granite8b
 ```
 
-30 run ids × 60 sessions each.
+30 run ids × 60 sessions each (Phase 6a's own grid; G0's grid is defined
+by its own design doc and uses the `g0c`/`g0u` prefixes above over the
+`qwen7b` / `codegemma7b` / `granite8b` slugs).
 
 ```
 eval/results/<run_id>/
-  manifest.json     # pinned params, ollama version, model digests, start/end
+  manifest.json     # pinned params, backend, preflight payload (verbatim,
+                     # minus its own grammar_sha256 -- see below), ollama
+                     # version, model digests, per-arm grammar_sha256,
+                     # start/end
   triples.jsonl     # written by the existing harness Session
   cells.jsonl       # appended per completed session (resume ledger)
   raw/<task>.<arm>.<attempt>.txt   # verbatim model output, pre-extraction
@@ -1900,6 +1907,11 @@ attempt order; each length always equals `attempts`. `truncated` records
 `done_reason == "length"` so runaway-generation frequency is auditable
 per arm and per model. `tokens_in`/`tokens_out`/`ms` are summed across
 the session's attempts.
+
+An optional `context_exhausted: true` field is present when the session
+ended on §45/§51's evidence-gated overflow rule — attempts-so-far
+recorded, no further attempt made — rather than a normal pass or an
+attempt-cap exhaustion; absent (not `false`) on every other session.
 
 ## 50. Module contracts
 
