@@ -213,6 +213,14 @@ MODELS = {
 NUM_CTX = {
     "granite8b": 4096,
 }
+# The CLI's ``--backend`` token, translated to the human-readable label
+# recorded in the manifest's top-level "backend" field.
+# LlamaCppClient.preflight() independently writes "llama.cpp" (with the
+# dot) into the provenance payload embedded at manifest["preflight"]
+# (section 49) -- without this mapping the top-level field would read
+# the bare CLI token "llamacpp" for the identical run, two spellings of
+# the same fact that a reader could take as two different backends.
+BACKEND_LABELS = {"ollama": "ollama", "llamacpp": "llama.cpp"}
 SEEDS = (1, 2, 3, 4, 5)
 SHOT_COUNTS = (0, 3)
 SESSIONS_PER_RUN = 60
@@ -444,12 +452,30 @@ def _manifest_fields(
     ``grammar_sha256`` is recorded per arm (section 49): a result produced
     under a grammar cannot be traced without knowing which one, and the
     rust arm's is always ``None`` by design (it is never constrained).
-    ``preflight`` is embedded verbatim alongside the fields already
-    extracted from it, since llamacpp's payload carries provenance (e.g.
-    ``model_path``) that has no equivalent top-level key here.
+    ``preflight`` is embedded alongside the fields already extracted from
+    it, since llamacpp's payload carries provenance (e.g. ``model_path``)
+    that has no equivalent top-level key here -- MINUS its own
+    ``grammar_sha256``, when present. That key (``LlamaCppClient.
+    preflight``'s own payload) reflects whichever client preflight was
+    run against, which is always ``clients["rust"]`` -- never constrained
+    -- so embedded verbatim it would read a permanently-``None`` grammar
+    digest inside ``manifest["preflight"]`` on every run, constrained or
+    not, sitting right next to the correctly-populated PER-ARM
+    ``grammar_sha256`` two keys up. A reader who checks only the nested
+    copy could misread a constrained run as unconstrained; dropped from
+    the embedded copy so the top-level per-arm field is the one place
+    this run's grammar provenance lives.
+
+    ``backend`` is recorded under ``BACKEND_LABELS``' canonical spelling,
+    not the raw CLI token, so this field and ``preflight["backend"]``
+    (llamacpp only) always agree.
     """
     client = clients["rust"]
     info = preflight or {}
+    embedded_preflight = (
+        {k: v for k, v in preflight.items() if k != "grammar_sha256"}
+        if preflight is not None else None
+    )
     return {
         "temperature": getattr(client, "temperature", None),
         "top_p": getattr(client, "top_p", None),
@@ -459,8 +485,8 @@ def _manifest_fields(
         "quantization_level": info.get("quantization_level"),
         "model_context_length": info.get("context_length"),
         "ollama_version": info.get("ollama_version"),
-        "backend": backend,
-        "preflight": preflight,
+        "backend": BACKEND_LABELS.get(backend, backend),
+        "preflight": embedded_preflight,
         "grammar_sha256": {
             arm: grammar_digest(getattr(clients[arm], "grammar", None))
             for arm in harness.ARMS
@@ -591,6 +617,27 @@ def main(argv: list[str] | None = None) -> int:
     if unknown:
         print(f"unknown model slug(s): {unknown}; known: {sorted(MODELS)}",
               file=sys.stderr)
+        return 2
+
+    if args.backend == "llamacpp" and len(slugs) > 1:
+        # One llama-server instance serves exactly one model (SPEC section
+        # 48/49): unlike Ollama, which can hold multiple pulled tags and
+        # route by name per request, llama-server is started on ONE set of
+        # weights and every request goes to whatever it currently has
+        # loaded. --models defaults to ALL FIVE slugs (see MODELS above),
+        # so the unguarded default would silently run every slug's
+        # sessions against a single server's weights -- a full grid of
+        # plausible-looking results attributed to the wrong models, with
+        # no abort and no manifest cause. Refusing here, before any
+        # generation, is the only place that mismatch can be caught.
+        print(
+            f"--backend llamacpp refuses more than one slug per invocation "
+            f"(got {len(slugs)}: {','.join(slugs)}) -- one llama-server "
+            f"instance serves one model; run each slug as its own "
+            f"invocation, pointed at a server started on that slug's "
+            f"weights",
+            file=sys.stderr,
+        )
         return 2
 
     shot_counts = [int(s) for s in args.shots.split(",") if s]

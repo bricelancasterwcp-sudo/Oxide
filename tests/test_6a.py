@@ -1218,6 +1218,67 @@ def test_main_proceeds_when_expect_model_path_matches(monkeypatch):
     assert code == 0
 
 
+def test_main_refuses_llamacpp_with_more_than_one_slug(capsys):
+    # One llama-server instance serves ONE model: unlike Ollama, which
+    # can hold multiple pulled tags and route by name per request,
+    # llama-server is started on ONE set of weights, and every request
+    # goes to whatever it currently has loaded. --models defaults to ALL
+    # FIVE slugs (MODELS), so the unguarded default would silently run
+    # every slug's sessions against a single server's weights -- a full
+    # grid of plausible-looking results attributed to the wrong models,
+    # with no abort and no manifest cause. The guard must fire before ANY
+    # client is constructed -- no monkeypatching needed; if it reached
+    # make_arm_clients this test would try to hit a real server.
+    code = driver.main([
+        "--backend", "llamacpp",
+        "--models", "qwen1_5b,qwen7b",
+        "--shots", "0",
+    ])
+    assert code == 2
+    err = capsys.readouterr().err
+    assert "llamacpp" in err
+    assert "qwen1_5b" in err and "qwen7b" in err
+
+
+def test_main_allows_llamacpp_with_a_single_slug(monkeypatch):
+    # The inverse: exactly one slug must not trip the guard. Stubbed
+    # exactly like test_main_proceeds_when_expect_model_path_matches so
+    # this stays hermetic -- --preflight-only stops before run_grid.
+    stub_clients = {
+        arm: _StaleServerStub("/blobs/sha256-anything") for arm in harness.ARMS
+    }
+    monkeypatch.setattr(
+        driver, "make_arm_clients",
+        lambda backend, slug, *, constrained, host: stub_clients,
+    )
+    code = driver.main([
+        "--backend", "llamacpp",
+        "--models", "qwen1_5b",
+        "--shots", "0",
+        "--preflight-only",
+    ])
+    assert code == 0
+
+
+def test_main_allows_ollama_with_multiple_slugs(monkeypatch):
+    # The guard is llamacpp-specific: Ollama can hold multiple pulled
+    # tags and route by model name per request, so multiple slugs in one
+    # invocation is the normal, supported (legacy 6a) path there.
+    stub_clients = {
+        arm: _StaleServerStub("/blobs/sha256-anything") for arm in harness.ARMS
+    }
+    monkeypatch.setattr(
+        driver, "make_arm_clients",
+        lambda backend, slug, *, constrained, host: stub_clients,
+    )
+    code = driver.main([
+        "--models", "qwen1_5b,qwen7b",
+        "--shots", "0",
+        "--preflight-only",
+    ])
+    assert code == 0
+
+
 def test_model_slugs_map_to_pinned_q8_tags():
     assert MODELS == {
         "qwen0_5b": "qwen2.5-coder:0.5b-instruct-q8_0",
@@ -1533,7 +1594,16 @@ def test_manifest_records_backend_and_per_arm_grammar_sha256(tmp_path):
     clients = {
         "oxide": oxide_client, "explicit": explicit_client, "rust": rust_client,
     }
-    info = {"model_path": "/blobs/sha256-deadbeef", "build_info": "b1-abc"}
+    # info["grammar_sha256"] is what LlamaCppClient.preflight() actually
+    # returns in production: the digest of whichever client preflight was
+    # run against, which is always clients["rust"] -- never constrained,
+    # so always None in practice. Embedded verbatim it would sit right
+    # next to the correctly-populated per-arm field below and read as
+    # "unconstrained" even on a constrained run (review finding 6).
+    info = {
+        "backend": "llama.cpp", "model_path": "/blobs/sha256-deadbeef",
+        "build_info": "b1-abc", "grammar_sha256": None,
+    }
 
     monkeypatch = pytest.MonkeyPatch()
     monkeypatch.setattr("eval.driver.run_one", lambda clients, **kw: None)
@@ -1551,8 +1621,19 @@ def test_manifest_records_backend_and_per_arm_grammar_sha256(tmp_path):
         monkeypatch.undo()
 
     m = _manifest(tmp_path)
-    assert m["backend"] == "llamacpp"
-    assert m["preflight"] == info
+    # The CLI token "llamacpp" is normalized to the same spelling
+    # LlamaCppClient.preflight() reports, so the two fields can never
+    # drift apart (review finding 5).
+    assert m["backend"] == "llama.cpp"
+    assert m["backend"] == m["preflight"]["backend"]
+    # The embedded preflight payload's OWN grammar_sha256 is dropped --
+    # the top-level per-arm field (below) is the one place this run's
+    # grammar provenance lives (review finding 6).
+    assert "grammar_sha256" not in m["preflight"]
+    assert m["preflight"] == {
+        "backend": "llama.cpp", "model_path": "/blobs/sha256-deadbeef",
+        "build_info": "b1-abc",
+    }
     assert m["grammar_sha256"] == {
         "oxide": grammar_digest('root ::= "oxide"'),
         "explicit": grammar_digest('root ::= "explicit"'),
@@ -2523,9 +2604,10 @@ def test_llamacpp_classifies_overflow_400_as_context_overflow_without_retrying(
     with pytest.raises(ServerContextOverflowError) as excinfo:
         client.generate("hi", seed=1)
     # The DISTINCT subclass, not the base ContextOverflowError raised by
-    # check_context -- run_session catches only this one (review finding
-    # 1: conflating the two would fabricate zero-attempt session results
-    # for what should be a run abort).
+    # check_context -- but run_session's evidence gate (SPEC section
+    # 45/51) catches BOTH identically, via the shared ContextOverflowError
+    # base, and branches on whether the session already has a submitted
+    # attempt, not on which of the two fired.
     assert isinstance(excinfo.value, ContextOverflowError)
     assert type(excinfo.value) is ServerContextOverflowError
     # Deterministic -- retrying would reproduce the identical 400 three

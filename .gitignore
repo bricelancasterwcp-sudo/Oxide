@@ -12,16 +12,15 @@ __pycache__/
 coverage.xml
 htmlcov/
 
-# Eval run internals — O_EXCL session locks are runtime-only state.
-# Results themselves (triples.jsonl, cells.jsonl, raw/, REPORT.md) ARE tracked:
-# they are the experimental record.
-eval/results/*/.sessions/
+# Eval run internals — O_EXCL session locks are runtime-only state, at
+# any nesting depth under eval/results/ (e.g. eval/results/<run_id>/ or
+# eval/results/<root>/<condition>/<run_id>/). Results themselves
+# (triples.jsonl, cells.jsonl, raw/, REPORT.md) ARE tracked: they are the
+# experimental record.
+eval/results/**/.sessions/
 
 # Transpiler scratch output
 *.rs.out
 
 # Subagent-driven-development scratch (ledgers, briefs, review packages)
 .superpowers/
-
-# harness session-claim locks are runtime machinery, never data
-eval/results/**/.sessions/
