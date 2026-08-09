@@ -97,19 +97,46 @@ for this row, not for comparisons.
 
 Sessions whose repair prompt outgrew the window end with their
 attempts-so-far recorded (`context_exhausted`; SPEC §45/§51's
-evidence-gated rule, landed mid-campaign at `2e7dfc2`..`1cb59fa`):
+evidence-gated rule, landed mid-campaign at `2e7dfc2`..`1cb59fa`). Both
+conditions, by arm — `python -m eval.g0_report`, re-run against both
+committed roots for this table (`--root .../constrained --run-prefix
+g0c` and `--root .../unconstrained --run-prefix g0u`, `--seeds 1-10`):
 
-| family | constrained exhausted cells |
-|---|---|
-| qwen (8192) | 1/600 |
-| codegemma (8192) | 1/600 |
-| granite (4096) | **100/600 (16.7%)** |
+| family | condition | exhausted cells | oxide | explicit | rust |
+|---|---|---|---|---|---|
+| qwen (8192) | constrained | 1/600 | 0 | 1 | 0 |
+| qwen (8192) | unconstrained | 0/600 | 0 | 0 | 0 |
+| codegemma (8192) | constrained | 1/600 | 1 | 0 | 0 |
+| codegemma (8192) | unconstrained | 0/600 | 0 | 0 | 0 |
+| granite (4096) | constrained | **100/600 (16.7%)** | 48 | 52 | 0 |
+| granite (4096) | unconstrained | **41/600 (6.8%)** | 27 | 14 | 0 |
 
 granite's rate is a direct consequence of its native window and is a
 REAL RESULT about running a 4K-context model in a 4-attempt repair
 loop — report it alongside any granite number, and treat granite's
 cross-family comparisons as carrying this covariate on top of the
 window itself.
+
+**Unconstrained granite's arm split is asymmetric where constrained
+granite's is not.** Constrained granite exhausts oxide and explicit at
+close to arm-fair rates (48 vs. 52 of 600); unconstrained granite does
+not (27 oxide vs. 14 explicit of 600) — the oxide arm loses
+proportionally more of its repair budget to exhaustion than explicit
+does, in the unconstrained condition specifically. Unconstrained
+granite's first-compile (oxide 4.0% / explicit 3.0%) and final-pass
+(oxide 7.5% / explicit 2.5%) rows above both carry this asymmetry as a
+covariate: an exhausted session's `final_passed` is always `false` by
+construction (exhaustion can only fire after a submitted, non-passing
+attempt — see `eval.driver.run_session`), so the arm losing MORE
+sessions to exhaustion has its own final-pass ceiling capped harder by
+it, not inflated. Oxide loses more sessions to exhaustion here and
+still shows the higher final-pass rate — if this covariate is doing
+anything to that comparison, it is understating oxide's edge, not
+producing it. Read the unconstrained granite row with that in mind
+rather than pooling it with the 8192-pinned families' clean numbers,
+and treat it as a covariate disclosure, not a corrected estimate — cell
+counts this small (200 per arm, single-digit-percent rates) do not
+support one.
 
 ## Limits
 
@@ -119,12 +146,13 @@ window itself.
   from Ollama (pilot) to llama.cpp for both conditions, within this
   campaign. Pilot numbers are directional context only.
 - **granite runs at n_ctx 4096** (its training context) — per-family
-  window covariate plus the exhaustion rate above.
+  window covariate plus the exhaustion rates above, in both conditions.
 - **The context-exhaustion semantics changed mid-campaign** (abort →
   evidence-gated session result). Only qwen's constrained s6 was
   re-run across the boundary; the rule is symmetric across arms, and
-  the 8192 families hit it once each, so the practical footprint is
-  granite, whose entire dataset ran on the final rule.
+  the 8192-pinned families' constrained runs hit it once each (zero
+  unconstrained), so the practical footprint is granite, whose entire
+  dataset ran on the final rule.
 - **EX-codes are outside the stage buckets** — the explicit arm's own
   EX0001-5 diagnostics (31 first-attempt occurrences, qwen) appear in
   code-level counts but no stage row; a small undercount of the
