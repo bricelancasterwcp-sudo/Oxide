@@ -63,7 +63,8 @@ class ResolveResult:
     # Var node_id (bare variant value) or Call node_id (constructor call)
     # -> variant name; infer owns the usage/arity checks (OX0303/OX0307)
     variant_refs: dict[int, str] = field(default_factory=dict)
-    # Assign node_id -> target var_id
+    # Assign/FieldAssign node_id -> the assigned variable's var_id
+    # (the BASE, for a field write)
     assign_of: dict[int, int] = field(default_factory=dict)
     diagnostics: list[Diagnostic] = field(default_factory=list)
 
@@ -218,6 +219,22 @@ class _Resolver:
                     self._diag(
                         "OX0200",
                         f"unknown identifier '{name}' in assignment",
+                        stmt.span,
+                    )
+                self._expr(value)
+            case ast.FieldAssign(base=base, value=value):
+                # Section 56: the base must be an existing local/param, and
+                # goes in the SAME map as whole-variable assignment so §28's
+                # "an assigned param gets mode own" applies unchanged -- a
+                # soundness requirement, since a field write through &T is
+                # rustc E0594.
+                var_id = self._lookup(base)
+                if var_id is not None:
+                    self.result.assign_of[stmt.node_id] = var_id
+                else:
+                    self._diag(
+                        "OX0200",
+                        f"unknown identifier '{base}' in assignment",
                         stmt.span,
                     )
                 self._expr(value)

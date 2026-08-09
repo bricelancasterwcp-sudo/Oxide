@@ -746,3 +746,44 @@ def test_variadic_vec_literal_runtime_stdout_matches_the_push_chain(
     chain_out = _run(_compile(_transpile_ok(chain), str(tmp_path)))
     # Assert
     assert variadic_out == chain_out == "3\n8\n-2\n"
+
+
+# ---- §56 field assignment ----
+
+FA_SOURCE = (
+    "struct P { x: Int, y: Int }\n"
+    "fn main() { let p = P { x: 1, y: 2 }\n p.x = 5\n print(p.x) }"
+)
+
+
+def test_field_assignment_emits_a_place_write_not_a_clone():
+    """§56: the target is a PLACE. Routing it through the field-access
+    emitter would append §36's `.clone()` and write into a temporary,
+    silently losing the assignment."""
+    rust, diags = transpile(FA_SOURCE)
+    assert diags == [], diags
+    assert "p.x = 5;" in rust
+    assert "p.x.clone() = " not in rust
+
+
+def test_field_assigned_binding_is_emitted_mut():
+    """The base joins the `assigned` set via assign_of, so `mut` falls out
+    of the existing inference."""
+    rust, diags = transpile(FA_SOURCE)
+    assert diags == [], diags
+    assert "let mut p: P = " in rust
+
+
+@requires_rustc
+def test_field_assignment_compiles_under_rustc(tmp_path):
+    """Accepted-implies-compiles."""
+    rust, diags = transpile(FA_SOURCE)
+    assert diags == [], diags
+    src = tmp_path / "prog.rs"
+    src.write_text(rust, encoding="utf-8")
+    proc = subprocess.run(
+        [RUSTC, "--edition", "2021", "-o", str(tmp_path / "prog"), str(src)],
+        capture_output=True,
+        text=True,
+    )
+    assert proc.returncode == 0, proc.stderr

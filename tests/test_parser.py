@@ -693,3 +693,42 @@ class TestVecLiteralSugar:
             "(module (fn main (params) (block (let (bind v) "
             "(call (var vec) (var x) (lit int 1))))))"
         )
+
+
+# ---------------------------------------------------------------------------
+# §56 field assignment: `s.f = e` at arbitrary field depth
+# ---------------------------------------------------------------------------
+
+
+class TestFieldAssignment:
+    """Models assign struct fields in place and the language had no such
+    form. Under constrained decoding the want deformed into a discarded
+    `==` comparison (18 occurrences in 9 of 600 constrained first attempts,
+    0 of 600 unconstrained) -- the §54 lesson, third instance.
+    """
+
+    def test_single_field_assignment_parses(self):
+        assert d("fn f() { p.x = 5 }") == mod_f(
+            "(block (field-assign p.x (lit int 5)))"
+        )
+
+    def test_nested_path_parses(self):
+        assert d("fn f() { a.b.c = 5 }") == mod_f(
+            "(block (field-assign a.b.c (lit int 5)))"
+        )
+
+    def test_double_equals_is_still_a_comparison(self):
+        """EQEQ is a distinct token kind, so the scan never fires here."""
+        assert "field-assign" not in d("fn f() { p.x == 5 }")
+
+    def test_plain_field_access_statement_is_unchanged(self):
+        """A failed scan restores the cursor: `p.x` alone stays an expr."""
+        assert "field-assign" not in d("fn f() { p.x }")
+
+    def test_scan_does_not_see_through_a_newline(self):
+        """`p.x` at end of line is an expression statement, never the start
+        of an assignment -- the rule _peek_next documents for §26."""
+        assert "field-assign" not in d("fn f() { p.x\n y = 5 }")
+
+    def test_whole_variable_assignment_is_untouched(self):
+        assert d("fn f() { p = 5 }") == mod_f("(block (assign p (lit int 5)))")

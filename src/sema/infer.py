@@ -20,6 +20,7 @@ from dataclasses import dataclass, field
 
 from src.diagnostics import Diagnostic, Span
 from src.parser import ast
+from src.sema.destructure import _DestructOps
 from src.sema.enums import _EnumOps
 from src.sema.resolve import ResolveResult
 from src.sema.types import (
@@ -70,7 +71,7 @@ def infer(module: ast.Module, resolved: ResolveResult) -> InferResult:
     return _Infer(module, resolved).run()
 
 
-class _Infer(_EnumOps):
+class _Infer(_EnumOps, _DestructOps):
     def __init__(self, module: ast.Module, resolved: ResolveResult) -> None:
         self.module = module
         self.resolved = resolved
@@ -370,6 +371,8 @@ class _Infer(_EnumOps):
                 var_id = self.resolved.assign_of.get(stmt.node_id)
                 if var_id is not None:
                     self.unify(value_ty, self.var_tv[var_id], value.span)
+            case ast.FieldAssign():
+                self._field_assign(stmt)
             case ast.Return(value=value):
                 val_ty = self._expr(value) if value is not None else UNIT
                 self.unify(val_ty, self._cur_ret, stmt.span)
@@ -380,6 +383,26 @@ class _Infer(_EnumOps):
                 self._expr(expr)
             case ast.ErrorStmt():
                 pass
+
+    def _field_assign(self, stmt: ast.FieldAssign) -> None:
+        """Section 56: walk the place left to right through the same field
+        lookup section 36 uses for reads, then unify the final field's type
+        with the RHS."""
+        value_ty = self._expr(stmt.value)
+        var_id = self.resolved.assign_of.get(stmt.node_id)
+        if var_id is None:
+            return  # unbound base: resolve already reported OX0200
+        ty = self.var_tv[var_id]
+        for fname in stmt.path:
+            checked = self._field_check(ty, fname, stmt.span)
+            if checked is None:
+                # Base type unknown so far: defer to the global solve,
+                # exactly as _field_access does.
+                tv = self._fresh()
+                self._pending_fields.append((ty, fname, stmt.span, tv))
+                checked = tv
+            ty = checked
+        self.unify(value_ty, ty, stmt.value.span)
 
     def _let(self, stmt: ast.Let) -> None:
         init_ty = self._expr(stmt.init)
@@ -395,41 +418,6 @@ class _Infer(_EnumOps):
                     self.unify(self.var_tv[bound[0]], target, pat.span)
             case ast.DestructPat() as pat:
                 self._destructure(pat, target, stmt.init.span)
-
-    def _destructure(
-        self, pat: ast.DestructPat, scrutinee: Type, init_span: Span
-    ) -> None:
-        var_ids = self.resolved.binds_of.get(pat.node_id, ())
-        if pat.struct_name not in self.struct_fields:
-            self._diag(
-                "OX0202", f"unknown struct '{pat.struct_name}'", pat.span
-            )
-            self.unify(scrutinee, ERROR_TYPE, init_span)
-            for var_id in var_ids:
-                self.unify(self.var_tv[var_id], ERROR_TYPE, pat.span)
-            return
-        self.unify(scrutinee, TCon(pat.struct_name), init_span)
-        fmap = self.struct_fields[pat.struct_name]
-        seen: set[str] = set()
-        for fname, var_id in zip(pat.field_names, var_ids):
-            if fname not in fmap:
-                self._diag(
-                    "OX0304",
-                    f"struct '{pat.struct_name}' has no field '{fname}'",
-                    pat.span,
-                )
-                self.unify(self.var_tv[var_id], ERROR_TYPE, pat.span)
-                continue
-            seen.add(fname)
-            self.unify(self.var_tv[var_id], fmap[fname], pat.span)
-        missing = [f for f in fmap if f not in seen]
-        if missing:
-            self._diag(
-                "OX0304",
-                "incomplete destructure: missing "
-                + ", ".join(f"'{f}'" for f in missing),
-                pat.span,
-            )
 
     # ---------------------------------------------------------- expressions
 

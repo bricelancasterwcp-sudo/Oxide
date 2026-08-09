@@ -113,6 +113,23 @@ class Assign:
 
 
 @dataclass(frozen=True, slots=True)
+class FieldAssign:
+    """`a.b.c = e` (SPEC.md section 56).
+
+    A distinct node rather than a widened ``Assign``: ``cfg`` matches
+    ``ast.Assign`` to emit a ``ReInit`` that re-establishes ownership,
+    which is exactly wrong for a field write. A separate node forces every
+    match site to decide, instead of silently inheriting that behaviour.
+    """
+
+    node_id: int
+    span: Span
+    base: str
+    path: tuple[str, ...]
+    value: Expr
+
+
+@dataclass(frozen=True, slots=True)
 class Return:
     node_id: int
     span: Span
@@ -282,7 +299,9 @@ type Expr = (
     | Lit
     | ErrorExpr
 )
-type Stmt = Let | Assign | Return | Break | Continue | ExprStmt | ErrorStmt
+type Stmt = (
+    Let | Assign | FieldAssign | Return | Break | Continue | ExprStmt | ErrorStmt
+)
 type Pattern = BindPat | DestructPat
 type Item = FnDecl | StructDecl | EnumDecl | ErrorStmt
 
@@ -366,6 +385,8 @@ def _dump_node(node: object) -> Generator[object, str, str]:
             return _sexp("destruct", struct_name, *field_names)
         case Assign(name=name, value=value):
             return _sexp("assign", name, (yield value))
+        case FieldAssign(base=base, path=path, value=value):
+            return _sexp("field-assign", ".".join((base, *path)), (yield value))
         case Return(value=value):
             if value is None:
                 return _sexp("return")
