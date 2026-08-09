@@ -635,6 +635,13 @@ def test_mismatched_element_types_in_a_variadic_vec_report_ox0300() -> None:
 
 
 def test_type_error_span_inside_a_variadic_vec_lands_within_the_source_call() -> None:
+    """The arg-span companion case: this diagnostic's span comes from the
+    real `"a"` literal token (`infer.py` always unifies at `arg.span`), so
+    it would pass even if every synthesized node in the desugared chain
+    carried `Span(0, 0)`. It is still worth pinning — it is the common
+    case a model actually hits — but the AST-walk test in
+    `test_parser.py::TestVecLiteralSugar` is what directly checks the
+    synthesized-node span claim itself."""
     # Arrange — the diagnostic must not point outside the `vec(...)` the
     # model actually wrote, even though the checker sees a synthesized
     # push-chain instead.
@@ -649,6 +656,31 @@ def test_type_error_span_inside_a_variadic_vec_lands_within_the_source_call() ->
     assert diag_codes(res) == ["OX0300"]
     span = res.diagnostics[0].span
     assert call_start <= span.start <= span.end <= call_end
+
+
+def test_diagnostic_on_a_synthesized_push_callee_lands_in_the_source_call() -> None:
+    """Unlike the companion above, this diagnostic lands ON a synthesized
+    node: shadowing the builtin `push` with a local `Int` makes both
+    desugared `push` calls "not callable" (§55's equivalence means the
+    checker resolves the synthesized `push` Var exactly as it would the
+    hand-written one — see SPEC.md §55's Restrictions). `OX0303`'s span is
+    `call.callee.span`, i.e. the synthesized Var's own span, so this is
+    direct coverage of the desugar's span-fidelity claim through the
+    diagnostic path rather than the AST alone."""
+    # Arrange
+    src = "fn f() { let push = 3\n let v = vec(1, 2)\n print(len(v)) }"
+    call_start = src.index("vec(")
+    call_end = src.index(")", call_start) + 1
+
+    # Act
+    res = analyze(src)
+
+    # Assert
+    assert "OX0303" in diag_codes(res)
+    ox0303 = [d for d in res.diagnostics if d.code == "OX0303"]
+    assert ox0303, diag_codes(res)
+    for diag in ox0303:
+        assert call_start <= diag.span.start <= diag.span.end <= call_end
 
 
 def test_zero_arg_variadic_vec_still_needs_annotation_or_use() -> None:

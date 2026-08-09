@@ -11,7 +11,8 @@ import dataclasses
 
 import pytest
 
-from src.parser.ast import BinOp, Let, Module, dump
+from src.diagnostics import Span
+from src.parser.ast import BinOp, Call, Let, Module, Var, dump
 from src.parser.parser import parse_source
 
 # ---------------------------------------------------------------------------
@@ -627,6 +628,60 @@ class TestVecLiteralSugar:
         dump = d("fn main() { let v = vec(1) }")
         assert "(field " not in dump
         assert dump.count("(call (var push)") == 1
+
+    def test_synthesized_nodes_carry_the_original_calls_span_not_the_args(self):
+        """SPEC.md §55's normative span claim, checked directly on the raw
+        AST rather than inferred from where a diagnostic happens to land
+        (a diagnostic on an argument would pass this check even if every
+        synthesized node carried `Span(0, 0)`): every synthesized `push`
+        Call/Var in the desugared chain carries the ORIGINAL `vec(1, 2)`
+        call's span; the innermost `vec()` call reuses the real `vec`
+        token's own (tighter) span for its callee; and the argument
+        literals keep their own real spans, untouched."""
+        src = "fn f() { let v = vec(1, 2) }"
+        vec_start = src.index("vec(")
+        vec_end = vec_start + len("vec")
+        call_end = src.index(")", vec_start) + 1
+        call_span = Span(vec_start, call_end)
+
+        module, diagnostics = parse_source(src)
+        assert diagnostics == []
+        let_stmt = module.items[0].body.stmts[0]
+
+        outer_push = let_stmt.init
+        assert isinstance(outer_push, Call)
+        assert isinstance(outer_push.callee, Var)
+        assert outer_push.callee.name == "push"
+        inner_push, lit2 = outer_push.args
+        assert isinstance(inner_push, Call)
+        assert isinstance(inner_push.callee, Var)
+        assert inner_push.callee.name == "push"
+        vec_call, lit1 = inner_push.args
+        assert isinstance(vec_call, Call)
+        assert isinstance(vec_call.callee, Var)
+        assert vec_call.callee.name == "vec"
+        assert vec_call.args == ()
+
+        # Synthesized nodes (no real source token of their own) carry the
+        # ORIGINAL call's span -- not a fabricated Span(0, 0) or a
+        # narrower/misleading guess.
+        assert outer_push.span == call_span
+        assert outer_push.callee.span == call_span
+        assert inner_push.span == call_span
+        assert inner_push.callee.span == call_span
+        assert vec_call.span == call_span
+
+        # The innermost call's callee reuses the REAL, already-parsed
+        # `vec` token -- its own tight span, not the full call's.
+        assert vec_call.callee.span == Span(vec_start, vec_end)
+        assert vec_call.callee.span != call_span
+
+        # Argument expressions keep their own real (narrower) spans --
+        # never widened to the synthesized call's span.
+        assert lit1.span != call_span
+        assert lit2.span != call_span
+        assert call_span.start <= lit1.span.start <= lit1.span.end <= call_span.end
+        assert call_span.start <= lit2.span.start <= lit2.span.end <= call_span.end
 
     def test_receiver_form_vec_is_not_variadic_sugar(self):
         """`x.vec(...)` goes through §53's method desugar (`vec` is in

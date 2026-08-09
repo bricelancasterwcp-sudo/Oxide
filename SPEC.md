@@ -2359,23 +2359,25 @@ is unamended: calls were already generic (`IDENT "(" args ")"`), so
 only what the front end does with it is new.
 
 ```
-vec(3, 8, -2)          ==  push(push(push(vec(), 3), 8), -2)
-vec(x, x)               # double move of x, same OX0401 the hand-written
-                         # chain reports — the checker never learns sugar
-                         # was involved
+vec(3, 8, -2)  ==  push(push(push(vec(), 3), 8), -2)
+vec(x, x)      ==  push(push(vec(), x), x)  # double move of x -- OX0401,
+                                            # same as the hand-written chain
 ```
 
 Restrictions:
 - `vec()` with zero arguments is **unchanged**: the desugar is a no-op, and
   the §16-pinned annotation-or-use ambiguity rule (`OX0302`) still governs
   it exactly as before this section.
-- Only the plain-call spelling `vec(...)` triggers the desugar. The
-  receiver-form `x.vec(...)` (§53; `vec` is in the parser's builtin-method
-  name set only because that set mirrors `src.sema.types.BUILTINS`
-  mechanically) still desugars to the flat `vec(x, ...)` call §53 already
-  produced — unaffected, and out of scope: nothing writes `x.vec(...)` in
-  practice, and `vec`'s 0-ary signature makes it arity-fail exactly as it
-  did before this section.
+- Only the plain-call spelling `vec(...)` triggers the desugar. This
+  section's rewrite is a parse-time rewrite of that surface spelling, fired
+  inside `_postfix`'s call-building branch, keyed on the parsed callee being
+  a bare `Var("vec")`. The receiver-form `x.vec(...)` (§53; `vec` is in the
+  parser's builtin-method name set only because that set mirrors
+  `src.sema.types.BUILTINS` mechanically) builds its flat `vec(x, ...)` Call
+  directly inside §53's own method-desugar path and is never re-entered by
+  this section's rewrite — the two Part XI rewrites are parse-time rewrites
+  of different surface spellings and deliberately do not compose. `x.vec(...)`
+  therefore keeps its pre-§55 `OX0303` arity failure.
 - Synthesized nodes carry the *original* `vec(...)` call's span (mirroring
   §53's precedent of never inventing a misleading span for a generated
   node): the intermediate `push` Calls and their `push` callee Vars have no
@@ -2390,7 +2392,7 @@ THREE model families under constrained decoding — qwen 69/91, codegemma
 59/69, granite 20/27 of first-attempt `OX0303` — with the call's arity
 always matching the task's list length. The intent is unambiguous: models
 treat `vec(...)` as a list literal, and the language's 0-arity constructor
-was the friction, not the model. Each element push is a linear consume-and
--return exactly like a hand-written push-chain, so the sugar composes with
-linearity for free — the same design-fit reasoning §53 already established
-for receiver-first calls.
+was the friction, not the model. Each element push is a linear
+consume-and-return exactly like a hand-written push-chain, so the sugar
+composes with linearity for free — the same design-fit reasoning §53
+already established for receiver-first calls.
