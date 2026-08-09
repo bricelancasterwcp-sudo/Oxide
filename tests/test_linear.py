@@ -502,3 +502,83 @@ def test_moving_distinct_owned_values_into_a_variadic_vec_is_clean():
 
     assert diag_codes(variadic_res) == []
     assert drop_list(variadic_res) == drop_list(chain_res)
+
+
+# ---------------------------------------------------------------------------
+# §56 field assignment: the base is a READ, and never a ReInit
+# ---------------------------------------------------------------------------
+
+
+def test_field_write_into_a_moved_base_is_use_after_move():
+    """§56: the base is a READ use (§36), so writing a field of a moved
+    struct is OX0400 -- not a silent re-ownership.
+
+    `let q = p` is the move. Passing to a function does NOT move here: a
+    param that is never assigned and never move-used infers mode `read`
+    (§15/§28), so `take(p)` emits `&p` and the base is still owned.
+    """
+    src = (
+        "struct P { v: Vec<Int> }\n"
+        "fn main() { let p = P { v: vec() }\n let q = p\n p.v = vec() }"
+    )
+    assert "OX0400" in codes_of(src)
+
+
+def test_whole_assignment_re_owns_a_moved_base_but_a_field_write_does_not():
+    """The contrast that motivates the distinct node, as one paired check:
+    after the same move, `p = e` re-establishes ownership and the program is
+    clean, while `p.f = e` must NOT re-own and stays an error. A widened
+    `Assign` node would have made the second line behave like the first.
+    """
+    moved = (
+        "struct P { v: Vec<Int> }\n"
+        "fn main() { let p = P { v: vec() }\n let q = p\n"
+    )
+    assert codes_of(moved + " p = P { v: vec() }\n print(len(p.v)) }") == []
+    assert "OX0400" in codes_of(moved + " p.v = vec()\n print(len(p.v)) }")
+
+
+def test_field_assigned_param_gets_own_mode():
+    """SOUNDNESS (§56/§28): a read-mode param emits `p: &Point`, and a
+    field write through &T is rustc E0594. An assigned param must be own."""
+    src = (
+        "struct P { x: Int }\n"
+        "fn bump(p: P) -> Int { p.x = 5\n p.x }\n"
+        "fn main() { let p = P { x: 1 }\n print(bump(p)) }"
+    )
+    res = analyze(src)
+    assert res.diagnostics == [], res.diagnostics
+    assert param_modes(res, "bump") == ("own",)
+
+
+def test_field_write_adds_no_drop_for_the_overwritten_value():
+    """§56: the old field value is consumed implicitly. Rust's assignment
+    drops it; a synthesized DropPoint would double-free."""
+    src = (
+        "struct P { v: Vec<Int> }\n"
+        "fn main() { let p = P { v: vec() }\n p.v = push(vec(), 1)\n"
+        " print(len(p.v)) }"
+    )
+    res = analyze(src)
+    assert res.diagnostics == [], res.diagnostics
+    # exactly one drop: `p` itself at block end, none for the replaced field
+    assert len(drop_list(res)) == 1, drop_list(res)
+
+
+def test_write_into_a_loop_binder_is_clean():
+    """The binder is a fresh owned clone per iteration, so the write is
+    local and discarded at iteration end."""
+    src = (
+        "struct P { x: Int }\n"
+        "fn main() { let ps = push(vec(), P { x: 1 })\n"
+        " for p in ps { p.x = 5\n print(p.x) } }"
+    )
+    assert codes_of(src) == []
+
+
+def test_field_write_on_a_vec_is_a_type_error_not_a_borrow_error():
+    """OX0406 cannot arise for §56: a directly iterated variable unifies
+    with Vec<T>, which has no fields."""
+    src = "fn main() { let v = vec()\n for x in v { v.f = 1 } }"
+    assert "OX0306" in codes_of(src)
+    assert "OX0406" not in codes_of(src)
