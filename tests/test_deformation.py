@@ -31,6 +31,45 @@ def test_a_lone_comparison_is_tail_not_statement_position():
     assert field_assign_deformations(src) == (0, 1)
 
 
+def test_bare_match_arm_body_is_tail_not_statement_position():
+    """An un-braced arm body (`pat => expr,`) is a value-producing position
+    structurally identical to Block.tail, not an ExprStmt -- the deformed
+    comparison is counted in the tail column."""
+    src = (
+        "enum E {\n    A,\n    B,\n}\n\n"
+        "fn f(e: E, a: A) -> Bool {\n"
+        "    match e {\n"
+        "        A => a.values == 5,\n"
+        "        B => false,\n"
+        "    }\n"
+        "}"
+    )
+    assert field_assign_deformations(src) == (0, 1)
+
+
+def test_braced_match_arm_body_is_not_double_counted():
+    """A braced arm body `{ ... expr }` is already handled by the
+    Block.tail case; the un-braced case must not double-count it."""
+    src = (
+        "enum E {\n    A,\n    B,\n}\n\n"
+        "fn f(e: E, a: A) -> Bool {\n"
+        "    match e {\n"
+        "        A => { a.values == 5 },\n"
+        "        B => false,\n"
+        "    }\n"
+        "}"
+    )
+    assert field_assign_deformations(src) == (0, 1)
+
+
+def test_statement_and_tail_hits_are_never_pooled():
+    """One source with both a discarded statement-position comparison and a
+    tail-position one -- proves the counters are independent, not summed or
+    overwritten by whichever position is visited last."""
+    src = "fn main() {\n    a.values == 5\n    b.count == 2\n}"
+    assert field_assign_deformations(src) == (1, 1)
+
+
 def test_a_condition_is_not_a_signature():
     src = "fn main() {\n    if p.x == 5 {\n        print(1)\n    }\n}"
     assert field_assign_deformations(src) == (0, 0)

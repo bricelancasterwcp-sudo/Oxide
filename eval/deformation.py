@@ -15,20 +15,26 @@ Measured over the committed G0 first attempts (oxide arm): 18 statement
 occurrences in 9 of 600 constrained programs, and exactly 0 of 600
 unconstrained.
 
-LIMITATION: tail conversion is syntactic and unconditional (it applies to
-any block, regardless of the enclosing function's return type), so a
-deformed field assignment that happens to be the LAST statement of a
-function's body lands in `Block.tail`, not in an `ExprStmt` -- it is
-counted in the tail column, never in the signature. This makes the tail
-column ambiguous in both directions: a tail-position `f.x == e` may be a
-legitimate `Bool` return (`c.r == c.g && c.g == c.b` is correct code), or it
-may be a deformed assignment that happened to fall last. Consequently the
-statement-position count is a LOWER BOUND on deformation, not an exact
-count: pooling the two columns would overcount (folding in legitimate Bool
-returns), while treating the signature alone as complete would undercount
-(missing deformations that landed in tail position). The two columns are
-kept separate for exactly this reason, and the pre-registered `18 -> 0`
-endpoint should be read as a lower-bound claim.
+LIMITATION: there are two value-producing positions that fall in the tail
+column rather than the signature, and both are counted the same way for the
+same reason. First, tail conversion is syntactic and unconditional (it
+applies to any block, regardless of the enclosing function's return type),
+so a deformed field assignment that happens to be the LAST statement of a
+function's body lands in `Block.tail`, not in an `ExprStmt`. Second, an
+un-braced match-arm body (`pat => expr,`, with no `{ }`) is parsed as a bare
+expression rather than a `Block`, so a deformed assignment sitting there is
+likewise never an `ExprStmt` -- a braced arm's `{ ... expr }` is still
+covered by the `Block.tail` case above, and this is the un-braced
+counterpart. Both positions make the tail column ambiguous in both
+directions: a tail-position `f.x == e` may be a legitimate `Bool` return
+(`c.r == c.g && c.g == c.b` is correct code), or it may be a deformed
+assignment that happened to fall last. Consequently the statement-position
+count is a LOWER BOUND on deformation, not an exact count: pooling the two
+columns would overcount (folding in legitimate Bool returns), while
+treating the signature alone as complete would undercount (missing
+deformations that landed in either tail position). The two columns are kept
+separate for exactly this reason, and the pre-registered `18 -> 0` endpoint
+should be read as a lower-bound claim.
 
 This lives in the repo rather than a scratch script because the 6a pilot's
 demand table became irreproducible when its filter did not.
@@ -69,7 +75,9 @@ def _children(node: object) -> list[object]:
         case ast.For(iterable=iterable, body=body):
             return [iterable, body]
         case ast.Match(scrutinee=scrutinee, arms=arms):
-            return [scrutinee, *(arm.body for arm in arms)]
+            return [scrutinee, *arms]
+        case ast.MatchArm(body=body):
+            return [body]
         case ast.Call(callee=callee, args=args):
             return [callee, *args]
         case ast.BinOp(lhs=lhs, rhs=rhs):
@@ -112,6 +120,10 @@ def field_assign_deformations(source: str) -> tuple[int, int]:
             case ast.ExprStmt(expr=expr) if _is_signature(expr):
                 stmt_hits += 1
             case ast.Block(tail=tail) if tail is not None and _is_signature(tail):
+                tail_hits += 1
+            case ast.MatchArm(body=body) if not isinstance(
+                body, ast.Block
+            ) and _is_signature(body):
                 tail_hits += 1
         stack.extend(_children(node))
     return (stmt_hits, tail_hits)
