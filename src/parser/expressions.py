@@ -346,6 +346,34 @@ class _ExprParserMixin:
         callee = Var(self._new_id(), name_tok.span, name_tok.lexeme)
         return Call(self._new_id(), span, callee, tuple(args))
 
+    def _desugar_vec_call(
+        self, vec_var: Var, args: list[Expr], call_span: Span
+    ) -> Expr:
+        """Desugar the variadic `vec(...)` list literal (SPEC.md §55).
+
+        `vec(a, b, c)` parses as `push(push(push(vec(), a), b), c)` --
+        pure sugar, in the same spirit as §53's method-call desugar. Every
+        synthesized node is an ordinary Call/Var, so resolution, typing,
+        LINEARITY, and codegen all see exactly the hand-written push-chain
+        they already know how to handle; no later stage is aware sugar was
+        involved. `vec()` with zero args is unaffected -- the loop below is
+        a no-op and this returns the same shape the un-desugared path would
+        have built.
+
+        Span fidelity mirrors §53: the synthesized push Calls and their
+        `push` Vars carry no real source token, so they carry the
+        ORIGINAL `vec(...)` call's span (``call_span``) -- a diagnostic
+        anywhere in the desugared chain still lands within the source
+        call. The innermost call reuses the real, already-parsed `vec`
+        Var (a genuine token), and argument expressions keep their own
+        real spans untouched.
+        """
+        result: Expr = Call(self._new_id(), call_span, vec_var, ())
+        for arg in args:
+            push_callee = Var(self._new_id(), call_span, "push")
+            result = Call(self._new_id(), call_span, push_callee, (result, arg))
+        return result
+
     def _postfix(self, lhs: Expr) -> Expr:
         tok = self._advance()  # DOT, LPAREN, or QUESTION
         if tok.kind is TokenKind.QUESTION:
@@ -370,4 +398,6 @@ class _ExprParserMixin:
         rparen = self._expect(TokenKind.RPAREN, "')'")
         self._skip_nl, self._no_struct_lit = saved
         span = Span(lhs.span.start, rparen.span.end)
+        if isinstance(lhs, Var) and lhs.name == "vec":
+            return self._desugar_vec_call(lhs, args, span)
         return Call(self._new_id(), span, lhs, tuple(args))

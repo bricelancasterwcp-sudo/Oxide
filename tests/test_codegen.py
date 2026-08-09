@@ -717,3 +717,32 @@ def test_regression_constant_division_by_zero_panics_at_runtime(
     proc = subprocess.run([exe], capture_output=True, text=True)
     # Assert
     assert proc.returncode != 0
+
+
+# ---------------------------------------------------------------------------
+# §55 `vec(...)` list literal — codegen is untouched: the desugar is purely
+# syntactic (parser-level), so a variadic `vec(...)` and its hand-written
+# push-chain equivalent must emit the same Rust and run identically.
+# ---------------------------------------------------------------------------
+
+
+def test_variadic_vec_literal_emits_byte_identical_rust_to_the_push_chain() -> None:
+    # Arrange
+    variadic = "fn main() { for x in vec(3, 8, -2) { print(x) } }"
+    chain = "fn main() { for x in push(push(push(vec(), 3), 8), -2) { print(x) } }"
+    # Act / Assert — codegen never sees sugar, so the emissions cannot differ.
+    assert _transpile_ok(variadic) == _transpile_ok(chain)
+
+
+@requires_rustc
+def test_variadic_vec_literal_runtime_stdout_matches_the_push_chain(
+    tmp_path: object,
+) -> None:
+    # Arrange
+    variadic = "fn main() { for x in vec(3, 8, -2) { print(x) } }"
+    chain = "fn main() { for x in push(push(push(vec(), 3), 8), -2) { print(x) } }"
+    # Act
+    variadic_out = _run(_compile(_transpile_ok(variadic), str(tmp_path)))
+    chain_out = _run(_compile(_transpile_ok(chain), str(tmp_path)))
+    # Assert
+    assert variadic_out == chain_out == "3\n8\n-2\n"

@@ -317,6 +317,25 @@ def test_e1_rust_byte_identical_to_core_w1(tmp_path: Path) -> None:
     assert obj["rust"] == core_rust
 
 
+def test_e1_variadic_vec_literal_is_byte_identical_to_the_push_chain(
+    tmp_path: Path,
+) -> None:
+    """SPEC.md §55: the variadic `vec(...)` desugar lives in the shared
+    front-end mixin (`_ExprParserMixin`), inherited unchanged by
+    `ExplicitParser` -- so `vec(3, 42, 99)` written in the explicit
+    dialect must emit the same Rust as the hand-annotated push-chain
+    form (E1), which is itself already proven byte-identical to core."""
+    e1_vec = _mutate(
+        E1, "push(push(push(vec(), 3), 42), 99)", "vec(3, 42, 99)"
+    )
+    core_rust, core_diags = transpile(W1_CORE)
+    assert core_diags == []
+    assert core_rust is not None
+    _, obj = _dialect_json(tmp_path, e1_vec)
+    assert obj["ok"] is True
+    assert obj["rust"] == core_rust
+
+
 def test_e1_text_mode_success(tmp_path: Path) -> None:
     path = _write(tmp_path, E1)
     proc = _run_cli(["--dialect=explicit", str(path)])

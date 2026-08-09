@@ -594,3 +594,70 @@ def test_int_literal_beyond_i64_range_is_rejected() -> None:
 
     # Act / Assert
     assert codes(src) == ["OX0300"]
+
+
+# ---------------------------------------------------------------------------
+# §55 `vec(...)` list literal — element-type unification and span fidelity.
+# The desugar is purely syntactic (parser-level), so these tests confirm
+# infer never learns sugar was involved: the variadic form and the
+# hand-written push-chain must produce identical inferred types and codes.
+# ---------------------------------------------------------------------------
+
+
+def test_variadic_vec_infers_the_same_element_type_as_the_push_chain() -> None:
+    # Arrange
+    variadic = "fn main() { let v = vec(3, 8, -2)\n print(len(v)) }"
+    chain = "fn main() { let v = push(push(push(vec(), 3), 8), -2)\n print(len(v)) }"
+
+    # Act
+    variadic_res = analyze(variadic)
+    chain_res = analyze(chain)
+
+    # Assert
+    assert diag_codes(variadic_res) == []
+    assert var_types_by_name(variadic_res, "main", "v") == ["Vec<Int>"]
+    assert var_types_by_name(variadic_res, "main", "v") == var_types_by_name(
+        chain_res, "main", "v"
+    )
+
+
+def test_mismatched_element_types_match_the_push_chains_codes() -> None:
+    # Arrange — `vec(1, "a")` is `push(push(vec(), 1), "a")`; the second
+    # push's element type (Str) fails to unify with the first (Int).
+    assert codes('fn main() { let v = vec(1, "a")\n print(len(v)) }') == codes(
+        'fn main() { let v = push(push(vec(), 1), "a")\n print(len(v)) }'
+    )
+
+
+def test_mismatched_element_types_in_a_variadic_vec_report_ox0300() -> None:
+    # Arrange / Act / Assert
+    assert codes('fn main() { let v = vec(1, "a") }') == ["OX0300"]
+
+
+def test_type_error_span_inside_a_variadic_vec_lands_within_the_source_call() -> None:
+    # Arrange — the diagnostic must not point outside the `vec(...)` the
+    # model actually wrote, even though the checker sees a synthesized
+    # push-chain instead.
+    src = 'fn main() { let v = vec(1, "a") }'
+    call_start = src.index("vec(")
+    call_end = src.index(")", call_start) + 1
+
+    # Act
+    res = analyze(src)
+
+    # Assert
+    assert diag_codes(res) == ["OX0300"]
+    span = res.diagnostics[0].span
+    assert call_start <= span.start <= span.end <= call_end
+
+
+def test_zero_arg_variadic_vec_still_needs_annotation_or_use() -> None:
+    # Arrange / Act / Assert — §55 leaves `vec()` unchanged: the §16 pinned
+    # ambiguity rule (OX0302) still governs the empty case.
+    assert codes("fn f() { let v = vec() }") == ["OX0302"]
+
+
+def test_annotated_empty_vec_still_pins_the_element_type() -> None:
+    # Arrange / Act / Assert — the annotation-or-use escape hatch for
+    # `vec()` is untouched by the variadic sugar.
+    assert codes("fn f() { let x: Vec<Int> = vec() }") == []

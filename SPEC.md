@@ -1854,7 +1854,9 @@ difference as a covariate rather than pooling it silently with the
 8192-pinned rows.
 
 **Grid:** 3 models × 2 shot conditions × 5 seeds × 20 tasks × 3 arms =
-**1800 sessions**, at most **7200 generations**. Estimated 8–14h wall
+**1800 sessions**, at most **7200 generations** (Phase 6a's own grid;
+G0's grid is defined by its own design doc and uses the `qwen7b` /
+`codegemma7b` / `granite8b` slugs named above). Estimated 8–14h wall
 clock; small models exhaust the attempt cap more often than they pass
 early, so the worst case is close to the expected case.
 
@@ -2344,3 +2346,51 @@ is absorbed into an adjacent one, producing a program that parses and means
 something the model did not write. Error counts collected under grammar
 constraint therefore include artifacts of the grammar's own gaps, and should
 be read with that in mind.
+
+## 55. `vec(...)` variadic list literal
+
+`vec(a, b, c)` parses as `push(push(push(vec(), a), b), c)`. This is
+**sugar only**: the parser emits ordinary `Call` nodes — one per synthesized
+`push`, wrapping the original 0-arg `vec()` call — so name resolution, type
+inference, linear checking, and codegen see exactly what they would have
+seen for the hand-written push-chain. No semantics change, and the grammar
+is unamended: calls were already generic (`IDENT "(" args ")"`), so
+`vec(1, 2, 3)` was already admitted syntactically before this section —
+only what the front end does with it is new.
+
+```
+vec(3, 8, -2)          ==  push(push(push(vec(), 3), 8), -2)
+vec(x, x)               # double move of x, same OX0401 the hand-written
+                         # chain reports — the checker never learns sugar
+                         # was involved
+```
+
+Restrictions:
+- `vec()` with zero arguments is **unchanged**: the desugar is a no-op, and
+  the §16-pinned annotation-or-use ambiguity rule (`OX0302`) still governs
+  it exactly as before this section.
+- Only the plain-call spelling `vec(...)` triggers the desugar. The
+  receiver-form `x.vec(...)` (§53; `vec` is in the parser's builtin-method
+  name set only because that set mirrors `src.sema.types.BUILTINS`
+  mechanically) still desugars to the flat `vec(x, ...)` call §53 already
+  produced — unaffected, and out of scope: nothing writes `x.vec(...)` in
+  practice, and `vec`'s 0-ary signature makes it arity-fail exactly as it
+  did before this section.
+- Synthesized nodes carry the *original* `vec(...)` call's span (mirroring
+  §53's precedent of never inventing a misleading span for a generated
+  node): the intermediate `push` Calls and their `push` callee Vars have no
+  real source token, so a diagnostic anywhere in the desugared chain still
+  lands within the source call the model actually wrote. Argument
+  expressions keep their own real spans untouched, and the innermost
+  `vec()` call reuses the real, already-parsed `vec` token.
+
+**Why this exists.** In the v0.3 generation-friction taxonomy (dossier 1),
+`vec(...)` called with arguments is the dominant `OX0303` sub-class in ALL
+THREE model families under constrained decoding — qwen 69/91, codegemma
+59/69, granite 20/27 of first-attempt `OX0303` — with the call's arity
+always matching the task's list length. The intent is unambiguous: models
+treat `vec(...)` as a list literal, and the language's 0-arity constructor
+was the friction, not the model. Each element push is a linear consume-and
+-return exactly like a hand-written push-chain, so the sugar composes with
+linearity for free — the same design-fit reasoning §53 already established
+for receiver-first calls.

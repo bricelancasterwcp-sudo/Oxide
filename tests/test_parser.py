@@ -580,3 +580,61 @@ class TestBuiltinMethodSyntax:
         """`p.area()` is not sugar: Oxide has no user-defined methods and
         no callable fields, so this remains what it always was."""
         assert "(field " in d("fn main() { let x = p.area() }")
+
+
+# ---------------------------------------------------------------------------
+# §55 `vec(...)` list literal: `vec(a, b, c)` == `push(push(push(vec(), a), b), c)`
+# ---------------------------------------------------------------------------
+
+
+class TestVecLiteralSugar:
+    """Sugar added because models call `vec(3, 8, -2, 12, 7)` as a variadic
+    list constructor; Oxide's `vec()` is 0-arity. Dominant OX0303 sub-class
+    across all three model families in the v0.3 taxonomy, arity always
+    matching the task's list length -- the intent is unambiguous.
+    """
+
+    def test_zero_arg_vec_is_unchanged(self):
+        """`vec()` stays a bare 0-arg call -- the desugar loop is a no-op."""
+        assert d("fn main() { let v = vec() }") == (
+            "(module (fn main (params) (block (let (bind v) (call (var vec))))))"
+        )
+
+    def test_one_arg_vec_desugars_to_a_single_push(self):
+        assert d("fn main() { let v = vec(1) }") == d(
+            "fn main() { let v = push(vec(), 1) }"
+        )
+
+    def test_three_arg_vec_desugars_to_a_push_chain(self):
+        assert d("fn main() { let v = vec(3, 8, -2) }") == d(
+            "fn main() { let v = push(push(push(vec(), 3), 8), -2) }"
+        )
+
+    def test_nested_vec_literals_desugar_independently(self):
+        assert d("fn main() { let v = vec(vec(1), vec(2)) }") == d(
+            "fn main() { let v = push(push(vec(), push(vec(), 1)), push(vec(), 2)) }"
+        )
+
+    def test_vec_literal_desugars_in_expression_position(self):
+        assert d("fn main() { print(len(vec(1, 2, 3))) }") == d(
+            "fn main() { print(len(push(push(push(vec(), 1), 2), 3))) }"
+        )
+
+    def test_desugared_call_is_an_ordinary_call_not_a_field_access(self):
+        """The synthesized `push` callees must be plain Var nodes -- the
+        same shape `_builtin_method` produces for `.push(...)` -- so no
+        later stage can tell sugar was involved."""
+        dump = d("fn main() { let v = vec(1) }")
+        assert "(field " not in dump
+        assert dump.count("(call (var push)") == 1
+
+    def test_receiver_form_vec_is_not_variadic_sugar(self):
+        """`x.vec(...)` goes through §53's method desugar (`vec` is in
+        BUILTIN_METHOD_NAMES only because it mirrors sema's builtin set) to
+        a flat `vec(x, 1)` Call -- it is untouched by §55, which only fires
+        on the plain-call spelling `vec(...)` seen directly by `_postfix`,
+        not on a Call `_builtin_method` already built."""
+        assert d("fn main() { let v = x.vec(1) }") == (
+            "(module (fn main (params) (block (let (bind v) "
+            "(call (var vec) (var x) (lit int 1))))))"
+        )

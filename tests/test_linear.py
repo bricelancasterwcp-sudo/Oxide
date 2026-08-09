@@ -463,3 +463,42 @@ def test_later_use_note_is_recorded_once_not_per_use():
     assert len(diags) == 1, diags
     later = [t for t, _ in diags[0].notes if t == "later used here"]
     assert len(later) == 1, f"expected exactly one later-use note, got {len(later)}"
+
+
+# ---------------------------------------------------------------------------
+# §55 `vec(...)` list literal — an owned element consumed twice must be
+# caught exactly as a hand-written double-push catches it: the desugar
+# is parser-level sugar, so the linear checker never learns a `vec(...)`
+# literal was involved.
+# ---------------------------------------------------------------------------
+
+
+def test_moving_the_same_owned_value_twice_into_a_variadic_vec_matches_the_push_chain():
+    """`vec(x, x)` desugars to `push(push(vec(), x), x)`: the second `x`
+    is a MOVE-context use (push's second param is `own`) of an already
+    -moved value -- the same OX0401 double move a hand-written
+    `push(push(vec(), x), x)` reports."""
+    variadic = "fn f(x: Vec<Int>) { let v = vec(x, x)\n print(len(v)) }"
+    chain = "fn f(x: Vec<Int>) { let v = push(push(vec(), x), x)\n print(len(v)) }"
+
+    variadic_res = analyze(variadic)
+    chain_res = analyze(chain)
+
+    assert diag_codes(variadic_res) == diag_codes(chain_res)
+    assert diag_codes(variadic_res) == ["OX0401"]
+
+
+def test_moving_distinct_owned_values_into_a_variadic_vec_is_clean():
+    """The non-adversarial case: distinct owned elements, no code, and the
+    same drop shape as the hand-written chain."""
+    variadic = "fn f(a: Vec<Int>, b: Vec<Int>) { let v = vec(a, b)\n print(len(v)) }"
+    chain = (
+        "fn f(a: Vec<Int>, b: Vec<Int>) "
+        "{ let v = push(push(vec(), a), b)\n print(len(v)) }"
+    )
+
+    variadic_res = analyze(variadic)
+    chain_res = analyze(chain)
+
+    assert diag_codes(variadic_res) == []
+    assert drop_list(variadic_res) == drop_list(chain_res)
