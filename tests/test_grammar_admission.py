@@ -98,3 +98,29 @@ def test_exemplar_parses_in_the_real_pipeline(name, program):
 @pytest.mark.parametrize("name,program", EXEMPLARS, ids=[e[0] for e in EXEMPLARS])
 def test_exemplar_is_admitted_by_the_grammar(name, program):
     assert admits(OXIDE_RULES, "root", program)
+
+
+# ---------------------------------------------------------------------------
+# §56 field assignment: what the language accepts, the grammar must admit
+# ---------------------------------------------------------------------------
+
+FIELD_ASSIGN_PROGRAM = "fn main() {\n    p.x = 5\n}\n"
+NESTED_ASSIGN_PROGRAM = "fn main() {\n    a.b.c = 5\n}\n"
+
+
+def test_oxide_grammar_admits_field_assignment():
+    """Before §56 the decoder could not emit `=` after a field path and
+    settled on `==`, producing a discarded comparison -- 18 occurrences in
+    9 of 600 constrained first attempts, 0 of 600 unconstrained."""
+    assert admits(OXIDE_RULES, "root", FIELD_ASSIGN_PROGRAM)
+    assert admits(OXIDE_RULES, "root", NESTED_ASSIGN_PROGRAM)
+
+
+def test_explicit_grammar_admits_field_assignment():
+    assert admits(EXPLICIT_RULES, "root", FIELD_ASSIGN_PROGRAM)
+    assert admits(EXPLICIT_RULES, "root", NESTED_ASSIGN_PROGRAM)
+
+
+def test_grammar_still_admits_plain_assignment():
+    """The star includes zero, so §26's form is admitted by the same rule."""
+    assert admits(OXIDE_RULES, "root", "fn main() {\n    p = 5\n}\n")

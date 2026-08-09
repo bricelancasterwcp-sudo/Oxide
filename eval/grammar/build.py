@@ -664,7 +664,18 @@ class _OxideGrammar:
                 Lit(" = "),
                 Ref(f"value-{t}"),
             ),
-            seq(Ref("lname"), Lit(" = "), Ref(f"value-{t}")),
+            # SPEC §56: assignment targets are places, not just names. The
+            # star includes zero, so §26's plain `x = e` is admitted by this
+            # same alternative. Before this, `=` was inadmissible after a
+            # field path and GBNF steered to `==`, emitting a DISCARDED
+            # comparison -- 18 occurrences in 9 of 600 constrained first
+            # attempts, and exactly 0 of 600 unconstrained.
+            seq(
+                Ref("lname"),
+                star(seq(Lit("."), Ref("lname"))),
+                Lit(" = "),
+                Ref(f"value-{t}"),
+            ),
             Lit("return"),
             seq(Lit("return "), Ref(f"value-{t}")),
             Ref(f"or-{t}"),
