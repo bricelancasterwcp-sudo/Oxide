@@ -84,7 +84,9 @@ def profile(
     partial: bool = False,
 ) -> dict:
     """Per-model diagnostic profile: arm rates, stage histograms, the
-    OX04xx gate count, and the paired oxide/explicit delta.
+    OX04xx gate count, the paired oxide/explicit delta, and the
+    ``context_exhausted`` count (SPEC section 45/51's evidence-gated
+    overflow rule) broken down per arm.
 
     Only the oxide and explicit arms are profiled for diagnostic codes
     (SPEC's stage buckets are defined over those two arms); rust is
@@ -150,6 +152,12 @@ def profile(
             }
         oxide = [c for c in cells if c["arm"] == "oxide"]
         explicit = [c for c in cells if c["arm"] == "explicit"]
+        context_exhausted_by_arm = {
+            arm: sum(
+                1 for c in cells if c["arm"] == arm and c.get("context_exhausted")
+            )
+            for arm in ARMS
+        }
         out[slug] = {
             **by_arm,
             "stage_hist_first": {
@@ -162,6 +170,10 @@ def profile(
             },
             "code_hist_first": dict(first_codes.most_common()),
             "gate": {"occurrences": gate_occurrences, "sessions": gate_sessions},
+            "context_exhausted": {
+                "cells": sum(context_exhausted_by_arm.values()),
+                "by_arm": context_exhausted_by_arm,
+            },
             "paired_delta": rollup.paired_delta(oxide, explicit),
             "paired_se": rollup.paired_se(oxide, explicit),
         }
@@ -261,6 +273,52 @@ def write_samples(
     return copied
 
 
+# The taxonomy's pinned definition (docs/superpowers/specs/
+# 2026-08-09-v03-taxonomy.md, "The demand histogram, and a validation
+# finding"): raw character occurrences over these seven characters, in
+# first-attempt raw generations, pooled across both Oxide arms. Punctuation
+# a model reaches for despite the grammar/card never offering it -- the
+# corpus-level "what do small models actually want to write" signal.
+DEMAND_CHARS = ";[]'|&#"
+
+
+def demand_histogram(
+    *, root: Path, models: list[str], seeds: list[int], prefix: str,
+) -> dict[str, dict[str, int]]:
+    """Per-model counts of ``DEMAND_CHARS``, first attempts, oxide +
+    explicit pooled. Reads ``raw/*.<arm>.1.txt`` directly (not
+    ``triples.jsonl``): the pinned definition is over the raw generated
+    text, not over anything the harness extracted or diagnosed."""
+    out: dict[str, dict[str, int]] = {}
+    for slug in models:
+        counts: Counter[str] = Counter()
+        for seed in seeds:
+            raw_dir = root / build_run_id(slug, 0, seed, prefix=prefix) / "raw"
+            if not raw_dir.exists():
+                continue
+            for arm in ("oxide", "explicit"):
+                for path in raw_dir.glob(f"*.{arm}.1.txt"):
+                    counts.update(
+                        c for c in path.read_text(encoding="utf-8")
+                        if c in DEMAND_CHARS
+                    )
+        out[slug] = {ch: counts.get(ch, 0) for ch in DEMAND_CHARS}
+    return out
+
+
+def _print_demand_histogram(
+    histogram: dict[str, dict[str, int]], models: list[str],
+) -> None:
+    print("\ndemand histogram (raw character occurrences, first attempts, "
+          "oxide+explicit pooled):")
+    for slug in models:
+        counts = histogram[slug]
+        nonzero = " ".join(
+            f"{ch!r}{counts[ch]}" for ch in DEMAND_CHARS if counts[ch]
+        )
+        print(f"  {slug:<12}{nonzero or '(none)'}")
+
+
 def _pct(rate: float) -> str:
     return f"{rate:.1%}"
 
@@ -296,6 +354,14 @@ def _print_report(out: dict, models: list[str]) -> None:
             f"{gate['sessions']} session(s)"
         )
 
+        exhausted = row["context_exhausted"]
+        by_arm = exhausted["by_arm"]
+        print(
+            f"context_exhausted: {exhausted['cells']} cell(s) "
+            f"(oxide {by_arm['oxide']}, explicit {by_arm['explicit']}, "
+            f"rust {by_arm['rust']})"
+        )
+
         delta, se = row["paired_delta"], row["paired_se"]
         if delta is None:
             print("paired delta (oxide - explicit, first_passed): "
@@ -314,6 +380,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--seeds", default=None)
     parser.add_argument("--run-prefix", default="g0c")
     parser.add_argument("--samples", type=int, default=None)
+    parser.add_argument("--demand-histogram", action="store_true",
+                        help="print the taxonomy's pinned demand "
+                             "histogram (raw character occurrences over "
+                             f"{DEMAND_CHARS!r}, first attempts, both "
+                             "Oxide arms, per family)")
     parser.add_argument("--validate-pilot", action="store_true")
     parser.add_argument("--partial", action="store_true",
                         help="profile the complete runs only, skipping "
@@ -364,6 +435,12 @@ def main(argv: list[str] | None = None) -> int:
             profiled=out, n=args.samples,
         )
         print(f"\nwrote {copied} sample file(s) to {args.root / 'samples'}")
+
+    if args.demand_histogram:
+        histogram = demand_histogram(
+            root=args.root, models=slugs, seeds=seeds, prefix=args.run_prefix,
+        )
+        _print_demand_histogram(histogram, slugs)
 
     return 0
 

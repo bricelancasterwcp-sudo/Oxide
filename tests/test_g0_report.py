@@ -152,6 +152,59 @@ def test_profiler_counts_gate_occurrences_and_sessions_separately(tmp_path):
     assert gate["sessions"] == 2
 
 
+# ------------------------------------------------- context_exhausted
+
+
+def test_profiler_reports_context_exhausted_counts_and_by_arm_split(tmp_path):
+    # Exhausted cells in TWO arms (oxide, explicit) -- the asymmetry the
+    # report has to disclose -- plus a clean rust arm. "cells" must be
+    # the sum across arms and "by_arm" must attribute each cell to its
+    # own arm, not pool them.
+    cells = _complete_cells()
+    exhausted_keys = {("t01", "oxide"), ("t02", "oxide"), ("t01", "explicit")}
+    for cell in cells:
+        if (cell["task"], cell["arm"]) in exhausted_keys:
+            cell["context_exhausted"] = True
+    _write_run(tmp_path, "qwen7b", 1, cells, [])
+
+    out = g0_report.profile(
+        root=tmp_path, models=["qwen7b"], seeds=[1], prefix="g0c"
+    )
+    exhausted = out["qwen7b"]["context_exhausted"]
+    assert exhausted["cells"] == 3
+    assert exhausted["by_arm"] == {"oxide": 2, "explicit": 1, "rust": 0}
+
+
+def test_profiler_context_exhausted_is_zero_when_field_is_absent(tmp_path):
+    # None of _complete_cells()'s records carry "context_exhausted" at
+    # all (the field is omitted entirely, never written as False) --
+    # the common case for every session that never overflowed.
+    _write_run(tmp_path, "qwen7b", 1, _complete_cells(), [])
+    out = g0_report.profile(
+        root=tmp_path, models=["qwen7b"], seeds=[1], prefix="g0c"
+    )
+    assert out["qwen7b"]["context_exhausted"] == {
+        "cells": 0,
+        "by_arm": {"oxide": 0, "explicit": 0, "rust": 0},
+    }
+
+
+def test_print_report_includes_the_context_exhausted_line(tmp_path, capsys):
+    cells = _complete_cells()
+    for cell in cells:
+        if cell["task"] == "t01" and cell["arm"] == "oxide":
+            cell["context_exhausted"] = True
+    _write_run(tmp_path, "qwen7b", 1, cells, [])
+
+    out = g0_report.profile(
+        root=tmp_path, models=["qwen7b"], seeds=[1], prefix="g0c"
+    )
+    g0_report._print_report(out, ["qwen7b"])
+    printed = capsys.readouterr().out
+    assert "context_exhausted: 1 cell(s)" in printed
+    assert "oxide 1, explicit 0, rust 0" in printed
+
+
 # ------------------------------------------- incomplete/partial roots
 
 
@@ -240,3 +293,31 @@ def test_write_samples_does_not_collide_across_seeds_for_the_same_task_arm(
     seed2 = dest_dir / f"{build_run_id('qwen7b', 0, 2, prefix='g0c')}.t16.explicit.txt"
     assert seed1.read_text(encoding="utf-8") == "seed 1\n"
     assert seed2.read_text(encoding="utf-8") == "seed 2\n"
+
+
+# ------------------------------------------------ --demand-histogram
+
+
+def test_demand_histogram_counts_pinned_chars_from_first_attempt_raw_text(
+    tmp_path,
+):
+    # The taxonomy's pinned definition (docs/superpowers/specs/
+    # 2026-08-09-v03-taxonomy.md, "The demand histogram, and a
+    # validation finding"): raw character occurrences over ";[]'|&#",
+    # first attempts, oxide+explicit pooled, per family.
+    run_dir = _write_run(tmp_path, "qwen7b", 1, _complete_cells(), [])
+    raw_dir = run_dir / "raw"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    (raw_dir / "t01.oxide.1.txt").write_text("a; b[0] | c\n", encoding="utf-8")
+    (raw_dir / "t02.explicit.1.txt").write_text("x & y; z#\n", encoding="utf-8")
+    # A second (repair) attempt and a rust-arm first attempt must NOT be
+    # counted -- pinned to first attempts, oxide+explicit only.
+    (raw_dir / "t01.oxide.2.txt").write_text(";;;;;\n", encoding="utf-8")
+    (raw_dir / "t03.rust.1.txt").write_text(";;;;;\n", encoding="utf-8")
+
+    histogram = g0_report.demand_histogram(
+        root=tmp_path, models=["qwen7b"], seeds=[1], prefix="g0c",
+    )
+    assert histogram["qwen7b"] == {
+        ";": 2, "[": 1, "]": 1, "'": 0, "|": 1, "&": 1, "#": 1,
+    }
