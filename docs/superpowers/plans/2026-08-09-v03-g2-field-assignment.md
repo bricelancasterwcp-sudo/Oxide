@@ -17,7 +17,7 @@
 - **Do not rename these surfaces** (SPEC §0): both `LANGUAGE_CARD*.md`, the `OX0306` suggestion string, `ARMS`/`arm` data keys, the `__oxide_` codegen prefix, `.ox`, and `eval/grammar/oxide.gbnf`. The generated GBNF header's `"core Oxide"` / `"explicit-Oxide"` text is part of that frozen grammar file — **leave it as-is**; do not "fix" it while editing `build.py`.
 - **Cards stay unchanged.** This change measures pure acceptance (design §7).
 - Commit messages omit Claude attribution.
-- Files stay under 800 lines. `src/sema/infer.py` is at 799 — Task 3 adds to it, so check the count and extract a helper if it crosses.
+- Files stay under 800 lines. **`src/sema/infer.py` is at exactly 799**, and Task 2 Step 9 adds ~18 lines to it — it WILL cross. Task 2 must therefore land the §56 typing walk as a helper method (`_field_assign_place(self, stmt: ast.FieldAssign) -> None`) called from a one-line `_stmt` case, and extract enough to stay under the cap. Do not raise the cap. Re-check with `wc -l src/sema/infer.py` before committing Task 2 and Task 3.
 
 ## File Structure
 
@@ -434,30 +434,40 @@ Update the `assign_of` docstring comment (~line 66) to:
 
 - [ ] **Step 9: Handle the node in typing**
 
-In `src/sema/infer.py`, in `_stmt`'s match, after the `ast.Assign` case:
+`src/sema/infer.py` is at exactly 799 lines against the project's 800 cap, so this lands as a **helper method** with a one-line call site, not as an inline case.
+
+In `_stmt`'s match, after the `ast.Assign` case:
 
 ```python
-            case ast.FieldAssign(path=path, value=value):
-                # Section 56: walk the place left to right through the same
-                # field lookup §36 uses for reads, then unify the final
-                # field's type with the RHS.
-                value_ty = self._expr(value)
-                var_id = self.resolved.assign_of.get(stmt.node_id)
-                if var_id is not None:
-                    ty = self.var_tv[var_id]
-                    for fname in path:
-                        checked = self._field_check(ty, fname, stmt.span)
-                        if checked is None:
-                            # Base type unknown so far: defer to the global
-                            # solve, exactly as _field_access does.
-                            tv = self._fresh()
-                            self._pending_fields.append(
-                                (ty, fname, stmt.span, tv)
-                            )
-                            checked = tv
-                        ty = checked
-                    self.unify(value_ty, ty, value.span)
+            case ast.FieldAssign():
+                self._field_assign(stmt)
 ```
+
+And as a new method, placed immediately after `_stmt`:
+
+```python
+    def _field_assign(self, stmt: ast.FieldAssign) -> None:
+        """Section 56: walk the place left to right through the same field
+        lookup section 36 uses for reads, then unify the final field's type
+        with the RHS."""
+        value_ty = self._expr(stmt.value)
+        var_id = self.resolved.assign_of.get(stmt.node_id)
+        if var_id is None:
+            return  # unbound base: resolve already reported OX0200
+        ty = self.var_tv[var_id]
+        for fname in stmt.path:
+            checked = self._field_check(ty, fname, stmt.span)
+            if checked is None:
+                # Base type unknown so far: defer to the global solve,
+                # exactly as _field_access does.
+                tv = self._fresh()
+                self._pending_fields.append((ty, fname, stmt.span, tv))
+                checked = tv
+            ty = checked
+        self.unify(value_ty, ty, stmt.value.span)
+```
+
+Then run `wc -l src/sema/infer.py`. If it is over 800, extract an existing unrelated block (the `_destructure` helper is the natural candidate) into a sibling module rather than raising the cap.
 
 - [ ] **Step 10: Handle the node in the CFG**
 
