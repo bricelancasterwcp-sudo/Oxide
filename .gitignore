@@ -22,3 +22,6 @@ eval/results/*/.sessions/
 
 # Subagent-driven-development scratch (ledgers, briefs, review packages)
 .superpowers/
+
+# harness session-claim locks are runtime machinery, never data
+eval/results/**/.sessions/
