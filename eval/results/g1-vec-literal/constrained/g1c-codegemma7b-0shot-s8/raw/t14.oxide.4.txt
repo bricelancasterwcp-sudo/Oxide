@@ -1,0 +1,13 @@
+fn main() {
+    let text = "mississippi".to_string()
+    let mut count_s = 0
+    let mut distinct_chars = 0
+    for c in text.chars() {
+        if c == "s".chars().nth(0).unwrap() {
+            count_s = count_s + 1
+        }
+        distinct_chars = distinct_chars + 1
+    }
+    print(count_s)
+    print(distinct_chars)
+}

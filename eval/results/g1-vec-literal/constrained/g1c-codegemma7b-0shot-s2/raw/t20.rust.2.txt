@@ -1,0 +1,27 @@
+use std::cmp::Ordering;
+
+fn main() {
+    let mut total_cost = 0;
+    let mut most_expensive_item = "";
+    let mut most_expensive_cost = 0;
+
+    // Define item data
+    let items = [
+        ("pen", 3, 4),
+        ("pad", 9, 2),
+        ("ink", 5, 3),
+    ];
+
+    for (name, unit_price, quantity) in items {
+        let cost = unit_price * quantity;
+        total_cost += cost;
+
+        if cost > most_expensive_cost {
+            most_expensive_cost = cost;
+            most_expensive_item = name;
+        }
+    }
+
+    println!("Total cost: {}", total_cost);
+    println!("Most expensive item: {}", most_expensive_item);
+}

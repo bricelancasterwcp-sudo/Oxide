@@ -1,0 +1,57 @@
+struct Multiples {
+    idx: Int,
+    mult: Int,
+}
+
+fn main() {
+    let sum = sum_first_n(Multiples { idx: 1, mult: 3 }, 8)
+    print(sum)
+}
+
+fn sum_first_n(mutMultiples: Multiples, n: Int) -> Int {
+    let mut sum = 0
+    for _ in range(0, n) {
+        let m = get(mutMultiples.idx)?
+        sum = sum + m
+        mutMultiples.idx == m + mutMultiples.mult
+    }
+    sum
+}
+
+fn print(x: Int) {
+    println(int_to_str(x))
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    "TODO"
+}
+
+fn get(idx: Int) -> Option<Int> {
+    "TODO"
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    "TODO"
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    "TODO"
+}
+
+fn vec() -> Vec<Int> {
+    "TODO"
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}

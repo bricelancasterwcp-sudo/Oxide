@@ -1,0 +1,36 @@
+fn sort_and_print(nums: &Vec<Int>) {
+    let mut sorted = clone(nums)
+    for i in 0.to_int().cmp(&sorted_len) {
+        let min_idx = get_min_idx(&sorted, i)
+        print(sorted_get(&sorted, min_idx))
+        drop sorted
+        sorted = remove(sorted, min_idx)
+    }
+}
+
+fn get_min_idx(nums: &Vec<Int>, start: Int) -> Int {
+    let mut min_idx = start
+    for i in start.cmp(&nums_len).cmp(&nums_len) {
+        if nums_get(&nums, i).cmp(&nums_get) < 0 {
+            min_idx = i
+        }
+    }
+    min_idx
+}
+
+fn remove(nums: Vec<Int>, idx: Int) -> Vec<Int> {
+    let mut result = vec()
+    for i in 0.cmp(&nums_len).cmp(&nums_len) {
+        if i.cmp(&idx) == 0 {
+            continue
+        }
+        push(result, nums_get(&nums, i))
+    }
+    result
+}
+
+fn main() {
+    let nums = vec(5, 3, 8, 1, 9, 2)
+    sort_and_print(&nums)
+    drop nums
+}

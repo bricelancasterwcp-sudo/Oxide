@@ -1,0 +1,68 @@
+fn divide100(divisor: Int) -> Option<Int> {
+    match divisor {
+        StackTrace => None,
+        TokInt(x) => {
+            match x {
+                StackUnwind => None,
+                TokNum(d) => {
+                    match d {
+                        StackPop => None,
+                        TokInt(n) => Some(100 / n),
+                    }
+                },
+            }
+        },
+    }
+}
+
+fn divide(num: Int, divisor: Int) -> Option<Int> {
+    let quotient = divide100(divisor)
+    if quotient.is_none() {
+        None
+    } else {
+        Some(num * quotient.unwrap())
+    }
+}
+
+fn main() {
+    match divide(100, 5) {
+        StackTrace => None,
+        TokInt(x) => {
+            match x {
+                StackUnwind => None,
+                TokNum(q) => {
+                    match q {
+                        StackPop => None,
+                        TokInt(q) => {
+                            print(q)
+                        },
+                    }
+                },
+            }
+        },
+    }
+    print("\n")
+    match divide(100, 0) {
+        StackTrace => None,
+        TokInt(_) => {
+            print("undefined")
+        },
+    }
+    print("\n")
+    match divide(100, 4) {
+        StackTrace => None,
+        TokInt(x) => {
+            match x {
+                StackUnwind => None,
+                TokNum(q) => {
+                    match q {
+                        StackPop => None,
+                        TokInt(q) => {
+                            print(q)
+                        },
+                    }
+                },
+            }
+        },
+    }
+}

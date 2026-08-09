@@ -1,0 +1,27 @@
+fn filter_and_count(list: &Vec<Int>, min: Int) -> Int {
+    let mut count = 0
+    let mut result = vec()
+    for value in &list {
+        if value > min {
+            count = count + 1
+            result = push(result, value)
+        }
+    }
+    print_str("Filtered values:")
+    for value in &result {
+        print(value)
+    }
+    print_str("Number of values kept:")
+    print(count)
+    count
+}
+
+fn main() {
+    let list = push(push(push(push(vec(), 4), 1), 7), 3)
+    let list = push(list, 9)
+    let list = push(list, 2)
+    let number_kept = filter_and_count(&list, 3)
+    drop list
+    print_str("Number of values that were not kept:")
+    print(len(&list) - number_kept)
+}

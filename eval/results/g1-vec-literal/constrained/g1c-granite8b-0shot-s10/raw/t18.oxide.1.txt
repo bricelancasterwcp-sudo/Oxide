@@ -1,0 +1,102 @@
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+fn perimeter(rectangle: Rectangle) -> Int {
+    2 * (rectangle.width + rectangle.height)
+}
+
+fn perimeter(triangle: Triangle) -> Int {
+    triangle.side1 + triangle.side2 + triangle.side3
+}
+
+fn main() {
+    let sequence = vec(Rectangle { width: 3, height: 4 }, Triangle { side1: 3, side2: 4, side3: 5 }, Rectangle { width: 2, height: 5 })
+    for shape in sequence {
+        match shape {
+            Rectangle(rectangle) => print(perimeter(rectangle)),
+            Triangle(triangle) => print(perimeter(triangle)),
+            _ => print_str("unknown shape") <= error,
+            X => print_str("unknown shape") <= error,
+            Z => print_str("unknown shape") <= error,
+            Y => print_str("unknown shape") <= error,
+            W => print_str("unknown shape") <= error,
+            V => print_str("unknown shape") <= error,
+            U => print_str("unknown shape") <= error,
+            T => print_str("unknown shape") <= error,
+            S => print_str("unknown shape") <= error,
+            R => print_str("unknown shape") <= error,
+            Q => print_str("unknown shape") <= error,
+            P => print_str("unknown shape") <= error,
+            O => print_str("unknown shape") <= error,
+            N => print_str("unknown shape") <= error,
+            M => print_str("unknown shape") <= error,
+            L => print_str("unknown shape") <= error,
+            K => print_str("unknown shape") <= error,
+            J => print_str("unknown shape") <= error,
+            I => print_str("unknown shape") <= error,
+            H => print_str("unknown shape") <= error,
+            G => print_str("unknown shape") <= error,
+            F => print_str("unknown shape") <= error,
+            E => print_str("unknown shape") <= error,
+            D => print_str("unknown shape") <= error,
+            C => print_str("unknown shape") <= error,
+            B => print_str("unknown shape") <= error,
+            A => print_str("unknown shape") <= error,
+            Z => print_str("unknown shape") <= error,
+            Y => print_str("unknown shape") <= error,
+            X => print_str("unknown shape") <= error,
+            W => print_str("unknown shape") <= error,
+            V => print_str("unknown shape") <= error,
+            U => print_str("unknown shape") <= error,
+            T => print_str("unknown shape") <= error,
+            S => print_str("unknown shape") <= error,
+            R => print_str("unknown shape") <= error,
+            Q => print_str("unknown shape") <= error,
+            P => print_str("unknown shape") <= error,
+            O => print_str("unknown shape") <= error,
+            N => print_str("unknown shape") <= error,
+            M => print_str("unknown shape") <= error,
+            L => print_str("unknown shape") <= error,
+            K => print_str("unknown shape") <= error,
+            J => print_str("unknown shape") <= error,
+            I => print_str("unknown shape") <= error,
+            H => print_str("unknown shape") <= error,
+            G => print_str("unknown shape") <= error,
+            F => print_str("unknown shape") <= error,
+            E => print_str("unknown shape") <= error,
+            D => print_str("unknown shape") <= error,
+            C => print_str("unknown shape") <= error,
+            B => print_str("unknown shape") <= error,
+            A => print_str("unknown shape") <= error,
+            Z => print_str("unknown shape") <= error,
+            Y => print_str("unknown shape") <= error,
+            X => print_str("unknown shape") <= error,
+            W => print_str("unknown shape") <= error,
+            V => print_str("unknown shape") <= error,
+            U => print_str("unknown shape") <= error,
+            T => print_str("unknown shape") <= error,
+            S => print_str("unknown shape") <= error,
+            R => print_str("unknown shape") <= error,
+            Q => print_str("unknown shape") <= error,
+            P => print_str("unknown shape") <= error,
+            O => print_str("unknown shape") <= error,
+            N => print_str("unknown shape") <= error,
+            M => print_str("unknown shape") <= error,
+            L => print_str("unknown shape") <= error,
+            K => print_str("unknown shape") <= error,
+            J => print_str("unknown shape") <= error,
+            I => print_str("unknown shape") <= error,
+            H => print_str("unknown shape") <= error,
+            G => print_str("unknown shape") <= error,
+            F => print_str("unknown shape") <= error,
+            E => print_str("unknown shape") <= error,
+            D => print_str("unknown shape") <= error,
+            C =>

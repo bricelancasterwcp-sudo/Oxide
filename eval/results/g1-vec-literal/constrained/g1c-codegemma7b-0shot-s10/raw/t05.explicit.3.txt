@@ -1,0 +1,17 @@
+fn seq(n: Int) -> Int {
+    if n < 3 {
+        return 1
+    }
+    let mut a = 1
+    let mut b = 1
+    for _ in 3.to_int_unchecked() {
+        let c = a + b
+        a = b
+        b = c
+    }
+    b
+}
+
+fn main() {
+    print(seq(20))
+}

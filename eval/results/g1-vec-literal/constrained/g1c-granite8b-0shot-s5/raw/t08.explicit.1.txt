@@ -1,0 +1,40 @@
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn main() {
+    let nums = push(push(vec(), 5), 40)
+    let bigger = extend(clone(&nums), 70)
+    print(sum_big(&nums, 10))
+    drop nums
+    print(sum_big(&bigger, 10))
+    drop bigger
+}
+
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7)
+    let count = 0
+    let largest = -100
+    for x in &nums {
+        if x > 0 {
+            count = count + 1
+        }
+        if x > largest {
+            largest = x
+        }
+    }
+    print_str("Count: ")
+    print(count)
+    print_str(" | Largest: ")
+    print(largest)
+}

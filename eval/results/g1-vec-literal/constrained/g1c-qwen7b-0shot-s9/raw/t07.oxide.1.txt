@@ -1,0 +1,25 @@
+struct Multiples { values: Vec<Int> }
+
+fn first_eight_multiples_of_three() -> Multiples {
+    let mut multiples = Multiples { values: vec() }
+    let mut i = 1
+    while multiples.values.len() < 8 {
+        multiples.values == push(multiples.values, i * 3)
+        i = i + 1
+    }
+    multiples
+}
+
+fn sum_of_elements(v: Vec<Int>) -> Int {
+    let mut sum = 0
+    for x in v {
+        sum = sum + x
+    }
+    sum
+}
+
+fn main() {
+    let multiples = first_eight_multiples_of_three()
+    let sum = sum_of_elements(multiples.values)
+    print(sum)
+}

@@ -1,0 +1,18 @@
+```rust
+fn main() {
+    let list = vec![4, 1, 7, 3, 9, 2];
+    let mut kept = Vec::new();
+
+    for &value in &list {
+        if value > 3 {
+            kept.push(value);
+        }
+    }
+
+    for &value in &kept {
+        println!("{}", value);
+    }
+
+    println!("{} values were kept", kept.len());
+}
+```

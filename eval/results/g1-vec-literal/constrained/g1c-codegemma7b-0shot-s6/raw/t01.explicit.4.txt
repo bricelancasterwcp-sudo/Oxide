@@ -1,0 +1,25 @@
+fn square(x: Int) -> Int {
+    return x * x
+}
+
+fn main() {
+    let total = 0
+    for i in 0.to_int().unwrap() {
+        total = total + square(i)
+    }
+    print(total)
+    drop total
+}
+
+fn square(x: Int) -> Int {
+    return x * x
+}
+
+fn main() {
+    let total = 0
+    for i in 0.to_int().unwrap() {
+        total = total + square(i)
+    }
+    print(total)
+    drop total
+}

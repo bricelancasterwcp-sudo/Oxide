@@ -1,0 +1,288 @@
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = get(list, 1)
+    let fifth = get(list, 5)
+    print(first)
+    print(fifth)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    if i < 0 || i >= len(v) {
+        return -1
+    }
+    v.get(i).unwrap()
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(items: Int, items_count: Int) -> Vec<Int> {
+    let mut result = Vec(items_count)
+    for i in 0 < items_count {
+        result.push(items)
+    }
+    return result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    return result
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= len(v) {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(items: Int, items_count: Int) -> Vec<Int> {
+    let mut result = Vec(items_count)
+    for i in 0 < items_count {
+        result.push(items)
+    }
+    return result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    return result
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= len(v) {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(items: Int, items_count: Int) -> Vec<Int> {
+    let mut result = Vec(items_count)
+    for i in 0 < items_count {
+        result.push(items)
+    }
+    return result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    return result
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= len(v) {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(items: Int, items_count: Int) -> Vec<Int> {
+    let mut result = Vec(items_count)
+    for i in 0 < items_count {
+        result.push(items)
+    }
+    return result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    return result
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= len(v) {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(items: Int, items_count: Int) -> Vec<Int> {
+    let mut result = Vec(items_count)
+    for i in 0 < items_count {
+        result.push(items)
+    }
+    return result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    return result
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= len(v) {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(items: Int, items_count: Int) -> Vec<Int> {
+    let mut result = Vec(items_count)
+    for i in 0 < items_count {
+        result.push(items)
+    }
+    return result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    return result
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= len(v) {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(items: Int, items_count: Int) -> Vec<Int> {
+    let mut result = Vec(items_count)
+    for i in 0 < items_count {
+        result.push(items)
+    }
+    return result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    return result
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= len(v) {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(items: Int, items_count: Int) -> Vec<Int> {
+    let mut result = Vec(items_count)
+    for i in 0 < items_count {
+        result.push(items)
+    }
+    return result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    return result
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= len(v) {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(items: Int, items_count: Int) -> Vec<Int> {
+    let mut result = Vec(items_count)
+    for i in 0 < items_count {
+        result.push(items)
+    }
+    return result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    return result
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= len(v) {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(items: Int, items_count: Int) -> Vec<Int> {
+    let mut result = Vec(items_count)
+    for i in 0 < items_count {
+        result

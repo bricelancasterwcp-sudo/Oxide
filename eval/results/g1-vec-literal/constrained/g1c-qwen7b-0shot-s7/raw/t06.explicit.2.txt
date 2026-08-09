@@ -1,0 +1,26 @@
+fn is_perfect(n: Int) -> Bool {
+    let sum = 1
+    let mut i = 2
+    while i * i <= n {
+        if n % i == 0 {
+            sum = sum + i
+            if i * i != n {
+                sum = sum + n / i
+            }
+        }
+        i = i + 1
+    }
+    sum == n
+}
+
+fn main() {
+    let mut i = 1
+    while i < 1000 {
+        if is_perfect(i) {
+            let s = int_to_str(i)
+            print_str(s)
+            print_str("\n")
+        }
+        i = i + 1
+    }
+}

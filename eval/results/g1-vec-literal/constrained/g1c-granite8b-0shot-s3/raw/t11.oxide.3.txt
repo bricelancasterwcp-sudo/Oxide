@@ -1,0 +1,8 @@
+fn main() {
+    let list = push(push(push(push(vec(), 5), 3), 8), 1, 9, 2)
+    let mut current = Some(list)
+    while letSome(mutnext) == current {
+        print(get(next, 0)?)
+        current = get(next, 1)
+    }
+}

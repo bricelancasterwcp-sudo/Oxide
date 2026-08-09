@@ -1,0 +1,21 @@
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7)
+    let mut positive = 0
+    let mut largest = None
+    for x in &nums {
+        if x > &mut && 0 {
+            positive = positive + 1
+        }
+        if letSome(y) == largest {
+            if y < x {
+                largest = Some(x)
+            }
+        } else {
+            largest = Some(x)
+        }
+    }
+    print(positive)
+    print(largest)
+    drop nums
+    drop largest
+}

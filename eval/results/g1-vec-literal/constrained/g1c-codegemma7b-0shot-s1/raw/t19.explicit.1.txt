@@ -1,0 +1,303 @@
+fn area(rect: &Rect) -> Int {
+    rect.width * rect.height
+}
+
+fn perimeter(rect: &Rect) -> Int {
+    2 * (rect.width + rect.height)
+}
+
+fn main() {
+    let r = Rect { width: 7, height: 4 }
+    print(area(&r))
+    print(perimeter(&r))
+    drop r
+}
+
+struct Rect {
+    width: Int,
+    height: Int,
+}
+
+struct Int {
+    value: String,
+}
+
+struct Float {
+    value: String,
+}
+
+struct Bool {
+    value: String,
+}
+
+struct Str {
+    value: String,
+}
+
+struct Unit {
+    value: String,
+}
+
+struct Vec {
+    values: Vec<Value>,
+}
+
+enum Value {
+    Int(Int),
+    Float(Float),
+    Bool(Bool),
+    Str(Str),
+    Unit(Unit),
+    Vec(Vec),
+}
+
+enum Option {
+    Some(Value),
+    None,
+}
+
+enum Result {
+    Ok(Value),
+    Err(Value),
+}
+
+fn print(value: Value) {
+    match value {
+        ValueInt(v) => println(&v),
+        ValueFloat(v) => println(&v),
+        ValueBool(v) => println(&v),
+        ValueStr(v) => println(&v),
+        ValueUnit(v) => println(&v),
+        ValueVec(v) => println(&v),
+    }
+}
+
+fn print_str(value: Str) {
+    println(&value)
+}
+
+fn vec() -> Vec {
+    Vec(vec())
+}
+
+fn push(vector: Vec, value: Value) -> Vec {
+    let mut new_values = vector.values
+    new_values.push(value)
+    Vec(new_values)
+}
+
+fn len(vector: Vec) -> Int {
+    Int(to_string(vector.values.len()))
+}
+
+fn get(vector: Vec, index: Int) -> Option {
+    if index.value.parse().unwrap() >= vector.values.len() {
+        OptionNone
+    } else {
+        OptionSome(vector.values.get(index.value.parse().unwrap()).unwrap().clone())
+    }
+}
+
+fn range(start: Int, end: Int) -> Vec {
+    let mut result = vec()
+    for i in start.value.parse().unwrap() + 1.parse().unwrap() - 1.parse().unwrap() + 1.parse().unwrap() {
+        if i.parse().unwrap() >= end.value.parse().unwrap() {
+            break
+        }
+        result.push(Int(to_string(i)))
+    }
+    Vec(result)
+}
+
+fn clone(value: &Value) -> Value {
+    match value {
+        ValueInt(v) => ValueInt(Int(v.value.clone())),
+        ValueFloat(v) => ValueFloat(Float(v.value.clone())),
+        ValueBool(v) => ValueBool(Bool(v.value.clone())),
+        ValueStr(v) => ValueStr(Str(v.value.clone())),
+        ValueUnit(v) => ValueUnit(Unit(v.value.clone())),
+        ValueVec(v) => ValueVec(Vec(v.values.iter().map(clone).collect())),
+    }
+}
+
+fn str_len(value: Str) -> Int {
+    Int(to_string(value.value.len()))
+}
+
+fn concat(first: Str, second: Str) -> Str {
+    Str(first.value + &second)
+}
+
+fn chars(value: Str) -> Vec {
+    let mut result = vec()
+    for c in value.value.chars() {
+        result.push(Str(c.to_string()))
+    }
+    Vec(result)
+}
+
+fn int_to_str(value: Int) -> Str {
+    Str(value.value)
+}
+
+fn parse_int(value: Str) -> Option {
+    match value.value.parse() {
+        Ok(v) => OptionSome(Int(v)),
+        Err(_) => OptionNone,
+    }
+}
+
+fn to_float(value: Int) -> Float {
+    Float(value.value.parse().unwrap())
+}
+
+fn trunc(value: Float) -> Int {
+    Int(to_string((value.value.parse().unwrap()).trunc()))
+}
+
+struct Rect {
+    width: Int,
+    height: Int,
+}
+
+struct Int {
+    value: String,
+}
+
+struct Float {
+    value: String,
+}
+
+struct Bool {
+    value: String,
+}
+
+struct Str {
+    value: String,
+}
+
+struct Unit {
+    value: String,
+}
+
+struct Vec {
+    values: Vec<Value>,
+}
+
+enum Value {
+    Int(Int),
+    Float(Float),
+    Bool(Bool),
+    Str(Str),
+    Unit(Unit),
+    Vec(Vec),
+}
+
+enum Option {
+    Some(Value),
+    None,
+}
+
+enum Result {
+    Ok(Value),
+    Err(Value),
+}
+
+fn print(value: Value) {
+    match value {
+        ValueInt(v) => println(&v),
+        ValueFloat(v) => println(&v),
+        ValueBool(v) => println(&v),
+        ValueStr(v) => println(&v),
+        ValueUnit(v) => println(&v),
+        ValueVec(v) => println(&v),
+    }
+}
+
+fn print_str(value: Str) {
+    println(&value)
+}
+
+fn vec() -> Vec {
+    Vec(vec())
+}
+
+fn push(vector: Vec, value: Value) -> Vec {
+    let mut new_values = vector.values
+    new_values.push(value)
+    Vec(new_values)
+}
+
+fn len(vector: Vec) -> Int {
+    Int(to_string(vector.values.len()))
+}
+
+fn get(vector: Vec, index: Int) -> Option {
+    if index.value.parse().unwrap() >= vector.values.len() {
+        OptionNone
+    } else {
+        OptionSome(vector.values.get(index.value.parse().unwrap()).unwrap().clone())
+    }
+}
+
+fn range(start: Int, end: Int) -> Vec {
+    let mut result = vec()
+    for i in start.value.parse().unwrap() + 1.parse().unwrap() - 1.parse().unwrap() + 1.parse().unwrap() {
+        if i.parse().unwrap() >= end.value.parse().unwrap() {
+            break
+        }
+        result.push(Int(to_string(i)))
+    }
+    Vec(result)
+}
+
+fn clone(value: &Value) -> Value {
+    match value {
+        ValueInt(v) => ValueInt(Int(v.value.clone())),
+        ValueFloat(v) => ValueFloat(Float(v.value.clone())),
+        ValueBool(v) => ValueBool(Bool(v.value.clone())),
+        ValueStr(v) => ValueStr(Str(v.value.clone())),
+        ValueUnit(v) => ValueUnit(Unit(v.value.clone())),
+        ValueVec(v) => ValueVec(Vec(v.values.iter().map(clone).collect())),
+    }
+}
+
+fn str_len(value: Str) -> Int {
+    Int(to_string(value.value.len()))
+}
+
+fn concat(first: Str, second: Str) -> Str {
+    Str(first.value + &second)
+}
+
+fn chars(value: Str) -> Vec {
+    let mut result = vec()
+    for c in value.value.chars() {
+        result.push(Str(c.to_string()))
+    }
+    Vec(result)
+}
+
+fn int_to_str(value: Int) -> Str {
+    Str(value.value)
+}
+
+fn parse_int(value: Str) -> Option {
+    match value.value.parse() {
+        Ok(v) => OptionSome(Int(v)),
+        Err(_) => OptionNone,
+    }
+}
+
+fn to_float(value: Int) -> Float {
+    Float(value.value.parse().unwrap())
+}
+
+fn trunc(value: Float) -> Int {
+    Int(to_string((value.value.parse().unwrap()).trunc()))
+}
+
+fn main() {
+    let r = Rect { width: 7, height: 4 }
+    print(area(&r))
+    print

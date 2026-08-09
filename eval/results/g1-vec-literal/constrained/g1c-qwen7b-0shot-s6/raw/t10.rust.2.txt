@@ -1,0 +1,16 @@
+fn main() {
+    let numbers = vec![4, 1, 7, 3, 9, 2];
+    let mut kept_values = Vec::new();
+
+    for &num in &numbers {
+        if num > 3 {
+            kept_values.push(num);
+        }
+    }
+
+    for &num in &kept_values {
+        println!("{}", num);
+    }
+
+    println!("{} values were kept.", kept_values.len());
+}

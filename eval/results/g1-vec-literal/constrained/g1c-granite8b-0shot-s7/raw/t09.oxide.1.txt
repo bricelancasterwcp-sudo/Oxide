@@ -1,0 +1,16 @@
+struct Item { value: Int }
+
+fn reverse_list(list: Vec<Item>) -> Vec<Item> {
+    let mut result = vec()
+    for item in list {
+        push(result, item)
+    }
+    result
+}
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 1 }), Item { value: 2 }), Item { value: 3 }), Item { value: 4 })
+    for item in reverse_list(items) {
+        print(item.value)
+    }
+}

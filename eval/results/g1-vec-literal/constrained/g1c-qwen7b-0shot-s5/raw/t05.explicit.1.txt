@@ -1,0 +1,20 @@
+fn fibonacci(n: Int) -> Int {
+    let a = 1
+    let b = 1
+    if n == 1 || n == 2 {
+        return n
+    }
+    let mut i = 3
+    while i <= n {
+        let temp = a + b
+        a = b
+        b = temp
+        i = i + 1
+    }
+    b
+}
+
+fn main() {
+    let term = fibonacci(20)
+    print(term)
+}

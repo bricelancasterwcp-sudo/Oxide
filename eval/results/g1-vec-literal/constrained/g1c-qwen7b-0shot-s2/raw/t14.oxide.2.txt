@@ -1,0 +1,31 @@
+struct TextInfo { count_s: Int, distinct_chars: Int }
+
+fn count_chars(text: Str) -> TextInfo {
+    let mut count_s = 0
+    let mut distinct = vec()
+    for c in chars(text) {
+        if c == "s" {
+            count_s = count_s + 1
+        }
+        if !contains(distinct, c) {
+            distinct = push(distinct, c)
+        }
+    }
+    TextInfo(count_s, len(distinct))
+}
+
+fn contains(vec: Vec<Str>, item: Str) -> Bool {
+    for e in vec {
+        if e == item {
+            return true
+        }
+    }
+    false
+}
+
+fn main() {
+    let text = "mississippi"
+    let info = count_chars(text)
+    print(info.count_s)
+    print(info.distinct_chars)
+}

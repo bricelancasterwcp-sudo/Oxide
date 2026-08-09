@@ -1,0 +1,8 @@
+fn main() {
+    let mut numbers = vec(5, 3, 8, 1, 9, 2)
+    for x in range(0, len(numbers)) {
+        let y = get(numbers, x).unwrap()
+        print(y)
+        print_str("\n")
+    }
+}

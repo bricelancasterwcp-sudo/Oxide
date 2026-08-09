@@ -1,0 +1,287 @@
+fn main() {
+    let mut first_eight_multiples_of_three: Vec<Int> = vec()
+    for x in 0 {
+        if x % 3 == 0 {
+            first_eight_multiples_of_three = push(first_eight_multiples_of_three, x)
+        }
+        if first_eight_multiples_of_three.len() == 8 {
+            break
+        }
+    }
+    let mut total = 0
+    for x in &first_eight_multiples_of_three {
+        total = total + x
+    }
+    print(total)
+    drop first_eight_multiples_of_three
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    vec(v, x)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    println("{}", x)
+}
+
+fn drop_vec(v: &Vec<Int>) {
+    drop v
+}
+
+fn to_int(f: Float) -> Int {
+    f.trunc()
+}
+
+fn to_float(i: Int) -> Float {
+    i.to_float()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    format("{} {}", a, b)
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(char_to_str).collect()
+}
+
+fn char_to_str(c: Char) -> Str {
+    c.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse()
+}
+
+fn main() {
+    let mut first_eight_multiples_of_three: Vec<Int> = vec()
+    for x in 0 {
+        if x % 3 == 0 {
+            first_eight_multiples_of_three = push(first_eight_multiples_of_three, x)
+        }
+        if first_eight_multiples_of_three.len() == 8 {
+            break
+        }
+    }
+    let mut total = 0
+    for x in &first_eight_multiples_of_three {
+        total = total + x
+    }
+    print(total)
+    drop_vec(&first_eight_multiples_of_three)
+}
+
+fn print(x: Int) {
+    println("{}", x)
+}
+
+fn drop_vec(v: &Vec<Int>) {
+    drop v
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    vec(v, x)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn to_int(f: Float) -> Int {
+    f.trunc()
+}
+
+fn to_float(i: Int) -> Float {
+    i.to_float()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    format("{} {}", a, b)
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(char_to_str).collect()
+}
+
+fn char_to_str(c: Char) -> Str {
+    c.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse()
+}
+
+fn main() {
+    let mut first_eight_multiples_of_three: Vec<Int> = vec()
+    for x in 0 {
+        if x % 3 == 0 {
+            first_eight_multiples_of_three = push(first_eight_multiples_of_three, x)
+        }
+        if first_eight_multiples_of_three.len() == 8 {
+            break
+        }
+    }
+    let mut total = 0
+    for x in &first_eight_multiples_of_three {
+        total = total + x
+    }
+    print(total)
+    drop_vec(&first_eight_multiples_of_three)
+}
+
+fn print(x: Int) {
+    println("{}", x)
+}
+
+fn drop_vec(v: &Vec<Int>) {
+    drop v
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    vec(v, x)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn to_int(f: Float) -> Int {
+    f.trunc()
+}
+
+fn to_float(i: Int) -> Float {
+    i.to_float()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    format("{} {}", a, b)
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(char_to_str).collect()
+}
+
+fn char_to_str(c: Char) -> Str {
+    c.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse()
+}
+
+fn main() {
+    let mut first_eight_multiples_of_three: Vec<Int> = vec()
+    for x in 0 {
+        if x % 3 == 0 {
+            first_eight_multiples_of_three = push(first_eight_multiples_of_three, x)
+        }
+        if first_eight_multiples_of_three.len() == 8 {
+            break
+        }
+    }
+    let mut total = 0
+    for x in &first_eight_multiples_of_three {
+        total = total + x
+    }
+    print(total)
+    drop_vec(&first_eight_multiples_of_three)
+}
+
+fn print(x: Int) {
+    println("{}", x)
+}
+
+fn drop_vec(v: &Vec<Int>) {
+    drop v
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    vec(v, x)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn to_int(f: Float) -> Int {
+    f.trunc()
+}
+
+fn to_float(i: Int) -> Float {
+    i.to_float()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    format("{} {}", a, b)
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(char_to_str).collect()
+}
+
+fn char_to_str(c: Char) -> Str {
+    c.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse()
+}
+
+fn main() {
+    let mut first_eight_multiples_of_three: Vec<Int> = vec()
+    for x in 0 {
+        if x % 3 == 0 {
+            first_eight_multiples_of_three = push(first_eight_multiples_of_three, x)
+        }
+        if first_eight_multiples_of_three.len() == 8 {
+            break
+        }
+    }
+    let mut total = 0
+    for x in &first_eight_multiples_of_three {
+        total = total + x
+    }
+    print(total)
+    drop_vec(&first_eight_multiples_of_three)
+}
+
+fn print(x: Int) {
+    println("{}", x)
+}
+
+fn drop_vec(v: &Vec<Int>) {
+    drop v
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    vec(v, x)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn to_int(f: Float) -> Int {
+    f.trunc()
+}
+
+fn to_float(

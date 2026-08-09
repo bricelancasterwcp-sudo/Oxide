@@ -1,0 +1,117 @@
+struct List { head: Option<Int>, tail: Vec<Int> }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 8), -2)
+    let mut v = push(v, 12)
+    v = push(v, 7)
+    let pos = len(filter(v, is_positive))
+    print(pos)
+    let largest = reduce(v, max)
+    print(largest)
+}
+
+fn filter(v: Vec<Int>, f: Int) -> Vec<Int> {
+    let mut out = vec()
+    for x in v {
+        if f(x) {
+            out = push(out, x)
+        }
+    }
+    out
+}
+
+fn is_positive(n: Int) -> Bool {
+    n > 0
+}
+
+fn reduce(v: Vec<Int>, f: Int) -> Int {
+    let mut acc = get(v, 0)?
+    for x in slice(v, 1, None) {
+        acc = f(acc, x)
+    }
+    acc
+}
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+fn slice(v: Vec<Int>, start: Int, end: Option<Int>) -> Vec<Int> {
+    let mut out = vec()
+    for i in range(start, end?) {
+        out = push(out, get(v, i)?)
+    }
+    out
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= len(v) {
+        None
+    } else {
+        Some(v.get(i))
+    }
+}
+
+fn print(n: Int) {
+    let s = int_to_str(n)
+    print_str(s)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut out = v
+    out.push(x)
+    out
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+struct Option {
+    value: Int,
+}
+
+struct Some {
+    value: Int,
+}
+
+struct None {
+    value: Int,
+}
+
+fn clone(x: Int) -> Int {
+    x
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    s.parse().ok()
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn main() {
+    let s = parse_int("42")
+    let v = push(vec(), 3)
+    let n = first_big(v)
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}

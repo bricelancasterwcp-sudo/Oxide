@@ -1,0 +1,10 @@
+struct Point { x: Int, y: Int }
+
+fn main() {
+    for num in range(1, 1000) {
+        let sum: Int = range(1, num / 2 + 1).map(i, if num % i == 0 { i } else { 0 }).sum()
+        if sum == num {
+            print(num)
+        }
+    }
+}

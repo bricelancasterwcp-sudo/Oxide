@@ -1,0 +1,14 @@
+fn main() {
+    let mut list = vec![4, 1, 7, 3, 9, 2];
+    let mut kept = 0;
+
+    for num in &mut list { // Change & to &mut
+        if *num > 3 {
+            println!("{}", num);
+            kept += 1;
+            list.retain(|x| x != num); // Remove the element from the list
+        }
+    }
+
+    println!("{} values kept", kept);
+}

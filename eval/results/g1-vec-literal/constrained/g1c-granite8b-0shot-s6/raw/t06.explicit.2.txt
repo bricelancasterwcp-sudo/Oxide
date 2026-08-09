@@ -1,0 +1,35 @@
+fn is_perfect(number: Int) -> Bool {
+    let mut sum = 0
+    for i in 1.trunc() < number {
+        if number % i == 0 {
+            sum = sum + i
+        }
+    }
+    sum == number
+}
+
+fn main() {
+    for i in 2.trunc() < 1000 {
+        if is_perfect(i) {
+            print(i)
+        }
+    }
+}
+
+fn is_perfect(number: Int) -> Bool {
+    let mut sum = 0
+    for i in 1.trunc() < number {
+        if number % i == 0 {
+            sum = sum + i
+        }
+    }
+    sum == number
+}
+
+fn main() {
+    for i in 2.trunc() < 1000 {
+        if is_perfect(i) {
+            print(i)
+        }
+    }
+}

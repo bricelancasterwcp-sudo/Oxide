@@ -1,0 +1,10 @@
+fn main() {
+    let mut numbers = Vec::new();
+    for i in 1..=24 {
+        if i % 3 == 0 {
+            numbers.push(i);
+        }
+    }
+    let sum: i32 = numbers.iter().sum();
+    println!("{}", sum);
+}

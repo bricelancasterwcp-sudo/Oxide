@@ -1,0 +1,103 @@
+fn perimeter(r: &Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn perimeter(t: &Triangle) -> Int {
+    t.a + t.b + t.c
+}
+
+fn main() {
+    let shapes = push(push(vec(), Rectangle { width: 3, height: 4 }), Triangle { a: 3, b: 4, c: 5 })
+    push(shapes, Rectangle { width: 2, height: 5 })
+    for s in &shapes {
+        print(perimeter(s))
+    }
+    drop shapes
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn push(v: Vec<Shape>, x: Shape) -> Vec<Shape> {
+    let mut r = v
+    r.push(x)
+    r
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn drop_shape(s: &Shape) {
+    drop s
+}
+
+fn len(v: &Vec<Shape>) -> Int {
+    len(v)
+}
+
+fn get(v: &Vec<Shape>, i: Int) -> Option<Shape> {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    range(a, b)
+}
+
+fn clone(x: &Shape) -> Shape {
+    clone(x)
+}
+
+fn str_len(s: &Str) -> Int {
+    str_len(s)
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    chars(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+fn drop_vec(v: &Vec<Shape>) {
+    drop v
+}
+
+fn main() {
+    let nums = push(push(vec(), 5), 40)
+    let bigger = extend(clone(&nums), 70)
+    print(sum_big(&nums, 10))
+    drop nums
+    print(sum_big(&bigger, 10))
+    drop bigger
+}

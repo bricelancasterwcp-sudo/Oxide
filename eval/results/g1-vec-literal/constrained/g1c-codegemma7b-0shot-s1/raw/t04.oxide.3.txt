@@ -1,0 +1,53 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+
+fn is_prime(x: Int) -> Bool {
+    if x <= 1 {
+        return false
+    }
+    for n in 2.to_float().trunc() + 1.to_float() {
+        if x % n == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn count_primes(max: Int) -> Int {
+    let mut count = 0
+    for n in 0.to_float().trunc() + 1.to_float() {
+        if is_prime(n) && n < max {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn main() {
+    print(count_primes(100))
+}

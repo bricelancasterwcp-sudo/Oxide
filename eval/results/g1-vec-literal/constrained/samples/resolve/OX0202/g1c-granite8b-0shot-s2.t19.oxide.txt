@@ -1,0 +1,15 @@
+fn area(r: Rect) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: Rect) -> Int {
+    let w = r.width
+    let h = r.height
+    2 * (w + h)
+}
+
+fn main() {
+    let r = Rect { width: 7, height: 4 }
+    print(area(r))
+    print(perimeter(r))
+}

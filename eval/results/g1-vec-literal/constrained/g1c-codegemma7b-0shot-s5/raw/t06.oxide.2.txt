@@ -1,0 +1,39 @@
+fn sum_of_divs(n: Int) -> Int {
+    let mut acc = 0
+    for x in 1.range(n) {
+        if n % x == 0 {
+            acc = acc + x
+        }
+    }
+    acc
+}
+
+fn is_perfect(n: Int) -> Bool {
+    sum_of_divs(n) == n
+}
+
+fn main() {
+    for x in 1.range(1000) {
+        if is_perfect(x) {
+            print(x)
+            print_str("\n")
+        }
+    }
+}
+
+fn perfect_nums_upto(n: Int) -> Vec<Int> {
+    let mut perfect_nums = vec()
+    for x in 1.range(n) {
+        if is_perfect(x) {
+            perfect_nums = push(perfect_nums, x)
+        }
+    }
+    perfect_nums
+}
+
+fn main() {
+    for x in perfect_nums_upto(1000) {
+        print(x)
+        print_str("\n")
+    }
+}

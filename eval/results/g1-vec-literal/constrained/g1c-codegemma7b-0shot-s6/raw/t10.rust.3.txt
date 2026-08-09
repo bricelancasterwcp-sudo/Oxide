@@ -1,0 +1,15 @@
+use std::io;
+
+fn main() {
+    let mut list = vec![4, 1, 7, 3, 9, 2];
+    let mut counter = 0;
+
+    for num in list.iter().copied() {
+        if num > 3 {
+            println!("{}", num);
+            counter += 1;
+        }
+    }
+
+    println!("{} values were kept", counter);
+}

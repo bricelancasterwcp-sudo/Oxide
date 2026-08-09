@@ -1,0 +1,40 @@
+fn reverse(s: Str) -> Str {
+    let mut result = vec()
+    for c in chars(s) {
+        push(result, c)
+    }
+    str_from_chars(result)
+}
+
+fn main() {
+    print(reverse("stack"))
+}
+
+fn str_from_chars(c: Vec<Str>) -> Str {
+    let mut result = ""
+    for i in (0).rev() {
+        result = push(result, get(c, i)?)
+    }
+    result
+}
+
+struct Point { x: Int, y: Int }
+
+fn main() {
+    let p = Point { x: 1, y: 2 }
+    print(p.x)
+    print(p.y)
+    let p2 = Point { x: 3, y: 4 }
+    print(p2.x)
+    print(p2.y)
+    let p3 = Point { x: 5, ..p }
+    print(p3.x)
+    print(p3.y)
+    let p4 = Point { x: 5, y: 6, ..p }
+    print(p4.x)
+    print(p4.y)
+    let p5 = Point { x: 5, y: 6, z: 7, ..p }
+    print(p5.x)
+    print(p5.y)
+    print(p5.z)
+}

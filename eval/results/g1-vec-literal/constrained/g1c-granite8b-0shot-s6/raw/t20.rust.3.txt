@@ -1,0 +1,10 @@
+fn main() {
+    let pens = 3 * 4;
+    let pads = 9 * 2;
+    let ink = 5 * 3;
+    let total = pens + pads + ink;
+
+    println!("{}", total);
+    let item_with_highest_cost = if pens == total { "Pen" } else if pads == total { "Pad" } else { "Ink" };
+    println!("Item with the highest cost: {}", item_with_highest_cost);
+}

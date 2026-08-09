@@ -1,0 +1,26 @@
+struct List { head: Option<Node> }
+
+struct Node { value: Int, next: Option<Node> }
+
+fn reverse_print(list: List) {
+    reverse_print_helper(list.head)
+}
+
+fn reverse_print_helper(node: Option<Node>) {
+    match node {
+        Some(n) => {
+            reverse_print_helper(n.next)
+            print(n.value)
+        },
+        None => returnOk(),
+    }
+}
+
+fn returnOk() {
+    return
+}
+
+fn main() {
+    let list = List { head: Some(Node { value: 1, next: Some(Node { value: 2, next: Some(Node { value: 3, next: Some(Node { value: 4, next: Some(), value: 5, next: None }) }) }) }) } // Build list 1 -> 2 -> 3 -> 4 -> 5
+    reverse_print(list) // Print 5 4 3 2 1
+}

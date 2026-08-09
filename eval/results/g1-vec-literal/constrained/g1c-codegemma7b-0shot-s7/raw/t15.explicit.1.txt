@@ -1,0 +1,21 @@
+fn main() {
+    let a = parse_int("12")
+    let b = parse_int("x")
+    let c = parse_int("30")
+    let mut total = 0
+    let mut count = 0
+    if a.is_some() {
+        total = total + a.unwrap()
+        count = count + 1
+    }
+    if b.is_some() {
+        total = total + b.unwrap()
+        count = count + 1
+    }
+    if c.is_some() {
+        total = total + c.unwrap()
+        count = count + 1
+    }
+    print(total)
+    print(count)
+}

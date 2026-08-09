@@ -1,0 +1,16 @@
+fn square(x: Int) -> Int {
+    x * x
+}
+
+fn sum_squares(limit: Int) -> Int {
+    let total = 0
+    for i in range(0, limit) {
+        total = total + square(i)
+    }
+    total
+}
+
+fn main() {
+    let result = sum_squares(10)
+    print(result)
+}

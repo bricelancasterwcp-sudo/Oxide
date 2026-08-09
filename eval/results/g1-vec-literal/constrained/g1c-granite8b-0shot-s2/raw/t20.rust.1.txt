@@ -1,0 +1,18 @@
+```rust
+const PEN: (f64, u32) = (3., 4);
+const PAD: (f64, u32) = (9., 2);
+const INK: (f64, u32) = (5., 3);
+
+fn main() {
+    let cost =PEN.0 * f64::from(PEN.1) +
+                PAD.0 * f64::from(PAD.1) +
+                INK.0 * f64::from(INK.1);
+
+    println!("{:.2}", cost);
+
+    let max_cost = [PEN,PAD,INK].iter()
+        .max_by_key(|x| x.0*f64::from(x.1))
+        .unwrap();
+    println!("{}", max_cost.1);
+}
+```

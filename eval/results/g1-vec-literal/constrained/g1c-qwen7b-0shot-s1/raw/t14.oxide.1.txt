@@ -1,0 +1,23 @@
+struct CountInfo { s_count: Int, distinct_chars: Int }
+
+fn count_chars(s: Str) -> CountInfo {
+    let mut counts = vec()
+    let mut distinct = vec()
+    for c in chars(s) {
+        if c == "s" {
+            counts = push(counts, 1)
+        }
+        if !contains(distinct, c) {
+            distinct = push(distinct, c)
+        }
+    }
+    CountInfo
+}
+
+fn main() {
+    let s = "mississippi"
+    let info = count_chars(s)
+    print(info.s_count)
+    print_str("\n")
+    print(info.distinct_chars)
+}

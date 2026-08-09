@@ -1,0 +1,81 @@
+struct Rectangle {
+    wid: Int,
+    len: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn main() {
+    let rect = Rectangle { wid: 3, len: 4 }
+    let tri = Triangle { a: 3, b: 4, c: 5 }
+    let seq = push(push(push(vec(), rect), tri), rect)
+    for s in seq {
+        match s {
+            Rectangle(r) => print(2 * (r.len + r.wid)),
+            Triangle(t) => {
+                let s = t.a + t.b + t.c
+                let area = s * (s - t.a) * (s - t.b) * (s - t.c)
+                let alt_area = t.a * t.b * t.c / (4 * sqrt(t.a * t.b * t.c))
+                print(sqrt(2 * area + 1 / 24 * alt_area))
+                break_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                print_str("big")
+                continue_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                print_str("small")
+                fallthrough_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                print_str("big and small")
+                fallthrough_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                print_str("small and big")
+                fallthrough
+                print_str("neither")
+                loop_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                print_str("looping")
+                return_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                print_str("returning")
+                return
+                match t.a {
+                    Triangle(t2) => {
+                        print(t2.a)
+                        print(t2.b)
+                        print(t2.c)
+                        break_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                        print_str("big")
+                        continue_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                        print_str("small")
+                        fallthrough
+                        print_str("neither")
+                        loop_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                        print_str("looping")
+                        return_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                        print_str("returning")
+                        return
+                        fallthrough
+                        print_str("small and big")
+                        fallthrough
+                        print_str("neither")
+                        loop_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                        print_str("looping")
+                        return_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                        print_str("returning")
+                        return
+                        fallthrough
+                        print_str("big and small")
+                        fallthrough
+                        print_str("neither")
+                        loop_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                        print_str("looping")
+                        return_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                        print_str("returning")
+                        return
+                        fallthrough
+                        print_str("small and big")
+                        fallthrough
+                        print_str("neither")
+                        loop_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                        print_str("looping")
+                        return_if(sqrt(2 * area + 1 / 24 * alt_area) > 100)
+                        print_str("returning")
+          

@@ -1,0 +1,11 @@
+fn print_if_backward(text: &Str) {
+    if text == text.chars().rev().collect() {
+        print_str(text)
+    }
+}
+
+fn main() {
+    print_if_backward("level")
+    print_if_backward("stereo")
+    print_if_backward("rotor")
+}

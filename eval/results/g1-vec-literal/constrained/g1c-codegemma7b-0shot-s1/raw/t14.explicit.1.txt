@@ -1,0 +1,16 @@
+fn main() {
+    let text = str_len("mississippi")
+    let s_count = 0
+    let mut seen: Vec<Str> = vec()
+    for c in chars(text) {
+        if c == "s" {
+            s_count = s_count + 1
+        } else {
+            seen = push(seen, c)
+        }
+    }
+    print(s_count)
+    print(len(&seen))
+    drop text
+    drop seen
+}

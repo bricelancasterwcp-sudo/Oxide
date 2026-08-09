@@ -1,0 +1,324 @@
+fn area(r: &Rectangle) -> Int {
+    (r.width * 2) + (r.height * 2)
+}
+
+fn perimeter(t: &Triangle) -> Int {
+    t.a + t.b + t.c
+}
+
+fn main() {
+    let s1 = Rectangle { width: 3, height: 4 }
+    let s2 = Triangle { a: 3, b: 4, c: 5 }
+    let s3 = Rectangle { width: 2, height: 5 }
+    println(area(&s1))
+    println(perimeter(&s2))
+    println(area(&s3))
+    drop s1
+    drop s2
+    drop s3
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    result
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut result = 0
+    for _ in &v {
+        result = result + 1
+    }
+    result
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < len(&v) {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut result = Vec.new()
+    for i in a + 1 < b {
+        result.push(i)
+    }
+    result
+}
+
+fn clone(x: &Int) -> Int {
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    a.to_owned() + b.to_owned()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut result = Vec.new()
+    for c in s.chars() {
+        result.push(c.to_string())
+    }
+    result
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn print(x: Int) {
+    print(int_to_str(x))
+}
+
+fn print_str(s: &Str) {
+    print(s)
+}
+
+fn vec() -> Vec<T> {
+    Vec.new()
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut result = v
+    result.push(x)
+    result
+}
+
+fn len(v: &Vec<T>) -> Int {
+    let mut result = 0
+    for _ in &v {
+        result = result + 1
+    }
+    result
+}
+
+fn get(v: &Vec<T>, i: Int) -> Option<T> {
+    if i < len(&v) {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut result = Vec.new()
+    for i in a + 1 < b {
+        result.push(i)
+    }
+    result
+}
+
+fn clone(x: &T) -> T {
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    a.to_owned() + b.to_owned()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut result = Vec.new()
+    for c in s.chars() {
+        result.push(c.to_string())
+    }
+    result
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn print(x: Int) {
+    print(int_to_str(x))
+}
+
+fn print_str(s: &Str) {
+    print(s)
+}
+
+fn vec() -> Vec<T> {
+    Vec.new()
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut result = v
+    result.push(x)
+    result
+}
+
+fn len(v: &Vec<T>) -> Int {
+    let mut result = 0
+    for _ in &v {
+        result = result + 1
+    }
+    result
+}
+
+fn get(v: &Vec<T>, i: Int) -> Option<T> {
+    if i < len(&v) {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut result = Vec.new()
+    for i in a + 1 < b {
+        result.push(i)
+    }
+    result
+}
+
+fn clone(x: &T) -> T {
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    a.to_owned() + b.to_owned()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut result = Vec.new()
+    for c in s.chars() {
+        result.push(c.to_string())
+    }
+    result
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn print(x: Int) {
+    print(int_to_str(x))
+}
+
+fn print_str(s: &Str) {
+    print(s)
+}
+
+fn vec() -> Vec<T> {
+    Vec.new()
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut result = v
+    result.push(x)
+    result
+}
+
+fn len(v: &Vec<T>) -> Int {
+    let mut result = 0
+    for _ in &v {
+        result = result + 1
+    }
+    result
+}
+
+fn get(v: &Vec<T>, i: Int) -> Option<T> {
+    if i < len(&v) {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut result = Vec.new()
+    for i in a + 1 < b {
+        result.push(i)
+    }
+    result
+}
+
+fn clone(x: &T) -> T {
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    a.to_owned() + b.to_owned()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut result = Vec.new()
+    for c in s.chars() {
+        result.push(c.to_string())
+    }
+    result
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse()
+}
+
+fn to_float(n: Int) -> Float {

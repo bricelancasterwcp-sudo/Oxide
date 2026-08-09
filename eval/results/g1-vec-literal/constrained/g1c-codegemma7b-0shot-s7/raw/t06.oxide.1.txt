@@ -1,0 +1,24 @@
+fn is_perfect(x: Int) -> Bool {
+    if x <= 1 {
+        return false
+    }
+    let mut sum = 0
+    for i in 2.to_int() + 1.to_int().rem_euclid(x).to_int() {
+        if x.rem_euclid(i) == 0 {
+            sum = sum + i
+        }
+        if sum > x {
+            return false
+        }
+    }
+    return sum == x
+}
+
+fn main() {
+    for i in 0.to_int() + 1.to_int().rem_euclid(1000).to_int() {
+        if is_perfect(i) {
+            print(i)
+            print_str("\n")
+        }
+    }
+}

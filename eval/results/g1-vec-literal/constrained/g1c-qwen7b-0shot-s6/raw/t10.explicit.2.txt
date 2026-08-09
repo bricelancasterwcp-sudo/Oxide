@@ -1,0 +1,9 @@
+fn main() {
+    let nums = vec(4, 1, 7, 3, 9, 2)
+    let filtered: Vec<Int> = nums.iter().filter_map || x || ifx > 3 || Some(x) || None || collect
+    for x in filtered {
+        print_str(x.to_string())
+        print_str("\n")
+    }
+    print(filtered.len())
+}

@@ -1,0 +1,120 @@
+fn main() {
+    let sum = sum_of_divisors(2000000)
+    print(sum)
+}
+
+fn sum_of_divisors(x: Int) -> Int {
+    let mut total = 0
+    for d in divisors(x) {
+        total = add(total, d)
+    }
+    total
+}
+
+fn divisors(x: Int) -> Vec<Int> {
+    let mut divs = vec()
+    let mut d = 1
+    while d <= trunc(sqrt(to_float(x))) {
+        if x % d == 0 {
+            divs = push(divs, d)
+            if d * d != x {
+                divs = push(divs, x / d)
+            }
+        }
+        d = add(d, 1)
+    }
+    divs
+}
+
+fn sqrt(x: Float) -> Float {
+    let mut low = 0.0
+    let mut high = x
+    while low < high {
+        let mid = (low + high) / 2.0
+        if mid * mid <= x {
+            low = mid
+        } else {
+            high = mid
+        }
+    }
+    low
+}
+
+fn add(x: Int, y: Int) -> Int {
+    x + y
+}
+
+fn print(x: Int) {
+    let str = int_to_str(x)
+    print_str(concat("\"", str, "\""))
+}
+
+fn print_str(s: Str) {
+    foreign_call("print", s)
+}
+
+fn foreign_call(s: Str, x: Int) -> Int {
+    0
+}
+
+fn vec() -> Vec<Int> {
+    0
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    x
+}
+
+fn len(v: Vec<Int>) -> Int {
+    0
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    0
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    0
+}
+
+fn clone(x: Int) -> Int {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    0
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    0
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    0
+}
+
+fn int_to_str(n: Int) -> Str {
+    0
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    0
+}
+
+fn to_float(n: Int) -> Float {
+    0.0
+}
+
+fn trunc(x: Float) -> Int {
+    0
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}

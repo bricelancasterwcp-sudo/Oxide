@@ -1,0 +1,13 @@
+fn fib(i: Int) -> Int {
+    if i <= 0 {
+        return 1
+    } else {
+        let a = fib(i - 1)
+        let b = fib(i - 2)
+        return a + b
+    }
+}
+
+fn main() {
+    print(fib(20))
+}

@@ -1,0 +1,41 @@
+fn reverse_print(v: &Vec<Int>) {
+    let mut i = v.len() - 1
+    while i >= 0 {
+        print(&v_get)(i).unwrap() + "\n"
+        i = i - 1
+    }
+}
+
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5)
+    reverse_print(&nums)
+    drop nums
+}
+
+fn v_get(v: &Vec<Int>, i: Int) -> Int {
+    get(v, i).unwrap()
+}
+
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5)
+    reverse_print(&nums)
+    drop nums
+}
+
+fn reverse_print(v: &Vec<Int>) {
+    let mut i = v.len() - 1
+    while i >= 0 {
+        print(&v_get)(i).unwrap() + "\n"
+        i = i - 1
+    }
+}
+
+fn v_get(v: &Vec<Int>, i: Int) -> Int {
+    get(v, i).unwrap()
+}
+
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5)
+    reverse_print(&nums)
+    drop nums
+}

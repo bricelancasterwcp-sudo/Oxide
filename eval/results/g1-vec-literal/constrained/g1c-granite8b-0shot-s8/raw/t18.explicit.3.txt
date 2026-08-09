@@ -1,0 +1,18 @@
+fn perimeter(x: Int) -> Int {
+    x * 2
+}
+
+fn area(x: Int, y: Int) -> Int {
+    x * y
+}
+
+fn main() {
+    let rectangle_perimeter = perimeter(10)
+    let rectangle_area = area(10, 5)
+    let triangle_perimeter = perimeter(10)
+    let triangle_area = area(3, 4)
+    print(rectangle_perimeter)
+    print(rectangle_area)
+    print(triangle_perimeter)
+    print(triangle_area)
+}

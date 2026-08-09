@@ -1,0 +1,11 @@
+fn is_palindrome(s: &Str) -> Bool {
+    let chars: Vec<Str> = chars(s).collect()
+    let reversed: Vec<Str> = chars.iter().rev().map(String).collect()
+    s == Str.join(&reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}

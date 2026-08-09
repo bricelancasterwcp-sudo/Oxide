@@ -1,0 +1,16 @@
+fn rectangle_perimeter(a: Int, b: Int) -> Int {
+    2 * (a + b)
+}
+
+fn triangle_perimeter(a: Int, b: Int, c: Int) -> Int {
+    a + b + c
+}
+
+fn main() {
+    println(rectangle_perimeter(3, 4))
+    println()
+    println(triangle_perimeter(3, 4, 5))
+    println()
+    println(rectangle_perimeter(2, 5))
+    println()
+}

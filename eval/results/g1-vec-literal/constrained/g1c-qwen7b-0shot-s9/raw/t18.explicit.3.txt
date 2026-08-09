@@ -1,0 +1,30 @@
+fn perimeter(rect: &Rectangle) -> Int {
+    2 * (rect.width + rect.height)
+}
+
+fn perimeter_triangle(triangle: &Triangle) -> Int {
+    triangle.a + triangle.b + triangle.c
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn main() {
+    let rec1 = Rectangle { width: 3, height: 4 }
+    let tri = Triangle { a: 3, b: 4, c: 5 }
+    let rec2 = Rectangle { width: 2, height: 5 }
+    print(perimeter(&rec1))
+    print(perimeter_triangle(&tri))
+    print(perimeter(&rec2))
+    drop rec1
+    drop tri
+    drop rec2
+}

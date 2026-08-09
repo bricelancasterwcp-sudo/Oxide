@@ -1,0 +1,13 @@
+struct Multiples { values: Vec<Int> }
+
+fn main() {
+    let mut multiples = Multiples { values: vec() }
+    let mut i = 1
+    while multiples.values.len() < 8 {
+        let product = i * 3
+        multiples.values == push(multiples.values, product)
+        i = i + 1
+    }
+    let sum: Int = multiples.values.iter().sum()
+    print(sum)
+}

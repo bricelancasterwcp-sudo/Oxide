@@ -1,0 +1,13 @@
+fn reverse(s: &Str) -> Str {
+    let mut result = vec_push(vec_push(vec(), s.chars().next().unwrap()), s.chars().nth(1).unwrap())
+    for c in s.chars().skip(2) {
+        result = vec_push(result, c)
+    }
+    result.iter().rev().collect()
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse(&text))
+    drop text
+}

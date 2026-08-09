@@ -1,0 +1,16 @@
+struct Point { x: Float, y: Float }
+
+fn gcd(mutua: Int, nonmutua: Int) -> Int {
+    let mut largest = nonmutua
+    while largest > 0 {
+        let remainder = mutua % largest
+        mutua = largest
+        largest = remainder
+    }
+    mutua
+}
+
+fn main() {
+    let p = Point { x: 1.5, y: 3.25 }
+    print(gcd(trunc(p.x)(), trunc(p.y)()))
+}

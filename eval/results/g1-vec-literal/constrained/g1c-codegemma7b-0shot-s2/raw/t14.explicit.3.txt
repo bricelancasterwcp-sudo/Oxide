@@ -1,0 +1,49 @@
+fn main() {
+    let str = "mississippi".to_string()
+    let mut count = 0
+    let mut distinct = 0
+    for c in str.chars() {
+        if c == "s" {
+            count = count + 1
+        }
+        if !distinct.contains(&c) {
+            distinct = distinct + 1
+        }
+    }
+    print(count)
+    print(distinct)
+}
+
+fn contains(s: &Str, c: &Char) -> Bool {
+    for ch in s.chars() {
+        if ch == c {
+            return true
+        }
+    }
+    false
+}
+
+struct Str {
+    chars: Vec<Char>,
+}
+
+fn to_string(s: &Vec<Char>) -> Str {
+    Str(s.clone())
+}
+
+fn len(s: &Str) -> Int {
+    s.chars.len()
+}
+
+fn chars(s: &Str) -> Vec<Char> {
+    s.chars.clone()
+}
+
+fn push(v: Vec<Char>, c: Char) -> Vec<Char> {
+    let mut v2 = v.clone()
+    v2.push(c)
+    v2
+}
+
+fn print(i: Int) {
+    print_str(to_string(&vec_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars_helper_1_0_0_impl_to_string_impl_int_to_str_chars

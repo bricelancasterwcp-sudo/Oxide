@@ -1,0 +1,11 @@
+fn main() {
+    let mut a = vec(4, 1, 7, 3, 9, 2)
+    let mut b = 0
+    for x in a {
+        if x > 3 {
+            print("{}\n", x)
+            b = b + 1
+        }
+    }
+    print("{}", b)
+}

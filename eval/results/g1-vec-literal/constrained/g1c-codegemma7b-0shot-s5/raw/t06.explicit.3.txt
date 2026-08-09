@@ -1,0 +1,17 @@
+fn sum_proper(n: Int) -> Option<Int> {
+    let mut total = 0
+    for x in 1.range(n) {
+        if n % x == 0 {
+            total = total + x
+        }
+    }
+    Some(total - n)
+}
+
+fn main() {
+    for n in 1.range(1000) {
+        if n == sum_proper(n)? {
+            print(n)
+        }
+    }
+}

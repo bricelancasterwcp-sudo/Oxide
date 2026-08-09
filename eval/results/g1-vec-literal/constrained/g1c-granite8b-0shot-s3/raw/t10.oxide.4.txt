@@ -1,0 +1,18 @@
+fn filter(v: Vec<Int>) -> Vec<Int> {
+    let mut acc = vec()
+    for x in v {
+        if x > 3 {
+            acc = push(acc, x)
+        }
+    }
+    acc
+}
+
+fn main() {
+    let v = vec()
+    for x in filter(push(push(push(v, 4), 1), 7)) {
+        print(x)
+        print("\n")
+    }
+    print(len(filter(vec())))
+}

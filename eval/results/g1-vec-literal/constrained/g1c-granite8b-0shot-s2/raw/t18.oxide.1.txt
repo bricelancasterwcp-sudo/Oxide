@@ -1,0 +1,17 @@
+fn rectangle(width: Int, height: Int) -> Int {
+    width + height + width + height
+}
+
+fn triangle(a: Int, b: Int, c: Int) -> Int {
+    a + b + c
+}
+
+fn main() {
+    let shapes = vec()
+    let shapes = push(shapes, rectangle(3, 4))
+    let shapes = push(shapes, triangle(3, 4, 5))
+    let shapes = push(shapes, rectangle(2, 5))
+    for shape in shapes {
+        print(shape)
+    }
+}

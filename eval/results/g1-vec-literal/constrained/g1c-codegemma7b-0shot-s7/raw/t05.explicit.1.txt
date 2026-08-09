@@ -1,0 +1,11 @@
+fn sum_two(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn main() {
+    let mut v = vec(1, 1)
+    for i in 20 {
+        push(v, sum_two(v.get(i - 1)?, v.get(i - 2)?))
+    }
+    print(v.get(19)?)
+}

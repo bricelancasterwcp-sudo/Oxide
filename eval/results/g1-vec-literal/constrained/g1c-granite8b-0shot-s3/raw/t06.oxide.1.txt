@@ -1,0 +1,375 @@
+struct IntPair { first: Int, second: Int }
+
+fn main() {
+    let mut i = 1
+    loop1(i)
+    loop2(i)
+}
+
+fn loop1(mutBOUND: Int) {
+    while true {
+        if is_perfect(i) {
+            print(i)
+        }
+        i = i + 1
+        if i > BOUND {
+            break
+        }
+    }
+}
+
+fn loop2(mutBOUND: Int) {
+    for i in range(2, BOUND) {
+        if is_perfect(i) {
+            print(i)
+        }
+    }
+}
+
+fn is_perfect(n: Int) -> Bool {
+    let mut sum = 0
+    for d in range(1, n) {
+        if n % d == 0 {
+            sum = sum + d
+        }
+    }
+    sum == n
+}
+
+fn print(n: Int) {
+    print_str(to_str(n) + "\n")
+}
+
+fn to_str(n: Int) -> Str {
+    str_len(n) + " digits: " + int_to_str(n)
+}
+
+struct Str { ptr: Int, len: Int }
+
+struct Int { val: Int }
+
+fn str_len(s: Str) -> Int {
+    s.len
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = vec()
+    for i in range(0, n.val) {
+        s = push(s, "1234567890" + get(range(0, 10), n.val % 10))
+    }
+    Str.rev(s)
+}
+
+struct Vec { data: Int, len: Int, cap: Int }
+
+fn push(v: Vec, x: Int) -> Vec {
+    let new_len = v.len + 1
+    let new_cap = if new_len > v.cap { new_len } else { v.cap }
+    let data = clone(v.data)
+    Vec.build(data, new_len, new_cap)
+}
+
+struct Vec { data: Int, len: Int }
+
+fn rev(v: Vec) -> Vec {
+    let mut v2 = vec()
+    for i in range(0, v.len) {
+        v2 = push(v2, get(v.data, v.len - 1 - i)?)
+    }
+    v2
+}
+
+struct Bool { val: Int }
+
+fn build(data: Int, len: Int) -> Vec {
+    let cap = len
+    Vec.build(data, len, cap)
+}
+
+struct Int { val: Int }
+
+fn clone(n: Int) -> Int {
+    Int.build(n.val)
+}
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Int { val: Int }
+
+fn get(v: Vec, i: Int) -> Option<Int> {
+    if i < 0 || i >= v.len {
+        None
+    } else {
+        Some(Int.build(get_unsafe(v.data, i)))
+    }
+}
+
+struct Int { val: Int }
+
+fn get_unsafe(v: Int, i: Int) -> Int {
+    get_unsafe_ptr(v, i).val
+}
+
+struct Int { val: Int }
+
+struct Int { val: Int }
+
+fn get_unsafe_ptr(v: Int, i: Int) -> Int {
+    Int.build(v.val + i)
+}
+
+struct Option { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Option { val: Int }
+
+struct Some { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct None { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Bool { val: Int }
+
+fn build(val: Int) -> Bool {
+    Bool.build(val)
+}
+
+struct Bool { val: Int }
+
+struct True { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Bool { val: Int }
+
+struct False { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}
+
+struct Unit { val: Int }
+
+struct Int { val: Int }
+
+fn build(val: Int) -> Int {
+    Int.build(val)
+}

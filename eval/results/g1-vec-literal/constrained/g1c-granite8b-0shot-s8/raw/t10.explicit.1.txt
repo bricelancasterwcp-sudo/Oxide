@@ -1,0 +1,38 @@
+fn filter(vec: &Vec<Int>, min: Int) -> Vec<Int> {
+    let mut vec = clone(&vec)
+    let mut index = 0
+    while index < len(&vec) {
+        if get(&vec, index) < min {
+            drop get
+            vec = drop_index(&vec, index)
+        } else {
+            index = index + 1
+        }
+    }
+    vec
+}
+
+fn drop_index(vec: &Vec<Int>, index: Int) -> Vec<Int> {
+    let mut vec = clone(&vec)
+    let mut i = 0
+    while i < index {
+        push(vec, get(&vec, i))
+        i = i + 1
+    }
+    while i < len(&vec) {
+        push(vec, get(&vec, i + 1))
+        i = i + 1
+    }
+    vec
+}
+
+fn main() {
+    let numbers = push(push(push(push(vec(), 4), 1), 7), 3)
+    let filtered_numbers = filter(&numbers, 3)
+    print_str("Filtered numbers:")
+    for number in &filtered_numbers {
+        print(number)
+    }
+    print_str("\nHow many numbers were kept:")
+    print(len(&filtered_numbers))
+}

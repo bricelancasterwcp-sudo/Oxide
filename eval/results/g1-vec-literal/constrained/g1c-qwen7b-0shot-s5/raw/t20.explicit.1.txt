@@ -1,0 +1,25 @@
+fn main() {
+    let pen = (1.0 * 3.0 * 4.0).floor() / 1.0 * 100.0 / 100.0
+    let pad = (9.0 * 2.0).floor() / 1.0 * 100.0 / 100.0
+    let ink = (5.0 * 3.0).floor() / 1.0 * 100.0 / 100.0
+    print(pen + pad + ink)
+    let items = vec(("pen".to_string() + ": " + &pen).to_string(), ("pad".to_string() + ": " + &pad).to_string(), ("ink".to_string() + ": " + &ink).to_string())
+    let mut max_cost = 0.0
+    let mut max_item = "".to_string()
+    for item in &items {
+        let cost: Vec<String> = item.split(": ").collect()
+        let cost_float: Vec<String> = cost.get(1).unwrap().split(".").collect()
+        let cost_int = cost_float.get(0).unwrap().parse().unwrap()
+        let cost_dec = cost_float.get(1).unwrap().parse().unwrap()
+        let cost_float = (cost_int * 100 + cost_dec) / 100.0
+        if cost_float > max_cost {
+            max_cost = cost_float
+            max_item = cost.get(0).unwrap().to_string()
+        }
+    }
+    print(max_item)
+    drop pen
+    drop pad
+    drop ink
+    drop items
+}

@@ -1,0 +1,16 @@
+fn square(x: Int) -> Int {
+    x * x
+}
+
+fn sum_of_squares() -> Int {
+    let mut sum = 0
+    for x in range(0, 10) {
+        sum = sum + square(x)
+    }
+    sum
+}
+
+fn main() {
+    print_str("sum of squares: ")
+    print(sum_of_squares())
+}

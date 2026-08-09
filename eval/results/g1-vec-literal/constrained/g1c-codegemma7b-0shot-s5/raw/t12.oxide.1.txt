@@ -1,0 +1,6 @@
+fn main() {
+    let text = "stack"
+    let mut chars = vec_char(text)
+    chars = chars.iter().rev().collect()
+    print_str(chars)
+}

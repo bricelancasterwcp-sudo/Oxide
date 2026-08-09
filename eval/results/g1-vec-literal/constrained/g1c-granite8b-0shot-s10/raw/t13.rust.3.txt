@@ -1,0 +1,5 @@
+fn main() {
+    for word in ["level", "stereo", "rotor"].iter() {
+        println!("{}", word == word.chars().rev().collect::<String>());
+    }
+}

@@ -1,0 +1,14 @@
+```rust
+fn main() {
+    let mut count = 0;
+    'outer: for n in 2..100 {
+        for i in 2..=((n as f64).sqrt() as u32) {
+            if n % i == 0 {
+                continue 'outer;
+            }
+        }
+        count += 1;
+    }
+    println!("{}", count);
+}
+```

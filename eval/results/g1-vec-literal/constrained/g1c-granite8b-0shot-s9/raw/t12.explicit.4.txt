@@ -1,0 +1,4 @@
+fn main() {
+    let stack = "stack".chars().rev().collect()
+    let reversed = stack
+}

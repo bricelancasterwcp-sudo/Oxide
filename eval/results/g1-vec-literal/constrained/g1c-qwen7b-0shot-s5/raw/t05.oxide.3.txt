@@ -1,0 +1,18 @@
+struct Fibonacci {
+    a: Int,
+    b: Int,
+}
+
+fn next(fib: Fibonacci) -> Fibonacci {
+    Fibonacci(fib.b, fib.a + fib.b)
+}
+
+fn main() {
+    let a1 = 1
+    let b1 = 1
+    let mut fib = Fibonacci { a: a1, b: b1 }
+    for _ in range(0, 20) {
+        fib = next(fib)
+    }
+    print(fib.b)
+}

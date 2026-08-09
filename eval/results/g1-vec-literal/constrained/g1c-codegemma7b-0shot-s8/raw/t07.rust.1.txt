@@ -1,0 +1,11 @@
+fn main() {
+    let mut multiples: Vec<u32> = Vec::new();
+
+    for i in 1..=8 {
+        multiples.push(3 * i);
+    }
+
+    let sum: u32 = multiples.iter().sum();
+
+    println!("Sum of multiples: {}", sum);
+}

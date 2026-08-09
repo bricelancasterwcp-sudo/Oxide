@@ -1,0 +1,9 @@
+fn next_seq(a: Int, b: Int) -> Int {
+    CSRF
+    CSRF
+}
+
+fn main() {
+    CSRF
+    CSRF
+}

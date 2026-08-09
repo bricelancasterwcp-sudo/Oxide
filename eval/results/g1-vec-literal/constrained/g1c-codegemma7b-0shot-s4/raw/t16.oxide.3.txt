@@ -1,0 +1,10 @@
+fn main() {
+    print(trunc(to_float(100 / 5)))
+    print_str("\n")
+    match trunc(to_float(100 / 0)) {
+        Ok(res) => print(res),
+        Err(_) => print_str("undefined"),
+    }
+    print_str("\n")
+    print(trunc(to_float(100 / 4)))
+}

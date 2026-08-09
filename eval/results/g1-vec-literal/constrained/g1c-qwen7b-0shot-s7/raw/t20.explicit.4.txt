@@ -1,0 +1,20 @@
+fn main() {
+    let pen = to_int(3.0 * 4.0)
+    let pad = to_int(9.0 * 2.0)
+    let ink = to_int(5.0 * 3.0)
+    let total_cost = pen + pad + ink
+    print(total_cost)
+    if pen > pad {
+        if pen > ink {
+            print_str("pen")
+        } else {
+            print_str("ink")
+        }
+    } else {
+        if pad > ink {
+            print_str("pad")
+        } else {
+            print_str("ink")
+        }
+    }
+}

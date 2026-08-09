@@ -1,0 +1,15 @@
+```rust
+fn main() {
+    // Rectangle area
+    let width: u32 = 7;
+    let height: u32 = 4;
+    let area = width * height;
+    println!("Area: {}", area);
+
+    // Rectangle perimeter
+    let perimeter = 2 * (width + height);
+    println!("Perimeter: {}", perimeter);
+}
+```
+
+This program calculates the area and perimeter of a rectangle with a width of 7 units and a height of 4 units. It then prints the area and perimeter to the console.

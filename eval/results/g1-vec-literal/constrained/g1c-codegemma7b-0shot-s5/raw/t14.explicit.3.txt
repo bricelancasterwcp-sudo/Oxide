@@ -1,0 +1,11 @@
+fn main() {
+    let text = str_len("mississippi")
+    let count = 0
+    for i in 0 < text {
+        if chars("mississippi") == "s" {
+            count = count + 1
+        }
+    }
+    print(count)
+    print(len(chars("mississippi")))
+}

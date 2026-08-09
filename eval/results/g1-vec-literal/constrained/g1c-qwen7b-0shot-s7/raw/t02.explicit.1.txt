@@ -1,0 +1,18 @@
+fn transform(num: Int) -> Int {
+    let mut steps = 0
+    let mut n = num
+    while n != 1 {
+        if n % 2 == 0 {
+            n = n / 2
+        } else {
+            n = n * 3 + 1
+        }
+        steps = steps + 1
+    }
+    steps
+}
+
+fn main() {
+    let steps = transform(27)
+    print(steps)
+}

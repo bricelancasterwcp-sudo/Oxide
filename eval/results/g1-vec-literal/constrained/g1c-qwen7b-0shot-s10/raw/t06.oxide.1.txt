@@ -1,0 +1,13 @@
+fn is_perfect(n: Int) -> Bool {
+    let sum = range(1, n).filter(x, x < n && n % x == 0).fold(0, x, x + y)
+    sum == n
+}
+
+fn main() {
+    for i in range(1, 1000) {
+        if is_perfect(i) {
+            print(i)
+            print_str("\n")
+        }
+    }
+}

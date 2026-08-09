@@ -1,0 +1,198 @@
+fn main() {
+    let pen = Item(3, 4)
+    let pad = Item(9, 2)
+    let ink = Item(5, 3)
+    let cost = pen.price() + pad.price() + ink.price()
+    print(cost)
+    let max_price = max(pen, pad, ink).price()
+    let item_name = max(pen, pad, ink).name()
+    print_str("Max price: ")
+    print(max_price)
+    print_str("Item name: ")
+    print_str(item_name)
+}
+
+struct Item { price: Int, quantity: Int }
+
+fn price(this: Item) -> Int {
+    this.price * this.quantity
+}
+
+fn name(this: Item) -> Str {
+    if this.quantity == 1 {
+        this.name_singular()
+    } else {
+        this.name_plural()
+    }
+}
+
+fn max(this: Item, other: Item, more: Item) -> Item {
+    if this.price > other.price {
+        if this.price > more.price {
+            this
+        } else {
+            more
+        }
+    } else {
+        if other.price > more.price {
+            other
+        } else {
+            more
+        }
+    }
+}
+
+fn name_singular(this: Item) -> Str {
+    let base = "1 "
+    if this.price == 3 {
+        base + "pen"
+    } else if this.price == 9 {
+        base + "pad"
+    } else if this.price == 5 {
+        base + "ink"
+    } else {
+        base + "item"
+    }
+}
+
+fn name_plural(this: Item) -> Str {
+    let base = "1 "
+    if this.price == 3 {
+        base + "pen"
+    } else if this.price == 9 {
+        base + "pad"
+    } else if this.price == 5 {
+        base + "ink"
+    } else {
+        base + "item"
+    }
+    base + "s"
+}
+
+struct Item { price: Int, quantity: Int }
+
+fn price(this: Item) -> Int {
+    this.price * this.quantity
+}
+
+fn name(this: Item) -> Str {
+    if this.quantity == 1 {
+        this.name_singular()
+    } else {
+        this.name_plural()
+    }
+}
+
+fn max(this: Item, other: Item, more: Item) -> Item {
+    if this.price > other.price {
+        if this.price > more.price {
+            this
+        } else {
+            more
+        }
+    } else {
+        if other.price > more.price {
+            other
+        } else {
+            more
+        }
+    }
+}
+
+fn name_singular(this: Item) -> Str {
+    let base = "1 "
+    if this.price == 3 {
+        base + "pen"
+    } else if this.price == 9 {
+        base + "pad"
+    } else if this.price == 5 {
+        base + "ink"
+    } else {
+        base + "item"
+    }
+}
+
+fn name_plural(this: Item) -> Str {
+    let base = "1 "
+    if this.price == 3 {
+        base + "pen"
+    } else if this.price == 9 {
+        base + "pad"
+    } else if this.price == 5 {
+        base + "ink"
+    } else {
+        base + "item"
+    }
+    base + "s"
+}
+
+struct Item { price: Int, quantity: Int }
+
+fn price(this: Item) -> Int {
+    this.price * this.quantity
+}
+
+fn name(this: Item) -> Str {
+    if this.quantity == 1 {
+        this.name_singular()
+    } else {
+        this.name_plural()
+    }
+}
+
+fn max(this: Item, other: Item, more: Item) -> Item {
+    if this.price > other.price {
+        if this.price > more.price {
+            this
+        } else {
+            more
+        }
+    } else {
+        if other.price > more.price {
+            other
+        } else {
+            more
+        }
+    }
+}
+
+fn name_singular(this: Item) -> Str {
+    let base = "1 "
+    if this.price == 3 {
+        base + "pen"
+    } else if this.price == 9 {
+        base + "pad"
+    } else if this.price == 5 {
+        base + "ink"
+    } else {
+        base + "item"
+    }
+}
+
+fn name_plural(this: Item) -> Str {
+    let base = "1 "
+    if this.price == 3 {
+        base + "pen"
+    } else if this.price == 9 {
+        base + "pad"
+    } else if this.price == 5 {
+        base + "ink"
+    } else {
+        base + "item"
+    }
+    base + "s"
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4 }
+    let pad = Item { price: 9, quantity: 2 }
+    let ink = Item { price: 5, quantity: 3 }
+    let cost = pen.price() + pad.price() + ink.price()
+    print(cost)
+    let max_price = max(pen, pad, ink).price()
+    let item_name = max(pen, pad, ink).name()
+    print_str("Max price: ")
+    print(max_price)
+    print_str("Item name: ")
+    print_str(item_name)
+}

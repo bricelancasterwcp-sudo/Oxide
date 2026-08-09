@@ -1,0 +1,16 @@
+fn area(w: Int, h: Int) -> Int {
+    w * h
+}
+
+fn perimeter(w: Int, h: Int) -> Int {
+    2 * (w + h)
+}
+
+fn main() {
+    let rect = 7 * 4
+    print(area(rect, rect))
+    drop rect
+    let rect = 7 * 4
+    print(perimeter(rect, rect))
+    drop rect
+}

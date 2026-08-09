@@ -1,0 +1,15 @@
+fn reverse(input: Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in input {
+        result = push(x, result)
+    }
+    result
+}
+
+fn main() {
+    print_str("1\n")
+    print_str("2\n")
+    print_str("3\n")
+    print_str("4\n")
+    print_str("5\n")
+}

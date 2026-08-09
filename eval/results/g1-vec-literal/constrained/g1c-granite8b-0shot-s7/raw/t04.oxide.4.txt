@@ -1,0 +1,35 @@
+struct Prime {
+    value: Int,
+    is_prime: Bool,
+}
+
+fn is_prime(x: Int) -> Bool {
+    if x < 2 {
+        return false
+    }
+    for i in 2.to_float().trunc() + 1.0 {
+        if i * i > x.to_float() + 1.0 {
+            return true
+        }
+        if x % i == 0 {
+            return false
+        }
+    }
+    false
+}
+
+fn main() {
+    let mut i = 2.to_float().trunc()
+    let mut primes = vec()
+    while i < 100.0 {
+        primes = push(primes, Prime { value: i.trunc(), is_prime: is_prime(i.trunc()) })
+        i = i + 1.0
+    }
+    let mut count = 0
+    for p in primes {
+        if p.value < 100 && p.is_prime {
+            count = count + 1
+        }
+    }
+    print(count)
+}

@@ -1,0 +1,209 @@
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    let len = str_len(s)
+    for i in range(0, len / 2) {
+        let j = len - 1 - i
+        if get(chars(s), i)? != get(chars(s), j)? {
+            return false
+        }
+    }
+    true
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    match i < len(v)? {
+        Some(true_val) => Some(clone(get(v, i)?)),
+        Some(false_val) => None,
+        _ => None,
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a < b? {
+        v = push(v, i)
+    }
+    v
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut v = vec()
+    for i in range(0, str_len(s)) {
+        v = push(v, str_sub(s, i, i + 1))
+    }
+    v
+}
+
+fn str_sub(s: Str, a: Int, b: Int) -> Str {
+    let sub = clone(s)
+    let start = trunc(to_float(a)?)
+    let end = trunc(to_float(b)?)
+    let len = end - start
+    let chars = get(chars(sub), start)?
+    concat(chars, get(chars(sub), end)?)
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn len(v: Vec<T>) -> Int {
+    match v {
+        Vec(refinner) => trunc(to_float(refinner.count)?),
+        _ => panic("len() not implemented for this type"),
+    }
+}
+
+fn print(x: T) {
+    match x {
+        Bool(b) => print_str(if b { "true" } else { "false" }),
+        Int(n) => print_int(n),
+        _ => panic("print() not implemented for this type"),
+    }
+}
+
+fn print_str(s: Str) {
+    let len = str_len(s)
+    for i in range(0, len) {
+        let c = get(chars(s), i)?
+        print_char(c)
+    }
+}
+
+fn print_char(c: Str) {
+    match c {
+        Str(refinner) => print_str(refinner.data),
+        _ => panic("print_char() not implemented for this type"),
+    }
+}
+
+fn panic(m: Str) {
+    print_str(m)
+    break_loop()
+}
+
+fn break_loop() {
+    loop_break()
+}
+
+fn loop_break() {
+    break_loop()
+}
+
+fn print_int(n: Int) {
+    let mut v = vec()
+    let mut n = n
+    while n > 0 {
+        let digit = (n % 10)
+        v = push(v, int_to_str(digit))
+        n = trunc(to_float(n / 10)?)
+    }
+    print_str(concat(v, Str("")))
+}
+
+fn int_to_str(n: Int) -> Str {
+    match n {
+        Int(inner) => inner.data,
+        _ => panic("int_to_str() not implemented for this type"),
+    }
+}
+
+fn to_float(x: T) -> Float {
+    match x {
+        Int(n) => Float(n.data),
+        _ => panic("to_float() not implemented for this type"),
+    }
+}
+
+fn trunc(x: Float) -> Int {
+    match x {
+        Float(inner) => Int(inner.data),
+        _ => panic("trunc() not implemented for this type"),
+    }
+}
+
+fn str_len(s: Str) -> Int {
+    match s {
+        Str(inner) => Int(inner.data.len()),
+        _ => panic("str_len() not implemented for this type"),
+    }
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    match a {
+        Str(a) => match b {
+            Str(b) => Str(StrData { data: a.data + b.data }),
+            _ => panic("concat() not implemented for this type"),
+        },
+        _ => panic("concat() not implemented for this type"),
+    }
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    match v {
+        Vec(refinner) => match i < refinner.count? {
+            Some(true_val) => Some(refinner.data.get(i.data)?.clone()),
+            Some(false_val) => None,
+            _ => None,
+        },
+        _ => panic("get() not implemented for this type"),
+    }
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    match v {
+        Vec(mut_refinner) => {
+            mut_refinner.data.push(x.clone())
+            Vec(mut_refinner)
+        },
+        _ => panic("push() not implemented for this type"),
+    }
+}
+
+fn vec() -> Vec<T> {
+    Vec(VecData { data: VecInner { count: Int(0), data: VecInnerData { data: VecInnerDataData { data: VecInnerDataDataData { data: VecInnerDataDataDataData { data: VecInnerDataDataDataDataData { data: VecInnerDataDataDataDataDataData { data: VecInnerDataDataDataDataDataDataData(), next: None }, next: None }, next: None }, next: None }, next: None }, next: None }, next: None }, next: None })
+}
+
+fn match_arm(pattern: T) -> T {
+    match pattern {
+        T(inner) => T(inner),
+        _ => panic("match_arm() not implemented for this type"),
+    }
+}
+
+fn loop_cond(x: Bool) -> Bool {
+    loop_body(x)
+}
+
+fn loop_body(x: Bool) -> Bool {
+    x
+}
+
+fn match_expr(x: T) -> T {
+    match x {
+        T(inner) => T(inner),
+        _ => panic("match_expr() not implemented for this type"),
+    }
+}
+
+fn if_expr(c: Bool, t: T, e: T) -> T {
+    match c {
+        Bool(inner) => match inner {
+            Some(true_val) => t,
+            Some(false_val) => e,
+            _ => panic("if_expr() not implemented for this type"),
+        },
+        _ => panic("if_expr() not implemented for this type"),
+    }
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}

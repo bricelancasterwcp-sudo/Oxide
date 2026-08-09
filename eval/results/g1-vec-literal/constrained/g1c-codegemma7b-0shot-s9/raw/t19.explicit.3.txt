@@ -1,0 +1,43 @@
+fn area(r: &Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: &Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print(area(&r))
+    print(perimeter(&r))
+    drop r
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Circle(Float),
+}
+
+fn print(x: Int) {
+    println(format("{}", x))
+}
+
+fn println(msg: String) {
+    print(msg)
+}
+
+fn format(format_str: String, args: Int) -> String {
+    format_str + &args
+}
+
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print(area(&r))
+    print(perimeter(&r))
+    drop r
+}

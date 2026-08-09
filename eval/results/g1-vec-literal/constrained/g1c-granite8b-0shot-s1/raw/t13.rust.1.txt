@@ -1,0 +1,9 @@
+fn main() {
+    test("level");
+    test("stereo");
+    test("rotor");
+}
+
+fn test(s: &str) {
+    println!("{}", s.chars().rev().collect::<String>() == s);
+}

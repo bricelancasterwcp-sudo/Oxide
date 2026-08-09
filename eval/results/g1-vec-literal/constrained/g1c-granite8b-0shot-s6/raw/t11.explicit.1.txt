@@ -1,0 +1,325 @@
+fn main() {
+    let mut xs = push(push(push(vec(), 5), 3), 8)
+    xs = push(xs, 1)
+    xs = push(xs, 9)
+    xs = push(xs, 2)
+    while len(&xs) > 0 {
+        print(get(&xs, 0).unwrap())
+        xs = drop_front(&xs)
+    }
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut v = clone(&v)
+    v = push_back(v, x)
+    v
+}
+
+fn push_back(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut v = clone(&v)
+    v = functional_update(v, vec_len(&v), x)
+    v
+}
+
+fn drop_front(v: &Vec<Int>) -> Vec<Int> {
+    let mut v = clone(&v)
+    v = functional_update(v, 0, get(&v, 1).unwrap())
+    v = functional_update(v, 1, get(&v, 2).unwrap())
+    v = functional_update(v, 2, get(&v, 3).unwrap())
+    v = functional_update(v, 3, get(&v, 4).unwrap())
+    drop_front_(&v)
+}
+
+fn drop_front_(_: &Vec<Int>) -> Vec<Int> {
+    let mut v = clone(_)
+    v = functional_update(v, 0, get(&v, 1).unwrap())
+    v = functional_update(v, 1, get(&v, 2).unwrap())
+    v = functional_update(v, 2, get(&v, 3).unwrap())
+    v = functional_update(v, 3, get(&v, 4).unwrap())
+    v
+}
+
+fn functional_update(v: Vec<Int>, i: Int, x: Int) -> Vec<Int> {
+    let mut v = clone(&v)
+    for j in range(0, vec_len(&v)) {
+        if j == i {
+            v = functional_update(v, j, x)
+        }
+    }
+    v
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    let mut v = clone(v)
+    for j in range(0, vec_len(&v)) {
+        if j == i {
+            return Some(get_(&v, j).unwrap())
+        }
+    }
+    None
+}
+
+fn get_(_: &Vec<Int>, _: Int) -> Option<Int> {
+    let mut v = clone(_)
+    for j in range(0, vec_len(&v)) {
+        if j == _ {
+            return Some(get_(&v, j).unwrap())
+        }
+    }
+    None
+}
+
+fn vec_len(v: &Vec<Int>) -> Int {
+    let mut v = clone(v)
+    len(&v)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    len_(&v)
+}
+
+fn len_(_: &Vec<Int>) -> Int {
+    let mut v = clone(_)
+    clone(_)
+}
+
+fn clone(v: &Vec<Int>) -> Vec<Int> {
+    let mut v = clone(v)
+    clone_(&v)
+}
+
+fn clone_(_: &Vec<Int>) -> Vec<Int> {
+    let mut v = clone(_)
+    clone_(&v)
+}
+
+fn print(x: Int) {
+    print_(&x)
+}
+
+fn print_(_: &Int) {
+    let mut x = clone(_)
+    drop_(&x)
+}
+
+fn drop_(_: &Int) {
+    let mut x = clone(_)
+    drop_(&x)
+}
+
+fn drop_(_: &Vec<Int>) {
+    let mut v = clone(_)
+    drop_(&v)
+}
+
+fn drop_(_: &Option<Int>) {
+    let mut o = clone(_)
+    drop_(&o)
+}
+
+fn drop_(_: &Result<Int, Int>) {
+    let mut r = clone(_)
+    drop_(&r)
+}
+
+fn drop_(_: &Str) {
+    let mut s = clone(_)
+    drop_(&s)
+}
+
+fn drop_(_: &Unit) {
+    let mut u = clone(_)
+    drop_(&u)
+}
+
+fn drop_(_: &Bool) {
+    let mut b = clone(_)
+    drop_(&b)
+}
+
+fn drop_(_: &Float) {
+    let mut f = clone(_)
+    drop_(&f)
+}
+
+fn drop_(_: &Char) {
+    let mut c = clone(_)
+    drop_(&c)
+}
+
+fn drop_(_: &Ref<Int>) {
+    let mut r = clone(_)
+    drop_(&r)
+}
+
+fn drop_(_: &Box<Int>) {
+    let mut b = clone(_)
+    drop_(&b)
+}
+
+fn drop_(_: &Vec<Int>) {
+    let mut v = clone(_)
+    drop_(&v)
+}
+
+fn drop_(_: &Int) {
+    let mut x = clone(_)
+    drop_(&x)
+}
+
+fn drop_(_: &Bool) {
+    let mut b = clone(_)
+    drop_(&b)
+}
+
+fn drop_(_: &Float) {
+    let mut f = clone(_)
+    drop_(&f)
+}
+
+fn drop_(_: &Char) {
+    let mut c = clone(_)
+    drop_(&c)
+}
+
+fn drop_(_: &Str) {
+    let mut s = clone(_)
+    drop_(&s)
+}
+
+fn drop_(_: &Unit) {
+    let mut u = clone(_)
+    drop_(&u)
+}
+
+fn drop_(_: &Option<Int>) {
+    let mut o = clone(_)
+    drop_(&o)
+}
+
+fn drop_(_: &Result<Int, Int>) {
+    let mut r = clone(_)
+    drop_(&r)
+}
+
+fn drop_(_: &Ref<Int>) {
+    let mut r = clone(_)
+    drop_(&r)
+}
+
+fn drop_(_: &Box<Int>) {
+    let mut b = clone(_)
+    drop_(&b)
+}
+
+fn drop_(_: &Vec<Int>) {
+    let mut v = clone(_)
+    drop_(&v)
+}
+
+fn drop_(_: &Int) {
+    let mut x = clone(_)
+    drop_(&x)
+}
+
+fn drop_(_: &Bool) {
+    let mut b = clone(_)
+    drop_(&b)
+}
+
+fn drop_(_: &Float) {
+    let mut f = clone(_)
+    drop_(&f)
+}
+
+fn drop_(_: &Char) {
+    let mut c = clone(_)
+    drop_(&c)
+}
+
+fn drop_(_: &Str) {
+    let mut s = clone(_)
+    drop_(&s)
+}
+
+fn drop_(_: &Unit) {
+    let mut u = clone(_)
+    drop_(&u)
+}
+
+fn drop_(_: &Option<Int>) {
+    let mut o = clone(_)
+    drop_(&o)
+}
+
+fn drop_(_: &Result<Int, Int>) {
+    let mut r = clone(_)
+    drop_(&r)
+}
+
+fn drop_(_: &Ref<Int>) {
+    let mut r = clone(_)
+    drop_(&r)
+}
+
+fn drop_(_: &Box<Int>) {
+    let mut b = clone(_)
+    drop_(&b)
+}
+
+fn drop_(_: &Vec<Int>) {
+    let mut v = clone(_)
+    drop_(&v)
+}
+
+fn drop_(_: &Int) {
+    let mut x = clone(_)
+    drop_(&x)
+}
+
+fn drop_(_: &Bool) {
+    let mut b = clone(_)
+    drop_(&b)
+}
+
+fn drop_(_: &Float) {
+    let mut f = clone(_)
+    drop_(&f)
+}
+
+fn drop_(_: &Char) {
+    let mut c = clone(_)
+    drop_(&c)
+}
+
+fn drop_(_: &Str) {
+    let mut s = clone(_)
+    drop_(&s)
+}
+
+fn drop_(_: &Unit) {
+    let mut u = clone(_)
+    drop_(&u)
+}
+
+fn drop_(_: &Option<Int>) {
+    let mut o = clone(_)
+    drop_(&o)
+}
+
+fn drop_(_: &Result<Int, Int>) {
+    let mut r = clone(_)
+    drop_(&r)
+}
+
+fn drop_(_: &Ref<Int>) {
+    let mut r = clone(_)
+    drop_(&r)
+}
+
+fn drop_(_: &Box<Int>) {
+    let mut b = clone(_)
+    drop_(&b)
+}
+
+fn drop_(_: &Vec<Int>) {

@@ -1,0 +1,9 @@
+fn main() {
+    let text = "stack".to_string()
+    let mut chars = vec()
+    for c in text.chars() {
+        chars.insert(0, c)
+    }
+    let rev = chars.iter().collect()
+    print(rev)
+}

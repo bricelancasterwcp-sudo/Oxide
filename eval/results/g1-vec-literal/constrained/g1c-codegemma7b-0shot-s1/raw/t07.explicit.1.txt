@@ -1,0 +1,15 @@
+fn sum_multiples_of_three(n: Int) -> Int {
+    let mut total = 0
+    for i in 1.range(n) {
+        if 0 == i % 3 {
+            total = total + i
+        }
+    }
+    total
+}
+
+fn main() {
+    let multiples = push(push(push(push(push(push(vec(), 3), 6), 9), 12), 15), 18)
+    print(sum_multiples_of_three(multiples))
+    drop multiples
+}

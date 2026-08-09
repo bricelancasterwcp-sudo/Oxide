@@ -1,0 +1,68 @@
+struct Fib {
+    a: Int,
+    b: Int,
+}
+
+fn fib_20() -> Int {
+    let f = Fib { a: 1, b: 1 }
+    let mut i = 0
+    loop_limit(20) || i == 0 || i == 1 || f.b
+    let n = f.b
+    f.b == f.a + f.b
+    f.a == n
+    i = i + 1
+    f.b
+}
+
+fn main() {
+    print(fib_20())
+}
+
+fn loop_limit(limit: Int) -> Bool {
+    let mut i = 0
+    i = i + 1
+    i < limit
+}
+
+struct Point {
+    x: Int,
+    y: Int,
+}
+
+struct Circle {
+    center: Point,
+    radius: Int,
+}
+
+struct Shape {
+    area: Int,
+}
+
+fn area(s: Shape) -> Int {
+    s.area
+}
+
+fn main() {
+    let c = Circle { center: Point { x: 1, y: 2 }, radius: 3 }
+    let a = area(c)
+    print(a)
+}
+
+struct Shape {
+    area: Int,
+}
+
+struct Circle {
+    center: Point,
+    radius: Int,
+}
+
+fn area(s: Shape) -> Int {
+    s.area
+}
+
+fn main() {
+    let c = Circle { center: Point { x: 1, y: 2 }, radius: 3 }
+    let a = area(c)
+    print(a)
+}

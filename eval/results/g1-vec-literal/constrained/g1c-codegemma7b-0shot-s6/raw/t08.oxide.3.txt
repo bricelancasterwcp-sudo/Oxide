@@ -1,0 +1,286 @@
+fn main() {
+    let list = vec(3, 8, -2, 12, 7)
+    let mut pos = 0
+    let mut max = list(0)
+    for x in list {
+        if x > 0 {
+            pos = pos + 1
+        }
+        if x > max {
+            max = x
+        }
+    }
+    print(pos)
+    print(max)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int) -> Vec<Int> {
+    push(push(push(push(vec(), a), b), c), d)
+}
+
+fn print(a: Int) {
+    print_str(int_to_str(a))
+}
+
+fn print_str(a: Str) {
+    for c in chars(a) {
+        print_char(c)
+    }
+}
+
+fn print_char(a: Str) {
+    for c in chars(a) {
+        print_char(c)
+    }
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= len(v) {
+        None
+    } else {
+        Some(v(i))
+    }
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let mut i = 0
+    for _ in v {
+        i = i + 1
+    }
+    i
+}
+
+fn push(v: Vec<Int>, a: Int) -> Vec<Int> {
+    let mut r = v
+    r = push(r, a)
+    r
+}
+
+fn int_to_str(mut: Int) -> Str {
+    let mut r = vec()
+    while mut > 0 {
+        let rem = mut % 10
+        r = push(r, rem)
+        mut = trunc(mut / 10)
+    }
+    let mut s = vec()
+    for i in r {
+        s = push(s, int_to_str(i))
+    }
+    concat(s)
+}
+
+fn concat(mut: Vec<Str>) -> Str {
+    let mut r = vec()
+    while len(mut) > 0 {
+        let x = pop(mut)
+        r = push(r, x)
+    }
+    let mut s = vec()
+    for i in r {
+        s = push(s, str_len(i))
+    }
+    let mut t = 0
+    for i in s {
+        t = t + i
+    }
+    let mut r = vec()
+    for i in 0 {
+        r = push(r, get(mut, t - i - 1)?)
+    }
+    concat(r)
+}
+
+fn pop(mut: Vec<Str>) -> Str {
+    let r = get(mut, len(mut) - 1)
+    let mut v = vec()
+    for i in 0 {
+        if i < len(mut) - 1 {
+            v = push(v, get(mut, i))
+        }
+    }
+    mut = v
+    r
+}
+
+fn str_len(a: Str) -> Int {
+    let mut i = 0
+    for _ in chars(a) {
+        i = i + 1
+    }
+    i
+}
+
+fn chars(a: Str) -> Vec<Str> {
+    let mut r = vec()
+    let mut i = 0
+    for c in a {
+        r = push(r, int_to_str(int(c)))
+        i = i + 1
+    }
+    r
+}
+
+fn int(a: Str) -> Int {
+    let mut r = 0
+    let mut mul = 1
+    for c in chars(a) {
+        let i = get(chars("0123456789"), int(c))
+        r = r + mul * i
+        mul = mul * 10
+    }
+    r
+}
+
+fn trunc(mut: Int) -> Int {
+    if mut < 0 {
+        return mut
+    }
+    let mut r = 0
+    let mut mul = 1
+    while mut >= mul {
+        r = r + mul
+        mul = mul * 10
+    }
+    r
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let mut found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int) -> Vec<Int> {
+    push(push(push(push(vec(), a), b), c), d)
+}
+
+fn print(a: Int) {
+    print_str(int_to_str(a))
+}
+
+fn print_str(a: Str) {
+    for c in chars(a) {
+        print_char(c)
+    }
+}
+
+fn print_char(a: Str) {
+    for c in chars(a) {
+        print_char(c)
+    }
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= len(v) {
+        None
+    } else {
+        Some(v(i))
+    }
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let mut i = 0
+    for _ in v {
+        i = i + 1
+    }
+    i
+}
+
+fn push(v: Vec<Int>, a: Int) -> Vec<Int> {
+    let mut r = v
+    r = push(r, a)
+    r
+}
+
+fn int_to_str(mut: Int) -> Str {
+    let mut r = vec()
+    while mut > 0 {
+        let rem = mut % 10
+        r = push(r, rem)
+        mut = trunc(mut / 10)
+    }
+    let mut s = vec()
+    for i in r {
+        s = push(s, int_to_str(i))
+    }
+    concat(s)
+}
+
+fn concat(mut: Vec<Str>) -> Str {
+    let mut r = vec()
+    while len(mut) > 0 {
+        let x = pop(mut)
+        r = push(r, x)
+    }
+    let mut s = vec()
+    for i in r {
+        s = push(s, str_len(i))
+    }
+    let mut t = 0
+    for i in s {
+        t = t + i
+    }
+    let mut r = vec()
+    for i in 0 {
+        r = push(r, get(mut, t - i - 1)?)
+    }
+    concat(r)
+}
+
+fn pop(mut: Vec<Str>) -> Str {
+    let r = get(mut, len(mut) - 1)
+    let mut v = vec()
+    for i in 0 {
+        if i < len(mut) - 1 {
+            v = push(v, get(mut, i))
+        }
+    }
+    mut = v
+    r
+}
+
+fn str_len(a: Str) -> Int {
+    let mut i = 0
+    for _ in chars(a) {
+        i = i + 1
+    }
+    i
+}
+
+fn chars(a: Str) -> Vec<Str> {
+    let mut r = vec()
+    let mut i = 0
+    for c in a {
+        r = push(r, int_to_str(int(c)))
+        i = i + 1
+    }
+    r
+}
+
+fn int(a: Str) -> Int {
+    let mut r = 0
+    let mut mul = 1
+    for c in chars(a) {
+        let i = get(chars("0123456789"), int(c))
+        r = r + mul * i

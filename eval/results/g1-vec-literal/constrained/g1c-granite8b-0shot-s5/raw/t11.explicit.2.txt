@@ -1,0 +1,11 @@
+fn print_number(number: Int) {
+    print(number)
+}
+
+fn main() {
+    let numbers = vec(5, 3, 8, 1, 9, 2)
+    for number in numbers {
+        print_number(&number)
+    }
+    drop numbers
+}

@@ -1,0 +1,13 @@
+fn transform(n: Int) -> Result<Int, String> {
+    if n == 1 {
+        Ok(0)
+    } else if n % 2 == 0 {
+        Ok(1 + transform(n / 2)?)
+    } else {
+        Ok(1 + transform(3 * n + 1)?)
+    }
+}
+
+fn main() {
+    print(transform(27))
+}

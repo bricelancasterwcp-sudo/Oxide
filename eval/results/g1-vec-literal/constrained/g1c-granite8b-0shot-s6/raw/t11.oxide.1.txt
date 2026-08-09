@@ -1,0 +1,17 @@
+struct List { val: Int, next: Option<Box<List>> }
+
+fn list_to_vec(list: Box<List>) -> Vec<Int> {
+    let mut vec = vec()
+    let mut cur = list
+    while letSome(node) == cur {
+        vec = push(vec, node.val)
+        cur = node.next
+    }
+    vec
+}
+
+fn main() {
+    let list = Box { val: 5, next: Some(Box { val: 3, next: Some(Box { val: 8, next: Some(Box { val: 1, next: Some(Box { val: 9, next: Some()() }) }) }) }) }
+    let vec = list_to_vec(list)
+    print(vec)
+}

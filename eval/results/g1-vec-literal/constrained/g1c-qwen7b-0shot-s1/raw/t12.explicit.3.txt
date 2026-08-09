@@ -1,0 +1,55 @@
+fn main() {
+    let s = "stack"
+    let chars = chars(s)
+    let reversed_chars = chars.iter().rev().map(String).collect()
+    let reversed_str: String = reversed_chars.join("")
+    print_str(&reversed_str)
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(str).collect()
+}
+
+fn print_str(s: &Str) {
+    println(&s)
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut v = v
+    v.push(x)
+    v
+}
+
+fn clone(x: &Str) -> Str {
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: Vec<Str>, b: Vec<Str>) -> Vec<Str> {
+    let mut a = a
+    a.extend(b)
+    a
+}
+
+fn join(a: Vec<Str>, sep: Str) -> Str {
+    a.join(&sep)
+}
+
+fn print(x: &Int) {
+    println(&x)
+}
+
+fn main() {
+    let s = "stack"
+    let chars = chars(s)
+    let reversed_chars = chars.iter().rev().map(String).collect()
+    let reversed_str: String = reversed_chars.join("")
+    print_str(&reversed_str)
+}

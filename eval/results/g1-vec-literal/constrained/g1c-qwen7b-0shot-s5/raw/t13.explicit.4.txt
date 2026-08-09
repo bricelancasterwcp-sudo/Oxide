@@ -1,0 +1,8 @@
+fn main() {
+    let level = "level".chars().eq("level".chars().rev()).unwrap_or(false)
+    print(level)
+    let stereo = "stereo".chars().eq("stereo".chars().rev()).unwrap_or(false)
+    print(stereo)
+    let rotor = "rotor".chars().eq("rotor".chars().rev()).unwrap_or(false)
+    print(rotor)
+}

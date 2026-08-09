@@ -1,0 +1,32 @@
+fn main() {
+    let mut limit = 1000
+    loop_start()
+    let mut current = 1
+    loop_start()
+    let mut factor = 1
+    loop_start()
+    if current * factor < limit {
+        let tmp = current * factor
+        print_int(tmp)
+        print_str(" ")
+        drop current
+        current = tmp
+        drop factor
+        factor = factor + 1
+    } else {
+        drop current
+        drop factor
+        loop_end()
+        drop tmp
+        current = current + 1
+    }
+    loop_end()
+    drop current
+    drop factor
+    drop tmp
+    print_str("\n")
+    drop tmp
+    limit = limit + 1
+    loop_end()
+    drop limit
+}

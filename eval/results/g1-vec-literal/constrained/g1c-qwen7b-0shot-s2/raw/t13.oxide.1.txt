@@ -1,0 +1,13 @@
+struct StrWrapper { s: Str }
+
+fn is_palindrome(s: Str) -> Bool {
+    let chars: Vec<Str> = chars(s)
+    let reversed: Vec<Str> = chars.chars().map(str_char).rev().collect()
+    concat(s, concat(reversed, str_char("\n"))) == concat(s, concat(str_char("\n"), s))
+}
+
+fn main() {
+    print(is_palindrome(StrWrapper { s: "level" }).s)
+    print(is_palindrome(StrWrapper { s: "stereo" }).s)
+    print(is_palindrome(StrWrapper { s: "rotor" }).s)
+}

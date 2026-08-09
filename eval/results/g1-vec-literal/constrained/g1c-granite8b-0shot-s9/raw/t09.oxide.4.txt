@@ -1,0 +1,20 @@
+struct List {
+    head: Int,
+    tail: Option<Box<List>>,
+}
+
+fn reverse(x: Box<List>) -> Box<List> {
+    match x.tail {
+        None => Box { head: x.head, tail: None },
+        Some(xs) => Box { head: xs.head, tail: Some(reverse(xs)) },
+    }
+}
+
+fn main() {
+    let xs = Box { head: 5, tail: Some(Box { head: 4, tail: Some(Box { head: 3, tail: Some(Box { head: 2, tail: Some(Box { head: 1, tail: None }) }) }) }) }
+    let ys = reverse(xs)
+    for x in ys.head {
+        print_str(int_to_str(x))
+        print_str("\n")
+    }
+}

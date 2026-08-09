@@ -1,0 +1,327 @@
+struct R {
+    f: Str,
+    s: Str,
+}
+
+fn main() {
+    print(is_palindrome("racecar"))
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    let f = reverse(s)
+    f == s
+}
+
+fn reverse(s: Str) -> Str {
+    let mut r = vec()
+    for c in chars(s) {
+        r = push(r, c)
+    }
+    concat(r, "")
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut r = vec()
+    let mut i = 0
+    while i < str_len(s) {
+        r = push(r, get(s, i))
+        i = i + 1
+    }
+    r
+}
+
+fn reverse(s: Str) -> Str {
+    let mut r = vec()
+    for c in chars(s) {
+        r = push(r, c)
+    }
+    concat(r, "")
+}
+
+fn str_len(s: Str) -> Int {
+    let mut n = 0
+    let mut i = 0
+    while i < len(s) {
+        n = n + 1
+        i = i + 1
+    }
+    n
+}
+
+fn get(s: Str, i: Int) -> Str {
+    let mut n = 0
+    let mut c = vec()
+    while n < i {
+        c = push(c, s.bytes.at(n))
+        n = n + 1
+    }
+    concat(c, "")
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut r = vec()
+    for y in v {
+        r = push(r, y)
+    }
+    r = push(r, x)
+    r
+}
+
+fn concat(a: Vec<T>, b: T) -> Vec<T> {
+    let mut r = vec()
+    for x in a {
+        r = push(r, x)
+    }
+    r = push(r, b)
+    r
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut n = 0
+    let mut i = 0
+    while i < len(v) {
+        n = n + 1
+        i = i + 1
+    }
+    n
+}
+
+fn main() {
+    print(is_palindrome("racecar"))
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    let f = reverse(s)
+    f == s
+}
+
+fn reverse(s: Str) -> Str {
+    let mut r = vec()
+    for c in chars(s) {
+        r = push(r, c)
+    }
+    concat(r, "")
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut r = vec()
+    let mut i = 0
+    while i < str_len(s) {
+        r = push(r, get(s, i))
+        i = i + 1
+    }
+    r
+}
+
+fn reverse(s: Str) -> Str {
+    let mut r = vec()
+    for c in chars(s) {
+        r = push(r, c)
+    }
+    concat(r, "")
+}
+
+fn str_len(s: Str) -> Int {
+    let mut n = 0
+    let mut i = 0
+    while i < len(s) {
+        n = n + 1
+        i = i + 1
+    }
+    n
+}
+
+fn get(s: Str, i: Int) -> Str {
+    let mut n = 0
+    let mut c = vec()
+    while n < i {
+        c = push(c, s.bytes.at(n))
+        n = n + 1
+    }
+    concat(c, "")
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut r = vec()
+    for y in v {
+        r = push(r, y)
+    }
+    r = push(r, x)
+    r
+}
+
+fn concat(a: Vec<T>, b: T) -> Vec<T> {
+    let mut r = vec()
+    for x in a {
+        r = push(r, x)
+    }
+    r = push(r, b)
+    r
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut n = 0
+    let mut i = 0
+    while i < len(v) {
+        n = n + 1
+        i = i + 1
+    }
+    n
+}
+
+fn main() {
+    print(is_palindrome("racecar"))
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    let f = reverse(s)
+    f == s
+}
+
+fn reverse(s: Str) -> Str {
+    let mut r = vec()
+    for c in chars(s) {
+        r = push(r, c)
+    }
+    concat(r, "")
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut r = vec()
+    let mut i = 0
+    while i < str_len(s) {
+        r = push(r, get(s, i))
+        i = i + 1
+    }
+    r
+}
+
+fn reverse(s: Str) -> Str {
+    let mut r = vec()
+    for c in chars(s) {
+        r = push(r, c)
+    }
+    concat(r, "")
+}
+
+fn str_len(s: Str) -> Int {
+    let mut n = 0
+    let mut i = 0
+    while i < len(s) {
+        n = n + 1
+        i = i + 1
+    }
+    n
+}
+
+fn get(s: Str, i: Int) -> Str {
+    let mut n = 0
+    let mut c = vec()
+    while n < i {
+        c = push(c, s.bytes.at(n))
+        n = n + 1
+    }
+    concat(c, "")
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut r = vec()
+    for y in v {
+        r = push(r, y)
+    }
+    r = push(r, x)
+    r
+}
+
+fn concat(a: Vec<T>, b: T) -> Vec<T> {
+    let mut r = vec()
+    for x in a {
+        r = push(r, x)
+    }
+    r = push(r, b)
+    r
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut n = 0
+    let mut i = 0
+    while i < len(v) {
+        n = n + 1
+        i = i + 1
+    }
+    n
+}
+
+fn main() {
+    print(is_palindrome("racecar"))
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    let f = reverse(s)
+    f == s
+}
+
+fn reverse(s: Str) -> Str {
+    let mut r = vec()
+    for c in chars(s) {
+        r = push(r, c)
+    }
+    concat(r, "")
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut r = vec()
+    let mut i = 0
+    while i < str_len(s) {
+        r = push(r, get(s, i))
+        i = i + 1
+    }
+    r
+}
+
+fn reverse(s: Str) -> Str {
+    let mut r = vec()
+    for c in chars(s) {
+        r = push(r, c)
+    }
+    concat(r, "")
+}
+
+fn str_len(s: Str) -> Int {
+    let mut n = 0
+    let mut i = 0
+    while i < len(s) {
+        n = n + 1
+        i = i + 1
+    }
+    n
+}
+
+fn get(s: Str, i: Int) -> Str {
+    let mut n = 0
+    let mut c = vec()
+    while n < i {
+        c = push(c, s.bytes.at(n))
+        n = n + 1
+    }
+    concat(c, "")
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut r = vec()
+    for y in v {
+        r = push(r, y)
+    }
+    r = push(r, x)

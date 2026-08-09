@@ -1,0 +1,32 @@
+{
+  "aborted_reason": null,
+  "backend": "llama.cpp",
+  "digest": null,
+  "ended_at": "2026-08-09T10:42:56.839684+00:00",
+  "grammar_sha256": {
+    "explicit": "c68d335f2ed6014e02e96e159109960f90e938e7658772153709e37538c5dca6",
+    "oxide": "3a6c5ff1594ce5eecb48ec8e2c0b138fc8b4749748887640135803585b493f1e",
+    "rust": null
+  },
+  "model": "qwen2.5-coder:7b-instruct-q8_0",
+  "model_context_length": null,
+  "model_slug": "qwen7b",
+  "num_ctx": 8192,
+  "num_predict": 2048,
+  "ollama_version": null,
+  "preflight": {
+    "backend": "llama.cpp",
+    "build_info": "b1-4988f6e",
+    "model": "qwen2.5-coder:7b-instruct-q8_0",
+    "model_path": "/mnt/extra/ollama-models/blobs/sha256-24b532e5276503b147d0eea0e47cb1d2bcce7c9034edd657b624261862ca54a1",
+    "num_ctx": 8192,
+    "server_n_ctx": 8192
+  },
+  "quantization_level": null,
+  "run_id": "g1c-qwen7b-0shot-s8",
+  "seed": 8,
+  "shots": 0,
+  "started_at": "2026-08-09T10:35:14.059844+00:00",
+  "temperature": 0.8,
+  "top_p": 0.95
+}

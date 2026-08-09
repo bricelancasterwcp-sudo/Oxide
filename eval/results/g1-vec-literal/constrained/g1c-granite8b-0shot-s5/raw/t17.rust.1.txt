@@ -1,0 +1,15 @@
+```rust
+const LIST: &[i32] = &[10, 20, 30];
+
+fn main() {
+    println!("{}", if LIST.len() > 1 { LIST[1] } else { -1 });
+    println!("{}", if LIST.len() > 5 { LIST[5] } else { -1 });
+}
+```
+
+const LIST: &[i32] = &[10, 20, 30];
+
+fn main() {
+    println!("{}", if LIST.len() > 1 { LIST[1] } else { -1 });
+    println!("{}", if LIST.len() > 5 { LIST[5] } else { -1 });
+}

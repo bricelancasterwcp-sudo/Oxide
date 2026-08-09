@@ -1,0 +1,22 @@
+fn is_positive(x: Int) -> Bool {
+    x > 0
+}
+
+fn max_val(v: &Vec<Int>) -> Int {
+    let mut max = v.get(0).unwrap_or(0)
+    for x in v {
+        if x > max {
+            max = x
+        }
+    }
+    max
+}
+
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7)
+    let count_pos = nums.iter().filter(is_positive).count()
+    let largest = max_val(&nums)
+    print(count_pos)
+    print(largest)
+    drop nums
+}

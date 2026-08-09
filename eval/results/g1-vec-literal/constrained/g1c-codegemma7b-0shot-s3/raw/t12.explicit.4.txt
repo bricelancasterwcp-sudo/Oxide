@@ -1,0 +1,10 @@
+fn main() {
+    let text = "stack".to_string()
+    let mut result = String.new()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    print(result)
+    drop result
+    drop text
+}

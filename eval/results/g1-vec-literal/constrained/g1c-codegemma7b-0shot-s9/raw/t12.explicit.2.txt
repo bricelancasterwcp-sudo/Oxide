@@ -1,0 +1,14 @@
+fn reverse(s: &Str) -> Str {
+    let mut chars = chars(s)
+    let mut result = str()
+    while len(chars) > 0 {
+        result = concat(result, chars(chars))
+        chars = get(chars, 1)
+    }
+    result
+}
+
+fn main() {
+    let text = str("stack")
+    print(reverse(text))
+}

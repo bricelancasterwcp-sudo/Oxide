@@ -1,0 +1,28 @@
+struct PrimeCheck { is_prime: Bool }
+
+fn is_prime(n: Int) -> Bool {
+    if n <= 1 {
+        return False
+    }
+    for i in range(2, to_float(n).sqrt().trunc() + 1) {
+        if n % i == 0 {
+            return False
+        }
+    }
+    True
+}
+
+fn count_primes(limit: Int) -> Int {
+    let mut count = 0
+    for i in range(2, limit) {
+        if is_prime(i) {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn main() {
+    let prime_count = count_primes(100)
+    print(prime_count)
+}

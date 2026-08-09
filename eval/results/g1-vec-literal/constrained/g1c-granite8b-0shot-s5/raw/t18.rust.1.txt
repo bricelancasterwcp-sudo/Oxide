@@ -1,0 +1,50 @@
+```rust
+pub fn main(){
+    let rect = rectangle(3,4);
+    let tri = triangle(3,4,5);
+    let rect2 = rectangle(2,5);
+
+    println!("{}", rect.perimeter());
+    println!("{}", tri.perimeter());
+    println!("{}", rect2.perimeter());
+}
+
+struct Triangle{
+    side_a: u32,
+    side_b: u32,
+    side_c: u32,
+}
+
+impl Triangle{
+    pub fn new(side_a: u32, side_b: u32, side_c: u32) -> Self {
+        Self { side_a, side_b, side_c }
+    }
+
+    pub fn perimeter(&self) -> u32 {
+        self.side_a + self.side_b + self.side_c
+    }
+}
+
+struct Rectangle{
+    length: u32,
+    width: u32,
+}
+
+impl Rectangle{
+    pub fn new(length: u32, width: u32) -> Self {
+        Self { length, width }
+    }
+
+    pub fn perimeter(&self) -> u32 {
+        2 * (self.length + self.width)
+    }
+}
+
+fn rectangle(length: u32, width: u32) -> Rectangle {
+    Rectangle::new(length, width)
+}
+
+fn triangle(side_a: u32, side_b: u32, side_c: u32) -> Triangle {
+    Triangle::new(side_a, side_b, side_c)
+}
+```

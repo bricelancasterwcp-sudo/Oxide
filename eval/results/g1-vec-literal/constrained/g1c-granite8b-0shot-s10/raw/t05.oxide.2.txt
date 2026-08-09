@@ -1,0 +1,19 @@
+struct Seq { a: Int, b: Int }
+
+fn seq(n: Int) -> Seq {
+    Seq(1, 1)
+}
+
+fn next(s: Seq) -> Seq {
+    Seq(s.b, s.a + s.b)
+}
+
+fn main() {
+    let mut s = seq(0)
+    let mut i = 0
+    while i < 20 {
+        s = next(s)
+        i = i + 1
+    }
+    print(s.b)
+}

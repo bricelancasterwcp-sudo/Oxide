@@ -1,0 +1,32 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let v = vec(5, 10, 15, 20)
+    let divisors = vec(5, 0, 4)
+    for d in divisors {
+        if d == 0 {
+            print_str("undefined")
+        } else {
+            match first_big(push(push(v, 3), 42)) / d {
+                None => print_str("undefined"),
+                Some(n) => print(n),
+            }
+        }
+    }
+}

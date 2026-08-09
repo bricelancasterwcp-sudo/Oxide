@@ -1,0 +1,14 @@
+fn main() {
+    let nums = vec(4, 1, 7, 3, 9, 2)
+    let mut out = vec()
+    for x in nums {
+        if x > 3 {
+            out.push(x)
+        }
+    }
+    for y in out {
+        print(y)
+        print_str("\n")
+    }
+    print(out.len())
+}

@@ -1,0 +1,301 @@
+fn is_prime(x: Int) -> Bool {
+    if x <= 1 {
+        return false
+    }
+    for n in 2.to_int() + 1.to_int() {
+        if x % n == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn main() {
+    let mut count = 0
+    for x in 2.to_int() + 1.to_int() {
+        if is_prime(x) {
+            count = count + 1
+        }
+    }
+    print(count)
+    drop count
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    vec(v, x)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < len(v) {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    (a.to_int() + 1.to_int()).to_int().zip(b.to_int()).filter(Some).map(Some).collect()
+}
+
+fn clone(x: &Int) -> Int {
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    a.to_owned() + b.to_owned()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(Some).collect()
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse().ok()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn print(x: Int) {
+    println("{}", x)
+}
+
+fn print_str(s: &Str) {
+    println("{}", s)
+}
+
+fn vec() -> Vec<Int> {
+    vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    vec(v, x)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < len(v) {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    (a.to_int() + 1.to_int()).to_int().zip(b.to_int()).filter(Some).map(Some).collect()
+}
+
+fn clone(x: &Int) -> Int {
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    a.to_owned() + b.to_owned()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(Some).collect()
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse().ok()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn print(x: Int) {
+    println("{}", x)
+}
+
+fn print_str(s: &Str) {
+    println("{}", s)
+}
+
+fn vec() -> Vec<Int> {
+    vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    vec(v, x)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < len(v) {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    (a.to_int() + 1.to_int()).to_int().zip(b.to_int()).filter(Some).map(Some).collect()
+}
+
+fn clone(x: &Int) -> Int {
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    a.to_owned() + b.to_owned()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(Some).collect()
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse().ok()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn print(x: Int) {
+    println("{}", x)
+}
+
+fn print_str(s: &Str) {
+    println("{}", s)
+}
+
+fn vec() -> Vec<Int> {
+    vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    vec(v, x)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < len(v) {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    (a.to_int() + 1.to_int()).to_int().zip(b.to_int()).filter(Some).map(Some).collect()
+}
+
+fn clone(x: &Int) -> Int {
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    a.to_owned() + b.to_owned()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(Some).collect()
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse().ok()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn print(x: Int) {
+    println("{}", x)
+}
+
+fn print_str(s: &Str) {
+    println("{}", s)
+}
+
+fn vec() -> Vec<Int> {
+    vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    vec(v, x)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < len(v) {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    (a.to_int() + 1.to_int()).to_int().zip(b.to_int()).filter(Some).map(Some).collect()
+}
+
+fn clone(x: &Int) -> Int {
+    

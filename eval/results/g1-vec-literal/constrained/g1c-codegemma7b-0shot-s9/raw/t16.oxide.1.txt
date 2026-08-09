@@ -1,0 +1,6 @@
+fn main() {
+    let x = 100
+    print(trunc(x / 5))
+    print(x / 0) // undefined
+    print(trunc(x / 4))
+}

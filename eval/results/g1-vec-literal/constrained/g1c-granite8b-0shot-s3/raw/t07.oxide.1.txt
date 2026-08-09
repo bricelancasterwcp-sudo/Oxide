@@ -1,0 +1,332 @@
+fn main() {
+    let mut v = vec()
+    for i in 1.step_to(8) {
+        v = push(v, 3 * i)
+    }
+    let sum = reduce(v, 0, add)
+    print(sum)
+}
+
+fn reduce(v: Vec<Int>, init: Int, op: Int, x: Int) -> Int {
+    if v.is_empty() {
+        init
+    } else {
+        op(reduce(v.tail(), init, op), v.head())
+    }
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Vec { head: Int, tail: Vec }
+
+fn vec() -> Vec {
+    Vec(0, Vec())
+}
+
+fn push(v: Vec, x: Int) -> Vec {
+    Vec(x, v)
+}
+
+fn is_empty(v: Vec) -> Bool {
+    if v.tail.is_empty() {
+        true
+    } else {
+        false
+    }
+}
+
+fn tail(v: Vec) -> Vec {
+    v.tail
+}
+
+fn head(v: Vec) -> Int {
+    v.head
+}
+
+fn step_to(v: Int, n: Int) -> Vec {
+    if v == n {
+        push(vec(), v)
+    } else {
+        push(step_to(v + 1, n), v)
+    }
+}
+
+struct Int { val: Int }
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+}
+
+fn print_str(s: Str) {
+    let s1 = s + "\n"
+    let p: Int = s1.len()
+    print_str_len(s1, 0, p)
+}
+
+fn print_str_len(s: Str, i: Int, p: Int) {
+    if i == p {
+        return
+    } else {
+        let c = get(s, i)?
+        let s2 = s.substr(i + 1, p - i - 1)
+        let p2: Int = s2.len()
+        print_int(c)
+        print_str_len(s2, 0, p2)
+    }
+}
+
+fn str_from_int(n: Int) -> Str {
+    let s = n.to_str()
+    let s2 = "0".repeat(3 - s.len())
+    s2 + s
+}
+
+fn to_str(x: Int) -> Str {
+    let s: Str = x.to_str()
+    s
+}
+
+struct Str { val: Str }
+
+fn len(s: Str) -> Int {
+    let p: Int = s.len()
+    Int(p)
+}
+
+fn substr(s: Str, i: Int, n: Int) -> Str {
+    let s2: Str = s.substr(i, n)
+    s2
+}
+
+fn repeat(s: Str, n: Int) -> Str {
+    let s2: Str = s.repeat(n)
+    s2
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let s: Str = a + b
+    s
+}
+
+struct Bool { val: Bool }
+
+fn parse_int(s: Str) -> Option<Int> {
+    if s == "0" {
+        Some(Int(0))
+    } else {
+        None
+    }
+}
+
+struct Option { val: Option }
+
+fn none() -> Option {
+    Option(None)
+}
+
+struct Some { val: Some }
+
+fn some(x: Int) -> Some {
+    Some(Some(x))
+}
+
+struct None { val: None }
+
+struct Float { val: Float }
+
+fn to_float(n: Int) -> Float {
+    let x: Float = n.to_float()
+    x
+}
+
+fn trunc(x: Float) -> Int {
+    let n: Int = x.trunc()
+    n
+}
+
+struct Unit { val: Unit }
+
+fn main() {
+    let x = some(5)
+    match x {
+        None => print_str("none"),
+        Some(n) => print(n),
+    }
+    print(len(concat("foo", "bar")))
+}
+
+struct Some { val: Some }
+
+fn some(x: Int) -> Some {
+    Some(Some(x))
+}
+
+struct None { val: None }
+
+struct Option { val: Option }
+
+fn none() -> Option {
+    Option(None)
+}
+
+struct Int { val: Int }
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+}
+
+fn print_str(s: Str) {
+    let s1 = s + "\n"
+    let p: Int = s1.len()
+    print_str_len(s1, 0, p)
+}
+
+fn print_str_len(s: Str, i: Int, p: Int) {
+    if i == p {
+        return
+    } else {
+        let c = get(s, i)?
+        let s2 = s.substr(i + 1, p - i - 1)
+        let p2: Int = s2.len()
+        print_int(c)
+        print_str_len(s2, 0, p2)
+    }
+}
+
+fn str_from_int(n: Int) -> Str {
+    let s: Str = n.to_str()
+    s
+}
+
+struct Str { val: Str }
+
+fn len(s: Str) -> Int {
+    let p: Int = s.len()
+    Int(p)
+}
+
+fn substr(s: Str, i: Int, n: Int) -> Str {
+    let s2: Str = s.substr(i, n)
+    s2
+}
+
+fn repeat(s: Str, n: Int) -> Str {
+    let s2: Str = s.repeat(n)
+    s2
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let s: Str = a + b
+    s
+}
+
+struct Bool { val: Bool }
+
+fn parse_int(s: Str) -> Option<Int> {
+    if s == "0" {
+        Some(Int(0))
+    } else {
+        None
+    }
+}
+
+struct Option { val: Option }
+
+fn none() -> Option {
+    Option(None)
+}
+
+struct Some { val: Some }
+
+fn some(x: Int) -> Some {
+    Some(Some(x))
+}
+
+struct None { val: None }
+
+struct Float { val: Float }
+
+fn to_float(n: Int) -> Float {
+    let x: Float = n.to_float()
+    x
+}
+
+fn trunc(x: Float) -> Int {
+    let n: Int = x.trunc()
+    n
+}
+
+struct Unit { val: Unit }
+
+fn main() {
+    let x = some(5)
+    match x {
+        None => print_str("none"),
+        Some(n) => print(n),
+    }
+    print(len(concat("foo", "bar")))
+}
+
+struct Some { val: Some }
+
+fn some(x: Int) -> Some {
+    Some(Some(x))
+}
+
+struct None { val: None }
+
+struct Option { val: Option }
+
+fn none() -> Option {
+    Option(None)
+}
+
+struct Int { val: Int }
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+}
+
+fn print_str(s: Str) {
+    let s1 = s + "\n"
+    let p: Int = s1.len()
+    print_str_len(s1, 0, p)
+}
+
+fn print_str_len(s: Str, i: Int, p: Int) {
+    if i == p {
+        return
+    } else {
+        let c = get(s, i)?
+        let s2 = s.substr(i + 1, p - i - 1)
+        let p2: Int = s2.len()
+        print_int(c)
+        print_str_len(s2, 0, p2)
+    }
+}
+
+fn str_from_int(n: Int) -> Str {
+    let s: Str = n.to_str()
+    s
+}
+
+struct Str { val: Str }
+
+fn len(s: Str) -> Int {
+    let p: Int = s.len()
+    Int(p)
+}
+
+fn substr(s: Str, i: Int, n: Int) -> Str {
+    let s2: Str = s.substr(i, n)
+    s2
+}
+
+fn repeat(s: Str, n: Int) -> Str {
+    let s2: Str = s.repeat(n)
+    s2
+}
+
+fn concat(a: Str, b: Str)

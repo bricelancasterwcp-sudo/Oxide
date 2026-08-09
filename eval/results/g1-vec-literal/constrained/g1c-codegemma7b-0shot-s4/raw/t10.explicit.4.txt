@@ -1,0 +1,268 @@
+fn main() {
+    let list = vec(4, 1, 7, 3, 9, 2)
+    let mut kept = 0
+    for n in &list {
+        if n > &list {
+            print(n)
+            print("\n")
+            kept = kept + 1
+        }
+    }
+    print(kept)
+    drop list
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    push(push(push(push(push(push(vec(), a), b), c), d), e), f)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut v = v
+    v.push(x)
+    v
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print(c)
+    }
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut digits = vec()
+    let mut n = n
+    while n > 0 {
+        digits.push(int_to_char(n % 10))
+        n = trunc(n / 10)
+    }
+    let mut s = str()
+    for d in reverse(&digits) {
+        s = concat(s, d)
+    }
+    if s == str() {
+        s = "0"
+    }
+    s
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut v = vec()
+    for i in 0.to_int() {
+        if s.len() <= i {
+            break
+        }
+        v.push(str(s.chars().nth(i).unwrap()))
+    }
+    v
+}
+
+fn reverse(v: &Vec<Int>) -> Vec<Int> {
+    let mut v = v.to_vec()
+    let mut a = 0.to_int()
+    let mut b = v.len().to_int() - 1.to_int()
+    while a < b {
+        let tmp = v.get(a).unwrap()
+        v.set(a, v.get(b).unwrap())
+        v.set(b, tmp)
+        a = a + 1.to_int()
+        b = b - 1.to_int()
+    }
+    v
+}
+
+fn str(c: Str) -> Str {
+    c
+}
+
+fn drop_vec(v: Vec<Int>) {
+    drop v
+}
+
+fn print_char(c: Str) {
+    print_str(c)
+}
+
+fn int_to_char(n: Int) -> Str {
+    if n == 0 {
+        return "0"
+    }
+    let mut n = n
+    let mut digits = vec()
+    while n > 0 {
+        digits.push(if n % 10 == 0 { 10 } else { n % 10 })
+        n = trunc(n / 10)
+    }
+    let mut s = str()
+    for d in reverse(&digits) {
+        s = concat(s, int_to_char(d))
+    }
+    s
+}
+
+fn drop_str(s: Str) {
+    drop s
+}
+
+fn drop_int(n: Int) {
+    drop n
+}
+
+fn drop_bool(b: Bool) {
+    drop b
+}
+
+fn drop_unit() {
+    drop unit
+}
+
+fn drop_float(f: Float) {
+    drop f
+}
+
+fn drop_option(o: Option<Int>) {
+    drop o
+}
+
+fn drop_result(r: Result<Int, Str>) {
+    drop r
+}
+
+fn reverse(v: &Vec<Int>) -> Vec<Int> {
+    let mut v = v.to_vec()
+    let mut a = 0.to_int()
+    let mut b = v.len().to_int() - 1.to_int()
+    while a < b {
+        let tmp = v.get(a).unwrap()
+        v.set(a, v.get(b).unwrap())
+        v.set(b, tmp)
+        a = a + 1.to_int()
+        b = b - 1.to_int()
+    }
+    v
+}
+
+fn drop_vec(v: Vec<Int>) {
+    drop v
+}
+
+fn drop_str(s: Str) {
+    drop s
+}
+
+fn drop_int(n: Int) {
+    drop n
+}
+
+fn drop_bool(b: Bool) {
+    drop b
+}
+
+fn drop_unit() {
+    drop unit
+}
+
+fn drop_float(f: Float) {
+    drop f
+}
+
+fn drop_option(o: Option<Int>) {
+    drop o
+}
+
+fn drop_result(r: Result<Int, Str>) {
+    drop r
+}
+
+fn drop_chars(c: Vec<Str>) {
+    drop c
+}
+
+fn drop_digits(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str(d: Vec<Str>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print_int(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print_int_print(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print_int_print_int(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print_int_print_int_drop(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print_int_print_int_drop_int(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print_int_print_int_drop_int_drop(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print_int_print_int_drop_int_drop_int(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print_int_print_int_drop_int_drop_int_drop(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print_int_print_int_drop_int_drop_int_drop_int(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print_int_print_int_drop_int_drop_int_drop_int_drop(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_char_conv_print_int_str_print_int_print_int_drop_int_drop_int_drop_int_drop_int(d: Vec<Int>) {
+    drop d
+}
+
+fn drop_digits_rev_str_int_

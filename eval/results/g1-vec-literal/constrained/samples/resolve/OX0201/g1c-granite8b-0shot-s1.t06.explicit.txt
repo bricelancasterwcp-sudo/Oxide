@@ -1,0 +1,41 @@
+fn is_perfect_number(n: Int) -> Bool {
+    let sum = 1 + reduce(divisors(n), 0, &add)
+    sum == n
+}
+
+fn divisors(n: Int) -> Vec<Int> {
+    let mut divisors = vec()
+    let mut i = 1
+    while i * i <= n {
+        if n % i == 0 {
+            push(divisors, i)
+            if i * i != n {
+                push(divisors, n / i)
+            }
+        }
+        i = i + 1
+    }
+    divisors
+}
+
+fn reduce(v: &Vec<Int>, init: Int, f: &Fn<Int, Int, Int>) -> Int {
+    let mut result = init
+    for e in v {
+        result = f(result, e, 1)
+    }
+    result
+}
+
+fn add(a: Int, b: Int, c: Int) -> Int {
+    a + b + c
+}
+
+fn main() {
+    let i = 1
+    while i * i <= 1000 {
+        if is_perfect_number(i * i) {
+            print(i * i)
+        }
+        i = i + 1
+    }
+}

@@ -1,0 +1,14 @@
+fn calculate_cost(unit_price: Int, quantity: Int) -> Int {
+    unit_price * quantity
+}
+
+fn main() {
+    let pen_cost = calculate_cost(3, 4)
+    let pad_cost = calculate_cost(9, 2)
+    let ink_cost = calculate_cost(5, 3)
+    let total_cost = pen_cost + pad_cost + ink_cost
+    print(total_cost)
+    let highest_cost = if pen_cost > pad_cost && pen_cost > ink_cost { "pen" } else { if pad_cost > ink_cost { "pad" } else { "ink" } }
+    print(&highest_cost)
+    drop highest_cost
+}

@@ -1,0 +1,6 @@
+```rust
+fn main() {
+    let sum: i32 = (0..8).map(|x| 3 * (x + 1)).sum();
+    println!("{}", sum);
+}
+```

@@ -1,0 +1,28 @@
+fn calc_cost(unit_price: Int, quantity: Int) -> Int {
+    unit_price * quantity
+}
+
+fn print_item_name(name: &Str) {
+    print(name)
+}
+
+fn main() {
+    let pen_cost = calc_cost(3, 4)
+    let pad_cost = calc_cost(9, 2)
+    let ink_cost = calc_cost(5, 3)
+    let total_cost = pen_cost + pad_cost + ink_cost
+    print_cost(total_cost)
+    if pen_cost > pad_cost {
+        if pen_cost > ink_cost {
+            print_item_name("pen")
+        } else {
+            print_item_name("ink")
+        }
+    } else {
+        if pad_cost > ink_cost {
+            print_item_name("pad")
+        } else {
+            print_item_name("ink")
+        }
+    }
+}

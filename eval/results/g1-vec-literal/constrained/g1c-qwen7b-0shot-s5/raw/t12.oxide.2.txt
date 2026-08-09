@@ -1,0 +1,7 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn main() {
+    let r = Reading { label: "stack", values: vec() }
+    let reversed = str_len(r.label).map(str_chars).map(rev).map(collect)
+    print_str(reversed)
+}

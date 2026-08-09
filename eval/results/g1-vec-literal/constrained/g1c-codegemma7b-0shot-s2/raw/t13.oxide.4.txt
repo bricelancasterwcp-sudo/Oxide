@@ -1,0 +1,29 @@
+fn char_to_string(c: Char) -> String {
+    return c.to_string()
+}
+
+fn vec_new() -> Vec<String> {
+    return vec()
+}
+
+fn palindrome(word: String) -> String {
+    let word_chars: Vec<String> = word.chars().map(char_to_string).collect_vec()
+    let mut reversed_word_chars: Vec<String> = vec_new()
+    for c in word_chars.iter().rev() {
+        reversed_word_chars.push(c.clone())
+    }
+    if word_chars == reversed_word_chars {
+        return String("true")
+    } else {
+        return String("false")
+    }
+}
+
+fn main() {
+    let level = palindrome("level".to_string())
+    let stereo = palindrome("stereo".to_string())
+    let rotor = palindrome("rotor".to_string())
+    println(level)
+    println(stereo)
+    println(rotor)
+}

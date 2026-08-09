@@ -1,0 +1,50 @@
+fn main() {
+    struct Shape;
+
+    impl Shape {
+        fn perimeter(&self) -> f64 {
+            0.0
+        }
+    }
+
+    struct Rectangle {
+        width: f64,
+        height: f64,
+    }
+
+    impl Rectangle {
+        fn new(width: f64, height: f64) -> Self {
+            Rectangle { width, height }
+        }
+
+        fn perimeter(&self) -> f64 {
+            2.0 * (self.width + self.height)
+        }
+    }
+
+    struct Triangle {
+        a: f64,
+        b: f64,
+        c: f64,
+    }
+
+    impl Triangle {
+        fn new(a: f64, b: f64, c: f64) -> Self {
+            Triangle { a, b, c }
+        }
+
+        fn perimeter(&self) -> f64 {
+            self.a + self.b + self.c
+        }
+    }
+
+    let shapes = [
+        Shape,
+        Shape,
+        Shape,
+    ];
+
+    for shape in shapes {
+        println!("{}", shape.perimeter());
+    }
+}

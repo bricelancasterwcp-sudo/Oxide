@@ -1,0 +1,24 @@
+fn count_s(text: Str) -> Int {
+    let count = 0
+    for ch in chars(text) {
+        if ch == "s" {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_chars(text: Str) -> Int {
+    let mut chars_map = map()
+    for ch in chars(text) {
+        chars_map.insert(ch, true)
+    }
+    chars_map.len()
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_s(text))
+    print_str(" ")
+    print(distinct_chars(text))
+}

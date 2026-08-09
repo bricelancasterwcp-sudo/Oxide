@@ -1,0 +1,15 @@
+fn fib(n: Int) -> Int {
+    let a = 1
+    let b = 1
+    for _ in 0 < n {
+        let c = a + b
+        drop a
+        a = b
+        b = c
+    }
+    a
+}
+
+fn main() {
+    print(fib(19))
+}

@@ -1,0 +1,314 @@
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    print(match first_big(v) {
+            Some(n) => n + 2,
+            None => -1,
+        })
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum == push(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let v2 = clone(v)
+    v2.push(x)
+}
+
+struct Sum { sum: Int }
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let v2 = clone(v)
+    v2.push(x)
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    match first_big(v) {
+        Some(n) => print(n + 2),
+        None => print_str("no big number"),
+    }
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        if x > 10 {
+            sum.sum == push(sum.sum, x)
+        }
+    }
+    match sum.sum {
+        Some(n) => print(n),
+        None => print_str("no big number"),
+    }
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found
+}
+
+struct Sum { sum: Int }
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let v2 = clone(v)
+    v2.push(x)
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        if x > 10 {
+            sum.sum == push(sum.sum, x)
+        }
+    }
+    match sum.sum {
+        Some(n) => print(n),
+        None => print_str("no big number"),
+    }
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found
+}
+
+struct Sum { sum: Int }
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let v2 = clone(v)
+    v2.push(x)
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        if x > 10 {
+            sum.sum == push(sum.sum, x)
+        }
+    }
+    match sum.sum {
+        Some(n) => print(n),
+        None => print_str("no big number"),
+    }
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        if x > 10 {
+            sum.sum == push(sum.sum, x)
+        }
+    }
+    print(sum.sum)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let v2 = clone(v)
+    v2.push(x)
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        if x > 10 {
+            sum.sum == push(sum.sum, x)
+        }
+    }
+    match sum.sum {
+        Some(n) => print(n),
+        None => print_str("no big number"),
+    }
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found
+}
+
+struct Sum { sum: Int }
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let v2 = clone(v)
+    v2.push(x)
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        if x > 10 {
+            sum.sum == push(sum.sum, x)
+        }
+    }
+    match sum.sum {
+        Some(n) => print(n),
+        None => print_str("no big number"),
+    }
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found
+}
+
+struct Sum { sum: Int }
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let v2 = clone(v)
+    v2.push(x)
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        if x > 10 {
+            sum.sum == push(sum.sum, x)
+        }
+    }
+    match sum.sum {
+        Some(n) => print(n),
+        None => print_str("no big number"),
+    }
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found
+}
+
+struct Sum { sum: Int }
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let v2 = clone(v)
+    v2.push(x)
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        if x > 10 {
+            sum.sum == push(sum.sum, x)
+        }
+    }
+    match sum.sum {
+        Some(n) => print(n),
+        None => print_str("no big number"),
+    }
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        if x > 10 {
+            sum.sum == push(sum.sum, x)
+        }
+    }
+    match sum.sum {
+        Some(n) => print(n),
+        None => print_str("no big number"),
+    }
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found

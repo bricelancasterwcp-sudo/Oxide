@@ -1,0 +1,22 @@
+fn parse_many(nums: &Vec<String>) -> Result<Int, Int> {
+    let mut total = 0
+    let mut count = 0
+    for num in nums {
+        match parse_int(num) {
+            Some(n) => {
+                total = total + n
+                count = count + 1
+            },
+            None => count == count + 1,
+        }
+    }
+    Ok(total)
+}
+
+fn main() {
+    let numbers = vec_expr("12", "x", "30")
+    match parse_many(&numbers) {
+        Ok(t) => print(t),
+        Err(c) => print(c),
+    }
+}

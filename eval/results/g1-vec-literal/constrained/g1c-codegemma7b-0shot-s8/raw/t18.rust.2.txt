@@ -1,0 +1,9 @@
+fn main() {
+    let rect_1 = (3, 4);
+    let tri = (3, 4, 5);
+    let rect_2 = (2, 5);
+
+    println!("Perimeter of Rectangle 1: {}", 2 * (rect_1.0 + rect_1.1));
+    println!("Perimeter of Triangle: {}", 2 * (tri.0 + tri.1 + tri.2));
+    println!("Perimeter of Rectangle 2: {}", 2 * (rect_2.0 + rect_2.1));
+}

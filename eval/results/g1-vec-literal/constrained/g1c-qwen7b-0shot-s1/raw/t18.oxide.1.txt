@@ -1,0 +1,27 @@
+struct Point { x: Int, y: Int }
+
+struct Rectangle { width: Int, height: Int }
+
+struct Triangle { sides: Vec<Int> }
+
+fn perimeter(r: Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn perimeter(t: Triangle) -> Int {
+    t.sides.iter().sum()
+}
+
+fn perimeter(p: Point) -> Int {
+    let Point { x, y } = p
+    ((x - y).pow(2) + (x + y).pow(2)).sqrt() * 2
+}
+
+fn main() {
+    let rect1 = Rectangle { width: 3, height: 4 }
+    let rect2 = Rectangle { width: 2, height: 5 }
+    let tri = Triangle { sides: vec(3, 4, 5) }
+    print(perimeter(rect1))
+    print(perimeter(tri))
+    print(perimeter(rect2))
+}

@@ -1,0 +1,42 @@
+fn len(v: &Vec<Int>) -> Int {
+    let mut i = 0
+    for _ in v {
+        i = i + 1
+    }
+    i
+}
+
+fn area(v: &Vec<Int>) -> Int {
+    if len(v) == 2 {
+        return v.get(0).unwrap() * v.get(1).unwrap()
+    } else if len(v) == 3 {
+        let s = v.get(0).unwrap() + v.get(1).unwrap() + v.get(2).unwrap()
+        return (s * (s - v.get(0).unwrap()) * (s - v.get(1).unwrap()) * (s - v.get(2).unwrap())).sqrt() / 4.0
+    } else {
+        return 0
+    }
+}
+
+fn perimeter(v: &Vec<Int>) -> Int {
+    if len(v) == 2 {
+        return 2 * (v.get(0).unwrap() + v.get(1).unwrap())
+    } else if len(v) == 3 {
+        let s = v.get(0).unwrap() + v.get(1).unwrap() + v.get(2).unwrap()
+        return s + (s - v.get(0).unwrap()) + (s - v.get(1).unwrap()) + (s - v.get(2).unwrap())
+    } else {
+        return 0
+    }
+}
+
+fn main() {
+    let r1 = vec(3, 4)
+    let t1 = vec(3, 4, 5)
+    let r2 = vec(2, 5)
+    print(perimeter(&r1))
+    print(area(&t1))
+    print(perimeter(&r2))
+    print(area(&r2))
+    drop r1
+    drop t1
+    drop r2
+}

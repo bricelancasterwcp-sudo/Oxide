@@ -1,0 +1,21 @@
+fn collatz(mutsteps: Int) -> Int {
+    let n = 27
+    let mut i = n
+    while i != 1 {
+        if i % 2 == 0 {
+            i = i / 2
+        } else {
+            i = (i * 3) + 1
+        }
+        if i == n {
+            print("inf")
+            break
+        }
+        mutsteps = mutsteps + 1
+    }
+    mutsteps
+}
+
+fn main() {
+    print(collatz(0))
+}

@@ -1,0 +1,292 @@
+fn main() {
+    let mut list = vec(1, 2, 3, 4, 5)
+    while len(list) > 0 {
+        print(get(list, len(list) - 1)?)
+        list = pop(pop(list)?)?
+    }
+}
+
+fn pop(v: Vec<Int>) -> Option<Vec<Int>> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(vec(range(0, len(v) - 1)?, v.last()?))
+    }
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < len(v) {
+        Some(v.get(i)?)
+    } else {
+        None
+    }
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(x: Int, y: Int, z: Int, w: Int, t: Int) -> Vec<Int> {
+    vec(x, y, z, w, t)
+}
+
+fn range(a: Int, b: Int) -> Option<Int> {
+    if a < b {
+        Some(a)
+    } else {
+        None
+    }
+}
+
+fn last(v: Vec<Int>) -> Option<Int> {
+    if len(v) > 0 {
+        Some(v.get(len(v) - 1)?)
+    } else {
+        None
+    }
+}
+
+fn print_str(x: Str) {
+    println(x)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_str()
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    s.parse()
+}
+
+fn clone(x: T) -> T {
+    x.clone()
+}
+
+fn str_len(s: Str) -> Int {
+    s.len()
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    a.concat(b)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    s.chars().map(Str).collect()
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    v.push(x)
+    v
+}
+
+fn is_none(x: Option<T>) -> Bool {
+    x == None
+}
+
+fn is_some(x: Option<T>) -> Bool {
+    x != None
+}
+
+fn unwrap(x: Option<T>) -> T {
+    x.unwrap()
+}
+
+fn unwrap_or(x: Option<T>, d: T) -> T {
+    x.unwrap_or(d)
+}
+
+fn unwrap_or_else(x: Option<T>, f: FnOnceWithoutArgs<T>) -> T {
+    x.unwrap_or_else(f)
+}
+
+fn and_then(x: Option<T>, f: FnOnceWithArgs<T, Option<U>>) -> Option<U> {
+    x.and_then(f)
+}
+
+fn map(x: Option<T>, f: FnOnceWithArgs<T, Option<U>>) -> Option<U> {
+    x.map(f)
+}
+
+fn filter(x: Option<T>, f: FnOnceWithArgs<T, Option<T>>) -> Option<T> {
+    x.filter(f)
+}
+
+fn ok_or(x: Result<T, E>, d: E) -> Result<T, E> {
+    x.ok_or(d)
+}
+
+fn ok_or_else(x: Result<T, E>, f: FnOnceWithoutArgs<Result<T, E>>) -> Result<T, E> {
+    x.ok_or_else(f)
+}
+
+fn expect(x: Result<T, E>, msg: Str) -> T {
+    x.expect(msg)
+}
+
+fn expect_err(x: Result<T, E>, msg: Str) -> E {
+    x.expect_err(msg)
+}
+
+fn zip(a: Vec<T>, b: Vec<U>) -> Vec<Tuple<T, U>> {
+    a.zip(b).map(Tuple)
+}
+
+fn take(v: Vec<T>, n: Int) -> Vec<T> {
+    v.take(n)
+}
+
+fn drop(v: Vec<T>) {
+    drop(v)
+}
+
+fn push_str(v: Vec<Str>, x: Str) -> Vec<Str> {
+    v.push(x)
+    v
+}
+
+fn pop_str(v: Vec<Str>) -> Option<Str> {
+    v.pop()
+}
+
+fn last_str(v: Vec<Str>) -> Option<Str> {
+    v.last()
+}
+
+fn get_str(v: Vec<Str>, i: Int) -> Option<Str> {
+    v.get(i)
+}
+
+fn len_str(v: Vec<Str>) -> Int {
+    v.len()
+}
+
+fn contains(v: Vec<T>, x: T) -> Bool {
+    v.contains(x)
+}
+
+fn remove(v: Vec<T>, x: T) -> Vec<T> {
+    v.remove(x)
+    v
+}
+
+fn insert(v: Vec<T>, i: Int, x: T) -> Vec<T> {
+    v.insert(i, x)
+    v
+}
+
+fn sort(v: Vec<T>) -> Vec<T> {
+    v.sort()
+    v
+}
+
+fn reverse(v: Vec<T>) -> Vec<T> {
+    v.reverse()
+    v
+}
+
+fn cmp(a: T, b: T) -> Int {
+    a.cmp(b)
+}
+
+fn min(a: T, b: T) -> T {
+    a.min(b)
+}
+
+fn max(a: T, b: T) -> T {
+    a.max(b)
+}
+
+fn abs(a: T) -> T {
+    a.abs()
+}
+
+fn signum(a: T) -> T {
+    a.signum()
+}
+
+fn sqrt(a: T) -> T {
+    a.sqrt()
+}
+
+fn cbrt(a: T) -> T {
+    a.cbrt()
+}
+
+fn exp(a: T) -> T {
+    a.exp()
+}
+
+fn ln(a: T) -> T {
+    a.ln()
+}
+
+fn log10(a: T) -> T {
+    a.log10()
+}
+
+fn log2(a: T) -> T {
+    a.log2()
+}
+
+fn sin(a: T) -> T {
+    a.sin()
+}
+
+fn cos(a: T) -> T {
+    a.cos()
+}
+
+fn tan(a: T) -> T {
+    a.tan()
+}
+
+fn asin(a: T) -> T {
+    a.asin()
+}
+
+fn acos(a: T) -> T {
+    a.acos()
+}
+
+fn atan(a: T) -> T {
+    a.atan()
+}
+
+fn atan2(a: T, b: T) -> T {
+    a.atan2(b)
+}
+
+fn is_nan(a: T) -> Bool {
+    a.is_nan()
+}
+
+fn is_infinite(a: T) -> Bool {
+    a.is_infinite()
+}
+
+fn is_finite(a: T) -> Bool {
+    a.is_finite()
+}
+
+fn min_by(v: Vec<T>, f: FnOnceWithArgs<T, T, Ordering>) -> Option<T> {
+    v.min_by(f)
+}
+
+fn max_by(v: Vec<T>, f: FnOnceWithArgs<T, T, Ordering>) -> Option<T> {
+    v.max_by(f)
+}
+
+fn arg_min_by(v: Vec<T>, f: FnOnceWithArgs<T, T, Ordering>) -> Option<Int> {
+    v.arg_

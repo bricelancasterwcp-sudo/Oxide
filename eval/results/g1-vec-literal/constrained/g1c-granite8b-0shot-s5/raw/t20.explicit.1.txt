@@ -1,0 +1,24 @@
+fn pen() -> Item {
+    Item(3, 4)
+}
+
+fn pad() -> Item {
+    Item(9, 2)
+}
+
+fn ink() -> Item {
+    Item(5, 3)
+}
+
+fn item_cost(i: Item) -> Int {
+    i.price * i.quantity
+}
+
+fn main() {
+    let p = pen()
+    let q = pad()
+    let r = ink()
+    print(item_cost(p) + item_cost(q) + item_cost(r))
+    let most_expensive = if item_cost(p) > item_cost(q) { if item_cost(p) > item_cost(r) { "pen" } else { "ink" } } else { if item_cost(q) > item_cost(r) { "pad" } else { "ink" } }
+    print(most_expensive)
+}

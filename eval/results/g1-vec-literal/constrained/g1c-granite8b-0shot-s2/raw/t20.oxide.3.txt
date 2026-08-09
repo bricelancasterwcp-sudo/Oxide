@@ -1,0 +1,34 @@
+fn pen() -> Int {
+    3
+}
+
+fn pad() -> Int {
+    9
+}
+
+fn ink() -> Int {
+    5
+}
+
+fn max(a: Int, b: Int, c: Int) -> Int {
+    if a > b && a > c {
+        a
+    } else if b > a && b > c {
+        b
+    } else {
+        c
+    }
+}
+
+fn main() {
+    let pens = pen() * 4
+    let pads = pad() * 2
+    let ink = ink() * 3
+    let total_cost = pens + pads + ink
+    print(total_cost)
+    match max(pens, pads, ink) {
+        Pen => print("pen"),
+        Pad => print("pad"),
+        Ink => print("ink"),
+    }
+}

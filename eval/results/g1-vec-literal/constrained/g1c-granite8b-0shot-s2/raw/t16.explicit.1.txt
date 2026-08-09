@@ -1,0 +1,22 @@
+fn divmod(x: Int, y: Int) -> Option<Int> {
+    if y == 0 {
+        None
+    } else {
+        Some(x / y)
+    }
+}
+
+fn main() {
+    match divmod(100, 5) {
+        Some(result) => print(result),
+        None => print_str("undefined"),
+    }
+    match divmod(100, 0) {
+        Some(result) => print(result),
+        None => print_str("undefined"),
+    }
+    match divmod(100, 4) {
+        Some(result) => print(result),
+        None => print_str("undefined"),
+    }
+}

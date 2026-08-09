@@ -1,0 +1,14 @@
+fn main() {
+    let a = 100 / 5
+    print(a)
+    print_str("\n")
+    let b = 100 / 0
+    match b {
+        Some(c) => print(c),
+        None => print_str("undefined"),
+    }
+    print_str("\n")
+    let c = 100 / 4
+    print(c)
+    print_str("\n")
+}

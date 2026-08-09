@@ -1,0 +1,44 @@
+fn level(s: Str) -> Bool {
+    let mut chars = chars(&s)
+    let mut bal = 0
+    while bal != 0 && len(&chars) != 0 {
+        let c = get(&chars, 0).unwrap()
+        bal = bal + (c == "(") - (c == ")")
+        chars = clone(&chars)
+    }
+    bal == 0
+}
+
+fn stereo(s: Str) -> Bool {
+    let chars = chars(&s)
+    len(&chars) != 0 && (get(&chars, 0).unwrap() != get(&chars, len(&chars) - 1).unwrap())
+}
+
+fn rotor(s: Str) -> Bool {
+    let chars = chars(&s)
+    let mut i = 0
+    let mut j = len(&chars) - 1
+    while i < j {
+        if get(&chars, i).unwrap() != get(&chars, j).unwrap() {
+            return false
+        }
+        i = i + 1
+        j = j - 1
+    }
+    true
+}
+
+fn main() {
+    print(level("(()"))
+    print(stereo("(()"))
+    print(rotor("(()"))
+    print(level("()"))
+    print(stereo("()"))
+    print(rotor("()"))
+    print(level("()))"))
+    print(stereo("()))"))
+    print(rotor("()))"))
+    print(level(")(()"))
+    print(stereo(")(()"))
+    print(rotor(")(()"))
+}

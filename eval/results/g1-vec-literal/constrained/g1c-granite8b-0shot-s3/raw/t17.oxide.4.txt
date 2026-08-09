@@ -1,0 +1,19 @@
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= len(v) {
+        None
+    } else {
+        Some(get_unsafe(v, i))
+    }
+}
+
+fn get_unsafe(v: Vec<Int>, i: Int) -> Int {
+    clone(get(v, i - 1)? + get(v, i - 2)?)
+}
+
+fn main() {
+    let v = push(push(push(vec(), 10), 20), 30)
+    let a = get(v, 1)?
+    let b = get(v, 5)?
+    print(a)
+    print(b)
+}

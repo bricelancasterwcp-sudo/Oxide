@@ -1,0 +1,25 @@
+fn count_and_print_max(v: &Vec<Int>) {
+    let mut count = 0
+    let mut max = None
+    for x in v {
+        if x > 0 {
+            count = count + 1
+        }
+        max = Some(if letSome(m) == max { if x > m { x } else { m } } else { x })
+    }
+    print(count)
+    print_str("\n")
+    match max {
+        Some(m) => print(m),
+        None => print("No positive values"),
+    }
+    print_str("\n")
+}
+
+fn main() {
+    let nums = push(push(push(vec(), 3), 8), push(vec(), -2))
+    push(nums, push(vec(), 12))
+    push(nums, push(vec(), 7))
+    count_and_print_max(&nums)
+    drop nums
+}

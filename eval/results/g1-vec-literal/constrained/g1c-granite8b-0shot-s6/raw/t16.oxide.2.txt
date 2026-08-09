@@ -1,0 +1,25 @@
+fn divide(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn main() {
+    match divide(100, 5) {
+        Some(q) => print(q),
+        None => print_str("undefined"),
+    }
+    print("\n")
+    match divide(100, 0) {
+        Some(q) => print(q),
+        None => print_str("undefined"),
+    }
+    print("\n")
+    match divide(100, 4) {
+        Some(q) => print(q),
+        None => print_str("undefined"),
+    }
+    print("\n")
+}

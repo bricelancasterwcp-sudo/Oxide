@@ -1,0 +1,17 @@
+fn main() {
+    let mut a = 1
+    let mut b = 1
+    let mut c = 0
+    let mut i = 0
+    while i < 20 {
+        c = a + b
+        drop a
+        a = b
+        drop b
+        b = c
+        drop c
+        c = 0
+        i = i + 1
+    }
+    print(b)
+}

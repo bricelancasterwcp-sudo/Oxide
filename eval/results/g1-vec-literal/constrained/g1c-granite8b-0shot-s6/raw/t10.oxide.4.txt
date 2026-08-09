@@ -1,0 +1,85 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn keep_big(values: Vec<Int>) -> Int {
+    let mut keep = vec()
+    for x in values {
+        if x > 3 {
+            keep = push(keep, x)
+        }
+    }
+    print_str("values kept:")
+    for x in keep {
+        print(x)
+    }
+    len(keep)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+    print(keep_big(vec(4, 1, 7, 3, 9, 2)))
+}
+
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn keep_big(values: Vec<Int>) -> Int {
+    let mut keep = vec()
+    for x in values {
+        if x > 3 {
+            keep = push(keep, x)
+        }
+    }
+    print_str("values kept:")
+    for x in keep {
+        print(x)
+    }
+    len(keep)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+    print(keep_big(vec(4, 1, 7, 3, 9, 2)))
+}

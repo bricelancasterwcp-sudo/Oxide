@@ -1,0 +1,425 @@
+fn main() {
+    let mut numbers = vec(1, 2, 3, 4, 5)
+    while len(numbers) > 0 {
+        print(get(numbers, len(numbers) - 1)?)
+        numbers = pop(numbers)?
+    }
+}
+
+fn pop(v: Vec<Int>) -> Option<Vec<Int>> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(vec(range(0, len(v) - 1)?, v.last()?))
+    }
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= len(v) {
+        None
+    } else {
+        Some(v.get(i)?)
+    }
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn vec(args: Int, elements: Int) -> Vec<Int> {
+    let mut result = Vec { len: 0, ptr: 0 }
+    for _ in range(0, elements) {
+        result = push(result, args)
+    }
+    result
+}
+
+fn range(a: Int, b: Int) -> Option<Int> {
+    if a >= b {
+        None
+    } else {
+        Some(a)
+    }
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print(int_to_str(ord(c)))
+    }
+    print_str("\n")
+}
+
+fn to_str(n: Int) -> Str {
+    if n < 10 {
+        return Str { len: 1, ptr: n + 48 }
+    }
+    let mut result = Str { len: 0, ptr: 0 }
+    let mut number = n
+    while number >= 10 {
+        let digit = number % 10
+        result = push(result, digit)
+        number = number / 10
+    }
+    result = push(result, number)
+    result
+}
+
+fn ord(c: Str) -> Int {
+    c.get(0)? - 48
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    if v.len == v.cap {
+        return vec(v, x)
+    } else {
+        let mut result = v
+        result.len == result.len + 1
+        result.ptr == x
+        result
+    }
+}
+
+fn vec(args: Vec<Int>, elements: Int) -> Vec<Int> {
+    let mut result = args
+    result.len == result.len + elements
+    result
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = vec()
+    let mut position = 0
+    while position < s.len {
+        result = push(result, Str { len: 1, ptr: s.ptr + position })
+        position = position + 1
+    }
+    result
+}
+
+fn to_float(n: Int) -> Float {
+    Float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    Int(x.number)
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+struct Float { number: Int }
+
+struct Str { len: Int, ptr: Int }
+
+struct Vec { len: Int, cap: Int, ptr: Int }
+
+enum Int {
+    Int8(Int8),
+    Int16(Int16),
+    Int32(Int32),
+    Int64(Int64),
+}
+
+enum Float {
+    Float32(Float32),
+    Float64(Float64),
+}
+
+enum Str {
+    Char(Char),
+    String(String),
+}
+
+enum Vec {
+    Empty,
+    Vector(Vector),
+}
+
+struct Vector {
+    len: Int,
+    capacity: Int,
+    ptr: Int,
+}
+
+enum Char {
+    Char(Char),
+}
+
+enum String {
+    String(String),
+}
+
+enum Int8 {
+    Int8(Int8),
+}
+
+enum Int16 {
+    Int16(Int16),
+}
+
+enum Int32 {
+    Int32(Int32),
+}
+
+enum Int64 {
+    Int64(Int64),
+}
+
+enum Float32 {
+    Float32(Float32),
+}
+
+enum Float64 {
+    Float64(Float64),
+}
+
+enum Error {
+    Error(Error),
+}
+
+enum Result {
+    Result(Result),
+}
+
+enum Option {
+    Option(Option),
+}
+
+enum None {
+    None,
+}
+
+enum Some {
+    Some(Some),
+}
+
+enum Cons {
+    Cons(Cons),
+}
+
+enum Nil {
+    Nil,
+}
+
+enum Link {
+    Link(Link),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Variant {
+    Variant(Variant),
+}
+
+enum Nullary {
+    Nullary,
+}
+
+enum Struct {
+    Struct(Struct),
+}
+
+enum Enum {
+    Enum(Enum),
+}
+
+enum Pattern {
+    Pattern(Pattern),
+}
+
+enum Binding {
+    Binding(Binding),
+}
+
+enum Unary {
+    Unary(Unary),
+}
+
+enum Binary {
+    Binary(Binary),
+}
+
+enum Comparison {
+    Comparison(Comparison),
+}
+
+enum Logical {
+    Logical(Logical),
+}
+
+enum Bitwise {
+    Bitwise(Bitwise),
+}
+
+enum Assignment {
+    Assignment(Assignment),
+}
+
+enum Expression {
+    Expression(Expression),
+}
+
+enum Statement {
+    Statement(Statement),
+}
+
+enum Block {
+    Block(Block),
+}
+
+enum Function {
+    Function(Function),
+}
+
+enum Program {
+    Program(Program),
+}
+
+enum Item {
+    Item(Item),
+}
+
+enum Parameter {
+    Parameter(Parameter),
+}
+
+enum Return {
+    Return(Return),
+}
+
+enum While {
+    While(While),
+}
+
+enum For {
+    For(For),
+}
+
+enum Break {
+    Break,
+}
+
+enum Continue {
+    Continue,
+}
+
+enum Match {
+    Match(Match),
+}
+
+enum Try {
+    Try(Try),
+}
+
+enum Catch {
+    Catch(Catch),
+}
+
+enum Const {
+    Const(Const),
+}
+
+enum Label {
+    Label(Label),
+}
+
+enum Unsafe {
+    Unsafe(Unsafe),
+}
+
+enum Code {
+    Code(Code),
+}
+
+enum ConstFunction {
+    ConstFunction(ConstFunction),
+}
+
+enum ConstVariable {
+    ConstVariable(ConstVariable),
+}
+
+enum ConstStruct {
+    ConstStruct(ConstStruct),
+}
+
+enum ConstEnum {
+    ConstEnum(ConstEnum),
+}
+
+enum ConstUnion {
+    ConstUnion(ConstUnion),
+}
+
+enum ConstEnumVariant {
+    ConstEnumVariant(ConstEnumVariant),
+}
+
+enum ConstTuple {
+    ConstTuple(ConstTuple),
+}
+
+enum ConstArray {
+    ConstArray(ConstArray),
+}
+
+enum ConstTupleField {
+    ConstTupleField(ConstTupleField),
+}
+
+enum ConstStructField {
+    ConstStructField(ConstStructField),
+}
+
+enum ConstArrayElement {
+    ConstArrayElement(ConstArrayElement),
+}
+
+enum ConstArrayRange {
+    ConstArrayRange(ConstArrayRange),
+}
+
+enum ConstFunctionBody {
+    ConstFunctionBody(ConstFunctionBody),
+}
+
+enum ConstVariableInitializer {
+    ConstVariableInitializer(ConstVariableInitializer),
+}
+
+enum ConstStructInitializer {
+    ConstStructInitializer(ConstStructInitializer),
+}
+
+enum ConstEnumInitializer {
+    ConstEnumInitializer(ConstEnumInitializer),
+}
+
+enum ConstUnionInitializer {
+    ConstUnionInitializer(ConstUnionInitializer),
+}
+
+enum ConstEnumVariantInitializer {
+    ConstEnumVariantInitializer(ConstEnumVariantInitializer),
+}
+
+enum ConstTupleInitializer {
+    ConstTupleInitializer(ConstTupleInitializer),
+}
+
+enum ConstArrayInitializer {
+    ConstArrayInitializer(ConstArrayInitializer),
+}
+
+enum ConstArrayRangeInitializer {
+    ConstArrayRangeInitializer(ConstArrayRangeInitializer),

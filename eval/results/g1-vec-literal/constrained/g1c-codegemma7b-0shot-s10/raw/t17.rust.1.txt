@@ -1,0 +1,5 @@
+fn main() {
+    let list = [10, 20, 30];
+    println!("{}", list[1]); // 20
+    println!("{}", list[5]); // -1
+}

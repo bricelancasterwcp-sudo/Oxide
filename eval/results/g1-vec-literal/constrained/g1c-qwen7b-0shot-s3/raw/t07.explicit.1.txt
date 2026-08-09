@@ -1,0 +1,14 @@
+fn main() {
+    let mut multiples = Vec(Int)
+    let mut sum = 0
+    let mut count = 0
+    let mut current = 3
+    while count < 8 {
+        multiples = push(multiples, current)
+        sum = sum + current
+        count = count + 1
+        current = current + 3
+    }
+    print(sum)
+    drop multiples
+}

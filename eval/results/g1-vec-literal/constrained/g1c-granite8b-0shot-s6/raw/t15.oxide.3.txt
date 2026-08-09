@@ -1,0 +1,34 @@
+struct Int_str {
+    createState: CXXFLAGS,
+    destructor: CXXDestructor,
+    dropInPlace: CXXDropInPlace,
+    layout: CXXLayout,
+    matchFromSliceWithLen: CXXMethod,
+    matchFromSliceWithLenShort: CXXMethod,
+    matchIntoSlice: CXXMethod,
+    name: CXXStr,
+    ptr: CXXPtr,
+    traits: CXXTraits,
+    typeId: CXXMethod,
+    asSlice: CXXMethod,
+    fromSlice: CXXMethod,
+    islice: CXXMethod,
+}
+
+fn parse_int(s: String) -> Option<Int> {
+    let mut i = 0
+    while i < s.len() && s.get(i) == Some("0") {
+        i = i + 1
+    }
+    if i == s.len() {
+        None
+    } else {
+        Some(i)
+    }
+}
+
+fn main() {
+    let s1 = "0".to_string()
+    let s2 = "12".to_string()
+    print(parse_int(s1)? + parse_int(s2)?)
+}

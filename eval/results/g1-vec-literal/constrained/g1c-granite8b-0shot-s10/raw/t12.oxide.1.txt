@@ -1,0 +1,18 @@
+struct Stack { top: Vec<Int> }
+
+fn reverse(s: Stack) -> Stack {
+    let mut top = s.top
+    let mut out = vec()
+    while len(top) > 0 {
+        push(out, pop(top))
+    }
+    Stack(out)
+}
+
+fn main() {
+    let s = Stack(push(push(vec(), 1), 2))
+    let r = reverse(s)
+    for x in r.top {
+        print(x)
+    }
+}

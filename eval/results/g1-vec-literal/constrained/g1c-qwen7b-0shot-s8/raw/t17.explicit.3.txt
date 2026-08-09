@@ -1,0 +1,13 @@
+fn main() {
+    let nums = vec(10, 20, 30)
+    let first = get(&nums, 1)
+    match first {
+        Some(x) => print(x),
+        None => print(-1),
+    }
+    let second = get(&nums, 5)
+    match second {
+        Some(x) => print(x),
+        None => print(-1),
+    }
+}

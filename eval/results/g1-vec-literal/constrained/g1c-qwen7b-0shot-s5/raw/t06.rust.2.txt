@@ -1,0 +1,8 @@
+fn main() {
+    for num in 1..1000 {
+        let sum: i32 = (1..num).filter(|&x| num % x == 0).sum();
+        if sum == num {
+            println!("{}", num);
+        }
+    }
+}

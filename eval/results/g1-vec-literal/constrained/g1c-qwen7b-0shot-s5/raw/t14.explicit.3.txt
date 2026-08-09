@@ -1,0 +1,369 @@
+fn main() {
+    let text = "mississippi"
+    let s_count = text.chars().filter(char_eq("s")).count()
+    let distinct_count = text.chars().collect().len()
+    print(s_count)
+    print(distinct_count)
+}
+
+fn char_eq(c: Str) -> Str {
+    move || c == "s"
+}
+
+fn count(f: Str) -> Int {
+    let mut count = 0
+    for _ in 0.range(count) {
+        if f() {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn collect(f: Str) -> Vec<Str> {
+    let mut result = Vec()
+    for i in 0.range(26) {
+        if f(to_char(i)) {
+            result = push(result, to_char(i))
+        }
+    }
+    result
+}
+
+fn to_char(n: Int) -> Str {
+    from_int(n + 97)
+}
+
+fn from_int(n: Int) -> Str {
+    ((n + 48) % 26).to_int().to_str()
+}
+
+fn print(x: Int) {
+    print_str(x.to_str())
+}
+
+fn print_str(s: Str) {
+    let mut chars = chars(s)
+    while chars.len() > 0 {
+        print_char(chars.get(0))
+        chars = chars.iter().skip(1).collect()
+    }
+}
+
+fn print_char(c: Str) {
+    print_str(c)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = Vec()
+    let mut i = 0
+    while i < str_len(s) {
+        result = push(result, get(s, i))
+        i = i + 1
+    }
+    result
+}
+
+fn get(s: Str, i: Int) -> Str {
+    &s + i
+}
+
+fn str_len(s: Str) -> Int {
+    len(s)
+}
+
+fn len(v: Str) -> Int {
+    v.len()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    concat(v, x)
+}
+
+fn concat(a: Vec<Str>, b: Str) -> Vec<Str> {
+    let mut result = a
+    let mut chars = chars(b)
+    while chars.len() > 0 {
+        result = push(result, chars.get(0))
+        chars = chars.iter().skip(1).collect()
+    }
+    result
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn vec_push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    concat(v, x)
+}
+
+fn vec_len(v: Vec<Str>) -> Int {
+    v.len()
+}
+
+fn vec_get(v: Vec<Str>, i: Int) -> Str {
+    &v + i
+}
+
+fn vec_clone(v: Vec<Str>) -> Vec<Str> {
+    v
+}
+
+fn vec_str_len(v: Vec<Str>) -> Int {
+    v.len()
+}
+
+fn vec_chars(v: Vec<Str>) -> Vec<Str> {
+    let mut result = Vec()
+    for i in 0.range(vec_len(v)) {
+        result = push(result, vec_get(v, i))
+    }
+    result
+}
+
+fn vec_int_to_str(n: Int) -> Str {
+    n.to_str()
+}
+
+fn vec_parse_int(s: Str) -> Option<Int> {
+    s.to_int()
+}
+
+fn vec_to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn vec_trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn vec_drop(v: Vec<Str>) {
+    drop v
+}
+
+fn vec_print(v: Vec<Str>) {
+    for i in 0.range(vec_len(v)) {
+        print_char(vec_get(v, i))
+    }
+}
+
+fn vec_print_char(c: Str) {
+    print_str(c)
+}
+
+fn vec_chars(s: Vec<Str>) -> Vec<Str> {
+    let mut result = Vec()
+    let mut i = 0
+    while i < vec_len(s) {
+        result = push(result, vec_get(v, i))
+        i = i + 1
+    }
+    result
+}
+
+fn vec_get(s: Vec<Str>, i: Int) -> Str {
+    &s + i
+}
+
+fn vec_str_len(s: Vec<Str>) -> Int {
+    s.len()
+}
+
+fn vec_len(v: Vec<Str>) -> Int {
+    v.len()
+}
+
+fn vec_push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    concat(v, x)
+}
+
+fn vec_concat(a: Vec<Str>, b: Str) -> Vec<Str> {
+    let mut result = a
+    let mut chars = chars(b)
+    while chars.len() > 0 {
+        result = push(result, chars.get(0))
+        chars = chars.iter().skip(1).collect()
+    }
+    result
+}
+
+fn vec_vec() -> Vec<Str> {
+    Vec()
+}
+
+fn vec_vec_push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    concat(v, x)
+}
+
+fn vec_vec_len(v: Vec<Str>) -> Int {
+    v.len()
+}
+
+fn vec_vec_get(v: Vec<Str>, i: Int) -> Str {
+    &v + i
+}
+
+fn vec_vec_clone(v: Vec<Str>) -> Vec<Str> {
+    v
+}
+
+fn vec_vec_str_len(v: Vec<Str>) -> Int {
+    v.len()
+}
+
+fn vec_vec_chars(v: Vec<Str>) -> Vec<Str> {
+    let mut result = Vec()
+    for i in 0.range(vec_vec_len(v)) {
+        result = push(result, vec_vec_get(v, i))
+    }
+    result
+}
+
+fn vec_vec_int_to_str(n: Int) -> Str {
+    n.to_str()
+}
+
+fn vec_vec_parse_int(s: Str) -> Option<Int> {
+    s.to_int()
+}
+
+fn vec_vec_to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn vec_vec_trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn vec_vec_drop(v: Vec<Str>) {
+    drop v
+}
+
+fn vec_vec_print(v: Vec<Str>) {
+    for i in 0.range(vec_vec_len(v)) {
+        print_char(vec_vec_get(v, i))
+    }
+}
+
+fn vec_vec_print_char(c: Str) {
+    print_str(c)
+}
+
+fn vec_vec_chars(s: Vec<Str>) -> Vec<Str> {
+    let mut result = Vec()
+    let mut i = 0
+    while i < vec_vec_len(s) {
+        result = push(result, vec_vec_get(v, i))
+        i = i + 1
+    }
+    result
+}
+
+fn vec_vec_get(s: Vec<Str>, i: Int) -> Str {
+    &s + i
+}
+
+fn vec_vec_str_len(s: Vec<Str>) -> Int {
+    s.len()
+}
+
+fn vec_vec_len(v: Vec<Str>) -> Int {
+    v.len()
+}
+
+fn vec_vec_push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    concat(v, x)
+}
+
+fn vec_vec_concat(a: Vec<Str>, b: Str) -> Vec<Str> {
+    let mut result = a
+    let mut chars = chars(b)
+    while chars.len() > 0 {
+        result = push(result, chars.get(0))
+        chars = chars.iter().skip(1).collect()
+    }
+    result
+}
+
+fn vec_vec_vec() -> Vec<Str> {
+    Vec()
+}
+
+fn vec_vec_vec_push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    concat(v, x)
+}
+
+fn vec_vec_vec_len(v: Vec<Str>) -> Int {
+    v.len()
+}
+
+fn vec_vec_vec_get(v: Vec<Str>, i: Int) -> Str {
+    &v + i
+}
+
+fn vec_vec_vec_clone(v: Vec<Str>) -> Vec<Str> {
+    v
+}
+
+fn vec_vec_vec_str_len(v: Vec<Str>) -> Int {
+    v.len()
+}
+
+fn vec_vec_vec_chars(v: Vec<Str>) -> Vec<Str> {
+    let mut result = Vec()
+    for i in 0.range(vec_vec_vec_len(v)) {
+        result = push(result, vec_vec_vec_get(v, i))
+    }
+    result
+}
+
+fn vec_vec_vec_int_to_str(n: Int) -> Str {
+    n.to_str()
+}
+
+fn vec_vec_vec_parse_int(s: Str) -> Option<Int> {
+    s.to_int()
+}
+
+fn vec_vec_vec_to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn vec_vec_vec_trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn vec_vec_vec_drop(v: Vec<Str>) {
+    drop v
+}
+
+fn vec_vec_vec_print(v: Vec<Str>) {
+    for i in 0.range(vec_vec_vec_len(v)) {
+        print_char(vec_vec_vec_get(v, i))
+    }
+}
+
+fn vec_vec_vec_print_char(c: Str) {
+    print_str(c)
+}
+
+fn vec_vec_vec_chars(s: Vec<Str>) -> Vec<Str> {
+    let mut result = Vec()
+    let mut i = 0
+    while i < vec_vec_vec_len(s) {
+        result = push(result, vec_vec_vec_get(v, i))
+        i = i + 1
+    }
+    result
+}
+
+fn vec_vec_vec_get(s: Vec<Str>, i: Int) -> Str {
+    &s + i
+}
+
+fn vec_vec_vec_str_len(s: Vec<Str>) -> Int {
+    s.len()
+}
+
+fn vec_vec_vec_len(v: Vec<Str

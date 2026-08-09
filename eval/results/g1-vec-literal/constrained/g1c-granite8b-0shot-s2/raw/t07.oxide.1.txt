@@ -1,0 +1,309 @@
+fn main() {
+    getStaticField(0) == 3
+    let i = 0
+    endfor
+    let i = i + 1
+    let v = push(v, 3 * i)
+    if i == 8 {
+        break_outer_loop
+    }
+    endfor
+    let sum = sum(v)
+    print_int(sum)
+}
+
+fn sum(v: Vec<Int>) -> Int {
+    let acc = 0
+    for x in v {
+        acc = acc + x
+    }
+    acc
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let new_len = len(v) + 1
+    let mut v2 = vec()
+    for i in range(0, new_len) {
+        let j = i - 1
+        if i == 0 {
+            v2 = push(v2, x)
+        } else {
+            v2 = push(v2, get(v, j)?)
+        }
+    }
+    v2
+}
+
+struct Vec {
+    len: Int,
+    data: Str,
+}
+
+fn len(v: Vec) -> Int {
+    v.len
+}
+
+fn get(v: Vec, i: Int) -> Option<T> {
+    if i < 0 || i >= v.len {
+        None
+    } else {
+        Some(data_at(v.data, i))
+    }
+}
+
+fn push(v: Vec, x: T) -> Vec {
+    let new_len = v.len + 1
+    let new_data = concat(v.data, str_from_int(x))
+    Vec(new_len, new_data)
+}
+
+struct Str {
+    data: Str,
+    len: Int,
+}
+
+fn str_from_int(n: Int) -> Str {
+    let s = int_to_str(n)
+    Str(s, len(s))
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let new_data = concat(a.data, b.data)
+    Str(new_data, a.len + b.len)
+}
+
+fn data_at(s: Str, i: Int) -> T {
+    let c = get_char(s, i)
+    c.val
+}
+
+struct Char {
+    val: Int,
+}
+
+fn get_char(s: Str, i: Int) -> Char {
+    if i < 0 || i >= s.len {
+        Char(0)
+    } else {
+        let c = char_at(s.data, i)
+        c
+    }
+}
+
+fn char_at(s: Str, i: Int) -> Char {
+    let c = s.data.substr(i, 1)
+    let n = parse_int(c)
+    Char(n)
+}
+
+fn print_int(n: Int) {
+    print(int_to_str(n))
+}
+
+fn print(s: Str) {
+    print_str(s)
+}
+
+struct Int {
+    val: Int,
+}
+
+fn int_to_str(n: Int) -> Str {
+    let s = "1234567890"
+    let s = s.substr(0, n)
+    Str(s, n)
+}
+
+fn parse_int(s: Str) -> Int {
+    let n = 0
+    if s.len == 0 {
+        n
+    } else {
+        let c = get_char(s, 0)
+        let d = c.val - 48
+        let s2 = s.substr(1, s.len - 1)
+        d + 10 * parse_int(s2)
+    }
+}
+
+fn sum(v: Vec<Int>) -> Int {
+    let acc = 0
+    for x in v {
+        acc = acc + x
+    }
+    acc
+}
+
+struct Vec {
+    len: Int,
+    data: Str,
+}
+
+fn len(v: Vec) -> Int {
+    v.len
+}
+
+fn get(v: Vec, i: Int) -> Option<T> {
+    if i < 0 || i >= v.len {
+        None
+    } else {
+        Some(data_at(v.data, i))
+    }
+}
+
+fn push(v: Vec, x: T) -> Vec {
+    let new_len = v.len + 1
+    let new_data = concat(v.data, str_from_int(x))
+    Vec(new_len, new_data)
+}
+
+struct Str {
+    data: Str,
+    len: Int,
+}
+
+fn str_from_int(n: Int) -> Str {
+    let s = int_to_str(n)
+    Str(s, len(s))
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let new_data = concat(a.data, b.data)
+    Str(new_data, a.len + b.len)
+}
+
+fn data_at(s: Str, i: Int) -> T {
+    let c = get_char(s, i)
+    c.val
+}
+
+struct Char {
+    val: Int,
+}
+
+fn get_char(s: Str, i: Int) -> Char {
+    if i < 0 || i >= s.len {
+        Char(0)
+    } else {
+        let c = char_at(s.data, i)
+        c
+    }
+}
+
+fn char_at(s: Str, i: Int) -> Char {
+    let c = s.data.substr(i, 1)
+    let n = parse_int(c)
+    Char(n)
+}
+
+fn print_int(n: Int) {
+    print(int_to_str(n))
+}
+
+fn print(s: Str) {
+    print_str(s)
+}
+
+struct Int {
+    val: Int,
+}
+
+fn int_to_str(n: Int) -> Str {
+    let s = "1234567890"
+    let s = s.substr(0, n)
+    Str(s, n)
+}
+
+fn parse_int(s: Str) -> Int {
+    let n = 0
+    if s.len == 0 {
+        n
+    } else {
+        let c = get_char(s, 0)
+        let d = c.val - 48
+        let s2 = s.substr(1, s.len - 1)
+        d + 10 * parse_int(s2)
+    }
+}
+
+fn sum(v: Vec<Int>) -> Int {
+    let acc = 0
+    for x in v {
+        acc = acc + x
+    }
+    acc
+}
+
+struct Vec {
+    len: Int,
+    data: Str,
+}
+
+fn len(v: Vec) -> Int {
+    v.len
+}
+
+fn get(v: Vec, i: Int) -> Option<T> {
+    if i < 0 || i >= v.len {
+        None
+    } else {
+        Some(data_at(v.data, i))
+    }
+}
+
+fn push(v: Vec, x: T) -> Vec {
+    let new_len = v.len + 1
+    let new_data = concat(v.data, str_from_int(x))
+    Vec(new_len, new_data)
+}
+
+struct Str {
+    data: Str,
+    len: Int,
+}
+
+fn str_from_int(n: Int) -> Str {
+    let s = int_to_str(n)
+    Str(s, len(s))
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let new_data = concat(a.data, b.data)
+    Str(new_data, a.len + b.len)
+}
+
+fn data_at(s: Str, i: Int) -> T {
+    let c = get_char(s, i)
+    c.val
+}
+
+struct Char {
+    val: Int,
+}
+
+fn get_char(s: Str, i: Int) -> Char {
+    if i < 0 || i >= s.len {
+        Char(0)
+    } else {
+        let c = char_at(s.data, i)
+        c
+    }
+}
+
+fn char_at(s: Str, i: Int) -> Char {
+    let c = s.data.substr(i, 1)
+    let n = parse_int(c)
+    Char(n)
+}
+
+fn print_int(n: Int) {
+    print(int_to_str(n))
+}
+
+fn print(s: Str) {
+    print_str(s)
+}
+
+struct Int {
+    val: Int,
+}

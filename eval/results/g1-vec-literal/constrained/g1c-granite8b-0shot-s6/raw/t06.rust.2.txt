@@ -1,0 +1,13 @@
+```rust
+fn main() {
+    for i in 6..1000 {
+        if perfect_number(i) {
+            println!("{}", i);
+        }
+    }
+}
+
+fn perfect_number(n: u32) -> bool {
+    (2..=n/2).fold(0, |acc, x| if n % x == 0 { acc + x } else { acc }) == n
+}
+```

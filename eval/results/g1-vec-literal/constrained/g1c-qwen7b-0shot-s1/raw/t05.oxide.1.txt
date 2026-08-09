@@ -1,0 +1,10 @@
+fn fib(n: Int) -> Int {
+    match n {
+        _ => fib(n - 1) + fib(n - 2),
+        _ => 1,
+    }
+}
+
+fn main() {
+    print(fib(20))
+}

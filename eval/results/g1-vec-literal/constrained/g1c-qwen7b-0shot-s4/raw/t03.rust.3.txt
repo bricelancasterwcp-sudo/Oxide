@@ -1,0 +1,20 @@
+fn gcd(mut m: u32, mut n: u32) -> u32 {
+    while m != 0 && n != 0 {
+        if m > n {
+            m %= n;
+        } else {
+            n %= m;
+        }
+    }
+    if m == 0 {
+        n
+    } else {
+        m
+    }
+}
+
+fn main() {
+    let m = 252;
+    let n = 105;
+    println!("The greatest common divisor of {} and {} is {}", m, n, gcd(m, n));
+}

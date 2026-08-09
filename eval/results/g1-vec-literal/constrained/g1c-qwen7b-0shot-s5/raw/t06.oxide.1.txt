@@ -1,0 +1,24 @@
+struct Number { value: Int }
+
+fn perfect_numbers() -> Vec<Int> {
+    let mut numbers = Vec()
+    for i in range(1, 1000) {
+        let mut sum = 0
+        for j in range(1, i) {
+            if i % j == 0 {
+                sum = sum + j
+            }
+        }
+        if sum == i {
+            numbers = push(numbers, i)
+        }
+    }
+    numbers
+}
+
+fn main() {
+    let numbers = perfect_numbers()
+    for n in numbers {
+        print(n)
+    }
+}

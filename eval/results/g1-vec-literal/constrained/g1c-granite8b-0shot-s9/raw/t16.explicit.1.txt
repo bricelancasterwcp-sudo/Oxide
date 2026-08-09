@@ -1,0 +1,14 @@
+fn divide(divisor: Int) -> Int {
+    if divisor == 0 {
+        return 42
+    }
+    let dividend = 100
+    let quotient = dividend / divisor
+    quotient
+}
+
+fn main() {
+    print(divide(5))
+    print(divide(0))
+    print(divide(4))
+}

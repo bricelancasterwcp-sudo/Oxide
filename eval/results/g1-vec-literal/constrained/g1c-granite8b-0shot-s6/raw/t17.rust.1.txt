@@ -1,0 +1,13 @@
+fn main() {
+    let list = vec![10, 20, 30];
+    
+    match list.get(1) {
+        Some(&value) => println!("{}", value),
+        None => println!("-1")
+    }
+    
+    match list.get(5) {
+        Some(&value) => println!("{}", value),
+        None => println!("-1")
+    }
+}

@@ -1,0 +1,12 @@
+fn main() {
+    let num = 100
+    let divisor_five = 5
+    let divisor_zero = 0
+    let divisor_four = 4
+    let result_five = num / divisor_five
+    let result_zero = if divisor_zero == 0 { "undefined" } else { num / divisor_zero }
+    let result_four = num / divisor_four
+    println(result_five)
+    println(result_zero)
+    println(result_four)
+}

@@ -1,0 +1,7 @@
+fn main() {
+    let texts = ["level", "stereo", "rotor"];
+    for text in texts.iter() {
+        let reversed_text = text.chars().rev().collect::<String>();
+        println!("{}", text == &reversed_text);
+    }
+}

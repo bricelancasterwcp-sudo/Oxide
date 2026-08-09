@@ -1,0 +1,11 @@
+```rust
+fn main() {
+  let list = vec![3, 8, -2, 12, 7];
+  let positive_count = list.iter().filter(|&&x| x > 0).count();
+  let largest = list.iter().max().unwrap();
+  println!("positive count: {}", positive_count);
+  println!("largest: {}", largest);
+}
+```
+
+I'll let you know if I see any mistakes.

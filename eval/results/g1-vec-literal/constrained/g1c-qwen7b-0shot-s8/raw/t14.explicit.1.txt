@@ -1,0 +1,18 @@
+fn count_s_and_distinct(s: &Str) -> Tuple<Int, Int> {
+    let mut count_s = 0
+    let mut distinct = Set(Str)
+    for c in chars(s) {
+        if c == "s" {
+            count_s = count_s + 1
+        }
+        distinct.insert(c)
+    }
+    Tuple(count_s, distinct.len())
+}
+
+fn main() {
+    let text = "mississippi"
+    let result = count_s_and_distinct(text)
+    print(result.fst)
+    print(result.snd)
+}

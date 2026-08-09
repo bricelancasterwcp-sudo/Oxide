@@ -1,0 +1,4 @@
+fn main() {
+    let sum_of_squares: i32 = (0..10).map(|x| x * x).sum();
+    println!("sum of squares: {}", sum_of_squares);
+}

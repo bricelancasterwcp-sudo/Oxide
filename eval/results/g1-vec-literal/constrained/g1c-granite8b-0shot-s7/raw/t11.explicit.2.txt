@@ -1,0 +1,11 @@
+fn main() {
+    let mut list = push(push(push(push(vec(), 5), 3), 8), 1)
+    let mut temp = vec()
+    while len(&list) > 0 {
+        temp = push(temp, pop(&mut, &mut, list))
+    }
+    while len(&temp) > 0 {
+        print(pop(&mut, &mut, temp))
+        temp = push(temp, pop(&mut, &mut, list))
+    }
+}

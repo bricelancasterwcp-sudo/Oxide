@@ -1,0 +1,42 @@
+fn main() {
+    let input = "12,x,30".split(",").map(str_to_int).collect()
+    let total = input.iter().filter_map(Result_ok).fold(0, add)
+    let failed = input.iter().filter(Result_is_err).count()
+    print(total)
+    print(failed)
+}
+
+fn str_to_int(s: &Str) -> Result<Int, String> {
+    match parse_int(s) {
+        Ok(n) => Ok(n),
+        Err(_) => Err(format("failed to parse {}", s)) - keep,
+    }
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn parse_int(s: &Str) -> Result<Int, String> {
+    match s.parse() {
+        Ok(n) => Ok(n),
+        Err(_) => Err(format("{} is not an integer", s)) - keep,
+    }
+}
+
+fn result_ok(r: &Result<Int, String>) -> Option<Int> {
+    match r {
+        Ok(n) => Some(n),
+        Err(_) => None,
+    }
+}
+
+fn result_is_err(r: &Result<Int, String>) -> Option<String> {
+    match r {
+        Ok(_) => None,
+        Err(e) => Some(e.to_string()),
+    }
+}
+
+fn print(x: Int) {
+    print(&format_int_str_radix_len_opt_fill_pad_align_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_pad_align_opt_

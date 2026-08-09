@@ -1,0 +1,7 @@
+fn main() {
+    let text = str_len("stack")
+    for c in chars(&text) {
+        print(&c)
+    }
+    drop text
+}

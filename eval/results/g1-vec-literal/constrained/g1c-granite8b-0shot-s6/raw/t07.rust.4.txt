@@ -1,0 +1,12 @@
+```rust
+fn main() {
+    let mut list: Vec<i32> = Vec::new();
+    for i in 1..9 {
+        if i % 3 == 0 {
+            list.push(i);
+        }
+    }
+    let sum: i32 = list.into_iter().sum();
+    println!("{:?}", sum);
+}
+```

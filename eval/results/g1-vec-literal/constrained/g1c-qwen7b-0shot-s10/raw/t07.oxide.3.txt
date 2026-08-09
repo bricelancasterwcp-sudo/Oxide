@@ -1,0 +1,17 @@
+struct VecInt { values: Vec<Int> }
+
+fn sum(v: VecInt) -> Int {
+    let mut total = 0
+    for x in v.values {
+        total = total + x
+    }
+    total
+}
+
+fn main() {
+    let mut multiples = VecInt { values: vec() }
+    for i in range(1, 9) {
+        multiples.values == push(multiples.values, i * 3)
+    }
+    print(sum(multiples))
+}

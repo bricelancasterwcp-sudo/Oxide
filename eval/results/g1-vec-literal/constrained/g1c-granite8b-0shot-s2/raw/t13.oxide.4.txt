@@ -1,0 +1,14 @@
+struct String {
+    data: Vec<Char>,
+}
+
+struct Char {
+    value: Int,
+    next: Option<Box<Char>>,
+}
+
+fn main() {
+    let level = String { data: vec() }
+    let stereo = String { data: vec() }
+    let rotor = String { data: vec() }
+}

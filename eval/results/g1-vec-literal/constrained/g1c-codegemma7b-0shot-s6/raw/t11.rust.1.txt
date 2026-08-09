@@ -1,0 +1,11 @@
+use std::cmp::Ordering;
+
+fn main() {
+    let mut numbers = [5, 3, 8, 1, 9, 2];
+
+    numbers.sort_by(|a, b| a.cmp(b));
+
+    for number in numbers {
+        println!("{}", number);
+    }
+}

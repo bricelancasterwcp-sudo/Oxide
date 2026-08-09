@@ -1,0 +1,15 @@
+fn main() {
+    let numbers = vec(4, 1, 7, 3, 9, 2)
+    let mut kept = vec()
+    for n in &numbers {
+        if n > 3 {
+            kept = push(kept, clone(n))
+        }
+    }
+    for k in &kept {
+        print(k)
+        print_str("\n")
+    }
+    print(len(&kept))
+    print_str("\n")
+}

@@ -1,0 +1,24 @@
+fn palindrome(word: &String) -> String {
+    let mut reversed = String.new()
+    for c in word.chars().rev() {
+        reversed.push(c)
+    }
+    reversed
+}
+
+fn is_palindrome(word: &String) -> String {
+    if word == palindrome(word) {
+        "true".to_string()
+    } else {
+        "false".to_string()
+    }
+}
+
+fn main() {
+    let level = "level".to_string()
+    let stereo = "stereo".to_string()
+    let rotor = "rotor".to_string()
+    print(is_palindrome(&level))
+    print(is_palindrome(&stereo))
+    print(is_palindrome(&rotor))
+}

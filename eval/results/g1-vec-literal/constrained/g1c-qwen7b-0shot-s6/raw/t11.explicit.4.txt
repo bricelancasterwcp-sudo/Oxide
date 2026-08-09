@@ -1,0 +1,32 @@
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v.clone() // Clone the vector to avoid consuming the
+    let n = v.len() // Get the length of the vector
+    for i in 0.range(n) {
+        for j in (i + 1).range(n) {
+            if get(v, i) > get(v, j) {
+                let temp = get(v, i).unwrap()
+                let val_j = get(v, j).unwrap()
+                drop temp
+                drop val_j
+                v.push(get(v, i).unwrap())
+                v.push(get(v, j).unwrap())
+                drop get
+            }
+        }
+    }
+    v
+}
+
+fn main() {
+    let nums = push(push(vec(), 5), 3)
+    push(nums, 8)
+    push(nums, 1)
+    push(nums, 9)
+    push(nums, 2)
+    let sorted_nums = sort(nums)
+    for num in &sorted_nums {
+        print_str(num.to_string().unwrap())
+        print_str("\n")
+    }
+    drop sorted_nums
+}

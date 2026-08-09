@@ -1,0 +1,18 @@
+```rust
+fn main() {
+    let width = 7;
+    let height = 4;
+    println!("The area is {} square pixels.", area(width, height));
+    println!("The perimeter is {} pixels.", perimeter(width, height));
+}
+
+fn area(width: u32, height: u32) -> u32 {
+    width * height
+}
+
+fn perimeter(width: u32, height: u32) -> u32 {
+    2 * (width + height)
+}
+```
+
+This program uses the `area` and `perimeter` functions to calculate and print the area and perimeter of a rectangle with width 7 and height 4. The `area` function multiplies the width and height to get the area, while the `perimeter` function calculates the perimeter by adding the width and height and multiplying by 2. The `main` function calls these functions and prints the results to the console.

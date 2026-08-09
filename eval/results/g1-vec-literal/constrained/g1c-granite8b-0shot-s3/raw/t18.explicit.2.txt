@@ -1,0 +1,22 @@
+fn perimeter(s: &Shape) -> Int {
+    match s {
+        Rectangle(width, height) => {
+            2 * (width + height)
+        },
+        Triangle(a, b, c) => {
+            a + b + c
+        },
+        _ => {
+            return 0
+        },
+    }
+}
+
+fn main() {
+    let r = Rectangle(3, 4)
+    let t = Triangle(3, 4, 5)
+    let u = Rectangle(2, 5)
+    print(perimeter(&r))
+    print(perimeter(&t))
+    print(perimeter(&u))
+}

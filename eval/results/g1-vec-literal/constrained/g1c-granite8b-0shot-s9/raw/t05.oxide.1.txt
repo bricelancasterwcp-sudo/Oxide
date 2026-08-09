@@ -1,0 +1,16 @@
+struct Sequence {
+    term1: Int,
+    term2: Int,
+}
+
+fn next(seq: Sequence) -> Sequence {
+    Sequence(seq.term2, seq.term1 + seq.term2)
+}
+
+fn main() {
+    let seq = Sequence(1, 1)
+    for _ in 1 <= 20 {
+        seq = next(seq)
+    }
+    print(seq.term2)
+}

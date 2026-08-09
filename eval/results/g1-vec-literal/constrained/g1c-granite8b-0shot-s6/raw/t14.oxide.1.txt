@@ -1,0 +1,323 @@
+fn main() {
+    let string = "mississippi".to_string().chars().collect().clone()
+    let s_count = count_char(string, "s".to_string().chars().collect().clone())
+    let d_count = distinct_chars(string)
+    print(s_count)
+    print(d_count)
+}
+
+fn count_char(string: Vec<Char>, char: Char) -> Int {
+    let mut count = 0
+    for c in string {
+        if c == char {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_chars(string: Vec<Char>) -> Int {
+    let mut distinct_chars = vec()
+    for c in string {
+        let found = get(distinct_chars, c)?
+        if found == false {
+            distinct_chars = push(distinct_chars, true)
+        }
+    }
+    len(distinct_chars)
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn println(x: Int) {
+    io_write(x)
+}
+
+fn io_write(x: Int) {
+    io_print(int_to_str(x))
+    io_newline()
+}
+
+fn io_print(x: Str) {
+    system_call(x)
+}
+
+fn system_call(x: Str) {
+    return x
+}
+
+fn io_newline() {
+    system_call("\n")
+}
+
+fn to_string(x: Int) -> Str {
+    return int_to_str(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return str_concat(str_concat(str_concat("Int: ".to_string().chars().collect().clone(), to_string(x)), "\n".to_string().chars().collect().clone()), "\n".to_string().chars().collect().clone())
+}
+
+fn str_concat(a: Str, b: Str) -> Str {
+    return a + b
+}
+
+fn get(vector: Vec<T>, index: Int) -> Option<T> {
+    if index < 0 || index >= len(vector) {
+        return None
+    } else {
+        let mut i = 0
+        let mut found = None
+        while i < len(vector) {
+            let item = get(vector, i)?
+            if i == index {
+                found = Some(item)
+                break
+            }
+            i = i + 1
+        }
+        return found
+    }
+}
+
+fn push(vector: Vec<T>, item: T) -> Vec<T> {
+    let mut result = vec()
+    for x in vector {
+        result = push(result, x)
+    }
+    result = push(result, item)
+    return result
+}
+
+fn vec() -> Vec<T> {
+    return vec()
+}
+
+fn len(vector: Vec<T>) -> Int {
+    return len(vector)
+}
+
+fn clone(x: T) -> T {
+    return x
+}
+
+fn print_str(x: Str) {
+    println(x)
+}
+
+fn main() {
+    let x = 3
+    let y = 4
+    let z = x + y
+    print(z)
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn println(x: Int) {
+    io_write(x)
+}
+
+fn io_write(x: Int) {
+    io_print(int_to_str(x))
+    io_newline()
+}
+
+fn io_print(x: Str) {
+    system_call(x)
+}
+
+fn system_call(x: Str) {
+    return x
+}
+
+fn io_newline() {
+    system_call("\n")
+}
+
+fn to_string(x: Int) -> Str {
+    return int_to_str(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return str_concat(str_concat(str_concat("Int: ".to_string().chars().collect().clone(), to_string(x)), "\n".to_string().chars().collect().clone()), "\n".to_string().chars().collect().clone())
+}
+
+fn str_concat(a: Str, b: Str) -> Str {
+    return a + b
+}
+
+fn main() {
+    let x = 3
+    let y = 4
+    let z = x + y
+    print(z)
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn println(x: Int) {
+    io_write(x)
+}
+
+fn io_write(x: Int) {
+    io_print(int_to_str(x))
+    io_newline()
+}
+
+fn io_print(x: Str) {
+    system_call(x)
+}
+
+fn system_call(x: Str) {
+    return x
+}
+
+fn io_newline() {
+    system_call("\n")
+}
+
+fn to_string(x: Int) -> Str {
+    return int_to_str(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return str_concat(str_concat(str_concat("Int: ".to_string().chars().collect().clone(), to_string(x)), "\n".to_string().chars().collect().clone()), "\n".to_string().chars().collect().clone())
+}
+
+fn str_concat(a: Str, b: Str) -> Str {
+    return a + b
+}
+
+fn main() {
+    let x = 3
+    let y = 4
+    let z = x + y
+    print(z)
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn println(x: Int) {
+    io_write(x)
+}
+
+fn io_write(x: Int) {
+    io_print(int_to_str(x))
+    io_newline()
+}
+
+fn io_print(x: Str) {
+    system_call(x)
+}
+
+fn system_call(x: Str) {
+    return x
+}
+
+fn io_newline() {
+    system_call("\n")
+}
+
+fn to_string(x: Int) -> Str {
+    return int_to_str(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return str_concat(str_concat(str_concat("Int: ".to_string().chars().collect().clone(), to_string(x)), "\n".to_string().chars().collect().clone()), "\n".to_string().chars().collect().clone())
+}
+
+fn str_concat(a: Str, b: Str) -> Str {
+    return a + b
+}
+
+fn main() {
+    let x = 3
+    let y = 4
+    let z = x + y
+    print(z)
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn println(x: Int) {
+    io_write(x)
+}
+
+fn io_write(x: Int) {
+    io_print(int_to_str(x))
+    io_newline()
+}
+
+fn io_print(x: Str) {
+    system_call(x)
+}
+
+fn system_call(x: Str) {
+    return x
+}
+
+fn io_newline() {
+    system_call("\n")
+}
+
+fn to_string(x: Int) -> Str {
+    return int_to_str(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return str_concat(str_concat(str_concat("Int: ".to_string().chars().collect().clone(), to_string(x)), "\n".to_string().chars().collect().clone()), "\n".to_string().chars().collect().clone())
+}
+
+fn str_concat(a: Str, b: Str) -> Str {
+    return a + b
+}
+
+fn main() {
+    let x = 3
+    let y = 4
+    let z = x + y
+    print(z)
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn println(x: Int) {
+    io_write(x)
+}
+
+fn io_write(x: Int) {
+    io_print(int_to_str(x))
+    io_newline()
+}
+
+fn io_print(x: Str) {
+    system_call(x)
+}
+
+fn system_call(x: Str) {
+    return x
+}
+
+fn io_newline() {
+    system_call("\n")
+}
+
+fn to_string(x: Int) -> Str {
+    return int_to_str(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return str_concat(str_concat(str_concat("Int: ".to_string().chars().

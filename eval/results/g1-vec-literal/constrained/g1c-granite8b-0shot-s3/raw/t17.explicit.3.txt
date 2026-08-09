@@ -1,0 +1,26 @@
+fn list_lookup(list: &Vec<Int>, pos: Int) -> Int {
+    let mut iter = &list
+    let mut index: Int = 0
+    while index < pos {
+        match get(&iter, index) {
+            None => return_error(-1) <= 10,
+            Some(value) => {
+                iter = &value
+                index = index + 1
+            },
+        }
+    }
+    match get(&iter, 0) {
+        None => return_error(-1) <= 10,
+        Some(value) => value,
+    }
+}
+
+fn main() {
+    let list = push(push(push(vec(), 10), 20), 30)
+    let result1 = list_lookup(&list, 1) <= 10
+    let result2 = list_lookup(&list, 5) <= 10
+    drop list
+    print(result1)
+    print(result2)
+}

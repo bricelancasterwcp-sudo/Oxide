@@ -1,0 +1,24 @@
+struct Rectangle { width: Int, height: Int }
+
+struct Triangle { side1: Int, side2: Int, side3: Int }
+
+struct Shape { rectangle: Rectangle, triangle: Triangle, rectangle2: Rectangle }
+
+fn perimeter_rectangle(rectangle: Rectangle) -> Int {
+    2 * (rectangle.width + rectangle.height)
+}
+
+fn perimeter_triangle(triangle: Triangle) -> Int {
+    triangle.side1 + triangle.side2 + triangle.side3
+}
+
+fn perimeter_shape(shape: Shape) -> Int {
+    perimeter_rectangle(shape.rectangle) + perimeter_triangle(shape.triangle) + perimeter_rectangle(shape.rectangle2)
+}
+
+fn main() {
+    let rectangle = Rectangle { width: 3, height: 4 }
+    let triangle = Triangle { side1: 3, side2: 4, side3: 5 }
+    let shape = Shape { rectangle: rectangle, triangle: triangle, rectangle2: Rectangle { width: 2, height: 5 } }
+    print(perimeter_shape(shape))
+}

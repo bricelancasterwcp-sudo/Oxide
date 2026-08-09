@@ -1,0 +1,7 @@
+fn main() {
+    let total = 0.to_float()
+    for x in 0.to_int().range(10) {
+        total = total + x.to_int().mul(x.to_int()).to_float()
+    }
+    print(total)
+}

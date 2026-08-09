@@ -1,0 +1,149 @@
+fn pen() -> Item {
+    Item(3, 4)
+}
+
+fn pad() -> Item {
+    Item(9, 2)
+}
+
+fn ink() -> Item {
+    Item(5, 3)
+}
+
+fn item_cost(item: &Item) -> Int {
+    item.unit_price * item.quantity
+}
+
+fn item_total(items: Vec<Item>) -> Int {
+    let mut total = 0
+    for item in &items {
+        total = total + item_cost(&item)
+    }
+    total
+}
+
+fn main() {
+    let items = push(push(push(vec(), pen()), pad()), ink())
+    print(item_total(&items))
+    let most_expensive = items.iter().max_by(item_cost).unwrap()
+    print(most_expensive.name)
+    drop items
+}
+
+struct Item {
+    unit_price: Int,
+    quantity: Int,
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn println(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(x: Str) {
+    trace("print_str(", x, ")")
+}
+
+fn trace(x: Str, y: Str, z: Str) {
+    print_str("trace(")
+    print_str(x)
+    print_str(", ")
+    print_str(y)
+    print_str(", ")
+    print_str(z)
+    print_str(")\n")
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    trace("push(", v, ", ", x, ")")
+    let n = len(&v)
+    let mut result = clone(&v)
+    result = result.resize(n + 1)
+    result.set(n, x)
+    result
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    trace("len(", v, ")")
+    v.len()
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    trace("get(", v, ", ", i, ")")
+    if i >= 0 && i < len(&v) {
+        Some(v.get(i))
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    trace("range(", a, ", ", b, ")")
+    let n = b - a
+    let mut result = vec()
+    for i in 0 < n {
+        result = push(result, a + i)
+    }
+    result
+}
+
+fn clone(x: &Int) -> Int {
+    trace("clone(", x, ")")
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    trace("str_len(", s, ")")
+    s.len()
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    trace("concat(", a, ", ", b, ")")
+    a + b
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    trace("chars(", s, ")")
+    let n = str_len(&s)
+    let mut result = vec()
+    for i in 0 < n {
+        result = push(result, s.get(i))
+    }
+    result
+}
+
+fn int_to_str(n: Int) -> Str {
+    trace("int_to_str(", n, ")")
+    n.to_string()
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    trace("parse_int(", s, ")")
+    s.parse().ok()
+}
+
+fn to_float(n: Int) -> Float {
+    trace("to_float(", n, ")")
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    trace("trunc(", x, ")")
+    x.trunc()
+}
+
+fn vec() -> Vec<Int> {
+    trace("vec()", "")
+    vec()
+}
+
+fn main() {
+    let items = push(push(push(vec(), pen()), pad()), ink())
+    print(item_total(&items))
+    let most_expensive = items.iter().max_by(item_cost).unwrap()
+    print(most_expensive.name)
+    drop items
+}

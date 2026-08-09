@@ -1,0 +1,24 @@
+struct List { head: Int, tail: Vec<Int> }
+
+fn num_pos(l: List) -> Int {
+    let mut n = 0
+    for x in l.tail {
+        if x > 0 {
+            n = n + 1
+        }
+    }
+    n + if_pos(l.head)
+}
+
+fn if_pos(x: Int) -> Int {
+    if x > 0 {
+        1
+    } else {
+        0
+    }
+}
+
+fn main() {
+    let l = List { head: 3, tail: push(push(push(vec(), 8), -2), 12) }
+    print(num_pos(l))
+}

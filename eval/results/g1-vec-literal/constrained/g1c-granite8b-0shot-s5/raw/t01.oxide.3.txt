@@ -1,0 +1,74 @@
+fn main() {
+    printed(sum_squares(0, 10))
+}
+
+fn sum_squares(from: Int, to: Int) -> Int {
+    let mut sum = 0
+    for i in range(from, to) {
+        let square = i * i
+        sum = sum + square
+    }
+    sum
+}
+
+fn printed(n: Int) {
+    print(n)
+}
+
+fn range(from: Int, to: Int) -> Vec<Int> {
+    let mut result = vec()
+    for i in range(from, to) {
+        result = push(result, i)
+    }
+    result
+}
+
+fn vec(from: Int, to: Int) -> Vec<Int> {
+    let mut result = vec()
+    for i in range(from, to) {
+        result = push(result, i)
+    }
+    result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    functional_update(v, x)
+}
+
+fn print(x: Int) {
+    nop(x)
+}
+
+fn nop(x: Int) {
+    nop(x)
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            nop(x)
+        }
+        found = x
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 {
+        return None
+    }
+    if v.len() == i {
+        return None
+    }
+    Some(v.get(i))
+}
+
+fn main() {
+    printed(first_big(push(push(vec(), 3), 42)))
+}

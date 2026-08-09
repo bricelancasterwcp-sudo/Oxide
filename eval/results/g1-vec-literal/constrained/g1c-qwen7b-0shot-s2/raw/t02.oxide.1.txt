@@ -1,0 +1,20 @@
+struct Number { value: Int }
+
+fn transform(n: Number) -> Int {
+    let mut count = 0
+    let mut current = n.value
+    while current != 1 {
+        if current % 2 == 0 {
+            current = current / 2
+        } else {
+            current = current * 3 + 1
+        }
+        count = count + 1
+    }
+    count
+}
+
+fn main() {
+    let num = Number { value: 27 }
+    print(transform(num))
+}

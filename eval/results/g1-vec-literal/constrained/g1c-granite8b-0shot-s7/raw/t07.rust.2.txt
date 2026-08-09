@@ -1,0 +1,5 @@
+fn main() {
+    let numbers = (1..8).filter(|&x| x % 3 == 0).collect::<Vec<i32>>();
+    let sum: i32 = numbers.iter().sum();
+    println!("{}", sum);
+}

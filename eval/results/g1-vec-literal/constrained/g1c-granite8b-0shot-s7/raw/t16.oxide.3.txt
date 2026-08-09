@@ -1,0 +1,19 @@
+fn div_100(divisor: Int) -> Option<Int> {
+    match divisor {
+        X => if X == 0 { None } else { Some(100 / X) },
+        Y => if Y == 0 { None } else { Some(100 / Y) },
+        Z => Some(100 / Z),
+    }
+}
+
+fn main() {
+    match div_100(5) {
+        Some(v) => print(v),
+        None => print_str("undefined"),
+    }
+    print(div_100(0)?)
+    match div_100(4) {
+        Some(v) => print(v),
+        None => print_str("undefined"),
+    }
+}

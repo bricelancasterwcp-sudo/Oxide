@@ -1,0 +1,20 @@
+struct List { values: Vec<Int> }
+
+fn filter_greater_than(v: Vec<Int>, threshold: Int) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if x > threshold {
+            result = push(result, x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let list = List { values: push(push(push(push(vec(), 4), 1), 7), 3), ouch: 9, two: 2 } // Corrected order of elements
+    let filtered = filter_greater_than(list.values, 3)
+    for x in filtered {
+        print(x)
+    }
+    print(len(filtered))
+}

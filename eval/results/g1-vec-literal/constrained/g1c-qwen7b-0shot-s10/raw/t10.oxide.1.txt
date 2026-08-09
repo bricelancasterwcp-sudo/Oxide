@@ -1,0 +1,21 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if x > 3 {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: vec(4, 1, 7, 3, 9, 2) }
+    let filtered = first_big(r.values)
+    for x in filtered {
+        print(x)
+        print_str("\n")
+    }
+    print(len(filtered))
+}

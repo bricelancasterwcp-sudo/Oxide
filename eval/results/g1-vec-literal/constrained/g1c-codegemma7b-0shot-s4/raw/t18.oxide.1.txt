@@ -1,0 +1,204 @@
+fn area(s: Shape) -> Float {
+    match s {
+        Shape(e) => match e {
+            ShapeType(s) => match s {
+                ShapeSubType(a, b) => a * b,
+                ShapeSubType(a, b, c) => 0.5 * a * b * c,
+            },
+            _ => panic("Invalid shape"),
+        },
+    }
+}
+
+fn perimeter(s: Shape) -> Float {
+    match s {
+        Shape(e) => match e {
+            ShapeType(s) => match s {
+                ShapeSubType(a, b) => 2.0 * (a + b),
+                ShapeSubType(a, b, c) => a + b + c,
+            },
+            _ => panic("Invalid shape"),
+        },
+    }
+}
+
+fn main() {
+    let r = Shape(ShapeType(ShapeSubType(3, 4)))
+    let t = Shape(ShapeType(ShapeSubType(3, 4, 5)))
+    let r2 = Shape(ShapeType(ShapeSubType(2, 5)))
+    print(perimeter(r))
+    print(perimeter(t))
+    print(perimeter(r2))
+}
+
+enum Shape {
+    Type(ShapeType),
+}
+
+enum ShapeType {
+    SubType(ShapeSubType),
+}
+
+enum ShapeSubType {
+    Rectangle(Float, Float),
+    Triangle(Float, Float, Float),
+}
+
+fn print(x: Float) {
+    print_str(int_to_str(trunc(x)))
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print(c)
+    }
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut c = v
+    c.append(x)
+    c
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if len(v) <= i {
+        return None
+    }
+    Some(v.get(i))
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a + 1 < b {
+        v.append(i)
+    }
+    v
+}
+
+fn clone(x: Int) -> Int {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    let mut count = 0
+    for _ in chars(s) {
+        count = count + 1
+    }
+    count
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let mut c = a
+    for i in chars(b) {
+        c = push(c, i)
+    }
+    c
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut v = vec()
+    let mut i = 0
+    while i < str_len(s) {
+        let c = get(s, i)
+        if c != None {
+            v.append(c)
+            i = i + 1
+        }
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut v = vec()
+    let mut c = n
+    while c != 0 {
+        let r = c % 10
+        let s = int_to_char(r)
+        v.append(s)
+        c = trunc(c / 10)
+    }
+    let mut s = str()
+    for i in range(len(v) - 1, -1, -1) {
+        s = concat(s, get(v, i))
+    }
+    s
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    if str_len(s) == 0 {
+        return None
+    }
+    let mut c = s
+    let mut n = 0
+    while len(c) > 0 {
+        let d = get(c, 0)
+        if d != None {
+            let x = char_to_int(d)
+            n = n * 10 + x
+            c = get(c, 1)
+        } else {
+            return None
+        }
+    }
+    Some(n)
+}
+
+fn to_float(n: Int) -> Float {
+    n
+}
+
+fn trunc(x: Float) -> Int {
+    if x >= 0 {
+        return int(x)
+    }
+    int(x - 0.5)
+}
+
+fn int(x: Float) -> Int {
+    x
+}
+
+fn char_to_int(c: Str) -> Int {
+    match c {
+        Str(s) => match s {
+            Some(v) => match v {
+                Some(c) => match c {
+                    Some(i) => match i {
+                        Some(b) => match b {
+                            Some(c) => match c {
+                                Some(i) => i - 48,
+                                _ => panic("Invalid character"),
+                            },
+                            _ => panic("Invalid character"),
+                        },
+                        _ => panic("Invalid character"),
+                    },
+                    _ => panic("Invalid character"),
+                },
+                _ => panic("Invalid character"),
+            },
+            _ => panic("Invalid character"),
+        },
+        _ => panic("Invalid character"),
+    }
+}
+
+fn int_to_char(n: Int) -> Str {
+    match n {
+        Int(i) => match i {
+            Some(x) => match x {
+                Some(n) => match n {
+                    Some(i) => match i {
+                        Some(b) => match b {
+                            Some(c) => match c {
+                                Some(i) => match i {
+                                    Some(b) => match b {
+                                        Some(c) => Some() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() + Str() +

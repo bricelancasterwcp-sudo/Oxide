@@ -1,0 +1,12 @@
+struct VecInt { values: Vec<Int> }
+
+fn reverse_print(v: VecInt) {
+    for i in range(len(v.values) - 1, -1, -1) {
+        print(get(v.values, i)?)
+    }
+}
+
+fn main() {
+    let v = VecInt { values: push(push(push(push(vec(), 1), 2), 3), 4), push: 5 }  // Corrected the syntax for initializing a
+    reverse_print(v)
+}

@@ -1,0 +1,9 @@
+use std::cmp::Ordering;
+
+fn main() {
+    let mut list = vec![5, 3, 8, 1, 9, 2];
+    list.sort_by(|a, b| a.cmp(b));
+    for e in list {
+        println!("{}", e);
+    }
+}

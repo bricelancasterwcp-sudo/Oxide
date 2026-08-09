@@ -1,0 +1,10 @@
+fn main() {
+    let nums = vec(10, 20, 30)
+    let elem1 = get(&nums, 1)
+    let elem2 = get(&nums, 5)
+    print(elem1)
+    drop elem1
+    print(elem2)
+    drop elem2
+    drop nums
+}

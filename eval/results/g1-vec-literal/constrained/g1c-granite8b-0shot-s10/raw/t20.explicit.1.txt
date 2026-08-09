@@ -1,0 +1,79 @@
+fn main() {
+    let pen = Item { price: 3, quantity: 4 }
+    let pad = Item { price: 9, quantity: 2 }
+    let ink = Item { price: 5, quantity: 3 }
+    print(get_total_cost(&pen, &pad, &ink))
+    print(get_item_with_highest_cost(&pen, &pad, &ink).name)
+}
+
+fn get_total_cost(pen: &Item, pad: &Item, ink: &Item) -> Int {
+    pen.price * pen.quantity + pad.price * pad.quantity + ink.price * ink.quantity
+}
+
+fn get_item_with_highest_cost(pen: &Item, pad: &Item, ink: &Item) -> Item {
+    let mut highest_cost = 0
+    let mut result = Item { price: 0, quantity: 0 }
+    if pen.price * pen.quantity > highest_cost {
+        highest_cost = pen.price * pen.quantity
+        result = pen.clone()
+    }
+    if pad.price * pad.quantity > highest_cost {
+        highest_cost = pad.price * pad.quantity
+        result = pad.clone()
+    }
+    if ink.price * ink.quantity > highest_cost {
+        highest_cost = ink.price * ink.quantity
+        result = ink.clone()
+    }
+    result
+}
+
+struct Item {
+    name: Str,
+    price: Int,
+    quantity: Int,
+}
+
+fn print(s: &Str) {
+    drop s
+}
+
+fn clone(x: &T) -> T {
+    drop x
+}
+
+fn drop_all(p: &Item, q: &Item, r: &Item) {
+    drop p
+    drop q
+    drop r
+}
+
+fn get_item_with_highest_cost(pen: &Item, pad: &Item, ink: &Item) -> Item {
+    let mut highest_cost = 0
+    let mut result = Item { price: 0, quantity: 0 }
+    if pen.price * pen.quantity > highest_cost {
+        highest_cost = pen.price * pen.quantity
+        result = pen.clone()
+    }
+    if pad.price * pad.quantity > highest_cost {
+        highest_cost = pad.price * pad.quantity
+        result = pad.clone()
+    }
+    if ink.price * ink.quantity > highest_cost {
+        highest_cost = ink.price * ink.quantity
+        result = ink.clone()
+    }
+    result
+}
+
+fn get_total_cost(pen: &Item, pad: &Item, ink: &Item) -> Int {
+    pen.price * pen.quantity + pad.price * pad.quantity + ink.price * ink.quantity
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4 }
+    let pad = Item { price: 9, quantity: 2 }
+    let ink = Item { price: 5, quantity: 3 }
+    print(get_total_cost(&pen, &pad, &ink))
+    print(get_item_with_highest_cost(&pen, &pad, &ink).name)
+}

@@ -1,0 +1,17 @@
+fn level(x: &Str) -> Bool {
+    x == "level"
+}
+
+fn stereo(x: &Str) -> Bool {
+    x == "stereo"
+}
+
+fn rotor(x: &Str) -> Bool {
+    x == "rotor"
+}
+
+fn main() {
+    print(level("level"))
+    print(stereo("stereo"))
+    print(rotor("rotor"))
+}

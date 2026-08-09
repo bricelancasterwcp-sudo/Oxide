@@ -1,0 +1,4 @@
+fn main() {
+    let stack = String("stack".to_string().chars().rev().collect())
+    println(stack)
+}

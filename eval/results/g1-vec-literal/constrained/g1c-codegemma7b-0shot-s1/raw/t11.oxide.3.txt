@@ -1,0 +1,17 @@
+fn main() {
+    let mut numbers = vec(5, 3, 8, 1, 9, 2)
+    numbers.sort()
+    for number in numbers {
+        print_str(int_to_str(number))
+        print_str("\n")
+    }
+}
+
+fn main() {
+    let mut numbers = vec(5, 3, 8, 1, 9, 2)
+    numbers.sort()
+    for number in numbers {
+        print_str(int_to_str(number))
+        print_str("\n")
+    }
+}

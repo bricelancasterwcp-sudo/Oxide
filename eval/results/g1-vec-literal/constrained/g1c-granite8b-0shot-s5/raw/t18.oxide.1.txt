@@ -1,0 +1,35 @@
+struct Rectangle { length: Int, width: Int }
+
+struct Triangle { side_a: Int, side_b: Int, side_c: Int }
+
+struct Shape {
+    rect: Rectangle,
+    tri: Triangle,
+    rect2: Rectangle,
+}
+
+fn perimeter(rect: Rectangle) -> Int {
+    let width = rect.width
+    let length = rect.length
+    let left_and_right = width * 2
+    let top_and_bottom = length * 2
+    return left_and_right + top_and_bottom
+}
+
+fn perimeter(tri: Triangle) -> Int {
+    let side_a = tri.side_a
+    let side_b = tri.side_b
+    let side_c = tri.side_c
+    let p = side_a + side_b + side_c
+    return p
+}
+
+fn main() {
+    let rect = Rectangle { length: 3, width: 4 }
+    let rect2 = Rectangle { length: 2, width: 5 }
+    let tri = Triangle { side_a: 3, side_b: 4, side_c: 5 }
+    let shapes = Shape { rect: rect, tri: tri, rect2: rect2 }
+    print(perimeter(shapes.rect))
+    print(perimeter(shapes.tri))
+    print(perimeter(shapes.rect2))
+}

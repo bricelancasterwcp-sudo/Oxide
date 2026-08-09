@@ -1,0 +1,20 @@
+fn main() {
+    let mut number = 27;
+    let mut steps = 0;
+
+    loop {
+        steps += 1;
+
+        if number == 1 {
+            break;
+        }
+
+        if number % 2 == 0 {
+            number /= 2;
+        } else {
+            number = 3 * number + 1;
+        }
+    }
+
+    println!("{} steps", steps - 1);
+}

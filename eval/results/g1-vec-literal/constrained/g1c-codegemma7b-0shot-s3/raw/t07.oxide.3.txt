@@ -1,0 +1,14 @@
+fn main() {
+    let mut acc = vec()
+    for x in (100000001 / 3).to_float() {
+        acc = push(acc, (x.trunc() + 3.0).to_int())
+        if acc.len() == 8 {
+            break
+        }
+    }
+    let mut sum = 0
+    for x in acc {
+        sum = sum + x
+    }
+    print(sum)
+}

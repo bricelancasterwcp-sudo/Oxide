@@ -1,0 +1,9 @@
+fn main() {
+    println!("{}", check_palindrome("level"));
+    println!("{}", check_palindrome("stereo"));
+    println!("{}", check_palindrome("rotor"));
+}
+
+fn check_palindrome(text: &str) -> bool {
+    text == text.chars().rev().collect::<String>()
+}

@@ -1,0 +1,22 @@
+fn sum(v: Vec<Int>, limit: Int) -> Int {
+    let total = 0
+    for x in v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn main() {
+    let nums = push(push(vec(), 12), 30)
+    let bigger = extend(nums, 20)
+    print(sum(nums, 20))
+    drop nums
+    print(sum(bigger, 10))
+    drop bigger
+}

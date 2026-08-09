@@ -1,0 +1,17 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn get_value(v: Vec<Int>, pos: Int) -> Int {
+    if pos >= 0 && pos < len(v) {
+        get(v, pos)?
+    } else {
+        -1
+    }
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(push(vec(), 10), 20), 30) }
+    let value1 = get_value(r.values, 1)
+    let value5 = get_value(r.values, 5)
+    print(value1)
+    print(value5)
+}

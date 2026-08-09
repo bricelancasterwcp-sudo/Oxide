@@ -1,0 +1,22 @@
+```rust
+fn main() {
+    let mut num = 27;
+    let mut steps = 0;
+
+    loop {
+        steps += 1;
+
+        if num == 1 {
+            break;
+        }
+
+        if num % 2 == 0 {
+            num /= 2;
+        } else {
+            num = 3 * num + 1;
+        }
+    }
+
+    println!("Steps: {}", steps);
+}
+```

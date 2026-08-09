@@ -1,0 +1,19 @@
+```rust
+fn main() {
+    let a = 252;
+    let b = 105;
+    let mut x = a;
+    let mut y = b;
+    while y != 0 {
+        let t = x % y;
+        x = y;
+        y = t;
+    }
+    println!("{}", x);
+}
+```
+
+Explanation:
+The code snippet uses the Euclidean algorithm to calculate the greatest common divisor (GCD) of two numbers. The algorithm repeatedly divides the larger number by the smaller number and replaces the larger number with the remainder until the remainder is zero. The last non-zero remainder is the GCD of the two numbers.
+
+In this solution, the code initializes two variables, a and b, with the given numbers 252 and 105 respectively. It then enters a while loop that continues until the value of y becomes zero. Inside the loop, the code calculates the remainder of x divided by y and assigns it to a temporary variable t. It then updates the values of x and y by assigning y to x and t to y respectively. This process continues until y becomes zero, at which point the code prints the value of x, which is the GCD of the original numbers.

@@ -1,0 +1,15 @@
+```rust
+fn main() {
+    let numbers = [4, 1, 7, 3, 9, 2];
+    let mut count = 0;
+
+    for &number in &numbers {
+        if number > 3 {
+            println!("{}", number);
+            count += 1;
+        }
+    }
+
+    println!("Number of values kept: {}", count);
+}
+```

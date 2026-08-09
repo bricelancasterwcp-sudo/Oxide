@@ -1,0 +1,37 @@
+fn area(w: Int, h: Int) -> Int {
+    w * h
+}
+
+fn perimeter(w: Int, h: Int) -> Int {
+    2 * (w + h)
+}
+
+fn main() {
+    let rect_area = area(7, 4)
+    print(rect_area)
+    let rect_perimeter = perimeter(7, 4)
+    print(rect_perimeter)
+    drop rect_area
+    drop rect_perimeter
+}
+
+fn drop_area(area: Int) {
+    drop area
+}
+
+fn drop_perimeter(perimeter: Int) {
+    drop perimeter
+}
+
+fn drop_main(area: Int, perimeter: Int) {
+    drop area
+    drop perimeter
+}
+
+fn main() {
+    let rect_area = area(7, 4)
+    print(rect_area)
+    let rect_perimeter = perimeter(7, 4)
+    print(rect_perimeter)
+    drop_main(rect_area, rect_perimeter)
+}

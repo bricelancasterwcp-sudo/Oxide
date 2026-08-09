@@ -1,0 +1,234 @@
+struct Stream { data: Vec<Char>, pos: Int }
+
+fn main() {
+    let mut s = Stream { data: str_to_chars("mississippi"), pos: 0 }
+    let s_count = loop_until_break(s, 0, 0, 0)
+    print(s_count)
+    print(count_unique(s))
+}
+
+fn loop_until_break(s: Stream, s_count: Int, last_char: Char, distinct_count: Int) -> Int {
+    match get(s.data, s.pos)? {
+        Some(ch) => {
+            if ch == last_char {
+                s_count
+            } else {
+                loop_until_break(Stream { data: s.data, pos: s.pos + 1 }, s_count + 1, ch, if ch != last_char { distinct_count + 1 } else { distinct_count })
+            }
+        },
+        None => break_loop(s_count, distinct_count),
+    }
+}
+
+fn break_loop(s_count: Int, distinct_count: Int) -> Int {
+    s_count
+}
+
+fn count_unique(s: Stream) -> Int {
+    let mut distinct_count = 0
+    let mut unique_chars = vec()
+    for c in s.data {
+        if !contains(unique_chars, c) {
+            unique_chars = push(unique_chars, c)
+            distinct_count = distinct_count + 1
+        }
+    }
+    distinct_count
+}
+
+fn contains(v: Vec<Char>, ch: Char) -> Bool {
+    for c in v {
+        if c == ch {
+            return true
+        }
+    }
+    false
+}
+
+fn str_to_chars(s: Str) -> Vec<Char> {
+    let mut chars = vec()
+    for i in range(0, len(s)) {
+        chars = push(chars, get(s, i)?)
+    }
+    chars
+}
+
+fn main() {
+    print_str("mississippi")
+    print_str("s occurs ")
+    let mut s = Stream { data: str_to_chars("mississippi"), pos: 0 }
+    let count = loop_until_break(s, 0, 0)
+    print(count)
+    print_str(" times")
+    print_str(" and there are ")
+    print(count_unique(s))
+    print_str(" distinct characters")
+}
+
+fn loop_until_break(s: Stream, count: Int) -> Int {
+    match get(s.data, s.pos)? {
+        Some(ch) => {
+            if ch == 35 {
+                count
+            } else {
+                loop_until_break(Stream { data: s.data, pos: s.pos + 1 }, count + 1)
+            }
+        },
+        None => break_loop(count),
+    }
+}
+
+fn break_loop(count: Int) -> Int {
+    count
+}
+
+fn main() {
+    print_str("1234567890\n\n")
+    print_str("This is an example of a\n")
+    print_str("multiline string literal.\n\n")
+    print_str("The compiler will insert\n")
+    print_str("appropriate newlines\n")
+    print_str("when needed.\n\n")
+    print_str("Note that the last line,\n")
+    print_str("ending in a newline, will\n")
+    print_str("not have another newline\n")
+    print_str("appended.\n")
+}
+
+fn main() {
+    print_str("Enter a number: ")
+    let mut s = Stream { data: str_to_chars(get_line()), pos: 0 }
+    match parse_int(s.data) {
+        Some(n) => print(n),
+        None => print_str("You didn't enter a number"),
+    }
+}
+
+fn main() {
+    print_str("Enter two numbers separated by a comma: ")
+    let mut s = Stream { data: str_to_chars(get_line()), pos: 0 }
+    let comma_index = loop_until_break(s, 0, -1, -1)
+    if comma_index == -1 {
+        print_str("You didn't enter two numbers separated by a comma.\n")
+    } else {
+        let first = parse_int(slice(s.data, 0, comma_index))?
+        let second = parse_int(slice(s.data, comma_index + 1, len(s.data)))?
+        print(first + second)
+    }
+}
+
+fn loop_until_break(s: Stream, comma_index: Int, last_char: Char, index: Int) -> Int {
+    match get(s.data, index + 1)? {
+        Some(ch) => {
+            if ch == 44 {
+                if last_char == 32 {
+                    comma_index
+                } else {
+                    loop_until_break(s, index, 32, index + 1)
+                }
+            } else {
+                loop_until_break(s, comma_index, ch, index + 1)
+            }
+        },
+        None => break_loop(comma_index, index),
+    }
+}
+
+fn break_loop(comma_index: Int, index: Int) -> Int {
+    if comma_index != -1 && index > comma_index {
+        comma_index
+    } else {
+        -1
+    }
+}
+
+fn slice(v: Vec<T>, start: Int, end: Int) -> Vec<T> {
+    let mut new_vec = vec()
+    for i in range(start, end) {
+        new_vec = push(new_vec, get(v, i)?)
+    }
+    new_vec
+}
+
+fn main() {
+    print_str("Enter a string: ")
+    let mut s = Stream { data: str_to_chars(get_line()), pos: 0 }
+    let mut s2 = s
+    for c in s.data {
+        if c == 10 {
+            s2 = Stream { data: s.data, pos: s.pos + 1 }
+            break
+        }
+    }
+    if len(s.data) < len(s2.data) {
+        print(len(s.data))
+    } else {
+        print(len(s2.data))
+    }
+}
+
+fn main() {
+    print_str("Enter a string: ")
+    let s = Stream { data: str_to_chars(get_line()), pos: 0 }
+    let mut vowels = vec()
+    let mut consonants = vec()
+    for c in s.data {
+        match c {
+            PERIOD => {
+                print_str("The last word was '")
+                print_str(join(vowels, ""))
+                print_str("' and the first word was '")
+                print_str(join(consonants, ""))
+                print_str("'.")
+            },
+            _ => {
+                if contains(vec(65, 69, 73, 79, 85, 97, 101, 105, 111, 117), c) {
+                    vowels = push(vowels, c)
+                } else {
+                    consonants = push(consonants, c)
+                }
+            },
+        }
+    }
+}
+
+fn main() {
+    print_str("Enter a string: ")
+    let mut s = Stream { data: str_to_chars(get_line()), pos: 0 }
+    let mut s2 = s
+    for c in s.data {
+        if c == 32 {
+            s2 = Stream { data: s.data, pos: s.pos + 1 }
+            break
+        }
+    }
+    if len(s.data) < len(s2.data) {
+        print_str(join(s.data, ""))
+    } else {
+        print_str(join(s2.data, ""))
+    }
+}
+
+fn join(v: Vec<Char>, separator: Str) -> Str {
+    let mut s = StringStream { string: chars_to_str(v), pos: 0 }
+    if len(s.string) == 0 {
+        return Str { data: vec(), len: 0 }
+    } else {
+        let mut result = get(s.string, s.pos)?
+        s.pos == s.pos + 1
+        while s.pos < len(s.string) {
+            result = concat(result, separator)
+            result = concat(result, get(s.string, s.pos)?)
+            s.pos == s.pos + 1
+        }
+        result
+    }
+}
+
+fn main() {
+    print_str("Enter a string: ")
+    let s = Stream { data: str_to_chars(get_line()), pos: 0 }
+    let mut vowels = vec()
+    let mut consonants = vec()
+    for c in s.data {
+        if contains(vec(

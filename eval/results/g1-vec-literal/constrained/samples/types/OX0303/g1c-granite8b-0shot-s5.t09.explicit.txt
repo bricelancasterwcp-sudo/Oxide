@@ -1,0 +1,19 @@
+fn reverse(vec: &Vec<Int>) -> Vec<Int> {
+    let result = vec()
+    let mut index = len(&vec) - 1
+    while index >= 0 {
+        push(result, get(&vec, index))
+        index = index - 1
+    }
+    result
+}
+
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5)
+    let reversed = reverse(&nums)
+    for i in 0.range(5) {
+        print(get(&reversed, i))
+    }
+    drop reversed
+    drop nums
+}

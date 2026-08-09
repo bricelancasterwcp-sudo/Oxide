@@ -1,0 +1,39 @@
+fn print_perimeter(rectangle: &Rectangle) {
+    let perimeter = rectangle.width() * 2 + rectangle.height() * 2
+    print(perimeter)
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn width(rectangle: &Rectangle) -> Int {
+    rectangle.width
+}
+
+fn height(rectangle: &Rectangle) -> Int {
+    rectangle.height
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+fn perimeter(triangle: &Triangle) -> Int {
+    triangle.side1 + triangle.side2 + triangle.side3
+}
+
+fn main() {
+    let triangle = Triangle { side1: 3, side2: 4, side3: 5 }
+    let rectangle1 = Rectangle { width: 3, height: 4 }
+    let rectangle2 = Rectangle { width: 2, height: 5 }
+    print_perimeter(&rectangle1)
+    print_perimeter(&rectangle2)
+    print_perimeter(&triangle)
+    drop triangle
+    drop rectangle1
+    drop rectangle2
+}

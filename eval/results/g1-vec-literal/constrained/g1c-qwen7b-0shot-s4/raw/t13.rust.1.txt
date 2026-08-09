@@ -1,0 +1,8 @@
+```rust
+fn main() {
+    let texts = ["level", "stereo", "rotor"];
+    for text in texts {
+        println!("{}", text == text.chars().rev().collect::<String>());
+    }
+}
+```

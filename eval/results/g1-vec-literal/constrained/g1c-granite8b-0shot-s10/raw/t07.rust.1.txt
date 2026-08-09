@@ -1,0 +1,10 @@
+```rust
+fn main() {
+    let mut result = 0;
+    for i in 1..=8 {
+        let multiple = i * 3;
+        result += multiple;
+    }
+    println!("{}", result);
+}
+```

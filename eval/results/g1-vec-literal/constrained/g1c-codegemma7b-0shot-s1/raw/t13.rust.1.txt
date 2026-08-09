@@ -1,0 +1,8 @@
+use std::io;
+
+fn main() {
+    for text in ["level", "stereo", "rotor"] {
+        let is_palindrome = text == text.chars().rev().collect::<String>();
+        println!("{}", is_palindrome);
+    }
+}

@@ -1,0 +1,15 @@
+fn lookup_element(v: &Vec<Int>, pos: Int) -> Int {
+    match get(v, pos) {
+        Some(x) => x,
+        None => -1,
+    }
+}
+
+fn main() {
+    let nums = vec(10, 20, 30)
+    let pos1 = 1
+    let pos5 = 5
+    print(lookup_element(&nums, pos1))
+    print(lookup_element(&nums, pos5))
+    drop nums
+}

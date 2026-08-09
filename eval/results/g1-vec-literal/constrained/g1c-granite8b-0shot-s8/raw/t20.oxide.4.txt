@@ -1,0 +1,28 @@
+struct Pen { unit_price: Int, quantity: Int }
+
+struct Pad { unit_price: Int, quantity: Int }
+
+struct Ink { unit_price: Int, quantity: Int }
+
+fn combine_prices(pen: Pen, pad: Pad, ink: Ink) -> Int {
+    pen.unit_price * pen.quantity + pad.unit_price * pad.quantity + ink.unit_price * ink.quantity
+}
+
+fn get_item_with_highest_cost(pen: Pen, pad: Pad, ink: Ink) -> Str {
+    let combined_price = combine_prices(pen, pad, ink)
+    if combined_price == pen.unit_price * pen.quantity {
+        "Pen"
+    } else if combined_price == pad.unit_price * pad.quantity {
+        "Pad"
+    } else {
+        "Ink"
+    }
+}
+
+fn main() {
+    let pen = Pen { unit_price: 3, quantity: 4 }
+    let pad = Pad { unit_price: 9, quantity: 2 }
+    let ink = Ink { unit_price: 5, quantity: 3 }
+    print(combine_prices(pen, pad, ink))
+    print(get_item_with_highest_cost(pen, pad, ink))
+}

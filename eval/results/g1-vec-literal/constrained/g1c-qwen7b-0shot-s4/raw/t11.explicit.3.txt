@@ -1,0 +1,294 @@
+fn sort(vec: Vec<Int>) -> Vec<Int> {
+    let mut sorted = vec
+    let n = len(&sorted)
+    for i in range(0, n) {
+        for j in range(i + 1, n) {
+            if get(&sorted, i) > get(&sorted, j) {
+                let temp = get(&sorted, i)
+                sorted = set(&sorted, i, get(&sorted, j))
+                sorted = set(&sorted, j, temp)
+            }
+        }
+    }
+    sorted
+}
+
+fn main() {
+    let nums = vec(5, 3, 8, 1, 9, 2)
+    let sorted = sort(clone(&nums))
+    for num in &sorted {
+        print(num)
+    }
+    drop nums
+    drop sorted
+}
+
+fn set(vec: Vec<Int>, index: Int, value: Int) -> Vec<Int> {
+    let mut new_vec = vec
+    new_vec = push(new_vec, 0)
+    new_vec = push(new_vec, 0)
+    let mut i = 0
+    while i < len(&new_vec) {
+        if i != index {
+            new_vec = push(new_vec, get(&vec, i))
+        }
+        i = i + 1
+    }
+    drop vec
+    new_vec
+}
+
+fn get(vec: &Vec<Int>, index: Int) -> Int {
+    let mut i = 0
+    while i < len(vec) {
+        if i == index {
+            return get(&vec, i)
+        }
+        i = i + 1
+    }
+    0
+}
+
+fn push(vec: Vec<Int>, value: Int) -> Vec<Int> {
+    let mut new_vec = vec
+    new_vec = push(new_vec, 0)
+    let mut i = 0
+    while i < len(&new_vec) - 1 {
+        new_vec = push(new_vec, get(&vec, i))
+        i = i + 1
+    }
+    new_vec = push(new_vec, value)
+    drop vec
+    new_vec
+}
+
+fn len(vec: &Vec<Int>) -> Int {
+    let mut i = 0
+    while i < len(vec) {
+        i = i + 1
+    }
+    i
+}
+
+fn vec() -> Vec<Int> {
+    let mut new_vec = vec
+    new_vec = push(new_vec, 0)
+    new_vec = push(new_vec, 0)
+    drop new_vec
+    vec
+}
+
+fn print(num: Int) {
+    println(num)
+}
+
+fn drop_vec(vec: Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_mut(vec: &Vec<Int>) {
+    drop vec
+}
+
+fn drop_vec_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(vec: &Vec<Int>) {
+    drop vec

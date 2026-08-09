@@ -1,0 +1,27 @@
+fn is_prime(n: Int) -> Bool {
+    let upper_bound = trunc(sqrt(to_float(n)))
+    for x in range(2, upper_bound + 1) {
+        if n % x == 0 {
+            return False
+        }
+    }
+    True
+}
+
+fn sum_divisors(n: Int) -> Int {
+    let mut result = 0
+    for x in range(1, n) {
+        if n % x == 0 {
+            result = result + x
+        }
+    }
+    result
+}
+
+fn main() {
+    for n in range(2, 1000) {
+        if is_prime(n) && sum_divisors(n) == n {
+            print(n)
+        }
+    }
+}

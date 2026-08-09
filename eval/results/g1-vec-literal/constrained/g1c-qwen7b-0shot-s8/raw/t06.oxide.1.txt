@@ -1,0 +1,8 @@
+fn is_perfect(n: Int) -> Bool {
+    let sum = (1).to(n - 1).map(to_int).filter(x, x < n && n % x == 0).fold(0, add)
+    sum == n
+}
+
+fn main() {
+    (1).to(1000).filter(is_perfect).for_each(print_str)
+}

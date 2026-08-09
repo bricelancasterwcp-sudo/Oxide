@@ -1,0 +1,7 @@
+fn main() {
+    let list = push(push(push(push(vec(), 5), 4), 3), 2)
+    for x in &list {
+        drop x
+    }
+    drop list
+}

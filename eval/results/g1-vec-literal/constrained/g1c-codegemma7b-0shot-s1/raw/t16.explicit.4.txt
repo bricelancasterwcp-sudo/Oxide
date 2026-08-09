@@ -1,0 +1,13 @@
+fn divide(num: Int, denom: Int) -> Str {
+    if denom == 0 {
+        "undefined".to_string()
+    } else {
+        (num / denom).to_string()
+    }
+}
+
+fn main() {
+    print(divide(100, 5))
+    print(divide(100, 0))
+    print(divide(100, 4))
+}

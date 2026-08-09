@@ -1,0 +1,17 @@
+fn main() {
+    let mut pos = 0;
+    let mut max = std::i32::MIN;
+    let mut list = vec![3, 8, -2, 12, 7];
+
+    for num in list.iter() {
+        if *num > 0 {
+            pos += 1;
+        }
+        if *num > max {
+            max = *num;
+        }
+    }
+
+    println!("{} positive values", pos);
+    println!("largest value is {}", max);
+}

@@ -1,0 +1,304 @@
+fn main() {
+    let mut list = push(push(push(push(vec(), 1), 2), 3), 4)
+    while len(list) > 0 {
+        print(get(list, 0)?)
+        list = pop(list)?
+    }
+}
+
+fn pop(v: Vec<Int>) -> Option<Vec<Int>> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(v.slice(1, len(v)))
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+    print_str("\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    "FIXME"
+}
+
+fn vec() -> Vec<Int> {
+    "FIXME"
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    "FIXME"
+}
+
+fn len(v: Vec<Int>) -> Int {
+    "FIXME"
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    "FIXME"
+}
+
+fn print_str(s: Str) {
+    "FIXME"
+}
+
+fn slice(v: Vec<Int>, start: Int, end: Int) -> Vec<Int> {
+    "FIXME"
+}
+
+struct Vec { data: Str, len: Int }
+
+fn main() {
+    let mut list = push(push(push(push(vec(), 1), 2), 3), 4)
+    while len(list) > 0 {
+        print(get(list, 0)?)
+        list = pop(list)?
+    }
+}
+
+fn pop(v: Vec<Int>) -> Option<Vec<Int>> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(v.slice(1, len(v)))
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+    print_str("\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+fn to_str(n: Int) -> Str {
+    "FIXME"
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Str("[]"), 0)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    Vec(concat(v.data, concat(Str("["), concat(to_str(x), Str("]")))), v.len + 1)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < v.len {
+        Some(parse_int(get_str_element(v.data, i + 1))?)
+    } else {
+        None
+    }
+}
+
+fn get_str_element(s: Str, i: Int) -> Str {
+    "FIXME"
+}
+
+fn print_str(s: Str) {
+    "FIXME"
+}
+
+fn concat(s: Str, s2: Str) -> Str {
+    "FIXME"
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    "FIXME"
+}
+
+struct Str { data: Str }
+
+struct Int { data: Int }
+
+struct Vec { data: Str, len: Int }
+
+struct Vec { data: Str, len: Int }
+
+fn main() {
+    let mut list = push(push(push(push(vec(), 1), 2), 3), 4)
+    while len(list) > 0 {
+        print(get(list, 0)?)
+        list = pop(list)?
+    }
+}
+
+fn pop(v: Vec<Int>) -> Option<Vec<Int>> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(v.slice(1, len(v)))
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+    print_str("\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+fn to_str(n: Int) -> Str {
+    "FIXME"
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Str("[]"), 0)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    Vec(concat(v.data, concat(Str("["), concat(to_str(x), Str("]")))), v.len + 1)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < v.len {
+        Some(parse_int(get_str_element(v.data, i + 1))?)
+    } else {
+        None
+    }
+}
+
+fn get_str_element(s: Str, i: Int) -> Str {
+    "FIXME"
+}
+
+fn print_str(s: Str) {
+    "FIXME"
+}
+
+fn concat(s: Str, s2: Str) -> Str {
+    "FIXME"
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    "FIXME"
+}
+
+struct Str { data: Str }
+
+struct Int { data: Int }
+
+struct Vec { data: Str, len: Int }
+
+struct Vec { data: Str, len: Int }
+
+fn main() {
+    let mut list = push(push(push(push(vec(), 1), 2), 3), 4)
+    while len(list) > 0 {
+        print(get(list, 0)?)
+        list = pop(list)?
+    }
+}
+
+fn pop(v: Vec<Int>) -> Option<Vec<Int>> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(v.slice(1, len(v)))
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+    print_str("\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+fn to_str(n: Int) -> Str {
+    "FIXME"
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Str("[]"), 0)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    Vec(concat(v.data, concat(Str("["), concat(to_str(x), Str("]")))), v.len + 1)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < v.len {
+        Some(parse_int(get_str_element(v.data, i + 1))?)
+    } else {
+        None
+    }
+}
+
+fn get_str_element(s: Str, i: Int) -> Str {
+    "FIXME"
+}
+
+fn print_str(s: Str) {
+    "FIXME"
+}
+
+fn concat(s: Str, s2: Str) -> Str {
+    "FIXME"
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    "FIXME"
+}
+
+struct Str { data: Str }
+
+struct Int { data: Int }
+
+struct Vec { data: Str, len: Int }
+
+struct Vec { data: Str, len: Int }
+
+fn main() {
+    let mut list = push(push(push(push(vec(), 1), 2), 3), 4)
+    while len(list) > 0 {
+        print(get(list, 0)?)
+        list = pop(list)?
+    }
+}
+
+fn pop(v: Vec<Int>) -> Option<Vec<Int>> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(v.slice(1, len(v)))
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+    print_str("\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+fn to_str(n: Int) -> Str {
+    "FIXME"
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Str("[]"), 0)
+}
+
+fn push(v: Vec

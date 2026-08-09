@@ -1,0 +1,321 @@
+fn main() {
+    let list = push(vec(), 5)
+    let list = push(list, 3)
+    let list = push(list, 8)
+    let list = push(list, 1)
+    let list = push(list, 9)
+    let list = push(list, 2)
+    let mut list = sort(list)
+    while list != vec() {
+        print(pop(list).unwrap())
+    }
+}
+
+fn pop(mutvec: Vec<Int>) -> Option<Int> {
+    match len(vec) {
+        GreaterThan(x) => {
+            let x = get(vec, x - 1).unwrap()
+            let vec = slice(vec, 0, x - 1)
+            Some(x)
+        },
+        LessThan(x) => {
+            match x {
+                EqualsTo(x) => {
+                    let vec = slice(vec, 0, 0)
+                    None
+                },
+            }
+        },
+    }
+}
+
+fn slice(vec: Vec<Int>, a: Int, b: Int) -> Vec<Int> {
+    let vec = clone(vec)
+    let vec = slice_mut(vec, a, b)
+    let vec = clone(vec)
+    vec
+}
+
+fn slice_mut(mutvec: Vec<Int>, a: Int, b: Int) -> Vec<Int> {
+    let len = trunc(b - a)
+    let vec = vec()
+    for i in range(0, len) {
+        let x = get(mutvec, a + i).unwrap()
+        let vec = push(vec, x)
+    }
+    vec
+}
+
+fn sort(vec: Vec<Int>) -> Vec<Int> {
+    if len(vec) > 1 {
+        let pivot = get(vec, 0).unwrap()
+        let left = filter(vec, LessThan(pivot))
+        let right = filter(vec, GreaterThan(pivot))
+        let left = sort(left)
+        let right = sort(right)
+        let vec = concat(left, push(right, pivot))
+        vec
+    } else {
+        vec
+    }
+}
+
+fn filter(vec: Vec<Int>, pred: Int) -> Vec<Int> {
+    let vec = clone(vec)
+    let vec = filter_mut(vec, pred)
+    let vec = clone(vec)
+    vec
+}
+
+fn filter_mut(mutvec: Vec<Int>, pred: Int) -> Vec<Int> {
+    let mut i = 0
+    while i < len(mutvec) {
+        if pred == get(mutvec, i).unwrap() {
+            let item = get(mutvec, i).unwrap()
+            let j = len(mutvec) - 1
+            let vec = slice(mutvec, 0, i)
+            let vec = push(vec, item)
+            let vec = slice(vec, 0, j)
+            mutvec = vec
+        } else {
+            i = i + 1
+        }
+    }
+    mutvec
+}
+
+enum CompOp {
+    GreaterThan(Int),
+    LessThan(Int),
+    EqualTo(Int),
+}
+
+fn match_comp(a: Int, op: CompOp, b: Int) -> Bool {
+    match op {
+        GreaterThan(x) => a > x,
+        LessThan(x) => a < x,
+        EqualTo(x) => a == x,
+    }
+}
+
+fn match_int(a: Int) -> Int {
+    match a {
+        EqualsToInt(x) => x,
+    }
+}
+
+fn match_int_bool(a: Int) -> Bool {
+    match a {
+        EqualsToInt(x) => x == 42,
+    }
+}
+
+fn match_struct(s: Struct) -> Int {
+    match s {
+        StructWithInt(x) => x,
+    }
+}
+
+struct Point {
+    x: Float,
+    y: Float,
+}
+
+struct StructWithInt {
+    x: Int,
+}
+
+enum OptionInt {
+    SomeInt(Int),
+    None,
+}
+
+enum OptionUnit {
+    SomeUnit,
+    None,
+}
+
+enum ResultIntStr {
+    OkInt(Int),
+    ErrStr(Str),
+}
+
+enum Unit {
+    Unit,
+}
+
+fn match_option_int(a: OptionInt) -> Int {
+    match a {
+        SomeInt(x) => x,
+        None => 0,
+    }
+}
+
+fn match_option_unit(a: OptionUnit) -> Unit {
+    match a {
+        SomeUnit => Unit,
+        None => Unit,
+    }
+}
+
+fn match_result_int_str(a: ResultIntStr) -> Int {
+    match a {
+        OkInt(x) => x,
+        ErrStr(s) => len(s),
+    }
+}
+
+fn match_result_int_str_unit(a: ResultIntStr) -> Unit {
+    match a {
+        OkInt(x) => Unit,
+        ErrStr(s) => Unit,
+    }
+}
+
+fn match_vec(v: Vec<Int>) -> Int {
+    match v {
+        VecWithInt(x) => x,
+    }
+}
+
+struct VecWithInt {
+    x: Int,
+}
+
+enum CompOpWithInt {
+    GreaterThan(Int),
+}
+
+fn match_comp_with_int(a: Int, op: CompOpWithInt, b: Int) -> Bool {
+    match op {
+        GreaterThan(x) => a > x,
+    }
+}
+
+enum CompOpWithStruct {
+    GreaterThan(Point),
+}
+
+fn match_comp_with_struct(a: Int, op: CompOpWithStruct, b: Int) -> Bool {
+    match op {
+        GreaterThan(p) => a > p.x + p.y,
+    }
+}
+
+enum Enum {
+    Variant1,
+    Variant2,
+}
+
+enum EnumWithInt {
+    Variant1,
+    VariantWithInt(Int),
+}
+
+enum EnumWithStruct {
+    Variant1,
+    VariantWithStruct(Point),
+}
+
+fn match_enum(e: Enum) -> Int {
+    match e {
+        Variant1 => 0,
+        Variant2 => 1,
+    }
+}
+
+fn match_enum_with_int(e: EnumWithInt) -> Int {
+    match e {
+        Variant1 => 0,
+        VariantWithInt(x) => x,
+    }
+}
+
+fn match_enum_with_struct(e: EnumWithStruct) -> Int {
+    match e {
+        Variant1 => 0,
+        VariantWithStruct(p) => p.x + p.y,
+    }
+}
+
+enum EnumWithOptionInt {
+    Variant1,
+    VariantWithOptionInt(OptionInt),
+}
+
+fn match_enum_with_option_int(e: EnumWithOptionInt) -> Int {
+    match e {
+        Variant1 => 0,
+        VariantWithOptionInt(a) => match_option_int(a),
+    }
+}
+
+enum EnumWithOptionUnit {
+    Variant1,
+    VariantWithOptionUnit(OptionUnit),
+}
+
+fn match_enum_with_option_unit(e: EnumWithOptionUnit) -> Unit {
+    match e {
+        Variant1 => Unit,
+        VariantWithOptionUnit(a) => match_option_unit(a),
+    }
+}
+
+enum EnumWithResultIntStr {
+    Variant1,
+    VariantWithResultIntStr(ResultIntStr),
+}
+
+fn match_enum_with_result_int_str(e: EnumWithResultIntStr) -> Int {
+    match e {
+        Variant1 => 0,
+        VariantWithResultIntStr(a) => match_result_int_str(a),
+    }
+}
+
+enum EnumWithResultIntStrUnit {
+    Variant1,
+    VariantWithResultIntStrUnit(ResultIntStr),
+}
+
+fn match_enum_with_result_int_str_unit(e: EnumWithResultIntStrUnit) -> Unit {
+    match e {
+        Variant1 => Unit,
+        VariantWithResultIntStrUnit(a) => match_result_int_str_unit(a),
+    }
+}
+
+enum EnumWithVec {
+    Variant1,
+    VariantWithVec(Vec<Int>),
+}
+
+fn match_enum_with_vec(e: EnumWithVec) -> Int {
+    match e {
+        Variant1 => 0,
+        VariantWithVec(a) => match_vec(a),
+    }
+}
+
+enum EnumWithEnum {
+    Variant1,
+    VariantWithEnum(Enum),
+}
+
+fn match_enum_with_enum(e: EnumWithEnum) -> Int {
+    match e {
+        Variant1 => 0,
+        VariantWithEnum(a) => match_enum(a),
+    }
+}
+
+enum EnumWithEnumWithInt {
+    Variant1,
+    VariantWithEnumWithInt(EnumWithInt),
+}
+
+fn match_enum_with_enum_with_int(e: EnumWithEnumWithInt) -> Int {
+    match e {
+        Variant1 => 0,
+        VariantWithEnumWithInt(a) => match

@@ -1,0 +1,27 @@
+struct Pen { price: Int, quantity: Int }
+
+struct Pad { price: Int, quantity: Int }
+
+struct Ink { price: Int, quantity: Int }
+
+fn cost(item: Pen) -> Int {
+    item.price * item.quantity
+}
+
+fn highest_cost(items: Vec<Pen>, pads: Vec<Pad>, inks: Vec<Ink>) -> Int {
+    let pen_cost = cost(items.first().unwrap())
+    let pad_cost = cost(pads.first().unwrap())
+    let ink_cost = cost(inks.first().unwrap())
+    let combined_cost = pen_cost + pad_cost + ink_cost
+    print(combined_cost)
+    let highest_item = items.first().unwrap()
+    let highest_item_name = "Pen"
+    print(highest_item_name)
+}
+
+fn main() {
+    let items = vec(Pen { price: 3, quantity: 4 })
+    let pads = vec(Pad { price: 9, quantity: 2 })
+    let inks = vec(Ink { price: 5, quantity: 3 })
+    highest_cost(items, pads, inks)
+}

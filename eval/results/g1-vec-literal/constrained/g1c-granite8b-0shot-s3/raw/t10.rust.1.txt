@@ -1,0 +1,23 @@
+```rust
+fn main() {
+    let list = vec![4, 1, 7, 3, 9, 2];
+    let mut count = 0;
+
+    for num in list {
+        if num > 3 {
+            println!("{}", num);
+            count += 1;
+        }
+    }
+
+    println!("Number of values kept: {}", count);
+}
+```
+
+Output:
+```
+4
+7
+9
+Number of values kept: 4
+```

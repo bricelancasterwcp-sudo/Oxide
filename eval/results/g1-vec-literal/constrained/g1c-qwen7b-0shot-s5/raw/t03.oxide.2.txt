@@ -1,0 +1,15 @@
+struct Pair { a: Int, b: Int }
+
+fn gcd(p: Pair) -> Int {
+    while p.b != 0 {
+        let temp = p.b
+        p.b == p.a % p.b
+        p.a == temp
+    }
+    p.a
+}
+
+fn main() {
+    let p = Pair { a: 252, b: 105 }
+    print(gcd(p))
+}

@@ -1,0 +1,345 @@
+fn len_square(s: &Shape) -> Int {
+    match s {
+        Square(n) => 4 * n,
+        _ => 0,
+    }
+}
+
+fn len_rectangle(s: &Shape) -> Int {
+    match s {
+        Rectangle(l, w) => 2 * (l + w),
+        _ => 0,
+    }
+}
+
+fn len_triangle(s: &Shape) -> Int {
+    match s {
+        Triangle(a, b, c) => a + b + c,
+        _ => 0,
+    }
+}
+
+fn main() {
+    let shapes = vec(Square(3), Triangle(3, 4, 5), Rectangle(2, 5))
+    for s in shapes {
+        print(len_square(&s))
+        print(len_rectangle(&s))
+        print(len_triangle(&s))
+    }
+}
+
+enum Shape {
+    Square(Int),
+    Triangle(Int, Int, Int),
+    Rectangle(Int, Int),
+}
+
+fn push(v: Vec<Shape>, x: Shape) -> Vec<Shape> {
+    let mut v = v
+    v.push(x)
+    v
+}
+
+fn vec(s: Shape) -> Vec<Shape> {
+    let mut v = vec()
+    v.push(s)
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn len(v: &Vec<Shape>) -> Int {
+    v.len()
+}
+
+fn get(v: &Vec<Shape>, i: Int) -> Option<Shape> {
+    if i >= len(v) {
+        None
+    } else {
+        Some(v.get(i))
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a + 1 < b {
+        v.push(i)
+    }
+    v
+}
+
+fn clone(x: &Shape) -> Shape {
+    match x {
+        Square(n) => Square(n),
+        Triangle(a, b, c) => Triangle(a, b, c),
+        Rectangle(l, w) => Rectangle(l, w),
+    }
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    a + b
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut v = vec()
+    for c in s.chars() {
+        v.push(c.to_string())
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    match s.parse() {
+        Ok(n) => Some(n),
+        Err(_) => None,
+    }
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn drop_shape(s: &Shape) {
+    match s {
+        Square(_) => drop_square(s),
+        Triangle(_, _, _) => drop_triangle(s),
+        Rectangle(_, _) => drop_rectangle(s),
+    }
+}
+
+fn drop_square(s: &Shape) {
+    let s = s
+    drop s
+}
+
+fn drop_triangle(s: &Shape) {
+    let s = s
+    drop s
+}
+
+fn drop_rectangle(s: &Shape) {
+    let s = s
+    drop s
+}
+
+fn drop_vec(v: &Vec<Shape>) {
+    let v = v
+    drop v
+}
+
+fn drop_str(s: &Str) {
+    let s = s
+    drop s
+}
+
+fn drop_int(n: &Int) {
+    let n = n
+    drop n
+}
+
+fn drop_float(f: &Float) {
+    let f = f
+    drop f
+}
+
+fn drop_option(o: &Option<Shape>) {
+    let o = o
+    drop o
+}
+
+fn drop_vec_int(v: &Vec<Int>) {
+    let v = v
+    drop v
+}
+
+fn drop_vec_str(v: &Vec<Str>) {
+    let v = v
+    drop v
+}
+
+fn drop_vec_float(v: &Vec<Float>) {
+    let v = v
+    drop v
+}
+
+fn drop_unit() {
+    drop_unit()
+}
+
+fn drop_bool(b: &Bool) {
+    let b = b
+    drop b
+}
+
+fn drop_char(c: &Char) {
+    let c = c
+    drop c
+}
+
+fn drop_result(r: &Result<Shape, Error>) {
+    let r = r
+    drop r
+}
+
+fn drop_enum(e: &Enum) {
+    let e = e
+    drop e
+}
+
+fn drop_struct(s: &Struct) {
+    let s = s
+    drop s
+}
+
+fn drop_tuple(t: &Tuple) {
+    let t = t
+    drop t
+}
+
+fn drop_lifetime(l: &Lifetime) {
+    let l = l
+    drop l
+}
+
+fn drop_pattern(p: &Pattern) {
+    let p = p
+    drop p
+}
+
+fn drop_marker(m: &Marker) {
+    let m = m
+    drop m
+}
+
+fn drop_ptr(p: &Ptr) {
+    let p = p
+    drop p
+}
+
+fn drop_raw_pointer(p: &RawPointer) {
+    let p = p
+    drop p
+}
+
+fn drop_cell(c: &Cell) {
+    let c = c
+    drop c
+}
+
+fn drop_rc(r: &Rc) {
+    let r = r
+    drop r
+}
+
+fn drop_arc(a: &Arc) {
+    let a = a
+    drop a
+}
+
+fn drop_refcell(r: &RefCell) {
+    let r = r
+    drop r
+}
+
+fn drop_option_int(o: &Option<Int>) {
+    let o = o
+    drop o
+}
+
+fn drop_option_float(o: &Option<Float>) {
+    let o = o
+    drop o
+}
+
+fn drop_option_bool(o: &Option<Bool>) {
+    let o = o
+    drop o
+}
+
+fn drop_option_str(o: &Option<Str>) {
+    let o = o
+    drop o
+}
+
+fn drop_option_shape(o: &Option<Shape>) {
+    let o = o
+    drop o
+}
+
+fn drop_result_int(r: &Result<Int, Error>) {
+    let r = r
+    drop r
+}
+
+fn drop_result_float(r: &Result<Float, Error>) {
+    let r = r
+    drop r
+}
+
+fn drop_result_bool(r: &Result<Bool, Error>) {
+    let r = r
+    drop r
+}
+
+fn drop_result_str(r: &Result<Str, Error>) {
+    let r = r
+    drop r
+}
+
+fn drop_result_shape(r: &Result<Shape, Error>) {
+    let r = r
+    drop r
+}
+
+fn drop_lifetime_int(l: &Lifetime, i: &Int) {
+    let l = l
+    let i = i
+    drop l
+    drop i
+}
+
+fn drop_lifetime_float(l: &Lifetime, f: &Float) {
+    let l = l
+    let f = f
+    drop l
+    drop f
+}
+
+fn drop_lifetime_bool(l: &Lifetime, b: &Bool) {
+    let l = l
+    let b = b
+    drop l
+    drop b
+}
+
+fn drop_lifetime_str(l: &Lifetime, s: &Str) {
+    let l = l
+    let s = s
+    drop l
+    drop s
+}
+
+fn drop_lifetime_shape(l: &Lifetime, s: &Shape) {
+    let l = l
+    let s = s
+    drop l
+    drop s
+}
+
+fn drop_pattern_int(p: &Pattern, i: &Int) {
+    let p = p
+    let i

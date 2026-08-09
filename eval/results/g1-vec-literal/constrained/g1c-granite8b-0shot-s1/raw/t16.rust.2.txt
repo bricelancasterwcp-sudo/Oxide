@@ -1,0 +1,7 @@
+```rust
+fn main() {
+    println!("{}", 100/5); // 20
+    println!("undefined");
+    println!("{}", 100/4); // 25
+}
+```

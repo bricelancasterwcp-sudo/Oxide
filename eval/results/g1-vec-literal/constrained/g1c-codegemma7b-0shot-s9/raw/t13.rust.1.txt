@@ -1,0 +1,17 @@
+fn main() {
+    let texts = ["level", "stereo", "rotor"];
+
+    for text in texts {
+        let len = text.len();
+        let mut is_palindrome = true;
+
+        for i in 0..len / 2 {
+            if text.chars().nth(i) != text.chars().nth(len - i - 1) {
+                is_palindrome = false;
+                break;
+            }
+        }
+
+        println!("{}", is_palindrome);
+    }
+}

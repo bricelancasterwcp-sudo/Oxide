@@ -1,0 +1,11 @@
+fn sum_of_squares() -> Int {
+    let acc = 0
+    for i in range(0, 10) {
+        acc = acc + i * i
+    }
+    acc
+}
+
+fn main() {
+    print(sum_of_squares())
+}

@@ -1,0 +1,12 @@
+fn main() {
+    let list = [10, 20, 30];
+    let positions = [1, 5];
+
+    for &position in &positions {
+        if position < list.len() {
+            println!("{}", list[position]);
+        } else {
+            println!("{}", -1);
+        }
+    }
+}

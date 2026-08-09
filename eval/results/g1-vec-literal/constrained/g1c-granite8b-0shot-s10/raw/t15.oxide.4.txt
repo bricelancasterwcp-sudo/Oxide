@@ -1,0 +1,45 @@
+struct Int {
+    value: IntValue,
+}
+
+enum IntValue {
+    Num(IntNum),
+    Symbolic(String),
+}
+
+struct IntNum {
+    digits: Vec<IntDigit>,
+    base: IntBase,
+}
+
+enum IntDigit {
+    Zero,
+    One,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    A,
+    B,
+    C,
+    D,
+    E,
+    F,
+}
+
+enum IntBase {
+    Dec,
+    Hex,
+}
+
+fn parse_int(s: String) -> Option<Int> {
+    None
+}
+
+fn main() {
+    let _x = parse_int("12".to_string())? + parse_int("x".to_string())? + parse_int("30".to_string())?
+}

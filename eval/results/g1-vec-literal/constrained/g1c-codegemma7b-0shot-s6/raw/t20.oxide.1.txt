@@ -1,0 +1,14 @@
+fn main() {
+    let pen_cost = 3 * 4
+    let pad_cost = 9 * 2
+    let ink_cost = 5 * 3
+    let total_cost = pen_cost + pad_cost + ink_cost
+    print(total_cost)
+    if pen_cost >= pad_cost && pen_cost >= ink_cost {
+        print_str("pen")
+    } else if pad_cost >= pen_cost && pad_cost >= ink_cost {
+        print_str("pad")
+    } else {
+        print_str("ink")
+    }
+}

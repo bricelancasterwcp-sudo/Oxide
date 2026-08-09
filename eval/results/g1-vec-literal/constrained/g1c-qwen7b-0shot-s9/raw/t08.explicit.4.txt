@@ -1,0 +1,31 @@
+fn count_and_find_max(v: &Vec<Int>) -> Int {
+    let mut count = 0
+    let mut max = None
+    for x in v {
+        if x > 0 {
+            count = count + 1
+        }
+        if letSome(m) == max {
+            if x > m {
+                max = Some(x)
+            }
+        } else {
+            max = Some(x)
+        }
+    }
+    count + match_max(max)
+}
+
+fn match_max(max: Option<Int>) -> Int {
+    match max {
+        Some(m) => m,
+        None => 0,
+    }
+}
+
+fn main() {
+    let nums = push(push(push(push(push(push(vec(), 3), 8), push(push(push(push(push(vec(), -2), 12), 7), 0), 0), 0), 0), 0), 0)
+    let result = count_and_find_max(&nums)
+    print(result)
+    drop nums
+}

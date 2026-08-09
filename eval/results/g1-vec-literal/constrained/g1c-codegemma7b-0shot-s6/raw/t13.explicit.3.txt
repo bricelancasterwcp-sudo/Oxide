@@ -1,0 +1,21 @@
+fn is_palindrome(text: &String) -> Boolean {
+    let mut forward_cursor = 0
+    let mut backward_cursor = text.len() - 1
+    while forward_cursor < backward_cursor {
+        if text.chars().nth(forward_cursor) != text.chars().nth(backward_cursor) {
+            return false
+        }
+        forward_cursor = forward_cursor + 1
+        backward_cursor = backward_cursor - 1
+    }
+    return true
+}
+
+fn main() {
+    let level = "level"
+    let stereo = "stereo"
+    let rotor = "rotor"
+    print(is_palindrome(&level))
+    print(is_palindrome(&stereo))
+    print(is_palindrome(&rotor))
+}

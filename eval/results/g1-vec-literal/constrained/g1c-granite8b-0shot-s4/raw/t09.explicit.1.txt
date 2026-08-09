@@ -1,0 +1,7 @@
+fn main() {
+    let mut list = push(push(push(push(vec(), 1), 2), 3), 4)
+    for x in &mut * list {
+        print(x)
+        drop x
+    }
+}

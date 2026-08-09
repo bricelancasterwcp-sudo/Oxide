@@ -1,0 +1,15 @@
+fn main() {
+    let mut x = 27
+    let mut steps = 0
+    loop
+    if x == 1 {
+        breakprintln(steps)
+    }
+    if x % 2 == 0 {
+        x = x / 2
+    }
+    elsex
+    x = 3 * x + 1
+    steps = steps + 1
+    end
+}

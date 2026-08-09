@@ -1,0 +1,15 @@
+fn main() {
+    let list = vec(3, 8, -2, 12, 7)
+    let mut positive = 0
+    let mut largest = list.get(0).unwrap()
+    for x in list {
+        if x > 0 {
+            positive = positive + 1
+        }
+        if largest < x {
+            largest = x
+        }
+    }
+    print(positive)
+    print(largest)
+}

@@ -1,0 +1,14 @@
+fn main() {
+    let nums = vec(10, 20, 30)
+    let pos1 = get(&nums, 1)
+    let pos5 = get(&nums, 5)
+    match pos1 {
+        Some(x) => print(x),
+        None => print(-1),
+    }
+    match pos5 {
+        Some(x) => print(x),
+        None => print(-1),
+    }
+    drop nums
+}

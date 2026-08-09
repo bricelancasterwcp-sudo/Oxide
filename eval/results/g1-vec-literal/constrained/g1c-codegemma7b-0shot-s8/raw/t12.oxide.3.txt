@@ -1,0 +1,328 @@
+fn reverse(s: Str) -> Str {
+    let mut rev = vec()
+    for c in chars(s) {
+        rev = push(rev, c)
+    }
+    str_join(rev.as_slice())
+}
+
+fn main() {
+    print(reverse("stack"))
+}
+
+fn str_join(s: Slice<Str>) -> Str {
+    let mut out = Str("")
+    for i in 0.upto(len(s) - 1) {
+        out = concat(out, s.get(i).unwrap())
+    }
+    out
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut c = vec()
+    for i in 0.upto(str_len(s) - 1) {
+        c = push(c, str_get(s, i).unwrap())
+    }
+    c
+}
+
+fn str_get(s: Str, i: Int) -> Option<Str> {
+    if i >= 0 && i < str_len(s) {
+        Some(Str(s.chars().nth(i).unwrap()))
+    } else {
+        None
+    }
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut c = 0
+    for _ in v {
+        c = c + 1
+    }
+    c
+}
+
+fn str_len(s: Str) -> Int {
+    let mut c = 0
+    for _ in s.chars() {
+        c = c + 1
+    }
+    c
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut c = v
+    c.push(x)
+    c
+}
+
+fn str_join(s: Slice<Str>) -> Str {
+    let mut out = Str("")
+    for i in 0.upto(len(s) - 1) {
+        out = concat(out, s.get(i).unwrap())
+    }
+    out
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let mut c = String(a.chars().chain(b.chars()))
+    Str(c)
+}
+
+fn slice(v: Vec<T>) -> Slice<T> {
+    let mut c = v
+    c.as_slice()
+}
+
+fn upto(a: Int, b: Int) -> Range {
+    Range(a, b)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.upto(b) {
+        v = push(v, i)
+    }
+    v
+}
+
+fn str(s: String) -> Str {
+    Str(s)
+}
+
+fn to_string(s: Str) -> String {
+    let mut c = String(s.chars())
+    c
+}
+
+fn as_slice(v: Vec<T>) -> Slice<T> {
+    let mut c = v
+    c.as_slice()
+}
+
+fn unwrap(o: Option<T>) -> T {
+    o.unwrap()
+}
+
+fn none() -> Option<T> {
+    None
+}
+
+fn some(x: T) -> Option<T> {
+    Some(x)
+}
+
+fn print(x: Any) {
+    println(to_string(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<T> {
+    let mut c = vec()
+    c
+}
+
+fn any(x: Any) -> Any {
+    x
+}
+
+fn copy(x: Any) -> Any {
+    let mut c = x
+    c
+}
+
+fn move(x: Any) -> Any {
+    x
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn sub(a: Int, b: Int) -> Int {
+    a - b
+}
+
+fn mul(a: Int, b: Int) -> Int {
+    a * b
+}
+
+fn div(a: Int, b: Int) -> Int {
+    a / b
+}
+
+fn rem(a: Int, b: Int) -> Int {
+    a % b
+}
+
+fn lt(a: Int, b: Int) -> Bool {
+    a < b
+}
+
+fn gt(a: Int, b: Int) -> Bool {
+    a > b
+}
+
+fn le(a: Int, b: Int) -> Bool {
+    a <= b
+}
+
+fn ge(a: Int, b: Int) -> Bool {
+    a >= b
+}
+
+fn eq(a: Any, b: Any) -> Bool {
+    a == b
+}
+
+fn ne(a: Any, b: Any) -> Bool {
+    a != b
+}
+
+fn bit_and(a: Int, b: Int) -> Int {
+    a && b
+}
+
+fn bit_or(a: Int, b: Int) -> Int {
+    a || b
+}
+
+fn bit_xor(a: Int, b: Int) -> Int {
+    a && b
+}
+
+fn bit_not(a: Int) -> Int {
+    !a
+}
+
+fn bit_shl(a: Int, b: Int) -> Int {
+    a.wrapping_shl(b)
+}
+
+fn bit_shr(a: Int, b: Int) -> Int {
+    a.wrapping_shr(b)
+}
+
+fn bit_shr_u(a: Int, b: Int) -> Int {
+    a.wrapping_shr(b)
+}
+
+fn bit_test(a: Int, b: Int) -> Bool {
+    (a && (1.shl(b))) != 0
+}
+
+fn bit_rev(a: Int) -> Int {
+    a.reverse_bits()
+}
+
+fn char(c: Char) -> Str {
+    Str(c)
+}
+
+fn any(x: Any) -> Any {
+    x
+}
+
+fn copy(x: Any) -> Any {
+    let mut c = x
+    c
+}
+
+fn move(x: Any) -> Any {
+    x
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn sub(a: Int, b: Int) -> Int {
+    a - b
+}
+
+fn mul(a: Int, b: Int) -> Int {
+    a * b
+}
+
+fn div(a: Int, b: Int) -> Int {
+    a / b
+}
+
+fn rem(a: Int, b: Int) -> Int {
+    a % b
+}
+
+fn lt(a: Int, b: Int) -> Bool {
+    a < b
+}
+
+fn gt(a: Int, b: Int) -> Bool {
+    a > b
+}
+
+fn le(a: Int, b: Int) -> Bool {
+    a <= b
+}
+
+fn ge(a: Int, b: Int) -> Bool {
+    a >= b
+}
+
+fn eq(a: Any, b: Any) -> Bool {
+    a == b
+}
+
+fn ne(a: Any, b: Any) -> Bool {
+    a != b
+}
+
+fn bit_and(a: Int, b: Int) -> Int {
+    a && b
+}
+
+fn bit_or(a: Int, b: Int) -> Int {
+    a || b
+}
+
+fn bit_xor(a: Int, b: Int) -> Int {
+    a && b
+}
+
+fn bit_not(a: Int) -> Int {
+    !a
+}
+
+fn bit_shl(a: Int, b: Int) -> Int {
+    a.wrapping_shl(b)
+}
+
+fn bit_shr(a: Int, b: Int) -> Int {
+    a.wrapping_shr(b)
+}
+
+fn bit_shr_u(a: Int, b: Int) -> Int {
+    a.wrapping_shr(b)
+}
+
+fn bit_test(a: Int, b: Int) -> Bool {
+    (a && (1.shl(b))) != 0
+}
+
+fn bit_rev(a: Int) -> Int {
+    a.reverse_bits()
+}
+
+fn char(c: Char) -> Str {
+    Str(c)
+}
+
+fn any(x: Any) -> Any {
+    x
+}
+
+fn copy(x: Any) -> Any {
+    let mut c = x
+    c

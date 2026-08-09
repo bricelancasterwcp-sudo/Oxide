@@ -1,0 +1,64 @@
+fn main() {
+    let rectangle = Rectangle { width: 7, height: 4 }
+    print(rectangle.area())
+    print(rectangle.perimeter())
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn perimeter(rectangle: &Rectangle) -> Int {
+    rectangle.width + rectangle.height + rectangle.width + rectangle.height
+}
+
+fn area(rectangle: &Rectangle) -> Int {
+    rectangle.width * rectangle.height
+}
+
+struct Point {
+    x: Int,
+    y: Int,
+}
+
+fn distance(p1: &Point, p2: &Point) -> Float {
+    to_float((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)).sqrt()
+}
+
+fn move_by(p: &Point, dx: Int, dy: Int) -> Point {
+    Point(p.x + dx, p.y + dy)
+}
+
+fn distance_between_moves(p1: &Point, dx: Int, dy: Int, p2: &Point) -> Float {
+    distance(&p1, &move_by && p1, dx, dy)
+}
+
+fn test_distance_between_moves() {
+    let point = Point(2, 2)
+    print(distance_between_moves(&point, 3, 4, &point))
+}
+
+fn rotate_point_90(p: &Point) -> Point {
+    Point(p.y, -p.x)
+}
+
+fn test_rotate_point_90() {
+    let point = Point(2, 2)
+    print(rotate_point_90(&point))
+}
+
+fn square(p: &Point) -> Int {
+    p.x * p.x + p.y * p.y
+}
+
+fn test_square() {
+    let point = Point(2, 2)
+    print(square(&point))
+}
+
+fn main() {
+    test_distance_between_moves()
+    test_rotate_point_90()
+    test_square()
+}

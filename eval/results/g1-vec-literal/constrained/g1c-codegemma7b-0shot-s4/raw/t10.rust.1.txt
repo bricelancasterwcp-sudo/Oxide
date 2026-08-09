@@ -1,0 +1,15 @@
+use std::io::Write;
+
+fn main() {
+    let mut nums = vec![4, 1, 7, 3, 9, 2];
+    let mut count = 0;
+
+    for num in nums.iter_mut() {
+        if *num > 3 {
+            print!("{}\n", num);
+            count += 1;
+        }
+    }
+
+    print!("{} value(s) kept\n", count);
+}

@@ -1,0 +1,12 @@
+fn main() {
+  let mut count = 0;
+  let list = vec![4, 1, 7, 3, 9, 2];
+  let mut iter = list.into_iter();
+  while let Some(n) = iter.next() {
+    if n > 3 {
+      println!("{}", n);
+      count += 1;
+    }
+  }
+  println!("Number of values kept: {}", count);
+}

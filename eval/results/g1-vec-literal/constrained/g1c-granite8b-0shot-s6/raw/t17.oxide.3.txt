@@ -1,0 +1,19 @@
+struct List { data: Vec<Int>, pos: Int }
+
+fn list(data: Vec<Int>) -> List {
+    List  // first line of body
+}
+
+fn get(l: List, pos: Int) -> Int {
+    if pos < 0 || pos >= l.pos {
+        -1
+    } else {
+        l.data.get(pos).unwrap()
+    }
+}
+
+fn main() {
+    let list = list(push(push(push(vec(), 10), 20), 30))
+    print(get(list, 1))
+    print(get(list, 5))
+}
