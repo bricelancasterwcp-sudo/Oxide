@@ -130,6 +130,12 @@ def run_session(
             tasks_path=tasks_path,
         )
 
+    # first/verdict are always populated by this point -- the
+    # ContextOverflowError branch above re-raises whenever
+    # session.attempts == 0, so zero evidence never reaches here. The
+    # `is not None`/truthiness guards below are kept anyway as a cheap
+    # defensive fallback, not for reachability: insurance against a
+    # future loop change silently breaking that invariant.
     cell = {
         "task": task_id,
         "arm": arm,

@@ -858,13 +858,28 @@ def test_run_session_aborts_when_context_exhausts_before_any_submission(tmp_path
         )
 
 
-def test_run_one_continues_to_the_next_session_past_context_exhaustion(tmp_path):
+@pytest.mark.parametrize(
+    "overflow_cls",
+    [ContextOverflowError, ServerContextOverflowError],
+    ids=["client_side", "server_side"],
+)
+def test_run_one_continues_to_the_next_session_past_context_exhaustion(
+    tmp_path, overflow_cls
+):
     # The RUN must continue past an exhausted session THAT HAS EVIDENCE
     # (attempts >= 1): no exception escapes run_session for that case, so
     # run_one's task x arm loop keeps going and every other cell still
-    # gets recorded. The stub's overflow fires on the REPAIR attempt of
-    # the very first session processed (tA/oxide), after that session's
-    # own attempt 1 already produced a real, failed submission.
+    # gets recorded. The except block in run_session is type-agnostic, so
+    # this is parametrized over BOTH raise sites -- the client's own
+    # check_context refusal (base ContextOverflowError) and the server's
+    # real-tokenizer rejection (ServerContextOverflowError) -- rather than
+    # asserted structurally identical: this file's own history
+    # (test_context_overflow_aborts_the_run_id_and_records_it's comment)
+    # records that exactly a single-flavor, stubbed-run_one test going
+    # vacuous is how a real gap went unremarked once before. The stub's
+    # overflow fires on the REPAIR attempt of the very first session
+    # processed (tA/oxide), after that session's own attempt 1 already
+    # produced a real, failed submission.
     class _ExhaustsOnRepairThenArmAware:
         _PROGRAMS = {
             "rust": 'fn main() { println!("42"); }\n',
@@ -880,7 +895,7 @@ def test_run_one_continues_to_the_next_session_past_context_exhaustion(tmp_path)
             if self.calls == 1:
                 return Generation("this is not a program", 10, 5, 100, False)
             if self.calls == 2:
-                raise ServerContextOverflowError("prompt exceeds num_ctx 8192")
+                raise overflow_cls("prompt exceeds num_ctx")
             if harness.RUST_PREAMBLE in prompt:
                 arm = "rust"
             elif "Oxide Explicit" in prompt:
