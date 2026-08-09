@@ -1,12 +1,16 @@
 """Struct destructuring-pattern typing for language v0.2 (SPEC.md
 sections 14, 27).
 
-Mixin consumed by ``src.sema.infer._Infer``. Extracted out of
-``infer.py`` to keep that module under the project's 800-line cap
-(unrelated to the section-56 field-assignment work that pushed it over);
-this is the destructure-pattern half of ``_let``'s typing, split out
-because it is self-contained and does not interact with any of the
-other statement forms.
+Mixin consumed by ``src.sema.infer._Infer``. This is one half of
+``_let``'s typing: ``infer._let`` keeps the ``BindPat`` case and
+delegates the ``DestructPat`` case here. The two halves share only
+``_let``'s entry point -- this one touches no other statement form --
+which is what made the split a safe way to bring ``infer.py`` back under
+the project's 800-line cap when the section-56 field-assignment work
+pushed it over. The extracted code is byte-identical to the original.
+
+Only :mod:`src.sema.analyze`'s API is contractual; this module is an
+internal helper of ``infer``.
 """
 
 from __future__ import annotations

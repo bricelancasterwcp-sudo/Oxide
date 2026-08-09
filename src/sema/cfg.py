@@ -36,7 +36,12 @@ _COPY = "copy"
 
 @dataclass(frozen=True, slots=True)
 class Use:
-    """A read or move of a non-copy local at one ``Var`` node."""
+    """A read or move of a non-copy local at one AST node.
+
+    Almost always a ``Var``. The exception is §56's field assignment,
+    whose base is a READ recorded against the ``FieldAssign`` STATEMENT
+    node -- there is no ``Var`` node for the base to hang it on.
+    """
 
     var_id: int
     node_id: int
@@ -455,7 +460,9 @@ class _Lowerer:
                 nodes = self._expr(value, _MOVE)
                 var_id = self.resolved.assign_of.get(stmt.node_id)
                 if var_id is not None and not self._is_copy_var(var_id):
-                    self.use_class[stmt.node_id] = _READ
+                    # No `use_class` entry: analyze.use_classes() resolves
+                    # its keys through resolve.use_of, which holds Var ids
+                    # only, so an entry under a statement id is unreachable.
                     nodes.append(Use(var_id, stmt.node_id, stmt.span, _READ))
                 return nodes
             case ast.Return(value=value):
