@@ -27,6 +27,7 @@ from eval.models import (
     Generation,
     ModelError,
     OllamaClient,
+    _parse_http_error_body,
     estimate_tokens,
 )
 from eval.repair import RepairPromptError, build_repair_prompt
@@ -344,6 +345,25 @@ def test_generate_sends_pinned_sampling_options(monkeypatch):
         # from the oxide and explicit arms only.
         "num_ctx": 8192,
     }
+
+
+def test_generate_sends_truncate_false_at_the_top_level(monkeypatch):
+    http = _FakeHTTP(json.loads(_chat_response()))
+    _client(monkeypatch, http).generate("hi", seed=4)
+    payload = http.calls[0][1]
+    # Section 51: the daemon's DEFAULT is to accept an oversized prompt,
+    # silently discard the FRONT of it, and answer anyway -- reproduced
+    # on :11434, a 3160-token prompt into a 256-token window returned
+    # 200 with prompt_eval_count 130 and only the TAIL canary visible.
+    # Under that default there is nothing for either overflow check to
+    # catch: no exception, no error field, and a plausible answer built
+    # on a prompt whose language card is gone.
+    assert payload["truncate"] is False
+    # Top-level ONLY. Also reproduced on :11434: the identical flag
+    # inside `options` is silently ignored (200, front-truncated), so
+    # moving it there to sit alongside num_ctx would disable the guard
+    # without failing anything.
+    assert "truncate" not in payload["options"]
 
 
 def test_generate_marks_length_stop_as_truncated(monkeypatch):
@@ -2474,8 +2494,9 @@ def _http_error(code: int, body: dict) -> urllib.error.HTTPError:
 
 # Bodies reproduced against the real llama-server running on :8081
 # (SPEC section 45/51): an oversized prompt and a malformed request,
-# respectively. See eval.llamacpp._context_overflow_message's docstring
-# for the exact probe transcript.
+# respectively. See eval.models._parse_http_error_body's docstring for
+# the exact probe transcripts, including Ollama's deeper wrapping of the
+# identical objects.
 _OVERFLOW_400_BODY = {
     "error": {
         "code": 400,
@@ -2527,6 +2548,106 @@ def test_llamacpp_classifies_non_overflow_400_as_model_error_after_retries(
     assert len(http.calls) == 3
     # The server's own message is surfaced, not discarded.
     assert "'messages' is required" in str(excinfo.value)
+
+
+def _ollama_http_error(code: int, body: dict) -> urllib.error.HTTPError:
+    """Ollama's shape for the SAME upstream failure: it proxies
+    llama.cpp's error object as an opaque JSON *string*, one level deeper
+    than llama.cpp's own body. Reproduced against the daemon on :11434
+    with ``truncate: false``::
+
+        {"error": "{\\"error\\": {\\"code\\": 400, \\"message\\":
+        \\"request (3160 tokens) exceeds the available context size (256
+        tokens), try increasing it\\", \\"type\\":
+        \\"exceed_context_size_error\\", \\"n_prompt_tokens\\": 3160,
+        \\"n_ctx\\": 256}}"}
+    """
+    return _http_error(code, {"error": json.dumps(body)})
+
+
+def test_parse_http_error_body_unwraps_ollamas_double_encoded_error():
+    # Both daemons must yield the SAME error object, or one shared
+    # classifier cannot serve both backends and the two paths would
+    # drift in how they classify an identical failure.
+    assert (
+        _parse_http_error_body(_ollama_http_error(400, _OVERFLOW_400_BODY))
+        == _OVERFLOW_400_BODY["error"]
+    )
+    assert (
+        _parse_http_error_body(_http_error(400, _OVERFLOW_400_BODY))
+        == _OVERFLOW_400_BODY["error"]
+    )
+
+
+def test_parse_http_error_body_keeps_a_plain_string_error_as_a_message():
+    # Ollama's own errors (a missing tag, say) are plain strings, not
+    # nested JSON. Returning None for them would discard the daemon's
+    # only explanation from the eventual ModelError.
+    error = _parse_http_error_body(
+        _http_error(404, {"error": "model not found"})
+    )
+    assert error == {"message": "model not found"}
+
+
+def test_ollama_classifies_overflow_400_as_context_overflow_without_retrying(
+    monkeypatch,
+):
+    http = _FakeHTTP(_ollama_http_error(400, _OVERFLOW_400_BODY))
+    with pytest.raises(ServerContextOverflowError) as excinfo:
+        _client(monkeypatch, http).generate("hi", seed=1)
+    # The same guarantees the llamacpp path already has: the DISTINCT
+    # subclass, so run_session's evidence gate sees an overflow rather
+    # than a generic ModelError that would abort the run outright...
+    assert type(excinfo.value) is ServerContextOverflowError
+    # ...and no retry, because the daemon would reject the identical
+    # prompt the same way three more times.
+    assert len(http.calls) == 1
+
+
+def test_ollama_classifies_non_overflow_400_as_model_error_after_retries(
+    monkeypatch,
+):
+    http = _FakeHTTP(
+        *[_ollama_http_error(400, _MALFORMED_400_BODY) for _ in range(3)]
+    )
+    with pytest.raises(ModelError) as excinfo:
+        _client(monkeypatch, http).generate("hi", seed=1)
+    assert not isinstance(excinfo.value, ContextOverflowError)
+    assert len(http.calls) == 3
+    assert "'messages' is required" in str(excinfo.value)
+
+
+@pytest.mark.live
+def test_live_ollama_refuses_a_prompt_the_estimate_let_through():
+    """The one thing a scripted body cannot prove: that the real daemon
+    refuses a prompt ``check_context`` ACCEPTED.
+
+    Punctuation-dense text tokenizes far worse than 4 chars/token, so the
+    crude estimate under-counts it badly -- measured on :11434, 1845
+    estimated tokens against the daemon's real 6648, a 3.6x miss. Before
+    ``truncate: false`` that prompt returned a normal 200 with its front
+    silently discarded and an answer built on the remainder.
+    """
+    client = OllamaClient(
+        MODELS["qwen0_5b"],
+        num_ctx=2048,
+        num_predict=8,
+        sleep=lambda _s: None,
+    )
+    if not client.healthy():
+        pytest.skip("ollama daemon not running")
+    try:
+        client.preflight()
+    except ModelError as exc:
+        pytest.skip(f"model not pulled: {exc}")
+
+    prompt = "; ".join(f"x{i}={i}" for i in range(760))
+    # Precondition, asserted rather than assumed: if the client-side
+    # estimate were the thing that fired, this test would pass without
+    # ever exercising the daemon -- the exact hole it exists to cover.
+    client.check_context(prompt)
+    with pytest.raises(ServerContextOverflowError):
+        client.generate(prompt, seed=1)
 
 
 @pytest.mark.parametrize(

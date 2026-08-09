@@ -1831,8 +1831,9 @@ rung, §51's memory-pressure case. The pinned value is recorded in
 every manifest as `num_ctx`, kept lexically distinct from
 `model_context_length` (the capability read off `/api/tags`) so the two
 cannot be confused, and `OllamaClient.generate` **refuses** any prompt
-whose estimated tokens plus `num_predict` exceed it rather than letting
-the daemon truncate silently (§51).
+whose estimated tokens plus `num_predict` exceed it — and separately
+forbids the daemon from truncating one that slips past that estimate —
+rather than letting the daemon truncate silently (§51).
 
 **The window pin is per-family, not universal.** `num_ctx` is
 `min(8192, that model's OWN advertised training context)`, applied
@@ -2153,6 +2154,31 @@ the primary comparison rests on. Refusing before the request means the
 retry loop never sees it (overflow is deterministic) and the
 consecutive-abort backstop below still fires if it is systematic.
 
+**Both backends must be *told* not to truncate, and only one of them
+volunteers.** llama-server rejects an oversized prompt on its own with a
+400 (`exceed_context_size_error`). Ollama's default is the opposite: it
+accepts the prompt, silently discards the **front** of it, and returns a
+normal 200. Reproduced on :11434 — a 3160-token prompt into a 256-token
+window answered with `prompt_eval_count: 130`, the tail canary present
+and the head canary gone. Under that default the crude estimate above is
+the *only* guard on the Ollama path, and any prompt it under-counts
+becomes a plausible answer built on a card-less prompt, recorded as an
+ordinary model failure in exactly the two arms §47 rests on — the same
+silent, non-random bias §48 pins `num_ctx` against, arriving through a
+different door and leaving the same absence of evidence.
+
+`OllamaClient.generate` therefore sends **`truncate: false`**, and it is
+**top-level, not inside `options`**: nested there the daemon ignores it
+and front-truncates anyway (also reproduced on :11434), so the flag would
+read as present in the payload while doing nothing at all. With it set,
+Ollama returns the same `exceed_context_size_error` 400 llama-server
+does — wrapped one level deeper, as a JSON *string* under `error`, which
+`eval.models._parse_http_error_body` unwraps. Classification then runs
+through one shared `raise_if_context_overflow`, so an identical 400
+cannot be classified two different ways depending on which daemon served
+the run, and the guarantee above holds for the whole harness rather than
+per backend.
+
 **The evidence gate decides session-result vs. abort — not which check
 raised the exception.** A repair prompt can grow across attempts and
 overflow either check well after real evidence already exists: the
@@ -2219,7 +2245,12 @@ in `harness.py` or `src/` is touched).
 3. **Model client** — protocol conformance against a stub; retry-then-
    abort on transport error; preflight raises on a missing tag;
    `num_predict` passed through; `done_reason == "length"` surfaced as
-   `truncated`.
+   `truncated`; `truncate: false` sent **top-level** and asserted absent
+   from `options` (where the daemon ignores it); an
+   `exceed_context_size_error` 400 classified as
+   `ServerContextOverflowError` without retry, and a non-overflow 400
+   retried with the daemon's own message surfaced — both asserted on
+   **each** backend against that backend's own error wrapping (§51).
 4. **Failure classification** (§51's governing rule, both directions) —
    a generation truncated at `num_predict` is submitted as a **model**
    failure and does **not** abort; an HTTP timeout **does** abort the

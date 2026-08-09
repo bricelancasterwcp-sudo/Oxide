@@ -39,11 +39,19 @@ from eval.models import (
     Generation,
     ModelError,
     estimate_tokens,
+    raise_if_context_overflow,
 )
 
 # Reused, not reimplemented: identical transport means an identical
 # exception surface, and therefore an identical ModelError boundary.
 from eval.models import _request as _request
+
+# Moved to eval.models so ONE classifier serves both backends (section
+# 51): llama.cpp rejects an oversized prompt on its own, Ollama only when
+# asked to, and two copies of this class would let the two paths classify
+# an identical 400 differently. Re-exported under its original name --
+# importers should not have to care which module defines it.
+from eval.models import ServerContextOverflowError as ServerContextOverflowError
 
 DEFAULT_HOST = "http://localhost:8081"
 
@@ -76,65 +84,6 @@ def grammar_digest(grammar: str | None) -> str | None:
     if grammar is None:
         return None
     return hashlib.sha256(grammar.encode("utf-8")).hexdigest()
-
-
-class ServerContextOverflowError(ContextOverflowError):
-    """The prompt PASSED the client's own pre-request estimate
-    (``check_context``) but the server's real tokenizer rejected it
-    anyway. ``estimate_tokens``'s chars-per-token heuristic is
-    deliberately crude (section 48's own docstring) and under-counts a
-    real prompt often enough that a repair prompt grown across several
-    attempts can clear it and still overflow the server -- a
-    cross-attempt sibling of truncation-at-``num_predict``.
-
-    A distinct subclass of the base ``ContextOverflowError`` so ``_call``
-    can raise it WITHOUT retrying (the failure is deterministic once the
-    server has rejected it) and so logs/manifests can tell which check
-    caught an overflow. ``eval.driver.run_session`` does NOT branch on
-    this distinction, though: both this subclass and the base class are
-    caught identically there and gated on whether the session already
-    has submitted evidence (section 45/51), not on which one fired --
-    the type axis matters for retry behavior and diagnostics, not for
-    session-result-vs-abort.
-    """
-
-
-def _parse_http_error_body(exc: urllib.error.HTTPError) -> dict | None:
-    """The server's own ``error`` object from a 400 (or other) response
-    body, or ``None`` if it cannot be read/parsed or isn't this JSON
-    shape. Reads the response body exactly once -- callers must not read
-    it again.
-
-    Reproduced against the running server on :8081 (SPEC section 45's
-    harness host) to pin the actual shapes rather than guess them:
-
-        oversized prompt -> HTTPError 400, body::
-
-            {"error": {"code": 400, "message": "request (15430 tokens)
-            exceeds the available context size (8192 tokens), try
-            increasing it", "type": "exceed_context_size_error",
-            "n_prompt_tokens": 15430, "n_ctx": 8192}}
-
-        malformed request (missing "messages") -> HTTPError 400, body::
-
-            {"error": {"code": 400, "message": "'messages' is required",
-            "type": "invalid_request_error"}}
-
-    ``error.type`` is the honest discriminator between the two.
-    """
-    try:
-        body = json.loads(exc.read().decode("utf-8"))
-    except Exception:
-        # The body is a live socket file, not a buffer: IncompleteRead,
-        # socket.timeout, or any other OSError can fire here alongside
-        # the JSON/decode failures, and an unreadable body is
-        # definitionally not overflow-shaped either way. Caught broadly
-        # so a read failure can never escape _call's except clause and
-        # kill the whole grid instead of this one request (would
-        # otherwise bypass the entire ModelError contract).
-        return None
-    error = body.get("error") if isinstance(body, dict) else None
-    return error if isinstance(error, dict) else None
 
 
 class LlamaCppClient:
@@ -175,30 +124,20 @@ class LlamaCppClient:
         same way three more times), so burning the retry budget on it
         would only delay a result that is already known. It is raised
         immediately as ``ServerContextOverflowError`` instead of
-        ``ModelError`` -- see ``_parse_http_error_body`` and that class's
-        docstring for why it is a DISTINCT subclass from the client-side
-        ``ContextOverflowError`` raised by ``check_context``. ``HTTPError``
-        must be caught ahead of the general ``URLError`` branch below: it
-        IS a ``URLError`` subclass, so listing it second would let the
-        general branch swallow it first.
+        ``ModelError`` -- see ``eval.models.raise_if_context_overflow``
+        and that class's docstring for why it is a DISTINCT subclass from
+        the client-side ``ContextOverflowError`` raised by
+        ``check_context``. ``HTTPError`` must be caught ahead of the
+        general ``URLError`` branch below: it IS a ``URLError`` subclass,
+        so listing it second would let the general branch swallow it
+        first.
         """
         last: Exception | str | None = None
         for attempt in range(self.retries):
             try:
                 return _request(url, payload, self.timeout_s)
             except urllib.error.HTTPError as exc:
-                error = _parse_http_error_body(exc)
-                overflow = error is not None and (
-                    error.get("type") == "exceed_context_size_error"
-                )
-                if overflow:
-                    raise ServerContextOverflowError(
-                        f"{self.model}: server rejected the prompt as "
-                        f"exceeding its context window "
-                        f"({error.get('message') or 'context size exceeded'}). "
-                        f"estimate_tokens() under-counted this prompt "
-                        f"against the server's real tokenizer."
-                    ) from exc
+                error = raise_if_context_overflow(self.model, exc)
                 # Not overflow-shaped: retried like any other transport
                 # failure, but surface the server's own message (if any)
                 # in the eventual ModelError instead of discarding it.

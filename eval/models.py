@@ -46,9 +46,8 @@ class ContextOverflowError(ModelError):
     """The prompt plus its reserved generation exceeds ``num_ctx`` --
     either caught BEFORE the request is ever sent (the client's own
     ``check_context`` estimate refusing a prompt it judges too large), or
-    via the ``eval.llamacpp.ServerContextOverflowError`` subclass, when
-    the server's real tokenizer rejects a prompt that PASSED that
-    estimate.
+    via the ``ServerContextOverflowError`` subclass below, when the
+    server's real tokenizer rejects a prompt that PASSED that estimate.
 
     A ModelError subclass on purpose. Overflow is a *configuration*
     failure, never a model result: llama.cpp silently truncates an
@@ -73,6 +72,33 @@ class ContextOverflowError(ModelError):
     would otherwise repeat identically across every seed, fabricating a
     full grid of zero-attempt "results" with no abort and no manifest
     cause.
+    """
+
+
+class ServerContextOverflowError(ContextOverflowError):
+    """The prompt PASSED the client's own pre-request estimate
+    (``check_context``) but the server's real tokenizer rejected it
+    anyway. ``estimate_tokens``'s chars-per-token heuristic is
+    deliberately crude (section 48's own docstring) and under-counts a
+    real prompt often enough that a repair prompt grown across several
+    attempts can clear it and still overflow the server -- a
+    cross-attempt sibling of truncation-at-``num_predict``.
+
+    A distinct subclass of the base ``ContextOverflowError`` so ``_call``
+    can raise it WITHOUT retrying (the failure is deterministic once the
+    server has rejected it) and so logs/manifests can tell which check
+    caught an overflow. ``eval.driver.run_session`` does NOT branch on
+    this distinction, though: both this subclass and the base class are
+    caught identically there and gated on whether the session already
+    has submitted evidence (section 45/51), not on which one fired --
+    the type axis matters for retry behavior and diagnostics, not for
+    session-result-vs-abort.
+
+    Defined HERE rather than beside one client because it is the shared
+    vocabulary of both backends: llama.cpp rejects an oversized prompt on
+    its own, and Ollama does so only when asked to (section 51's
+    ``truncate: false``). Two classes would let the two paths classify an
+    identical failure differently.
     """
 
 
@@ -108,6 +134,94 @@ def _request(
         return json.loads(resp.read().decode())
 
 
+def _parse_http_error_body(exc: urllib.error.HTTPError) -> dict | None:
+    """The server's own ``error`` object from a 400 (or other) response
+    body, or ``None`` if it cannot be read/parsed. Reads the response
+    body exactly once -- callers must not read it again.
+
+    Reproduced against both running servers rather than guessed, because
+    the two daemons wrap the SAME upstream failure differently.
+
+    llama-server on :8081 (SPEC section 45's harness host) -- the error
+    object is a nested dict::
+
+        oversized prompt -> HTTPError 400, body::
+
+            {"error": {"code": 400, "message": "request (15430 tokens)
+            exceeds the available context size (8192 tokens), try
+            increasing it", "type": "exceed_context_size_error",
+            "n_prompt_tokens": 15430, "n_ctx": 8192}}
+
+        malformed request (missing "messages") -> HTTPError 400, body::
+
+            {"error": {"code": 400, "message": "'messages' is required",
+            "type": "invalid_request_error"}}
+
+    Ollama on :11434 -- the identical object, proxied as an opaque JSON
+    *string* one level deeper, so a bare ``isinstance(error, dict)`` test
+    silently discards it::
+
+            {"error": "{\\"error\\": {\\"code\\": 400, \\"message\\":
+            \\"request (3160 tokens) exceeds the available context size
+            (256 tokens), try increasing it\\", \\"type\\":
+            \\"exceed_context_size_error\\", \\"n_prompt_tokens\\": 3160,
+            \\"n_ctx\\": 256}}"}
+
+    Ollama's OWN errors (a missing tag, say) are plain non-JSON strings;
+    those are returned as ``{"message": <text>}`` so the daemon's only
+    explanation still reaches the eventual ``ModelError`` instead of
+    being dropped on the floor.
+
+    ``error.type`` is the honest discriminator between overflow and
+    everything else, and it is now identical across both backends.
+    """
+    try:
+        body = json.loads(exc.read().decode("utf-8"))
+    except Exception:
+        # The body is a live socket file, not a buffer: IncompleteRead,
+        # socket.timeout, or any other OSError can fire here alongside
+        # the JSON/decode failures, and an unreadable body is
+        # definitionally not overflow-shaped either way. Caught broadly
+        # so a read failure can never escape _call's except clause and
+        # kill the whole grid instead of this one request (would
+        # otherwise bypass the entire ModelError contract).
+        return None
+    error = body.get("error") if isinstance(body, dict) else None
+    if isinstance(error, str):
+        try:
+            inner = json.loads(error)
+        except Exception:
+            return {"message": error}
+        # Unwrap Ollama's extra ``error`` layer when present, and accept
+        # the object directly if a future version stops adding it.
+        error = inner.get("error", inner) if isinstance(inner, dict) else None
+    return error if isinstance(error, dict) else None
+
+
+def raise_if_context_overflow(
+    model: str, exc: urllib.error.HTTPError
+) -> dict | None:
+    """Raise ``ServerContextOverflowError`` when this HTTP error is the
+    server's own overflow rejection; otherwise return its parsed error
+    object (or ``None``) for the caller to fold into a ``ModelError``.
+
+    Shared by both clients so an identical 400 cannot be classified two
+    different ways depending on which daemon served the run -- which is
+    the entire reason section 51's guarantee can be stated once for the
+    whole harness rather than per backend.
+    """
+    error = _parse_http_error_body(exc)
+    if error is not None and error.get("type") == "exceed_context_size_error":
+        raise ServerContextOverflowError(
+            f"{model}: server rejected the prompt as exceeding its "
+            f"context window "
+            f"({error.get('message') or 'context size exceeded'}). "
+            f"estimate_tokens() under-counted this prompt against the "
+            f"server's real tokenizer."
+        ) from exc
+    return error
+
+
 class OllamaClient:
     """One pinned model served by a local Ollama daemon."""
 
@@ -137,11 +251,32 @@ class OllamaClient:
         self._sleep = sleep
 
     def _call(self, url: str, payload: dict | None = None) -> dict:
-        """Retry transient transport failures, then give up loudly."""
-        last: Exception | None = None
+        """Retry transient transport failures, then give up loudly.
+
+        A context-overflow 400 is the one failure NOT retried: it is
+        deterministic (the daemon would reject the identical prompt the
+        same way three more times), so it is raised immediately as
+        ``ServerContextOverflowError``. ``HTTPError`` must be caught
+        ahead of the general ``URLError`` branch below: it IS a
+        ``URLError`` subclass, so listing it second would let the general
+        branch swallow it, retry an overflow three times, and then
+        misreport it as a plain transport ``ModelError`` -- which
+        ``run_session``'s evidence gate would turn into a run abort
+        instead of a ``context_exhausted`` session result.
+        """
+        last: Exception | str | None = None
         for attempt in range(self.retries):
             try:
                 return _request(url, payload, self.timeout_s)
+            except urllib.error.HTTPError as exc:
+                error = raise_if_context_overflow(self.model, exc)
+                # Not overflow-shaped: retried like any other transport
+                # failure, but surface the daemon's own message (if any)
+                # in the eventual ModelError instead of discarding it.
+                message = error.get("message") if error else None
+                last = f"{exc} ({message})" if message else exc
+                if attempt < self.retries - 1:
+                    self._sleep(self.backoff_s * (2**attempt))
             except (urllib.error.URLError, OSError, ValueError) as exc:
                 last = exc
                 if attempt < self.retries - 1:
@@ -174,7 +309,15 @@ class OllamaClient:
         aborting the run on the very behaviour we are measuring.
 
         Truncation of the *prompt* is the opposite case and is refused
-        outright -- see ``check_context``."""
+        outright -- by ``check_context`` before the request, and by
+        ``truncate: false`` at the daemon when that crude estimate lets
+        an oversized prompt through (section 51).
+
+        ``truncate`` is deliberately TOP-LEVEL, not inside ``options``.
+        Reproduced against the daemon on :11434: the same flag nested in
+        ``options`` is silently ignored and the prompt is front-truncated
+        anyway, so tidying it in beside ``num_ctx`` would disable the
+        guard while every test still passed."""
         self.check_context(prompt)
         body = self._call(
             f"{self.host}/api/chat",
@@ -182,6 +325,7 @@ class OllamaClient:
                 "model": self.model,
                 "messages": [{"role": "user", "content": prompt}],
                 "stream": False,
+                "truncate": False,
                 "options": {
                     "temperature": self.temperature,
                     "top_p": self.top_p,
