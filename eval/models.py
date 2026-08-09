@@ -43,9 +43,12 @@ class ModelError(Exception):
 
 
 class ContextOverflowError(ModelError):
-    """The prompt plus its reserved generation exceeds ``num_ctx``,
-    caught BEFORE the request is ever sent -- the client's own
-    ``check_context`` estimate refusing a prompt it judges too large.
+    """The prompt plus its reserved generation exceeds ``num_ctx`` --
+    either caught BEFORE the request is ever sent (the client's own
+    ``check_context`` estimate refusing a prompt it judges too large), or
+    via the ``eval.llamacpp.ServerContextOverflowError`` subclass, when
+    the server's real tokenizer rejects a prompt that PASSED that
+    estimate.
 
     A ModelError subclass on purpose. Overflow is a *configuration*
     failure, never a model result: llama.cpp silently truncates an
@@ -60,14 +63,16 @@ class ContextOverflowError(ModelError):
     grid-stop backstop rather than producing 1800 plausible-looking
     sessions built on truncated prompts.
 
-    This classification is for the PRE-REQUEST case only: there is no
-    session evidence yet when it fires, so aborting the run id loses
-    nothing (section 51). ``eval.llamacpp.ServerContextOverflowError`` is
-    the distinct sibling for a prompt that PASSED this estimate and was
-    rejected only by the server's own tokenizer -- ``run_session``
-    catches that subclass specifically, and only that subclass, so a
-    plain ``ContextOverflowError`` raised here still propagates and
-    still aborts the run exactly as described above (section 45/51).
+    ``run_session`` gates on EVIDENCE, not on which of the two raised it
+    (section 45/51): with at least one attempt already submitted this
+    session, it is a RESULT -- attempts-so-far recorded, cell marked
+    ``context_exhausted``, run continues. With zero attempts submitted,
+    it still aborts the run id exactly as described above, because there
+    is nothing to lose by aborting a session with no evidence -- and at a
+    small per-family window (section 48) an oversized INITIAL prompt
+    would otherwise repeat identically across every seed, fabricating a
+    full grid of zero-attempt "results" with no abort and no manifest
+    cause.
     """
 
 

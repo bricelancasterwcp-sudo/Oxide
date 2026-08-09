@@ -87,13 +87,15 @@ class ServerContextOverflowError(ContextOverflowError):
     attempts can clear it and still overflow the server -- a
     cross-attempt sibling of truncation-at-``num_predict``.
 
-    Distinct from the base ``ContextOverflowError``, which is the
-    client's OWN pre-request refusal and still aborts the run (SPEC
-    section 51): this subclass is the SESSION-RESULT sibling section
-    45/51 describes. ``eval.driver.run_session`` catches this subclass
-    specifically -- and only this subclass -- so a plain
-    ``ContextOverflowError`` from ``check_context`` is untouched by that
-    catch and still propagates as a run abort.
+    A distinct subclass of the base ``ContextOverflowError`` so ``_call``
+    can raise it WITHOUT retrying (the failure is deterministic once the
+    server has rejected it) and so logs/manifests can tell which check
+    caught an overflow. ``eval.driver.run_session`` does NOT branch on
+    this distinction, though: both this subclass and the base class are
+    caught identically there and gated on whether the session already
+    has submitted evidence (section 45/51), not on which one fired --
+    the type axis matters for retry behavior and diagnostics, not for
+    session-result-vs-abort.
     """
 
 

@@ -1647,15 +1647,18 @@ each attempt appended to `eval/results/<run_id>/triples.jsonl`:
 `{"task", "arm", "attempt", "code", "diagnostics", "compiled",
 "passed"}`) — this file is the verified-repair-triple dataset.
 
-**Context-budget exhaustion is a session result, not infrastructure —
-but only when the SERVER is the one that catches it** (§51): if a
-prompt passes the client's own pre-request estimate and the server's
-real tokenizer rejects it anyway, the session ends there with
-attempts-so-far recorded and the cell marked `context_exhausted`; the
-grid proceeds to the next session, not a run abort. The client's OWN
-pre-request refusal is a different, narrower exception and is
-unaffected: it still aborts the run id exactly as before, because at
-that point there is no session evidence yet to preserve.
+**Context-budget exhaustion is gated on EVIDENCE, not on which check
+caught it** (§51): with at least one attempt already submitted this
+session, an overflow — from either the client's own pre-request estimate
+or the server's real tokenizer — is a session RESULT: it ends there with
+attempts-so-far recorded and the cell marked `context_exhausted`, and the
+grid proceeds to the next session, not a run abort. With ZERO attempts
+submitted this session, it still aborts the run id exactly as before,
+because there is nothing to lose by aborting a session that produced no
+evidence — and at a small per-family window (§48) an oversized initial
+prompt would otherwise repeat identically across every seed, fabricating
+a whole grid of zero-attempt "results" with no abort and no manifest
+cause.
 
 Fairness pins: identical task text across arms; caps on attempts (4) and
 exec time identical; the Rust arm receives rustc's own full diagnostic
@@ -2131,8 +2134,8 @@ comparison, in opposite directions.
 |---|---|---|
 | Ollama down / tag missing at start | infrastructure | preflight abort, before any generation |
 | Transport error or HTTP timeout | infrastructure | 3 retries with backoff, then **abort this `run_id`** (below) |
-| Prompt + `num_predict` exceeds `num_ctx`, caught by the CLIENT's own pre-request estimate (`ContextOverflowError`) | infrastructure | **refused before the request**, not retried; aborts this `run_id` with the cause in its manifest |
-| Prompt passes the client's estimate, but the SERVER's real tokenizer rejects it (`ServerContextOverflowError`, a distinct subclass) | **model** | session ends; attempts-so-far recorded; cell marked `context_exhausted` (§45) |
+| Prompt + `num_predict` exceeds `num_ctx` (`ContextOverflowError`, from either the client's pre-request estimate or its `ServerContextOverflowError` subclass), with **ZERO** attempts submitted this session | infrastructure | **abort this `run_id`**, cause in its manifest — no evidence to lose |
+| Same overflow, with **≥1** attempt already submitted this session | **model** | session ends; attempts-so-far recorded; cell marked `context_exhausted` (§45) |
 | Generation hits `num_predict` | **model** | truncated source submitted; real failed attempt; `truncated: true` logged |
 | Empty or malformed generation | **model** | real failure, consumes an attempt |
 | Non-UTF8 source | **model** | existing `_unencodable_source_verdict` |
@@ -2150,20 +2153,26 @@ the primary comparison rests on. Refusing before the request means the
 retry loop never sees it (overflow is deterministic) and the
 consecutive-abort backstop below still fires if it is systematic.
 
-**Cross-attempt context exhaustion is the sibling case, and it is a
-result — but the two must not be conflated.** The estimate above is
-checked per request, not against the whole session, so a repair prompt
-that grows across attempts can pass it and still overflow the server's
-real tokenizer. That failure is raised as `ServerContextOverflowError`,
-a DISTINCT subclass of the client's own `ContextOverflowError` — not the
-same exception — precisely so the driver can tell the two cases apart
-without guessing from session state. `run_session` catches only the
-subclass; a plain `ContextOverflowError` (the pre-request refusal above)
-still propagates and still aborts the run. Collapsing the two into one
-catch would fabricate a zero-attempt "result" for a prompt that never
-had a chance to produce one — e.g. a 3-shot condition whose card and
-shots alone exceed `num_ctx` — silently dropping what should be a loud,
-manifest-recorded abort.
+**The evidence gate decides session-result vs. abort — not which check
+raised the exception.** A repair prompt can grow across attempts and
+overflow either check well after real evidence already exists: the
+client's own estimate on a later attempt, or — since that estimate is
+deliberately crude — the server's real tokenizer via
+`ServerContextOverflowError`, a DISTINCT subclass `_call` raises so the
+failure is never retried (it is deterministic once the server has
+rejected it) and so manifests/logs can tell which check caught it.
+`run_session` gates on `session.attempts`, not on exception type: with
+**≥1** attempt already submitted, EITHER exception is a session result;
+with **zero** attempts submitted, EITHER exception still aborts the run
+exactly as above. Gating on exception type alone — an earlier iteration
+of this rule — fabricated a full grid of zero-attempt "results" whenever
+the CLIENT's own check fired on a repair prompt at a small per-family
+window (§48): `granite-code:8b`'s native 4096 hit this in practice,
+mid-session, on attempts that already had real evidence the type-based
+rule discarded. Gating on evidence instead closes that gap while still
+refusing to fabricate a result for a prompt that never had a chance to
+produce one — e.g. a 3-shot condition whose card and shots alone exceed
+`num_ctx` on attempt 1 is still a loud, manifest-recorded abort.
 
 **Run-id-scoped abort.** A persistent transport failure aborts only the
 current `run_id` — at most 60 sessions, ~20–30 min — records the cause

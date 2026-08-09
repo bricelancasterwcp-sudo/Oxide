@@ -731,10 +731,13 @@ class _ContextExhaustsClient:
     number ``fires_on_attempt``, then raises
     ``ServerContextOverflowError`` on that call -- the shape of a repair
     prompt that grew across attempts, passed the client's OWN pre-request
-    estimate, and overflowed the server's real context window anyway. The
-    base ``ContextOverflowError`` (the client's pre-request refusal) is a
-    DIFFERENT case -- see ``test_context_overflow_aborts_the_run_id_and_records_it``
-    -- and is deliberately not what this stub raises."""
+    estimate, and overflowed the server's real context window anyway.
+    ``ContextOverflowError`` (the client's own pre-request check) is a
+    DIFFERENT raise site, exercised separately below by
+    ``_ClientSideOverflowAfterOneAttempt``/``_OverflowingClient`` -- the
+    evidence gate (SPEC section 45/51) treats both identically, but the
+    two raise sites are kept distinct in these fixtures so a regression
+    in either one shows up on its own test."""
 
     def __init__(self, fires_on_attempt: int) -> None:
         self.fires_on_attempt = fires_on_attempt
@@ -748,9 +751,10 @@ class _ContextExhaustsClient:
 
 
 def test_run_session_ends_at_context_exhaustion_with_evidence_so_far(tmp_path):
-    # SPEC section 45/51: cross-attempt context exhaustion is a RESULT,
-    # not infrastructure. The session ends with the N-1 attempts already
-    # submitted recorded, not the 4-attempt cap, and does not raise.
+    # Quadrant: server-side raise, attempts >= 1 -- a RESULT, not
+    # infrastructure (SPEC section 45/51). The session ends with the N-1
+    # attempts already submitted recorded, not the 4-attempt cap, and
+    # does not raise.
     task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
     tasks = tmp_path / "tasks.jsonl"
     tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
@@ -777,17 +781,40 @@ def test_run_session_ends_at_context_exhaustion_with_evidence_so_far(tmp_path):
     assert not (raw_dir / "tX.oxide.3.txt").exists()
 
 
-def test_run_session_records_a_failed_cell_when_context_exhausts_before_any_submission(
-    tmp_path,
-):
-    # Defensive case (shouldn't happen -- attempt-1 prompts are small --
-    # but must not crash): zero evidence is still a recorded result.
+class _ClientSideOverflowAfterOneAttempt:
+    """Attempt 1 is a real, failing submission (evidence). The repair
+    attempt raises the BASE ``ContextOverflowError`` -- the client's own
+    ``check_context`` refusal -- not the server subclass. This is the
+    exact granite8b failure mode: a repair prompt grown past attempt 1
+    that overflows check_context's own estimate at a small per-family
+    window (native 4096), AFTER a real submission already happened."""
+
+    def __init__(self) -> None:
+        self.calls = 0
+
+    def generate(self, prompt: str, *, seed: int) -> Generation:
+        self.calls += 1
+        if self.calls == 1:
+            return Generation("this is not a program", 10, 5, 100, False)
+        raise ContextOverflowError(
+            "prompt is ~5097 tok and num_predict is 2048, which together "
+            "exceed num_ctx 4096"
+        )
+
+
+def test_run_session_treats_client_side_overflow_as_a_result_with_evidence(tmp_path):
+    # Quadrant: client-side raise (check_context), attempts >= 1 -- also
+    # a RESULT under the evidence gate. This is the case an earlier,
+    # type-based version of the rule got wrong: granite8b's native 4096
+    # window means check_context itself (not just the server) routinely
+    # rejects a grown repair prompt on a session that already has real
+    # evidence, and that must not abort the whole run.
     task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
     tasks = tmp_path / "tasks.jsonl"
     tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
     raw_dir = tmp_path / "raw"
     cell = run_session(
-        _ContextExhaustsClient(fires_on_attempt=1),
+        _ClientSideOverflowAfterOneAttempt(),
         run_id="6a-test-0shot-s1",
         task_id="tX",
         arm="oxide",
@@ -797,23 +824,48 @@ def test_run_session_records_a_failed_cell_when_context_exhausts_before_any_subm
         tasks_path=tasks,
     )
     assert set(cell.keys()) == _CELL_SCHEMA | {"context_exhausted"}
-    assert cell["attempts"] == 0
+    assert cell["attempts"] == 1
     assert cell["context_exhausted"] is True
-    assert cell["first_compiled"] is False
-    assert cell["first_passed"] is False
     assert cell["final_passed"] is False
-    assert cell["attempts_to_pass"] == harness.MAX_ATTEMPTS + 1
-    assert cell["tokens_in"] == 0 and cell["tokens_out"] == 0
-    assert cell["contract_compliant"] == []
-    assert cell["truncated"] == []
-    assert list(raw_dir.glob("*")) == []  # no generation ever wrote output
+    assert (raw_dir / "tX.oxide.1.txt").is_file()
+    assert not (raw_dir / "tX.oxide.2.txt").exists()
+
+
+def test_run_session_aborts_when_context_exhausts_before_any_submission(tmp_path):
+    # Quadrant: server-side raise, attempts == 0 -- now an ABORT, not a
+    # recorded result (this is the change from the previous, type-based
+    # rule). Zero evidence is a configuration failure regardless of which
+    # check caught it: at a small per-family window, an oversized INITIAL
+    # prompt would otherwise repeat identically across every seed of a
+    # (task, arm, shots) triple, fabricating a full grid of zero-attempt
+    # "results" with no abort and no manifest cause -- exactly what
+    # ContextOverflowError's ModelError inheritance exists to prevent.
+    # (The client-side, attempts == 0 quadrant is covered by
+    # test_context_overflow_aborts_the_run_id_and_records_it below.)
+    task = {"id": "tX", "prompt": "Print 42.", "expected_stdout": "42\n"}
+    tasks = tmp_path / "tasks.jsonl"
+    tasks.write_text(json.dumps(task) + "\n", encoding="utf-8")
+    with pytest.raises(ServerContextOverflowError):
+        run_session(
+            _ContextExhaustsClient(fires_on_attempt=1),
+            run_id="6a-test-0shot-s1",
+            task_id="tX",
+            arm="oxide",
+            shots=0,
+            results_root=tmp_path / "results",
+            raw_dir=tmp_path / "raw",
+            tasks_path=tasks,
+        )
 
 
 def test_run_one_continues_to_the_next_session_past_context_exhaustion(tmp_path):
-    # Finding: the RUN must continue past an exhausted session -- no
-    # exception escapes run_session, so run_one's task x arm loop keeps
-    # going and every other cell still gets recorded.
-    class _ExhaustsFirstCallThenArmAware:
+    # The RUN must continue past an exhausted session THAT HAS EVIDENCE
+    # (attempts >= 1): no exception escapes run_session for that case, so
+    # run_one's task x arm loop keeps going and every other cell still
+    # gets recorded. The stub's overflow fires on the REPAIR attempt of
+    # the very first session processed (tA/oxide), after that session's
+    # own attempt 1 already produced a real, failed submission.
+    class _ExhaustsOnRepairThenArmAware:
         _PROGRAMS = {
             "rust": 'fn main() { println!("42"); }\n',
             "explicit": "fn main() {\n    print(42)\n}\n",
@@ -826,6 +878,8 @@ def test_run_one_continues_to_the_next_session_past_context_exhaustion(tmp_path)
         def generate(self, prompt: str, *, seed: int) -> Generation:
             self.calls += 1
             if self.calls == 1:
+                return Generation("this is not a program", 10, 5, 100, False)
+            if self.calls == 2:
                 raise ServerContextOverflowError("prompt exceeds num_ctx 8192")
             if harness.RUST_PREAMBLE in prompt:
                 arm = "rust"
@@ -845,7 +899,7 @@ def test_run_one_continues_to_the_next_session_past_context_exhaustion(tmp_path)
     )
     results_root = tmp_path / "results"
     run_id = "6a-test-context-exhaustion-continues"
-    client = _ExhaustsFirstCallThenArmAware()
+    client = _ExhaustsOnRepairThenArmAware()
 
     run_one(
         {arm: client for arm in harness.ARMS},
@@ -859,11 +913,11 @@ def test_run_one_continues_to_the_next_session_past_context_exhaustion(tmp_path)
     cells_path = results_root / run_id / "cells.jsonl"
     cells = [json.loads(line) for line in cells_path.read_text(encoding="utf-8").splitlines()]
     # Every task x arm pair still produced a cell: one exhausted session
-    # did not stop the loop or abort anything.
+    # (with real evidence) did not stop the loop or abort anything.
     assert len(cells) == len(tasks) * len(harness.ARMS)
     exhausted = [c for c in cells if c.get("context_exhausted")]
     assert len(exhausted) == 1
-    assert exhausted[0]["attempts"] == 0
+    assert exhausted[0]["attempts"] == 1  # real evidence, not zero
 
 
 class _ArmAwareClient:
@@ -1507,14 +1561,17 @@ def test_context_overflow_aborts_the_run_id_and_records_it(tmp_path):
     # End to end, through the REAL run_session/run_one pipeline (not a
     # stub of the code under test -- a stubbed run_one cannot prove
     # anything about what run_session does or doesn't catch, which is
-    # exactly how this case going vacuous went unremarked once). The
-    # client's OWN pre-request refusal (a plain ContextOverflowError from
-    # check_context, section 45/51) is the one case that still aborts:
-    # there is no session evidence yet, so there is nothing to lose by
-    # aborting. Its session-result sibling, ServerContextOverflowError,
-    # is covered end to end by
+    # exactly how this case going vacuous went unremarked once). Quadrant:
+    # client-side raise (check_context), attempts == 0 -- the evidence
+    # gate (SPEC section 45/51) still aborts here regardless of which
+    # check fired, because there is no session evidence yet to lose. The
+    # other three quadrants are covered elsewhere:
+    # test_run_session_treats_client_side_overflow_as_a_result_with_evidence
+    # (client-side, attempts >= 1),
     # test_run_session_ends_at_context_exhaustion_with_evidence_so_far
-    # and test_run_one_continues_to_the_next_session_past_context_exhaustion.
+    # (server-side, attempts >= 1), and
+    # test_run_session_aborts_when_context_exhausts_before_any_submission
+    # (server-side, attempts == 0).
     class _OverflowingClient:
         def generate(self, prompt: str, *, seed: int) -> Generation:
             raise ContextOverflowError("prompt exceeds num_ctx 8192")
