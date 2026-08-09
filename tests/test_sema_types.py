@@ -693,3 +693,51 @@ def test_annotated_empty_vec_still_pins_the_element_type() -> None:
     # Arrange / Act / Assert — the annotation-or-use escape hatch for
     # `vec()` is untouched by the variadic sugar.
     assert codes("fn f() { let x: Vec<Int> = vec() }") == []
+
+
+# ---------------------------------------------------------------------------
+# §56 field assignment: the place is walked with the same lookup §36 uses
+# ---------------------------------------------------------------------------
+
+
+def test_field_assign_unknown_field_is_ox0304() -> None:
+    src = "struct P { x: Int }\nfn main() { let p = P { x: 1 }\n p.z = 5 }"
+    assert "OX0304" in codes(src)
+
+
+def test_field_assign_into_non_struct_is_ox0306() -> None:
+    src = "fn main() { let n = 1\n n.x = 5 }"
+    assert "OX0306" in codes(src)
+
+
+def test_field_assign_type_mismatch_is_ox0300() -> None:
+    src = (
+        "struct P { x: Int }\n"
+        'fn main() { let p = P { x: 1 }\n p.x = "s" }'
+    )
+    assert "OX0300" in codes(src)
+
+
+def test_field_assign_unbound_base_is_ox0200() -> None:
+    assert "OX0200" in codes("fn main() { nope.x = 5 }")
+
+
+def test_nested_path_walks_every_step() -> None:
+    """The intermediate field must itself be a struct: the second step of
+    `a.b.c` is checked against `b`'s type, not `a`'s."""
+    src = (
+        "struct Inner { v: Int }\n"
+        "struct Outer { i: Inner }\n"
+        "fn main() { let o = Outer { i: Inner { v: 1 } }\n o.i.nope = 5 }"
+    )
+    assert "OX0304" in codes(src)
+
+
+def test_nested_path_accepts_a_valid_walk() -> None:
+    src = (
+        "struct Inner { v: Int }\n"
+        "struct Outer { i: Inner }\n"
+        "fn main() { let o = Outer { i: Inner { v: 1 } }\n o.i.v = 5\n"
+        " print(o.i.v) }"
+    )
+    assert codes(src) == []
