@@ -1,0 +1,32 @@
+fn main() {
+    let s1 = "12";
+    let s2 = "x";
+    let s3 = "30";
+
+    let mut sum = 0;
+    let mut count = 0;
+
+    if let Some(n1) = parse_int(s1) {
+        sum += n1;
+        count += 1;
+    } else {
+        count += 1;
+    }
+
+    if let Some(n2) = parse_int(s2) {
+        sum += n2;
+        count += 1;
+    } else {
+        count += 1;
+    }
+
+    if let Some(n3) = parse_int(s3) {
+        sum += n3;
+        count += 1;
+    } else {
+        count += 1;
+    }
+
+    print(sum);
+    print(count);
+}

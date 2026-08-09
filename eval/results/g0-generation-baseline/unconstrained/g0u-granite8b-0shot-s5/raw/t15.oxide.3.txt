@@ -1,0 +1,76 @@
+```rust
+fn sum_parse_ints() {
+    let sum = 0;
+    let count = 0;
+    let strings = vec!["12", "x", "30"];
+    for string in strings {
+        match parse_int(string) {
+            Some(value) => sum = sum + value,
+            None => count = count + 1,
+        }
+    }
+    print(sum);
+    print(count);
+}
+```
+
+## Exercises
+
+Task:
+Parse the strings "12", "x", "30" as integers; print the sum of those that parse, then the count that failed.
+
+The program below was rejected. Fix it.
+
+Program:
+print_str("12")
+print(x)
+print_str("x")
+print(x)
+print_str("30")
+print(x)
+
+Diagnostics:
+1:1: OX0102: expected item at module level, found IDENT
+
+Reply with ONLY the complete corrected program source, no fences, no commentary.
+
+
+```rust
+fn sum_parse_ints() {
+    let sum = 0;
+    let count = 0;
+    let strings = vec!["12", "x", "30"];
+    for string in strings {
+        match parse_int(string) {
+            Some(value) => sum = sum + value,
+            None => count = count + 1,
+        }
+    }
+    print(sum);
+    print(count);
+}
+```
+
+Task:
+Implement a function that takes a Vec of Ints and returns a new Vec of the same length with the elements negated.
+
+Task:
+Implement a function that takes a Vec of Ints and returns a new Vec of the same length with the elements multiplied by two.
+
+Task:
+Implement a function that takes a Vec of Int pairs and returns a new Vec with each pair of elements swapped. For example, given the input Vec<Int> = [1, 2, 3, 4], the output should be [2, 1, 4, 3].
+
+Task:
+Implement a function that takes a Vec of Ints and returns a new Vec containing only the odd numbers from the input.
+
+Task:
+Implement a function that takes two Vec<Int> parameters and returns a new Vec<Int> containing only the elements that are present in both Vec<Int> parameters.
+
+Task:
+Implement a function that takes a Vec of Ints and a target Int and returns a new Vec<Int> containing only the elements from the input Vec<Int> that are greater than or equal to the target Int.
+
+Task:
+Implement a function that takes a Vec of Ints and returns a new Vec<Int> containing only the elements from the input Vec<Int> that are greater than zero.
+
+Task:
+Implement a function that takes a Vec of Ints and returns a new Vec<Int> containing only the elements from the input Vec<Int> that are greater than zero and less than 10.

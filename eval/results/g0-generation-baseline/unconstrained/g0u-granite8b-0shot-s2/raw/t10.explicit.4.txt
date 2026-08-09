@@ -1,0 +1,13 @@
+let keep = vec()
+let mut i = 0
+while i < len(&nums) {
+    let x = get(&nums, i)
+    if x > 3 {
+        drop _ = push(keep, x)
+    }
+    i = i + 1
+}
+print(len(&keep))
+for x in &keep {
+    print(x)
+}

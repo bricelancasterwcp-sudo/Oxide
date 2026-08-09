@@ -1,0 +1,38 @@
+fn main() {
+    struct Item {
+        name: Str,
+        unit_price: Float,
+        quantity: Int,
+    }
+
+    let items = push(
+        push(
+            push(vec(), Item {
+                name: "pen",
+                unit_price: 3.0,
+                quantity: 4,
+            }),
+            Item {
+                name: "pad",
+                unit_price: 9.0,
+                quantity: 2,
+            }),
+        Item {
+            name: "ink",
+            unit_price: 5.0,
+            quantity: 3,
+        }),
+    );
+
+    let cost = items.iter().fold(0.0, |acc, i| acc + i.unit_price * i.quantity);
+
+    let most_expensive = items
+        .iter()
+        .max_by_key(|i| i.unit_price * i.quantity)
+        .unwrap()
+        .name;
+
+    print(cost);
+    print_str("\n");
+    print_str(most_expensive);
+}

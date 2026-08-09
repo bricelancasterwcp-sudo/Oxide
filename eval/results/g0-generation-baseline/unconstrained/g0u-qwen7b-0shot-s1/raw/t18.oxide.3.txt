@@ -1,0 +1,23 @@
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+fn perimeter(s: Shape) -> Int {
+    match s {
+        Shape::Rect(a, b) => 2 * (a + b),
+        Shape::Tri(a, b, c) => a + b + c,
+    }
+}
+
+fn main() {
+    let shapes = vec![
+        Shape::Rect(3, 4),
+        Shape::Tri(3, 4, 5),
+        Shape::Rect(2, 5),
+    ];
+
+    for shape in shapes {
+        print(perimeter(shape));
+    }
+}

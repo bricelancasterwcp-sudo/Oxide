@@ -1,0 +1,13 @@
+let x = 1;
+let y = 2;
+let z = 3;
+
+print(x + y + z);
+
+fn main() {
+    let list = [3, 8, -2, 12, 7];
+    let positive_count = list.iter().filter(|&x| x > 0).count();
+    let largest = list.iter().max().unwrap();
+    print(positive_count);
+    print(largest);
+}

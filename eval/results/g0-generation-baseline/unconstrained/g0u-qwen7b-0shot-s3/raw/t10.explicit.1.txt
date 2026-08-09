@@ -1,0 +1,23 @@
+```rust
+fn filter(v: &Vec<Int>, limit: Int) -> Vec<Int> {
+    let mut result = vec()
+    for x in &v {
+        if x > limit {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let nums = push(push(push(push(push(vec(), 4), 1), 7), 3), 9), 2)
+    let kept = filter(&nums, 3)
+    for x in &kept {
+        print_str(format!("{}", x))
+        print_str("\n")
+    }
+    print(format!("{}", kept.len()))
+    drop nums
+    drop kept
+}
+```

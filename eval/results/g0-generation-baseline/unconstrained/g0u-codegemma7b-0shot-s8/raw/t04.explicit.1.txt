@@ -1,0 +1,21 @@
+fn is_prime(n: Int) -> Bool {
+    if n <= 1 {
+        return false;
+    }
+    for i in range(2, n) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+
+fn main() {
+    let mut count = 0;
+    for n in range(2, 100) {
+        if is_prime(n) {
+            count = count + 1;
+        }
+    }
+    print(count)
+}

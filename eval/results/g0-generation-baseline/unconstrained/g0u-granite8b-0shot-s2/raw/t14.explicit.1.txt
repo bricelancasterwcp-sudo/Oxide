@@ -1,0 +1,19 @@
+```text
+let text = "mississippi";
+let mut count = 0;
+let mut distinct_chars = 0;
+let mut index = 0;
+
+while index < text.len() {
+    if text.get(index) == Some(&"s") {
+        count += 1;
+    }
+    distinct_chars += 1;
+    index += 1;
+}
+
+print(count);
+print(distinct_chars);
+```
+
+The task is to count the number of "s" characters in the text and the number of distinct characters. We initialize count to 0, distinct_chars to 0, and index to 0. Then we enter a while loop that runs until the index reaches the length of the text. Within the loop, we check if the character at the current index is "s" and if it is, we increment the count. We also increment the distinct_chars variable to keep track of the number of distinct characters encountered. Finally, we increment the index to move to the next character in the text. After the loop ends, we print the count and the distinct_chars variables.

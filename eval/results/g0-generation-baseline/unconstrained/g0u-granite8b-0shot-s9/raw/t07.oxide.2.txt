@@ -1,0 +1,11 @@
+```
+fn main() {
+    let x = push(push(vec(), 3), 42)
+    let y = push(push(vec(), 3 * 2), 42 * 2)
+    let z = push(push(vec(), 3 * 4), 42 * 4)
+    print(x)
+    print(y)
+    print(z)
+    print(len(x))
+}
+```

@@ -1,0 +1,20 @@
+fn is_palindrome(text: &str) -> bool {
+    let mut chars = text.chars().peekable();
+    while let Some(front) = chars.next() {
+        if let Some(back) = chars.next_back() {
+            if front != back {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    true
+}
+
+fn main() {
+    let level = is_palindrome("level");
+    let stereo = is_palindrome("stereo");
+    let rotor = is_palindrome("rotor");
+    print!("{} \n {} \n {} \n", level, stereo, rotor);
+}

@@ -1,0 +1,15 @@
+fn perfect_numbers_up_to(n: Int) -> Vec<Int> {
+    (range(2, n)
+        .filter(|x| sum_of_divisors(x) == x)
+        .collect())
+}
+
+fn sum_of_divisors(x: Int) -> Int {
+    (range(1, x)
+        .filter(|&d| x % d == 0)
+        .fold(0, |acc, d| acc + d))
+}
+
+fn main() {
+    print(perfect_numbers_up_to(1000))
+}

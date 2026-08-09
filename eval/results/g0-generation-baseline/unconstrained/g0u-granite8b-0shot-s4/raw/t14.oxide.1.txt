@@ -1,0 +1,25 @@
+struct String { data: Vec<u8>, len: u32 }
+
+fn count_s(s: &String) -> u32 {
+    let mut count = 0;
+    for &c in s.data.iter() {
+        if c == 's' as u8 {
+            count += 1;
+        }
+    }
+    count
+}
+
+fn count_distinct_chars(s: &String) -> u32 {
+    let mut chars = [false; 256];
+    for &c in s.data.iter() {
+        chars[c as usize] = true;
+    }
+    chars.iter().filter(|&&b| b).count() as u32
+}
+
+fn main() {
+    let s = String { data: vec!['m' as u8, 'i', 's', 's', 'i', 's', 's', 'i', 'p', 'p', 'i'], len: 12 };
+    print(count_s(&s));
+    print(count_distinct_chars(&s));
+}

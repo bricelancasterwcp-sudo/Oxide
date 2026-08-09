@@ -1,0 +1,12 @@
+fn divide(num: Int, denom: Int) -> Str {
+    if denom == 0 {
+        return "undefined".to_string();
+    }
+    (num / denom).to_string()
+}
+
+fn main() {
+    println!("{}", divide(100, 5));
+    println!("{}", divide(100, 0));
+    println!("{}", divide(100, 4));
+}

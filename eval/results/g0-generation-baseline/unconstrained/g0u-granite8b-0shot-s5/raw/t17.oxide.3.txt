@@ -1,0 +1,16 @@
+```rust
+fn task(list: Vec<Int>) -> (Option<Int>, Option<Int>) {
+    let first = list.get(1);
+    let fifth = list.get(5);
+    (first, fifth)
+}
+```
+
+Answer:
+```rust
+fn task(list: Vec<Int>) -> (Option<Int>, Option<Int>) {
+    let first = list.get(1);
+    let fifth = list.get(5);
+    (first, fifth)
+}
+```

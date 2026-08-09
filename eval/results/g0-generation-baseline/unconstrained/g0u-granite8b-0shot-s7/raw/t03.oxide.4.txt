@@ -1,0 +1,11 @@
+print(gcd(252, 105))
+
+fn gcd(a: Int, b: Int) -> Int {
+    let (mut a, mut b) = (a, b)
+    while b != 0 {
+        let r = a % b
+        a = b
+        b = r
+    }
+    a
+}

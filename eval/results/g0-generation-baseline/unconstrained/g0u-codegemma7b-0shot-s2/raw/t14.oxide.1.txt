@@ -1,0 +1,19 @@
+fn count(s: &str) -> (Int, Int) {
+    let mut count = 0;
+    let mut seen: Vec<char> = vec![];
+    for c in s.chars() {
+        if c == 's' {
+            count += 1;
+        }
+        if !seen.contains(&c) {
+            seen.push(c);
+        }
+    }
+    (count, seen.len())
+}
+
+fn main() {
+    let (count, unique) = count("mississippi");
+    print("s: {}\n", count);
+    print("unique: {}\n", unique);
+}

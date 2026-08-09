@@ -1,0 +1,27 @@
+```rust
+fn divide(n: Int, d: Int) -> Int {
+    if d == 0 {
+        0
+    } else {
+        n / d
+    }
+}
+
+fn main() {
+    let q1 = divide(100, 5);
+    print(q1);
+    drop q1;
+
+    let q2 = divide(100, 0);
+    if q2 == 0 {
+        print_str("undefined");
+    } else {
+        print(q2);
+    }
+    drop q2;
+
+    let q3 = divide(100, 4);
+    print(q3);
+    drop q3;
+}
+```

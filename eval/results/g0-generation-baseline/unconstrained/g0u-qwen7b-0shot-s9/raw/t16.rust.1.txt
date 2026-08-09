@@ -1,0 +1,14 @@
+```rust
+fn main() {
+    let divisors = [5, 0, 4];
+    let dividend = 100;
+
+    for &divisor in divisors.iter() {
+        if divisor == 0 {
+            println!("undefined");
+        } else {
+            println!("{}", dividend / divisor);
+        }
+    }
+}
+```

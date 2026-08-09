@@ -1,0 +1,7 @@
+```rust
+fn main() {
+    let numbers = (1..9).filter(|&x| x % 3 == 0).collect::<Vec<i32>>();
+    let sum: i32 = numbers.iter().sum();
+    println!("{}", sum);
+}
+```

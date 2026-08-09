@@ -1,0 +1,26 @@
+```
+fn main() {
+    let pen = (3, 4);
+    let pad = (9, 2);
+    let ink = (5, 3);
+    let total_cost = 0;
+    let name_highest_cost = "";
+    let mut highest_cost = 0;
+
+    for (name, (unit_price, quantity)) in [&pen, &pad, &ink].iter().enumerate() {
+        let cost = unit_price * quantity;
+        total_cost = total_cost + cost;
+        if cost > highest_cost {
+            highest_cost = cost;
+            name_highest_cost = name;
+        }
+    }
+
+    print_str("Total cost: ");
+    print_int(total_cost);
+    print_str("\nItem with the highest cost: ");
+    print_str(name_highest_cost);
+}
+```
+
+This program uses linear references to keep track of the items' quantities and prices, and then calculates the total cost and finds the item with the highest cost. The `for` loop iterates over each item, calculates its cost, adds it to the total cost, and updates the highest cost and its corresponding name if necessary. Finally, it prints the total cost and the name of the item with the highest cost.

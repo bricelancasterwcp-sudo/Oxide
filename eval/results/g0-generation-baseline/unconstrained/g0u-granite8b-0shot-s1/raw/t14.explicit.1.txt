@@ -1,0 +1,18 @@
+fn count_and_distinct_chars(input: &Str) -> (Int, Int) {
+    let mut count = 0
+    let mut distinct_count = 0
+    for char in chars(&input) {
+        if char == "s" {
+            count = count + 1
+        }
+        distinct_count = distinct_count + 1
+    }
+    (count, distinct_count)
+}
+
+fn main() {
+    let text = "mississippi"
+    let (count, distinct_count) = count_and_distinct_chars(&text)
+    print(count)
+    print(distinct_count)
+}

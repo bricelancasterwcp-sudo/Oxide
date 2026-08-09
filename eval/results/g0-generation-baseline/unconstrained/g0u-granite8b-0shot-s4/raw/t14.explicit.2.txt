@@ -1,0 +1,18 @@
+```
+fn main() {
+    let text = "mississippi";
+    let mut count = 0;
+    let mut distinct = 0;
+    let mut chars = chars(text);
+    while let Some(ch) = chars.next() {
+        if ch == 's' {
+            count += 1;
+        }
+        distinct += 1;
+    }
+    drop(text);
+    drop(chars);
+    print(count);
+    print(distinct);
+}
+```

@@ -1,0 +1,12 @@
+```
+fn main() {
+    print(&"level" == &"level".chars().rev().collect::<String>());
+    drop "level";
+
+    print(&"stereo" == &"stereo".chars().rev().collect::<String>());
+    drop "stereo";
+
+    print(&"rotor" == &"rotor".chars().rev().collect::<String>());
+    drop "rotor";
+}
+```

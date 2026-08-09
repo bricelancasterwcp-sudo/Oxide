@@ -1,0 +1,12 @@
+fn lookup(l: Vec<Int>, p: Int) -> Int {
+    if p >= len(l) {
+        return -1;
+    }
+    get(l, p).unwrap_or(-1)
+}
+
+fn main() {
+    let list = vec![10, 20, 30];
+    println!("{}", lookup(list, 1)); // 20
+    println!("{}", lookup(list, 5)); // -1
+}

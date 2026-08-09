@@ -1,0 +1,10 @@
+```rust
+fn main() {
+    let s = "mississippi";
+    let count_s = s.chars().filter(|&c| c == 's').count();
+    let distinct_chars = s.chars().collect::<std::collections::HashSet<char>>().len();
+    print(count_s);
+    print_str("\n");
+    print(distinct_chars);
+}
+```

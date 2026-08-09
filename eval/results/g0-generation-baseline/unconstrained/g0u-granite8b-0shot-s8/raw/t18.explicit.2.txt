@@ -1,0 +1,21 @@
+```
+fn perimeter(shapes: Vec<Shape>) -> Int {
+    let perimeter = 0
+    for shape in &shapes {
+        perimeter = perimeter + perimeter_of(shape)
+    }
+    perimeter
+}
+
+fn perimeter_of(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(w, h) => w + w + h + h,
+        Triangle(a, b, c) => a + b + c,
+    }
+}
+
+fn main() {
+    let shapes = vec(Rectangle(3, 4), Triangle(3, 4, 5), Rectangle(2, 5))
+    print(perimeter(&shapes))
+}
+```

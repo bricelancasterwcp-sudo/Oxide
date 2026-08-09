@@ -1,0 +1,14 @@
+```rust
+fn is_perfect(n: Int) -> Bool {
+    let total = reduce(|acc, i| acc + i, 0, filter(|i| i < n && n % i == 0, range(1, n)));
+    total == n
+}
+
+fn main() {
+    for n in range(2, 1000) {
+        if is_perfect(n) {
+            print(n);
+        }
+    }
+}
+```

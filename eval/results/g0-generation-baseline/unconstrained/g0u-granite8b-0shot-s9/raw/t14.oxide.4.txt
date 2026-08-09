@@ -1,0 +1,11 @@
+fn main() {
+    let s = "mississippi";
+    let s_chars: Vec<Str> = chars(s);
+    let s_contains_s = fold(s_chars, false, |acc, c| acc || c == "s");
+    let s_contains = len(s_chars);
+    print_str("s occurs ");
+    print(s_contains_s);
+    print_str(" times, and is made up of ");
+    print(s_contains);
+    print_str(" distinct characters.");
+}

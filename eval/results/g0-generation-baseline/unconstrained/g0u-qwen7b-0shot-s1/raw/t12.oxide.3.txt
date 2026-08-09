@@ -1,0 +1,3 @@
+```text
+print_str(rev(chars("stack")).collect::<Vec<Str>>().join(""))
+```

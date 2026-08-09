@@ -1,0 +1,11 @@
+fn main() {
+    let mut v = push(push(push(push(push(vec(), 5), 3), 8), 1), 9);
+    push(v, 2);
+    let mut i = 0;
+    while i < len(&v) {
+        print(&v[i]);
+        drop v[i];
+        i = i + 1;
+    }
+    drop v;
+}

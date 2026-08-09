@@ -1,0 +1,14 @@
+```rust
+fn parse_ints(a: Str, b: Str, c: Str) -> (Int, Int) {
+    match (parse_int(a), parse_int(b), parse_int(c)) {
+        (Some(x), Some(y), Some(z)) => (x + y + z, 0),
+        _ => (0, 1)
+    }
+}
+
+fn main() {
+    let (sum, errors) = parse_ints("12", "x", "30");
+    print(sum);
+    print(errors);
+}
+```

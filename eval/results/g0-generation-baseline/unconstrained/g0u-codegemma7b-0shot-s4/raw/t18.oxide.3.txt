@@ -1,0 +1,19 @@
+struct Rectangle { w: Int, h: Int }
+struct Triangle { a: Int, b: Int, c: Int }
+
+fn area(r: &Rectangle) -> Int { r.w * r.h }
+fn area(t: &Triangle) -> Int { t.a + t.b + t.c - max(t.a, max(t.b, t.c)) }
+
+fn max(a: Int, b: Int) -> Int { if a > b { a } else { b } }
+
+fn perimeter(r: &Rectangle) -> Int { 2 * r.w + 2 * r.h }
+fn perimeter(t: &Triangle) -> Int { 2 * t.a + 2 * t.b + 2 * t.c }
+
+fn main() {
+    let r = Rectangle { w: 3, h: 4 };
+    print(perimeter(&r));
+    let t = Triangle { a: 3, b: 4, c: 5 };
+    print(perimeter(&t));
+    let r2 = Rectangle { w: 2, h: 5 };
+    print(perimeter(&r2));
+}

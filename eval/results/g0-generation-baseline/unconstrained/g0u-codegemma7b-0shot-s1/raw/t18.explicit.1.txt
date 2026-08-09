@@ -1,0 +1,40 @@
+use Oxide_Explicit as ox;
+
+fn area_rect(l: ox::Int, w: ox::Int) -> ox::Int {
+    l * w
+}
+
+fn area_triangle(a: ox::Int, b: ox::Int, c: ox::Int) -> ox::Int {
+    let s = (a + b + c) / 2;
+    (s * (s - a) * (s - b) * (s - c)).trunc(0.5)
+}
+
+fn perimeter_rect(l: ox::Int, w: ox::Int) -> ox::Int {
+    2 * (l + w)
+}
+
+fn perimeter_triangle(a: ox::Int, b: ox::Int, c: ox::Int) -> ox::Int {
+    a + b + c
+}
+
+fn main() {
+    let r1 = ox::Shape::Rectangle(3, 4);
+    let t1 = ox::Shape::Triangle(3, 4, 5);
+    let r2 = ox::Shape::Rectangle(2, 5);
+
+    match r1 {
+        ox::Shape::Rectangle(l, w) => ox::print(perimeter_rect(l, w)),
+        _ => unreachable!(),
+    };
+
+    match t1 {
+        ox::Shape::Triangle(a, b, c) => ox::print(perimeter_triangle(a, b, c)),
+        _ => unreachable!(),
+    };
+
+    match r2 {
+        ox::Shape::Rectangle(l, w) => ox::print(perimeter_rect(l, w)),
+        _ => unreachable!(),
+    };
+}
+```

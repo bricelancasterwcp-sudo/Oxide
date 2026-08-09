@@ -1,0 +1,33 @@
+fn main() {
+    let mut v = vec(1, 2, 3, 4, 5);
+    while len(v) > 0 {
+        print(get(v, len(v) - 1)?.to_string());
+        v = pop(v)?;
+        print_str("\n");
+    }
+}
+
+fn pop(v: Vec<Int>) -> Option<Vec<Int>> {
+    if len(v) == 0 {
+        return None;
+    }
+    Some(vec(take(v, len(v) - 1), rest(v)...))
+}
+
+fn take(v: Vec<Int>, i: Int) -> Int {
+    let x = get(v, i)?;
+    vec(rest(v)...).push(x);
+    x
+}
+
+fn rest(v: Vec<Int>) -> Vec<Int> {
+    if len(v) == 0 {
+        return vec();
+    }
+    vec(get(v, 0)?, rest(drop(v))...)
+}
+
+fn drop(v: Vec<Int>) -> Vec<Int> {
+    get(v, 0).map(|_| rest(v))
+}
+```

@@ -1,0 +1,18 @@
+fn main() {
+    let mut success = 0
+    let mut fail = 0
+    for s in ["12", "x", "30"] {
+        match parse_int(s) {
+            Some(n) => {
+                print(n)
+                success += 1
+            },
+            None => {
+                print_str("fail")
+                fail += 1
+            },
+        }
+    }
+    print(success)
+    print(fail)
+}

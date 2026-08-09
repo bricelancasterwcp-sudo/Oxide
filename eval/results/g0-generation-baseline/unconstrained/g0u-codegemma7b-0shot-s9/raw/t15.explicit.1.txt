@@ -1,0 +1,15 @@
+fn main() {
+    let input = ["12", "x", "30"];
+    let mut parsed = 0;
+    let mut failed = 0;
+    for line in input {
+        let number = parse_int(line);
+        if let Some(n) = number {
+            parsed += n;
+        } else {
+            failed += 1;
+        }
+    }
+    print(parsed)
+    print(failed)
+}

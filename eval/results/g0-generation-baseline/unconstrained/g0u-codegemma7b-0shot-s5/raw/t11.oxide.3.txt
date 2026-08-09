@@ -1,0 +1,9 @@
+fn main() {
+    let mut list = vec![5, 3, 8, 1, 9, 2];
+    let mut i = 0;
+    while i < len(list) {
+        print_str(&int_to_str(get(list, i)?));
+        print_str("\n");
+        i = i + 1;
+    }
+}

@@ -1,0 +1,22 @@
+struct Stack {
+    data: Vec<Char>,
+}
+
+fn reverse(s: &mut Stack) {
+    for i in 0..(len(s.data) / 2) {
+        let l = s.data[i];
+        let r = s.data[len(s.data) - i - 1];
+        s.data[i] = r;
+        s.data[len(s.data) - i - 1] = l;
+    }
+}
+
+fn main() {
+    let mut s = Stack { data: push(vec(), 'h') };
+    push(s.data, 'e');
+    push(s.data, 'l');
+    push(s.data, 'l');
+    push(s.data, 'o');
+    reverse(&mut s);
+    print_str(&s.data);
+}

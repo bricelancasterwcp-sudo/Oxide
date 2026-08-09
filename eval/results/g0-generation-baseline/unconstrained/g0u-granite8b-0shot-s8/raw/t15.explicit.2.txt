@@ -1,0 +1,18 @@
+```
+fn main() {
+    let sum = sum_big([12, 30], 10);
+    let count = sum_big([12, "x", 30], 10);
+    print(sum);
+    print(count);
+}
+
+fn sum_big(v: Vec<Int>, limit: Int) -> Int {
+    let total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total
+}
+```

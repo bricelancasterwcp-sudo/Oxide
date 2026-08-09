@@ -1,0 +1,16 @@
+fn main() {
+    let nums = ["12", "x", "30"];
+    let mut sum = 0;
+    let mut count = 0;
+    for n in nums {
+        match parse_int(n) {
+            Some(i) => {
+                sum += i;
+                count += 1;
+            }
+            None => (),
+        }
+    }
+    print(sum);
+    print(count);
+}

@@ -1,0 +1,14 @@
+```oxide
+fn main() {
+    let mut first_eight = vec();
+    let mut x = 0;
+    while first_eight.len() < 8 {
+        x += 1;
+        if x % 3 == 0 {
+            first_eight = push(first_eight, x);
+        }
+    }
+    let sum = first_eight.iter().fold(0, |acc, x| acc + x);
+    print(sum)
+}
+```

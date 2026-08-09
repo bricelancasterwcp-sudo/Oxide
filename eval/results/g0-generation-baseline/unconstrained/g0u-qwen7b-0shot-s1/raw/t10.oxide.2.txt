@@ -1,0 +1,22 @@
+struct List { items: Vec<Int> }
+
+fn filter(v: Vec<Int>, threshold: Int) -> Vec<Int> {
+    let mut result = Vec::new()
+    for x in v {
+        if x > threshold {
+            result = push(result, x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let l = List { items: vec(4, 1, 7, 3, 9, 2) }
+    let filtered = filter(l.items.clone(), 3)
+    for x in filtered {
+        print(x)
+        print_str("\n")
+    }
+    print(len(filtered))
+    print_str("\n")
+}

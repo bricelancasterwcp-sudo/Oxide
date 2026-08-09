@@ -1,0 +1,10 @@
+```text
+fn div_100(x: Int) -> Option<Int> {
+    match x {
+        5 => Some(20),
+        0 => None,
+        4 => Some(25),
+        _ => None,
+    }
+}
+```

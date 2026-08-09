@@ -1,0 +1,19 @@
+```rust
+fn main() {
+    let list = vec![10, 20, 30];
+
+    let element_at_1 = get(&list, 1);
+    let element_at_5 = get(&list, 5);
+
+    print!("{:?}\n", element_at_1); // Output: Some(20)
+    print!("{:?}\n", element_at_5); // Output: None
+}
+
+fn get(list: &Vec<i32>, index: usize) -> Option<i32> {
+    if index >= list.len() {
+        None
+    } else {
+        Some(list[index])
+    }
+}
+```

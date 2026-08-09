@@ -1,0 +1,25 @@
+```
+fn read_ints(s: Str) -> Vec<Int> {
+    let mut v = vec()
+    for c in chars(s) {
+        if let Ok(i) = parse_int(&c) {
+            v = push(v, i)
+        }
+    }
+    v
+}
+
+fn sum_ints(s: Str) -> Int {
+    let v = read_ints(s)
+    let mut total = 0
+    for x in &v {
+        total = total + x
+    }
+    total
+}
+
+fn main() {
+    let s = "12 x 30"
+    print(sum_ints(s))
+}
+```

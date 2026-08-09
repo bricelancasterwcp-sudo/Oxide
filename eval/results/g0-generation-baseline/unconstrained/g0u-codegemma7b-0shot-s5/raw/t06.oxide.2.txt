@@ -1,0 +1,22 @@
+fn sum_of_divs(n: Int) -> Int {
+    let mut acc = 0;
+    for x in 1..(n/2+1) {
+        if n % x == 0 {
+            acc = acc + x;
+        }
+    }
+    acc
+}
+
+fn is_perfect(n: Int) -> Bool {
+    n == sum_of_divs(n)
+}
+
+fn main() {
+    for x in 0..1000 {
+        if is_perfect(x) {
+            print(x)
+            print("\n")
+        }
+    }
+}

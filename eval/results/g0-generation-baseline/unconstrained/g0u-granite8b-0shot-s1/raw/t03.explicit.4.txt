@@ -1,0 +1,14 @@
+```text
+fn main() {
+    print(gcd(252, 105));
+}
+
+fn gcd(mut x: Int, mut y: Int) -> Int {
+    while y != 0 {
+        let r = x % y;
+        x = y;
+        y = r;
+    }
+    x
+}
+```

@@ -1,0 +1,37 @@
+use std::cmp;
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4 };
+    let pad = Item { price: 9, quantity: 2 };
+    let ink = Item { price: 5, quantity: 3 };
+
+    let total_cost = pen.cost() + pad.cost() + ink.cost();
+    print(total_cost);
+
+    let most_expensive = cmp::max_by(
+        [pen, pad, ink],
+        |i1, i2| i1.cost().cmp(&i2.cost()),
+    );
+    print(most_expensive.name());
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+}
+
+impl Item {
+    fn cost(&self) -> Int {
+        self.price * self.quantity
+    }
+
+    fn name(&self) -> Str {
+        match self {
+            Item { price: 3, .. } => "pen",
+            Item { price: 9, .. } => "pad",
+            Item { price: 5, .. } => "ink",
+            _ => unreachable!(),
+        }
+    }
+}
+```

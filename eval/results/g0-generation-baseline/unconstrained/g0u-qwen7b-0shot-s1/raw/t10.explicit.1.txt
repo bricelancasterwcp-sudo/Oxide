@@ -1,0 +1,23 @@
+```
+fn filter(v: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if *x > 3 {
+            result = push(result, *x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let nums = vec(4, 1, 7, 3, 9, 2)
+    let filtered = filter(&nums)
+    for x in &filtered {
+        print_str(&int_to_str(x))
+        print("\n")
+    }
+    print(int_to_str(&len(&filtered)))
+    drop nums
+    drop filtered
+}
+```

@@ -1,0 +1,11 @@
+```
+fn main() {
+    for n in 1..1000 {
+        let sum = (1..n).filter(|&x| n % x == 0).sum();
+        if sum == n {
+            print(n);
+            print_str("\n");
+        }
+    }
+}
+```

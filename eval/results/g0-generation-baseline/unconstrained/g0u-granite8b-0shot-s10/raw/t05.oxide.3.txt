@@ -1,0 +1,8 @@
+fn next(x: Int) -> Int { x + 1 }
+
+fn main() {
+    let x = 1
+    let y = next(x)
+    let z = next(y)
+    print(z)
+}

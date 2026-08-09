@@ -1,0 +1,24 @@
+```
+fn perimeter(x: &Shape) -> Int {
+    match x {
+        Rectangle(w, h) => 2*(w+h),
+        Triangle(a, b, c) => a + b + c,
+        Circle(r) => 2*3.14*r
+    }
+}
+
+fn main() {
+    let rect = Rectangle(3, 4);
+    let tri = Triangle(3, 4, 5);
+    let circ = Circle(2);
+
+    let rect_perimeter = perimeter(&rect);
+    let tri_perimeter = perimeter(&tri);
+    let circ_perimeter = perimeter(&circ);
+
+    print(rect_perimeter);
+    print(tri_perimeter);
+    print(circ_perimeter);
+}
+```
+Note: I have corrected the program and removed the unnecessary code.

@@ -1,0 +1,7 @@
+fn main() {
+    let list = vec![10, 20, 30];
+    let element1 = get(list, 1).unwrap_or(-1);
+    let element2 = get(list, 5).unwrap_or(-1);
+    print(element1);
+    print(element2);
+}

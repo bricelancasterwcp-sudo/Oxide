@@ -1,0 +1,28 @@
+```rust
+fn main() {
+    let args = std::env::args().skip(1);
+    let mut parsed_nums = 0;
+    let mut failed_nums = 0;
+    for arg in args {
+        if let Ok(num) = parse_int(&arg) {
+            parsed_nums += num;
+        } else {
+            failed_nums += 1;
+        }
+    }
+    print("{} {}\n", parsed_nums, failed_nums);
+}
+
+fn parse_int(s: &str) -> Option<Int> {
+    match s.chars().nth(0) {
+        Some('0'..='9') => {
+            let mut num = 0;
+            for c in s.chars() {
+                num = num * 10 + (c as Int - '0' as Int);
+            }
+            Some(num)
+        }
+        _ => None
+    }
+}
+```

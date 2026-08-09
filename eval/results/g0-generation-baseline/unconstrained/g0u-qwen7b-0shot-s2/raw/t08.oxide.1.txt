@@ -1,0 +1,31 @@
+```oxide
+struct List { values: Vec<Int> }
+
+fn count_positive(v: Vec<Int>) -> Int {
+    let mut count = 0
+    for x in v {
+        if x > 0 {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn max_value(v: Vec<Int>) -> Int {
+    let mut max = -1000000
+    for x in v {
+        if x > max {
+            max = x
+        }
+    }
+    max
+}
+
+fn main() {
+    let list = List { values: push(push(push(push(vec(), 3), 8), -2), 12) }
+    let positive_count = count_positive(list.values)
+    let max = max_value(list.values)
+    print(positive_count)
+    print(max)
+}
+```

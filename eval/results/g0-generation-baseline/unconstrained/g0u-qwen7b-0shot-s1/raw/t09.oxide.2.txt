@@ -1,0 +1,33 @@
+struct List<T> { head: Option<T>, tail: Option<Box<List<T>>> }
+
+fn push<T>(list: Option<Box<List<T>>>, value: T) -> Option<Box<List<T>>> {
+    Some(Box::new(List { head: Some(value), tail: list }))
+}
+
+fn reverse<T>(list: Option<Box<List<T>>>) -> Option<Box<List<T>>> {
+    let mut result = None;
+    let mut current = list;
+    while let Some(mut node) = current {
+        current = node.tail.take();
+        node.tail = result;
+        result = Some(node);
+    }
+    result
+}
+
+fn print_list<T>(list: Option<Box<List<T>>>) {
+    match list {
+        Some(node) => {
+            print_list(node.tail);
+            print(node.head.as_ref().unwrap());
+            println!();
+        },
+        None => ()
+    }
+}
+
+fn main() {
+    let list = push(push(push(push(push(None, 5), 4), 3), 2), 1);
+    let reversed = reverse(list);
+    print_list(reversed);
+}

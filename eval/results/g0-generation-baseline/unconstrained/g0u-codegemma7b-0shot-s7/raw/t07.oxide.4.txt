@@ -1,0 +1,5 @@
+fn main() {
+    let v = range(1, 30).filter(|x| x % 3 == 0).take(8).collect::<Vec<Int>>();
+    let s = v.iter().fold(0, |acc, x| acc + x);
+    print(s)
+}

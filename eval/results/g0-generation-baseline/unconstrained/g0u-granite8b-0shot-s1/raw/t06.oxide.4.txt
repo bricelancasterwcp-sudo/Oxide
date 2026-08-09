@@ -1,0 +1,22 @@
+fn perfect_nums(n: Int) -> Vec<Int> {
+    if n == 0 {
+        return vec();
+    } else {
+        let divisors = filter(|d| d < n && n % d == 0, range(1, n));
+        let sum = reduce(|acc, d| acc + d, divisors, 0);
+        if sum == n {
+            return push(vec(), n);
+        } else {
+            return perfect_nums(n + 1);
+        }
+    }
+}
+
+fn main() {
+    let perfects = perfect_nums(2);
+    for p in perfects {
+        print_str("Perfect number: ");
+        print(p);
+        print_str("\n");
+    }
+}

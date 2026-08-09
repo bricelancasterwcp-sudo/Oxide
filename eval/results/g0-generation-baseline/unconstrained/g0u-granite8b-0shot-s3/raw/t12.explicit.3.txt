@@ -1,0 +1,8 @@
+fn main() {
+    let stack = "stack";
+    let mut i = len(&stack) - 1;
+    while i >= 0 {
+        print(get(&stack, i));
+        i = i - 1;
+    }
+}

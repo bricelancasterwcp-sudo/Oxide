@@ -1,0 +1,24 @@
+fn gcd(a: Int, b: Int) -> Int {
+    let mut tmp;
+    if a < b {
+        tmp = a;
+        a = b;
+        b = tmp;
+    }
+    while b != 0 {
+        tmp = a % b;
+        a = b;
+        b = tmp;
+    }
+    a
+}
+
+fn main() {
+    let a = 252;
+    let b = 105;
+    let result = gcd(a, b);
+    print(result);
+    drop a;
+    drop b;
+    drop result;
+}

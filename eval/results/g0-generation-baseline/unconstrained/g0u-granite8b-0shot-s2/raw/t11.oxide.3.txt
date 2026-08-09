@@ -1,0 +1,17 @@
+let list = push(push(push(push(vec(), 5), 3), 8), 1);
+let mut sorted = clone(list);
+while len(sorted) > 1 {
+    let smallest = sorted[0];
+    let rest = get(sorted, 1)?;
+    sorted = rest;
+    for x in sorted {
+        if x < smallest {
+            break;
+        }
+        sorted = push(sorted, x);
+    }
+    sorted = push(sorted, smallest);
+}
+for x in sorted {
+    print(x)
+}

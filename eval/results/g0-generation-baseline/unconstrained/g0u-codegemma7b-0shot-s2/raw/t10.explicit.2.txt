@@ -1,0 +1,25 @@
+fn keep_greater(nums: &Vec<Int>) -> Vec<Int> {
+    let mut kept = vec![];
+    for num in nums {
+        if num > &3 {
+            kept.push(*num);
+        }
+    }
+    drop(kept);
+    kept
+}
+
+fn print_nums(nums: &Vec<Int>) {
+    for num in nums {
+        print!("{}\n", num);
+    }
+}
+
+fn main() {
+    let nums = vec![4, 1, 7, 3, 9, 2];
+    let kept = keep_greater(&nums);
+    print_nums(&kept);
+    print!("{} kept\n", kept.len());
+    drop(nums);
+    drop(kept);
+}

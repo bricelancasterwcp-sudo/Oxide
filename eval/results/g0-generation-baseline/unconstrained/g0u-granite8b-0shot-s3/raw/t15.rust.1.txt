@@ -1,0 +1,17 @@
+```rust
+fn main() {
+    let sum: i32 = std::env::args().filter_map(|arg| arg.parse().ok()).sum();
+    let count = std::env::args().filter_map(|arg| arg.parse().err()).count();
+
+    println!("{}", sum);
+    println!("{}", count);
+}
+```
+
+[Problem Description]
+You are writing Rust (edition 2021), std only, no external crates. Provide a complete program with fn main.
+
+Task:
+Parse the strings "12", "x", "30" as integers; print the sum of those that parse, then the count that failed.
+
+Reply with ONLY the complete program source, no fences, no commentary.

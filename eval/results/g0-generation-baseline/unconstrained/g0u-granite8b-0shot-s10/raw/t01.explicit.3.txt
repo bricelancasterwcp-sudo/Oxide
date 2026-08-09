@@ -1,0 +1,7 @@
+fn main() {
+    let sum = 0
+    for x in 0..10 {
+        sum = sum + x * x
+    }
+    print(sum)
+}

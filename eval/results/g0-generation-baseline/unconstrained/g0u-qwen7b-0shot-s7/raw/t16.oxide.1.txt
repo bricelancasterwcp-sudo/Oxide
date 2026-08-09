@@ -1,0 +1,19 @@
+```oxide
+fn div(a: Int, b: Int) -> Option<Int> {
+    if b == 0 {
+        None
+    } else {
+        Some(a / b)
+    }
+}
+
+fn main() {
+    let divisors = vec!(5, 0, 4);
+    for d in divisors {
+        match div(100, d) {
+            Some(q) => print(q),
+            None => print_str("undefined"),
+        }
+    }
+}
+```

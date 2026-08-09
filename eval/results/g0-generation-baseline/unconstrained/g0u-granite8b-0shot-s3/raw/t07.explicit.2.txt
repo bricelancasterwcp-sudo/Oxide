@@ -1,0 +1,19 @@
+```rust
+fn main() {
+    let mut v = vec();
+    v = push(v, 3);
+    v = push(v, 6);
+    v = push(v, 9);
+    let sum = sum(&v);
+    drop v;
+    print(sum);
+}
+
+fn sum(v: &Vec<Int>) -> Int {
+    let mut total = 0;
+    for x in &v {
+        total = total + x;
+    }
+    total
+}
+```

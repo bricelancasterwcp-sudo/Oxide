@@ -1,0 +1,11 @@
+fn stack_in_reverse(text: Str) -> Str {
+    let mut stack = vec()
+    for ch in text.chars() {
+        stack.push(ch);
+    }
+    let mut result = vec()
+    for _ in 0..text.len() {
+        result.push(stack.pop().unwrap())
+    }
+    concat(result)
+}

@@ -1,0 +1,14 @@
+fn main() {
+    let num1 = 252;
+    let num2 = 105;
+    let mut divisor = 0;
+    
+    for i in (1..=num1).rev() {
+        if num1 % i == 0 && num2 % i == 0 {
+            divisor = i;
+            break;
+        }
+    }
+    
+    println!("The greatest common divisor of {} and {} is {}", num1, num2, divisor);
+}

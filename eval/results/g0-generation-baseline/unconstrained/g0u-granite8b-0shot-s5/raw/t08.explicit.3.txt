@@ -1,0 +1,29 @@
+fn positive_count(v: &[Int]) -> Int {
+    let mut count = 0;
+    for &x in v {
+        if x > 0 {
+            count += 1;
+        }
+    }
+    count
+}
+
+fn largest(v: &[Int]) -> Option<Int> {
+    let mut largest = None;
+    for &x in v {
+        if largest.is_none() || x > largest.unwrap() {
+            largest = Some(x);
+        }
+    }
+    largest
+}
+
+fn main() {
+    let list = [3, 8, -2, 12, 7];
+    let positive = positive_count(&list);
+    let largest = largest(&list);
+    print(positive);
+    drop positive;
+    print(largest);
+    drop largest;
+}

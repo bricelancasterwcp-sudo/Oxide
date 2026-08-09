@@ -1,0 +1,13 @@
+fn main() {
+    let num = 100;
+    let div_by_five = num / 5;
+    if 0 != 0 {
+        let div_by_zero = num / 0;
+    }
+    let div_by_four = num / 4;
+    print(div_by_five)
+    if 0 != 0 {
+        print("undefined")
+    }
+    print(div_by_four)
+}

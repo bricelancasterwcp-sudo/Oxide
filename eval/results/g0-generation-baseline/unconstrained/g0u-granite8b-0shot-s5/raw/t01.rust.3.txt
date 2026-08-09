@@ -1,0 +1,4 @@
+fn main() {
+    let total = (0..10).map(|n| n.pow(2)).sum::<i32>();
+    println!("{}", total);
+}

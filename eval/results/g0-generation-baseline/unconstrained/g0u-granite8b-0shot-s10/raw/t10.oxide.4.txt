@@ -1,0 +1,18 @@
+fn main() {
+    let mut list = push(push(push(push(vec(), 4), 1), 7), 3);
+    list = filter(list, |x| x > 3);
+    for x in list {
+        print(x);
+    }
+    print(len(list));
+}
+
+fn filter(v: Vec<Int>, f: fn(Int) -> Bool) -> Vec<Int> {
+    let mut out = vec()
+    for x in v {
+        if f(x) {
+            out = push(out, x)
+        }
+    }
+    out
+}

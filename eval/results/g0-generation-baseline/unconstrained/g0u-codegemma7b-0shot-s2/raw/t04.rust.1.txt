@@ -1,0 +1,16 @@
+fn main() {
+    let mut primes = 0;
+    for n in 2..100 {
+        let mut is_prime = true;
+        for d in 2..=(n as f64).sqrt() as i32 {
+            if n % d == 0 {
+                is_prime = false;
+                break;
+            }
+        }
+        if is_prime {
+            primes += 1;
+        }
+    }
+    println!("{}", primes);
+}

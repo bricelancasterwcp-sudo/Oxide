@@ -1,0 +1,13 @@
+```oxide
+fn is_palindrome(s: Str) -> Bool {
+    let chars = chars(s)
+    let reversed = concat(reversed(chars), vec())
+    equals(s, reversed)
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+```

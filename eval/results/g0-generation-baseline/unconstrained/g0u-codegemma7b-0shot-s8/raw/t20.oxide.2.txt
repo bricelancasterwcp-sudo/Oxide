@@ -1,0 +1,41 @@
+fn main() {
+    let pen = Item { price: 3, quantity: 4 };
+    let pad = Item { price: 9, quantity: 2 };
+    let ink = Item { price: 5, quantity: 3 };
+    
+    let total_cost = pen.cost() + pad.cost() + ink.cost();
+    println!("Total cost: {}", total_cost);
+    
+    let most_expensive = max_by(pen, pad, ink, |i1, i2| i1.cost().cmp(&i2.cost()));
+    println!("Most expensive item: {}", most_expensive.name());
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+}
+
+impl Item {
+    fn cost(&self) -> Int {
+        self.price * self.quantity
+    }
+    
+    fn name(&self) -> Str {
+        match self {
+            Item { price: 3, .. } => "Pen",
+            Item { price: 9, .. } => "Pad",
+            Item { price: 5, .. } => "Ink",
+        }
+    }
+}
+
+fn max_by<T, F>(a: T, b: T, c: T, f: F) -> T
+where
+    F: Fn(&T, &T) -> Ordering,
+{
+    match f(&a, &b) {
+        Ordering::Greater => a,
+        Ordering::Less => b,
+        Ordering::Equal => max_by(b, c, f),
+    }
+}

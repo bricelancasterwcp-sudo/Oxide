@@ -1,0 +1,19 @@
+```rust
+fn main() {
+    let nums = vec![10, 20, 30];
+    let pos1 = 1;
+    let pos5 = 5;
+
+    let element1 = match get(&nums, pos1) {
+        Some(x) => x,
+        None => -1,
+    };
+    print(element1);
+
+    let element5 = match get(&nums, pos5) {
+        Some(x) => x,
+        None => -1,
+    };
+    print(element5);
+}
+```

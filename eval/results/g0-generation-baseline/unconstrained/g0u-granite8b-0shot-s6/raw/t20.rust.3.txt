@@ -1,0 +1,15 @@
+```rust
+fn main() {
+    let mut items = vec![
+        ("pen", 3, 4),
+        ("pad", 9, 2),
+        ("ink", 5, 3),
+    ];
+
+    let total_cost: u32 = items.iter().map(|(_, unit_price, quantity)| unit_price * quantity).sum();
+    println!("Total cost: {}", total_cost);
+
+    let (item_with_highest_cost, _, _) = items.iter().max_by_key(|(_, unit_price, quantity)| unit_price * quantity).unwrap();
+    println!("Item with the highest cost: {}", item_with_highest_cost);
+}
+```

@@ -1,0 +1,14 @@
+```
+fn parse_ints(a: Str, b: Str, c: Str) -> (Int, Int) {
+    let x = parse_int(a)?;
+    let y = parse_int(b)?;
+    let z = parse_int(c)?;
+    (x + y + z, 0)
+}
+
+fn main() {
+    let (sum, errors) = parse_ints("12", "x", "30");
+    print(sum);
+    print(errors);
+}
+```

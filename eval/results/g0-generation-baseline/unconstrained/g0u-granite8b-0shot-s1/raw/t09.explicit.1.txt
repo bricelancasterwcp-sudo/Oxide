@@ -1,0 +1,14 @@
+fn print_number(n: Int) {
+    print(n)
+}
+
+fn print_list(lst: &Vec<Int>) {
+    for item in lst {
+        print_number(*item)
+    }
+}
+
+fn main() {
+    let lst = vec(5, 4, 3, 2, 1);
+    print_list(&lst);
+}

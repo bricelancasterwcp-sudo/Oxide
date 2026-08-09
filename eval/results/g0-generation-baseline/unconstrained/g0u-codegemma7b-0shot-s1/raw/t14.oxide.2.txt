@@ -1,0 +1,23 @@
+let str = "mississippi";
+
+let mut count = 0;
+for c in str.chars() {
+    if c == 's' {
+        count += 1;
+    }
+}
+
+let mut seen = [false; 26];
+for c in str.chars() {
+    seen[(c as usize - 'a' as usize) % 26] = true;
+}
+
+let mut distinct = 0;
+for b in seen {
+    if b {
+        distinct += 1;
+    }
+}
+
+print(count);
+print(distinct);

@@ -1,0 +1,6 @@
+fn main() {
+    let v = 100;
+    print(trunc(v / 5));
+    print(v / 0);
+    print(trunc(v / 4));
+}

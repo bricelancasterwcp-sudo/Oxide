@@ -1,0 +1,21 @@
+fn main() {
+    let v = vec(3, 6, 9)
+    let sum = first_big(v) + second(v)?.unwrap()
+    print(sum)
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}

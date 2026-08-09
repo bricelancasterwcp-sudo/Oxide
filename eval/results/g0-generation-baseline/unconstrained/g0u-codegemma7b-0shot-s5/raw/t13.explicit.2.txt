@@ -1,0 +1,14 @@
+fn palindrome(text: &str) -> bool {
+    for i in 0..(text.len() / 2) {
+        if text.chars().nth(i) != text.chars().nth(text.len() - i - 1) {
+            return false;
+        }
+    }
+    true
+}
+
+fn main() {
+    print(palindrome("level"))
+    print(palindrome("stereo"))
+    print(palindrome("rotor"))
+}

@@ -1,0 +1,27 @@
+fn parse(s: Str) -> Option<Int> {
+    let mut n = 0;
+    for c in s.chars() {
+        if c < '0' || c > '9' {
+            return None;
+        }
+        n = n * 10 + (c as Int - '0' as Int);
+    }
+    Some(n)
+}
+
+fn main() {
+    let inputs = ["12", "x", "30"];
+    let mut sum = 0;
+    let mut count = 0;
+    for input in inputs {
+        match parse(input.to_string()) {
+            Some(n) => {
+                sum += n;
+                count += 1;
+            },
+            None => (),
+        }
+    }
+    print(sum);
+    print(count);
+}

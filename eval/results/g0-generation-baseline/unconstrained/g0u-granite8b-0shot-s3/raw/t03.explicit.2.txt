@@ -1,0 +1,16 @@
+```rust
+fn gcd(mut a: Int, mut b: Int) -> Int {
+    while b != 0 {
+        let temp = b;
+        b = a % b;
+        a = temp;
+    }
+    a
+}
+
+fn main() {
+    print(gcd(252, 105))
+}
+```
+
+In this corrected program, we define a function `gcd` that takes two integer parameters `a` and `b`. Inside the function, we use a while loop to continuously calculate the greatest common divisor (GCD) of the two numbers. The `while` loop continues as long as `b` is not equal to 0. Inside the loop, we declare a temporary variable `temp` and assign the value of `b` to it. Then, we update the value of `b` to be the remainder of `a` divided by `b`, and update the value of `a` to be the temporary variable `temp`. This process continues until `b` becomes 0, at which point the function returns the value of `a`, which is the GCD of the original two numbers. Finally, in the `main` function, we call the `gcd` function with the values 252 and 105, and print the result using the `print` function.

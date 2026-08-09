@@ -1,0 +1,33 @@
+```
+let mut v = vec(5, 3, 8, 1, 9, 2);
+
+while true {
+    let i = match first_big(v) {
+        Some(i) => i,
+        None => break
+    };
+    print(i);
+    print_str("\n");
+    v = pop(v, i);
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    for x in v {
+        if x > 10 {
+            return Some(x);
+        }
+    }
+    None
+}
+
+fn pop(v: Vec<Int>, i: Int) -> Vec<Int> {
+    let mut v2 = vec()
+    for j in range(0, i) {
+        v2 = push(v2, get(v, j)?)
+    }
+    for j in range(i + 1, len(v)) {
+        v2 = push(v2, get(v, j)?)
+    }
+    v2
+}
+```

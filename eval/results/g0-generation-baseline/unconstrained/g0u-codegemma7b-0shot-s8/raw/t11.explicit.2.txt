@@ -1,0 +1,7 @@
+fn main() {
+    let mut numbers = vec![5, 3, 8, 1, 9, 2];
+    numbers.sort_unstable();
+    for number in &numbers {
+        print!("{}\n", number);
+    }
+}

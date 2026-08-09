@@ -1,0 +1,20 @@
+fn main() {
+    let rect = Rectangle { width: 7, height: 4 };
+    print(area(&rect));
+    print(perimeter(&rect));
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(r: &Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: &Rectangle) -> Int {
+    let width = r.width;
+    let height = r.height;
+    2 * (width + height)
+}

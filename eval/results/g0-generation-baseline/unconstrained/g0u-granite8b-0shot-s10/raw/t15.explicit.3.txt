@@ -1,0 +1,19 @@
+fn main() {
+    let mut sum = 0;
+    let mut fails = 0;
+
+    for n in range(1, 32) {
+        let s = int_to_str(n);
+        let p = parse_int(s);
+        match p {
+            Some(i) => {
+                sum = sum + i;
+            }
+            None => {
+                fails = fails + 1;
+            }
+        }
+    }
+    print(sum);
+    print(fails);
+}

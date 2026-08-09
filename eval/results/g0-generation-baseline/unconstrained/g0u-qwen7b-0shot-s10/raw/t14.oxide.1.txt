@@ -1,0 +1,9 @@
+```oxide
+fn main() {
+    let s = "mississippi"
+    let count_s = s.chars().filter(|&c| c == 's').len()
+    let distinct_chars: Vec<Str> = s.chars().collect::<Vec<Str>>().into_iter().collect::<std::collections::HashSet<_>>().into_iter().collect()
+    print(count_s)
+    print(distinct_chars.len())
+}
+```

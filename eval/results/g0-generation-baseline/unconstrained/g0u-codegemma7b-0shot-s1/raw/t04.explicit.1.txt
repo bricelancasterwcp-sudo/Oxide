@@ -1,0 +1,23 @@
+use oxide_explicit as ox;
+
+fn is_prime(n: ox::Int) -> ox::Bool {
+    if n < 2 {
+        return false;
+    }
+    for i in 2..ox::trunc(ox::sqrt(n)) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+
+fn main() {
+    let mut count = 0;
+    for i in 1..100 {
+        if is_prime(i) {
+            count = count + 1;
+        }
+    }
+    ox::print(count)
+}

@@ -1,0 +1,23 @@
+fn main() {
+    let s = "mississippi";
+    let mut count = 0;
+    let mut distinct = 0;
+    for ch in &s {
+        if ch == 's' {
+            count = count + 1;
+        }
+    }
+    print(count);
+    for ch in &s {
+        let mut found = false;
+        for prev in &s {
+            if ch == prev {
+                found = true;
+            }
+        }
+        if !found {
+            distinct = distinct + 1;
+        }
+    }
+    print(distinct);
+}

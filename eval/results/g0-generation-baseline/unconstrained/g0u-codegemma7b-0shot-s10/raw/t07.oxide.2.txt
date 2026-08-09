@@ -1,0 +1,16 @@
+fn main() {
+    let mut result = vec![];
+    for x in 1.. {
+        if result.len() == 8 {
+            break;
+        }
+        if x % 3 == 0 {
+            result = push(result, x);
+        }
+    }
+    let mut sum = 0;
+    for x in result {
+        sum = sum + x;
+    }
+    print(sum)
+}

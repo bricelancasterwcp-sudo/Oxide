@@ -1,0 +1,18 @@
+use Oxide_Explicit as ox;
+
+fn area(w: ox.Int, h: ox.Int) -> ox.Int {
+    w * h
+}
+
+fn perimeter(w: ox.Int, h: ox.Int) -> ox.Int {
+    2 * (w + h)
+}
+
+fn main() {
+    let w = 7;
+    let h = 4;
+    print(area(&w, &h));
+    print(perimeter(&w, &h));
+    drop w;
+    drop h;
+}

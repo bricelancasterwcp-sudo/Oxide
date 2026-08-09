@@ -1,0 +1,12 @@
+```rust
+fn main() {
+    let div_by_five = 100 / 5;
+    println!("{}", div_by_five);
+
+    let div_by_zero = 100 / 0;
+    println!("{}", div_by_zero);
+
+    let div_by_four = 100 / 4;
+    println!("{}", div_by_four);
+}
+```

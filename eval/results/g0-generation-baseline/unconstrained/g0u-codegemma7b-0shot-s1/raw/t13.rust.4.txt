@@ -1,0 +1,9 @@
+use std::io;
+
+fn main() {
+    for word in ["level", "stereo", "rotor"] {
+        let forward = word.to_lowercase();
+        let backward: String = forward.chars().rev().collect();
+        println!("{} is a palindrome: {}", word, forward == backward);
+    }
+}

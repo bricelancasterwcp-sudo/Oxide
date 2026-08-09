@@ -1,0 +1,17 @@
+fn palindrome(text: &str) -> bool {
+    let mut chars = text.chars().peekable();
+    let mut rev_chars = text.chars().rev().peekable();
+    loop {
+        match (chars.next(), rev_chars.next()) {
+            (Some(c1), Some(c2)) => if c1 != c2 { return false; }
+            (None, None) => return true,
+            (Some(_), None) | (None, Some(_)) => return false,
+        }
+    }
+}
+
+fn main() {
+    println!("{}", palindrome("level"));
+    println!("{}", palindrome("stereo"));
+    println!("{}", palindrome("rotor"));
+}

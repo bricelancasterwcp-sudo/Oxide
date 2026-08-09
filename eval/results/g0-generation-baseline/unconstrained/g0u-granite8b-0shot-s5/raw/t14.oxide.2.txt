@@ -1,0 +1,2 @@
+print(len(str_split("mississippi", "s")))
+print(len(str_split("mississippi", "")))

@@ -1,0 +1,8 @@
+fn main() {
+    let mut sum = 0f32;
+    for i in 0..=9 {
+        sum += trunc(f32::from(i) * f32::from(i));
+    }
+    print(sum)
+}
+```

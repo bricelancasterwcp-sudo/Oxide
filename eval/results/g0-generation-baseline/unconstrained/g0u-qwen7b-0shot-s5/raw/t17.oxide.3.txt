@@ -1,0 +1,13 @@
+fn get_element(v: Vec<Int>, i: Int) -> Int {
+    if i < 0 || i >= len(v) {
+        -1
+    } else {
+        get(v, i).unwrap_or(-1)
+    }
+}
+
+fn main() {
+    let v = vec(10, 20, 30);
+    print(get_element(v.clone(), 1));  // Output: 20
+    print(get_element(v.clone(), 5));  // Output: -1
+}

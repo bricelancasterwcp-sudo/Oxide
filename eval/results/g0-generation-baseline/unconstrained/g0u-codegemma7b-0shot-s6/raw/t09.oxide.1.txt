@@ -1,0 +1,7 @@
+fn main() {
+    let mut v = vec![1, 2, 3, 4, 5];
+    for x in range(0, len(v)) {
+        print_str(&get(v, len(v) - x - 1)?.to_str());
+        print_str("\n");
+    }
+}

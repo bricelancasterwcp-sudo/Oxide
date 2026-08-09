@@ -1,0 +1,18 @@
+fn main() {
+    let nums = vec![4, 1, 7, 3, 9, 2];
+    let mut kept = Vec::new();
+
+    for &x in &nums {
+        if x > 3 {
+            kept.push(x);
+        }
+    }
+
+    for &x in &kept {
+        println!("{}", x);
+    }
+
+    println!("{}", kept.len());
+    drop nums;
+    drop kept;
+}

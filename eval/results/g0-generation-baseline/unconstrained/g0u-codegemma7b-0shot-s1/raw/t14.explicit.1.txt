@@ -1,0 +1,22 @@
+use oxide_explicit::prelude::*;
+
+fn count_s_and_distinct(text: &str) -> (Int, Int) {
+    let mut s_count = 0;
+    let mut distinct_count = 0;
+    for c in text.chars() {
+        if c == 's' {
+            s_count = s_count + 1;
+        }
+        if distinct_count == 0 {
+            distinct_count = distinct_count + 1;
+        }
+    }
+    (s_count, distinct_count)
+}
+
+fn main() {
+    let text = "mississippi";
+    let (s_count, distinct_count) = count_s_and_distinct(text);
+    print("s count: {}\n", s_count);
+    print("distinct count: {}\n", distinct_count);
+}

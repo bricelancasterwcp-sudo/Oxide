@@ -1,0 +1,31 @@
+struct Pen { price: Int, quantity: Int }
+struct Pad { price: Int, quantity: Int }
+struct Ink { price: Int, quantity: Int }
+
+fn cost(p: Pen) -> Int {
+    p.price * p.quantity
+}
+
+fn main() {
+    let pen = Pen { price: 3, quantity: 4 }
+    let pad = Pad { price: 9, quantity: 2 }
+    let ink = Ink { price: 5, quantity: 3 }
+
+    let all_items = push(push(push(vec(), pen), pad), ink)
+    let total_cost = fold(all_items, 0, |total, item| total + cost(item))
+    print(total_cost)
+
+    let max_cost = fold(all_items, 0, |total, item| {
+        let item_cost = cost(item)
+        if item_cost > total { item_cost } else { total }
+    })
+    let max_item = fold(all_items, None, |max, item| {
+        let item_cost = cost(item)
+        if max.is_none() || item_cost > max.unwrap() { Some(item) } else { max }
+    })
+
+    match max_item {
+        Some(item) => print(item.price * item.quantity),
+        None => print_str("no items"),
+    }
+}

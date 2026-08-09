@@ -1,0 +1,11 @@
+```rust
+fn main() {
+    let dividends = vec![100, 5, 0, 4];
+    for divisor in dividends {
+        match divisor {
+            0 => print_str("undefined"),
+            _ => print(dividends[0] / divisor),
+        }
+    }
+}
+```

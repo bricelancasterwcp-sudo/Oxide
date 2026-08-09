@@ -1,0 +1,23 @@
+```
+fn main() {
+    let mut multiples = vec()
+    for x in range(1, 4) {
+        if x % 3 == 0 {
+            multiples = push(multiples, x)
+        }
+    }
+    let sum = sum_big(&multiples, 10)
+    drop multiples
+    print(sum)
+}
+
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total
+}
+```

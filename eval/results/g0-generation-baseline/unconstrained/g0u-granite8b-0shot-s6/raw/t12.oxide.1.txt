@@ -1,0 +1,1 @@
+print_str("kcat snoitcnuq ym emos= revo eht")

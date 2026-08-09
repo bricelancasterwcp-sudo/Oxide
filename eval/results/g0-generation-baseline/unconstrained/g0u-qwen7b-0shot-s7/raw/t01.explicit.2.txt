@@ -1,0 +1,14 @@
+fn sum_of_squares(limit: Int) -> Int {
+    let total = 0;
+    let mut x = 0;
+    while x < limit {
+        total = total + (x * x);
+        x = x + 1;
+    }
+    total
+}
+
+fn main() {
+    let result = sum_of_squares(10);
+    print(result);
+}

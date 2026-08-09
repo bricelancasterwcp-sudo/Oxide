@@ -1,0 +1,6 @@
+fn main() {
+    let stack = "stack";
+    for c in stack.chars().rev() {
+        print!("{}", c);
+    }
+}

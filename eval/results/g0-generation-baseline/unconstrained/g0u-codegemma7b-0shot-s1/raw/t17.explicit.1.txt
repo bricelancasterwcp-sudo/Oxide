@@ -1,0 +1,15 @@
+use std::mem::drop;
+
+fn main() {
+    let list = vec![10, 20, 30];
+    println!("{}", get(&list, 1).unwrap_or(-1));
+    println!("{}", get(&list, 5).unwrap_or(-1));
+    drop(list);
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= v.len() as Int {
+        return None;
+    }
+    Some(v[i as usize])
+}

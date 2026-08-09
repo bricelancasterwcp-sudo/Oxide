@@ -1,0 +1,30 @@
+struct Rectangle { width: Int, height: Int }
+struct Triangle { side1: Int, side2: Int, side3: Int }
+struct Shape {
+    rectangle: Option<Rectangle>,
+    triangle: Option<Triangle>,
+    rectangle2: Option<Rectangle>,
+}
+
+fn perimeter(shape: Shape) -> Int {
+    match shape {
+        Shape {
+            rectangle: Some(Rectangle { width, height }),
+            ..
+        } => width * 2 + height * 2,
+        Shape {
+            triangle: Some(Triangle { side1, side2, side3 }),
+            ..
+        } => side1 + side2 + side3,
+        _ => 0,
+    }
+}
+
+fn main() {
+    let rectangle = Rectangle { width: 3, height: 4 };
+    let triangle = Triangle { side1: 3, side2: 4, side3: 5 };
+    let shape = Shape { rectangle: Some(rectangle), triangle: Some(triangle), rectangle2: None };
+    for shape in [shape, shape] {
+        print(perimeter(shape));
+    }
+}

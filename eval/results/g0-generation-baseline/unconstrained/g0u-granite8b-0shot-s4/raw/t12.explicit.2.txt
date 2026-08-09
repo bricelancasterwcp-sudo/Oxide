@@ -1,0 +1,12 @@
+```
+fn main() {
+    let stack = "stack"
+    let reversed = ""
+    for c in chars(&stack) {
+        reversed = concat(c, reversed)
+    }
+    print(reversed)
+    drop stack
+    drop reversed
+}
+```

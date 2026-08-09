@@ -1,0 +1,27 @@
+```
+fn main() {
+  let mut i = 2;
+  while i < 1000 {
+    let sum = perfect_sum(i);
+    if sum == i {
+      print(i);
+    }
+    i = i + 1;
+  }
+}
+
+fn perfect_sum(n: Int) -> Int {
+  let mut sum = 1;
+  let mut d = 2;
+  while d * d <= n {
+    if n % d == 0 {
+      sum += d;
+      if d * d != n {
+        sum += n / d;
+      }
+    }
+    d += 1;
+  }
+  sum
+}
+```

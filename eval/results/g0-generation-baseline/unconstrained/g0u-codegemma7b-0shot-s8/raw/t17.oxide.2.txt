@@ -1,0 +1,7 @@
+fn main() {
+    let list = vec![10, 20, 30];
+    let x = get(list, 1)?;
+    print(x);
+    let y = get(list, 5)?;
+    print(y);
+}

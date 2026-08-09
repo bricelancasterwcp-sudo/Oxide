@@ -1,0 +1,31 @@
+fn main() {
+    let v = vec(5, 3, 8, 1, 9, 2)
+    let mut v = v
+    while v.len() > 1 {
+        let min = first_big(v)
+        v = filter(|x| x != min, v)
+    }
+    for x in v {
+        print(x)
+    }
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let mut found = -1
+    for x in v {
+        if x > found {
+            found = x
+        }
+    }
+    found
+}
+
+fn filter(pred: fn(Int) -> Bool, v: Vec<Int>) -> Vec<Int> {
+    let mut r = vec()
+    for x in v {
+        if pred(x) {
+            r = push(r, x)
+        }
+    }
+    r
+}

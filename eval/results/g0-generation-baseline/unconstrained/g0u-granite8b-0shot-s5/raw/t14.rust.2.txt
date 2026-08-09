@@ -1,0 +1,8 @@
+fn main() {
+    let word = "mississippi";
+    let s_count: usize = word.chars().filter(|&c| c == 's').count();
+    let distinct_chars: usize = word.chars().collect::<std::collections::HashSet<_>>().len();
+
+    println!("Number of 's': {}", s_count);
+    println!("Number of distinct characters: {}", distinct_chars);
+}

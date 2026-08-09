@@ -1,0 +1,6 @@
+fn main() {
+    let mut v = vec![1, 2, 3, 4, 5];
+    while !v.is_empty() {
+        print!("{}\n", v.pop().unwrap());
+    }
+}

@@ -1,0 +1,22 @@
+```rust
+struct List { head: Int, tail: Vec<Int> }
+
+fn lookup(list: &List, pos: Int) -> Int {
+    let mut iter = list.tail.iter();
+    if pos == 0 {
+        return list.head
+    }
+    for (i, &x) in iter.enumerate() {
+        if i == pos - 1 {
+            return x
+        }
+    }
+    -1
+}
+
+fn main() {
+    let list = List { head: 10, tail: vec![20, 30] }
+    print(lookup(&list, 1))
+    print(lookup(&list, 5))
+}
+```

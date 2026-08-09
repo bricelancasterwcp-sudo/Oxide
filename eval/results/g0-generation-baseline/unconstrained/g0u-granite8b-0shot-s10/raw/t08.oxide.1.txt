@@ -1,0 +1,19 @@
+```rust
+fn main() {
+    let list = vec(3, 8, -2, 12, 7);
+    let mut pos_count = 0;
+    let mut max = 0;
+
+    for i in list {
+        if i > 0 {
+            pos_count += 1;
+        }
+        if i > max {
+            max = i;
+        }
+    }
+
+    print(pos_count);
+    print(max);
+}
+```

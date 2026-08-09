@@ -1,0 +1,15 @@
+fn main() {
+    let list = [10, 20, 30];
+
+    // Look up element at position 1
+    match list.get(1) {
+        Some(element) => println!("Element at position 1: {}", element),
+        None => println!("Position 1 is out of bounds."),
+    }
+
+    // Look up element at position 5
+    match list.get(4) {
+        Some(element) => println!("Element at position 5: {}", element),
+        None => println!("Position 5 is out of bounds."),
+    }
+}

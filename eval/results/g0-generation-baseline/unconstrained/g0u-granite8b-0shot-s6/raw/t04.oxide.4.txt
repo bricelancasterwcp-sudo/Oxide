@@ -1,0 +1,22 @@
+```
+fn main() {
+    let mut count = 0;
+    for x in range(2, 100) {
+        if is_prime(x) {
+            count += 1;
+        }
+    }
+    print(count)
+}
+
+fn is_prime(x: Int) -> Bool {
+    let mut is_prime = true;
+    for divisor in range(2, x) {
+        if x % divisor == 0 {
+            is_prime = false;
+            break;
+        }
+    }
+    is_prime
+}
+```

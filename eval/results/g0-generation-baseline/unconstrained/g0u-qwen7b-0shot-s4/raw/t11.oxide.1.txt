@@ -1,0 +1,9 @@
+```oxide
+fn main() {
+    let mut nums = vec(5, 3, 8, 1, 9, 2);
+    nums.sort();
+    for num in nums {
+        print(num);
+    }
+}
+```

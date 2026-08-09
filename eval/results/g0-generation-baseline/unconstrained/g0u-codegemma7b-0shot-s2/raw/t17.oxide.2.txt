@@ -1,0 +1,20 @@
+fn lookup_elements(list: Vec<Int>, positions: Vec<usize>) -> Vec<Int> {
+    let mut result: Vec<Int> = vec![];
+    for position in positions {
+        if position >= 0 && position < list.len() {
+            result.push(list[position]);
+        } else {
+            result.push(-1);
+        }
+    }
+    result
+}
+
+fn main() {
+    let list = vec![10, 20, 30];
+    let positions = vec![1, 5];
+    let result = lookup_elements(list, positions);
+    for element in result {
+        print!("{} ", element);
+    }
+}

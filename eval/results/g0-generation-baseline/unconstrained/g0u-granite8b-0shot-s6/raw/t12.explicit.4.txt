@@ -1,0 +1,15 @@
+fn reverse(s: Str) -> Str {
+    let mut r = ""
+    for c in s.chars() {
+        r = c + r
+    }
+    r
+}
+
+fn main() {
+    print(reverse("stack"))
+}
+
+Diagnostics:
+1:1: OX0102: expected item at module level, found IDENT
+20:1: OX0102: expected item at module level, found IDENT

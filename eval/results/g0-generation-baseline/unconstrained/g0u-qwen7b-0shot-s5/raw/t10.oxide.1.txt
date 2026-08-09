@@ -1,0 +1,20 @@
+```oxide
+fn filter_and_count(v: Vec<Int>) -> Vec<Int> {
+    let mut result = vec();
+    for x in v {
+        if x > 3 {
+            push(result, x);
+        }
+    }
+    result
+}
+
+fn main() {
+    let v = push(push(push(push(push(vec(), 4), 1), 7), 3), 9), 2);
+    let filtered = filter_and_count(v);
+    for x in filtered {
+        print(x);
+    }
+    print(filtered.len());
+}
+```

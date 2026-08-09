@@ -1,0 +1,12 @@
+```rust
+fn main() {
+    let multiples = vec();
+    let mut sum = 0;
+    for i in range(1, 9) {
+        let x = i * 3;
+        push(multiples, x);
+        sum = sum + x;
+    }
+    print(sum);
+}
+```

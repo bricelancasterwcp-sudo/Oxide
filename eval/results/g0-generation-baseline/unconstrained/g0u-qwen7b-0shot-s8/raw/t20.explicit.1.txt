@@ -1,0 +1,37 @@
+```rust
+struct Item {
+    name: Str,
+    unit_price: Int,
+    quantity: Int,
+}
+
+fn cost(item: &Item) -> Int {
+    item.unit_price * item.quantity
+}
+
+fn main() {
+    let pen = Item { name: "Pen", unit_price: 3, quantity: 4 };
+    let pad = Item { name: "Pad", unit_price: 9, quantity: 2 };
+    let ink = Item { name: "Ink", unit_price: 5, quantity: 3 };
+
+    let total_cost = cost(&pen) + cost(&pad) + cost(&ink);
+    print(total_cost);
+
+    let items = vec![&pen, &pad, &ink];
+    let mut max_cost = 0;
+    let mut max_item_name = "";
+
+    for item in &items {
+        let item_cost = cost(item);
+        if item_cost > max_cost {
+            max_cost = item_cost;
+            max_item_name = &item.name;
+        }
+    }
+
+    print_str(max_item_name);
+    drop pen;
+    drop pad;
+    drop ink;
+}
+```

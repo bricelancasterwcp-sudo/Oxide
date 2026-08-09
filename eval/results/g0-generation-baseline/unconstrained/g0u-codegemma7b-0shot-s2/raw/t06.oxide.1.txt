@@ -1,0 +1,19 @@
+fn factors(x: Int) -> Vec<Int> {
+    let mut v = vec![];
+    for i in 1..(trunc(x / 2) + 1) {
+        if x % i == 0 { v.push(i) }
+    }
+    v
+}
+
+fn is_perfect(x: Int) -> bool {
+    let fs = factors(x);
+    let sum = fs.iter().fold(0, |acc, x| acc + x);
+    sum == x
+}
+
+fn main() {
+    for i in 1..1000 {
+        if is_perfect(i) { print(i) }
+    }
+}

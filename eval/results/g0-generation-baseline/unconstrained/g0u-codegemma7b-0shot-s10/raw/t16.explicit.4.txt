@@ -1,0 +1,31 @@
+fn main() {
+    let dividend = 100;
+    let divisor_5 = 5;
+    let divisor_0 = 0;
+    let divisor_4 = 4;
+
+    let result_5 = divide(dividend, divisor_5);
+    let result_0 = divide(dividend, divisor_0);
+    let result_4 = divide(dividend, divisor_4);
+
+    print_quotient(result_5);
+    print_quotient(result_0);
+    print_quotient(result_4);
+}
+
+fn divide(dividend: Int, divisor: Int) -> Int {
+    if divisor == 0 {
+        return 0;
+    } else {
+        return dividend / divisor;
+    }
+}
+
+fn print_quotient(quotient: Int) {
+    if quotient == 0 {
+        print("undefined");
+    } else {
+        print(quotient);
+    }
+    print("\n");
+}

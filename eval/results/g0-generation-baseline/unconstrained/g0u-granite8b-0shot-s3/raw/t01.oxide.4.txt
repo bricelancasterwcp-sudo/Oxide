@@ -1,0 +1,13 @@
+fn main() {
+    let sum = sum_of_squares(0, 9);
+    print(sum);
+}
+
+fn sum_of_squares(i: Int, limit: Int) -> Int {
+    let square = |x| x * x;
+    if i > limit {
+        0
+    } else {
+        square(i) + sum_of_squares(i + 1, limit)
+    }
+}

@@ -1,0 +1,33 @@
+```
+fn main() {
+  let v = vec(5, 3, 8, 1, 9, 2);
+  let mut v = sort(&v);
+
+  while true {
+    if v.is_empty() {
+      break;
+    }
+    print(v.pop());
+  }
+}
+
+fn sort(v: &Vec<Int>) -> Vec<Int> {
+  let mut v = clone(&v);
+
+  for i in range(1, len(&v)) {
+    let mut j = i;
+    while j > 0 && v[j] < v[j-1] {
+      swap(&mut v, j, j-1);
+      j -= 1;
+    }
+  }
+
+  v
+}
+
+fn swap(v: &mut Vec<Int>, i: Int, j: Int) {
+  let t = v[i];
+  v[i] = v[j];
+  v[j] = t;
+}
+```

@@ -1,0 +1,11 @@
+fn seq(n: Int) -> Int {
+    if n <= 2 {
+        1
+    } else {
+        seq(n - 1) + seq(n - 2)
+    }
+}
+
+fn main() {
+    print(seq(20))
+}

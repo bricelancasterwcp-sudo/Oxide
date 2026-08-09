@@ -1,0 +1,129 @@
+# Oxide — Language Card (v0.2.1)
+
+Oxide is a Rust-like language with **implicit linear types**: ownership works
+like Rust's, but there is no borrow syntax — the compiler infers moves,
+borrows, and destruction points. Types are fully inferred; annotations are
+optional everywhere.
+
+## Syntax essentials
+
+- No semicolons — newlines end statements. Blocks `{ }` are expressions; the
+  last expression in a block is its value (no `return` needed at the end).
+  A newline before `{` or before `else` is fine.
+- Items: `fn name(param: Type, ...) -> Type { ... }`, `struct Name { field: Type }`,
+  `enum Name { Variant(Type, ...), Nullary }`.
+- Statements: `let x = expr` · `x = expr` (reassignment) · `return expr` ·
+  `while cond { }` · `for x in vec_expr { }` · `break` · `continue` ·
+  expression statements.
+- Expressions: `if c { a } else { b }` and `match e { Pat => expr, _ => expr }`
+  are expressions. Match arms: `Variant(binders)`, `Nullary`, or `_`.
+- `expr?` unwraps an `Option`/`Result`; on `None`/`Err` it returns early from
+  the enclosing function, which must return the same wrapper kind.
+- Functional update: `Point { x: 5, ..p }` builds a new struct taking every
+  unlisted field from `p` (consumes `p`; `..p` must be last).
+- `let mut x = e` means `let x = e`; bindings are already reassignable.
+- Builtins accept receiver-first method syntax: `v.clone()` means `clone(v)`,
+  `v.push(x)` means `push(v, x)`, and calls chain — `vec().push(1).push(2)`.
+  Both forms are identical in meaning and ownership. Only builtins: there are
+  no user-defined methods, so `p.area()` is an error.
+- Variant names are global — write `Circle(1.5)`, not `Shape::Circle(1.5)`.
+- Comparison chains like `a < b < c` are not allowed; parenthesize.
+
+## Types
+
+`Int`, `Float`, `Bool`, `Str`, `Unit`, `Vec<T>`, user structs and enums,
+plus builtin `Option<T>` (`Some(x)` / `None`) and `Result<T, E>`
+(`Ok(x)` / `Err(e)`). Int and Float never mix implicitly — convert with
+`to_float` / `trunc`. Structs/enums are declared non-generic.
+
+## Ownership (the part that differs from other languages)
+
+`Int`, `Float`, `Bool`, `Unit` are copied freely. Everything else
+(`Str`, `Vec`, structs, enums) is **linear**: each value is consumed exactly
+once, and the compiler destroys it automatically after its final use.
+
+A use **consumes** (moves) when it: initializes a `let` (`let y = x` consumes
+`x`); is passed to a consuming function (like `push`, `concat`); is returned;
+is placed in a struct literal or variant; is the `..rest` of a functional
+update; is destructured (`let Point { x, y } = p`); is matched (`match e`
+consumes `e`); or has `?` applied.
+
+A use does **not** consume when it: is passed to a read-only function
+(`print`, `len`, `get`, `clone`, `str_len`, `chars`, `parse_int`); appears as
+an operator operand or condition; is iterated (`for x in v` — `v` remains
+usable; each `x` is a fresh copy); or is the base of a field access (`s.f` —
+the field arrives as a fresh copy even for non-copyable types, and `s` stays
+usable).
+
+Rules of thumb:
+- After a value is moved, the variable is dead. Need it twice? Use
+  `clone(x)`, or do the reading before the moving.
+- Reassignment revives: `acc = push(acc, item)` is the accumulation idiom
+  (works in loops).
+- Moving an outer variable inside a loop body fails ("moved in a previous
+  iteration") unless you reassign it before the iteration ends.
+- Field access copies; destructuring consumes. Read one field with `s.f`;
+  take a struct apart with `let S { ... } = s`.
+- Never drop anything manually — destruction is automatic, including at
+  `break`, `continue`, and early `return`.
+
+## Builtins
+
+```text
+print(x)                      # debug-print any value
+print_str(s)                  # print a Str without quotes
+vec() -> Vec<T>               # empty vector (needs usage context to infer T)
+push(v, x) -> Vec<T>          # consumes v, returns it with x appended
+len(v) -> Int                 # length of a Vec
+get(v, i) -> Option<T>        # element copy at index i
+range(a, b) -> Vec<Int>       # integers a..b-1
+clone(x) -> T                 # fresh copy of any value
+str_len(s) -> Int             # characters in a Str
+concat(a, b) -> Str           # consumes both, returns a+b
+chars(s) -> Vec<Str>          # one-char strings
+int_to_str(n) -> Str
+parse_int(s) -> Option<Int>
+to_float(n) -> Float          # Int to Float
+trunc(x) -> Int               # Float to Int, toward zero
+```
+
+## Example
+
+```
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            # field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+```
+
+## Reading compiler errors
+
+Errors carry codes: `OX03xx` are type errors, `OX04xx` ownership errors.
+`OX0400 use of moved value 'v'` includes a note pointing at the earlier
+move — fix by cloning at the earlier site or reordering. `OX0403` means a
+loop-carried move — reassign the variable inside the loop. `OX0307` means a
+`match` is missing variants — add arms or `_`. `OX0308` means `?` was applied
+where the function's return type is not the matching wrapper.

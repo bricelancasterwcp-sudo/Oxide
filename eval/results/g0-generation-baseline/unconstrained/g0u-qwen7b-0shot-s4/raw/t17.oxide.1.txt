@@ -1,0 +1,9 @@
+```rust
+fn main() {
+    let v = vec![10, 20, 30];
+    let first = get(v, 1);
+    let second = get(v, 5);
+    print(first.unwrap_or(-1));
+    print(second.unwrap_or(-1));
+}
+```

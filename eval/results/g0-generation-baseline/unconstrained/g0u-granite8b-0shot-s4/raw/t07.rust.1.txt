@@ -1,0 +1,4 @@
+fn main() {
+    let sum: i32 = (1..9).step_by(3).sum();
+    println!("{}", sum);
+}

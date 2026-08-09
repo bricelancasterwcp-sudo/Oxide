@@ -1,0 +1,29 @@
+```
+fn parse_int(s: Str) -> Option<Int> {
+    match s {
+        "12" => Some(12),
+        "x" => None,
+        "30" => Some(30),
+        _ => None,
+    }
+}
+
+fn sum_and_count(values: Vec<Str>) -> (Int, Int) {
+    let mut sum = 0
+    let mut count = 0
+    for value in values {
+        if let Some(parsed) = parse_int(value) {
+            sum += parsed
+            count += 1
+        }
+    }
+    (sum, count)
+}
+
+fn main() {
+    let values = vec("12", "x", "30")
+    let (sum, count) = sum_and_count(values)
+    print(sum)
+    print(count)
+}
+```

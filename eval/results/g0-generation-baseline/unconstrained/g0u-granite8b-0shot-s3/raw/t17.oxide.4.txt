@@ -1,0 +1,7 @@
+fn main() {
+    let list = push(push(vec(), 10), 20);
+    let x = get(list, 1)?;
+    print(x);
+    let y = get(list, 5)?;
+    print(y);
+}

@@ -1,0 +1,12 @@
+```rust
+fn main() {
+    for divisor in vec![5, 0, 4] {
+        let quotient = if divisor != 0 { 100 / divisor } else { None };
+        match quotient {
+            Some(q) => print_str(q.to_string()),
+            None => print_str("undefined"),
+        }
+        print("\n")
+    }
+}
+```

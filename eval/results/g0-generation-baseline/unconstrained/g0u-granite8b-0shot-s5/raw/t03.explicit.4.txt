@@ -1,0 +1,35 @@
+fn main() {
+    let x = 4;
+    let y = 0;
+
+    while x > y {
+        print(x);
+        x = x - 1;
+        drop x;
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x));
+}
+
+fn print_str(s: Str) {
+    // implementation here
+}
+
+fn int_to_str(n: Int) -> Str {
+    // implementation here
+}
+
+
+fn gcd(mut x: Int, mut y: Int) -> Int {
+    while y != 0 {
+        let temp = y;
+        y = x % y;
+        x = temp;
+        drop temp;
+    }
+    drop y;
+    drop x;
+    x
+}

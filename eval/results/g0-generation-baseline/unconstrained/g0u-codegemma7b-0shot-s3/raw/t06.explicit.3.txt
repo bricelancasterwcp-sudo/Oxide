@@ -1,0 +1,25 @@
+fn sum_of_divisors(n: Int) -> Int {
+    let mut total = 0;
+    for i in 1..(n / 2) + 1 {
+        if n % i == 0 {
+            total += i;
+        }
+    }
+    total
+}
+
+fn is_perfect(n: Int) -> Bool {
+    if n == 0 {
+        return false;
+    }
+    sum_of_divisors(n) == n
+}
+
+fn main() {
+    for i in 0..1000 {
+        if is_perfect(i) {
+            print(i)
+            print("\n")
+        }
+    }
+}

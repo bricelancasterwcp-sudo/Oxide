@@ -1,0 +1,33 @@
+```
+struct Rectangle { width: Int, height: Int }
+
+struct Triangle { side1: Int, side2: Int, side3: Int }
+
+fn perimeter(r: Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn perimeter(t: Triangle) -> Int {
+    t.side1 + t.side2 + t.side3
+}
+
+fn main() {
+    let sequence = push(
+        push(
+            push(vec(), Rectangle { width: 3, height: 4 }),
+            Triangle { side1: 3, side2: 4, side3: 5 }),
+        Rectangle { width: 2, height: 5 })
+
+    for shape in sequence {
+        match shape {
+            Rectangle { width, height } => {
+                print(2 * (width + height))
+            },
+            Triangle { side1, side2, side3 } => {
+                print(side1 + side2 + side3)
+            },
+            _ => { }
+        }
+    }
+}
+```

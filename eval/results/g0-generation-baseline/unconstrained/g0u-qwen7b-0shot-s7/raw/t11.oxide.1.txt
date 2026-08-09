@@ -1,0 +1,27 @@
+```oxide
+struct List { head: Option<Int>, tail: Option<Box<List>> }
+
+fn from_vec(v: Vec<Int>) -> List {
+    let mut list = List { head: None, tail: None };
+    for x in v.into_iter().rev() {
+        list = List { head: Some(x), tail: Some(Box::new(list)) };
+    }
+    list
+}
+
+fn print_list(list: List) {
+    match list {
+        List { head: Some(x), tail: Some(tail) } => {
+            print(x);
+            print_list(*tail);
+        },
+        _ => ()
+    }
+}
+
+fn main() {
+    let v = push(push(push(push(push(vec(), 5), 3), 8), 1), 9), 2);
+    let list = from_vec(v);
+    print_list(list);
+}
+```

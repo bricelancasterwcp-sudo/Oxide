@@ -1,0 +1,11 @@
+```
+fn print_rev(s: Str) {
+    for c in chars(s) {
+        print(c)
+    }
+}
+
+fn main() {
+    print_rev("stack")
+}
+```

@@ -1,0 +1,22 @@
+```oxide
+fn parse_int(s: Str) -> Option<Int> {
+    parse_int(s)
+}
+
+fn main() {
+    let s1 = "12"
+    let s2 = "x"
+    let s3 = "30"
+    let mut sum = 0
+    let mut count = 0
+    for s in vec![s1, s2, s3] {
+        match parse_int(s) {
+            Some(n) => sum += n,
+            None => count += 1,
+        }
+    }
+    print(sum)
+    print_str(" ")
+    print(count)
+}
+```

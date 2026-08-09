@@ -1,0 +1,19 @@
+```
+struct Stack {
+    data: Vec<Int>,
+}
+
+fn main() {
+    let mut s = Stack { data: vec() }
+    for c in "stack".chars() {
+        s.data = push(s.data, c)
+    }
+    let mut result = vec()
+    while len(s.data) > 0 {
+        let i = len(s.data) - 1
+        result = push(result, get(s.data, i)?)
+        s.data = range(0, i)
+    }
+    print_str(str_cat(result))
+}
+```

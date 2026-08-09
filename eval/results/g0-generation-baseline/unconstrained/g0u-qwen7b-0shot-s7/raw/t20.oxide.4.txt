@@ -1,0 +1,32 @@
+```rust
+struct Item { name: Str, price: Int, quantity: Int }
+
+fn cost(item: Item) -> Int {
+    item.price * item.quantity
+}
+
+fn main() {
+    let pen = Item { name: "pen", price: 3, quantity: 4 };
+    let pad = Item { name: "pad", price: 9, quantity: 2 };
+    let ink = Item { name: "ink", price: 5, quantity: 3 };
+
+    let total_cost = cost(pen.clone()) + cost(pad.clone()) + cost(ink.clone());
+    print(total_cost);
+
+    let mut max_cost = 0;
+    let mut max_item = "";
+    if cost(pen.clone()) > max_cost {
+        max_cost = cost(pen.clone());
+        max_item = pen.name;
+    }
+    if cost(pad.clone()) > max_cost {
+        max_cost = cost(pad.clone());
+        max_item = pad.name;
+    }
+    if cost(ink.clone()) > max_cost {
+        max_cost = cost(ink.clone());
+        max_item = ink.name;
+    }
+    print_str(max_item);
+}
+```

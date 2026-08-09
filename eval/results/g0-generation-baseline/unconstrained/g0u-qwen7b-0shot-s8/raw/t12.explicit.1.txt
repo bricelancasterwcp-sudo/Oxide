@@ -1,0 +1,12 @@
+```rust
+fn reverse(s: &Str) -> Str {
+    let mut chars: Vec<Str> = chars(s).map(|c| c).collect();
+    chars.reverse();
+    concat(chars)
+}
+
+fn main() {
+    let text = "stack";
+    print(reverse(text));
+}
+```

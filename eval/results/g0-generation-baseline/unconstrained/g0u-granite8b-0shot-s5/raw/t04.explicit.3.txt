@@ -1,0 +1,22 @@
+fn is_prime(n: Int) -> Bool {
+  if n <= 1 {
+    false
+  } else {
+    for x in 2..n {
+      if n % x == 0 {
+        return false;
+      }
+    }
+    true
+  }
+}
+
+fn main() {
+  let total = 0;
+  for x in 2..100 {
+    if is_prime(x) {
+      total = total + 1;
+    }
+  }
+  print(total);
+}

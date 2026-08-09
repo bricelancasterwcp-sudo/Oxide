@@ -1,0 +1,1 @@
+print_str(concat(reverse(vec(map(chars("stack"), |c| str_len(&c.to_string()))))))

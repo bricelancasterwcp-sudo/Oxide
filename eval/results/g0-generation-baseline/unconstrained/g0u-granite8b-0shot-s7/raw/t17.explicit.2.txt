@@ -1,0 +1,16 @@
+```
+fn lookup(list: &Vec<Int>, pos: Int) -> Int {
+    let elem = get(&list, pos)
+    match elem {
+        Some(n) => n,
+        None => -1,
+    }
+}
+
+fn main() {
+    let numbers = push(push(vec(), 10), 20)
+    print(lookup(&numbers, 1))
+    print(lookup(&numbers, 5))
+    drop numbers
+}
+```

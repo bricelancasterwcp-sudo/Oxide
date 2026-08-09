@@ -1,0 +1,39 @@
+The program compiled and ran, but produced incorrect output.
+Its output was:
+
+stack
+
+The program source was:
+
+fn reverse(s: Str) -> Str {
+    let mut r = ""
+    for c in s.chars() {
+        r = c + r
+    }
+    r
+}
+
+fn main() {
+    print(reverse("stack"))
+}
+
+Reply with ONLY the complete corrected program source, no fences, no commentary.
+
+
+Diagnostics:
+1:1: OX0102: expected item at module level, found IDENT
+20:1: OX0102: expected item at module level, found IDENT
+
+Reply with ONLY the complete corrected program source, no fences, no commentary.
+
+fn reverse(s: Str) -> Str {
+    let mut r = ""
+    for c in s.chars() {
+        r = c + r
+    }
+    r
+}
+
+fn main() {
+    print(reverse("stack"))
+}

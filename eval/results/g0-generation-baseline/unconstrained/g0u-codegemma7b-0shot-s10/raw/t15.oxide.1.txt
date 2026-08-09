@@ -1,0 +1,14 @@
+fn main() {
+    let input = ["12", "x", "30"];
+    let mut sum = 0;
+    let mut errors = 0;
+    for s in input {
+        match parse_int(s) {
+            Some(n) => sum += n,
+            None => errors += 1,
+        }
+    }
+    print(sum);
+    print(errors);
+}
+```

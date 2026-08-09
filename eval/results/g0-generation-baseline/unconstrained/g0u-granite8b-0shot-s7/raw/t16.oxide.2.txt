@@ -1,0 +1,23 @@
+```
+let five = 5
+let zero = 0
+let four = 4
+let x = trunc(100 / five)
+let y = trunc(100 / zero)
+let z = trunc(100 / four)
+if zero == zero {
+    print(x)
+} else {
+    print_str("undefined")
+}
+if four == zero {
+    print(y)
+} else {
+    print_str("undefined")
+}
+if five == zero {
+    print(z)
+} else {
+    print_str("undefined")
+}
+```

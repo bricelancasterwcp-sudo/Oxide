@@ -1,0 +1,32 @@
+```rust
+fn count_positive(v: &Vec<Int>) -> Int {
+    let count = 0;
+    for x in v {
+        if x > 0 {
+            count = count + 1;
+        }
+    }
+    count
+}
+
+fn max_value(v: &Vec<Int>) -> Int {
+    let mut max = v[0];
+    for x in v {
+        if x > max {
+            max = x;
+        }
+    }
+    max
+}
+
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7);
+    let pos_count = count_positive(&nums);
+    let max_val = max_value(&nums);
+    print_str("Positive values: ");
+    print(pos_count);
+    print_str(", Max value: ");
+    print(max_val);
+    drop nums
+}
+```

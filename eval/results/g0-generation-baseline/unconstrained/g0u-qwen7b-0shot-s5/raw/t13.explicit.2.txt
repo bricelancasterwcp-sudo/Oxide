@@ -1,0 +1,9 @@
+fn main() {
+    let level: Str = "level";
+    let stereo: Str = "stereo";
+    let rotor: Str = "rotor";
+    
+    print(&level == &rotor.chars().rev().collect::<Str>()[..]);
+    print(&stereo == &stereo.chars().rev().collect::<Str>()[..]);
+    print(&rotor == &rotor.chars().rev().collect::<Str>()[..]);
+}

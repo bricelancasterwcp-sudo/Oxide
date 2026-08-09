@@ -1,0 +1,16 @@
+struct List {
+    data: Vec<Int>,
+    len: Int
+}
+
+fn print_list(l: List) {
+    let mut l = l
+    for i in range(0, l.len) {
+        print(get(l.data, i)?)
+        l.len = l.len - 1
+    }
+}
+
+fn main() {
+    print_list(List { data: vec(1, 2, 3, 4, 5), len: 5 })
+}

@@ -1,0 +1,16 @@
+fn main() {
+    let strings = vec();
+    let sum = sum_big(&strings, 0);
+    drop strings;
+    print(sum);
+}
+
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total
+}

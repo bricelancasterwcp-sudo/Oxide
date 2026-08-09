@@ -1,0 +1,24 @@
+fn main() {
+    let stack = "stack";
+    for i in range(stack.len() - 1, -1, -1) {
+        print_str(&stack[i]);
+    }
+}
+
+fn print_str(s: &Str) {
+    for c in chars(&s) {
+        print(c);
+    }
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut chars_vec = vec();
+    for i in range(0, s.len()) {
+        chars_vec = push(chars_vec, s[i]);
+    }
+    chars_vec
+}
+
+fn print(n: Int) {
+    println!("{}", n);
+}

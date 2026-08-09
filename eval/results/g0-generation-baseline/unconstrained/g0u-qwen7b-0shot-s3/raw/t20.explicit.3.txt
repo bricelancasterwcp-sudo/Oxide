@@ -1,0 +1,29 @@
+```rust
+struct Item {
+    name: Str,
+    unit_price: Int,
+    quantity: Int,
+}
+
+fn main() {
+    let pen = Item { name: "pen", unit_price: 3, quantity: 4 };
+    let pad = Item { name: "pad", unit_price: 9, quantity: 2 };
+    let ink = Item { name: "ink", unit_price: 5, quantity: 3 };
+
+    let total_cost = pen.unit_price * pen.quantity + pad.unit_price * pad.quantity + ink.unit_price * ink.quantity;
+    print(total_cost);
+
+    let highest_cost_item = if pen.unit_price * pen.quantity >= pad.unit_price * pad.quantity && pen.unit_price * pen.quantity >= ink.unit_price * ink.quantity {
+        pen.name
+    } else if pad.unit_price * pad.quantity >= pen.unit_price * pen.quantity && pad.unit_price * pad.quantity >= ink.unit_price * ink.quantity {
+        pad.name
+    } else {
+        ink.name
+    };
+
+    print_str(highest_cost_item);
+    drop pen;
+    drop pad;
+    drop ink;
+}
+```

@@ -1,0 +1,25 @@
+print_str("mississippi")
+
+let count = 0
+let mut distinct = 0
+let s = "mississippi"
+for c in s.chars() {
+    if c == 's' {
+        count = count + 1
+    }
+    if !contains(c) {
+        distinct = distinct + 1
+    }
+}
+print(count)
+print(distinct)
+
+fn contains(c: Char) -> Bool {
+    let s = "mississippi"
+    for sc in s.chars() {
+        if sc == c {
+            return true
+        }
+    }
+    false
+}

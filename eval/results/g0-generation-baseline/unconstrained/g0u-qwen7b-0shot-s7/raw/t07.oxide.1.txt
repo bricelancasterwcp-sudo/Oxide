@@ -1,0 +1,22 @@
+```oxide
+struct Multiples { list: Vec<Int> }
+
+fn sum_multiples() -> Int {
+    let mut acc = 0
+    for i in range(1, 9) {
+        let multiple = 3 * i
+        acc = push(acc, multiple)
+    }
+    let mut sum = 0
+    for x in acc.list {
+        sum = x + sum
+    }
+    sum
+}
+
+fn main() {
+    let multiples = Multiples { list: vec() }
+    let result = sum_multiples()
+    print(result)
+}
+```

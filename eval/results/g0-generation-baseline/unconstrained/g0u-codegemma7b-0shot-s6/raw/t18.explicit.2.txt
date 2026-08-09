@@ -1,0 +1,46 @@
+use std::fmt::Print;
+
+fn area(a: Int, b: Int) -> Int {
+    a * b
+}
+
+fn perimeter(a: Int, b: Int) -> Int {
+    2 * (a + b)
+}
+
+fn main() {
+    let r1 = Rectangle { w: 3, h: 4 };
+    let t = Triangle { a: 3, b: 4, c: 5 };
+    let r2 = Rectangle { w: 2, h: 5 };
+
+    print_perimeter(&r1);
+    print_perimeter(&t);
+    print_perimeter(&r2);
+}
+
+fn print_perimeter(s: &Shape) {
+    match s {
+        Shape::Rectangle(r) => print("Rectangle: "),
+        Shape::Triangle(t) => print("Triangle: "),
+        Shape::Nullary => return,
+    }
+    print!("{}", perimeter(r.w, r.h));
+    println!();
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+    Nullary,
+}
+
+struct Rectangle {
+    w: Int,
+    h: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}

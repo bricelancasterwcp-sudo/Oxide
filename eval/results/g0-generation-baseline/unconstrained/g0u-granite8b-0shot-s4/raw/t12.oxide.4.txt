@@ -1,0 +1,3 @@
+```
+print_str("".chars().rev().collect::<String>().as_str())
+```

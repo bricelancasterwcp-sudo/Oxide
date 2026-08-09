@@ -1,0 +1,18 @@
+use oxide_explicit as ox;
+
+fn main() {
+    let nums = ox::vec(3, 8, -2, 12, 7);
+    let mut count = 0;
+    let mut max = ox::Int::MIN;
+    for x in &nums {
+        if *x > 0 {
+            count = count + 1;
+            if *x > max {
+                max = *x;
+            }
+        }
+    }
+    ox::print(count);
+    ox::print(max);
+    ox::drop(nums);
+}

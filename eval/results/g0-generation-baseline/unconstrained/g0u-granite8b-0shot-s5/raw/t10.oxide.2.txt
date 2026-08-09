@@ -1,0 +1,22 @@
+```
+fn task(v: Vec<Int>) -> Int {
+    let mut filtered = vec()
+    for x in v {
+        if x > 3 {
+            filtered = push(filtered, x)
+        }
+    }
+    len(filtered)
+}
+
+fn main() {
+    let v = push(push(push(push(vec(), 4), 1), 7), 3)
+    print(task(v))
+    print(task(push(vec(), 1)))
+    print(task(push(vec(), 7)))
+    print(task(push(vec(), 3)))
+    print(task(push(push(vec(), 4), 1)))
+    print(task(push(push(vec(), 7), 3)))
+    print(task(push(push(push(vec(), 4), 1), 7), 3)))
+}
+```

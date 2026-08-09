@@ -1,0 +1,10 @@
+```
+fn main() {
+  let mut sum = 0;
+  for i in 1..8 {
+    let mult = 3 * i;
+    sum += mult;
+  }
+  print(sum);
+}
+```

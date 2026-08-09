@@ -1,0 +1,20 @@
+```rust
+fn main() {
+    let s = "mississippi".to_string();
+    let mut count = 0;
+    let mut distinct = 0;
+    let mut current_char = ' ';
+    for c in s.chars() {
+        if c == 's' {
+            count += 1;
+        }
+        if c != current_char {
+            distinct += 1;
+            current_char = c;
+        }
+    }
+    drop s;
+    print(count);
+    print(distinct);
+}
+```

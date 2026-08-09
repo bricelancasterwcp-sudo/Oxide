@@ -1,0 +1,8 @@
+let width = 7;
+let height = 4;
+let area = width * height;
+let perimeter = 2 * (width + height);
+drop width;
+drop height;
+print(area);
+print(perimeter);

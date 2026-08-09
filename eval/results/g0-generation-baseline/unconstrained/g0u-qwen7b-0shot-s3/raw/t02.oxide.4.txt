@@ -1,0 +1,14 @@
+fn transform(n: Int) -> Int {
+    if n == 1 {
+        0
+    } else if n % 2 == 0 {
+        transform(n / 2) + 1
+    } else {
+        transform(n * 3 + 1) + 1
+    }
+}
+
+fn main() {
+    let steps = transform(27);
+    print(steps);
+}

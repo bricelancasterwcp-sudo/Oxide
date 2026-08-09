@@ -1,0 +1,20 @@
+fn main() {
+    let x = 100;
+    let y = 5;
+    let z = 0;
+    let w = 4;
+    let a = x / y;
+    if z == 0 {
+        print("undefined");
+    } else {
+        let b = x / z;
+        print(b);
+    }
+    if w == 0 {
+        print("undefined");
+    } else {
+        let c = x / w;
+        print(c);
+    }
+    print(a);
+}

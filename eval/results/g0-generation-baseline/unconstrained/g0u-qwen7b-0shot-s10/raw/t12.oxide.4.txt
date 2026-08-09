@@ -1,0 +1,14 @@
+fn reverse(s: Str) -> Str {
+    let mut chars = chars(s);
+    let mut reversed = vec();
+    while let Some(c) = chars.pop() {
+        reversed = push(reversed, c);
+    }
+    concat(reversed)
+}
+
+fn main() {
+    let text = "stack";
+    let reversed_text = reverse(text.clone());
+    print(reversed_text);
+}

@@ -1,0 +1,19 @@
+fn parse_many(nums: &[Str]) -> (Int, Int) {
+    let mut sum = 0
+    let mut errors = 0
+    for n in nums {
+        match parse_int(n) {
+            Some(x) => sum = sum + x,
+            None => errors = errors + 1,
+        }
+    }
+    (sum, errors)
+}
+
+fn main() {
+    let nums = ["12", "x", "30", "42", "a", "7"]
+    let (result, errors) = parse_many(&nums)
+    print(result)
+    print(errors)
+}
+```

@@ -1,0 +1,37 @@
+```
+fn main() {
+    let total = loop {
+        let sum = loop {
+            let sum = loop {
+                let sum = loop {
+                    let sum = loop {
+                        let sum = loop {
+                            let sum = loop {
+                                let sum = loop {
+                                    let i = get(range(0, 10), sum)?
+                                    if i > 9 { break sum + i * i }
+                                    sum + i * i
+                                }
+                                if i > 9 { break sum + i * i }
+                                sum + i * i
+                            }
+                            if i > 9 { break sum + i * i }
+                            sum + i * i
+                        }
+                        if i > 9 { break sum + i * i }
+                        sum + i * i
+                    }
+                    if i > 9 { break sum + i * i }
+                    sum + i * i
+                }
+                if i > 9 { break sum + i * i }
+                sum + i * i
+            }
+            if i > 9 { break sum + i * i }
+            sum + i * i
+        }
+        if sum > 81 { break sum }
+    }
+    print(total)
+}
+```

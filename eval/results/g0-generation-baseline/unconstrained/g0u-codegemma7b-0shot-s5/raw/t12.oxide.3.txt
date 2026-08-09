@@ -1,0 +1,7 @@
+fn main() {
+    let text = "stack";
+    for c in chars(text).iter().rev() {
+        print(c);
+    }
+    print_str("\n");
+}

@@ -1,0 +1,14 @@
+fn print_sorted(v: &Vec<Int>) {
+    let mut sorted = clone(v);
+    sorted.sort();
+    for x in &sorted {
+        print(x)
+    }
+    drop sorted
+}
+
+fn main() {
+    let nums = vec![5, 3, 8, 1, 9, 2]
+    print_sorted(&nums)
+    drop nums
+}

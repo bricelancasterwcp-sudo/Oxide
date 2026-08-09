@@ -1,0 +1,12 @@
+fn main() {
+    let mut x = 1
+    let mut y = 1
+    for i in range(1, 21) {
+        let temp = x + y
+        drop y
+        y = x
+        x = temp
+        print(x)
+        drop x
+    }
+}

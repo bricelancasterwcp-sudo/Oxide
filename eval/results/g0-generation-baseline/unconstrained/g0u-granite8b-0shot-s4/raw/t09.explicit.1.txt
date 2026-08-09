@@ -1,0 +1,13 @@
+```rust
+fn print_reverse(list: &[Int]) {
+    for i in (0..len(list)).rev() {
+        print(get(list, i).unwrap());
+    }
+}
+
+fn main() {
+    let list = vec(5, 4, 3, 2, 1);
+    print_reverse(&list);
+    drop list;
+}
+```

@@ -1,0 +1,15 @@
+fn main() {
+    let s = "mississippi";
+    let mut count = 0;
+    let mut distinct = 0;
+    for c in s.chars() {
+        if c == 's' {
+            count += 1;
+        }
+        if distinct == 0 || c != distinct {
+            distinct += 1;
+        }
+    }
+    print(count);
+    print(distinct);
+}

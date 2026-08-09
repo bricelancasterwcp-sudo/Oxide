@@ -1,0 +1,19 @@
+```rust
+fn filter_print(v: &Vec<Int>, limit: Int) -> Int {
+    let mut count = 0;
+    for x in v {
+        if *x > limit {
+            print(x);
+            count = count + 1;
+        }
+    }
+    count
+}
+
+fn main() {
+    let nums = push(push(push(push(push(vec(), 4), 1), 7), 3), 9);
+    let count = filter_print(&nums, 3);
+    print(count);
+    drop nums;
+}
+```

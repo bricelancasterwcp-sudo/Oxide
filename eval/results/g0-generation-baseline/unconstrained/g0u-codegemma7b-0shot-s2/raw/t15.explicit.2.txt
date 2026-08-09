@@ -1,0 +1,26 @@
+fn parse(s: &str) -> Option<Int> {
+    let mut total = 0
+    for x in s.chars() {
+        if x.is_digit(10) {
+            total = total * 10 + x.to_digit(10).unwrap() as Int
+        } else {
+            return None
+        }
+    }
+    Some(total)
+}
+
+fn main() {
+    let nums = vec!["12", "x", "30"]
+    let mut success = 0
+    let mut fail = 0
+    for n in &nums {
+        if let Some(x) = parse(n) {
+            success = success + x
+        } else {
+            fail = fail + 1
+        }
+    }
+    print(success)
+    print(fail)
+}

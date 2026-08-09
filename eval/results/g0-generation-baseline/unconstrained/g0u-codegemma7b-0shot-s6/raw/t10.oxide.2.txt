@@ -1,0 +1,13 @@
+fn main() {
+    let mut list = vec![4, 1, 7, 3, 9, 2];
+    let mut output = vec![];
+    for x in list {
+        if x > 3 {
+            output.push(x);
+        }
+    }
+    for y in output {
+        print!("{}\n", y);
+    }
+    print!("{} kept\n", output.len());
+}

@@ -1,0 +1,15 @@
+```
+fn get_element(vec: &Vec<Int>, pos: Int) -> Int {
+    match get(vec, pos) {
+        Some(x) => x,
+        None => -1
+    }
+}
+
+fn main() {
+    let list = push(push(push(vec(), 10), 20), 30);
+    print(get_element(&list, 1));
+    print(get_element(&list, 5));
+    drop list
+}
+```

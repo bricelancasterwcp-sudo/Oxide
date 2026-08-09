@@ -1,0 +1,9 @@
+const LIST: [i32; 3] = [10, 20, 30];
+
+fn main() {
+    let pos1 = LIST.get(1);
+    let pos5 = LIST.get(5);
+
+    println!("pos1 = {:?}", pos1);
+    println!("pos5 = {:?}", pos5);
+}

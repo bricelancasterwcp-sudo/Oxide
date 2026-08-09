@@ -1,0 +1,15 @@
+```rust
+fn main() {
+    let level: &str = "level";
+    print(&level == &level.chars().rev().collect::<String>());
+    drop level;
+
+    let stereo: &str = "stereo";
+    print(&stereo == &stereo.chars().rev().collect::<String>());
+    drop stereo;
+
+    let rotor: &str = "rotor";
+    print(&rotor == &rotor.chars().rev().collect::<String>());
+    drop rotor;
+}
+```

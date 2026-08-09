@@ -1,0 +1,16 @@
+```
+fn area(width: Int, height: Int) -> Int {
+    width * height
+}
+
+fn perimeter(width: Int, height: Int) -> Int {
+    2 * (width + height)
+}
+
+fn main() {
+    let width = 7;
+    let height = 4;
+    print(area(width, height));
+    print(perimeter(width, height));
+}
+```

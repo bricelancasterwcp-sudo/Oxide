@@ -1,0 +1,37 @@
+```rust
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn perimeter(shape: Shape) -> Int {
+    match shape {
+        Shape::Rectangle(Rectangle { width, height }) => 2 * (width + height),
+        Shape::Triangle(Triangle { a, b, c }) => a + b + c,
+    }
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn main() {
+    let shapes = vec![
+        Shape::Rectangle(Rectangle { width: 3, height: 4 }),
+        Shape::Triangle(Triangle { a: 3, b: 4, c: 5 }),
+        Shape::Rectangle(Rectangle { width: 2, height: 5 }),
+    ];
+
+    for shape in shapes {
+        print(perimeter(shape));
+        print("\n");
+    }
+}
+```

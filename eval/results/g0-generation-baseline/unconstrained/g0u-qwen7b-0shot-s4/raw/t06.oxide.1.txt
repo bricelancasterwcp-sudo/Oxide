@@ -1,0 +1,23 @@
+```oxide
+fn divisors_sum(n: Int) -> Int {
+    let mut sum = 0
+    for i in range(1, n) {
+        if n % i == 0 {
+            sum += i
+        }
+    }
+    sum
+}
+
+fn is_perfect(n: Int) -> Bool {
+    divisors_sum(n) == n
+}
+
+fn main() {
+    for num in range(1, 1000) {
+        if is_perfect(num) {
+            print(num)
+        }
+    }
+}
+```

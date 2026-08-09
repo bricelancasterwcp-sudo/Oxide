@@ -1,0 +1,16 @@
+fn next_seq(a: Int, b: Int) -> Int {
+  a + b
+}
+
+fn print_seq(a: Int, b: Int, n: Int) {
+  if n <= 0 {
+    return;
+  }
+
+  print(a);
+  print_seq(b, next_seq(a, b), n - 1);
+}
+
+fn main() {
+  print_seq(1, 1, 20);
+}

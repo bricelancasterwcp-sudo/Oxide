@@ -1,0 +1,7 @@
+fn main() {
+    let list = push(push(push(push(vec(), 1), 2), 3), 4), 5);
+    let reversed = reverse(list);
+    for x in reversed {
+        print(x);
+    }
+}

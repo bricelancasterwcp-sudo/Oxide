@@ -1,0 +1,20 @@
+```rust
+fn divide(dividend: Int, divisor: Int) -> Result<Int, Str> {
+    if divisor == 0 {
+        Err("undefined".to_string())
+    } else {
+        Ok(dividend / divisor)
+    }
+}
+
+fn main() {
+    let nums = vec![5, 0, 4];
+    for d in &nums {
+        match divide(100, *d)? {
+            q => print(q),
+            Err(msg) => print(msg),
+        }
+        print("\n")
+    }
+}
+```

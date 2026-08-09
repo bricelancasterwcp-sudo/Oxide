@@ -1,0 +1,16 @@
+fn third(n: Int) -> Int {
+    if n <= 2 {
+        return 1;
+    }
+    let a = 1;
+    let b = 1;
+    let mut c = a + b;
+    for _ in 3..n {
+        (a, b, c) = (b, c, a + b);
+    }
+    return c;
+}
+
+fn main() {
+    print(third(20));
+}

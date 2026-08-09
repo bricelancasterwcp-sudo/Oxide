@@ -1,0 +1,17 @@
+fn is_palindrome(s: &Str) -> Bool {
+    let len = str_len(s);
+    let mut i = 0;
+    while i < len / 2 {
+        if s[i] != s[len - 1 - i] {
+            return false;
+        }
+        i = i + 1;
+    }
+    true
+}
+
+fn main() {
+    print(is_palindrome("level"));
+    print(is_palindrome("stereo"));
+    print(is_palindrome("rotor"));
+}

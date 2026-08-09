@@ -1,0 +1,49 @@
+```
+fn list_lookup(l: Vec<Int>, i: Int) -> Option<Int> {
+    let len = len(l)
+    if i < 0 || i >= len {
+        None
+    } else {
+        Some(get(l, i)?)
+    }
+}
+
+fn main() {
+    let l = push(push(push(vec(), 10), 20), 30)
+    let x = list_lookup(l, 0)
+    match x {
+        Some(n) => print(n),
+        None => print_str("out of bounds"),
+    }
+    let x = list_lookup(l, 1)
+    match x {
+        Some(n) => print(n),
+        None => print_str("out of bounds"),
+    }
+    let x = list_lookup(l, 2)
+    match x {
+        Some(n) => print(n),
+        None => print_str("out of bounds"),
+    }
+    let x = list_lookup(l, 3)
+    match x {
+        Some(n) => print(n),
+        None => print_str("out of bounds"),
+    }
+    let x = list_lookup(l, 4)
+    match x {
+        Some(n) => print(n),
+        None => print_str("out of bounds"),
+    }
+    let x = list_lookup(l, 5)
+    match x {
+        Some(n) => print(n),
+        None => print_str("out of bounds"),
+    }
+    let x = list_lookup(l, 6)
+    match x {
+        Some(n) => print(n),
+        None => print_str("out of bounds"),
+    }
+}
+```

@@ -1,0 +1,33 @@
+const UPPER_LIMIT: u32 = 1000;
+
+fn main() {
+    for n in 2..UPPER_LIMIT {
+        if perfect_number(n) {
+            println!("{}", n);
+        }
+    }
+}
+
+fn perfect_number(mut n: u32) -> bool {
+    let mut sum = 1;
+    if n % 2 == 0 {
+        while n % 2 == 0 {
+            n /= 2;
+            sum += n;
+        }
+    }
+    let mut i = 3;
+    while i * i <= n {
+        if n % i == 0 {
+            while n % i == 0 {
+                n /= i;
+                sum += i;
+            }
+        }
+        i += 2;
+    }
+    if n > 1 {
+        sum += n;
+    }
+    sum == (2 * n)
+}

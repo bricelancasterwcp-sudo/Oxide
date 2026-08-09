@@ -1,0 +1,21 @@
+```rust
+fn sort(list: &mut [Int]) {
+    for i in 0..list.len() {
+        for j in 0..list.len() {
+            if list[i] > list[j] {
+                let temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut numbers = [5, 3, 8, 1, 9, 2];
+    sort(&mut numbers);
+    for number in &numbers {
+        print(number);
+    }
+}
+```

@@ -1,0 +1,18 @@
+fn main() {
+    let x = parse_int("12");
+    let y = parse_int("x");
+    let z = parse_int("30");
+    let sum = match x {
+        Some(i) => i,
+        None => 0,
+    } + match y {
+        Some(i) => i,
+        None => 0,
+    } + match z {
+        Some(i) => i,
+        None => 0,
+    };
+    print(sum);
+    let count = 1 + 1 + 1;
+    print(count);
+}

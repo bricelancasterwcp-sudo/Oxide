@@ -1,0 +1,63 @@
+struct Pen {
+    unit_price: Int,
+    quantity: Int,
+}
+
+struct Pad {
+    unit_price: Int,
+    quantity: Int,
+}
+
+struct Ink {
+    unit_price: Int,
+    quantity: Int,
+}
+
+fn pen() -> Pen {
+    Pen {
+        unit_price: 3,
+        quantity: 4,
+    }
+}
+
+fn pad() -> Pad {
+    Pad {
+        unit_price: 9,
+        quantity: 2,
+    }
+}
+
+fn ink() -> Ink {
+    Ink {
+        unit_price: 5,
+        quantity: 3,
+    }
+}
+
+fn main() {
+    let pen_cost = pen().unit_price * pen().quantity;
+    let pad_cost = pad().unit_price * pad().quantity;
+    let ink_cost = ink().unit_price * ink().quantity;
+
+    print(pen_cost + pad_cost + ink_cost); // Combine costs
+
+    let mut highest_cost = 0;
+    let mut item_name = "";
+
+    if pen_cost > highest_cost {
+        highest_cost = pen_cost;
+        item_name = "Pen";
+    }
+
+    if pad_cost > highest_cost {
+        highest_cost = pad_cost;
+        item_name = "Pad";
+    }
+
+    if ink_cost > highest_cost {
+        highest_cost = ink_cost;
+        item_name = "Ink";
+    }
+
+    print_str(item_name); // Print the item with the highest cost
+}

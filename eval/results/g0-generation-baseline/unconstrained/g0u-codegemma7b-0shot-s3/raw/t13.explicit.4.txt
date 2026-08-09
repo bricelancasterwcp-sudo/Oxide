@@ -1,0 +1,22 @@
+fn palindrome(text: &str) -> bool {
+    let mut forward = 0;
+    let mut backward = text.len() - 1;
+    while forward < backward {
+        if text.chars().nth(forward) != text.chars().nth(backward) {
+            return false;
+        }
+        forward += 1;
+        backward -= 1;
+    }
+    true
+}
+
+fn main() {
+    let level = "level";
+    let stereo = "stereo";
+    let rotor = "rotor";
+
+    println!("{}", palindrome(level));
+    println!("{}", palindrome(stereo));
+    println!("{}", palindrome(rotor));
+}

@@ -1,0 +1,25 @@
+```rust
+fn pen() -> (Int, Int) {
+    (3, 4)
+}
+
+fn pad() -> (Int, Int) {
+    (9, 2)
+}
+
+fn ink() -> (Int, Int) {
+    (5, 3)
+}
+
+fn main() {
+    let (price, quantity) = pen()
+    let cost = price * quantity
+    print(cost)
+    drop cost
+    print("Item with the highest cost:")
+    let (price, quantity) = ink()
+    let cost = price * quantity
+    print(cost)
+    drop cost
+}
+```

@@ -1,0 +1,31 @@
+```rust
+fn count_s(s: &Str) -> (Int, Int) {
+    let mut total = 0
+    let mut unique = 0
+    for c in &chars(s) {
+        if c == "s" {
+            total = total + 1
+        }
+        if !contains_char(s, c) {
+            unique = unique + 1
+        }
+    }
+    (total, unique)
+}
+
+fn contains_char(s: &Str, c: &Str) -> Bool {
+    for sc in &chars(s) {
+        if sc == c {
+            return true
+        }
+    }
+    false
+}
+
+fn main() {
+    let text = "mississippi"
+    let (total, unique) = count_s(&text)
+    print_str(&total)
+    print_str(&unique)
+}
+```

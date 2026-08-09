@@ -1,0 +1,24 @@
+```text
+fn main() {
+    let mut sum = 0;
+    for i in 2..1000 {
+        if is_perfect(i) {
+            sum = sum + i;
+        }
+    }
+    print_int(sum);
+    print_str("\n");
+}
+
+fn is_perfect(n: Int) -> Bool {
+    let mut sum = 0;
+    let mut i = 1;
+    while i < n {
+        if n % i == 0 {
+            sum = sum + i;
+        }
+        i = i + 1;
+    }
+    sum == n
+}
+```

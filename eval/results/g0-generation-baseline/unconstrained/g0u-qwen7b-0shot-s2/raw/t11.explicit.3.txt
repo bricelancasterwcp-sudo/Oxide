@@ -1,0 +1,26 @@
+fn main() {
+    let list = vec(5, 3, 8, 1, 9, 2);
+    let mut sorted = vec();
+    let mut remaining = clone(&list);
+
+    while !remaining.is_empty() {
+        let mut min = remaining[0];
+        let mut min_index = 0;
+        for i in 1..remaining.len() {
+            if remaining[i] < min {
+                min = remaining[i];
+                min_index = i;
+            }
+        }
+        sorted = push(sorted, min);
+        remaining = concat(remaining[0..min_index].to_vec(), remaining[min_index+1..].to_vec());
+    }
+
+    for x in &sorted {
+        print(x);
+    }
+
+    drop list;
+    drop sorted;
+    drop remaining;
+}

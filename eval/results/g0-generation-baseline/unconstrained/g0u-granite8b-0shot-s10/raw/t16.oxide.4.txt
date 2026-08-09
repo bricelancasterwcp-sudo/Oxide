@@ -1,0 +1,25 @@
+fn div(x: Int, y: Int) -> Option<Int> {
+    if y == 0 {
+        None
+    } else {
+        Some(x / y)
+    }
+}
+
+fn main() {
+    let five = Some(5);
+    let zero = Some(0);
+    let four = Some(4);
+    match div(100, *five?) {
+        Some(q) => print(q),
+        None => print_str("undefined"),
+    }
+    match div(100, *zero?) {
+        Some(q) => print(q),
+        None => print_str("undefined"),
+    }
+    match div(100, *four?) {
+        Some(q) => print(q),
+        None => print_str("undefined"),
+    }
+}

@@ -1,0 +1,11 @@
+fn level(s: &str) -> bool {
+    s == s[::-1]
+}
+
+fn stereo(s: &str) -> bool {
+    s == s[::-1]
+}
+
+fn rotor(s: &str) -> bool {
+    s == s[::-1]
+}

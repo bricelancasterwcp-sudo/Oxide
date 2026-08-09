@@ -1,0 +1,30 @@
+```
+struct List { head: Int, tail: Option<Box<List>> }
+
+fn print_list(l: &List) {
+    match l {
+        List { head, tail: None } => print(head),
+        List { head, tail: Some(rest) } => {
+            print(head);
+            print_list(rest);
+        },
+    }
+}
+
+fn reverse_list(l: &List) -> List {
+    match l {
+        List { head, tail: None } => List { head, tail: None },
+        List { head, tail: Some(rest) } => {
+            let rest_rev = reverse_list(rest);
+            List { head, tail: Some(Box::new(rest_rev)) }
+        },
+    }
+}
+
+fn main() {
+    let l = List { head: 1, tail: Some(Box::new(List { head: 2, tail: Some(Box::new(List { head: 3, tail: Some(Box::new(List { head: 4, tail: Some(Box::new(List { head: 5, tail: None })) })) })) })) };
+    print_list(&l);
+    print_str("\n");
+    print_list(&reverse_list(&l));
+}
+```

@@ -1,0 +1,29 @@
+```rust
+fn main() {
+    // Define the items
+    let pen_price = 3;
+    let pen_quantity = 4;
+    let pad_price = 9;
+    let pad_quantity = 2;
+    let ink_price = 5;
+    let ink_quantity = 3;
+
+    // Calculate the total cost
+    let total_cost = pen_price * pen_quantity + pad_price * pad_quantity + ink_price * ink_quantity;
+
+    // Print the total cost
+    println!("Total cost: {}", total_cost);
+
+    // Find the item with the highest cost
+    let highest_cost_item = if pen_price * pen_quantity > pad_price * pad_quantity && pen_price * pen_quantity > ink_price * ink_quantity {
+        "Pen"
+    } else if pad_price * pad_quantity > pen_price * pen_quantity && pad_price * pad_quantity > ink_price * ink_quantity {
+        "Pad"
+    } else {
+        "Ink"
+    };
+
+    // Print the item with the highest cost
+    println!("Item with the highest cost: {}", highest_cost_item);
+}
+```

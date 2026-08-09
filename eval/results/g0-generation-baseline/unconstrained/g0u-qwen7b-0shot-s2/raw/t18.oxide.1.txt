@@ -1,0 +1,18 @@
+```rust
+enum Shape { Rectangle(Int, Int), Triangle(Int, Int, Int), Rectangle2(Int, Int) }
+
+fn perimeter(s: Shape) -> Int {
+    match s {
+        Shape::Rectangle(a, b) => 2 * (a + b),
+        Shape::Triangle(a, b, c) => a + b + c,
+        Shape::Rectangle2(a, b) => 2 * (a + b),
+    }
+}
+
+fn main() {
+    let shapes = vec![Shape::Rectangle(3, 4), Shape::Triangle(3, 4, 5), Shape::Rectangle2(2, 5)];
+    for shape in shapes {
+        print(perimeter(shape));
+    }
+}
+```

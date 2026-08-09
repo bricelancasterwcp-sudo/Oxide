@@ -1,0 +1,16 @@
+fn gcd(a: Int, b: Int) -> Int {
+    let mut tmp;
+    loop {
+        tmp = a % b;
+        if tmp == 0 {
+            break
+        }
+        (a, b) = (b, tmp);
+    }
+    b
+}
+
+fn main() {
+    let x = gcd(252, 105);
+    print(x)
+}

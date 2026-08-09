@@ -1,0 +1,14 @@
+struct Point { x: Int, y: Int }
+
+struct Rect { p1: Point, p2: Point }
+
+fn main() {
+    let r = Rect {
+        p1: Point { x: 0, y: 0 },
+        p2: Point { x: 7, y: 4 },
+    }
+    let area = r.p2.x * r.p2.y - r.p1.x * r.p1.y
+    print(area)
+    let perimeter = 2 * (r.p1.x + r.p2.x) + 2 * (r.p1.y + r.p2.y)
+    print(perimeter)
+}

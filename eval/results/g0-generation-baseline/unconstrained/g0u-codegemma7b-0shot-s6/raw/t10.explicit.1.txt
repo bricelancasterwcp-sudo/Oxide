@@ -1,0 +1,15 @@
+```rust
+fn main() {
+    let mut list = vec![4, 1, 7, 3, 9, 2];
+    let mut keep = vec![];
+    for num in &list {
+        if *num > 3 {
+            keep.push(*num);
+        }
+    }
+    for num in &keep {
+        println!("{}", num);
+    }
+    println!("{}", keep.len());
+}
+```

@@ -1,0 +1,7 @@
+fn main() {
+    for divisor in vec![5, 0, 4] {
+        let quotient = if divisor != 0 { 100 / divisor } else { 0 };
+        print_str(quotient.to_string());
+        print("\n")
+    }
+}

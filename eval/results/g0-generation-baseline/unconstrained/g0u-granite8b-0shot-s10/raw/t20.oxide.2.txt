@@ -1,0 +1,28 @@
+```
+struct Item { name: Str, price: Int, quantity: Int }
+
+fn main() {
+    let pen = Item { name: "pen", price: 3, quantity: 4 }
+    let pad = Item { name: "pad", price: 9, quantity: 2 }
+    let ink = Item { name: "ink", price: 5, quantity: 3 }
+    let all_items = vec(pen, pad, ink)
+    let cost = reduce(all_items, 0, |a, i| a + i.price * i.quantity)
+    let most_expensive = reduce(all_items, (-1, 0), |a, i| {
+        if i.price * i.quantity > a.1 {
+            (i, i.price * i.quantity)
+        } else {
+            a
+        }
+    })
+    print(cost)
+    print(most_expensive.0.name)
+}
+
+fn reduce<A, T, F: Fn(A, T) -> A>(items: Vec<T>, init: A, f: F) -> A {
+    let mut acc = init
+    for x in items {
+        acc = f(acc, x)
+    }
+    acc
+}
+```

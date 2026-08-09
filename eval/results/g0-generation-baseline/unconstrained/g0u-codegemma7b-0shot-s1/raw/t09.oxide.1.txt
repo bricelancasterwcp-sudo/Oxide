@@ -1,0 +1,84 @@
+```text
+fn main() {
+    let mut numbers = vec![1, 2, 3, 4, 5];
+    while let Some(x) = get(numbers, 0) {
+        print_str(&to_str(x));
+        numbers = pop(numbers)?
+    }
+}
+
+fn pop(v: Vec<Int>) -> Option<Vec<Int>> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(vec![get(v, 0)?, rest(v)...])
+    }
+}
+
+fn rest(v: Vec<Int>) -> Vec<Int> {
+    if len(v) == 0 {
+        panic!("empty vector")
+    } else {
+        vec![get(v, 1)?, ...rest(drop(v, 1))]
+    }
+}
+
+fn drop(v: Vec<Int>, n: Int) -> Vec<Int> {
+    if n == 0 {
+        v
+    } else {
+        let (first, rest) = split(v);
+        drop(rest, n - 1)
+    }
+}
+
+fn split(v: Vec<Int>) -> (Int, Vec<Int>) {
+    if len(v) == 0 {
+        panic!("empty vector")
+    } else {
+        (get(v, 0)?, rest(v))
+    }
+}
+
+fn to_str(i: Int) -> Str {
+    if i < 0 {
+        panic!("negative integer")
+    } else {
+        if i == 0 {
+            "0"
+        } else {
+            let mut digits: Vec<Str> = vec![];
+            let mut n = i;
+            while n > 0 {
+                digits.push(to_char((n % 10) as Char));
+                n = trunc(n / 10);
+            }
+            join(reverse(digits))
+        }
+    }
+}
+
+fn join(v: Vec<Str>) -> Str {
+    let mut s = "";
+    for x in v {
+        s = concat(s, x)
+    }
+    s
+}
+
+fn reverse(v: Vec<Str>) -> Vec<Str> {
+    let mut r = vec![];
+    for x in v {
+        r.insert(0, x)
+    }
+    r
+}
+
+fn to_char(c: Char) -> Str {
+    if c < '0' || c > '9' {
+        panic!("not a digit")
+    } else {
+        c.to_string()
+    }
+}
+```

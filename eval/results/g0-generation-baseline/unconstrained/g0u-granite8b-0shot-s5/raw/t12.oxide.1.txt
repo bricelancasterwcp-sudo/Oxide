@@ -1,0 +1,9 @@
+```text
+fn rev(s: Str) -> Str {
+    let mut chars = vec()
+    for i in range(str_len(s), 0, -1) {
+        chars = push(chars, get(s, i-1)?)
+    }
+    concat(chars, "")
+}
+```

@@ -1,0 +1,6 @@
+```rust
+fn main() {
+    let sum = (0..=9).map(|x| x * x).sum::<u32>();
+    println!("{}", sum);
+}
+```

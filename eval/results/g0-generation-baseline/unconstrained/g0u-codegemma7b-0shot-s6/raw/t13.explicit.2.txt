@@ -1,0 +1,19 @@
+fn is_palindrome(s: &str) -> bool {
+    let mut front = 0;
+    let mut back = s.len() - 1;
+    while front < back {
+        if s.chars().nth(front).unwrap() != s.chars().nth(back).unwrap() {
+            return false;
+        }
+        front += 1;
+        back -= 1;
+    }
+    true
+}
+
+fn main() {
+    let texts = ["level", "stereo", "rotor"];
+    for text in texts {
+        println!("{}", is_palindrome(text));
+    }
+}

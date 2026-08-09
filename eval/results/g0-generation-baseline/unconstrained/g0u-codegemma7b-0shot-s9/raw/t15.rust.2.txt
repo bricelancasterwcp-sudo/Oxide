@@ -1,0 +1,15 @@
+fn main() {
+    let mut sum = 0;
+    let mut count = 0;
+
+    for line in ["12", "x", "30"] {
+        if let Ok(num) = line.parse::<i32>() {
+            sum += num;
+            count += 1;
+        } else {
+            count += 1;
+        }
+    }
+
+    println!("Sum: {}, Count: {}", sum, count);
+}

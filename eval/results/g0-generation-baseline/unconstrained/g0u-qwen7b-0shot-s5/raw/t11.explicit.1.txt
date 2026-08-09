@@ -1,0 +1,26 @@
+```rust
+fn sort(v: &Vec<Int>) -> Vec<Int> {
+    let mut sorted = v.clone()
+    let n = len(&sorted)
+    for i in 0..n {
+        for j in 0..n - i - 1 {
+            if sorted[j] > sorted[j + 1] {
+                let temp = sorted[j]
+                sorted[j] = sorted[j + 1]
+                sorted[j + 1] = temp
+            }
+        }
+    }
+    sorted
+}
+
+fn main() {
+    let nums = vec(5, 3, 8, 1, 9, 2)
+    let sorted_nums = sort(&nums)
+    for num in &sorted_nums {
+        print_str(num)
+    }
+    drop nums
+    drop sorted_nums
+}
+```

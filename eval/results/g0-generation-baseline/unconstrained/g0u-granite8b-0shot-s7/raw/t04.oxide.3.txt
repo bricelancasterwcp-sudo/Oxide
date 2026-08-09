@@ -1,0 +1,19 @@
+let primes = vec(2)
+for i in range(3, 100) {
+    if is_prime(i) {
+        primes = push(primes, i)
+    }
+}
+print(len(primes))
+
+fn is_prime(x: Int) -> Bool {
+    if x <= 1 {
+        return false
+    }
+    for y in range(2, x) {
+        if x % y == 0 {
+            return false
+        }
+    }
+    true
+}

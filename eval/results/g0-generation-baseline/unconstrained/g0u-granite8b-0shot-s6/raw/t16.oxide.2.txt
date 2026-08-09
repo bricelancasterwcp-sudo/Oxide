@@ -1,0 +1,13 @@
+fn main() {
+    let first = 100 / 5;
+    let second = 100 / 0;
+    let third = 100 / 4;
+
+    print(first);
+    if second == None {
+        print_str("undefined");
+    } else {
+        print(second.unwrap());
+    }
+    print(third);
+}

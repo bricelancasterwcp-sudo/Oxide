@@ -1,0 +1,24 @@
+```rust
+struct List { values: Vec<Int> }
+
+fn filter_greater_than_three(v: Vec<Int>) -> Vec<Int> {
+    let mut result = Vec::new();
+    for x in v {
+        if x > 3 {
+            result.push(x);
+        }
+    }
+    result
+}
+
+fn main() {
+    let l = List { values: vec![4, 1, 7, 3, 9, 2] };
+    let filtered = filter_greater_than_three(l.values);
+    for x in filtered {
+        print(x);
+        print_str("\n");
+    }
+    print(len(filtered));
+    print_str("\n");
+}
+```

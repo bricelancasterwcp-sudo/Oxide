@@ -1,0 +1,23 @@
+fn main() {
+    let rect_3_4 = Shape::Rectangle(3, 4);
+    let tri_3_4_5 = Shape::Triangle(3, 4, 5);
+    let rect_2_5 = Shape::Rectangle(2, 5);
+
+    println!("{}", rect_3_4.perimeter());
+    println!("{}", tri_3_4_5.perimeter());
+    println!("{}", rect_2_5.perimeter());
+}
+
+enum Shape {
+    Rectangle(u32, u32),
+    Triangle(u32, u32, u32),
+}
+
+impl Shape {
+    fn perimeter(&self) -> u32 {
+        match self {
+            Shape::Rectangle(w, h) => 2 * (w + h),
+            Shape::Triangle(a, b, c) => a + b + c,
+        }
+    }
+}

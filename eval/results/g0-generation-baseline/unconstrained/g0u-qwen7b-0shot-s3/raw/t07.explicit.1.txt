@@ -1,0 +1,16 @@
+```rust
+fn main() {
+    let mut multiples = Vec::new();
+    let mut sum = 0;
+    let mut i = 1;
+    while multiples.len() < 8 {
+        if i % 3 == 0 {
+            multiples = push(multiples, i);
+            sum = sum + i;
+        }
+        i = i + 1;
+    }
+    print(sum);
+    drop multiples;
+}
+```

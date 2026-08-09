@@ -1,0 +1,6 @@
+fn main() {
+    let text = str_len("mississippi");
+    let distinct = chars("mississippi");
+    print(text)
+    print(distinct)
+}

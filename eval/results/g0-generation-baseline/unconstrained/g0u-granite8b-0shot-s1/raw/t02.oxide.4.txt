@@ -1,0 +1,23 @@
+```text
+fn transform(mut x: Int) -> Int {
+    while x > 1 {
+        if x % 2 == 0 {
+            x = x / 2;
+        } else {
+            x = (x * 3) + 1;
+        }
+    }
+    x
+}
+
+fn main() {
+    let mut n = 27
+    while n > 1 {
+        print(n)
+        n = transform(n)
+    }
+    print_str("done!")
+}
+```
+
+This program correctly implements the Collatz Conjecture, which states that for any positive integer `n`, the sequence will always reach 1.

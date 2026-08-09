@@ -1,0 +1,32 @@
+use oxide::print;
+
+fn main() {
+    let pen = (3, 4);
+    let pad = (9, 2);
+    let ink = (5, 3);
+
+    let cost_pen = pen.0 * pen.1;
+    let cost_pad = pad.0 * pad.1;
+    let cost_ink = ink.0 * ink.1;
+
+    let total_cost = cost_pen + cost_pad + cost_ink;
+    print(total_cost);
+
+    let max_cost = max(cost_pen, max(cost_pad, cost_ink));
+
+    if max_cost == cost_pen {
+        print("pen");
+    } else if max_cost == cost_pad {
+        print("pad");
+    } else {
+        print("ink");
+    }
+}
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}

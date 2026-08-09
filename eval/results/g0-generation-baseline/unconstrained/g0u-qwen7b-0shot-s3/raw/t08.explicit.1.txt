@@ -1,0 +1,22 @@
+```rust
+fn count_and_find_max(v: &Vec<Int>) -> (Int, Int) {
+    let mut count = 0;
+    let mut max = -999999;
+    for x in &v {
+        if *x > 0 {
+            count += 1;
+        }
+        if *x > max {
+            max = *x;
+        }
+    }
+    (count, max)
+}
+
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7);
+    let (positive_count, max_value) = count_and_find_max(&nums);
+    print(positive_count);
+    print(max_value);
+}
+```

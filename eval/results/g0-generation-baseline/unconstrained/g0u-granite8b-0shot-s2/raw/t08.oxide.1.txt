@@ -1,0 +1,6 @@
+```text
+print(len(match [3, 8, -2, 12, 7] {
+    [_, 8, _, 12, 7] => 2,
+    [a, b, c, d, e] => print_str("oh no!"),
+}))
+```

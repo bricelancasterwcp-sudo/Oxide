@@ -1,0 +1,19 @@
+```rust
+fn perimeter_of_rectangle(w: Int, h: Int) -> Int {
+    2 * (w + h)
+}
+
+fn perimeter_of_triangle(a: Int, b: Int, c: Int) -> Int {
+    a + b + c
+}
+
+fn main() {
+    let rect1 = (3, 4);
+    let triangle = (3, 4, 5);
+    let rect2 = (2, 5);
+
+    print(perimeter_of_rectangle(rect1.0, rect1.1));
+    print(perimeter_of_triangle(triangle.0, triangle.1, triangle.2));
+    print(perimeter_of_rectangle(rect2.0, rect2.1));
+}
+```

@@ -1,0 +1,11 @@
+```rust
+fn main() {
+    let (mut a, mut b) = (1, 1);
+    for _ in 0..18 {
+        let t = a + b;
+        a = b;
+        b = t;
+    }
+    print(b);
+}
+```

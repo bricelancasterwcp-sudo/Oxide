@@ -1,0 +1,25 @@
+# Perfect-Number Generator
+
+This program prints out all the perfect numbers less than 1000. Perfect numbers are numbers equal to the sum of their positive divisors, excluding the number itself. The program iterates through all numbers from 2 to 999 and checks if each number is perfect. If it is, the program prints out the number.
+
+```rust
+fn main() {
+    for i in 2..1000 {
+        if is_perfect(i) {
+            println!("{}", i);
+        }
+    }
+}
+
+fn is_perfect(n: Int) -> Bool {
+    let mut sum = 0;
+    let mut i = 1;
+    while i < n {
+        if n % i == 0 {
+            sum = sum + i;
+        }
+        i = i + 1;
+    }
+    sum == n
+}
+```

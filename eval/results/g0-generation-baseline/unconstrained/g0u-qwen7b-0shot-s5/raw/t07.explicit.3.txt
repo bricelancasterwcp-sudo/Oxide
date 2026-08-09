@@ -1,0 +1,27 @@
+fn main() {
+    let mut multiples = vec![];
+    let mut n = 3;
+    while multiples.len() < 8 {
+        multiples = push(multiples, n);
+        n = n + 3;
+    }
+    let sum = sum_big(&multiples, 0);
+    print(sum);
+    drop multiples;
+}
+
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0;
+    for x in &v {
+        if x > limit {
+            total = total + x;
+        }
+    }
+    total
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut new_v = v;
+    new_v.push(x);
+    new_v
+}

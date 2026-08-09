@@ -1,0 +1,27 @@
+```rust
+fn fib(n: Int) -> Int {
+    let a = 1;
+    let b = 1;
+    if n == 0 {
+        a
+    } else if n == 1 {
+        b
+    } else {
+        let mut i = 2;
+        let mut current = 0;
+        while i <= n {
+            current = a + b;
+            a = b;
+            b = current;
+            i = i + 1;
+        }
+        current
+    }
+}
+
+fn main() {
+    let term = fib(20);
+    print(term);
+    drop term;
+}
+```

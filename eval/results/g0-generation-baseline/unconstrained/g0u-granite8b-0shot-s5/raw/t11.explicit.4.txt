@@ -1,0 +1,26 @@
+fn print(x: &str) {
+    print_str(x);
+}
+
+fn main() {
+    let nums = push(push(vec(), 5), 40);
+    let bigger = extend(clone(&nums), 70);
+    print(sum_big(&nums, 10));
+    drop nums;
+    print(sum_big(&bigger, 10));
+    drop bigger;
+}
+
+fn sum_big(v: &Vec<i32>, limit: i32) -> i32 {
+    let total = 0;
+    for x in v {
+        if *x > limit {
+            total = total + x;
+        }
+    }
+    total
+}
+
+fn extend(mut v: Vec<i32>, x: i32) -> Vec<i32> {
+    push(v, x)
+}

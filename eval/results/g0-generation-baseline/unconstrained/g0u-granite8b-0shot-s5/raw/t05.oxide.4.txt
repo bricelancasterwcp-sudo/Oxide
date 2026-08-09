@@ -1,0 +1,10 @@
+fn seq(n: Int) -> Int {
+    match n {
+        0 | 1 => n
+        _ => seq(n - 1) + seq(n - 2)
+    }
+}
+
+fn main() {
+    print(seq(20))
+}

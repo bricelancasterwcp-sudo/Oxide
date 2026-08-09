@@ -1,0 +1,12 @@
+```
+fn gcd(x: Int, y: Int) -> Int {
+    if x == 0 {
+        return y
+    }
+    gcd(y % x, x)
+}
+
+fn main() {
+    print(gcd(252, 105))
+}
+```

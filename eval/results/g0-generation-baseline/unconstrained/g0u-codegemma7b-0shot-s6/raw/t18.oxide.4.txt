@@ -1,0 +1,12 @@
+fn area_rect(w: Int, h: Int) -> Int { w * h }
+fn area_tri(a: Int, b: Int, c: Int) -> Int { a * b / 2 }
+fn perimeter(w: Int, h: Int) -> Int { 2 * (w + h) }
+
+fn main() {
+    let r1 = (3, 4);
+    let t1 = (3, 4, 5);
+    let r2 = (2, 5);
+    print(perimeter(r1.0, r1.1));
+    print(perimeter(t1.0, t1.1));
+    print(perimeter(r2.0, r2.1));
+}

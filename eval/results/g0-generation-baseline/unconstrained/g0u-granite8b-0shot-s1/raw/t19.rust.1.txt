@@ -1,0 +1,6 @@
+fn main() {
+    let w = 7;
+    let h = 4;
+    println!("Area: {}", w * h);
+    println!("Perimeter: {}", 2 * (w + h));
+}

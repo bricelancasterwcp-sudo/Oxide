@@ -1,0 +1,9 @@
+fn print_reversed(s: Str) {
+    for c in chars(s).iter().rev() {
+        print(c)
+    }
+}
+
+fn main() {
+    print_reversed("stack")
+}

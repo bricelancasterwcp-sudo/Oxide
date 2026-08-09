@@ -1,0 +1,13 @@
+fn main() {
+    let args = vec!["12", "x", "30"];
+    let mut total = 0;
+    let mut failed = 0;
+    for arg in args {
+        match parse_int(arg) {
+            Some(n) => total += n,
+            None => failed += 1,
+        }
+    }
+    print(total);
+    print(failed);
+}

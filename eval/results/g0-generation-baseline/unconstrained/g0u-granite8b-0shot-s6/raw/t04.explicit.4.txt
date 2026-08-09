@@ -1,0 +1,24 @@
+```
+fn main() {
+    let primes = vec(2);
+    let mut i = 3;
+    let mut count = 0;
+    while i < 100 {
+        if is_prime(&primes, i) {
+            primes = push(clone(&primes), i);
+            count = count + 1;
+        }
+        i = i + 1;
+    }
+    print(count);
+}
+
+fn is_prime(primes: &Vec<Int>, n: Int) -> Bool {
+    for p in &primes {
+        if n % p == 0 {
+            return false;
+        }
+    }
+    true
+}
+```

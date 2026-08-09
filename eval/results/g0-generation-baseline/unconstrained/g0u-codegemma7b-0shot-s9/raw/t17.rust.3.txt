@@ -1,0 +1,10 @@
+fn main() {
+    let list = vec![10, 20, 30];
+
+    for i in 0..=5 {
+        match list.get(i) {
+            Some(element) => println!("List element at position {} is {}", i, element),
+            None => println!("List element at position {} does not exist", i),
+        }
+    }
+}

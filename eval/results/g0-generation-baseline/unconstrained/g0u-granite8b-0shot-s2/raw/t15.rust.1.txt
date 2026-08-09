@@ -1,0 +1,18 @@
+```rust
+use std::str::FromStr;
+
+fn main() {
+    let mut sum = 0;
+    let mut fails = 0;
+
+    for s in ["12", "x", "30"] {
+        if let Ok(n) = i32::from_str(s) {
+            sum += n;
+        } else {
+            fails += 1;
+        }
+    }
+
+    println!("sum: {}, fails: {}", sum, fails);
+}
+```

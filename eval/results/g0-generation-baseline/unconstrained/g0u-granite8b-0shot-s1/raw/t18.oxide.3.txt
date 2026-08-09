@@ -1,0 +1,23 @@
+```rust
+struct Rectangle { width: i32, height: i32 }
+
+struct Triangle { side1: i32, side2: i32, side3: i32 }
+
+enum Shape { Rectangle(Rectangle), Triangle(Triangle) }
+
+fn perimeter(rectangle: Rectangle) -> i32 {
+    2 * (rectangle.width + rectangle.height)
+}
+
+fn perimeter(triangle: Triangle) -> i32 {
+    triangle.side1 + triangle.side2 + triangle.side3
+}
+
+fn main() {
+    let sequence = Shape::Rectangle(Rectangle { width: 3, height: 4 });
+    print(perimeter(match sequence {
+        Shape::Rectangle(r) => r,
+        _ => panic!("expected a rectangle"),
+    }));
+}
+```

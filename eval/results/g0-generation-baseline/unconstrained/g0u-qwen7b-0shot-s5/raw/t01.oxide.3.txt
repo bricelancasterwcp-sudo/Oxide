@@ -1,0 +1,7 @@
+fn main() {
+    let mut sum = 0;
+    for i in range(0, 10) {
+        sum += i * i;
+    }
+    print(sum);
+}

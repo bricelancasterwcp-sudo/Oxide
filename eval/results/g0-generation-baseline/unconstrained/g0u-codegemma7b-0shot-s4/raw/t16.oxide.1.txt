@@ -1,0 +1,8 @@
+```
+fn main() {
+    let a = 100;
+    print(trunc(a / 5));
+    print(a / 0);
+    print(trunc(a / 4));
+}
+```

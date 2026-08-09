@@ -1,0 +1,5 @@
+let x = parse_int("12")?;
+let y = parse_int("x")?;
+let z = parse_int("30")?;
+print(x + y + z);
+print(len(range(1, 10)));

@@ -1,0 +1,13 @@
+```
+fn reverse(v: Vec<Int>) -> Vec<Int> {
+    let mut acc = vec()
+    for x in v {
+        acc = push(acc, x)
+    }
+    acc
+}
+
+fn main() {
+    print(reverse(range(1, 6)))
+}
+```

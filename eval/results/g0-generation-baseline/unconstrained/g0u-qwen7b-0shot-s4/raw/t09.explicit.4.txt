@@ -1,0 +1,10 @@
+```rust
+fn main() {
+    let v = vec(1, 2, 3, 4, 5);
+    let mut iter = v.iter().rev();
+    while let Some(x) = iter.next() {
+        print_str(x);
+    }
+    drop v;
+}
+```

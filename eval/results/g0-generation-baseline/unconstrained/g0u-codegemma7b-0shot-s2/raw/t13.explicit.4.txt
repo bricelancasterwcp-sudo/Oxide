@@ -1,0 +1,21 @@
+fn palindrome(word: &str) -> bool {
+    let mut front = 0;
+    let mut back = word.len() - 1;
+    while front < back {
+        if word.chars().nth(front) != word.chars().nth(back) {
+            return false;
+        }
+        front += 1;
+        back -= 1;
+    }
+    true
+}
+
+fn main() {
+    let level = palindrome("level");
+    let stereo = palindrome("stereo");
+    let rotor = palindrome("rotor");
+    println!("{}", level);
+    println!("{}", stereo);
+    println!("{}", rotor);
+}

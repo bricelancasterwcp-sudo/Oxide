@@ -1,0 +1,27 @@
+fn keep_greater_than_3(list: Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in list {
+        if x > 3 {
+            result = push(result, x)
+        }
+    }
+    result
+}
+
+fn print_values(values: Vec<Int>) {
+    for x in values {
+        print(x)
+        print_str("\n")
+    }
+}
+
+fn print_count(values: Vec<Int>) {
+    print(len(values))
+}
+
+fn main() {
+    let list = push(push(push(push(vec(), 4), 1), 7), 3)
+    let kept_values = keep_greater_than_3(list)
+    print_values(kept_values)
+    print_count(kept_values)
+}

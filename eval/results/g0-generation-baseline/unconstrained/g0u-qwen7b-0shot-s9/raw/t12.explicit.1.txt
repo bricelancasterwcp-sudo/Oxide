@@ -1,0 +1,15 @@
+```rust
+fn reverse(s: &Str) -> Str {
+    let mut chars = s.chars().collect::<Vec<Str>>();
+    chars.reverse();
+    chars.concat()
+}
+
+fn main() {
+    let text = "stack";
+    let reversed = reverse(&text);
+    print_str(reversed);
+    drop text;
+    drop reversed;
+}
+```

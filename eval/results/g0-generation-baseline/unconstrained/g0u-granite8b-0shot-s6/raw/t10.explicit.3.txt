@@ -1,0 +1,21 @@
+```
+fn filter(list: &[Int], threshold: Int) -> Vec<Int> {
+    let mut result = vec();
+    for i in list {
+        if *i > threshold {
+            push(result, *i);
+        }
+    }
+    result
+}
+
+fn main() {
+    let list = [4, 1, 7, 3, 9, 2];
+    let filtered = filter(&list, 3);
+    for i in filtered {
+        print(i);
+        print("\n");
+    }
+    print(len(&filtered));
+}
+```

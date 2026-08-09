@@ -1,0 +1,13 @@
+fn main() {
+    let mut v = vec![4, 1, 7, 3, 9, 2];
+    let mut i = 0;
+    while i < v.len() {
+        if v[i] <= 3 {
+            v.remove(i);
+        } else {
+            print!("{}\n", v[i]);
+            i += 1;
+        }
+    }
+    print!("{} elements kept\n", v.len());
+}

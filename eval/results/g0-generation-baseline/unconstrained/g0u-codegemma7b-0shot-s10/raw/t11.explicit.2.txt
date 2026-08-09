@@ -1,0 +1,9 @@
+fn main() {
+    let mut numbers = vec![5, 3, 8, 1, 9, 2];
+    numbers.sort();
+    for num in &numbers {
+        print_str(num)
+        print_str("\n")
+    }
+    drop numbers
+}

@@ -1,0 +1,14 @@
+fn main() {
+    let total = reduce(range(0, 10), 0, |acc, n| {
+        acc + n * n
+    })
+    print(total)
+}
+
+fn reduce<T>(v: Vec<T>, init: T, f: fn(T, T) -> T) -> T {
+    let mut acc = init
+    for x in v {
+        acc = f(acc, x)
+    }
+    acc
+}

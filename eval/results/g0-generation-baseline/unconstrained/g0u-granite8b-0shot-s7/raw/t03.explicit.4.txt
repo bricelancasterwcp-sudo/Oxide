@@ -1,0 +1,14 @@
+fn main() {
+    let a = 60;
+    let b = 48;
+    print(gcd(a, b));
+}
+
+fn gcd(mut x: Int, mut y: Int) -> Int {
+    while y != 0 {
+        let temp = y;
+        y = x % y;
+        x = temp;
+    }
+    x
+}

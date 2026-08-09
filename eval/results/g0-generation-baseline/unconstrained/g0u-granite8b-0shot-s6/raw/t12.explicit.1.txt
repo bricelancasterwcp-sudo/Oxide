@@ -1,0 +1,5 @@
+let stack = "stack".chars().collect::<Vec<char>>();
+stack.reverse();
+let text = stack.iter().collect::<String>();
+print_str(&text);
+```

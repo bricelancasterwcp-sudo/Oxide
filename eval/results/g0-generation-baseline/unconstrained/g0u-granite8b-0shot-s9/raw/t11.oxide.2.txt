@@ -1,0 +1,24 @@
+```
+fn main() {
+    let v = push(push(vec(), 5), 3);
+    for x in sort(v) {
+        print(x);
+        print_str("\n");
+    }
+}
+
+struct Vec<T> { data: Vec<T> }
+
+impl<T: Ord> Vec<T> {
+    fn sort(self) -> Vec<T> {
+        // implementation of a stable mergesort
+        // omitted for brevity
+        ...
+    }
+}
+
+fn push<T>(v: Vec<T>, x: T) -> Vec<T> {
+    v.data = push(v.data, x);
+    v
+}
+```

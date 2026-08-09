@@ -1,0 +1,37 @@
+```rust
+fn parse_int(s: Str) -> Option<Int> {
+    parse_int(s)
+}
+
+fn main() {
+    let s1 = "12";
+    let s2 = "x";
+    let s3 = "30";
+
+    let n1 = parse_int(s1);
+    let n2 = parse_int(s2);
+    let n3 = parse_int(s3);
+
+    let mut sum = 0;
+    let mut count = 0;
+
+    match n1 {
+        Some(n) => sum += n,
+        None => count += 1,
+    }
+
+    match n2 {
+        Some(n) => sum += n,
+        None => count += 1,
+    }
+
+    match n3 {
+        Some(n) => sum += n,
+        None => count += 1,
+    }
+
+    print(sum);
+    print_str(" ");
+    print(count);
+}
+```

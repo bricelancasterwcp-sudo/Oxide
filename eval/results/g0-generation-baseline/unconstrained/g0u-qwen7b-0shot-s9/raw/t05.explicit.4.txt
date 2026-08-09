@@ -1,0 +1,20 @@
+fn fib(n: Int) -> Int {
+    if n == 0 {
+        1
+    } else if n == 1 {
+        1
+    } else {
+        let a = 1;
+        let mut b = 1;
+        for _ in 2..=n {
+            let temp = b;
+            b = a + b;
+            a = temp;
+        }
+        b
+    }
+}
+
+fn main() {
+    print(fib(19));
+}

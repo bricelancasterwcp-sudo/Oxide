@@ -1,0 +1,28 @@
+```rust
+fn main() {
+    let a = 100;
+    let b = 5;
+    let c = 0;
+    let d = 4;
+
+    let q1 = a / b;
+    print(q1);
+    drop a;
+    drop b;
+
+    if c != 0 {
+        let q2 = a / c;
+        print(q2);
+        drop a;
+        drop c;
+    } else {
+        print("undefined");
+        drop a;
+    }
+
+    let q3 = a / d;
+    print(q3);
+    drop a;
+    drop d;
+}
+```

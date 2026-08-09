@@ -1,0 +1,22 @@
+```oxide
+struct List { values: Vec<Int> }
+
+fn filter(v: Vec<Int>, threshold: Int) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if x > threshold {
+            result = push(result, x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let list = List { values: push(push(push(push(vec(), 4), 1), 7), 3), 9), 2) }
+    let filtered = filter(list.values, 3)
+    for x in filtered {
+        print(x)
+    }
+    print(len(filtered))
+}
+```

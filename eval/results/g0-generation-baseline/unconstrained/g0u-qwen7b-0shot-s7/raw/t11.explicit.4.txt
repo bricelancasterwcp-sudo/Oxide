@@ -1,0 +1,23 @@
+```rust
+fn sort_ascending(v: Vec<Int>) -> Vec<Int> {
+    let mut sorted = v;
+    let len = len(&sorted);
+    for i in 0..len {
+        for j in 0..len - i - 1 {
+            if sorted[j] > sorted[j + 1] {
+                let temp = sorted[j];
+                sorted[j] = sorted[j + 1];
+                sorted[j + 1] = temp;
+            }
+        }
+    }
+    sorted
+}
+
+fn main() {
+    let nums = sort_ascending(vec(5, 3, 8, 1, 9, 2));
+    for x in &nums {
+        print_str(&int_to_str(x))
+    }
+}
+```

@@ -1,0 +1,28 @@
+fn area_rect(a: Int, b: Int) -> Int {
+    a * b
+}
+
+fn area_tri(a: Int, b: Int, c: Int) -> Int {
+    let s = (a + b + c) / 2
+    (s * (s - a) * (s - b) * (s - c)).trunc(0)
+}
+
+fn main() {
+    let shapes = vec![
+        Shape::Rectangle(3, 4),
+        Shape::Triangle(3, 4, 5),
+        Shape::Rectangle(2, 5),
+    ];
+    for s in shapes {
+        match s {
+            Shape::Rectangle(a, b) => print(area_rect(a, b)),
+            Shape::Triangle(a, b, c) => print(area_tri(a, b, c)),
+        }
+    }
+}
+
+enum Shape {
+    Rectangle(Int, Int),
+    Triangle(Int, Int, Int),
+}
+```

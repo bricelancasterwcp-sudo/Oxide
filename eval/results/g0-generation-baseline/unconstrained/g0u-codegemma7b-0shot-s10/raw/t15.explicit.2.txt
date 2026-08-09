@@ -1,0 +1,13 @@
+fn main() {
+    let nums = vec!["12", "x", "30"];
+    let mut total = 0;
+    let mut count = 0;
+    for num in &nums {
+        if let Ok(n) = parse_int(num) {
+            total = total + n;
+            count = count + 1;
+        }
+    }
+    print(total);
+    print(count);
+}

@@ -1,0 +1,21 @@
+```rust
+fn filter_and_count(v: Vec<Int>) -> (Vec<Int>, Int) {
+    let mut result = Vec::new();
+    for x in v {
+        if x > 3 {
+            result.push(x);
+        }
+    }
+    (result, result.len())
+}
+
+fn main() {
+    let v = vec!(4, 1, 7, 3, 9, 2);
+    let (filtered, count) = filter_and_count(v);
+    for x in filtered {
+        print(x);
+        print_str("\n");
+    }
+    print(count);
+}
+```

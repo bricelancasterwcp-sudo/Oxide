@@ -1,0 +1,33 @@
+fn count_s_and_distinct(s: Str) -> (Int, Int) {
+    let mut count_s = 0
+    let mut distinct_chars = Vec<Str>()
+    
+    for c in chars(s) {
+        if c == "s" {
+            count_s += 1
+        }
+        if !contains(distinct_chars, c) {
+            push(distinct_chars, c)
+        }
+    }
+    
+    (count_s, len(distinct_chars))
+}
+
+fn contains(vec: Vec<Str>, item: Str) -> Bool {
+    for x in vec {
+        if x == item {
+            return True
+        }
+    }
+    False
+}
+
+fn main() {
+    let text = "mississippi"
+    let (s_count, distinct_count) = count_s_and_distinct(text.clone())
+    print_str("Number of 's': ")
+    print(s_count)
+    print_str("\nNumber of distinct characters: ")
+    print(distinct_count)
+}

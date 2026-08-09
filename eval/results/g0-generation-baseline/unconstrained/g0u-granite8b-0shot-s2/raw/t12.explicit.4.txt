@@ -1,0 +1,8 @@
+fn stack(text: Str) -> Str {
+    let mut reversed = vec()
+    for c in chars(&text) {
+        reversed = push(reversed, c)
+    }
+    drop(reversed);
+    reversed
+}

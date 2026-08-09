@@ -1,0 +1,29 @@
+```
+struct Pen { price: Int, quantity: Int }
+struct Pad { price: Int, quantity: Int }
+struct Ink { price: Int, quantity: Int }
+
+fn cost(item: &Item) -> Int {
+    item.price * item.quantity
+}
+
+fn highest_cost(items: Vec<Item>) -> (Int, Str) {
+    let mut highest = (0, "")
+    for item in items {
+        let c = cost(&item)
+        if c > highest.0 {
+            highest = (c, item.name)
+        }
+    }
+    highest
+}
+
+fn main() {
+    let pen = Pen { price: 3, quantity: 4 }
+    let pad = Pad { price: 9, quantity: 2 }
+    let ink = Ink { price: 5, quantity: 3 }
+    let items = push(push(vec(), pen), pad)
+    print(highest_cost(items).0)
+    print_str(highest_cost(items).1)
+}
+```

@@ -1,0 +1,17 @@
+fn main() {
+    let list = push(push(vec(), 3), 6);
+    let sum = sum_mults(list, 3);
+    print(sum);
+    drop list;
+    drop sum;
+}
+
+fn sum_mults(v: &Vec<Int>, mult: Int) -> Int {
+    let total = 0
+    for x in &v {
+        if x % mult == 0 {
+            total = total + x
+        }
+    }
+    total
+}

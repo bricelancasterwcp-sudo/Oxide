@@ -1,0 +1,15 @@
+fn main() {
+    for i in 2..1000 {
+        if perfect_number(i) {
+            println!("{}", i);
+        }
+    }
+}
+
+fn perfect_number(n: u32) -> bool {
+    (2..=(n as f32).sqrt() as u32)
+        .filter(|&x| n % x == 0)
+        .map(|x| x * (n / x))
+        .sum::<u32>()
+        == n * 2
+}

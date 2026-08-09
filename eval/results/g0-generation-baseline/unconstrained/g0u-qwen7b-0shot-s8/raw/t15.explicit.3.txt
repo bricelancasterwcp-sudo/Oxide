@@ -1,0 +1,27 @@
+```rust
+fn parse_int(s: Str) -> Option<Int> {
+    s.to_int()
+}
+
+fn print(x: Int) {
+    print_str(&x.to_string())
+}
+
+fn main() {
+    let nums = vec!("12", "x", "30");
+    let mut sum = 0;
+    let mut count = 0;
+    for s in &nums {
+        match parse_int(s) {
+            Some(num) => {
+                sum = sum + num;
+            },
+            None => {
+                count = count + 1;
+            }
+        }
+    }
+    print(sum);
+    print(count);
+}
+```

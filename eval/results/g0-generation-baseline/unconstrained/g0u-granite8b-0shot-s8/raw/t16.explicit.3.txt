@@ -1,0 +1,12 @@
+fn div(x: Int, y: Int) -> Option<Int> {
+    if y == 0 {
+        return None;
+    }
+    return Some(x / y);
+}
+
+fn main() {
+    print(div(100, 5));
+    print(div(100, 0));
+    print(div(100, 4));
+}

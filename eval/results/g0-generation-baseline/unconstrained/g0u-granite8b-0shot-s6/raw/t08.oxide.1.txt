@@ -1,0 +1,28 @@
+struct List { head: Option<Int>, tail: Vec<Int> }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 8), -2)
+    let mut v = push(v, 12)
+    v = push(v, 7)
+    let pos = len(filter(v, |x| x > 0))
+    let largest = foldl(filter(v, |x| x > 0), |acc, x| if x > acc { x } else { acc })
+    print(pos); print(largest)
+}
+
+fn filter(v: Vec<Int>, f: fn(Int) -> Bool) -> Vec<Int> {
+    let mut out = vec()
+    for x in v {
+        if f(x) {
+            out = push(out, x)
+        }
+    }
+    out
+}
+
+fn foldl(v: Vec<Int>, f: fn(Int, Int) -> Int) -> Int {
+    let mut acc = 0
+    for x in v {
+        acc = f(acc, x)
+    }
+    acc
+}

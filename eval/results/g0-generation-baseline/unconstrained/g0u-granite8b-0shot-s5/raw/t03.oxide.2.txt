@@ -1,0 +1,18 @@
+```
+fn main() {
+    print(gcd(252, 105))
+}
+
+// The Euclidean algorithm.
+fn gcd(mut a: Int, mut b: Int) -> Int {
+    while b != 0 {
+        if a < b {
+            let t = a
+            a = b
+            b = t
+        }
+        a = a - b
+    }
+    a
+}
+```

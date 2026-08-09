@@ -1,0 +1,39 @@
+```rust
+fn main() {
+    let text = "mississippi";
+    let count = count_char(text, 's');
+    let distinct_count = distinct_chars(text);
+    print(count);
+    print_str(" ");
+    print(distinct_count);
+}
+
+fn count_char(text: Str, c: Char) -> Int {
+    let mut count = 0;
+    for ch in chars(text) {
+        if ch == c {
+            count += 1;
+        }
+    }
+    count
+}
+
+fn distinct_chars(text: Str) -> Int {
+    let mut chars_seen = vec();
+    for ch in chars(text) {
+        if !contains_char(chars_seen, ch) {
+            chars_seen = push(chars_seen, ch);
+        }
+    }
+    len(chars_seen)
+}
+
+fn contains_char(chars: Vec<Char>, c: Char) -> Bool {
+    for ch in chars {
+        if ch == c {
+            return true;
+        }
+    }
+    false
+}
+```

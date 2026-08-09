@@ -1,0 +1,27 @@
+```text
+fn main() {
+    let s = "mississippi";
+    let mut count = 0;
+    let mut distinct = 0;
+    for ch in &s {
+        if ch == 's' {
+            count = count + 1;
+        }
+    }
+    print(count);
+    for ch in &s {
+        let mut found = false;
+        for prev in &s {
+            if ch == prev {
+                found = true;
+            }
+        }
+        if !found {
+            distinct = distinct + 1;
+        }
+    }
+    print(distinct);
+}
+```
+
+The `print` function consumes the argument. The `count` variable is only read, so it is declared as a read-only reference with the `&` symbol. The `distinct` variable is reassigned multiple times, so it is declared as a variable with no `&` symbol.

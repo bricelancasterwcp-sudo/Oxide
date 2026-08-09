@@ -1,0 +1,19 @@
+```
+fn main() {
+  let mut a = 1;
+  let mut b = 1;
+  let mut c = 0;
+  let mut count = 0;
+  while count < 20 {
+    count = count + 1;
+    c = a + b;
+    a = b;
+    b = c;
+    drop count;
+  }
+  print(c);
+  drop c;
+  drop b;
+  drop a;
+}
+```

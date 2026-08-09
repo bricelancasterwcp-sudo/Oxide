@@ -1,0 +1,31 @@
+```text
+struct Text { bytes: Vec<u8> }
+
+fn count_letter(s: Str, letter: u8) -> Int {
+    let mut count = 0
+    for ch in chars(s) {
+        if ch as u8 == letter {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_chars(s: Str) -> Int {
+    let mut distinct = 0
+    for ch in chars(s) {
+        let c = ch as u8
+        if s.bytes[c] == 0 {
+            distinct = distinct + 1
+            s.bytes[c] = 1
+        }
+    }
+    distinct
+}
+
+fn main() {
+    let s = Text { bytes: vec_repeat(0, 256) }
+    print(count_letter("mississippi", 's'))
+    print(distinct_chars("mississippi"))
+}
+```

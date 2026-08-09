@@ -1,0 +1,28 @@
+fn main() {
+    let text = "mississippi";
+    let s_count = count_char(text, 's');
+    let distinct_chars = distinct_count(text);
+    print(s_count);
+    print(distinct_chars);
+}
+
+fn count_char(text: &str, ch: char) -> Int {
+    let mut count = 0;
+    for c in text.chars() {
+        if c == ch {
+            count = count + 1;
+        }
+    }
+    count
+}
+
+fn distinct_count(text: &str) -> Int {
+    let chars: Vec<char> = text.chars().collect();
+    let mut distinct_chars = Vec::new();
+    for c in chars {
+        if !distinct_chars.contains(&c) {
+            distinct_chars.push(c);
+        }
+    }
+    distinct_chars.len()
+}

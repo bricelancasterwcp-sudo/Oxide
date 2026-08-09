@@ -1,0 +1,2 @@
+print(len("mississippi"))
+print(len(chars("mississippi")))

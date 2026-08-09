@@ -1,0 +1,12 @@
+fn reverse(input: Vec<Int>) -> Vec<Int> {
+    let mut result = vec();
+    for i in range(len(input)-1, -1, -1) {
+        result = push(result, get(input, i).unwrap());
+    }
+    result
+}
+
+fn main() {
+    print_str(str_concat("The numbers in reverse order are: ", "\n",
+        join("\n", reverse(range(1, 6, 1)))))
+}

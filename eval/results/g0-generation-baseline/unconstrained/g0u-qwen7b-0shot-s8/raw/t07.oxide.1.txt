@@ -1,0 +1,15 @@
+```oxide
+fn sum_of_multiples() -> Int {
+    let mut sum = 0
+    for i in range(1, 9) {
+        let multiple = 3 * i
+        sum = sum + multiple
+    }
+    sum
+}
+
+fn main() {
+    let result = sum_of_multiples()
+    print(result)
+}
+```

@@ -1,0 +1,49 @@
+```
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        Rectangle { width, height } => 2 * (width + height),
+        Triangle { side1, side2, side3 } => side1 + side2 + side3,
+    }
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+trait Shape {
+    fn perimeter(&self) -> Int;
+}
+
+impl Shape for Rectangle {
+    fn perimeter(&self) -> Int {
+        2 * (self.width + self.height)
+    }
+}
+
+impl Shape for Triangle {
+    fn perimeter(&self) -> Int {
+        self.side1 + self.side2 + self.side3
+    }
+}
+
+fn print_int(n: Int) {
+    print(int_to_str(n))
+}
+
+fn main() {
+    let rect = Rectangle { width: 3, height: 4 }
+    let triangle = Triangle { side1: 3, side2: 4, side3: 5 }
+    let square = Rectangle { width: 2, height: 5 }
+
+    print_int(perimeter(&rect))
+    print_int(perimeter(&triangle))
+    print_int(perimeter(&square))
+}
+```

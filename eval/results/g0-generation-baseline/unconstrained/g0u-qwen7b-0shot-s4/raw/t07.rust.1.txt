@@ -1,0 +1,7 @@
+```rust
+fn main() {
+    let multiples_of_three: Vec<i32> = (1..=8).map(|x| x * 3).collect();
+    let sum: i32 = multiples_of_three.iter().sum();
+    println!("{}", sum);
+}
+```

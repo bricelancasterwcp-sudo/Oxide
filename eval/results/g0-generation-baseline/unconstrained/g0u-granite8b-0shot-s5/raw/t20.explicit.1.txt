@@ -1,0 +1,95 @@
+```
+fn main() {
+  let pen = Pen { unit_price: 3, quantity: 4};
+  let pad = Pad { unit_price: 9, quantity: 2};
+  let ink = Ink { unit_price: 5, quantity: 3};
+
+  let total = pen.cost() + pad.cost() + ink.cost();
+  let most_expensive = get_most_expensive_item(total, &[&pen, &pad, &ink]);
+  print_total_cost(total);
+  print_most_expensive_item_name(most_expensive);
+}
+
+struct Pen {
+  unit_price: Int,
+  quantity: Int
+}
+
+impl Pen {
+  fn cost(&self) -> Int {
+    self.unit_price * self.quantity
+  }
+}
+
+struct Pad {
+  unit_price: Int,
+  quantity: Int
+}
+
+impl Pad {
+  fn cost(&self) -> Int {
+    self.unit_price * self.quantity
+  }
+}
+
+struct Ink {
+  unit_price: Int,
+  quantity: Int
+}
+
+impl Ink {
+  fn cost(&self) -> Int {
+    self.unit_price * self.quantity
+  }
+}
+
+fn get_most_expensive_item(total: Int, items: &[&Item]) -> &Item {
+  let mut most_expensive = items[0];
+  for &item in items {
+    if item.cost() > most_expensive.cost() {
+      most_expensive = item;
+    }
+  }
+  most_expensive
+}
+
+fn print_total_cost(total: Int) {
+  print(total)
+}
+
+fn print_most_expensive_item_name(item: &Item) {
+  print(item.name())
+}
+
+trait Item {
+  fn cost(&self) -> Int;
+  fn name(&self) -> Str;
+}
+
+impl Item for Pen {
+  fn cost(&self) -> Int {
+    self.unit_price * self.quantity
+  }
+  fn name(&self) -> Str {
+    "Pen"
+  }
+}
+
+impl Item for Pad {
+  fn cost(&self) -> Int {
+    self.unit_price * self.quantity
+  }
+  fn name(&self) -> Str {
+    "Pad"
+  }
+}
+
+impl Item for Ink {
+  fn cost(&self) -> Int {
+    self.unit_price * self.quantity
+  }
+  fn name(&self) -> Str {
+    "Ink"
+  }
+}
+```

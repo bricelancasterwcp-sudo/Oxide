@@ -1,0 +1,10 @@
+```text
+fn main() {
+    let limit = 10;
+    let mut sum = 0f32;
+    for n in 0..=limit {
+        sum += n as f32 * n as f32
+    }
+    print(sum)
+}
+```

@@ -1,0 +1,31 @@
+fn sqrt(x: Int) -> Float {
+    let mut s = trunc(x as Float)
+    let mut r = 0.0
+    for _ in range(1, 21) {
+        r = (0.5 * (r + x / r)).trunc()
+    }
+    r
+}
+
+fn is_prime(x: Int) -> Bool {
+    if x <= 1 {
+        return false
+    }
+    let sqrt_x = trunc(sqrt(to_float(x)))
+    for y in range(2, sqrt_x + 1) {
+        if x % y == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn count_primes(n: Int) -> Int {
+    let mut primes = push(vec(), 2)
+    for x in range(3, n) {
+        if is_prime(x) {
+            primes = push(primes, x)
+        }
+    }
+    len(primes)
+}

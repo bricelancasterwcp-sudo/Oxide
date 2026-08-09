@@ -1,0 +1,12 @@
+fn main() {
+    let text = "mississippi";
+    let mut count = 0;
+    let mut seen = false;
+    for c in text.chars() {
+        if c == 's' {
+            count += 1;
+        }
+        seen |= c != 's';
+    }
+    print!("{} {}", count, seen as usize);
+}

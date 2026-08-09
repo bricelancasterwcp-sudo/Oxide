@@ -1,0 +1,24 @@
+struct Item { name: Str, price: Int, quantity: Int }
+
+fn combined_cost(items: Vec<Item>) -> Int {
+    let sum = fold(items, 0, |s, i| s + i.price * i.quantity)
+    sum
+}
+
+fn best_item(items: Vec<Item>) -> Option<Item> {
+    let best = max_by(items, |i| i.price * i.quantity)
+    best
+}
+
+fn main() {
+    let items = vec(
+        Item { name: "pen", price: 3, quantity: 4 },
+        Item { name: "pad", price: 9, quantity: 2 },
+        Item { name: "ink", price: 5, quantity: 3 },
+    )
+    print(combined_cost(items))
+    match best_item(items) {
+        Some(i) => print(i.name),
+        None => print_str("no items"),
+    }
+}

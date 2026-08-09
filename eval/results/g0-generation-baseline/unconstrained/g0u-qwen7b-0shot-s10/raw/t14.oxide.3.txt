@@ -1,0 +1,7 @@
+fn main() {
+    let s = "mississippi";
+    let count_s = s.chars().filter(|&c| c == 's').count();
+    let distinct_chars: HashSet<Str> = s.chars().collect();
+    print(count_s);
+    print(distinct_chars.len());
+}

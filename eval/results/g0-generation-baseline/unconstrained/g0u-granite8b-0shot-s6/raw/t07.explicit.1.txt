@@ -1,0 +1,21 @@
+fn main() {
+    let mut nums = vec();
+    let mut i = 3;
+    while i <= 24 {
+        push(nums, i);
+        i = i + 3;
+    }
+    let total = sum_big(&nums, 24);
+    print(total);
+    drop nums;
+}
+
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let mut total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total
+}

@@ -1,0 +1,32 @@
+fn get_cost(unit_price: Int, quantity: Int) -> Int {
+    unit_price * quantity
+}
+
+fn main() {
+    let pen_cost = get_cost(3, 4);
+    let pad_cost = get_cost(9, 2);
+    let ink_cost = get_cost(5, 3);
+
+    let total_cost = pen_cost + pad_cost + ink_cost;
+    print(total_cost);
+
+    let mut most_expensive_name = "";
+    let mut most_expensive_cost = 0;
+
+    if pen_cost > most_expensive_cost {
+        most_expensive_name = "pen";
+        most_expensive_cost = pen_cost;
+    }
+
+    if pad_cost > most_expensive_cost {
+        most_expensive_name = "pad";
+        most_expensive_cost = pad_cost;
+    }
+
+    if ink_cost > most_expensive_cost {
+        most_expensive_name = "ink";
+        most_expensive_cost = ink_cost;
+    }
+
+    print(most_expensive_name);
+}

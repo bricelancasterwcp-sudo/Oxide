@@ -1,0 +1,33 @@
+fn len(v: &Vec<Int>) -> Int {
+    let mut i = 0
+    for _ in v {
+        i = i + 1
+    }
+    i
+}
+
+fn area(v: &Vec<Int>) -> Int {
+    if len(v) == 2 {
+        return v[0] * v[1]
+    }
+    let s = (v[0] + v[1]) / 2
+    s * s * len(v)
+}
+
+fn perimeter(v: &Vec<Int>) -> Int {
+    if len(v) == 2 {
+        return 2 * (v[0] + v[1])
+    }
+    let (a, b, c) = (v[0], v[1], v[2])
+    a + b + c + (a * a + b * b + c * c).sqrt()
+}
+
+fn main() {
+    let r1 = vec![3, 4]
+    let t = vec![3, 4, 5]
+    let r2 = vec![2, 5]
+
+    print(perimeter(&r1))
+    print(perimeter(&t))
+    print(perimeter(&r2))
+}

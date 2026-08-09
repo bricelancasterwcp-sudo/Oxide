@@ -1,0 +1,22 @@
+```rust
+fn square(x: Int) -> Int {
+    x * x
+}
+
+fn sum(v: &Vec<Int>) -> Int {
+    let total = 0;
+    for x in &v {
+        total = total + square(*x);
+    }
+    total
+}
+
+fn main() {
+    let nums = vec();
+    for i in range(0, 10) {
+        push(nums, i);
+    }
+    print(sum(&nums));
+    drop nums;
+}
+```

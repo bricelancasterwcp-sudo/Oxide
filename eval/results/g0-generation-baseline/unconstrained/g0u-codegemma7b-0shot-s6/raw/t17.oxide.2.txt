@@ -1,0 +1,9 @@
+fn main() {
+    let list = vec![10, 20, 30];
+
+    let element_at_1 = get(list, 1).unwrap_or(-1);
+    let element_at_5 = get(list, 5).unwrap_or(-1);
+
+    print(element_at_1);
+    print(element_at_5);
+}

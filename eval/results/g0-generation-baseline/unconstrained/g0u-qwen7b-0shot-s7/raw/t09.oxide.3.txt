@@ -1,0 +1,16 @@
+```rust
+struct List { head: Option<Int>, tail: Option<Box<List>> }
+
+fn print_reverse(list: List) {
+    match list.tail {
+        Some(t) => print_reverse(*t),
+        None => (),
+    }
+    print(list.head);
+}
+
+fn main() {
+    let list = List { head: Some(5), tail: Some(Box::new(List { head: Some(4), tail: Some(Box::new(List { head: Some(3), tail: Some(Box::new(List { head: Some(2), tail: Some(Box::new(List { head: Some(1), tail: None }) }) }) }) }) }) });
+    print_reverse(list);
+}
+```

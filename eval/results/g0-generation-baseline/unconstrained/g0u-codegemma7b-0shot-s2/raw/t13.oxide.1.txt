@@ -1,0 +1,23 @@
+fn palindrome(word: &str) -> bool {
+    let mut forward = 0;
+    let mut backward = word.len() - 1;
+    while forward < backward {
+        if word.chars().nth(forward).unwrap() != word.chars().nth(backward).unwrap() {
+            return false;
+        }
+        forward += 1;
+        backward -= 1;
+    }
+    true
+}
+
+fn main() {
+    let text = ["level", "stereo", "rotor"];
+    for word in text {
+        if palindrome(word) {
+            print!("true\n");
+        } else {
+            print!("false\n");
+        }
+    }
+}

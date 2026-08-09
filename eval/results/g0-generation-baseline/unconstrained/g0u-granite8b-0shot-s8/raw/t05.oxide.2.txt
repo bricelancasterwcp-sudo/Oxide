@@ -1,0 +1,13 @@
+```
+fn next_term(n: Int, acc: Vec<Int>) -> Vec<Int> {
+    if n == 0 {
+        acc
+    } else {
+        next_term(n - 1, push(acc, n))
+    }
+}
+
+fn main() {
+    print(get(next_term(20, vec()), 19)?)
+}
+```

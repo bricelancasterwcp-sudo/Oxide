@@ -1,0 +1,27 @@
+fn main() {
+    let pen = Item { unit_price: 3, quantity: 4 };
+    let pad = Item { unit_price: 9, quantity: 2 };
+    let ink = Item { unit_price: 5, quantity: 3 };
+
+    let total_cost = pen.cost() + pad.cost() + ink.cost();
+    print(total_cost);
+
+    if pen.cost() > pad.cost() && pen.cost() > ink.cost() {
+        print("pen");
+    } else if pad.cost() > pen.cost() && pad.cost() > ink.cost() {
+        print("pad");
+    } else {
+        print("ink");
+    }
+}
+
+struct Item {
+    unit_price: Int,
+    quantity: Int,
+}
+
+impl Item {
+    fn cost(&self) -> Int {
+        self.unit_price * self.quantity
+    }
+}

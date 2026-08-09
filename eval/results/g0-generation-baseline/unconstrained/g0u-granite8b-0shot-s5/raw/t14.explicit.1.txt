@@ -1,0 +1,38 @@
+```
+fn s_count(s: &Str, c: Char) -> Int {
+    let mut count = 0
+    for ch in &chars(s) {
+        if ch == &c {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_count(s: &Str) -> Int {
+    let mut unique = 0
+    let mut chars = clone(&chars(s))
+    while len(&chars) > 0 {
+        let c = pop(&mut chars)
+        let same = any(&chars, |ch| ch == &c)
+        if !same {
+            unique = unique + 1
+        }
+    }
+    unique
+}
+
+fn main() {
+    let text = "mississippi"
+    print(s_count(&text, 's'))
+    print(distinct_count(&text))
+}
+```
+
+In the `s_count` function, the count is initialized to 0, then we iterate over each character in the input string. If the current character is equal to the desired character, we increment the count. Finally, we return the count.
+
+In the `distinct_count` function, we initialize a variable `unique` to keep track of the number of distinct characters. We clone the characters of the input string into a new vector called `chars`. We then iterate over each character in `chars` and check if any other character in `chars` is equal to the current character. If none of the other characters are equal, we increment `unique` by 1. Finally, we return `unique`.
+
+In the `main` function, we define a string `text` with the value "mississippi". We then call the `s_count` function with `text` and the character 's' to count the number of occurrences of 's' in the string. We also call the `distinct_count` function with `text` to count the number of distinct characters in the string. Finally, we print the results of the two calls to `print`.
+
+Please note that this solution assumes that the input string contains only ASCII characters. If the input string contains Unicode characters, the `chars` function will return a vector of Unicode code points instead of individual characters.

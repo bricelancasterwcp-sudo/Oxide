@@ -1,0 +1,31 @@
+fn print_perimeter(shapes: &Vec<Shape>) {
+    for shape in &shapes {
+        match shape {
+            Shape::Rectangle(length, width) => {
+                print(perimeter_rectangle(*length, *width))
+            }
+            Shape::Triangle(side1, side2, side3) => {
+                print(perimeter_triangle(*side1, *side2, *side3))
+            }
+            _ => { }
+        }
+    }
+}
+
+fn perimeter_rectangle(length: Int, width: Int) -> Int {
+    length + width + length + width
+}
+
+fn perimeter_triangle(side1: Int, side2: Int, side3: Int) -> Int {
+    side1 + side2 + side3
+}
+
+fn main() {
+    let shapes = push(
+        push(
+            push(vec(), Shape::Rectangle(3, 4)),
+            Shape::Triangle(3, 4, 5)),
+        Shape::Rectangle(2, 5))
+    print_perimeter(&shapes)
+    drop shapes
+}

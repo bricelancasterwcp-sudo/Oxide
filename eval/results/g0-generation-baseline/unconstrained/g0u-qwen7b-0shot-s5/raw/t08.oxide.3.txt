@@ -1,0 +1,36 @@
+```rust
+struct Reading { label: Str, values: Vec<Int> }
+
+fn is_positive(x: Int) -> Bool {
+    x > 0
+}
+
+fn max_value(v: Vec<Int>) -> Int {
+    let mut max = i32::MIN;
+    for x in v {
+        if x > max {
+            max = x;
+        }
+    }
+    max
+}
+
+fn count_if(v: Vec<Int>, pred: fn(Int) -> Bool) -> Int {
+    let mut count = 0;
+    for x in v {
+        if pred(x) {
+            count = count + 1;
+        }
+    }
+    count
+}
+
+fn main() {
+    let mut v = push(push(push(push(vec(), 3), 8), -2), 12);
+    v = push(v, 7);
+    let positive_count = count_if(v, is_positive);
+    print(positive_count);
+    let max = max_value(v);
+    print(max);
+}
+```

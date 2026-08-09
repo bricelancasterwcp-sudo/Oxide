@@ -1,0 +1,49 @@
+ pen with unit price 3 and quantity 4,
+ pad with unit price 9 and quantity 2,
+ ink with unit price 5 and quantity 3.
+
+print("Total cost: ");
+let mut highest_cost = 0.0;
+let mut item_with_highest_cost = "";
+for item in vec(pen, pad, ink) {
+    let cost = item.unit_price * item.quantity;
+    print(cost);
+    print("\n");
+    if cost > highest_cost {
+        highest_cost = cost;
+        item_with_highest_cost = item.name;
+    }
+}
+print("Item with the highest cost: ");
+print(item_with_highest_cost);
+
+struct Item {
+    name: Str,
+    unit_price: Float,
+    quantity: Int,
+}
+
+fn main() {
+    let pen = Item { name: "Pen", unit_price: 3.0, quantity: 4 };
+    let pad = Item { name: "Pad", unit_price: 9.0, quantity: 2 };
+    let ink = Item { name: "Ink", unit_price: 5.0, quantity: 3 };
+    let items = vec(pen, pad, ink);
+    main2(items);
+}
+
+fn main2(items: Vec<Item>) {
+    print("Total cost: ");
+    let mut highest_cost = 0.0;
+    let mut item_with_highest_cost = "";
+    for item in items {
+        let cost = item.unit_price * item.quantity;
+        print(cost);
+        print("\n");
+        if cost > highest_cost {
+            highest_cost = cost;
+            item_with_highest_cost = item.name;
+        }
+    }
+    print("Item with the highest cost: ");
+    print(item_with_highest_cost);
+}

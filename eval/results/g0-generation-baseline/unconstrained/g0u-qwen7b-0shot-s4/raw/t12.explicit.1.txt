@@ -1,0 +1,7 @@
+```
+fn main() {
+    let text = "stack";
+    let reversed = chars(text).rev().collect::<String>();
+    print_str(&reversed);
+}
+```

@@ -1,0 +1,24 @@
+```text
+struct List { head: Int, tail: Vec<Int> }
+
+fn keep_bigger_than_3(xs: Vec<Int>) -> (Int, Vec<Int>) {
+    let mut n_kept = 0
+    let mut kept_tail = vec()
+    for x in xs {
+        if x > 3 {
+            kept_tail = push(kept_tail, x)
+            n_kept += 1
+        }
+    }
+    (n_kept, kept_tail)
+}
+
+fn main() {
+    let xs = push(push(push(push(vec(), 4), 1), 7), 3)
+    let (n_kept, kept_tail) = keep_bigger_than_3(xs)
+    print(n_kept)
+    for x in kept_tail {
+        print(x)
+    }
+}
+```

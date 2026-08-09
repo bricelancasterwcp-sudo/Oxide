@@ -1,0 +1,9 @@
+```text
+fn main() {
+    let vec = vec![10, 20, 30];
+    let val_1 = get(vec, 1)?;
+    let val_2 = get(vec, 5)?;
+    print(val_1);
+    print(val_2);
+}
+```

@@ -1,0 +1,19 @@
+```rust
+fn main() {
+    let list = vec(10, 20, 30);
+    let pos1 = 1;
+    let pos5 = 5;
+    let element1 = get(&list, pos1);
+    let element5 = get(&list, pos5);
+    if element1.is_some() {
+        print(element1.unwrap());
+    } else {
+        print(-1);
+    }
+    if element5.is_some() {
+        print(element5.unwrap());
+    } else {
+        print(-1);
+    }
+}
+```

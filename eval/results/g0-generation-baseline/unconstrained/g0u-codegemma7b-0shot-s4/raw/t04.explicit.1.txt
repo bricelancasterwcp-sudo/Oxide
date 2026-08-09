@@ -1,0 +1,25 @@
+```rust
+fn is_prime(x: Int) -> Bool {
+    if x <= 1 {
+        return false
+    }
+    let mut i = 2
+    while i * i <= x {
+        if x % i == 0 {
+            return false
+        }
+        i = i + 1
+    }
+    true
+}
+
+fn main() {
+    let mut count = 0
+    for i in 1..100 {
+        if is_prime(i) {
+            count = count + 1
+        }
+    }
+    print(count)
+}
+```

@@ -1,0 +1,24 @@
+fn get_element(list: &[Int], index: Int) -> Option<Int> {
+    if index >= 0 && index < len(&list) {
+        return Some(get(&list, index));
+    }
+    None
+}
+
+fn main() {
+    let list = push(push(vec(), 10), 20);
+    let lookup_1 = get_element(&list, 1);
+    let lookup_5 = get_element(&list, 5);
+
+    match lookup_1 {
+        Some(val) => print(val),
+        None => print(-1),
+    }
+
+    match lookup_5 {
+        Some(val) => print(val),
+        None => print(-1),
+    }
+
+    drop list;
+}

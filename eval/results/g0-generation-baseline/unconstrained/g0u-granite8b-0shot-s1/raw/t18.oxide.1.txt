@@ -1,0 +1,20 @@
+struct Sequence { shape: Shape }
+
+struct Rectangle { width: Int, height: Int }
+
+struct Triangle { side1: Int, side2: Int, side3: Int }
+
+enum Shape { Rectangle(Rectangle), Triangle(Triangle) }
+
+fn perimeter(rectangle: Rectangle) -> Int {
+    2 * (rectangle.width + rectangle.height)
+}
+
+fn perimeter(triangle: Triangle) -> Int {
+    triangle.side1 + triangle.side2 + triangle.side3
+}
+
+fn main() {
+    let sequence = Sequence { shape: Rectangle { width: 3, height: 4 } }
+    print(perimeter(sequence.shape))
+}

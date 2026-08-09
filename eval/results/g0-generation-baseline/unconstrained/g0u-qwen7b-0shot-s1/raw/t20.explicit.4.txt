@@ -1,0 +1,47 @@
+```rust
+enum Item { Pen, Pad, Ink }
+
+struct Record {
+    item: Item,
+    unit_price: Int,
+    quantity: Int,
+}
+
+fn cost(record: &Record) -> Int {
+    record.unit_price * record.quantity
+}
+
+fn name(record: &Record) -> Str {
+    match record.item {
+        Item::Pen => "pen",
+        Item::Pad => "pad",
+        Item::Ink => "ink",
+    }
+}
+
+fn main() {
+    let pen = Record {
+        item: Item::Pen,
+        unit_price: 3,
+        quantity: 4,
+    };
+    let pad = Record {
+        item: Item::Pad,
+        unit_price: 9,
+        quantity: 2,
+    };
+    let ink = Record {
+        item: Item::Ink,
+        unit_price: 5,
+        quantity: 3,
+    };
+    let total_cost = cost(&pen) + cost(&pad) + cost(&ink);
+    print(total_cost);
+    let items = vec![&pen, &pad, &ink];
+    let most_expensive = items.iter().max_by_key(|r| cost(r)).unwrap();
+    print_str(name(most_expensive));
+    drop pen;
+    drop pad;
+    drop ink;
+}
+```

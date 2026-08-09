@@ -1,0 +1,52 @@
+struct List {
+    head: Int,
+    tail: Option<Box<List>>,
+}
+
+fn count_positive(l: List) -> Int {
+    let n = match l.tail {
+        None => 1,
+        Some(box List { head, tail }) => if head > 0 {
+            1 + count_positive(List { head, tail })
+        } else {
+            count_positive(*tail.unwrap())
+        },
+    }
+    n
+}
+
+fn largest(l: List) -> Int {
+    let n = match l.tail {
+        None => l.head,
+        Some(box List { head, tail }) => if head > largest(*tail.unwrap()) {
+            head
+        } else {
+            largest(*tail.unwrap())
+        },
+    }
+    n
+}
+
+fn main() {
+    let l = List {
+        head: 3,
+        tail: Some(box List {
+            head: 8,
+            tail: Some(box List {
+                head: -2,
+                tail: Some(box List {
+                    head: 12,
+                    tail: Some(box List {
+                        head: 7,
+                        tail: None,
+                    }),
+                }),
+            }),
+        }),
+    }
+    let n = count_positive(l);
+    print(n);
+    print_str(" ");
+    let n = largest(l);
+    print(n);
+}

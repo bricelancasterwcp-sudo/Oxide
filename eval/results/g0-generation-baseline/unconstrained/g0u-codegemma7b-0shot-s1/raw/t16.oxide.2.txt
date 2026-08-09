@@ -1,0 +1,5 @@
+fn main() {
+    println!("{}", 100 / 5);
+    print_str("undefined\n");
+    println!("{}", 100 / 4);
+}

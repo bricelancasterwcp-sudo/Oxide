@@ -1,0 +1,37 @@
+```text
+fn main() {
+    let inputs = vec("12", "x", "30")
+    match try_parse_ints(inputs) {
+        Ok(ns) => print_str(concat("success: ", str_len(to_string(ns)))),
+        Err(es) => {
+            print_str("failures: ")
+            for e in es {
+                print_str(concat("\"", e, "\""))
+            }
+        }
+    }
+}
+
+fn try_parse_int(s: Str) -> Result<Int, Str> {
+    match parse_int(s) {
+        Some(n) => Ok(n),
+        None => Err(s),
+    }
+}
+
+fn try_parse_ints(v: Vec<Str>) -> Result<Vec<Int>, Vec<Str>> {
+    let mut successes = vec()
+    let mut failures = vec()
+    for s in v {
+        match try_parse_int(s) {
+            Ok(n) => successes = push(successes, n),
+            Err(e) => failures = push(failures, e),
+        }
+    }
+    if len(failures) == 0 {
+        Ok(successes)
+    } else {
+        Err(failures)
+    }
+}
+```

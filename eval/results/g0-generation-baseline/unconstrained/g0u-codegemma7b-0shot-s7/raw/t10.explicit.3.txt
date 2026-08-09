@@ -1,0 +1,13 @@
+fn main() {
+    let numbers = vec![4, 1, 7, 3, 9, 2];
+    let mut kept_count = 0;
+
+    for number in &numbers {
+        if *number > 3 {
+            print!("{}\n", number);
+            kept_count += 1;
+        }
+    }
+
+    print!("{} values kept\n", kept_count);
+}

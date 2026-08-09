@@ -1,0 +1,12 @@
+print(count_s("mississippi"))
+print(count_letter("", "mississippi"))
+
+fn count_s(s: Str) -> Int {
+    let s_vec = str_split(s, "s")
+    len(s_vec)
+}
+
+fn count_letter(c: Str, s: Str) -> Int {
+    let s_vec = str_split(s, c)
+    len(s_vec)
+}

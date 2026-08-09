@@ -1,0 +1,18 @@
+fn seq(n: Int) -> Int {
+    if n < 3 {
+        return 1
+    }
+    let mut a = 1;
+    let mut b = 1;
+    for _ in 3..=n {
+        let c = a + b;
+        drop a;
+        a = b;
+        b = c;
+    }
+    b
+}
+
+fn main() {
+    print(seq(20))
+}

@@ -1,0 +1,37 @@
+fn main() {
+    let (mut total_cost, mut most_expensive_item) = (0.0, "");
+
+    for _ in 0..3 {
+        let (name, unit_price, quantity) = read_item();
+        let cost = unit_price * quantity;
+
+        total_cost += cost;
+
+        if cost > most_expensive_item.1 {
+            most_expensive_item = (name, cost);
+        }
+    }
+
+    println!("Total cost: {}", total_cost);
+    println!("Most expensive item: {}", most_expensive_item.0);
+}
+
+fn read_item() -> (String, f64, i32) {
+    let mut name = String::new();
+    let mut unit_price = String::new();
+    let mut quantity = String::new();
+
+    println!("Enter item name: ");
+    io::stdin().read_line(&mut name).unwrap();
+
+    println!("Enter unit price: ");
+    io::stdin().read_line(&mut unit_price).unwrap();
+
+    println!("Enter quantity: ");
+    io::stdin().read_line(&mut quantity).unwrap();
+
+    let unit_price = unit_price.trim().parse::<f64>().unwrap();
+    let quantity = quantity.trim().parse::<i32>().unwrap();
+
+    (name, unit_price, quantity)
+}

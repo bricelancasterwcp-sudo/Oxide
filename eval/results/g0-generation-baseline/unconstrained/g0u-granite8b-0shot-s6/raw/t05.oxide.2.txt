@@ -1,0 +1,21 @@
+```
+struct Sequence {
+    values: Vec<Int>
+}
+
+fn fib(n: Int) -> Int {
+    if n <= 2 {
+        1
+    } else {
+        fib(n - 1) + fib(n - 2)
+    }
+}
+
+fn main() {
+    let s = Sequence { values: vec() }
+    for i in 0..20 {
+        s.values = push(s.values, fib(i))
+    }
+    print(get(s.values, -1)?)
+}
+```

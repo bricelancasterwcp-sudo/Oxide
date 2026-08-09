@@ -1,0 +1,19 @@
+fn count_chars(s: &str) -> (Int, Int) {
+    let mut seen_chars = Vec::new();
+    let mut s_count = 0;
+    for c in s.chars() {
+        if c == 's' {
+            s_count += 1;
+        }
+        if !seen_chars.contains(&c) {
+            seen_chars.push(c);
+        }
+    }
+    (s_count, seen_chars.len())
+}
+
+fn main() {
+    let (s_count, distinct_count) = count_chars("mississippi");
+    print(s_count);
+    print(distinct_count);
+}

@@ -1,0 +1,7 @@
+fn main() {
+    let mut result = 0;
+    for x in 0..10 {
+        result = result + x * x;
+    }
+    print(result);
+}

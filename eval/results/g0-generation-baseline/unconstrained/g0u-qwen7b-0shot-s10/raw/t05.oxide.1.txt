@@ -1,0 +1,20 @@
+```oxide
+fn fibonacci(n: Int) -> Int {
+    if n <= 1 {
+        1
+    } else {
+        let mut a = 1;
+        let mut b = 1;
+        for _ in 2..=n {
+            let temp = a + b;
+            a = b;
+            b = temp;
+        }
+        b
+    }
+}
+
+fn main() {
+    print(fibonacci(19))
+}
+```

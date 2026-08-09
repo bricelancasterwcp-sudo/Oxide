@@ -1,0 +1,14 @@
+fn main() {
+    let mut a = vec![4, 1, 7, 3, 9, 2];
+    let mut count = 0;
+    for (i, x) in a.iter_mut().enumerate() {
+        if *x > 3 {
+            print!("{}\n", x);
+            count += 1;
+        } else {
+            drop a[i];
+        }
+    }
+    print!("{}", count);
+}
+```

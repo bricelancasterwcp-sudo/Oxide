@@ -1,0 +1,13 @@
+fn divide(a: Int, b: Int) -> Option<Int> {
+    if b == 0 {
+        None
+    } else {
+        Some(trunc(a / b))
+    }
+}
+
+fn main() {
+    print(divide(100, 5))
+    print(divide(100, 0))
+    print(divide(100, 4))
+}

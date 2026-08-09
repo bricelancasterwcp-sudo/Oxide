@@ -1,0 +1,22 @@
+```text
+fn keep_gt_3(v: &Vec<Int>, out: &mut Vec<Int>) {
+    let mut i = 0;
+    while i < len(&v) {
+        if get(&v, i).unwrap() > 3 {
+            push(out, get(&v, i).unwrap());
+        }
+        i = i + 1;
+    }
+}
+
+fn main() {
+    let values = vec(4, 1, 7, 3, 9, 2);
+    let mut kept = vec();
+    keep_gt_3(&values, &mut kept);
+    let count = len(&kept);
+    print(count);
+    for value in &kept {
+        print(value);
+    }
+}
+```

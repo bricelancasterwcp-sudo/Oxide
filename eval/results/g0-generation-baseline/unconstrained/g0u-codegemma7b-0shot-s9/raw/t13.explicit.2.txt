@@ -1,0 +1,22 @@
+fn is_palindrome(text: &str) -> bool {
+    let mut start = 0;
+    let mut end = text.len() - 1;
+    while start < end {
+        if text.chars().nth(start) != text.chars().nth(end) {
+            return false;
+        }
+        start += 1;
+        end -= 1;
+    }
+    true
+}
+
+fn main() {
+    let level = "level";
+    let stereo = "stereo";
+    let rotor = "rotor";
+
+    println!("{}", is_palindrome(level));
+    println!("{}", is_palindrome(stereo));
+    println!("{}", is_palindrome(rotor));
+}

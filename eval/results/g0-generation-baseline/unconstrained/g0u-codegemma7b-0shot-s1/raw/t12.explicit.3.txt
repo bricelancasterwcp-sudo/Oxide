@@ -1,0 +1,15 @@
+```rust
+fn reverse_str(s: &Str) -> Str {
+    let mut rev_str = str_len(s).to_string();
+    for c in chars(s).iter().rev() {
+        rev_str = concat(c, &rev_str);
+    }
+    rev_str
+}
+
+fn main() {
+    let text = "stack";
+    print(reverse_str(text));
+    drop text
+}
+```

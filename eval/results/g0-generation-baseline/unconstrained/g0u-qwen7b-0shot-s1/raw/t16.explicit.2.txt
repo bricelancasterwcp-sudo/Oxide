@@ -1,0 +1,19 @@
+```rust
+fn divide(dividend: Int, divisor: Int) -> Result<Int, Str> {
+    if divisor == 0 {
+        Err("undefined".to_string())
+    } else {
+        Ok(dividend / divisor)
+    }
+}
+
+fn main() {
+    for d in [5, 0, 4] {
+        match divide(100, d) {
+            Ok(q) => print(q),
+            Err(msg) => print(msg),
+        }
+        print("\n")
+    }
+}
+```

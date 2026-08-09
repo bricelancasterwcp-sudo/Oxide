@@ -1,0 +1,9 @@
+```rust
+fn main() {
+  let a = parse_int("12")?;
+  let b = parse_int("x")?;
+  let c = parse_int("30")?;
+  print(a + b + c);
+  print(2);
+}
+```

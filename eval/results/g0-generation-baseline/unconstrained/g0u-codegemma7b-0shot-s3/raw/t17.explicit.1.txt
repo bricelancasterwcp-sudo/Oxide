@@ -1,0 +1,14 @@
+fn lookup(v: &Vec<Int>, idx: Int) -> Int {
+    if idx >= 0 && idx < v.len() {
+        v[idx]
+    } else {
+        -1
+    }
+}
+
+fn main() {
+    let nums = vec![10, 20, 30];
+    print(lookup(&nums, 1)) // Output: 20
+    print(lookup(&nums, 5)) // Output: -1
+    print(lookup(&nums, 0)) // Output: 10
+}

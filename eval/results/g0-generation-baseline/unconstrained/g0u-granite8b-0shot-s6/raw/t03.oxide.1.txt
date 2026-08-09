@@ -1,0 +1,12 @@
+```rust
+fn gcd(m: Int, n: Int) -> Int {
+    match m % n {
+        0 => n,
+        _ => gcd(n, m % n),
+    }
+}
+
+fn main() {
+    print(gcd(252, 105));
+}
+```

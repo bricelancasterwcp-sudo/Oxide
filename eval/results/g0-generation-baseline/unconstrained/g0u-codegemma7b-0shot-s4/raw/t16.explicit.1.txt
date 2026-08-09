@@ -1,0 +1,14 @@
+```rust
+fn main() {
+    let x = 100;
+    let y = 5;
+    let z = 0;
+    let w = 4;
+    let a = x / y;
+    let b = x / z;
+    let c = x / w;
+    print(a);
+    print(b);
+    print(c);
+}
+```

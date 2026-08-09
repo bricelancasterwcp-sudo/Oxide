@@ -1,0 +1,17 @@
+fn count_primes(n: Int) -> Int {
+    let mut primes = push(vec(), 2)
+    for x in range(3, n) {
+        let mut is_prime = true
+        let sqrt_x = trunc(sqrt(to_float(x)))
+        for y in range(2, sqrt_x + 1) {
+            if x % y == 0 {
+                is_prime = false
+                break
+            }
+        }
+        if is_prime {
+            primes = push(primes, x)
+        }
+    }
+    len(primes)
+}

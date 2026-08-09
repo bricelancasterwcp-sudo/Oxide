@@ -1,0 +1,22 @@
+```
+fn main() {
+  let mut i = 2;
+  while i < 1000 {
+    let mut sum = 1;
+    let mut d = 2;
+    while d * d <= i {
+      if i % d == 0 {
+        sum += d;
+        if d * d != i {
+          sum += i / d;
+        }
+      }
+      d += 1;
+    }
+    if sum == i {
+      print(i);
+    }
+    i = i + 1;
+  }
+}
+```

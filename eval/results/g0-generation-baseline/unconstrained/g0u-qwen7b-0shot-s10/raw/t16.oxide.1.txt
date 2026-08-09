@@ -1,0 +1,13 @@
+```rust
+fn main() {
+    for divisor in vec![5, 0, 4] {
+        match divisor {
+            0 => print_str("undefined\n"),
+            _ => {
+                let quotient = 100 / divisor;
+                print(quotient, "\n")
+            }
+        }
+    }
+}
+```

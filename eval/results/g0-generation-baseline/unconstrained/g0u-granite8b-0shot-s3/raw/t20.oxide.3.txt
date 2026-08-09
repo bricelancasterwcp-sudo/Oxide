@@ -1,0 +1,33 @@
+struct Pen { price: Int, quantity: Int }
+struct Pad { price: Int, quantity: Int }
+struct Ink { price: Int, quantity: Int }
+
+fn cost(items: Vec<Item>) -> Int {
+    let total = sum(map(items, |item| item.price * item.quantity))
+    print(total)
+    total
+}
+
+fn name_of_most_expensive(items: Vec<Item>) -> Str {
+    let most_expensive = foldl(items, |best, item| {
+        if item.price * item.quantity > best.price * best.quantity {
+            item
+        } else {
+            best
+        }
+    })
+    print(most_expensive.price * most_expensive.quantity)
+    most_expensive.name
+}
+
+fn main() {
+    let items = vec(
+        Pen { price: 3, quantity: 4 },
+        Pad { price: 9, quantity: 2 },
+        Ink { price: 5, quantity: 3 }
+    )
+    cost(items)
+    let most_expensive_name = name_of_most_expensive(items)
+    print_str("The most expensive item is ")
+    print_str(most_expensive_name)
+}

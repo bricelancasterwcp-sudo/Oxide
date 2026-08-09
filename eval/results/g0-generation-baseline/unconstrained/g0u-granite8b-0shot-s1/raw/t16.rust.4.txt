@@ -1,0 +1,15 @@
+```rust
+fn main() {
+    println!("{}", 100 / 5);
+    let result = std::panic::catch_unwind(|| {
+        100 / 0
+    });
+
+    match result {
+        Ok(_) => println!("undefined"),
+        Err(_) => println!("panicked")
+    }
+
+    println!("{}", 100 / 4);
+}
+```

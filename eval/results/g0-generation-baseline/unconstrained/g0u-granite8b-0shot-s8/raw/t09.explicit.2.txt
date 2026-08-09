@@ -1,0 +1,13 @@
+```
+fn print_vec(v: &Vec<Int>) {
+    for x in &v {
+        print(x)
+    }
+}
+
+fn main() {
+    let nums = push(push(vec(), 5), 40)
+    print_vec(&nums)
+    drop nums
+}
+```

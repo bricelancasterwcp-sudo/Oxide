@@ -1,0 +1,14 @@
+fn lookup(v: Vec<Int>, pos: Int) -> Int {
+    if pos < 0 || pos >= len(v) {
+        -1
+    } else {
+        get(v, pos).unwrap_or(-1)
+    }
+}
+
+fn main() {
+    let v = vec![10, 20, 30];
+    println!("{}", lookup(v, 1));
+    println!("{}", lookup(v, 5));
+}
+```

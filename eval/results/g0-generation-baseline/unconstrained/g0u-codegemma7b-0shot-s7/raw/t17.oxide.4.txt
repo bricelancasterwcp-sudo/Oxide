@@ -1,0 +1,15 @@
+fn main() {
+    let vec = vec![10, 20, 30];
+    let first = get(vec, 1)?;
+    print(first);
+    if let Some(fifth) = get(vec, 5) {
+        print(fifth);
+    } else {
+        print(-1);
+    }
+    if let Some(outside) = get(vec, 10) {
+        print(outside);
+    } else {
+        print(-1);
+    }
+}

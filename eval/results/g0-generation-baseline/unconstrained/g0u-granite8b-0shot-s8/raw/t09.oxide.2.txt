@@ -1,0 +1,9 @@
+```
+fn reverse(v: Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        result = push(result, x)
+    }
+    result
+}
+```

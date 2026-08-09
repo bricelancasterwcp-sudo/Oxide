@@ -1,0 +1,41 @@
+```rust
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn is_prime(n: Int) -> Bool {
+    if n < 2 {
+        return false
+    }
+    for i in 2..n {
+        if n % i == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn count_primes_strictly_less_than(n: Int) -> Int {
+    let primes = vec()
+    for i in 2..n {
+        if is_prime(i) {
+            primes = push(primes, i)
+        }
+    }
+    len(&primes)
+}
+
+fn main() {
+    print(count_primes_strictly_less_than(100))
+}
+```

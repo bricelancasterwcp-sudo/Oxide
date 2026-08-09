@@ -1,0 +1,8 @@
+fn area(w: Int, h: Int) -> Int { w * h }
+fn perimeter(w: Int, h: Int) -> Int { 2 * (w + h) }
+
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print(area(r.width, r.height))
+    print(perimeter(r.width, r.height))
+}

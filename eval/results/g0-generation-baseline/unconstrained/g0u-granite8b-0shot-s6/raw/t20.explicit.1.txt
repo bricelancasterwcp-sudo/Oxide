@@ -1,0 +1,35 @@
+fn main() {
+    let pen = pen(3, 4);
+    let pad = pad(9, 2);
+    let ink = ink(5, 3);
+    let all = pen + pad + ink;
+    print(all);
+    let best = most_expensive(pen, pad, ink);
+    print(best);
+}
+
+fn pen(price: Int, quantity: Int) -> Int {
+    price * quantity
+}
+
+fn pad(price: Int, quantity: Int) -> Int {
+    price * quantity
+}
+
+fn ink(price: Int, quantity: Int) -> Int {
+    price * quantity
+}
+
+fn most_expensive(pen: Int, pad: Int, ink: Int) -> Str {
+    if pen > pad && pen > ink {
+        return "pen";
+    } else if pad > pen && pad > ink {
+        return "pad";
+    } else {
+        return "ink";
+    }
+}
+
+fn print(x: Int) {
+    drop x;
+}

@@ -1,0 +1,7 @@
+fn main() {
+    let divisors = vec![5, 0, 4];
+    for divisor in divisors {
+        let quotient = if divisor != 0 { 100 / divisor } else { "undefined" };
+        println!("{}", quotient);
+    }
+}

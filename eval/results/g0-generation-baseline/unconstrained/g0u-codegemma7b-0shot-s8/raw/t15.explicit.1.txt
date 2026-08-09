@@ -1,0 +1,11 @@
+fn main() {
+    let mut total = 0
+    let mut failed = 0
+    for arg in std::env::args().skip(1) {
+        match parse_int(&arg) {
+            Some(n) => total = total + n,
+            None => failed = failed + 1,
+        }
+    }
+    print("{}\n{}\n", total, failed)
+}

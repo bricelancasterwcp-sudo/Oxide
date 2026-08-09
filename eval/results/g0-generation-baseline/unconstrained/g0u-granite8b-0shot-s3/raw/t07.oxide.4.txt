@@ -1,0 +1,13 @@
+fn main() {
+    let v = push(push(vec(), 3), 42)
+    let sum = fold(v, 0, |acc, x| acc + x)
+    print(sum)
+}
+
+fn fold(v: Vec<Int>, init: Int, f: fn(Int, Int) -> Int) -> Int {
+    let mut acc = init
+    for x in v {
+        acc = f(acc, x)
+    }
+    acc
+}

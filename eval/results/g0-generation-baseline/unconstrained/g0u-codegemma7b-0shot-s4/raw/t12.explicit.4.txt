@@ -1,0 +1,11 @@
+fn reverse_str(s: &Str) -> Str {
+    let mut result = str_len(s)
+    for i in (0..str_len(s)).rev() {
+        result = concat(char_at(s, i), result)
+    }
+    result
+}
+
+fn main() {
+    print(reverse_str(&"stack"))
+}

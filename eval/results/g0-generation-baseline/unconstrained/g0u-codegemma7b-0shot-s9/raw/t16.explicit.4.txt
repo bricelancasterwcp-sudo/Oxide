@@ -1,0 +1,13 @@
+fn main() {
+    let divisor = 5;
+    let result = 100 / divisor;
+    print(result);
+    
+    let divisor = 0;
+    let result = 100 / divisor;
+    print("undefined");
+    
+    let divisor = 4;
+    let result = 100 / divisor;
+    print(result);
+}

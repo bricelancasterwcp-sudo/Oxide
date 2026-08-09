@@ -1,0 +1,24 @@
+```
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    for i in range(0, len(v)) {
+        let min_idx = i
+        for j in range(i + 1, len(v)) {
+            if v[j] < v[min_idx] {
+                min_idx = j
+            }
+        }
+        let temp = v[i]
+        v[i] = v[min_idx]
+        v[min_idx] = temp
+    }
+    v
+}
+
+fn main() {
+    let mut nums = vec(5, 3, 8, 1, 9, 2)
+    nums = sort(nums)
+    for n in nums {
+        print(n)
+    }
+}
+```

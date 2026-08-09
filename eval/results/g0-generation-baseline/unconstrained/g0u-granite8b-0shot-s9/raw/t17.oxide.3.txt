@@ -1,0 +1,10 @@
+fn get_two(v: Vec<Int>) -> Int {
+    let x = get(v, 0)?;
+    let y = get(v, 1)?;
+    x + y
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 4), 5)
+    print(get_two(v))
+}

@@ -1,0 +1,7 @@
+fn main() {
+    let numbers = vec![1, 2, 3, 4, 5];
+    for i in (0..numbers.len()).rev() {
+        print_str(&numbers[i].to_string());
+        print_str("\n");
+    }
+}

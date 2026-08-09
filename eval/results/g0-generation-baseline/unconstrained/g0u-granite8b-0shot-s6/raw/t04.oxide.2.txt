@@ -1,0 +1,17 @@
+fn main() {
+    let limit = 100;
+    let mut count = 0;
+    for x in range(2, limit) {
+        let mut is_prime = true;
+        for divisor in range(2, x) {
+            if x % divisor == 0 {
+                is_prime = false;
+                break;
+            }
+        }
+        if is_prime {
+            count += 1;
+        }
+    }
+    print(count)
+}

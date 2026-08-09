@@ -1,0 +1,16 @@
+use oxide_explicit as ox;
+
+fn main() {
+    let nums = ox::push(ox::push(ox::push(ox::push(ox::push(ox::push(ox::vec(), 4), 1), 7), 3), 9), 2);
+    let mut kept = 0;
+    ox::for_each(
+        ox::filter(nums, |x| x > &ox::int(3)),
+        |x| {
+            ox::print(x);
+            ox::print(ox::str_("\n"));
+            ox::inc(&mut kept);
+        },
+    );
+    ox::print(ox::str_(&format!("{} values kept\n", kept)));
+    ox::drop(nums);
+}

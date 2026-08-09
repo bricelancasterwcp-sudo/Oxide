@@ -1,0 +1,20 @@
+fn main() {
+    let list = push(push(push(push(vec(), 1), 2), 3), 4), 5);
+    let reversed = reverse(list);
+    for x in reversed {
+        print(x);
+    }
+}
+
+fn reverse<T>(mut v: Vec<T>) -> Vec<T> {
+    let mut result = vec();
+    while let Some(x) = pop(&mut v) {
+        push(result, x);
+    }
+    result
+}
+
+fn pop<T>(v: &mut Vec<T>) -> Option<T> {
+    v.pop()
+}
+```

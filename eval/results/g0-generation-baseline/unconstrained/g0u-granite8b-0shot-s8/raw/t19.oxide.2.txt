@@ -1,0 +1,21 @@
+```
+struct Point { x: Int, y: Int }
+struct Circle { center: Point, radius: Int }
+struct Shape { kind: ShapeKind, color: Str }
+enum ShapeKind { Circle(Circle), Rect(Int, Int) }
+
+fn area(s: Shape) -> Int {
+    match s.kind {
+        Circle(c) => 3_14 * c.radius * c.radius,
+        Rect(w, h) => w * h,
+    }
+}
+
+fn main() {
+    let rect = Shape {
+        kind: Rect(7, 4),
+        color: "blue",
+    }
+    print(area(rect))
+}
+```

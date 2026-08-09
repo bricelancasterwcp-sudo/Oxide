@@ -1,0 +1,13 @@
+```rust
+fn gcd(a: Int, b: Int) -> Int {
+    if a == 0 {
+        return b
+    } else {
+        return gcd(b % a, a)
+    }
+}
+
+fn main() {
+    print(gcd(252, 105))
+}
+```

@@ -1,0 +1,17 @@
+use std::io::{self, Write};
+use std::str::FromStr;
+
+fn main() {
+    let mut sum = 0;
+    let mut failures = 0;
+
+    for line in ["12", "x", "30"] {
+        match line.parse::<i32>() {
+            Ok(n) => sum += n,
+            Err(_) => failures += 1,
+        }
+    }
+
+    writeln!(io::stdout(), "Sum: {}", sum).unwrap();
+    writeln!(io::stdout(), "Failures: {}", failures).unwrap();
+}

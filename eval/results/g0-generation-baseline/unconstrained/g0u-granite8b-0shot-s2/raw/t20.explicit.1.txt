@@ -1,0 +1,27 @@
+```text
+fn cost(pen: &Pen, pad: &Pad, ink: &Ink) -> Int {
+    pen.price * pen.quantity + pad.price * pad.quantity + ink.price * ink.quantity
+}
+
+fn main() {
+    let pen = Pen { price: 3, quantity: 4 }
+    let pad = Pad { price: 9, quantity: 2 }
+    let ink = Ink { price: 5, quantity: 3 }
+    print(cost(&pen, &pad, &ink))
+    let mut max_price = 0
+    let mut item_name = ""
+    for name in ["pen", "pad", "ink"] {
+        let p = match name {
+            "pen" => &pen,
+            "pad" => &pad,
+            "ink" => &ink,
+            _ => unreachable!(),
+        }
+        if p.price > max_price {
+            max_price = p.price
+            item_name = name
+        }
+    }
+    print_str(item_name)
+}
+```

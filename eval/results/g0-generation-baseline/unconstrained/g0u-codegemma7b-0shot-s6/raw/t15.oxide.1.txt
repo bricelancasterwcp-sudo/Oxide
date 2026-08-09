@@ -1,0 +1,15 @@
+```
+fn main() {
+    let nums = ["12", "x", "30"];
+    let mut sum = 0;
+    let mut fail = 0;
+    for n in nums {
+        match parse_int(n) {
+            Some(i) => sum += i,
+            None => fail += 1,
+        }
+    }
+    print(sum);
+    print(fail);
+}
+```

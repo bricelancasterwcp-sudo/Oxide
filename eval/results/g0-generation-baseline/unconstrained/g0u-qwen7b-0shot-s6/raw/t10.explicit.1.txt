@@ -1,0 +1,16 @@
+```rust
+fn main() {
+    let nums = vec![4, 1, 7, 3, 9, 2];
+    let mut i = 0;
+    let mut count = 0;
+    while i < nums.len() {
+        if nums[i] > 3 {
+            print!("{}", nums[i]);
+            count = count + 1;
+        }
+        i = i + 1;
+    }
+    print!("\n{}", count);
+    drop nums;
+}
+```

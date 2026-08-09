@@ -1,0 +1,48 @@
+```text
+print(x)                      # reads x — debug-print
+print_str(s)                  # reads s — print without quotes
+vec() -> Vec<T>               # empty vector (context infers T)
+push(v, x) -> Vec<T>          # consumes v, returns it with x appended
+len(v) -> Int                 # reads v
+get(v, i) -> Option<T>        # reads v — element copy at i
+range(a, b) -> Vec<Int>       # integers a..b-1
+clone(x) -> T                 # reads x — fresh copy
+str_len(s) -> Int             # reads s
+concat(a, b) -> Str           # consumes both, returns a+b
+chars(s) -> Vec<Str>          # reads s — one-char strings
+int_to_str(n) -> Str
+parse_int(s) -> Option<Int>   # reads s
+to_float(n) -> Float
+trunc(x) -> Int               # toward zero
+
+fn sort(v: &mut Vec<Int>) {
+    for i in range(0, len(v)) {
+        let mut smallest = i
+        for j in range(i+1, len(v)) {
+            if get(v, j) < get(v, smallest) {
+                smallest = j
+            }
+        }
+        if smallest != i {
+            swap(v, i, smallest)
+        }
+    }
+}
+
+fn swap(v: &mut Vec<Int>, i: Int, j: Int) {
+    let tmp = clone(get(v, i))
+    drop v[i]
+    v[i] = get(v, j)
+    drop v[j]
+    v[j] = tmp
+}
+
+fn main() {
+    let mut values = push(push(vec(), 5), 40)
+    sort(&mut values)
+    for x in &values {
+        print(x)
+        print("\n")
+    }
+}
+```

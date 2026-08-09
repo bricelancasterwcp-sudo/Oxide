@@ -1,0 +1,18 @@
+```rust
+fn main() {
+    let a = 100 / 5;
+    print(a);
+    drop a;
+
+    let b = match 100 / 0 {
+        0 => "undefined",
+        _ => &str::from("undefined"),
+    };
+    print(b);
+    drop b;
+
+    let c = 100 / 4;
+    print(c);
+    drop c;
+}
+```

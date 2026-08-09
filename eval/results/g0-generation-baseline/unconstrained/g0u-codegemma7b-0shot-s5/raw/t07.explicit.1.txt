@@ -1,0 +1,16 @@
+fn main() {
+    let mut first_eight_multiples_of_three: Vec<Int> = vec![];
+    let mut current_multiple_of_three = 0;
+
+    while first_eight_multiples_of_three.len() < 8 {
+        current_multiple_of_three += 3;
+        first_eight_multiples_of_three.push(current_multiple_of_three);
+    }
+
+    let mut sum_of_multiples_of_three = 0;
+    for multiple in &first_eight_multiples_of_three {
+        sum_of_multiples_of_three += multiple;
+    }
+
+    print(sum_of_multiples_of_three)
+}

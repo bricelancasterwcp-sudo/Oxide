@@ -1,0 +1,26 @@
+```rust
+struct Rectangle {
+    width: i32,
+    height: i32,
+}
+
+struct Triangle {
+    side1: i32,
+    side2: i32,
+    side3: i32,
+}
+
+fn perimeter(shape: &impl Shape) -> i32 {
+    shape.perimeter()
+}
+
+fn main() {
+    let rectangle = Rectangle { width: 3, height: 4 };
+    let triangle = Triangle { side1: 3, side2: 4, side3: 5 };
+    let sequence = [rectangle, triangle, rectangle];
+
+    for shape in sequence {
+        println!("{}", perimeter(&shape));
+    }
+}
+```

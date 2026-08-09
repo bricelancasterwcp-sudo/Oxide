@@ -1,0 +1,16 @@
+fn count(s: &str) -> (Int, Int) {
+    let mut seen = 0;
+    let mut distinct = 0;
+    for c in s.chars() {
+        seen = seen + 1;
+        if seen == 1 {
+            distinct = distinct + 1
+        }
+    }
+    (seen, distinct)
+}
+
+fn main() {
+    let (total, unique) = count("mississippi");
+    print("{}\n{}\n", total, unique)
+}

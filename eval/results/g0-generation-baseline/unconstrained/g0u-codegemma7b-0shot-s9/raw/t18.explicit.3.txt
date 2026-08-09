@@ -1,0 +1,20 @@
+fn perimeter(rect: &(2, 4)) -> Int {
+    2 * (rect.0 + rect.1)
+}
+
+fn perimeter(triangle: &(3, 4, 5)) -> Int {
+    triangle.0 + triangle.1 + triangle.2
+}
+
+fn perimeter(rect: &(2, 5)) -> Int {
+    2 * (rect.0 + rect.1)
+}
+
+fn main() {
+    let triangle = (3, 4, 5)
+    let rect = (2, 4)
+    let rect2 = (2, 5)
+    print(perimeter(&triangle))
+    print(perimeter(&rect))
+    print(perimeter(&rect2))
+}

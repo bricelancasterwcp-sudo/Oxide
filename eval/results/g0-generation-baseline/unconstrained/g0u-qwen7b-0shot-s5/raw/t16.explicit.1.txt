@@ -1,0 +1,34 @@
+```rust
+fn main() {
+    let divisor1 = 5;
+    let divisor2 = 0;
+    let divisor3 = 4;
+
+    if divisor1 != 0 {
+        let quotient = 100 / divisor1;
+        print(quotient);
+    } else {
+        print_str("undefined");
+    }
+
+    print_str("\n");
+
+    if divisor2 != 0 {
+        let quotient = 100 / divisor2;
+        print(quotient);
+    } else {
+        print_str("undefined");
+    }
+
+    print_str("\n");
+
+    if divisor3 != 0 {
+        let quotient = 100 / divisor3;
+        print(quotient);
+    } else {
+        print_str("undefined");
+    }
+
+    print_str("\n");
+}
+```

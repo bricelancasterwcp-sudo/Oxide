@@ -1,0 +1,13 @@
+```
+fn print_reverse(v: Vec<Int>) {
+    let mut v = v
+    while len(v) > 0 {
+        print(get(v, len(v) - 1)?)
+        v = range(0, len(v) - 1)
+    }
+}
+
+fn main() {
+    print_reverse(range(1, 6))
+}
+```

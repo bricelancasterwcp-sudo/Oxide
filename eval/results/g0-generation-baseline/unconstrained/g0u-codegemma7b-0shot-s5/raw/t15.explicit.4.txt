@@ -1,0 +1,18 @@
+fn parse_ints(s: &str) -> (Int, Int) {
+    let mut parsed_nums = 0;
+    let mut failed_nums = 0;
+    for num in s.split_whitespace() {
+        match parse_int(num) {
+            Some(n) => parsed_nums = parsed_nums + n,
+            None => failed_nums = failed_nums + 1,
+        }
+    }
+    (parsed_nums, failed_nums)
+}
+
+fn main() {
+    let input_string = "12 x 30";
+    let (parsed_sum, failed_count) = parse_ints(input_string);
+    print("Parsed sum: {}\n", parsed_sum);
+    print("Failed count: {}\n", failed_count);
+}

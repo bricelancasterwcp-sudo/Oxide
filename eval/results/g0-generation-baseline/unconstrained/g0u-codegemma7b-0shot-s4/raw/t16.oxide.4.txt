@@ -1,0 +1,6 @@
+fn main() {
+    let a = 100;
+    print(trunc(a / 5));
+    if 0 == 0 { print_str("undefined"); }
+    print(trunc(a / 4));
+}

@@ -1,0 +1,23 @@
+```rust
+fn main() {
+  for n in 2..1000 {
+    let mut sum = 1;
+    let mut d = 2;
+    while d * d <= n {
+      if n % d == 0 {
+        sum += d;
+        if d * d != n {
+          sum += n / d;
+        }
+      }
+      d += 1;
+    }
+    if sum == n {
+      print(n);
+    }
+  }
+}
+```
+
+Note that you are not allowed to use any `Vec`, `Option`, `Result`, `String`, or
+`Iterator` methods.

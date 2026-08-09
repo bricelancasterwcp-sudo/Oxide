@@ -1,0 +1,12 @@
+fn main() {
+  let stack = "stack";
+  let mut index = len(&stack) - 1;
+  let mut result = "";
+
+  while index >= 0 {
+    result = concat(&result, &get(&stack, index).unwrap());
+    index -= 1;
+  }
+
+  print(result);
+}

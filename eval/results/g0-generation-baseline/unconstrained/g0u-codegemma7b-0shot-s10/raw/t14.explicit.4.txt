@@ -1,0 +1,19 @@
+fn count_s(s: &Str) -> (Int, Int) {
+    let mut count = 0;
+    let mut seen: Vec<char> = vec![];
+    for c in s.chars() {
+        if c == 's' {
+            count += 1;
+        }
+        if !seen.contains(&c) {
+            seen.push(c);
+        }
+    }
+    (count, seen.len() as Int)
+}
+
+fn main() {
+    let (count, distinct) = count_s("mississippi");
+    print!("The character 's' occurs {} times in 'mississippi'.\n", count);
+    print!("The distinct characters in 'mississippi' are: {}\n", distinct);
+}

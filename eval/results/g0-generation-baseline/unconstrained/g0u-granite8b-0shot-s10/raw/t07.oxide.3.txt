@@ -1,0 +1,7 @@
+fn main() {
+    let v = push(push(vec(), 3), 42)
+    let sum = for i in 0..len(v) {
+        get(v, i)? * 3
+    }
+    print(sum)
+}

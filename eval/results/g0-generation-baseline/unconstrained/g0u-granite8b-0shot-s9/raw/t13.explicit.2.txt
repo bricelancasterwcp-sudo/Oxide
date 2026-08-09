@@ -1,0 +1,14 @@
+```
+fn print(x: &Str) {
+    print_str(concat(x, "\n"))
+}
+
+fn main() {
+    let level = "level"
+    let stereo = "stereo"
+    let rotor = "rotor"
+    print(level)
+    print(stereo)
+    print(rotor)
+}
+```

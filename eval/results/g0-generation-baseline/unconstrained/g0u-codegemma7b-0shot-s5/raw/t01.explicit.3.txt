@@ -1,0 +1,8 @@
+fn main() {
+    let total = 0;
+    for x in 0..=9 {
+        total = total + x * x;
+    }
+    print(total);
+    drop total;
+}

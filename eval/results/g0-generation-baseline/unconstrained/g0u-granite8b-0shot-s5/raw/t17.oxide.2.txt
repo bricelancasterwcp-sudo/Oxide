@@ -1,0 +1,7 @@
+```
+fn task(list: Vec<Int>) -> (Option<Int>, Option<Int>) {
+    let first = get(list, 1)?;
+    let fifth = get(list, 5)?;
+    (Some(first), Some(fifth))
+}
+```

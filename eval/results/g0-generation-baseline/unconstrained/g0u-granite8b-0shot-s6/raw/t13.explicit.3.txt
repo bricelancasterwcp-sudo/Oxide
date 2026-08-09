@@ -1,0 +1,11 @@
+```rust
+fn main() {
+    let level = "level";
+    let stereo = "stereo";
+    let rotor = "rotor";
+
+    println!("{}", level.chars().rev().collect::<String>() == level);
+    println!("{}", stereo.chars().rev().collect::<String>() == stereo);
+    println!("{}", rotor.chars().rev().collect::<String>() == rotor);
+}
+```

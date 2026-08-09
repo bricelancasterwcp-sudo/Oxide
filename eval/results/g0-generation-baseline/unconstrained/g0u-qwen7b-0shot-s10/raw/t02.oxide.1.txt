@@ -1,0 +1,20 @@
+```oxide
+fn transform_steps(n: Int) -> Int {
+    let mut steps = 0
+    let mut x = n
+    while x != 1 {
+        if x % 2 == 0 {
+            x = x / 2
+        } else {
+            x = x * 3 + 1
+        }
+        steps = steps + 1
+    }
+    steps
+}
+
+fn main() {
+    let steps = transform_steps(27)
+    print(steps)
+}
+```

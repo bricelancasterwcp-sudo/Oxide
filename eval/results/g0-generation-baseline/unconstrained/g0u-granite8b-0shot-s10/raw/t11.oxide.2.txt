@@ -1,0 +1,20 @@
+```
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v
+    for i in 0..len(v) {
+        for j in i..len(v) {
+            if v[i] > v[j] {
+                let t = v[i]
+                v[i] = v[j]
+                v[j] = t
+            }
+        }
+    }
+    v
+}
+
+fn main() {
+    let v = push(push(push(vec(), 5), 3), 8)
+    print(sort(v))
+}
+```

@@ -1,0 +1,13 @@
+fn main() {
+    let mut nums = vec![3, 8, -2, 12, 7];
+    let mut positives = 0;
+    let mut largest = nums[0];
+    for n in nums.iter() {
+        if *n > 0 {
+            positives += 1;
+            largest = std::cmp::max(largest, *n);
+        }
+    }
+    print(positives);
+    print(largest);
+}

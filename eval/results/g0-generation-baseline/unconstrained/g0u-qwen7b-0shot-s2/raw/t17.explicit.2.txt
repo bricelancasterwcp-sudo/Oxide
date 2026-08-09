@@ -1,0 +1,19 @@
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v[i])
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let nums = vec(10, 20, 30);
+    match get(&nums, 1) {
+        Some(x) => print(x),
+        None => print(-1),
+    }
+    match get(&nums, 5) {
+        Some(x) => print(x),
+        None => print(-1),
+    }
+}

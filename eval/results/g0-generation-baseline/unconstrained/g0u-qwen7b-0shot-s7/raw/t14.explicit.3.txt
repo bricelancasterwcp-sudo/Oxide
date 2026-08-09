@@ -1,0 +1,20 @@
+fn count_chars(s: &Str) -> (Int, Int) {
+    let mut count = 0
+    let mut chars_set = Vec<Str>()
+    for c in chars(s) {
+        if c == "s" {
+            count = count + 1
+        }
+        if !chars_set.contains(&c) {
+            chars_set.push(c)
+        }
+    }
+    (count, chars_set.len())
+}
+
+fn main() {
+    let text = "mississippi"
+    let (s_count, distinct_count) = count_chars(&text)
+    print(s_count)
+    print(distinct_count)
+}

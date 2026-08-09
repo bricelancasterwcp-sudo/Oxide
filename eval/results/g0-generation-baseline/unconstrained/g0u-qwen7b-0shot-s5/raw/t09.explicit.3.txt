@@ -1,0 +1,16 @@
+fn reverse_print(v: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec();
+    let len = len(v);
+    for i in 0..len {
+        let x = get(v, len - 1 - i);
+        print_str(x);
+        push(result, x);
+    }
+    result
+}
+
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5);
+    reverse_print(&nums);
+    drop nums
+}

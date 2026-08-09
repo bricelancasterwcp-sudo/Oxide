@@ -1,0 +1,27 @@
+```rust
+struct Point { x: Float, y: Float }
+
+struct Rectangle { width: Float, height: Float }
+impl Rectangle {
+    fn perimeter(&self) -> Float {
+        2.0 * (self.width + self.height)
+    }
+}
+
+struct Triangle { sides: Vec<Float> }
+impl Triangle {
+    fn perimeter(&self) -> Float {
+        self.sides.iter().sum()
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle { width: 3.0, height: 4.0 };
+    let triangle = Triangle { sides: vec![3.0, 4.0, 5.0] };
+    let rect2 = Rectangle { width: 2.0, height: 5.0 };
+
+    print(rect1.perimeter());
+    print(triangle.perimeter());
+    print(rect2.perimeter());
+}
+```

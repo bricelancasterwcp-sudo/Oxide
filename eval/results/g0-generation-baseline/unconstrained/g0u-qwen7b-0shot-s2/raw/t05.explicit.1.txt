@@ -1,0 +1,15 @@
+```rust
+fn fibonacci(n: Int, a: Int, b: Int) -> Int {
+    if n == 0 {
+        a
+    } else {
+        fibonacci(n - 1, b, a + b)
+    }
+}
+
+fn main() {
+    let result = fibonacci(19, 1, 1);
+    print(result);
+    drop result;
+}
+```

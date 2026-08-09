@@ -1,0 +1,11 @@
+fn reverse(s: &str) -> Str {
+    let mut result = vec![]
+    for c in s.chars().rev() {
+        result.push(c)
+    }
+    str_concat(&result)
+}
+
+fn main() {
+    print(reverse("stack"))
+}

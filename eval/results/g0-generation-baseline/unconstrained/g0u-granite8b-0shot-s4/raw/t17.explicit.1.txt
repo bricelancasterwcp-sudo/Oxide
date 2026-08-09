@@ -1,0 +1,40 @@
+```rust
+use std::io;
+
+fn main() {
+    let mut list = vec![10, 20, 30];
+
+    let pos1 = read_position();
+    let pos5 = read_position();
+
+    println!("{}", lookup(&list, pos1));
+    println!("{}", lookup(&list, pos5));
+}
+
+fn lookup(list: &Vec<i32>, position: usize) -> i32 {
+    match list.get(position) {
+        Some(val) => *val,
+        None => -1,
+    }
+}
+
+fn read_position() -> usize {
+    let mut input = String::new();
+
+    match io::stdin().read_line(&mut input) {
+        Ok(_) => {
+            let trimmed = input.trim();
+            match trimmed.parse::<usize>() {
+                Ok(num) => num,
+                Err(_) => 0,
+            }
+        }
+        Err(_) => 0,
+    }
+}
+```
+
+Task:
+A list contains 10, 20, 30 in that order. Look up the element at position 1, then the element at position 5, where positions count from 0. For each lookup print the element found, or -1 when the position is outside the list.
+
+Reply with ONLY the complete program source, no fences, no commentary.

@@ -1,0 +1,16 @@
+```rust
+fn main() {
+    let divisors = vec![5, 0, 4];
+    for d in &divisors {
+        if *d == 0 {
+            print_str("undefined\n");
+        } else {
+            print(&div(100, *d))
+        }
+    }
+}
+
+fn div(x: Int, y: Int) -> Int {
+    x / y
+}
+```

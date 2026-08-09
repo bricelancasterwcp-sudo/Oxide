@@ -1,0 +1,13 @@
+fn gcd(a: Int, b: Int) -> Int {
+    let zero = 0;
+    if b == zero {
+        a
+    } else {
+        gcd(b, a % b)
+    }
+}
+
+fn main() {
+    print(gcd(252, 105))
+}
+```

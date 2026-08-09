@@ -1,0 +1,7 @@
+for ch in text.chars() {
+    stack.push(ch);
+}
+
+for _ in 0..text.len() {
+    print!("{}", stack.pop().unwrap());
+}

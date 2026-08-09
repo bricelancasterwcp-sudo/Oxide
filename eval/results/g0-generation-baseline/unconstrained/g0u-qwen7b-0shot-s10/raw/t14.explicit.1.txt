@@ -1,0 +1,27 @@
+```rust
+fn count_s(text: &Str) -> Int {
+    let count = 0;
+    for c in chars(text) {
+        if c == "s" {
+            count = count + 1;
+        }
+    }
+    count
+}
+
+fn count_distinct(text: &Str) -> Int {
+    let mut chars_set = vec![];
+    for c in chars(text) {
+        if !chars_set.contains(&c) {
+            chars_set = push(chars_set, c);
+        }
+    }
+    len(chars_set)
+}
+
+fn main() {
+    let text = "mississippi";
+    print(count_s(text));
+    print(count_distinct(text));
+}
+```

@@ -1,0 +1,16 @@
+```oxide
+fn gcd(a: Int, b: Int) -> Int {
+    let mut x = a
+    let mut y = b
+    while y != 0 {
+        let temp = y
+        y = x % y
+        x = temp
+    }
+    x
+}
+
+fn main() {
+    print(gcd(252, 105))
+}
+```

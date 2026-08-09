@@ -1,0 +1,32 @@
+```rust
+struct Reading { label: String, values: Vec<i32> }
+
+fn first_big(v: Vec<i32>) -> i32 {
+    let found = -1;
+    for x in v {
+        if x > 10 {
+            found = x;
+            break;
+        }
+    }
+    found
+}
+
+fn second(v: Vec<i32>) -> Option<i32> {
+    let x = match get(v, 1) {
+        Some(x) => x,
+        None => return None,
+    };
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab".to_string(), values: push(push(vec(), 3), 42) };
+    print(first_big(r.values));            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2".to_string(), ..r };
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+```

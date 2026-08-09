@@ -1,0 +1,27 @@
+```oxide
+fn count_s(text: Str) -> Int {
+    let count = 0
+    for c in chars(text) {
+        if c == "s" {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_chars(text: Str) -> Int {
+    let mut chars_set = Vec()
+    for c in chars(text) {
+        if get(chars_set, c) == None {
+            chars_set = push(chars_set, c)
+        }
+    }
+    len(chars_set)
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_s(text))
+    print(distinct_chars(text))
+}
+```

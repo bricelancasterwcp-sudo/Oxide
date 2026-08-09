@@ -1,0 +1,12 @@
+fn main() {
+    let (mut total_cost, mut most_expensive) = (0f32, "");
+    for (name, price, qty) in [("pen", 3f32, 4), ("pad", 9f32, 2), ("ink", 5f32, 3)] {
+        let cost = price * qty as f32;
+        total_cost += cost;
+        if cost > most_expensive.len() as f32 {
+            most_expensive = name.clone();
+        }
+    }
+    print(format!("Total cost: {}", total_cost));
+    print(format!("Most expensive: {}", most_expensive));
+}

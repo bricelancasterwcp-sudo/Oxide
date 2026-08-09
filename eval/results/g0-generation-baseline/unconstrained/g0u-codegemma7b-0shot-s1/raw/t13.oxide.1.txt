@@ -1,0 +1,24 @@
+```text
+fn is_palindrome(word: &str) -> bool {
+    let mut start = 0;
+    let mut end = word.len() - 1;
+
+    while start < end {
+        if word.chars().nth(start) != word.chars().nth(end) {
+            return false;
+        }
+        start += 1;
+        end -= 1;
+    }
+
+    true
+}
+
+fn main() {
+    let texts = ["level", "stereo", "rotor"];
+
+    for text in texts {
+        println!("{}", is_palindrome(text));
+    }
+}
+```

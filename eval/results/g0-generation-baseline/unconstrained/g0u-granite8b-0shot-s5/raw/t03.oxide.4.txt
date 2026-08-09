@@ -1,0 +1,17 @@
+fn main() {
+    print(gcd(252, 105))
+}
+
+fn gcd(a: Int, b: Int) -> Int {
+    let mut a = a
+    let mut b = b
+    while b != 0 {
+        if a < b {
+            let t = a
+            a = b
+            b = t
+        }
+        a = a - b
+    }
+    a
+}

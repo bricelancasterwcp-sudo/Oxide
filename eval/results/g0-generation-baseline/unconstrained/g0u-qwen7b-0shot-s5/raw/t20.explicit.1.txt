@@ -1,0 +1,30 @@
+```rust
+struct Item {
+    name: Str,
+    price: Int,
+    quantity: Int,
+}
+
+fn main() {
+    let pen = Item { name: "Pen", price: 3, quantity: 4 };
+    let pad = Item { name: "Pad", price: 9, quantity: 2 };
+    let ink = Item { name: "Ink", price: 5, quantity: 3 };
+
+    let total_cost = pen.price * pen.quantity + pad.price * pad.quantity + ink.price * ink.quantity;
+    print(total_cost);
+
+    let mut max_cost = pen.price * pen.quantity;
+    let mut max_item = &pen;
+
+    if pad.price * pad.quantity > max_cost {
+        max_cost = pad.price * pad.quantity;
+        max_item = &pad;
+    }
+
+    if ink.price * ink.quantity > max_cost {
+        max_cost = ink.price * ink.quantity;
+        max_item = &ink;
+    }
+
+    print_str(max_item.name);
+}

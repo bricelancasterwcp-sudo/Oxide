@@ -1,0 +1,16 @@
+struct Stack {
+    items: Vec<Str>,
+}
+
+fn main() {
+    let mut s = Stack { items: vec() };
+    s = push(s, "hello");
+    s = push(s, ", ");
+    s = push(s, "world");
+    s = push(s, "!");
+    print_str(s.items);
+}
+
+fn push(s: Stack, item: Str) -> Stack {
+    Stack { items: push(s.items, item) }
+}

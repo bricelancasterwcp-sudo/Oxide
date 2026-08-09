@@ -1,0 +1,23 @@
+```rust
+fn fibonacci(n: Int) -> Int {
+    if n <= 1 {
+        1
+    } else {
+        let a = 1;
+        let b = 1;
+        for _ in 2..n {
+            let temp = a + b;
+            drop a;
+            a = b;
+            b = temp;
+        }
+        a
+    }
+}
+
+fn main() {
+    let term = fibonacci(20);
+    print(term);
+    drop term;
+}
+```

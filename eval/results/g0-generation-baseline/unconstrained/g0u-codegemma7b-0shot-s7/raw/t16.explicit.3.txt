@@ -1,0 +1,10 @@
+fn main() {
+    for divisor in [5, 0, 4] {
+        if divisor == 0 {
+            print("undefined\n")
+        } else {
+            let quotient = 100 / divisor
+            print("{}\n", quotient)
+        }
+    }
+}

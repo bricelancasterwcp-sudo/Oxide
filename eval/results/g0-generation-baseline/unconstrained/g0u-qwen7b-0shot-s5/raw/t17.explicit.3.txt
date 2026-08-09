@@ -1,0 +1,12 @@
+fn get_element(nums: &Vec<Int>, pos: Int) -> Int {
+    match get(nums, pos) {
+        Some(x) => x,
+        None => -1
+    }
+}
+
+fn main() {
+    let nums = vec(10, 20, 30);
+    print(get_element(&nums, 1));
+    print(get_element(&nums, 5));
+}

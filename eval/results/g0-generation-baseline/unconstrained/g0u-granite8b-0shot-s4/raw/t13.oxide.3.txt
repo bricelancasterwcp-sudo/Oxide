@@ -1,0 +1,9 @@
+fn main() {
+    let level = "level";
+    let stereo = "stereo";
+    let rotor = "rotor";
+
+    print(level == level[::-1]);
+    print(stereo == stereo[::-1]);
+    print(rotor == rotor[::-1]);
+}

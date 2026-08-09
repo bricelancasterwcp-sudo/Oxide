@@ -1,0 +1,16 @@
+fn main() {
+    let nums = vec![5, 40];
+    let bigger = vec![nums[0], nums[1], 70];
+    print(sum_big(&nums, 10));
+    print(sum_big(&bigger, 10));
+}
+
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0;
+    for x in v {
+        if x > limit {
+            total = total + x;
+        }
+    }
+    total
+}

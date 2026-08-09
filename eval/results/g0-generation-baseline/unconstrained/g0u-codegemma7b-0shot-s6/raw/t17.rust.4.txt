@@ -1,0 +1,12 @@
+use std::collections::LinkedList;
+
+fn main() {
+    let mut list = LinkedList::new();
+
+    list.push_back(10);
+    list.push_back(20);
+    list.push_back(30);
+
+    println!("{}", list.ge(1).unwrap_or(&-1)); // 20
+    println!("{}", list.ge(5).unwrap_or(&-1)); // -1
+}

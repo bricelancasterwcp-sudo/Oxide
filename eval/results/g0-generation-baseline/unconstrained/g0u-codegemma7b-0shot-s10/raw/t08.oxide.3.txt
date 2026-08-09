@@ -1,0 +1,13 @@
+fn main() {
+    let nums = vec![3, 8, -2, 12, 7];
+    let mut pos = 0;
+    let mut max = -1;
+    for n in nums {
+        if n > 0 {
+            pos += 1;
+            max = max.max(n);
+        }
+    }
+    print(pos);
+    print(max);
+}

@@ -1,0 +1,7 @@
+fn main() {
+    let mut acc = 0f64;
+    for i in 0..10 {
+        acc = acc + i * i;
+    }
+    print(acc);
+}

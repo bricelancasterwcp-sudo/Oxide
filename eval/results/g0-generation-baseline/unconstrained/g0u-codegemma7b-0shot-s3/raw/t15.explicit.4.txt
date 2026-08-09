@@ -1,0 +1,21 @@
+fn parse_and_sum(str_list: &[Str]) -> (Int, Int) {
+    let mut sum = 0;
+    let mut count = 0;
+    for s in str_list {
+        match parse_int(s) {
+            Some(num) => {
+                sum += num;
+                count += 1;
+            },
+            None => (),
+        }
+    }
+    (sum, count)
+}
+
+fn main() {
+    let str_list = vec![str("12"), str("x"), str("30")];
+    let (sum, count) = parse_and_sum(&str_list);
+    print(sum);
+    print(count);
+}

@@ -1,0 +1,39 @@
+fn calculate_item_cost(unit_price: Int, quantity: Int) -> Int {
+    unit_price * quantity
+}
+
+fn find_most_expensive_item(items: Vec<(String, Int, Int)>) -> String {
+    let mut most_expensive_item = String::new();
+    let mut max_cost = 0;
+
+    for (item_name, unit_price, quantity) in items {
+        let item_cost = calculate_item_cost(unit_price, quantity);
+        if item_cost > max_cost {
+            max_cost = item_cost;
+            most_expensive_item = item_name;
+        }
+    }
+
+    most_expensive_item
+}
+
+fn main() {
+    let items = vec![
+        ("pen".to_string(), 3, 4),
+        ("pad".to_string(), 9, 2),
+        ("ink".to_string(), 5, 3),
+    ];
+
+    let total_cost = items
+        .iter()
+        .map(|(item_name, unit_price, quantity)| {
+            calculate_item_cost(*unit_price, *quantity)
+        })
+        .sum();
+
+    println!("Total cost: {}", total_cost);
+
+    let most_expensive_item = find_most_expensive_item(items);
+
+    println!("Most expensive item: {}", most_expensive_item);
+}

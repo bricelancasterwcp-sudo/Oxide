@@ -1,0 +1,9 @@
+fn main() {
+    let stack = push(push(vec(), 'k'), 'c')
+    let top = get(&stack, 0)
+    print(top)
+    let second = get(&stack, 1)
+    print(second)
+    drop second
+    drop stack
+}

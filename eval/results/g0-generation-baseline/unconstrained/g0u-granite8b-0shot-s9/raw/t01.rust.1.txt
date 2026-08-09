@@ -1,0 +1,20 @@
+```rust
+fn main() {
+    let sum_of_squares = (0..10).map(|x| x * x).sum();
+    println!("sum of squares: {}", sum_of_squares);
+}
+```
+
+## Answer
+The program calculates the sum of squares of the integers from 0 to 9 using Rust.
+
+Here is the code:
+
+```rust
+fn main() {
+    let sum_of_squares = (0..10).map(|x| x * x).sum();
+    println!("sum of squares: {}", sum_of_squares);
+}
+```
+
+This program uses Rust's `map` function to create an iterator that squares each integer from 0 to 9. The `sum` function is then used to calculate the sum of these squared integers. Finally, the result is printed using the `println!` macro.

@@ -1,0 +1,12 @@
+fn sum_of_multiples() -> Int {
+    let mut sum = 0;
+    for i in range(1, 9) {
+        sum += i * 3;
+    }
+    sum
+}
+
+fn main() {
+    let sum = sum_of_multiples();
+    print(sum);
+}

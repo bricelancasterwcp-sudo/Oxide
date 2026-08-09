@@ -1,0 +1,18 @@
+fn main() {
+    let pen = (3, 4);
+    let pad = (9, 2);
+    let ink = (5, 3);
+    let total_cost = pen.0 * pen.1 + pad.0 * pad.1 + ink.0 * ink.1;
+    let mut highest_cost = pen.0 * pen.1;
+    let mut highest_item = "pen";
+    if pad.0 * pad.1 > highest_cost {
+        highest_cost = pad.0 * pad.1;
+        highest_item = "pad";
+    }
+    if ink.0 * ink.1 > highest_cost {
+        highest_cost = ink.0 * ink.1;
+        highest_item = "ink";
+    }
+    print(total_cost)
+    print(highest_item)
+}

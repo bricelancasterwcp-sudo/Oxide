@@ -1,0 +1,31 @@
+fn total_cost(prices: &Vec<Int>, quantities: &Vec<Int>) -> Int {
+    let mut sum = 0;
+    for i in 0..prices.len() {
+        sum += prices[i] * quantities[i]
+    }
+    sum
+}
+
+fn most_expensive(prices: &Vec<Int>, names: &Vec<Str>) -> Str {
+    let mut max_cost = 0;
+    let mut most_expensive_name = "";
+    for i in 0..prices.len() {
+        if prices[i] * quantities[i] > max_cost {
+            max_cost = prices[i] * quantities[i];
+            most_expensive_name = &names[i];
+        }
+    }
+    most_expensive_name.to_string()
+}
+
+fn main() {
+    let prices = vec![3, 9, 5];
+    let quantities = vec![4, 2, 3];
+    let names = vec![Str::from("pen"), Str::from("pad"), Str::from("ink")];
+
+    let total = total_cost(&prices, &quantities);
+    print(total);
+
+    let most_expensive_name = most_expensive(&prices, &names);
+    print(most_expensive_name);
+}

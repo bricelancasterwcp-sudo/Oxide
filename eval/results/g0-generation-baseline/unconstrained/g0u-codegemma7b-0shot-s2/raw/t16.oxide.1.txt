@@ -1,0 +1,13 @@
+fn divide_by(dividend: Int, divisor: Int) -> Str {
+    if divisor == 0 {
+        return "undefined";
+    }
+    let quotient = dividend / divisor;
+    format!("{}", quotient)
+}
+
+fn main() {
+    print(divide_by(100, 5));
+    print(divide_by(100, 0));
+    print(divide_by(100, 4));
+}

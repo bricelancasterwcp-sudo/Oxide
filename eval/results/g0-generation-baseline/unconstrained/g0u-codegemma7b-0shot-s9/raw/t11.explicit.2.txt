@@ -1,0 +1,16 @@
+fn main() {
+    let mut nums = vec(5, 3, 8, 1, 9, 2);
+    for x in &mut nums {
+        for y in &mut nums {
+            if *x > *y {
+                let tmp = *x;
+                *x = *y;
+                *y = tmp;
+            }
+        }
+    }
+    for x in &nums {
+        print(x);
+        print("\n")
+    }
+}

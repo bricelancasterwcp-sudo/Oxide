@@ -1,0 +1,14 @@
+```rust
+fn perfect(n: Int) -> Bool {
+    let sum = (1..n).filter(|&x| n % x == 0).sum();
+    sum == n
+}
+
+fn main() {
+    for i in range(1, 1000) {
+        if perfect(i) {
+            print(i)
+        }
+    }
+}
+```

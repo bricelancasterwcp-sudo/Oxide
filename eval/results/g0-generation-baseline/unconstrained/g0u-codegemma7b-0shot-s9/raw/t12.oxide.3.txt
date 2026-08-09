@@ -1,0 +1,8 @@
+fn main() {
+    let text = "stack";
+    let mut rev_text = "";
+    for c in text.chars().rev() {
+        rev_text = push(rev_text, c.to_string());
+    }
+    print(rev_text);
+}

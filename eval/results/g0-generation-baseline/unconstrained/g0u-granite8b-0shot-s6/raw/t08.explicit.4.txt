@@ -1,0 +1,17 @@
+```
+fn main() {
+    let list = [3, 8, -2, 12, 7];
+    let mut count = 0;
+    let mut largest = 0;
+    for &x in &list {
+        if x > 0 {
+            count += 1;
+        }
+        if x > largest {
+            largest = x;
+        }
+    }
+    print(count);
+    print(largest);
+}
+```

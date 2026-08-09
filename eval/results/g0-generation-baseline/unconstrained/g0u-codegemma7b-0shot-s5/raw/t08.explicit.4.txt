@@ -1,0 +1,18 @@
+fn main() {
+    let nums = vec![3, 8, -2, 12, 7];
+    let mut positive = 0;
+    let mut largest = nums[0];
+    for &num in &nums {
+        if num > 0 {
+            positive = positive + 1;
+            if largest < num {
+                largest = num;
+            }
+        }
+    }
+    print(positive);
+    print(largest);
+    drop nums;
+    drop largest;
+    drop positive;
+}

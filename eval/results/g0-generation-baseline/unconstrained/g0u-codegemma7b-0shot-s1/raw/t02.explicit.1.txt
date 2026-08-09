@@ -1,0 +1,16 @@
+fn count_transforms(mut n: Int) -> Int {
+    let mut steps = 0;
+    while n != 1 {
+        if n % 2 == 0 {
+            n = n / 2;
+        } else {
+            n = (3 * n) + 1;
+        }
+        steps = steps + 1;
+    }
+    steps
+}
+
+fn main() {
+    print(count_transforms(27))
+}

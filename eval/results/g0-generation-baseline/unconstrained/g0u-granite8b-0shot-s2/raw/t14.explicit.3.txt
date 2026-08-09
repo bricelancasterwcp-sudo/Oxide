@@ -1,0 +1,15 @@
+let text = "mississippi";
+let mut count = 0;
+let mut distinct_chars = 0;
+let mut index = 0;
+
+while index < text.len() {
+    if text.get(index) == Some(&"s") {
+        count += 1;
+    }
+    distinct_chars += 1;
+    index += 1;
+}
+
+print(count);
+print(distinct_chars);

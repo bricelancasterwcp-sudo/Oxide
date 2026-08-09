@@ -1,0 +1,8 @@
+```
+let sum = ref(0)
+for i in range(0, 10) {
+    let square = |x| x * x
+    sum := sum.get() + square(i)
+}
+print(sum.get())
+```

@@ -1,0 +1,13 @@
+fn main() {
+    let x = 100;
+    let y = 5;
+    print(trunc(x / y));
+    let z = 0;
+    if z == 0 {
+        print_str("undefined")
+    } else {
+        print(trunc(x / z))
+    }
+    let w = 4;
+    print(trunc(x / w))
+}

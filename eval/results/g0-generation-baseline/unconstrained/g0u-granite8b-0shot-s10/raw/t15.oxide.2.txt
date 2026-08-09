@@ -1,0 +1,9 @@
+```
+fn main() {
+    let x = parse_int("12")?
+    let y = parse_int("x")?
+    let z = parse_int("30")?
+    print(x + y + z)
+    print(3)
+}
+```

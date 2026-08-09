@@ -1,0 +1,27 @@
+```rust
+struct Rectangle { width: Int, height: Int }
+struct Triangle { sides: Vec<Int> }
+
+fn perimeter(r: Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn perimeter(t: Triangle) -> Int {
+    t.sides[0] + t.sides[1] + t.sides[2]
+}
+
+fn main() {
+    let shapes = vec![
+        Rectangle { width: 3, height: 4 },
+        Triangle { sides: vec![3, 4, 5] },
+        Rectangle { width: 2, height: 5 },
+    ];
+
+    for shape in shapes {
+        match shape {
+            Rectangle { width, height } => print(perimeter(Rectangle { width, height })),
+            Triangle { sides } => print(perimeter(Triangle { sides })),
+        }
+    }
+}
+```

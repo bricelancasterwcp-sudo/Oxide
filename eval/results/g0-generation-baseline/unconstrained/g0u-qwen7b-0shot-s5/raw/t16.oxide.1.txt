@@ -1,0 +1,10 @@
+```rust
+fn main() {
+    for d in vec![5, 0, 4] {
+        match d {
+            0 => print_str("undefined\n"),
+            _ => print(trunc(100 / d), "\n"),
+        }
+    }
+}
+```

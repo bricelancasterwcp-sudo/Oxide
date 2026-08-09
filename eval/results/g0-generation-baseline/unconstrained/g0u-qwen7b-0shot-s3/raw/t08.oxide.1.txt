@@ -1,0 +1,22 @@
+```oxide
+fn count_and_max(v: Vec<Int>) -> (Int, Int) {
+    let mut count = 0
+    let mut max = -1000
+    for x in v {
+        if x > 0 {
+            count += 1
+        }
+        if x > max {
+            max = x
+        }
+    }
+    (count, max)
+}
+
+fn main() {
+    let v = vec(3, 8, -2, 12, 7)
+    let (count, max) = count_and_max(v)
+    print(count)
+    print(max)
+}
+```

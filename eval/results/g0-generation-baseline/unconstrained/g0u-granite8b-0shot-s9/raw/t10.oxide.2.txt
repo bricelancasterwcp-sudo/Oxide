@@ -1,0 +1,24 @@
+```
+fn keep_gt_3(v: Vec<Int>) -> Vec<Int> {
+    let mut r = vec()
+    for x in v {
+        if x > 3 {
+            r = push(r, x)
+        }
+    }
+    r
+}
+
+fn count(v: Vec<Int>) -> Int {
+    len(v)
+}
+
+fn main() {
+    let task = [4, 1, 7, 3, 9, 2]
+    let r = keep_gt_3(task)
+    for x in r {
+        print(x)
+    }
+    print(count(r))
+}
+```

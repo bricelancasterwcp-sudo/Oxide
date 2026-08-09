@@ -1,0 +1,11 @@
+fn print_reverse(v: &Vec<Int>) {
+    for x in &v {
+        print(x)
+    }
+}
+
+fn main() {
+    let nums = vec(5, 40)
+    print_reverse(&nums)
+    drop nums
+}

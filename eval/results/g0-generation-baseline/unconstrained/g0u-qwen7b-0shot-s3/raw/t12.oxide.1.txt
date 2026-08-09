@@ -1,0 +1,7 @@
+```oxide
+fn main() {
+    let s = "stack";
+    let reversed = chars(s).map(|c| c).rev().concat();
+    print_str(reversed);
+}
+```

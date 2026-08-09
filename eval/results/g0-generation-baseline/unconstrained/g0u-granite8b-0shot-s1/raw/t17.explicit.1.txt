@@ -1,0 +1,62 @@
+use std::collections::HashMap;
+use std::io::{self, Write};
+use std::fs::File;
+
+fn main() {
+    let mut input_1 = String::new();
+    let mut input_2 = String::new();
+    let mut input_3 = String::new();
+    let mut input_4 = String::new();
+
+    print!("Enter a number: ");
+    io::stdout().flush().unwrap();
+    io::stdin().read_line(&mut input_1).expect("Failed to read line");
+
+    print!("Enter a number: ");
+    io::stdout().flush().unwrap();
+    io::stdin().read_line(&mut input_2).expect("Failed to read line");
+
+    print!("Enter a number: ");
+    io::stdout().flush().unwrap();
+    io::stdin().read_line(&mut input_3).expect("Failed to read line");
+
+    print!("Enter a number: ");
+    io::stdout().flush().unwrap();
+    io::stdin().read_line(&mut input_4).expect("Failed to read line");
+
+    let input_1: f64 = match input_1.trim().parse() {
+        Ok(num) => num,
+        Err(_) => return,
+    };
+    let input_2: f64 = match input_2.trim().parse() {
+        Ok(num) => num,
+        Err(_) => return,
+    };
+    let input_3: f64 = match input_3.trim().parse() {
+        Ok(num) => num,
+        Err(_) => return,
+    };
+    let input_4: f64 = match input_4.trim().parse() {
+        Ok(num) => num,
+        Err(_) => return,
+    };
+
+    let mut list: HashMap<i32, f64> = HashMap::new();
+    list.insert(0, input_1);
+    list.insert(1, input_2);
+    list.insert(2, input_3);
+    list.insert(3, input_4);
+
+    let lookup_1 = list.get(&1);
+    let lookup_5 = list.get(&5);
+
+    match lookup_1 {
+        Some(val) => println!("Element at position 1: {}", val),
+        None => println!("Element at position 1: -1"),
+    }
+
+    match lookup_5 {
+        Some(val) => println!("Element at position 5: {}", val),
+        None => println!("Element at position 5: -1"),
+    }
+}

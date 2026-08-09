@@ -1,0 +1,15 @@
+```text
+fn main() {
+    let mut two = 2;
+    let mut seven = 7;
+    let mut result = 1;
+    while result < 1000 {
+        if result % two == 0 {
+            result = result / two;
+        } else {
+            result = result * seven + 1;
+        }
+    }
+    print(result);
+}
+```

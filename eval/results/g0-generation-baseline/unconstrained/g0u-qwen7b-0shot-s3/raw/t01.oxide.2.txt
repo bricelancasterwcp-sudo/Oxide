@@ -1,0 +1,4 @@
+fn main() {
+    let sum = (0..10).map(|x| x * x).sum();
+    print(sum);
+}

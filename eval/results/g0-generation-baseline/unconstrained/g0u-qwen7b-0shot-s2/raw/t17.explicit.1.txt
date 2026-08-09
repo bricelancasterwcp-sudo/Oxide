@@ -1,0 +1,14 @@
+```rust
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    match get(v, i) {
+        Some(x) => x,
+        None => -1,
+    }
+}
+
+fn main() {
+    let nums = vec(10, 20, 30);
+    print(get(&nums, 1));
+    print(get(&nums, 5));
+}
+```

@@ -1,0 +1,8 @@
+fn main() {
+    let stack = "stack";
+    let mut s = String::new();
+    for i in (0..str_len(stack)).rev() {
+        s = s + &get(stack, i).unwrap();
+    }
+    print_str(&s);
+}

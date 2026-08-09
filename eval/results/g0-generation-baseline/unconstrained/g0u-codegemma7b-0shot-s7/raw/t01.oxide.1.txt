@@ -1,0 +1,4 @@
+fn main() {
+    let sum = range(0, 10).iter().map(|x| x * x).fold(0, |acc, x| acc + x);
+    print(sum)
+}

@@ -1,0 +1,27 @@
+```
+fn div(x: Int, y: Int) -> Option<Int> {
+    if y == 0 {
+        None
+    } else {
+        Some(x / y)
+    }
+}
+
+fn main() {
+    let quot = div(100, 5)
+    let no_quot = div(100, 0)
+    let quot2 = div(100, 4)
+    match quot {
+        Some(q) => print(q),
+        None => print_str("undefined")
+    }
+    match no_quot {
+        Some(q) => print(q),
+        None => print_str("undefined")
+    }
+    match quot2 {
+        Some(q) => print(q),
+        None => print_str("undefined")
+    }
+}
+```

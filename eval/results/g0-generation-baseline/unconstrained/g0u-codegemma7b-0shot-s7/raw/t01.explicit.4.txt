@@ -1,0 +1,13 @@
+fn square(n: Int) -> Int {
+    n * n
+}
+
+fn main() {
+    let total = 0;
+    for i in 0..=9 {
+        let square_i = square(i);
+        total = total + square_i;
+        drop square_i;
+    }
+    print(total);
+}

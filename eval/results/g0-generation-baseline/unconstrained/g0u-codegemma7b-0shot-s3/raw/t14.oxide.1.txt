@@ -1,0 +1,14 @@
+fn count_s(s: &str) -> (Int, Int) {
+    let mut count = 0;
+    let mut seen = Vec::new();
+    for c in s.chars() {
+        if c == 's' { count += 1; }
+        seen.push(c);
+    }
+    (count, seen.len())
+}
+
+fn main() {
+    let (count, distinct) = count_s("mississippi");
+    print("{} {}", count, distinct);
+}

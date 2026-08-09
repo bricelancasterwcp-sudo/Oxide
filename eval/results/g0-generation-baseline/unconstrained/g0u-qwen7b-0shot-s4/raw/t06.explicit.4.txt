@@ -1,0 +1,24 @@
+```rust
+fn perfect_numbers(limit: Int) -> Vec<Int> {
+    let mut result = Vec::new()
+    for n in 1..limit {
+        let mut sum = 0
+        for i in 1..n {
+            if n % i == 0 {
+                sum = sum + i
+            }
+        }
+        if sum == n {
+            result.push(n)
+        }
+    }
+    result
+}
+
+fn main() {
+    let perfects = perfect_numbers(1000)
+    for p in &perfects {
+        print(p)
+    }
+}
+```

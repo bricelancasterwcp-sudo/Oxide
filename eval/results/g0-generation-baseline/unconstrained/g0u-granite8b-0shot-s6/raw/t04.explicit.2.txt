@@ -1,0 +1,18 @@
+fn main() {
+    let primes: Vec<Int> = vec(2);
+    for i in range(3, 100) {
+        if is_prime(&primes, i) {
+            primes = push(clone(&primes), i);
+        }
+    }
+    print(len(&primes));
+}
+
+fn is_prime(primes: &Vec<Int>, n: Int) -> Bool {
+    for p in &primes {
+        if n % p == 0 {
+            return false;
+        }
+    }
+    true
+}

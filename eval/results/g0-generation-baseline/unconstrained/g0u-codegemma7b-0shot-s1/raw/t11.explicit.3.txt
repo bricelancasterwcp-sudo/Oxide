@@ -1,0 +1,19 @@
+fn main() {
+    let mut nums = vec![5, 3, 8, 1, 9, 2];
+    let mut pos = 0;
+    while pos < nums.len() {
+        let mut i = pos;
+        let mut min = &nums[pos];
+        for j in pos + 1..nums.len() {
+            if nums[j] < *min {
+                min = &nums[j];
+                i = j;
+            }
+        }
+        print(*min);
+        if pos != i {
+            (nums[pos], nums[i]) = (nums[i], *min);
+        }
+        pos = pos + 1;
+    }
+}

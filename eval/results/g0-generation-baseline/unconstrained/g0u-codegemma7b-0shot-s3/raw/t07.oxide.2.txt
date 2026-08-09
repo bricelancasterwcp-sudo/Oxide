@@ -1,0 +1,8 @@
+fn main() {
+    let mut acc = vec();
+    for x in 1.. {
+        if acc.len() == 8 { break }
+        if x % 3 == 0 { acc = push(acc, x) }
+    }
+    print(acc.iter().fold(0, |acc, x| acc + x))
+}

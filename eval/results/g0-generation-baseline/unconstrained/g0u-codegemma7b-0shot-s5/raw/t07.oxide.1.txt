@@ -1,0 +1,17 @@
+fn main() {
+    let mut a = vec![];
+    for i in 0..100 {
+        if i % 3 == 0 {
+            a = push(a, i);
+            if a.len() == 8 {
+                break;
+            }
+        }
+    }
+    let mut sum = 0;
+    for i in a {
+        sum = sum + i;
+    }
+    print(sum)
+}
+```

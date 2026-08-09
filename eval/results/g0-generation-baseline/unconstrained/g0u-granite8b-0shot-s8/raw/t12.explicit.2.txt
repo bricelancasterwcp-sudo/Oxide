@@ -1,0 +1,4 @@
+fn main() {
+    let stack = vec("stack".chars().rev().collect::<String>())
+    print(stack)
+}

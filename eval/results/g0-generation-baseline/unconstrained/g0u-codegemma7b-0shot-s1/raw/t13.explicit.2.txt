@@ -1,0 +1,24 @@
+```
+fn is_palindrome(word: &str) -> bool {
+    let mut left = 0;
+    let mut right = word.len() - 1;
+    while left < right {
+        if word.chars().nth(left) != word.chars().nth(right) {
+            return false;
+        }
+        left += 1;
+        right -= 1;
+    }
+    true
+}
+
+fn main() {
+    let level = "level";
+    let stereo = "stereo";
+    let rotor = "rotor";
+
+    println!("{}", is_palindrome(level)); // true
+    println!("{}", is_palindrome(stereo)); // true
+    println!("{}", is_palindrome(rotor)); // true
+}
+```

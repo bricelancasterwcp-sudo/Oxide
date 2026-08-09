@@ -1,0 +1,46 @@
+```text
+print(x)                      # debug-print any value
+print_str(s)                  # print a Str without quotes
+vec() -> Vec<T>               # empty vector (needs usage context to infer T)
+push(v, x) -> Vec<T>          # consumes v, returns it with x appended
+len(v) -> Int                 # length of a Vec
+get(v, i) -> Option<T>        # element copy at index i
+range(a, b) -> Vec<Int>       # integers a..b-1
+clone(x) -> T                 # fresh copy of any value
+str_len(s) -> Int             # characters in a Str
+concat(a, b) -> Str           # consumes both, returns a+b
+chars(s) -> Vec<Str>          # one-char strings
+int_to_str(n) -> Str
+parse_int(s) -> Option<Int>
+to_float(n) -> Float          # Int to Float
+trunc(x) -> Int               # Float to Int, toward zero
+```
+
+```
+fn collatz(n: Int) -> Int {
+    let mut count = 0
+    let mut x = n
+    while x > 1 {
+        if x % 2 == 0 {
+            x = x / 2
+        } else {
+            x = 3 * x + 1
+        }
+        count = count + 1
+    }
+    count
+}
+
+fn main() {
+    print(collatz(27))
+}
+```
+
+## Reading compiler errors
+
+Errors carry codes: `OX03xx` are type errors, `OX04xx` ownership errors.
+`OX0400 use of moved value 'v'` includes a note pointing at the earlier
+move — fix by cloning at the earlier site or reordering. `OX0403` means a
+loop-carried move — reassign the variable inside the loop. `OX0307` means a
+`match` is missing variants — add arms or `_`. `OX0308` means `?` was applied
+where the function's return type is not the matching wrapper.

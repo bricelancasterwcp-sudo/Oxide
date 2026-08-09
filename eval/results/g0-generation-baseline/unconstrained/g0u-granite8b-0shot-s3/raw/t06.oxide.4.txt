@@ -1,0 +1,16 @@
+fn main() {
+    let mut sum = 0;
+    for n in range(2, 1000) {
+        let mut factors = 0;
+        for d in range(1, n) {
+            if n % d == 0 {
+                factors = factors + d;
+            }
+        }
+        if factors == n {
+            print(n);
+            sum = sum + n;
+        }
+    }
+    print(sum);
+}

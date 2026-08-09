@@ -1,0 +1,21 @@
+fn count_and_find_max(values: Vec<Int>) -> (Int, Int) {
+    let mut count = 0
+    let mut max = -1000
+    for v in values {
+        if v > 0 {
+            count = count + 1
+        }
+        if v > max {
+            max = v
+        }
+    }
+    (count, max)
+}
+
+fn main() {
+    let values = push(push(push(push(vec(), 3), 8), -2), 12)
+    let values = push(values, 7)
+    let (positive_count, max_value) = count_and_find_max(values.clone())
+    print(positive_count)
+    print(max_value)
+}

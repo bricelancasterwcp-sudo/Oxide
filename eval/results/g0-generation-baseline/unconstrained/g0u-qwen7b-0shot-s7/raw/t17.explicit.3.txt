@@ -1,0 +1,20 @@
+fn main() {
+    let vec = vec(10, 20, 30);
+    let pos1 = 1;
+    let pos5 = 5;
+    if pos1 < vec.len() {
+        print(vec_get(&vec, pos1));
+    } else {
+        print(-1);
+    }
+    if pos5 < vec.len() {
+        print(vec_get(&vec, pos5));
+    } else {
+        print(-1);
+    }
+    drop vec;
+}
+
+fn vec_get(v: &Vec<Int>, i: Int) -> Int {
+    get(v, i).unwrap_or(-1)
+}

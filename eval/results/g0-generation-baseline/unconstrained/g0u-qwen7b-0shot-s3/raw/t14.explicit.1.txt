@@ -1,0 +1,9 @@
+```rust
+fn main() {
+    let text = "mississippi";
+    let count_s = text.chars().filter(|&c| c == 's').count();
+    let distinct_chars: usize = text.chars().collect::<std::collections::HashSet<_>>().len();
+    print(count_s);
+    print(distinct_chars);
+}
+```

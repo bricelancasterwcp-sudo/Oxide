@@ -1,0 +1,18 @@
+struct Task { name: Str, points: Int }
+struct User { name: Str, tasks: Vec<Task> }
+
+fn main() {
+    let t1 = Task { name: "Task1", points: 5 }
+    let t2 = Task { name: "Task2", points: 3 }
+    let t3 = Task { name: "Task3", points: 8 }
+    let t4 = Task { name: "Task4", points: 1 }
+    let t5 = Task { name: "Task5", points: 9 }
+    let t6 = Task { name: "Task6", points: 2 }
+    let user = User {
+        name: "John",
+        tasks: push(push(push(push(push(vec(), t1), t2), t3), t4), t5),
+    }
+    for t in user.tasks {
+        print(t.name)
+    }
+}

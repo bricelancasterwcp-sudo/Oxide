@@ -1,0 +1,25 @@
+fn main() {
+    let mut nums = vec();
+    nums = push(nums, 5);
+    nums = push(nums, 40);
+    let mut bigger = clone(&nums);
+    bigger = push(bigger, 70);
+    print(sum_big(&nums, 10));
+    drop nums;
+    print(sum_big(&bigger, 10));
+    drop bigger;
+}
+
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let mut total = 0;
+    for x in &v {
+        if x > limit {
+            total = total + x;
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}

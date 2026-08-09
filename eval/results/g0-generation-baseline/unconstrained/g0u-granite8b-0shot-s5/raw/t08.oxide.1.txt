@@ -1,0 +1,21 @@
+```rust
+fn count_and_max(v: Vec<Int>) -> (Int, Int) {
+    let (mut count, mut max) = (0, 0)
+    for x in v {
+        if x > 0 {
+            count += 1
+        }
+        if x > max {
+            max = x
+        }
+    }
+    (count, max)
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 8), -2)
+    let (c, m) = count_and_max(push(v, 12), 7)
+    print(c)
+    print(m)
+}
+```

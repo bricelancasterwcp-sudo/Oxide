@@ -1,0 +1,14 @@
+```
+fn lookup(v: Vec<Int>, pos: Int) -> Int {
+    match get(v, pos) {
+        Some(n) => n,
+        None => -1,
+    }
+}
+
+fn main() {
+    let v = vec![10, 20, 30];
+    print(lookup(v, 1));
+    print(lookup(v, 5));
+}
+```

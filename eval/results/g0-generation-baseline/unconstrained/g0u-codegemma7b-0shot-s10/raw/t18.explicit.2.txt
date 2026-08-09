@@ -1,0 +1,17 @@
+fn perimeter(l: Float, w: Float) -> Float {
+    2. * (l + w)
+}
+
+fn triangle_perimeter(a: Float, b: Float, c: Float) -> Float {
+    a + b + c
+}
+
+fn main() {
+    let rectangle = (3., 4.);
+    let triangle = (3., 4., 5.);
+    let other_rectangle = (2., 5.);
+
+    print(perimeter(rectangle.0, rectangle.1));
+    print(triangle_perimeter(triangle.0, triangle.1, triangle.2));
+    print(perimeter(other_rectangle.0, other_rectangle.1));
+}

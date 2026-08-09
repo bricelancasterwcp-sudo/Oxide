@@ -1,0 +1,16 @@
+```rust
+fn area(width: Int, height: Int) -> Int {
+    width * height
+}
+
+fn perimeter(width: Int, height: Int) -> Int {
+    2 * (width + height)
+}
+
+fn main() {
+    let rect = (7, 4);
+    print(area(rect.0, rect.1));
+    drop rect
+    print(perimeter(rect.0, rect.1));
+}
+```

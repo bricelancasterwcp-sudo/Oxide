@@ -1,0 +1,19 @@
+```rust
+fn main() {
+    print(level() == level().chars().rev().collect::<String>());
+    print(stereo() == stereo().chars().rev().collect::<String>());
+    print(rotor() == rotor().chars().rev().collect::<String>());
+}
+
+fn level() -> Str {
+    "level"
+}
+
+fn stereo() -> Str {
+    "stereo"
+}
+
+fn rotor() -> Str {
+    "rotor"
+}
+```

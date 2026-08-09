@@ -1,0 +1,17 @@
+fn area(l: Int, w: Int) -> Int { l * w }
+fn perimeter(l: Int, w: Int) -> Int { 2 * l + 2 * w }
+fn triangle_perimeter(a: Int, b: Int, c: Int) -> Int { a + b + c }
+
+fn main() {
+    let r1 = Rectangle { l: 3, w: 4 };
+    let t1 = Triangle { a: 3, b: 4, c: 5 };
+    let r2 = Rectangle { l: 2, w: 5 };
+
+    print(perimeter(r1.l, r1.w));
+    print(triangle_perimeter(t1.a, t1.b, t1.c));
+    print(perimeter(r2.l, r2.w));
+}
+
+struct Rectangle { l: Int, w: Int }
+struct Triangle { a: Int, b: Int, c: Int }
+```

@@ -1,0 +1,7 @@
+fn main() {
+    let string = "mississippi";
+    let s_count = string.chars().filter(|c| c == &'s').count();
+    let unique_chars = string.chars().collect::<std::collections::HashSet<_>>().len();
+    print(s_count);
+    print(unique_chars);
+}

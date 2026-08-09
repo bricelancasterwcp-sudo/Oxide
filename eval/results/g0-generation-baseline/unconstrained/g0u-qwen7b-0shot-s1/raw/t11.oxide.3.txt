@@ -1,0 +1,23 @@
+struct List {
+    values: Vec<Int>
+}
+
+fn sort(mut lst: Vec<Int>) -> Vec<Int> {
+    for i in 0..lst.len() {
+        for j in 0..lst.len() - i - 1 {
+            if lst[j] > lst[j + 1] {
+                lst.swap(j, j + 1);
+            }
+        }
+    }
+    lst
+}
+
+fn main() {
+    let lst = List { values: vec![5, 3, 8, 1, 9, 2] };
+    let sorted = sort(lst.values.clone());
+    for x in sorted {
+        print(x);
+        print_str("\n");
+    }
+}

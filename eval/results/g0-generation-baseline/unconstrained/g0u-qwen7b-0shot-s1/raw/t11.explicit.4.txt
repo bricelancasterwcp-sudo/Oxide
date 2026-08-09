@@ -1,0 +1,27 @@
+```rust
+fn main() {
+    let nums = vec![5, 3, 8, 1, 9, 2];
+    let sorted = sort(&nums);
+    for x in &sorted {
+        print_str(&x.to_str());
+        print_str("\n");
+    }
+    drop nums;
+    drop sorted;
+}
+
+fn sort(v: &Vec<Int>) -> Vec<Int> {
+    let mut v = v.clone();
+    let len = len(&v);
+    for i in range(0, len) {
+        for j in range(0, len - i - 1) {
+            if v[j] > v[j + 1] {
+                let temp = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = temp;
+            }
+        }
+    }
+    v
+}
+```

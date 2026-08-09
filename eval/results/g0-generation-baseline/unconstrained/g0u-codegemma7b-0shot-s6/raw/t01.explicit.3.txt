@@ -1,0 +1,9 @@
+fn square(x: Int) -> Int { x * x }
+
+fn main() {
+    let total = 0
+    for x in 0..=9 {
+        total = total + square(x)
+    }
+    print(total)
+}

@@ -1,0 +1,12 @@
+```text
+print(count_s("mississippi"))
+print(count_letter("", "mississippi"))
+
+fn count_s(s: Str) -> Int {
+    len(str_split(s, "s"))
+}
+
+fn count_letter(c: Str, s: Str) -> Int {
+    len(str_split(s, c))
+}
+```

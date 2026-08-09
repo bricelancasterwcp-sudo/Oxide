@@ -1,0 +1,39 @@
+fn area(rect: &Rectangle) -> Float {
+    return rect.width * rect.height;
+}
+
+fn perimeter(rect: &Rectangle) -> Float {
+    return 2 * (rect.width + rect.height);
+}
+
+fn area(tri: &Triangle) -> Float {
+    let s = (tri.a + tri.b + tri.c) / 2f32;
+    return (s * (s - tri.a) * (s - tri.b) * (s - tri.c)).sqrt();
+}
+
+fn perimeter(tri: &Triangle) -> Float {
+    return tri.a + tri.b + tri.c;
+}
+
+fn main() {
+    let r = Rectangle { width: 3f32, height: 4f32 };
+    let t = Triangle { a: 3f32, b: 4f32, c: 5f32 };
+    let r2 = Rectangle { width: 2f32, height: 5f32 };
+    print(area(&r));
+    print(perimeter(&r));
+    print(area(&t));
+    print(perimeter(&t));
+    print(area(&r2));
+    print(perimeter(&r2));
+}
+
+struct Rectangle {
+    width: Float,
+    height: Float,
+}
+
+struct Triangle {
+    a: Float,
+    b: Float,
+    c: Float,
+}

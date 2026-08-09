@@ -1,0 +1,15 @@
+fn is_palindrome(s: Str) -> Bool {
+    let n = str_len(s);
+    for i in range(0, n / 2) {
+        if get(s, i) != get(s, n - i - 1) {
+            return False;
+        }
+    }
+    True
+}
+
+fn main() {
+    print(is_palindrome("level"));
+    print(is_palindrome("stereo"));
+    print(is_palindrome("rotor"));
+}

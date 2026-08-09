@@ -1,0 +1,13 @@
+```text
+fn square(x: Int) -> Int {
+    x * x
+}
+
+fn main() {
+    let mut sum = 0
+    for i in range(0, 10) {
+        sum = sum + square(i)
+    }
+    print(sum)
+}
+```

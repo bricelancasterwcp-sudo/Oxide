@@ -1,0 +1,37 @@
+print(x)                      # debug-print any value
+print_str(s)                  # print a Str without quotes
+vec() -> Vec<T>               # empty vector (needs usage context to infer T)
+push(v, x) -> Vec<T>          # consumes v, returns it with x appended
+len(v) -> Int                 # length of a Vec
+get(v, i) -> Option<T>        # element copy at index i
+range(a, b) -> Vec<Int>       # integers a..b-1
+clone(x) -> T                 # fresh copy of any value
+str_len(s) -> Int             # characters in a Str
+concat(a, b) -> Str           # consumes both, returns a+b
+chars(s) -> Vec<Str>          # one-char strings
+int_to_str(n) -> Str
+parse_int(s) -> Option<Int>
+to_float(n) -> Float          # Int to Float
+trunc(x) -> Int               # Float to Int, toward zero
+
+fn main() {
+    let mut sum = 0
+    for d in range(1, 20) {
+        for n in range(2, 20) {
+            let mut factors = vec()
+            for i in range(1, n) {
+                if n % i == 0 {
+                    factors = push(factors, i)
+                }
+            }
+            let product = sum(factors)
+            if product == n {
+                sum = push(sum, n)
+            }
+        }
+    }
+    for n in sum {
+        print(n)
+        print_str("\n")
+    }
+}

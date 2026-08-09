@@ -1,0 +1,16 @@
+```rust
+fn main() {
+    let mut sums = vec![];
+    for num in 1..1000 {
+        let sum: Int = (1..num).filter(|&x| num % x == 0).sum();
+        if sum == num {
+            sums.push(num);
+        }
+    }
+    for num in sums {
+        print(num);
+        print_str("\n");
+    }
+    drop sums;
+}
+```

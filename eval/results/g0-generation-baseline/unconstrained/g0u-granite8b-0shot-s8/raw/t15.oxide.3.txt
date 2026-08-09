@@ -1,0 +1,10 @@
+fn main() {
+    let nums = range(1, 4);
+    let parsed_nums = map(nums, |s| parse_int(s));
+    let sum = foldl(parsed_nums, 0, |acc, x| acc + x);
+    print(sum);
+
+    let parsed_ok = filter(parsed_nums, |x| x.is_some());
+    let count_ok = len(parsed_ok);
+    print(count_ok);
+}

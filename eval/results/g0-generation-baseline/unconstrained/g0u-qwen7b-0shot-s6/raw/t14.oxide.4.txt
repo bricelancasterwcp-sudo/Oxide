@@ -1,0 +1,23 @@
+```rust
+fn count_s_and_distinct(s: Str) -> (Int, Int) {
+    let mut count_s = 0;
+    let mut distinct = vec![];
+    for c in chars(s) {
+        if c == "s" {
+            count_s += 1;
+        }
+        if !distinct.contains(&c) {
+            distinct.push(c);
+        }
+    }
+    (count_s, len(distinct))
+}
+
+fn main() {
+    let s = "mississippi";
+    let (count_s, distinct_count) = count_s_and_distinct(s);
+    print(count_s);
+    print_str(" ");
+    print(distinct_count);
+}
+```

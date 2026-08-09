@@ -1,0 +1,6 @@
+fn main() {
+    let txt = str_len("stack");
+    for i in (0..txt).rev() {
+        print(chars("stack")[i])
+    }
+}

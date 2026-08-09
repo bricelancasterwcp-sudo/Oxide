@@ -1,0 +1,11 @@
+fn sum(v: &Vec<Int>, i: Int) -> Int {
+    v[i - 1] + v[i - 2]
+}
+
+fn main() {
+    let mut nums = vec![1, 1];
+    for i in 2..20 {
+        nums.push(sum(&nums, i));
+    }
+    print(nums[19])
+}

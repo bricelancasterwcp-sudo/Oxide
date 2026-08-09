@@ -1,0 +1,29 @@
+```
+struct List { items: Vec<Int> }
+
+fn count_positive(v: Vec<Int>) -> Int {
+    let mut count = 0
+    for x in v {
+        if x > 0 {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn max_value(v: Vec<Int>) -> Int {
+    let mut max = -1000000
+    for x in v {
+        if x > max {
+            max = x
+        }
+    }
+    max
+}
+
+fn main() {
+    let l = List { items: push(push(push(push(vec(), 3), 8), -2), 12), 7 } }
+    print(count_positive(l.items))
+    print(max_value(l.items))
+}
+```

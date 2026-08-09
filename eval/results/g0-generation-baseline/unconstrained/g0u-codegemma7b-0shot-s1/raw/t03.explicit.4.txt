@@ -1,0 +1,14 @@
+use oxide_explicit as ox;
+
+fn gcd(a: Int, b: Int) -> Int {
+    if b == 0 {
+        return a;
+    }
+    return gcd(b, a % b);
+}
+
+fn main() {
+    let result = gcd(252, 105);
+    print(result);
+    drop result;
+}

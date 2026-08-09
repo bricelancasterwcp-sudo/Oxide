@@ -1,0 +1,40 @@
+```
+print(x)                      # reads x — debug-print
+print_str(s)                  # reads s — print without quotes
+vec() -> Vec<T>               # empty vector (context infers T)
+push(v, x) -> Vec<T>          # consumes v, returns it with x appended
+len(v) -> Int                 # reads v
+get(v, i) -> Option<T>        # reads v — element copy at i
+range(a, b) -> Vec<Int>       # integers a..b-1
+clone(x) -> T                 # reads x — fresh copy
+str_len(s) -> Int             # reads s
+concat(a, b) -> Str           # consumes both, returns a+b
+chars(s) -> Vec<Str>          # reads s — one-char strings
+int_to_str(n) -> Str
+parse_int(s) -> Option<Int>   # reads s
+to_float(n) -> Float
+trunc(x) -> Int               # toward zero
+
+fn main() {
+    let nums = push(push(vec(), 5), 40)
+    let bigger = extend(clone(&nums), 70)
+    print(sum_big(&nums, 10))
+    drop nums
+    print(sum_big(&bigger, 10))
+    drop bigger
+}
+
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+```

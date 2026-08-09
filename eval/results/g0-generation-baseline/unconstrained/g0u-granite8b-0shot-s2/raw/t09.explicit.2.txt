@@ -1,0 +1,41 @@
+```text
+print(x)                      # reads x — debug-print
+print_str(s)                  # reads s — print without quotes
+vec() -> Vec<T>               # empty vector (context infers T)
+push(v, x) -> Vec<T>          # consumes v, returns it with x appended
+len(v) -> Int                 # reads v
+get(v, i) -> Option<T>        # reads v — element copy at i
+range(a, b) -> Vec<Int>       # integers a..b-1
+clone(x) -> T                 # reads x — fresh copy
+str_len(s) -> Int             # reads s
+concat(a, b) -> Str           # consumes both, returns a+b
+chars(s) -> Vec<Str>          # reads s — one-char strings
+int_to_str(n) -> Str
+parse_int(s) -> Option<Int>   # reads s
+to_float(n) -> Float
+trunc(x) -> Int               # toward zero
+
+fn print_list_in_reverse(list: &Vec<Int>) {
+    let mut reversed_list = vec();
+    let mut index = len(&list) - 1;
+    while index >= 0 {
+        reversed_list = push(reversed_list, get(&list, index));
+        index = index - 1;
+    }
+    let mut index = 0;
+    while index < len(&reversed_list) {
+        print(get(&reversed_list, index));
+        index = index + 1;
+    }
+}
+
+fn main() {
+    let my_list = push(push(vec(), 5), 40);
+    print_list_in_reverse(&my_list);
+    drop my_list;
+}
+```
+
+This is the corrected program that prints the elements of the list in the opposite order, one per line.
+
+Note: The code provided in the question has some errors in the syntax and type annotations. The corrected program fixes these errors and provides a solution to the problem.

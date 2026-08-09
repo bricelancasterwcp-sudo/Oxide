@@ -1,0 +1,12 @@
+fn main() {
+    let mut list = vec![1, 2, 3, 4, 5];
+    for x in list.iter_mut() {
+        print(x);
+        drop x;
+    }
+    for x in list.iter_mut().rev() {
+        print(x);
+        drop x;
+    }
+    drop list;
+}

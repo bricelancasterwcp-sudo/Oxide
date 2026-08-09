@@ -1,0 +1,21 @@
+```rust
+fn keep_bigger_than(mut v: Vec<Int>, limit: Int) -> Int {
+    let mut total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    drop total
+    drop v
+}
+
+fn main() {
+    let mut v = push(push(vec(), 5), 40)
+    let mut v2 = clone(&v)
+    keep_bigger_than(&mut v, 10)
+    drop v
+    keep_bigger_than(&mut v2, 10)
+    drop v2
+}
+```

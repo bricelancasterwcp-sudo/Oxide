@@ -1,0 +1,14 @@
+```rust
+fn main() {
+    let mut list = Vec::new();
+    let mut n = 3;
+    while list.len() < 8 {
+        list.push(n);
+        n += 3;
+    }
+
+    let sum: u32 = list.into_iter().sum();
+
+    println!("{}", sum);
+}
+```

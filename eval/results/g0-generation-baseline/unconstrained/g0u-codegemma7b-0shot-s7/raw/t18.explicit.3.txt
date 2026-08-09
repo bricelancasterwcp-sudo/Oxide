@@ -1,0 +1,25 @@
+fn area_rectangle(a: Int, b: Int) -> Int {
+    2 * (a + b)
+}
+
+fn area_triangle(a: Int, b: Int, c: Int) -> Float {
+    let s = (a + b + c) / 2.0
+    (s * (s - a) * (s - b) * (s - c)).sqrt()
+}
+
+fn main() {
+    let shapes = push(
+        push(
+            push(
+                vec(),
+                area_rectangle(3, 4),
+            ),
+            area_triangle(3, 4, 5),
+        ),
+        area_rectangle(2, 5),
+    );
+
+    for x in &shapes {
+        print(x)
+    }
+}

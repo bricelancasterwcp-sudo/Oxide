@@ -1,0 +1,6 @@
+fn main() {
+    let numbers = vec![1, 2, 3, 4, 5];
+    for n in range(len(numbers) - 1, -1, -1) {
+        print(get(numbers, n)?.to_string())
+    }
+}

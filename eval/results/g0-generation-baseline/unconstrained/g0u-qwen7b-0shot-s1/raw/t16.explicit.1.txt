@@ -1,0 +1,24 @@
+```
+fn divide(dividend: Int, divisor: Int) -> Result<Int, Str> {
+    if divisor == 0 {
+        Err("undefined".to_string())
+    } else {
+        Ok(dividend / divisor)
+    }
+}
+
+fn main() {
+    let quotients = vec![5, 0, 4]
+        .into_iter()
+        .map(|d| divide(100, d))
+        .collect::<Vec<_>>();
+
+    for quotient in quotients {
+        match quotient {
+            Ok(q) => print(q),
+            Err(msg) => print(msg),
+        }
+        print("\n")
+    }
+}
+```

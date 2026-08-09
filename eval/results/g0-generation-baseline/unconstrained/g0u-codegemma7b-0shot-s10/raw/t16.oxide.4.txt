@@ -1,0 +1,10 @@
+fn main() {
+    let v = 100;
+    print(trunc(v / 5));
+    if v == 0 {
+        print_str("undefined");
+    } else {
+        print(trunc(v / 0));
+    }
+    print(trunc(v / 4));
+}

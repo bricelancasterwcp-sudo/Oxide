@@ -1,0 +1,19 @@
+fn parse_and_sum(str_list: &[&str]) -> (Int, Int) {
+    let mut sum = 0;
+    let mut error_count = 0;
+    for s in str_list {
+        match parse_int(s) {
+            Some(n) => sum += n,
+            None => error_count += 1,
+        }
+    }
+    (sum, error_count)
+}
+
+fn main() {
+    let input_list = ["12", "x", "30"];
+    let (sum, error_count) = parse_and_sum(&input_list);
+    print(sum)
+    print(error_count)
+}
+```

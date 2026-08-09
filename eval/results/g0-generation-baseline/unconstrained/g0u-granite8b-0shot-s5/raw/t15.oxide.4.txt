@@ -1,0 +1,17 @@
+fn sum_parse_ints() {
+    let sum = 0;
+    let count = 0;
+    let strings = vec!["12", "x", "30"];
+    for string in strings {
+        match parse_int(string) {
+            Some(value) => sum = sum + value,
+            None => count = count + 1,
+        }
+    }
+    print(sum);
+    print(count);
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    Some(0)
+}

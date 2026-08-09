@@ -1,0 +1,14 @@
+fn main() {
+    let pen = (3, 4);
+    let pad = (9, 2);
+    let ink = (5, 3);
+    let total_cost = pen.0 * pen.1 + pad.0 * pad.1 + ink.0 * ink.1;
+    println!("{}", total_cost);
+    if pen.0 * pen.1 > pad.0 * pad.1 && pen.0 * pen.1 > ink.0 * ink.1 {
+        println!("Pen");
+    } else if pad.0 * pad.1 > ink.0 * ink.1 {
+        println!("Pad");
+    } else {
+        println!("Ink");
+    }
+}

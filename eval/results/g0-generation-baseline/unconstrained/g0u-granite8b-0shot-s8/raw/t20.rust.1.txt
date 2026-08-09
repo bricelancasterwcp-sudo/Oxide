@@ -1,0 +1,14 @@
+```rust
+fn main() {
+    let pen = (3, 4);
+    let pad = (9, 2);
+    let ink = (5, 3);
+
+    let all_items = [pen, pad, ink];
+    let total_cost: u32 = all_items.iter().map(|(price, quantity)| price * quantity).sum();
+    println!("Total cost: {}", total_cost);
+
+    let (highest_price, highest_quantity) = all_items.iter().max_by_key(|&(price, quantity)| price * quantity).unwrap();
+    println!("Item with the highest cost: {} * {} = {}", highest_price, highest_quantity, highest_price * highest_quantity);
+}
+```

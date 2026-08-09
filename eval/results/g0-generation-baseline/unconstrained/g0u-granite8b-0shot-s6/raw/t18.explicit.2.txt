@@ -1,0 +1,24 @@
+fn main() {
+    let rect1 = Shape::Rectangle(3, 4);
+    let rect2 = Shape::Rectangle(2, 5);
+    let triangle = Shape::Triangle(3, 4, 5);
+
+    let perimeter1 = match rect1 {
+        Shape::Rectangle(width, height) => 2 * (width + height),
+        _ => 0,
+    };
+    let perimeter2 = match rect2 {
+        Shape::Rectangle(width, height) => 2 * (width + height),
+        _ => 0,
+    };
+    let perimeter3 = match triangle {
+        Shape::Triangle(side1, side2, side3) => side1 + side2 + side3,
+        _ => 0,
+    };
+
+    print(perimeter1);
+    print("\n");
+    print(perimeter2);
+    print("\n");
+    print(perimeter3);
+}

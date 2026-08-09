@@ -1,0 +1,19 @@
+```
+fn main() {
+    print(level("level"));
+    print(stereo("stereo"));
+    print(rotor("rotor"));
+}
+
+fn level(s: Str) -> Bool {
+    s == s[::-1]
+}
+
+fn stereo(s: Str) -> Bool {
+    s == s[::-1]
+}
+
+fn rotor(s: Str) -> Bool {
+    s == s[::-1]
+}
+```

@@ -1,0 +1,17 @@
+```rust
+let text = "mississippi";
+let mut count = 0;
+let mut distinct = 0;
+
+for c in text.chars() {
+    if c == 's' {
+        count += 1;
+    }
+    distinct += 1;
+}
+
+println!("{}", count);
+println!("{}", distinct);
+```
+
+This solution uses the Rust programming language to print the number of times the character "s" occurs in the given text and the number of distinct characters in the text. The program iterates through each character in the text using the `chars` method and increments the count if the character is "s". It also increments the distinct count for each character encountered. Finally, it prints the count and distinct count using the `println` function.

@@ -1,0 +1,25 @@
+fn main() {
+    let list = vec!(3, 8, -2, 12, 7);
+    let mut positive_count = 0;
+    let mut max_value = None;
+
+    for &x in &list {
+        if x > 0 {
+            positive_count = positive_count + 1;
+        }
+        max_value = match max_value {
+            Some(y) if x > y => Some(x),
+            _ => max_value,
+        };
+    }
+
+    print_str("Positive count: ");
+    print(positive_count);
+    print_str("\n");
+    print_str("Max value: ");
+    match max_value {
+        Some(x) => print(x),
+        None => print("None"),
+    }
+    print_str("\n");
+}

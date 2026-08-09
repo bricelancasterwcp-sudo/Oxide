@@ -1,0 +1,12 @@
+fn main() {
+    let nums = vec![3, 8, -2, 12, 7];
+    let mut count = 0;
+    let mut max = std::i32::MIN;
+    for n in nums {
+        if n > 0 {
+            count += 1;
+            max = std::cmp::max(max, n);
+        }
+    }
+    print!("{} {}", count, max);
+}

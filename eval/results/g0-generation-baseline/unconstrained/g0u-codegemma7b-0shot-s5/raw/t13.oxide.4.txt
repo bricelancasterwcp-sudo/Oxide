@@ -1,0 +1,19 @@
+fn palindrome(text: String) -> bool {
+    let text_len = text.len();
+
+    for i in 0..(text_len / 2) {
+        if text.chars().nth(i) != text.chars().nth(text_len - i - 1) {
+            return false;
+        }
+    }
+
+    true
+}
+
+fn main() {
+    let texts = vec!["level", "stereo", "rotor"];
+
+    for text in texts {
+        println!("{}", palindrome(text.to_string()));
+    }
+}

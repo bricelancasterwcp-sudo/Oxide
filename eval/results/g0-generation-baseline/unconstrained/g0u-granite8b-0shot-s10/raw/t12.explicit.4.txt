@@ -1,0 +1,16 @@
+fn main() {
+    let stack = vec("hello", "world");
+    print_str(chars(stack).pop().unwrap());
+    print_str(chars(stack).pop().unwrap());
+}
+
+fn print_str(s: Str) {
+    for c in &chars(s) {
+        print(c.to_int() + 'a' as Int - 1);
+    }
+    print('\n');
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    push(vec(), s)
+}

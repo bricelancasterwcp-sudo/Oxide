@@ -1,0 +1,15 @@
+fn main() {
+    let mut first = 3
+    let mut second = 6
+    let mut third = 9
+    let mut sum = 0
+
+    for _ in range(0, 8) {
+        sum = sum + first
+        first = first + 3
+        second = second + 3
+        third = third + 3
+    }
+
+    print(sum)
+}

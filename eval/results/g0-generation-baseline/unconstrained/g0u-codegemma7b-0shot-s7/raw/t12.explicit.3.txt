@@ -1,0 +1,14 @@
+fn reverse_string(text: &str) -> String {
+    let mut result = String::new();
+    for c in text.chars().rev() {
+        result.push(c);
+    }
+    result
+}
+
+fn main() {
+    let text = "stack";
+    let reversed_text = reverse_string(text);
+    print(reversed_text);
+    drop reversed_text;
+}

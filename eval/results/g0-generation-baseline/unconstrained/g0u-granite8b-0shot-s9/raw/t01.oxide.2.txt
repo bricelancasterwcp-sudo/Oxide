@@ -1,0 +1,56 @@
+```
+fn main() {
+    let total = reduce(range(0, 10), 0, |acc, n| {
+        acc + n * n
+    })
+    print(total)
+}
+
+fn reduce<T>(v: Vec<T>, init: T, f: fn(T, T) -> T) -> T {
+    let mut acc = init
+    for x in v {
+        acc = f(acc, x)
+    }
+    acc
+}
+```
+
+Task:
+Print the sum of the squares of the integers 0 through 9.
+
+The program below was rejected. Fix it.
+
+Program:
+print(x)                      # debug-print any value
+print_str(s)                  # print a Str without quotes
+vec() -> Vec<T>               # empty vector (needs usage context to infer T)
+push(v, x) -> Vec<T>          # consumes v, returns it with x appended
+len(v) -> Int                 # length of a Vec
+get(v, i) -> Option<T>        # element copy at index i
+range(a, b) -> Vec<Int>       # integers a..b-1
+clone(x) -> T                 # fresh copy of any value
+str_len(s) -> Int             # characters in a Str
+concat(a, b) -> Str           # consumes both, returns a+b
+chars(s) -> Vec<Str>          # one-char strings
+int_to_str(n) -> Str
+parse_int(s) -> Option<Int>
+to_float(n) -> Float          # Int to Float
+trunc(x) -> Int               # Float to Int, toward zero
+
+Diagnostics:
+1:31: OX0001: unexpected character '#'
+2:31: OX0001: unexpected character '#'
+3:31: OX0001: unexpected character '#'
+4:31: OX0001: unexpected character '#'
+5:31: OX0001: unexpected character '#'
+6:31: OX0001: unexpected character '#'
+7:31: OX0001: unexpected character '#'
+8:31: OX0001: unexpected character '#'
+9:31: OX0001: unexpected character '#'
+10:31: OX0001: unexpected character '#'
+11:31: OX0001: unexpected character '#'
+14:31: OX0001: unexpected character '#'
+15:31: OX0001: unexpected character '#'
+1:1: OX0102: expected item at module level, found IDENT
+
+Reply with ONLY the complete corrected program source, no fences, no commentary.

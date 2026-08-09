@@ -1,0 +1,8 @@
+```text
+print_str("12")
+print(x)
+print_str("x")
+print(x)
+print_str("30")
+print(x)
+```

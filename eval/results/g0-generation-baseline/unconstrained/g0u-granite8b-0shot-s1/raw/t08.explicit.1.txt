@@ -1,0 +1,22 @@
+fn count_positive_and_largest(list: &[Int]) -> (Int, Int) {
+    let mut positive_count = 0;
+    let mut largest = Int::min_value();
+
+    for x in list {
+        if x > 0 {
+            positive_count = positive_count + 1;
+        }
+        if x > largest {
+            largest = x;
+        }
+    }
+
+    (positive_count, largest)
+}
+
+fn main() {
+    let list = [3, 8, -2, 12, 7];
+    let (positive_count, largest) = count_positive_and_largest(&list);
+    print(positive_count);
+    print(largest);
+}

@@ -1,0 +1,23 @@
+```
+fn count_chars(s: Str) -> (Int, Int) {
+    let mut count_s = 0
+    let mut distinct = vec!()
+    for c in chars(s) {
+        if c == "s" {
+            count_s += 1
+        }
+        if !distinct.contains(&c) {
+            distinct = push(distinct, c)
+        }
+    }
+    (count_s, len(distinct))
+}
+
+fn main() {
+    let text = "mississippi"
+    let (count, distinct) = count_chars(text)
+    print(count)
+    print_str(", ")
+    print(distinct)
+}
+```

@@ -1,0 +1,9 @@
+fn main() {
+    let list = vec![10, 20, 30];
+    let first = get(list, 1)?;
+    let fifth = get(list, 5)?;
+    print(first);
+    print(fifth);
+    print(-1);
+}
+```

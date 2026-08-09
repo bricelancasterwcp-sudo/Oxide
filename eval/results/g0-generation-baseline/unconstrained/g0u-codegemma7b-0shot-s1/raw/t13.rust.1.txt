@@ -1,0 +1,15 @@
+use std::io;
+
+fn main() {
+    for word in ["level", "stereo", "rotor"] {
+        let mut forward = String::new();
+        let mut backward = String::new();
+        for c in word.chars() {
+            forward.push(c);
+        }
+        for c in word.chars().rev() {
+            backward.push(c);
+        }
+        println!("{} is a palindrome: {}", word, forward == backward);
+    }
+}

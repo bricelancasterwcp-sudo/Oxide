@@ -1,0 +1,13 @@
+fn main() {
+    let mut parsed = 0;
+    let mut failed = 0;
+
+    for arg in std::env::args().skip(1) {
+        match parse_int(arg) {
+            Some(n) => parsed += n,
+            None => failed += 1,
+        }
+    }
+
+    print_str(&format!("parsed: {parsed}, failed: {failed}"));
+}

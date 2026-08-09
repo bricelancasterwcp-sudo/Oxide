@@ -1,0 +1,15 @@
+```
+fn div(a: Int, b: Int) -> Str {
+    if b == 0 {
+        "undefined".to_str()
+    } else {
+        to_float(a / b).to_str()
+    }
+}
+
+fn main() {
+    print(div(100, 5))
+    print(div(100, 0))
+    print(div(100, 4))
+}
+```

@@ -1,0 +1,22 @@
+```rust
+fn fib(n: Int) -> Int {
+    if n <= 1 {
+        n
+    } else {
+        let a = 1;
+        let b = 1;
+        for _ in 2..n {
+            let c = a + b;
+            drop a;
+            a = b;
+            b = c;
+        }
+        b
+    }
+}
+
+fn main() {
+    let term = fib(20);
+    print(term);
+}
+```

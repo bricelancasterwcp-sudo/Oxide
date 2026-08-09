@@ -1,0 +1,9 @@
+```text
+fn main() {
+    let list = vec![3, 8, -2, 12, 7];
+    let pos = list.iter().filter(|x| **x > 0).count();
+    print(pos);
+    let max = list.iter().copied().max().unwrap();
+    print(max);
+}
+```

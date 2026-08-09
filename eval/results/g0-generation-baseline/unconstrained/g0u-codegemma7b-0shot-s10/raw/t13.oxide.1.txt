@@ -1,0 +1,10 @@
+fn is_palindrome(text: &str) -> bool {
+    text == text.chars().rev().collect::<String>()
+}
+
+fn main() {
+    let texts = ["level", "stereo", "rotor"];
+    for text in texts {
+        println!("{}", is_palindrome(text));
+    }
+}

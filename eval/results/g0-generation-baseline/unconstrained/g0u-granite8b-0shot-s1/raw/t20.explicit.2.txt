@@ -1,0 +1,63 @@
+fn pen() -> Vec<Int> {
+    push(vec(), 3)
+}
+
+fn pad() -> Vec<Int> {
+    push(vec(), 9)
+}
+
+fn ink() -> Vec<Int> {
+    push(vec(), 5)
+}
+
+fn item_cost(name: Str) -> Int {
+    match name {
+        "pen" => 12,
+        "pad" => 18,
+        "ink" => 15,
+        _ => 0
+    }
+}
+
+fn main() {
+    let items = vec(pen(), pad(), ink())
+    let total = reduce(items, 0, |acc, item| acc + item_cost(item))
+    print(total)
+    let most_expensive = reduce(items, (0, "null"), |acc, item| {
+        let cost = item_cost(item)
+        if cost > acc.0 {
+            (cost, item)
+        } else {
+            acc
+        }
+    })
+    print_str("most expensive: ")
+    print_str(most_expensive.1)
+    print(" (cost ")
+    print(most_expensive.0)
+    print(")\n")
+}
+
+fn reduce<T, U>(items: Vec<T>, init: U, f: fn(U, T) -> U) -> U {
+    let mut result = init
+    for item in &items {
+        result = f(result, item)
+    }
+    result
+}
+
+fn reduce2<T, U>(items: Vec<T>, init: U, f: fn(U, T) -> U) -> U {
+    let mut result = init
+    for item in items {
+        result = f(result, item)
+    }
+    result
+}
+
+fn reduce3<T, U>(items: Vec<T>, init: U, f: fn(U, T) -> U) -> U {
+    let mut result = init
+    for item in items {
+        result = f(result, item)
+    }
+    result
+}

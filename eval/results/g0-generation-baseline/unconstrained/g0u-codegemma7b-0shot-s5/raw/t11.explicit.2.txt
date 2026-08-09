@@ -1,0 +1,16 @@
+fn print_sorted_list(list: &Vec<Int>) {
+    let mut sorted_list = vec![];
+    for num in list {
+        sorted_list.push(*num);
+    }
+    sorted_list.sort_unstable();
+    for num in &sorted_list {
+        print_str(num)
+    }
+    print_str("\n")
+}
+
+fn main() {
+    let mut list = vec![5, 3, 8, 1, 9, 2];
+    print_sorted_list(&list)
+}

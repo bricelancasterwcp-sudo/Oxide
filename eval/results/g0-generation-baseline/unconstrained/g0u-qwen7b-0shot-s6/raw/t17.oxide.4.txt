@@ -1,0 +1,7 @@
+```rust
+fn main() {
+    let values = vec![10, 20, 30];
+    print(get(values.clone(), 1).unwrap_or(-1));
+    print(get(values.clone(), 5).unwrap_or(-1));
+}
+```

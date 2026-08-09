@@ -1,0 +1,19 @@
+fn main() {
+    let mut v = vec();
+    v = push(v, 3);
+    v = push(v, 6);
+    v = push(v, 9);
+    let sum = first_big(v);
+    print(sum);
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}

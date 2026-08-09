@@ -1,0 +1,21 @@
+struct List { head: Option<Int>, tail: Option<Box<List>> }
+
+fn get_at(list: Option<List>, pos: Int) -> Int {
+    let mut current = list;
+    for _ in 0..pos {
+        current = match current {
+            Some(l) => l.tail,
+            None => return -1
+        };
+    }
+    match current {
+        Some(l) => l.head.unwrap_or(-1),
+        None => -1
+    }
+}
+
+fn main() {
+    let list = Some(List { head: Some(10), tail: Some(Box::new(List { head: Some(20), tail: Some(Box::new(List { head: Some(30), tail: None }) }) }) });
+    print(get_at(list, 1));  // 20
+    print(get_at(list, 5));  // -1
+}

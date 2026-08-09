@@ -1,0 +1,13 @@
+fn area(rect: (Int, Int)) -> Int {
+    rect.0 * rect.1
+}
+
+fn perimeter(rect: (Int, Int)) -> Int {
+    2 * (rect.0 + rect.1)
+}
+
+fn main() {
+    let r = (7, 4);
+    print(area(r));
+    print(perimeter(r));
+}

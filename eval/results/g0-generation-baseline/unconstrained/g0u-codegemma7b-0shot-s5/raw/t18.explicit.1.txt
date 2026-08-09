@@ -1,0 +1,19 @@
+fn rect_area(a: Int, b: Int) -> Int {
+    a * 2 + b * 2
+}
+
+fn triangle_area(a: Int, b: Int, c: Int) -> Int {
+    let s = (a + b + c) / 2;
+    (s * (s - a) * (s - b) * (s - c)).sqrt() as Int
+}
+
+fn main() {
+    let r1 = (3, 4);
+    let t1 = (3, 4, 5);
+    let r2 = (2, 5);
+
+    println!("{}", rect_area(r1.0, r1.1));
+    println!("{}", triangle_area(t1.0, t1.1, t1.2));
+    println!("{}", rect_area(r2.0, r2.1));
+}
+```

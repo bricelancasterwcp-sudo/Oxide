@@ -1,0 +1,19 @@
+```rust
+fn sum_divisors(n: Int) -> Int {
+    let mut total = 0
+    for i in range(1, n) {
+        if n % i == 0 {
+            total = total + i
+        }
+    }
+    total
+}
+
+fn main() {
+    for num in range(1, 1000) {
+        if num == sum_divisors(num) {
+            print(num)
+        }
+    }
+}
+```

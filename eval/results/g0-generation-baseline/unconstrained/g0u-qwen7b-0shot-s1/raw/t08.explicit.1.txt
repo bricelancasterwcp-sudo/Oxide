@@ -1,0 +1,28 @@
+```rust
+fn is_positive(x: Int) -> Bool {
+    x > 0
+}
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7);
+    let mut positive_count = 0;
+    let mut max_value = -1000000; // Assuming all values will be less than this
+    for x in &nums {
+        if is_positive(x) {
+            positive_count = positive_count + 1;
+        }
+        max_value = max(max_value, *x);
+    }
+    print(positive_count);
+    print(max_value);
+    drop nums;
+}
+```

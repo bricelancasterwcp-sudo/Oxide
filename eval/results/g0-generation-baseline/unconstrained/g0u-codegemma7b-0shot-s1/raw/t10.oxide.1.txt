@@ -1,0 +1,14 @@
+```text
+fn main() {
+    let mut values = vec![4, 1, 7, 3, 9, 2];
+    let mut kept = 0;
+    while !values.is_empty() {
+        let x = values.pop().unwrap();
+        if x > 3 {
+            print!("{}\n", x);
+            kept += 1;
+        }
+    }
+    print!("{} kept\n", kept);
+}
+```

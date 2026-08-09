@@ -1,0 +1,16 @@
+fn main() {
+    let mut seq = vec![];
+    for x in 0.. {
+        if x % 3 == 0 {
+            seq = push(seq, x);
+            if seq.len() == 8 {
+                break;
+            }
+        }
+    }
+    let mut sum = 0;
+    for x in &seq {
+        sum = sum + x;
+    }
+    print(sum)
+}

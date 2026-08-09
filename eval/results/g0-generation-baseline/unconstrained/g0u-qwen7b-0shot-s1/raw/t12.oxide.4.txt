@@ -1,0 +1,3 @@
+```text
+print_str(join(collect(rev(chars("stack"))), ""))
+```

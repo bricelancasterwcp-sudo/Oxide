@@ -1,0 +1,6 @@
+fn main() {
+    let vec = vec![10, 20, 30];
+    print(get(vec, 1).unwrap_or(-1));
+    print(get(vec, 5).unwrap_or(-1));
+}
+```

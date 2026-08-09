@@ -1,0 +1,30 @@
+```oxide
+struct Item { name: Str, price: Int, quantity: Int }
+
+fn cost(item: Item) -> Int {
+    item.price * item.quantity
+}
+
+fn main() {
+    let pen = Item { name: "pen", price: 3, quantity: 4 }
+    let pad = Item { name: "pad", price: 9, quantity: 2 }
+    let ink = Item { name: "ink", price: 5, quantity: 3 }
+    
+    let total_cost = cost(pen) + cost(pad) + cost(ink)
+    print(total_cost)
+    
+    let items = vec![pen, pad, ink]
+    let mut max_cost = 0
+    let mut max_item = ""
+    
+    for item in items {
+        let c = cost(item)
+        if c > max_cost {
+            max_cost = c
+            max_item = item.name
+        }
+    }
+    
+    print_str(max_item)
+}
+```

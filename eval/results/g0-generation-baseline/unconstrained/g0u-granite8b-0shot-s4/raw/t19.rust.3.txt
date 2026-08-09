@@ -1,0 +1,9 @@
+fn main() {
+    let width = 7;
+    let height = 4;
+    let area = width * height;
+    let perimeter = 2 * (width + height);
+
+    println!("The area of the rectangle is {} square pixels.", area);
+    println!("The perimeter of the rectangle is {} pixels.", perimeter);
+}

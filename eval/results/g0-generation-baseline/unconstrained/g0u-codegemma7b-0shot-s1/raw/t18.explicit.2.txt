@@ -1,0 +1,32 @@
+use oxide_explicit as ox;
+
+fn main() {
+    let r = ox::Struct {
+        name: ox::Str::from("Rectangle"),
+        height: ox::Int::from(3),
+        width: ox::Int::from(4),
+    };
+    let t = ox::Struct {
+        name: ox::Str::from("Triangle"),
+        a: ox::Int::from(3),
+        b: ox::Int::from(4),
+        c: ox::Int::from(5),
+    };
+    let r2 = ox::Struct {
+        name: ox::Str::from("Rectangle"),
+        height: ox::Int::from(2),
+        width: ox::Int::from(5),
+    };
+
+    ox::print(ox::Str::from("Rectangle"));
+    ox::print(ox::Int::from(2 * r.height + 2 * r.width));
+    ox::drop(r);
+
+    ox::print(ox::Str::from("Triangle"));
+    ox::print(ox::Int::from(t.a + t.b + t.c));
+    ox::drop(t);
+
+    ox::print(ox::Str::from("Rectangle"));
+    ox::print(ox::Int::from(2 * r2.height + 2 * r2.width));
+    ox::drop(r2);
+}

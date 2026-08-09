@@ -1,0 +1,17 @@
+fn main() {
+    let mut nums = vec![4, 1, 7, 3, 9, 2];
+    let mut kept = vec![];
+
+    for x in &nums {
+        if *x > 3 {
+            kept.push(*x);
+        }
+    }
+
+    for x in &kept {
+        print_str(&format!("{}", x));
+        print_str("\n");
+    }
+
+    print_str(&format!("{} values were kept\n", kept.len()));
+}

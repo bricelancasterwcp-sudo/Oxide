@@ -1,0 +1,12 @@
+use Oxide_Explicit as ox;
+
+fn main() {
+    let nums = ox::parse_int("12");
+    let x = ox::parse_int("x");
+    let y = ox::parse_int("30");
+    ox::print(ox::int_to_str(ox::trunc(ox::to_float(ox::add(ox::to_float(nums), ox::to_float(y))))));
+    ox::print(ox::int_to_str(ox::add(ox::neq(nums, x), ox::neq(x, y))));
+    ox::drop nums;
+    ox::drop x;
+    ox::drop y;
+}

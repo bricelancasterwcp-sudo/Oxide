@@ -1,0 +1,1 @@
+print_str(concat(reverse(concat(chars("stack")))))

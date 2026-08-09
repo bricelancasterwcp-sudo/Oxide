@@ -1,0 +1,30 @@
+```
+fn main() {
+    let pen = Pen{unit_price: 3, quantity: 4}
+    let pad = Pad{unit_price: 9, quantity: 2}
+    let ink = Ink{unit_price: 5, quantity: 3}
+
+    let combined_cost = pen.unit_price * pen.quantity + pad.unit_price * pad.quantity + ink.unit_price * ink.quantity;
+    print(combined_cost);
+
+    let mut max_cost = 0;
+    let mut item_name = "";
+
+    if (pen.unit_price * pen.quantity) > max_cost {
+        max_cost = pen.unit_price * pen.quantity;
+        item_name = "Pen";
+    }
+
+    if (pad.unit_price * pad.quantity) > max_cost {
+        max_cost = pad.unit_price * pad.quantity;
+        item_name = "Pad";
+    }
+
+    if (ink.unit_price * ink.quantity) > max_cost {
+        max_cost = ink.unit_price * ink.quantity;
+        item_name = "Ink";
+    }
+
+    print(item_name);
+}
+```

@@ -1,0 +1,8 @@
+fn main() {
+    let values = vec![4, 1, 7, 3, 9, 2];
+    let kept: Vec<_> = values.into_iter().filter(|&x| x > 3).collect();
+    for value in &kept {
+        println!("{}", value);
+    }
+    println!("{}", kept.len());
+}

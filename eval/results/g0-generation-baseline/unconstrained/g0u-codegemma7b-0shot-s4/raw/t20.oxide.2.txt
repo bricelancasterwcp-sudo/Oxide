@@ -1,0 +1,18 @@
+let pen = Item { unit_price: 3, quantity: 4 };
+let pad = Item { unit_price: 9, quantity: 2 };
+let ink = Item { unit_price: 5, quantity: 3 };
+
+let total_cost = pen.cost() + pad.cost() + ink.cost();
+let max_cost = max(max(pen.cost(), pad.cost()), ink.cost());
+
+print_str("Total cost: ");
+print(total_cost);
+print_str("\n");
+
+if max_cost == pen.cost() {
+    print_str("Pen\n");
+} else if max_cost == pad.cost() {
+    print_str("Pad\n");
+} else {
+    print_str("Ink\n");
+}

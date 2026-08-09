@@ -1,0 +1,24 @@
+```rust
+fn perimeter(shapes: &Vec<Shape>) {
+    for shape in &shapes {
+        match shape {
+            Shape::Rectangle { width, height } => {
+                print(width * 2 + height * 2)
+            }
+            Shape::Triangle { a, b, c } => {
+                print(a + b + c)
+            }
+            _ => {}
+        }
+    }
+}
+
+fn main() {
+    let shapes = vec![
+        Shape::Rectangle { width: 3, height: 4 },
+        Shape::Triangle { a: 3, b: 4, c: 5 },
+        Shape::Rectangle { width: 2, height: 5 },
+    ];
+    perimeter(&shapes);
+}
+```

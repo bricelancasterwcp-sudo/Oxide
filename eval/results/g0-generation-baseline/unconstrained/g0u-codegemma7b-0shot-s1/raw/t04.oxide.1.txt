@@ -1,0 +1,26 @@
+use std::num::Zero;
+
+fn is_prime(n: Int) -> Bool {
+    if n <= 1 {
+        false
+    } else {
+        let mut i = 5
+        while i * i <= n {
+            if n % i == 0 || n % (i + 2) == 0 {
+                false
+            }
+            i += 6
+        }
+        true
+    }
+}
+
+fn main() {
+    let mut count = 0
+    for n in 2..100 {
+        if is_prime(n) {
+            count += 1
+        }
+    }
+    print(count)
+}

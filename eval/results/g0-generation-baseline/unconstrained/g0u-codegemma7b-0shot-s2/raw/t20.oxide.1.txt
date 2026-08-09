@@ -1,0 +1,30 @@
+fn total(items: Vec<(Str, Int, Int)>) -> (Int, Str) {
+    let mut total_cost = 0
+    let mut most_expensive_item = ""
+    let mut max_cost = 0
+
+    for (name, price, quantity) in items {
+        let item_cost = price * quantity
+        total_cost += item_cost
+
+        if item_cost > max_cost {
+            max_cost = item_cost
+            most_expensive_item = name
+        }
+    }
+
+    (total_cost, most_expensive_item)
+}
+
+fn main() {
+    let items = vec![
+        ("pen", 3, 4),
+        ("pad", 9, 2),
+        ("ink", 5, 3),
+    ];
+
+    let (total_cost, most_expensive_item) = total(items);
+
+    print(total_cost)
+    print_str(most_expensive_item)
+}

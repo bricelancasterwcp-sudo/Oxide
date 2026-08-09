@@ -1,0 +1,14 @@
+```rust
+fn sum_of_multiples(n: Int) -> Int {
+    let mut sum = 0;
+    for i in range(1, n + 1) {
+        sum = sum + (i * 3);
+    }
+    sum
+}
+
+fn main() {
+    let multiples = sum_of_multiples(8);
+    print(multiples);
+}
+```

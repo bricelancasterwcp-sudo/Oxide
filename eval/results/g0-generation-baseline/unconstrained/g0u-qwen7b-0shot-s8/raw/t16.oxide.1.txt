@@ -1,0 +1,18 @@
+```oxide
+fn main() {
+    for d in vec(5, 0, 4) {
+        match div(100, d) {
+            Some(q) => print(q),
+            None => print_str("undefined"),
+        }
+    }
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(trunc(n.to_float() / d.to_float()))
+    }
+}
+```

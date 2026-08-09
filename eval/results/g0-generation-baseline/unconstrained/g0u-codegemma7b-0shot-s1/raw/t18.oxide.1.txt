@@ -1,0 +1,38 @@
+use std::f64::consts;
+
+fn area(r: &Rect) -> f64 {
+    r.w * r.h
+}
+
+fn area(t: &Tri) -> f64 {
+    0.5 * t.a * t.b
+}
+
+fn area(r: &Rec2) -> f64 {
+    r.w * r.h
+}
+
+fn perimeter(r: &Rect) -> f64 {
+    2 * (r.w + r.h)
+}
+
+fn perimeter(t: &Tri) -> f64 {
+    t.a + t.b + t.c
+}
+
+fn perimeter(r: &Rec2) -> f64 {
+    2 * (r.w + r.h)
+}
+
+fn main() {
+    let r = Rect { w: 3, h: 4 };
+    let t = Tri { a: 3., b: 4., c: 5. };
+    let r2 = Rec2 { w: 2., h: 5. };
+    print(perimeter(&r));
+    print(perimeter(&t));
+    print(perimeter(&r2));
+}
+
+struct Rect { w: f64, h: f64 }
+struct Tri { a: f64, b: f64, c: f64 }
+struct Rec2 { w: f64, h: f64 }

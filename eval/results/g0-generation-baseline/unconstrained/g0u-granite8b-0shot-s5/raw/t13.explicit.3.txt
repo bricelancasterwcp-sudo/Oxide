@@ -1,0 +1,15 @@
+fn level(s: Str) -> Bool {
+    str_len(s) % 2 == 0
+}
+
+fn stereo(s: Str) -> Bool {
+    let len = str_len(s)
+    len % 2 == 0 && get(chars(s), len / 2) == Some('=')
+}
+
+fn rotor(s: Str) -> Bool {
+    let len = len(chars(s))
+    len % 2 == 0
+        && level(concat("0", s))
+        && level(concat("1", s))
+}

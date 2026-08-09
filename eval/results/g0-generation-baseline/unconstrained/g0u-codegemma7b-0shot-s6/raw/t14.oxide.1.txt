@@ -1,0 +1,17 @@
+```
+fn main() {
+    let word = "mississippi";
+    let mut count = 0;
+    let mut seen: Vec<char> = vec![];
+    for c in word.chars() {
+        if c == 's' {
+            count += 1;
+        }
+        if !seen.contains(&c) {
+            seen.push(c);
+        }
+    }
+    println!("'s' appears {} times", count);
+    println!("There are {} distinct characters", seen.len());
+}
+```

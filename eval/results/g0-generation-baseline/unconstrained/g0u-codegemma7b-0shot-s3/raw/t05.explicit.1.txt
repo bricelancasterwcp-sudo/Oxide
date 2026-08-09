@@ -1,0 +1,12 @@
+fn term(n: Int) -> Int {
+    if n <= 2 {
+        return 1;
+    }
+    let a = term(n - 1);
+    let b = term(n - 2);
+    return a + b;
+}
+
+fn main() {
+    print(term(20));
+}

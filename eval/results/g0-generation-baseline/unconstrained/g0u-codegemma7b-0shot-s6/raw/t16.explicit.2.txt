@@ -1,0 +1,12 @@
+fn main() {
+    let div_by_five = 100 / 5;
+    println!("{}", div_by_five);
+
+    match 100 / 0 {
+        Ok(div_by_zero) => println!("{}", div_by_zero),
+        Err(_) => println!("undefined"),
+    }
+
+    let div_by_four = 100 / 4;
+    println!("{}", div_by_four);
+}

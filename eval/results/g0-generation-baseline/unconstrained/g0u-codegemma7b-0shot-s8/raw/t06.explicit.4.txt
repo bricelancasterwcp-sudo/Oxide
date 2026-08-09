@@ -1,0 +1,23 @@
+fn divisors(n: Int) -> Vec<Int> {
+    let mut factors = vec![];
+    for i in 1..(n/2) + 1 {
+        if n % i == 0 {
+            factors.push(i)
+        }
+    }
+    factors
+}
+
+fn is_perfect(n: Int) -> Bool {
+    let factors = divisors(n);
+    let sum = factors.iter().fold(0, |acc, x| acc + x);
+    sum == n
+}
+
+fn main() {
+    for i in 1..1000 {
+        if is_perfect(i) {
+            print(i)
+        }
+    }
+}

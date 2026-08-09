@@ -1,0 +1,35 @@
+```
+fn keep_big(v: Vec<Int>, limit: Int) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if x > limit {
+            result = push(result, x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let nums = push(push(vec(), 5), 40)
+    let bigger = keep_big(nums, 10)
+    print(bigger)
+    drop nums
+    drop bigger
+}
+```
+
+## Other questions
+
+- What is the value of the following expression? Explain your answer.
+
+```
+fn main() {
+    print(len(push(vec(), 5)))
+}
+```
+
+- Write a program to print all even numbers from 1 to 100.
+
+- Write a program to find all pairs of positive integers that multiply to a given number `n`.
+
+- Write a program to compute the greatest common divisor of two positive integers `a` and `b` using Euclid's algorithm.

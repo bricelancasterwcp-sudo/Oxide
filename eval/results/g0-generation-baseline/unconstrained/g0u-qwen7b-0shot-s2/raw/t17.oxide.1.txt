@@ -1,0 +1,16 @@
+```oxide
+struct List { values: Vec<Int> }
+
+fn get_value(l: List, pos: Int) -> Int {
+    let x = get(l.values, pos)?
+    x
+}
+
+fn main() {
+    let l = List { values: vec(10, 20, 30) }
+    let val1 = get_value(l, 1)
+    let val5 = get_value(l, 5)
+    print(val1)
+    print(val5)
+}
+```

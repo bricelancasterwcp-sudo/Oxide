@@ -1,0 +1,18 @@
+```rust
+fn sum_multiples() -> Int {
+    let mut sum = 0
+    let mut multiple = 3
+    let mut count = 0
+    while count < 8 {
+        sum = sum + multiple
+        multiple = multiple + 3
+        count = count + 1
+    }
+    sum
+}
+
+fn main() {
+    let result = sum_multiples()
+    print(result)
+}
+```

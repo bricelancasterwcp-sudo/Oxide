@@ -1,0 +1,36 @@
+```oxide
+struct Item {
+    name: Str,
+    unit_price: Int,
+    quantity: Int
+}
+
+fn cost(item: Item) -> Int {
+    item.unit_price * item.quantity
+}
+
+fn main() {
+    let pen = Item { name: "pen", unit_price: 3, quantity: 4 }
+    let pad = Item { name: "pad", unit_price: 9, quantity: 2 }
+    let ink = Item { name: "ink", unit_price: 5, quantity: 3 }
+    
+    let total_cost = cost(pen) + cost(pad) + cost(ink)
+    print(total_cost)
+    
+    let items = vec![pen, pad, ink]
+    let max_cost_item = match items {
+        [ref p, ref p1, ref p2] => {
+            if cost(*p) > cost(*p1) && cost(*p) > cost(*p2) {
+                p
+            } else if cost(*p1) > cost(*p) && cost(*p1) > cost(*p2) {
+                p1
+            } else {
+                p2
+            }
+        },
+        _ => panic("Unexpected number of items")
+    }
+    
+    print_str(max_cost_item.name)
+}
+```

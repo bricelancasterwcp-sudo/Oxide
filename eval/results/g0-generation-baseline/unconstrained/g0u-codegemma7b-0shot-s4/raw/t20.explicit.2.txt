@@ -1,0 +1,43 @@
+use oxide_explicit::*;
+
+fn main() {
+    let pen = Item { unit_price: 3, quantity: 4 };
+    let pad = Item { unit_price: 9, quantity: 2 };
+    let ink = Item { unit_price: 5, quantity: 3 };
+
+    let total_cost = pen.cost() + pad.cost() + ink.cost();
+
+    let most_expensive = if pen.cost() > pad.cost() {
+        if pen.cost() > ink.cost() {
+            &pen
+        } else {
+            &ink
+        }
+    } else if pad.cost() > ink.cost() {
+        &pad
+    } else {
+        &ink
+    };
+
+    print(total_cost)
+    print_str(most_expensive.name())
+}
+
+struct Item {
+    unit_price: Int,
+    quantity: Int,
+}
+
+impl Item {
+    fn cost(&self) -> Int {
+        self.unit_price * self.quantity
+    }
+
+    fn name(&self) -> Str {
+        match self {
+            Item { unit_price: 3, .. } => "pen",
+            Item { unit_price: 9, .. } => "pad",
+            Item { unit_price: 5, .. } => "ink",
+        }
+    }
+}

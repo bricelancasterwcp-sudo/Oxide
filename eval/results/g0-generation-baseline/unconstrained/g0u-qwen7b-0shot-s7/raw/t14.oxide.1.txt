@@ -1,0 +1,12 @@
+```oxide
+let text = "mississippi"
+let count_s = text.chars().filter(|&c| c == 's').count()
+let distinct_chars = text.chars().collect::<Vec<Str>>().iter().fold(vec![], |mut acc, c| {
+    if !acc.contains(c) {
+        acc.push(c.clone())
+    }
+    acc
+}).len()
+print(count_s)
+print(distinct_chars)
+```

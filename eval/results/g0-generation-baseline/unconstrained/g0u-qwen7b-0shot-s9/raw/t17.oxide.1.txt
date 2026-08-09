@@ -1,0 +1,13 @@
+```rust
+fn main() {
+    let list = vec![10, 20, 30];
+    let pos1 = 1;
+    let pos5 = 5;
+
+    let val1 = get(list, pos1).unwrap_or(-1);
+    print(val1);
+
+    let val5 = get(list, pos5).unwrap_or(-1);
+    print(val5);
+}
+```

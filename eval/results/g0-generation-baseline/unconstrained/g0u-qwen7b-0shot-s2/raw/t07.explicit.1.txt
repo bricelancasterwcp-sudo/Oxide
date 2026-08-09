@@ -1,0 +1,8 @@
+```rust
+fn main() {
+    let multiples = vec![3, 6, 9, 12, 15, 18, 21, 24];
+    let sum = multiples.iter().sum();
+    print(sum);
+    drop multiples;
+}
+```

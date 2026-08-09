@@ -1,0 +1,29 @@
+```
+fn main() {
+  let mut list = push(push(push(push(vec(), 5), 3), 8), 1);
+  list = push(list, 9);
+  list = push(list, 2);
+
+  let mut smaller = vec();
+  while !list.is_empty() {
+    let min = first_big(list)?
+    list = get(list, 1)?;
+    smaller = push(smaller, min);
+  }
+  for x in smaller {
+    print(x);
+    print_str("\n");
+  }
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    Some(found)
+}
+```

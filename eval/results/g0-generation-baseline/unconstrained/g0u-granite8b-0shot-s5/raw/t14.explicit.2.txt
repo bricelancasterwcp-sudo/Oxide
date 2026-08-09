@@ -1,0 +1,28 @@
+fn s_count(s: &Str, c: Char) -> Int {
+    let mut count = 0
+    for ch in &chars(s) {
+        if ch == &c {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_count(s: &Str) -> Int {
+    let mut unique = 0
+    let mut chars = clone(&chars(s))
+    while len(&chars) > 0 {
+        let c = pop(&mut chars)
+        let same = any(&chars, |ch| ch == &c)
+        if !same {
+            unique = unique + 1
+        }
+    }
+    unique
+}
+
+fn main() {
+    let text = "mississippi"
+    print(s_count(&text, 's'))
+    print(distinct_count(&text))
+}

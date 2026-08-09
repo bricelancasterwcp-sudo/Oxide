@@ -1,0 +1,18 @@
+fn main() {
+    let text = "mississippi";
+
+    let mut s_count = 0;
+    let mut distinct_chars = 0;
+
+    for c in text.chars() {
+        if c == 's' {
+            s_count += 1;
+        }
+        if !distinct_chars.contains(&c) {
+            distinct_chars += 1;
+        }
+    }
+
+    print!("{} ", s_count);
+    print!("{}", distinct_chars);
+}

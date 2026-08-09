@@ -1,0 +1,6 @@
+fn main() {
+    let nums = push(push(push(push(push(push(vec(), 3), 6), 9), 12), 15), 18);
+    let sum = nums[0] + nums[1] + nums[2] + nums[3] + nums[4] + nums[5] + nums[6] + nums[7];
+    print(sum)
+}
+```

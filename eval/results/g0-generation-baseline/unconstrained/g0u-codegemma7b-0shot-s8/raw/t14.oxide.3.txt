@@ -1,0 +1,13 @@
+fn main() {
+    let text = "mississippi";
+    let mut s_count = 0;
+    let mut c_set = set();
+    for c in text.chars() {
+        if c == 's' {
+            s_count += 1;
+        }
+        insert(c_set, c);
+    }
+    print(s_count);
+    print(len(c_set));
+}

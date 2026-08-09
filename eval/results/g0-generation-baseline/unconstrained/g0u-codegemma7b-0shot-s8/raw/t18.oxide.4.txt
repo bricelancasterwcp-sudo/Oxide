@@ -1,0 +1,32 @@
+fn area(s: Shape) -> Float {
+    match s {
+        Shape::Rect(w, h) => float(w * h),
+        Shape::Triangle(a, b, c) => {
+            let s = (a + b + c) / 2.0
+            float((s * (s - a) * (s - b) * (s - c)).sqrt())
+        },
+    }
+}
+
+fn perimeter(s: Shape) -> Float {
+    match s {
+        Shape::Rect(w, h) => float(2.0 * (w + h)),
+        Shape::Triangle(a, b, c) => float(a + b + c),
+    }
+}
+
+fn main() {
+    let shapes = vec![
+        Shape::Rect(3, 4),
+        Shape::Triangle(3, 4, 5),
+        Shape::Rect(2, 5),
+    ];
+    for s in shapes {
+        print(perimeter(s))
+    }
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Triangle(Int, Int, Int),
+}

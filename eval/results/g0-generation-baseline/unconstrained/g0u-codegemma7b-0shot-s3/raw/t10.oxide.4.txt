@@ -1,0 +1,12 @@
+fn main() {
+    let mut v = vec![4, 1, 7, 3, 9, 2];
+    let mut n = 0;
+    for x in v.iter() {
+        if *x > 3 {
+            print!("{}\n", x);
+            n += 1;
+        }
+    }
+    print!("{} values\n", n);
+}
+```

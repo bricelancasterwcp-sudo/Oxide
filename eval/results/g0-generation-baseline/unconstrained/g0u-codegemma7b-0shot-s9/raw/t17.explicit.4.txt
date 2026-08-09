@@ -1,0 +1,22 @@
+fn main() {
+    let list = vec![10, 20, 30];
+    print_int(get(&list, 1));
+    print_int(get(&list, 5));
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    if i >= 0 && i < len(&v) {
+        v[i]
+    } else {
+        -1
+    }
+}
+
+fn print_int(n: Int) {
+    if n != -1 {
+        print(int_to_str(n));
+    } else {
+        print("Out of bounds");
+    }
+    print("\n");
+}

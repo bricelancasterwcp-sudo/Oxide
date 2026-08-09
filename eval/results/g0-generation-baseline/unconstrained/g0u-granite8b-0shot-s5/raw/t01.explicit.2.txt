@@ -1,0 +1,11 @@
+```rust
+fn square(x: Int) -> Int {
+    x * x
+}
+
+fn main() {
+    let numbers = vec(range(0, 10));
+    let squares = map(&numbers, &square);
+    print(sum(&squares));
+}
+```

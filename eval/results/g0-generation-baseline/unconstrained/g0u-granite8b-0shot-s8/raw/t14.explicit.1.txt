@@ -1,0 +1,13 @@
+```rust
+fn count_s(s: Str) -> (Int, Int) {
+    let mut count = 0
+    let mut distinct = 0
+    for c in chars(&s) {
+        if c == 's' {
+            count = count + 1
+        }
+        distinct = distinct + 1
+    }
+    (count, distinct)
+}
+```

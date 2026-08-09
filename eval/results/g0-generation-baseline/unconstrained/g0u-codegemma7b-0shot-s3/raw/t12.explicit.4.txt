@@ -1,0 +1,6 @@
+fn main() {
+    let text = "stack";
+    let mut chars = chars(text);
+    chars.reverse();
+    print_str(str_from(&chars))
+}

@@ -1,0 +1,3 @@
+```oxide
+print_str(concat(chars("stack"), chars("stack").reverse()))
+```

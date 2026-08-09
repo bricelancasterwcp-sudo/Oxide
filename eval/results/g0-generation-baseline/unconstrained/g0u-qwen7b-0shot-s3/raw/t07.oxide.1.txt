@@ -1,0 +1,17 @@
+```rust
+fn main() {
+    let mut multiples = vec![];
+    let mut i = 1;
+    while multiples.len() < 8 {
+        let multiple = i * 3;
+        multiples = push(multiples, multiple);
+        i += 1;
+    }
+    let sum: Int = sum(multiples);
+    print(sum);
+}
+
+fn sum(v: Vec<Int>) -> Int {
+    v.iter().fold(0, |acc, &x| acc + x)
+}
+```

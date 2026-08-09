@@ -1,0 +1,12 @@
+fn sum_two(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn main() {
+    let mut v = vec![1, 1];
+    for i in 2..20 {
+        let tmp = sum_two(v[i - 2], v[i - 1]);
+        v.push(tmp);
+    }
+    print(v[19]);
+}

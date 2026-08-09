@@ -1,0 +1,8 @@
+fn main() {
+    let mut acc = 0f64;
+    for i in 0..=9 {
+        acc = acc + float_to_int(i) * float_to_int(i);
+    }
+    print(acc)
+}
+```

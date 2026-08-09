@@ -1,0 +1,20 @@
+fn rectangle_perimeter(width: Int, height: Int) -> Int {
+    let side_length = width + height;
+    4 * side_length
+}
+
+fn triangle_perimeter(side_a: Int, side_b: Int, side_c: Int) -> Int {
+    side_a + side_b + side_c
+}
+
+fn main() {
+    let rect = push(push(vec(), 3), 4)
+    let rect_perim = rectangle_perimeter(len(&rect), len(&rect))
+    let rect_drop = drop rect
+    let tri = push(push(push(vec(), 3), 4), 5)
+    let tri_perim = triangle_perimeter(len(&tri), len(&tri), len(&tri))
+    let tri_drop = drop tri
+    print(rect_perim)
+    print(tri_perim)
+}
+

@@ -1,0 +1,9 @@
+let five = 5
+let zero = 0
+let four = 4
+let x = trunc(100 / five)
+print(x)
+let y = trunc(100 / zero)
+print_str("undefined")
+let z = trunc(100 / four)
+print(z)

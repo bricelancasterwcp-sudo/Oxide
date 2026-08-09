@@ -1,0 +1,18 @@
+```
+fn perimeter(s: Shape) -> Int {
+    match s {
+        Rectangle { width, height } => 2 * (width + height),
+        Triangle { side1, side2, side3 } => side1 + side2 + side3,
+        _ => 0,
+    }
+}
+
+fn main() {
+    let rect = Rectangle { width: 3, height: 4 };
+    let tri = Triangle { side1: 3, side2: 4, side3: 5 };
+    let rect2 = Rectangle { width: 2, height: 5 };
+    print(perimeter(rect));
+    print(perimeter(tri));
+    print(perimeter(rect2));
+}
+```

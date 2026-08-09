@@ -1,0 +1,27 @@
+use oxide_explicit::*;
+
+fn item_cost(unit_price: Float, quantity: Int) -> Float {
+    unit_price * quantity
+}
+
+fn main() {
+    let pen_cost = item_cost(3., 4);
+    let pad_cost = item_cost(9., 2);
+    let ink_cost = item_cost(5., 3);
+
+    let total_cost = pen_cost + pad_cost + ink_cost;
+    print(total_cost);
+
+    if pen_cost > pad_cost && pen_cost > ink_cost {
+        print("Pen");
+    } else if pad_cost > pen_cost && pad_cost > ink_cost {
+        print("Pad");
+    } else {
+        print("Ink");
+    }
+
+    drop pen_cost;
+    drop pad_cost;
+    drop ink_cost;
+    drop total_cost;
+}

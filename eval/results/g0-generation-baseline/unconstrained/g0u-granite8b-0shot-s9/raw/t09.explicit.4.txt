@@ -1,0 +1,10 @@
+fn main() {
+    let list = vec(1, 2, 3, 4, 5);
+    let mut index = len(&list);
+    while index > 0 {
+        index = index - 1;
+        print(get(&list, index).unwrap());
+        drop index;
+    }
+    drop list;
+}

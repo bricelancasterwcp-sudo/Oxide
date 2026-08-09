@@ -1,0 +1,14 @@
+```
+fn main() {
+    let v = vec![4, 1, 7, 3, 9, 2];
+    let mut keep_count = 0;
+    for x in v {
+        if x > 3 {
+            print(x);
+            print("\n");
+            keep_count += 1;
+        }
+    }
+    print(keep_count);
+}
+```

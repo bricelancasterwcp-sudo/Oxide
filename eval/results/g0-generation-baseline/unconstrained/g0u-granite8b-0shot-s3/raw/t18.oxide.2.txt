@@ -1,0 +1,21 @@
+```rust
+struct Rectangle { width: Int, height: Int }
+struct Triangle { side1: Int, side2: Int, side3: Int }
+
+fn perimeter(shape: Shape) -> Int {
+    match shape {
+        Rectangle { width, height } => width * 2 + height * 2,
+        Triangle { side1, side2, side3 } => side1 + side2 + side3,
+        _ => 0,
+    }
+}
+
+fn main() {
+    let rectangle = Rectangle { width: 3, height: 4 };
+    let triangle = Triangle { side1: 3, side2: 4, side3: 5 };
+    let sequence = [rectangle, triangle, rectangle];
+    for shape in sequence {
+        print(perimeter(shape));
+    }
+}
+```

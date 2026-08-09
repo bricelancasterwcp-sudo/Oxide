@@ -1,0 +1,13 @@
+use std::io;
+
+fn main() {
+    let mut multiples = Vec::new();
+
+    for i in 1..=8 {
+        multiples.push(i * 3);
+    }
+
+    let sum: i32 = multiples.iter().sum();
+
+    println!("Sum of multiples: {}", sum);
+}

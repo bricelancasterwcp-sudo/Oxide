@@ -1,0 +1,21 @@
+```oxide
+fn main() {
+    let texts = vec("level", "stereo", "rotor");
+    for t in texts {
+        let reversed = concat(chars(t).iter().rev().map(|c| c).collect::<Vec<Str>>());
+        print_str(equivalent(t, reversed));
+    }
+}
+
+fn equivalent(a: Str, b: Str) -> Str {
+    if str_len(a) != str_len(b) {
+        return "false";
+    }
+    for i in range(0, str_len(a)) {
+        if get(a, i) != get(b, i) {
+            return "false";
+        }
+    }
+    "true"
+}
+```

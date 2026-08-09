@@ -1,0 +1,27 @@
+```
+fn perfect_number(x: Int) -> Bool {
+    let mut sum = 0;
+    for i in range(1, x) {
+        if x % i == 0 {
+            sum = sum + i;
+        }
+    }
+    sum == x
+}
+
+fn main() {
+    let limit = 1000;
+    let mut numbers = vec();
+    for i in range(1, limit) {
+        if perfect_number(i) {
+            numbers = push(numbers, i);
+        }
+    }
+
+    for n in &numbers {
+        print(n);
+    }
+}
+```
+
+This program is corrected to handle the error.

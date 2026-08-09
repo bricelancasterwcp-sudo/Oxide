@@ -1,0 +1,36 @@
+fn parse_int(s: &Str) -> Option<Int> {
+    s.parse::<Int>().ok()
+}
+
+fn main() {
+    let s1 = "12";
+    let s2 = "x";
+    let s3 = "30";
+
+    let mut sum = 0;
+    let mut count = 0;
+
+    if let Some(num) = parse_int(s1) {
+        sum += num;
+    } else {
+        count += 1;
+    }
+
+    if let Some(num) = parse_int(s2) {
+        sum += num;
+    } else {
+        count += 1;
+    }
+
+    if let Some(num) = parse_int(s3) {
+        sum += num;
+    } else {
+        count += 1;
+    }
+
+    print(sum);
+    print(count);
+    drop s1;
+    drop s2;
+    drop s3;
+}

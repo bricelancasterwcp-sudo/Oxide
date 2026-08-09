@@ -1,0 +1,19 @@
+```rust
+fn main() {
+    let dividends = vec![100, 100, 100];
+    let divisors = vec![5, 0, 4];
+
+    for i in 0..3 {
+        let quotient = if divisors[i] == 0 {
+            "undefined"
+        } else {
+            &dividends[i] / divisors[i]
+        };
+        print_str(quotient);
+        print_str("\n");
+    }
+
+    drop dividends;
+    drop divisors;
+}
+```

@@ -1,0 +1,21 @@
+```text
+struct List { head: Int, tail: Vec<Int> }
+
+fn lookup(list: List, pos: Int) -> Int {
+    if pos == 0 {
+        return list.head
+    }
+    for (i, x) in list.tail.iter().enumerate() {
+        if i == pos - 1 {
+            return x
+        }
+    }
+    -1
+}
+
+fn main() {
+    let list = List { head: 10, tail: push(push(vec(), 20), 30) }
+    print(lookup(list, 1))
+    print(lookup(list, 5))
+}
+```

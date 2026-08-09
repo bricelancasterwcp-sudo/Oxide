@@ -1,0 +1,14 @@
+let pos = 0
+let mut max = 0
+for x in &nums {
+    if x > 0 {
+        pos = pos + 1
+    }
+    if x > max {
+        max = x
+    }
+}
+print(pos)
+drop pos
+print(max)
+drop max

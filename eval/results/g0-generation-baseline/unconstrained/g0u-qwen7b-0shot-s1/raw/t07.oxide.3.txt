@@ -1,0 +1,7 @@
+```rust
+fn main() {
+    let multiples = (1..).filter(|&x| x % 3 == 0).take(8).collect::<Vec<Int>>();
+    let sum = multiples.iter().sum::<Int>();
+    print(sum);
+}
+```

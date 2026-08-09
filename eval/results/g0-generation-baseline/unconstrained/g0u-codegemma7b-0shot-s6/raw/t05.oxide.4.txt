@@ -1,0 +1,15 @@
+```
+fn fib(n: Int) -> Int {
+    if n < 2 {
+        return 1
+    }
+    let a = fib(n - 1)
+    let b = fib(n - 2)
+    return a + b
+}
+
+fn main() {
+    let x = fib(20)
+    print(x)
+}
+```

@@ -1,0 +1,18 @@
+```rust
+fn main() {
+    let list = vec![10, 20, 30];
+
+    let element_at_1 = list.get(1);
+    let element_at_5 = list.get(5);
+
+    match element_at_1 {
+        Some(&val) => println!("Element at position 1: {}", val),
+        None => println!("Element at position 1 not found"),
+    }
+
+    match element_at_5 {
+        Some(&val) => println!("Element at position 5: {}", val),
+        None => println!("Element at position 5 not found"),
+    }
+}
+```

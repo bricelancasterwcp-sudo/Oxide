@@ -1,0 +1,41 @@
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let v2 = clone(v)
+    for i in range(0, len(v2)) {
+        let j = first_big(get_slice(v2, i + 1, len(v2)))?
+        swap(v2, i, j)
+    }
+    v2
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found
+}
+
+fn get_slice(v: Vec<T>, start: Int, end: Int) -> Vec<T> {
+    let mut res = vec()
+    for i in range(start, end) {
+        res = push(res, get(v, i)?)
+    }
+    res
+}
+
+fn swap(v: Vec<T>, i: Int, j: Int) {
+    let temp = get(v, i)?
+    let v2 = functional_update(v, i, .x = get(v, j)?)
+    let v3 = functional_update(v2, j, .x = temp)
+    ()
+}
+
+fn main() {
+    let v = sort(vec(5, 3, 8, 1, 9, 2))
+    for x in v {
+        print(x)
+    }
+}

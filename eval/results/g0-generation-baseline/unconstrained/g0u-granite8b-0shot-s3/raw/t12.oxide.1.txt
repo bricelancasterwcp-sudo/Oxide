@@ -1,0 +1,12 @@
+```text
+fn main() {
+    let stack = "stack";
+    let mut i = len(stack) - 1;
+    let mut s = Str::new(0);
+    while i >= 0 {
+        s = push(s, get(stack, i).unwrap());
+        i -= 1;
+    }
+    print_str(s);
+}
+```

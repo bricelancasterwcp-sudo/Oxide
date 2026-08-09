@@ -1,0 +1,2 @@
+print(len(chars("mississippi")))
+print(len(chars(concat(concat("miss","i"),"ss"),concat("i","ppi")))))

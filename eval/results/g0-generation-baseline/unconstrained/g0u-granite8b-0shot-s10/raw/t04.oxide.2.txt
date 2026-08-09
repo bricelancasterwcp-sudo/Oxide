@@ -1,0 +1,20 @@
+```
+fn main() {
+    let mut primes = vec()
+    for x in range(2, 100) {
+        if is_prime(x) {
+            primes = push(primes, x)
+        }
+    }
+    print(len(primes))
+}
+
+fn is_prime(n: Int) -> Bool {
+    for d in range(2, n) {
+        if n % d == 0 {
+            return false
+        }
+    }
+    true
+}
+```

@@ -1,0 +1,16 @@
+```rust
+fn main() {
+    let numbers = vec![4, 1, 7, 3, 9, 2];
+    let mut kept = vec![];
+    for &num in &numbers {
+        if num > 3 {
+            kept = push(kept, num);
+        }
+    }
+    for &num in &kept {
+        print(num);
+        print_str("\n");
+    }
+    print(kept.len());
+}
+```

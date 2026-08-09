@@ -1,0 +1,32 @@
+use std::io;
+
+fn main() {
+    let mut total_cost = 0.0;
+    let mut most_expensive_item = "";
+    let mut max_cost = 0.0;
+
+    loop {
+        let mut input = String::new();
+        io::stdin().read_line(&mut input).expect("Failed to read input");
+
+        if input.trim() == "end" {
+            break;
+        }
+
+        let mut parts = input.trim().split_whitespace();
+        let name = parts.next().unwrap();
+        let unit_price = parts.next().unwrap().parse::<f64>().unwrap();
+        let quantity = parts.next().unwrap().parse::<usize>().unwrap();
+
+        let cost = unit_price * quantity as f64;
+        total_cost += cost;
+
+        if cost > max_cost {
+            max_cost = cost;
+            most_expensive_item = name;
+        }
+    }
+
+    println!("Total cost: {:.2}", total_cost);
+    println!("Most expensive item: {}", most_expensive_item);
+}

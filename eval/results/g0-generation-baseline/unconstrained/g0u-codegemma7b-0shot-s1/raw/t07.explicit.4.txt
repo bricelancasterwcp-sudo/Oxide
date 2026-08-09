@@ -1,0 +1,12 @@
+fn main() {
+    let nums = push(push(push(push(push(vec(), 3), 6), 9), 12), 15);
+    print(sum_big(&nums));
+}
+
+fn sum_big(v: &Vec<Int>) -> Int {
+    let mut total = 0;
+    for x in &v {
+        total = total + x;
+    }
+    total;
+}

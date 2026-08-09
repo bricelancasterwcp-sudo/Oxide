@@ -1,0 +1,14 @@
+fn gcd(a: u32, b: u32) -> u32 {
+    let mut tmp;
+    let mut s = a;
+    let mut t = b;
+    while t != 0 {
+        tmp = s % t;
+        (s, t) = (t, tmp);
+    }
+    s
+}
+
+fn main() {
+    println!("{}", gcd(252, 105));
+}

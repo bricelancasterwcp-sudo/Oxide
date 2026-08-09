@@ -1,0 +1,16 @@
+let pen = (price: 3, quantity: 4)
+let pad = (price: 9, quantity: 2)
+let ink = (price: 5, quantity: 3)
+
+let cost = pen.price * pen.quantity + pad.price * pad.quantity + ink.price * ink.quantity
+let max_price = max(pen.price * pen.quantity, pad.price * pad.quantity, ink.price * ink.quantity)
+let max_item = if pen.price * pen.quantity == max_price {
+    pen
+} else if pad.price * pad.quantity == max_price {
+    pad
+} else {
+    ink
+}
+
+print(cost)
+print(max_item.price * max_item.quantity)

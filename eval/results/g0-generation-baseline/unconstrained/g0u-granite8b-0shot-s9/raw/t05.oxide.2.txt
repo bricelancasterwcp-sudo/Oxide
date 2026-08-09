@@ -1,0 +1,34 @@
+```
+fn main() {
+    let x = 1
+    let y = 1
+    let mut i = 0
+    while i < 19 {
+        if i % 2 == 0 {
+            x = y
+        } else {
+            y = x
+        }
+        i = i + 1
+    }
+    print(x)
+}
+```
+
+Answer:
+```
+fn main() {
+    let x = 1
+    let y = 1
+    let mut i = 0
+    while i < 19 {
+        if i % 2 == 0 {
+            x = y
+        } else {
+            y = x
+        }
+        i = i + 1
+    }
+    print(x)
+}
+```

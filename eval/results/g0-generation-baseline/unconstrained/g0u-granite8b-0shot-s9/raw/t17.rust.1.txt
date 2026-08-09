@@ -1,0 +1,17 @@
+```rust
+fn main() {
+    let list = vec![10, 20, 30];
+    let index1 = 1;
+    let index5 = 5;
+
+    match list.get(index1) {
+        Some(val) => println!("Element at index 1 is {}", val),
+        None => println!("Index 1 is out of bounds"),
+    }
+
+    match list.get(index5) {
+        Some(val) => println!("Element at index 5 is {}", val),
+        None => println!("Index 5 is out of bounds"),
+    }
+}
+```

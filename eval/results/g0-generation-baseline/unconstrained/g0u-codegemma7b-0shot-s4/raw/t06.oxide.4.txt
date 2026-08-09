@@ -1,0 +1,21 @@
+fn is_perfect(n: Int) -> Bool {
+    if n <= 1 {
+        return false
+    }
+    let mut sum = 0
+    for i in range(2, trunc(sqrt(n)) + 1) {
+        if n % i == 0 {
+            sum += i + n / i
+        }
+    }
+    return sum == n
+}
+
+fn main() {
+    for n in range(2, 1000) {
+        if is_perfect(n) {
+            print(n)
+            print_str("\n")
+        }
+    }
+}

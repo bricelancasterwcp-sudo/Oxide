@@ -1,0 +1,31 @@
+fn main() {
+    let pen = Item { price: 3, quantity: 4 };
+    let pad = Item { price: 9, quantity: 2 };
+    let ink = Item { price: 5, quantity: 3 };
+
+    let total_cost = pen.cost() + pad.cost() + ink.cost();
+
+    let (most_expensive_item, _) = [pen, pad, ink].iter().max_by_key(|item| item.cost());
+
+    println!("Total cost: {}", total_cost);
+    println!("Most expensive item: {}", most_expensive_item.name());
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+}
+
+impl Item {
+    fn cost(&self) -> Int {
+        self.price * self.quantity
+    }
+
+    fn name(&self) -> Str {
+        match self {
+            Item { price: 3, .. } => "Pen",
+            Item { price: 9, .. } => "Pad",
+            Item { price: 5, .. } => "Ink",
+        }
+    }
+}

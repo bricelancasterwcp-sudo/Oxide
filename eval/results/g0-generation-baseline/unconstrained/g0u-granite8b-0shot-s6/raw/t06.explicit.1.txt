@@ -1,0 +1,8 @@
+# Perfect Numbers
+
+Print every perfect number greater than 0 and less than 1000 in increasing order, one per line. A number is perfect when it equals the sum of its positive divisors other than itself.
+
+Task:
+Print every perfect number greater than 0 and less than 1000 in increasing order, one per line. A number is perfect when it equals the sum of its positive divisors other than itself.
+
+Reply with ONLY the complete program source, no fences, no commentary.

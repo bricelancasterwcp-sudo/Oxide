@@ -1,0 +1,16 @@
+fn lookup(list: Vec<Int>, pos: Int) -> Option<Int> {
+    let mut result = None
+    for (i, x) in list.iter().enumerate() {
+        if i == pos {
+            result = Some(*x)
+            break
+        }
+    }
+    result
+}
+
+fn main() {
+    let list = push(push(push(vec(), 10), 20), 30)
+    print(lookup(list, 0)?)
+    print(lookup(list, 4)?)
+}

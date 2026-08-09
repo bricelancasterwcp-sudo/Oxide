@@ -1,0 +1,14 @@
+struct Sequence {
+    values: Vec<Int>
+}
+
+fn main() {
+    let s = Sequence { values: push(push(vec(), 1), 1) }
+    for _ in 0..19 {
+        let a = get(s.values, -1)?
+        let b = get(s.values, -2)?
+        let sum = a + b
+        s.values = push(s.values, sum)
+    }
+    print(get(s.values, -1)?)
+}

@@ -1,0 +1,26 @@
+```
+fn div_100(x: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        return None;
+    }
+    return Some(x / d);
+}
+
+fn main() {
+    let x = 100;
+    match div_100(x, 5) {
+        None => print("undefined"),
+        Some(q) => print(q)
+    }
+    match div_100(x, 0) {
+        None => print("undefined"),
+        Some(q) => print(q)
+    }
+    match div_100(x, 4) {
+        None => print("undefined"),
+        Some(q) => print(q)
+    }
+}
+```
+
+The issue was caused by a missing semicolon at the end of each function declaration. After adding semicolons to the end of each function declaration, the program compiles successfully.

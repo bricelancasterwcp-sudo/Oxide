@@ -1,0 +1,30 @@
+fn main() {
+    let text = "mississippi";
+    let mut count = 0;
+    for c in text.chars() {
+        if c == 's' {
+            count += 1;
+        }
+    }
+    print(count);
+    print(len(set(text)));
+}
+
+fn set(s: Str) -> Vec<Str> {
+    let mut out = vec();
+    for c in s.chars() {
+        if !contains(out, string(c)) {
+            out = push(out, string(c));
+        }
+    }
+    out
+}
+
+fn contains(v: Vec<Str>, s: Str) -> bool {
+    for i in v {
+        if i == s {
+            return true;
+        }
+    }
+    false
+}

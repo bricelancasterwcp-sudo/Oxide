@@ -1,0 +1,23 @@
+```rust
+fn sum_big(v: &[Int], limit: Int) -> Int {
+    let mut total = 0
+    for &x in v {
+        if x > limit {
+            total += x
+        }
+    }
+    total
+}
+
+fn extend(mut v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x);
+    v
+}
+
+fn main() {
+    let nums = vec![5, 40];
+    let bigger = extend(nums, 70);
+    print(sum_big(&nums, 10));
+    print(sum_big(&bigger, 10));
+}
+```

@@ -1,0 +1,21 @@
+fn count_and_max(v: &Vec<Int>) -> (Int, Int) {
+    let mut count = 0
+    let mut max = i32::MIN
+    for &x in v {
+        if x > 0 {
+            count = count + 1
+        }
+        if x > max {
+            max = x
+        }
+    }
+    (count, max)
+}
+
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7)
+    let (count, max) = count_and_max(&nums)
+    print(count)
+    print(max)
+    drop nums
+}

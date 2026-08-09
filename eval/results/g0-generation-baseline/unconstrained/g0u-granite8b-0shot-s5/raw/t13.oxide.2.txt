@@ -1,0 +1,43 @@
+```text
+print(x)                      # debug-print any value
+print_str(s)                  # print a Str without quotes
+vec() -> Vec<T>               # empty vector (needs usage context to infer T)
+push(v, x) -> Vec<T>          # consumes v, returns it with x appended
+len(v) -> Int                 # length of a Vec
+get(v, i) -> Option<T>        # element copy at index i
+range(a, b) -> Vec<Int>       # integers a..b-1
+clone(x) -> T                 # fresh copy of any value
+str_len(s) -> Int             # characters in a Str
+concat(a, b) -> Str           # consumes both, returns a+b
+chars(s) -> Vec<Str>          # one-char strings
+int_to_str(n) -> Str
+parse_int(s) -> Option<Int>
+to_float(n) -> Float          # Int to Float
+trunc(x) -> Int               # Float to Int, toward zero
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            # field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+```

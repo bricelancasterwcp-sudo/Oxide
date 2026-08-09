@@ -1,0 +1,12 @@
+```oxide
+fn main() {
+    let text = "mississippi";
+    let count_s = text.chars().filter(|&c| c == 's').count();
+    let distinct_chars: Vec<char> = text.chars().collect();
+    let count_distinct = distinct_chars.iter().fold(0, |acc, &c| if distinct_chars.iter().filter(|&&d| d == c).count() == 1 { acc + 1 } else { acc });
+
+    print(count_s);
+    print_str(" ");
+    print(count_distinct);
+}
+```

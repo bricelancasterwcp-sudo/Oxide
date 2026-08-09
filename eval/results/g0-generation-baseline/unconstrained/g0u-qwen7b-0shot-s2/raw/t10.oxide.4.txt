@@ -1,0 +1,23 @@
+```rust
+struct List { values: Vec<Int> }
+
+fn filter(v: Vec<Int>, threshold: Int) -> Vec<Int> {
+    let mut result = vec();
+    for x in v {
+        if x > threshold {
+            result = push(result, x);
+        }
+    }
+    result
+}
+
+fn main() {
+    let list = List { values: vec![4, 1, 7, 3, 9, 2] };
+    let filtered = filter(list.values.clone(), 3);
+    for x in filtered {
+        print(x);
+        print_str("\n");
+    }
+    print(len(filtered));
+}
+```

@@ -1,0 +1,14 @@
+```
+fn main() {
+    let first_n = 8;
+    let mut total = 0;
+    let mut i = 0;
+    while i < first_n {
+        if i % 3 == 0 {
+            total = total + i;
+        }
+        i = i + 1;
+    }
+    print(total)
+}
+```

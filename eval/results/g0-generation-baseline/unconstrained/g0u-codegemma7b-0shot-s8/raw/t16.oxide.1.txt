@@ -1,0 +1,8 @@
+fn main() {
+    let num = 100;
+    let div_by = [5, 0, 4];
+    for d in div_by {
+        let result = if d == 0 { "undefined" } else { (num / d).to_string() };
+        println!("{}", result);
+    }
+}

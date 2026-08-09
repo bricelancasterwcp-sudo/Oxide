@@ -1,0 +1,5 @@
+fn main() {
+    let s = "stack";
+    let reversed: String = s.chars().rev().collect();
+    print_str(&reversed);
+}

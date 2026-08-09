@@ -1,0 +1,13 @@
+fn main() {
+    let dividends = vec![100, 100, 100];
+    let divisors = vec![5, 0, 4];
+
+    for (dividend, divisor) in dividends.iter().zip(divisors.iter()) {
+        if *divisor != 0 {
+            print!("{}", dividend / divisor);
+        } else {
+            print!("undefined");
+        }
+        print("\n");
+    }
+}

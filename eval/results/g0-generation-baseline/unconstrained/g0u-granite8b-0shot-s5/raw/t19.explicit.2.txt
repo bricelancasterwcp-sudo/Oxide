@@ -1,0 +1,33 @@
+```rust
+fn area(r: &Rectangle) -> Int {
+    r.width() * r.height()
+}
+
+fn perimeter(r: &Rectangle) -> Int {
+    2 * (r.width() + r.height())
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+impl Rectangle {
+    fn width(&self) -> Int {
+        self.width
+    }
+    fn height(&self) -> Int {
+        self.height
+    }
+}
+
+fn main() {
+    let rect = Rectangle {
+        width: 7,
+        height: 4,
+    };
+    print(area(&rect));
+    drop rect;
+    print(perimeter(&rect));
+}
+```

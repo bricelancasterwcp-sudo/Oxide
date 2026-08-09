@@ -1,0 +1,14 @@
+fn main() {
+    let mut v = vec![4, 1, 7, 3, 9, 2];
+    let mut i = 0;
+    let mut k = 0;
+    while i < v.len() {
+        if v[i] > 3 {
+            print!("{}\n", v[i]);
+            k += 1;
+        }
+        i += 1;
+    }
+    print!("{} values kept\n", k);
+    drop v;
+}

@@ -1,0 +1,13 @@
+```oxide
+fn main() {
+    let mut results = vec![];
+    let texts = vec!["level", "stereo", "rotor"];
+    for text in texts {
+        let reversed: Str = text.chars().rev().collect();
+        results.push(reversed == text);
+    }
+    for result in results {
+        print(result);
+    }
+}
+```

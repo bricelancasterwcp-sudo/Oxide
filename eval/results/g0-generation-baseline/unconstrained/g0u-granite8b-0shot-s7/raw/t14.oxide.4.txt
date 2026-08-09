@@ -1,0 +1,13 @@
+let text = "mississippi";
+let mut count = 0;
+let mut distinct = 0;
+
+for c in text.chars() {
+    if c == 's' {
+        count += 1;
+    }
+    distinct += 1;
+}
+
+println!("{}", count);
+println!("{}", distinct);

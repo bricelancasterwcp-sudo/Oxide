@@ -1,0 +1,16 @@
+```rust
+fn first_8_multiples_of_3() -> Int {
+    let mut result = 0
+    for x in range(1, 100) {
+        if x % 3 == 0 {
+            result = result + x
+            if result >= 24 {
+                return result
+            }
+        }
+    }
+    0
+}
+
+print(first_8_multiples_of_3())
+```

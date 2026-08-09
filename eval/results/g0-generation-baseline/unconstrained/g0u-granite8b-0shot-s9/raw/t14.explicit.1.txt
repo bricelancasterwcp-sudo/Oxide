@@ -1,0 +1,40 @@
+```
+fn main() {
+    let word = "mississippi";
+    let s_count = count_letter('s', &word);
+    let distinct = distinct_letters(&word);
+    print(s_count);
+    print(distinct);
+}
+
+fn count_letter(letter: Char, s: &Str) -> Int {
+    let mut count = 0
+    for c in &s {
+        if c == &letter {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_letters(s: &Str) -> Int {
+    let mut count = 0
+    let mut seen = vec()
+    for c in &s {
+        if !is_member(&seen, &c) {
+            push(&mut seen, c)
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn is_member(v: &Vec<Char>, c: &Char) -> Bool {
+    for x in &v {
+        if x == c {
+            return true
+        }
+    }
+    false
+}
+```

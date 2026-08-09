@@ -1,0 +1,7 @@
+fn main() {
+    let mut numbers = vec![1, 2, 3, 4, 5];
+    while let Some(x) = numbers.pop() {
+        print_str(int_to_str(x));
+        print_str("\n");
+    }
+}

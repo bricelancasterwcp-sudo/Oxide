@@ -1,0 +1,24 @@
+fn main() {
+    let rect = Shape::Rect { width: 7, height: 4 };
+    print(area(&rect));
+    print(perimeter(&rect));
+}
+
+enum Shape {
+    Rect { width: Int, height: Int },
+    Circle(Float),
+}
+
+fn area(s: &Shape) -> Int {
+    match s {
+        Shape::Rect { width, height } => width * height,
+        Shape::Circle(r) => (r * r * 3.14).trunc(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Int {
+    match s {
+        Shape::Rect { width, height } => 2 * (width + height),
+        Shape::Circle(r) => (2 * 3.14 * r).trunc(),
+    }
+}

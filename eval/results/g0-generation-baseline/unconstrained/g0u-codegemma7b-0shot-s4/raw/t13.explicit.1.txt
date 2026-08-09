@@ -1,0 +1,19 @@
+```rust
+fn is_palindrome(text: &str) -> bool {
+    let mut chars = text.chars();
+    let mut rev_chars = text.chars().rev();
+    while let (Some(c1), Some(c2)) = (chars.next(), rev_chars.next()) {
+        if c1 != c2 {
+            return false;
+        }
+    }
+    true
+}
+
+fn main() {
+    let texts = ["level", "stereo", "rotor"];
+    for text in texts {
+        println!("{}", is_palindrome(text));
+    }
+}
+```

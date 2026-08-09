@@ -1,0 +1,31 @@
+```rust
+fn is_prime(n: Int) -> Bool {
+    if n <= 1 {
+        False
+    } else {
+        let mut i = 2;
+        while i * i <= n {
+            if n % i == 0 {
+                return False;
+            }
+            i = i + 1;
+        }
+        True
+    }
+}
+
+fn count_primes(limit: Int) -> Int {
+    let mut count = 0;
+    for n in range(2, limit) {
+        if is_prime(n) {
+            count = count + 1;
+        }
+    }
+    count
+}
+
+fn main() {
+    let primes = count_primes(100);
+    print(primes);
+}
+```

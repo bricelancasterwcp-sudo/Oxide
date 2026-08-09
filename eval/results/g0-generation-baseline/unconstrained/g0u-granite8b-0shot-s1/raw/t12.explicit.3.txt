@@ -1,0 +1,3 @@
+let stack = text.chars().rev().collect();
+let reversed_text: String = stack.into_iter().collect();
+println!("{}", reversed_text);

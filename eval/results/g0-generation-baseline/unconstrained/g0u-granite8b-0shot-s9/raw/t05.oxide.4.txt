@@ -1,0 +1,16 @@
+fn main() {
+    let x = 1
+    let y = 1
+    let mut i = 0
+    while i < 20 {
+        if i % 2 == 0 {
+            let temp = x
+            x = y
+            y = temp
+        } else {
+            y = x
+        }
+        i = i + 1
+    }
+    print(x)
+}

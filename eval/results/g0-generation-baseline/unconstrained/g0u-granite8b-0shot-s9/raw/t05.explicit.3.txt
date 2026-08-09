@@ -1,0 +1,13 @@
+fn main() {
+    let x = 1
+    let y = 1
+    let mut z = x + y
+    for i in range(0, 19) {
+        let a = z
+        let b = z
+        drop a
+        drop b
+        z = a + b
+    }
+    print(z)
+}

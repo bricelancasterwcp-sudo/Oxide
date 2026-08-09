@@ -1,0 +1,13 @@
+let multiples = vec()
+let mut i = 0
+while i < 8 {
+    let multiple = 3 * i
+    multiples = push(multiples, multiple)
+    i = i + 1
+}
+let mut sum = 0
+for multiple in &multiples {
+    sum = sum + *multiple
+}
+drop multiples
+print(sum)

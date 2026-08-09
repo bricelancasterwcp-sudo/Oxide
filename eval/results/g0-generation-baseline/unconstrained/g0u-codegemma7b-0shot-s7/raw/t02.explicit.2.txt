@@ -1,0 +1,18 @@
+fn is_even(n: Int) -> Bool {
+    n % 2 == 0
+}
+
+fn main() {
+    let mut x = 27;
+    let mut steps = 0;
+    while x != 1 {
+        if is_even(x) {
+            x = x / 2;
+        } else {
+            x = 3 * x + 1;
+        }
+        steps += 1;
+    }
+    print(steps);
+    drop steps
+}

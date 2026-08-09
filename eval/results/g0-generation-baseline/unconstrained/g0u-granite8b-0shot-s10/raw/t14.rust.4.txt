@@ -1,0 +1,8 @@
+fn main() {
+    let s = "mississippi";
+    let count = s.matches('s').count();
+    let distinct_chars = s.chars().unique().count();
+
+    println!("Number of 's': {}", count);
+    println!("Number of distinct characters: {}", distinct_chars);
+}

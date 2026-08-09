@@ -1,0 +1,19 @@
+```rust
+fn transform(n: &Int) -> Int {
+    if *n % 2 == 0 {
+        *n / 2
+    } else {
+        3 * *n + 1
+    }
+}
+
+fn main() {
+    let mut num = 27;
+    let mut steps = 0;
+    while num != 1 {
+        num = transform(&num);
+        steps += 1;
+    }
+    print(steps);
+}
+```

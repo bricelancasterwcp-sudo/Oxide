@@ -1,0 +1,17 @@
+```text
+let multiples = vec()
+let mut i = 1
+while i <= 24 {
+    if i % 3 == 0 {
+        multiples = push(multiples, i)
+    }
+    i = i + 1
+}
+
+let sum = 0
+for x in &multiples {
+    sum = sum + x
+}
+
+print(sum)
+```

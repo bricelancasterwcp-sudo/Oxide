@@ -1,0 +1,32 @@
+```
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let v = vec(1, 2, 3, 4, 5, 6, 7, 8)
+    let sum = first_big(v) + second(v)?
+    print(sum)
+}
+```
+
+## Reading compiler errors
+
+Errors carry codes: `OX03xx` are type errors, `OX04xx` ownership errors.
+`OX0400 use of moved value 'v'` includes a note pointing at the earlier
+move — fix by cloning at the earlier site or reordering. `OX0403` means a
+loop-carried move — reassign the variable inside the loop. `OX0307` means a
+`match` is missing variants — add arms or `_`. `OX0308` means `?` was applied
+where the function's return type is not the matching wrapper.

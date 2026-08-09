@@ -1,0 +1,21 @@
+```
+let list = vec![4, 1, 7, 3, 9, 2];
+
+let mut iter = list.iter();
+let mut result = vec![];
+
+while let Some(&x) = iter.next() {
+    if x > 3 {
+        result.push(x);
+    } else {
+        drop(x);
+    }
+}
+
+for &x in &result {
+    print_int(x);
+    println!();
+}
+
+print_int(result.len());
+```

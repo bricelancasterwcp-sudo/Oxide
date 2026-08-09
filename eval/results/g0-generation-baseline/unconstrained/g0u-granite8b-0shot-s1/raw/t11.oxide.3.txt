@@ -1,0 +1,20 @@
+```text
+struct Task { name: String, points: i32 }
+struct User { name: String, tasks: Vec<Task> }
+
+fn main() {
+    let t1 = Task { name: "Task1".to_string(), points: 5 };
+    let t2 = Task { name: "Task2".to_string(), points: 3 };
+    let t3 = Task { name: "Task3".to_string(), points: 8 };
+    let t4 = Task { name: "Task4".to_string(), points: 1 };
+    let t5 = Task { name: "Task5".to_string(), points: 9 };
+    let t6 = Task { name: "Task6".to_string(), points: 2 };
+    let user = User {
+        name: "John".to_string(),
+        tasks: vec![t1, t2, t3, t4, t5, t6],
+    };
+    for t in &user.tasks {
+        print(&t.name);
+    }
+}
+```
