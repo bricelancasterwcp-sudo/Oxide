@@ -1,0 +1,296 @@
+fn main() {
+    let list = push(push(push(push(vec(), 5), 3), 8), 1, 9, 2)
+    let mut i = 0
+    while i < len(&list) {
+        let mut j = i + 1
+        while j < len(&list) {
+            if get(&list, j).unwrap() < get(&list, i).unwrap() {
+                swap(&mut * list, i, j)
+            }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    for i in 0 < len(&list) {
+        print(get(&list, i).unwrap())
+        print_str("\n")
+    }
+    drop list
+}
+
+fn swap(list: &Vec<Int>, a: Int, b: Int) {
+    let temp = get(list, a).unwrap()
+    set(list, a, get(list, b).unwrap())
+    set(list, b, temp)
+}
+
+fn set(list: &Vec<Int>, index: Int, value: Int) {
+    let mut i = 0
+    while i < len(&list) {
+        if i == index {
+            drop list
+            return push(list, value)
+        }
+        i = i + 1
+    }
+    drop list
+    panic("index out of bounds")
+}
+
+fn get(list: &Vec<Int>, index: Int) -> Option<Int> {
+    let mut i = 0
+    while i < len(&list) {
+        if i == index {
+            return Some(clone(list + i))
+        }
+        i = i + 1
+    }
+    None
+}
+
+fn push(list: Vec<Int>, value: Int) -> Vec<Int> {
+    let v = len(&list)
+    let mut new_list = clone(&list)
+    set(&mut * new_list, v, value)
+    new_list
+}
+
+fn len(list: &Vec<Int>) -> Int {
+    clone(&list).len()
+}
+
+fn clone(list: &Vec<Int>) -> Vec<Int> {
+    let mut new_list = vec()
+    for i in 0 < len(list) {
+        push(new_list, get(list, i).unwrap())
+    }
+    new_list
+}
+
+fn panic(message: &Str) -> None {
+    print_str(message)
+    print_str("\n")
+    None
+}
+
+fn print(number: Int) {
+    print_str(int_to_str(number))
+}
+
+fn print_str(s: &Str) {
+    print_str("OX: ")
+    print_str(s)
+    print_str("\n")
+}
+
+fn vec() -> Vec<Int> {
+    vec()
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    chars(s)
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+fn main() {
+    let list = push(push(push(push(vec(), 5), 3), 8), 1, 9, 2)
+    let mut i = 0
+    while i < len(&list) {
+        let mut j = i + 1
+        while j < len(&list) {
+            if get(&list, j).unwrap() < get(&list, i).unwrap() {
+                swap(&mut * list, i, j)
+            }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    for i in 0 < len(&list) {
+        print(get(&list, i).unwrap())
+        print_str("\n")
+    }
+    drop list
+}
+
+fn swap(list: &Vec<Int>, a: Int, b: Int) {
+    let temp = get(list, a).unwrap()
+    set(list, a, get(list, b).unwrap())
+    set(list, b, temp)
+}
+
+fn set(list: &Vec<Int>, index: Int, value: Int) {
+    let mut i = 0
+    while i < len(&list) {
+        if i == index {
+            drop list
+            return push(list, value)
+        }
+        i = i + 1
+    }
+    drop list
+    panic("index out of bounds")
+}
+
+fn get(list: &Vec<Int>, index: Int) -> Option<Int> {
+    let mut i = 0
+    while i < len(&list) {
+        if i == index {
+            return Some(clone(list + i))
+        }
+        i = i + 1
+    }
+    None
+}
+
+fn push(list: Vec<Int>, value: Int) -> Vec<Int> {
+    let v = len(&list)
+    let mut new_list = clone(&list)
+    set(&mut * new_list, v, value)
+    new_list
+}
+
+fn len(list: &Vec<Int>) -> Int {
+    clone(&list).len()
+}
+
+fn clone(list: &Vec<Int>) -> Vec<Int> {
+    let mut new_list = vec()
+    for i in 0 < len(list) {
+        push(new_list, get(list, i).unwrap())
+    }
+    new_list
+}
+
+fn panic(message: &Str) -> None {
+    print_str(message)
+    print_str("\n")
+    None
+}
+
+fn print(number: Int) {
+    print_str(int_to_str(number))
+}
+
+fn print_str(s: &Str) {
+    print_str("OX: ")
+    print_str(s)
+    print_str("\n")
+}
+
+fn vec() -> Vec<Int> {
+    vec()
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    chars(s)
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+fn main() {
+    let list = push(push(push(push(vec(), 5), 3), 8), 1, 9, 2)
+    let mut i = 0
+    while i < len(&list) {
+        let mut j = i + 1
+        while j < len(&list) {
+            if get(&list, j).unwrap() < get(&list, i).unwrap() {
+                swap(&mut * list, i, j)
+            }
+            j = j + 1
+        }
+        i = i + 1
+    }
+    for i in 0 < len(&list) {
+        print(get(&list, i).unwrap())
+        print_str("\n")
+    }
+    drop list
+}
+
+fn swap(list: &Vec<Int>, a: Int, b: Int) {
+    let temp = get(list, a).unwrap()
+    set(list, a, get(list, b).unwrap())
+    set(list, b, temp)
+}
+
+fn set(list: &Vec<Int>, index: Int, value: Int) {
+    let mut i = 0
+    while i < len(&list) {
+        if i == index {
+            drop list
+            return push(list, value)
+        }
+        i = i + 1
+    }
+    drop list
+    panic("index out of bounds")
+}
+
+fn get(list: &Vec<Int>, index: Int) -> Option<Int> {
+    let mut i = 0
+    while i < len(&list) {
+        if i == index {
+            return Some(clone(list + i))
+        }
+        i = i + 1
+    }
+    None
+}
+
+fn push(list: Vec<Int>, value: Int) -> Vec<Int> {
+    let v = len(&list)
+    let mut new_list = clone(&list)
+    set(&mut * new_list, v, value)
+    new_list
+}
+
+fn len(list: &Vec<Int>) -> Int {
+    clone(&list).len()
+}
+
+fn clone(list: &Vec<Int>) -> Vec<Int> {
+    let mut new_list = vec()
+    for i in 0 < len(list) {
+        push(new_list, get(list, i).unwrap())
+    }
+    new_list
+}
+
+fn panic(message: &

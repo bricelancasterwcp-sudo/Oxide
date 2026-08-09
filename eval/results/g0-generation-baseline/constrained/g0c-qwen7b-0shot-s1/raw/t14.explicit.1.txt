@@ -1,0 +1,331 @@
+fn main() {
+    let text = "mississippi"
+    let s_count = text.chars().filter(char_eq(&s)).count()
+    let distinct_chars = text.chars().collect_set().len()
+    print(s_count)
+    print_str(" ")
+    print(distinct_chars)
+    drop text
+}
+
+fn char_eq(c: &Char) -> FnMut_Char {
+    move || char_eq_helper(c)
+}
+
+fn char_eq_helper(c: &Char) -> Bool {
+    c == &s
+}
+
+fn collect_set(v: Vec<Str>) -> HashSet<Str> {
+    let mut set = HashSet.new()
+    for x in &v {
+        set.insert(x.clone())
+    }
+    set
+}
+
+fn print_str(s: &Str) {
+    print(s)
+}
+
+fn drop_str(s: &Str) {
+    drop s
+}
+
+fn drop_vec(v: Vec<Str>) {
+    drop v
+}
+
+fn drop_hash_set(set: HashSet<Str>) {
+    drop set
+}
+
+fn drop_hash_map(map: HashMap<Str, Str>) {
+    drop map
+}
+
+fn drop_option(o: Option<Str>) {
+    drop o
+}
+
+fn drop_result(r: Result<Str, Str>) {
+    drop r
+}
+
+fn drop_bool(b: Bool) {
+    drop b
+}
+
+fn drop_int(i: Int) {
+    drop i
+}
+
+fn drop_float(f: Float) {
+    drop f
+}
+
+fn drop_char(c: Char) {
+    drop c
+}
+
+fn drop_unit(u: Unit) {
+    drop u
+}
+
+fn drop_vec_char(v: Vec<Char>) {
+    drop v
+}
+
+fn drop_vec_int(v: Vec<Int>) {
+    drop v
+}
+
+fn drop_vec_float(v: Vec<Float>) {
+    drop v
+}
+
+fn drop_vec_bool(v: Vec<Bool>) {
+    drop v
+}
+
+fn drop_vec_unit(v: Vec<Unit>) {
+    drop v
+}
+
+fn drop_vec_vec_char(v: Vec<Vec<Char>>) {
+    drop v
+}
+
+fn drop_vec_vec_int(v: Vec<Vec<Int>>) {
+    drop v
+}
+
+fn drop_vec_vec_float(v: Vec<Vec<Float>>) {
+    drop v
+}
+
+fn drop_vec_vec_bool(v: Vec<Vec<Bool>>) {
+    drop v
+}
+
+fn drop_vec_vec_unit(v: Vec<Vec<Unit>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_char(v: Vec<Vec<VecChar>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_int(v: Vec<Vec<VecInt>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_float(v: Vec<Vec<VecFloat>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_bool(v: Vec<Vec<VecBool>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_unit(v: Vec<Vec<VecUnit>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_char(v: Vec<Vec<VecVecChar>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_int(v: Vec<Vec<VecVecInt>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_float(v: Vec<Vec<VecVecFloat>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_bool(v: Vec<Vec<VecVecBool>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_unit(v: Vec<Vec<VecVecUnit>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_char(v: Vec<Vec<VecVecVecChar>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_int(v: Vec<Vec<VecVecVecInt>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_float(v: Vec<Vec<VecVecVecFloat>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_bool(v: Vec<Vec<VecVecVecBool>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_unit(v: Vec<Vec<VecVecVecUnit>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_char(v: Vec<Vec<VecVecVecVecChar>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<VecVecVecVecInt>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_float(v: Vec<Vec<VecVecVecVecFloat>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_bool(v: Vec<Vec<VecVecVecVecBool>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_unit(v: Vec<Vec<VecVecVecVecUnit>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_char(v: Vec<Vec<VecVecVecVecVecChar>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<VecVecVecVecVecInt>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_float(v: Vec<Vec<VecVecVecVecVecFloat>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_bool(v: Vec<Vec<VecVecVecVecVecBool>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_unit(v: Vec<Vec<VecVecVecVecVecUnit>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_char(v: Vec<Vec<VecVecVecVecVecVecChar>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<VecVecVecVecVecVecInt>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_float(v: Vec<Vec<VecVecVecVecVecVecFloat>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_bool(v: Vec<Vec<VecVecVecVecVecVecBool>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_unit(v: Vec<Vec<VecVecVecVecVecVecUnit>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_char(v: Vec<Vec<VecVecVecVecVecVecVecChar>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<VecVecVecVecVecVecVecInt>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_float(v: Vec<Vec<VecVecVecVecVecVecVecFloat>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_bool(v: Vec<Vec<VecVecVecVecVecVecVecBool>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_unit(v: Vec<Vec<VecVecVecVecVecVecVecUnit>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_char(v: Vec<Vec<VecVecVecVecVecVecVecVecChar>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<VecVecVecVecVecVecVecVecInt>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_float(v: Vec<Vec<VecVecVecVecVecVecVecVecFloat>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_bool(v: Vec<Vec<VecVecVecVecVecVecVecVecBool>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_unit(v: Vec<Vec<VecVecVecVecVecVecVecVecUnit>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_char(v: Vec<Vec<VecVecVecVecVecVecVecVecVecChar>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<VecVecVecVecVecVecVecVecVecInt>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_float(v: Vec<Vec<VecVecVecVecVecVecVecVecVecFloat>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_bool(v: Vec<Vec<VecVecVecVecVecVecVecVecVecBool>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_unit(v: Vec<Vec<VecVecVecVecVecVecVecVecVecUnit>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_char(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecChar>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_float(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecFloat>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_bool(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecBool>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_unit(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecUnit>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_char(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecChar>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_float(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecFloat>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_bool(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecBool>>) {
+    drop v
+}
+
+fn drop_vec_vec

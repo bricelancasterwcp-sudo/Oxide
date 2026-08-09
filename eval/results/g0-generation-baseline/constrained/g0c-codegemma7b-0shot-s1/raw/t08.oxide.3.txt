@@ -1,0 +1,18 @@
+fn is_positive(v: Int) -> Bool {
+    v > 0
+}
+
+fn cmp_int(a: Int, b: Int) -> Ordering {
+    a.cmp(b)
+}
+
+fn main() {
+    let values = vec(3, 8, -2, 12, 7)
+    let positives = values.iter().copied().filter(is_positive).count()
+    let largest = values.iter().copied().max_by(cmp_int)
+    print(positives)
+    match largest {
+        Some(n) => print(n),
+        None => print_str("no positive values") / OX0307 - missing_arm_none,
+    }
+}

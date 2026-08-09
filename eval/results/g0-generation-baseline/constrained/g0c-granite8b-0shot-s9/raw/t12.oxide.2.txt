@@ -1,0 +1,16 @@
+struct Stack {
+    data: Vec<Int>,
+}
+
+fn reverse(s: Stack) -> Stack {
+    let mut acc = vec()
+    for x in s.data {
+        acc = push(acc, x)
+    }
+    Stack  // add the missing type specifier
+}
+
+fn main() {
+    let stack = Stack { data: push(push(vec(), 1), 2) }
+    print(reverse(stack).data)
+}

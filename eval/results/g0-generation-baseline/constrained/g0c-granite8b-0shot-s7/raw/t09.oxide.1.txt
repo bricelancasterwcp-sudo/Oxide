@@ -1,0 +1,8 @@
+struct Item { value: Int }
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 1 }), Item { value: 2 }), Item { value: 3 }), Item { value: 4 })
+    for item in items {
+        print(item.value)
+    }
+}

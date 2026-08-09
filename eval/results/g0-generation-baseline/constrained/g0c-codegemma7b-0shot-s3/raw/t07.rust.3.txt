@@ -1,0 +1,13 @@
+fn main() {
+    let mut multiples_of_three: Vec<u32> = Vec::new();
+
+    for i in 1..=24 {
+        if i % 3 == 0 {
+            multiples_of_three.push(i);
+        }
+    }
+
+    let sum: u32 = multiples_of_three.iter().take(8).sum();
+
+    println!("The sum of the first 8 positive multiples of 3 is {}", sum);
+}

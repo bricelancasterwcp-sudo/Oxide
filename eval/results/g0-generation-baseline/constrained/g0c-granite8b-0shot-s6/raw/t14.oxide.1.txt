@@ -1,0 +1,317 @@
+fn main() {
+    let string = "mississippi".to_string().chars().collect().clone()
+    let s_count = count_char(string, "s".to_string().chars().collect().clone())
+    let d_count = distinct_chars(string)
+    print(s_count)
+    print(d_count)
+}
+
+fn count_char(string: Vec<Char>, char: Char) -> Int {
+    let mut count = 0
+    for c in string {
+        if c == char {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_chars(string: Vec<Char>) -> Int {
+    let mut distinct_chars = vec()
+    for c in string {
+        let found = get(distinct_chars, c)?
+        if found == false {
+            distinct_chars = push(distinct_chars, true)
+        }
+    }
+    len(distinct_chars)
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn println(x: Int) {
+    io_write(x)
+}
+
+fn io_write(x: Int) {
+    io_print(int_to_str(x))
+    io_newline()
+}
+
+fn io_print(x: Str) {
+    system_call(x)
+}
+
+fn system_call(x: Str) {
+    return x
+}
+
+fn io_newline() {
+    system_call("\n")
+}
+
+fn to_string(x: Int) -> Str {
+    return int_to_str(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return str_concat(str_concat(str_concat("Int: ".to_string().chars().collect().clone(), to_string(x)), "\n".to_string().chars().collect().clone()), "\n".to_string().chars().collect().clone())
+}
+
+fn str_concat(a: Str, b: Str) -> Str {
+    return a + b
+}
+
+fn get(vector: Vec<Char>, x: Char) -> Option<Bool> {
+    let mut found = false
+    for c in vector {
+        if c == x {
+            found = true
+        }
+    }
+    if found {
+        return Some(true)
+    } else {
+        return Some(false)
+    }
+}
+
+fn len(vector: Vec<Char>) -> Int {
+    let mut length = 0
+    for c in vector {
+        length = length + 1
+    }
+    length
+}
+
+fn push(vector: Vec<Char>, x: Char) -> Vec<Char> {
+    let mut new_vector = vec()
+    for c in vector {
+        new_vector = push(new_vector, c)
+    }
+    new_vector = push(new_vector, x)
+    new_vector
+}
+
+fn clone(x: Int) -> Int {
+    return x
+}
+
+fn print_str(s: Str) {
+    io_write(s)
+}
+
+fn main() {
+    let string = "mississippi".to_string().chars().collect().clone()
+    let s_count = count_char(string, "s".to_string().chars().collect().clone())
+    let d_count = distinct_chars(string)
+    print(s_count)
+    print(d_count)
+}
+
+fn count_char(string: Vec<Char>, char: Char) -> Int {
+    let mut count = 0
+    for c in string {
+        if c == char {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_chars(string: Vec<Char>) -> Int {
+    let mut distinct_chars = vec()
+    for c in string {
+        let found = get(distinct_chars, c)?
+        if found == false {
+            distinct_chars = push(distinct_chars, true)
+        }
+    }
+    len(distinct_chars)
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn println(x: Int) {
+    io_write(x)
+}
+
+fn io_write(x: Int) {
+    io_print(int_to_str(x))
+    io_newline()
+}
+
+fn io_print(x: Str) {
+    system_call(x)
+}
+
+fn system_call(x: Str) {
+    return x
+}
+
+fn io_newline() {
+    system_call("\n")
+}
+
+fn to_string(x: Int) -> Str {
+    return int_to_str(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return str_concat(str_concat(str_concat("Int: ".to_string().chars().collect().clone(), to_string(x)), "\n".to_string().chars().collect().clone()), "\n".to_string().chars().collect().clone())
+}
+
+fn str_concat(a: Str, b: Str) -> Str {
+    return a + b
+}
+
+fn get(vector: Vec<Char>, x: Char) -> Option<Bool> {
+    let mut found = false
+    for c in vector {
+        if c == x {
+            found = true
+        }
+    }
+    if found {
+        return Some(true)
+    } else {
+        return Some(false)
+    }
+}
+
+fn len(vector: Vec<Char>) -> Int {
+    let mut length = 0
+    for c in vector {
+        length = length + 1
+    }
+    length
+}
+
+fn push(vector: Vec<Char>, x: Char) -> Vec<Char> {
+    let mut new_vector = vec()
+    for c in vector {
+        new_vector = push(new_vector, c)
+    }
+    new_vector = push(new_vector, x)
+    new_vector
+}
+
+fn clone(x: Int) -> Int {
+    return x
+}
+
+fn print_str(s: Str) {
+    io_write(s)
+}
+
+fn main() {
+    let string = "mississippi".to_string().chars().collect().clone()
+    let s_count = count_char(string, "s".to_string().chars().collect().clone())
+    let d_count = distinct_chars(string)
+    print(s_count)
+    print(d_count)
+}
+
+fn count_char(string: Vec<Char>, char: Char) -> Int {
+    let mut count = 0
+    for c in string {
+        if c == char {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_chars(string: Vec<Char>) -> Int {
+    let mut distinct_chars = vec()
+    for c in string {
+        let found = get(distinct_chars, c)?
+        if found == false {
+            distinct_chars = push(distinct_chars, true)
+        }
+    }
+    len(distinct_chars)
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn println(x: Int) {
+    io_write(x)
+}
+
+fn io_write(x: Int) {
+    io_print(int_to_str(x))
+    io_newline()
+}
+
+fn io_print(x: Str) {
+    system_call(x)
+}
+
+fn system_call(x: Str) {
+    return x
+}
+
+fn io_newline() {
+    system_call("\n")
+}
+
+fn to_string(x: Int) -> Str {
+    return int_to_str(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return str_concat(str_concat(str_concat("Int: ".to_string().chars().collect().clone(), to_string(x)), "\n".to_string().chars().collect().clone()), "\n".to_string().chars().collect().clone())
+}
+
+fn str_concat(a: Str, b: Str) -> Str {
+    return a + b
+}
+
+fn get(vector: Vec<Char>, x: Char) -> Option<Bool> {
+    let mut found = false
+    for c in vector {
+        if c == x {
+            found = true
+        }
+    }
+    if found {
+        return Some(true)
+    } else {
+        return Some(false)
+    }
+}
+
+fn len(vector: Vec<Char>) -> Int {
+    let mut length = 0
+    for c in vector {
+        length = length + 1
+    }
+    length
+}
+
+fn push(vector: Vec<Char>, x: Char) -> Vec<Char> {
+    let mut new_vector = vec()
+    for c in vector {
+        new_vector = push(new_vector, c)
+    }
+    new_vector = push(new_vector, x)
+    new_vector
+}
+
+fn clone(x: Int) -> Int {
+    return x
+}
+
+fn print_str(s: Str) {
+    io_write(s)
+}
+
+fn main() {
+    let string = "mississippi".

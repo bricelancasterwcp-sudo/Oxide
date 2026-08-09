@@ -1,0 +1,321 @@
+fn main() {
+    let nums = vec_str("12", "x", "30")
+    let sum = nums.iter().filter_map(parse_int).fold(0, add)
+    print(sum)
+    print(len(nums) - len(nums.iter().filter_map(parse_int).collect()))
+}
+
+fn vec_str(first: Str, rest: Str, others: Str) -> Vec<Str> {
+    let mut v = vec(first)
+    for s in split(rest, others, " ") {
+        v.push(s)
+    }
+    v
+}
+
+fn split(first: Str, rest: Str, sep: Str) -> Vec<Str> {
+    let mut v = vec(first)
+    let mut rest = rest
+    while letSome(pos) == find(rest, sep) {
+        let token = rest.slice(0, pos)
+        v.push(token)
+        rest = rest.slice(pos + len(sep), len(rest))
+    }
+    v.push(rest)
+    v
+}
+
+fn find(haystack: Str, needle: Str) -> Option<Int> {
+    for i in 0.upto(len(haystack) - len(needle)) {
+        if haystack.slice(i, len(needle)) == needle {
+            return Some(i)
+        }
+    }
+    None
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    if s.chars().all(is_digit) {
+        Some(int_to_str(s).parse().unwrap())
+    } else {
+        None
+    }
+}
+
+fn is_digit(c: Char) -> Bool {
+    "0123456789".chars().contains(c)
+}
+
+fn add(acc: Int, item: Int) -> Int {
+    acc + item
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut c = 0
+    for _ in v {
+        c = c + 1
+    }
+    c
+}
+
+fn collect(v: Vec<T>) -> Vec<T> {
+    let mut c = vec()
+    for x in v {
+        c.push(x)
+    }
+    c
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    for c in s.chars() {
+        print(c)
+    }
+}
+
+fn to_str(n: Int) -> Str {
+    format("%d", n)
+}
+
+fn to_float(n: Int) -> Float {
+    n
+}
+
+fn trunc(x: Float) -> Int {
+    x
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    s.chars().count()
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    a + b
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut v = vec()
+    for c in s.chars() {
+        v.push(to_str(c).to_str())
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("%d", n)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    if s.chars().all(is_digit) {
+        Some(s.parse().unwrap())
+    } else {
+        None
+    }
+}
+
+fn is_digit(c: Char) -> Bool {
+    "0123456789".chars().contains(c)
+}
+
+fn add(acc: Int, item: Int) -> Int {
+    acc + item
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut c = 0
+    for _ in v {
+        c = c + 1
+    }
+    c
+}
+
+fn collect(v: Vec<T>) -> Vec<T> {
+    let mut c = vec()
+    for x in v {
+        c.push(x)
+    }
+    c
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    for c in s.chars() {
+        print(c)
+    }
+}
+
+fn to_str(n: Int) -> Str {
+    format("%d", n)
+}
+
+fn to_float(n: Int) -> Float {
+    n
+}
+
+fn trunc(x: Float) -> Int {
+    x
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    s.chars().count()
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    a + b
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut v = vec()
+    for c in s.chars() {
+        v.push(to_str(c).to_str())
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("%d", n)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    if s.chars().all(is_digit) {
+        Some(s.parse().unwrap())
+    } else {
+        None
+    }
+}
+
+fn is_digit(c: Char) -> Bool {
+    "0123456789".chars().contains(c)
+}
+
+fn add(acc: Int, item: Int) -> Int {
+    acc + item
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut c = 0
+    for _ in v {
+        c = c + 1
+    }
+    c
+}
+
+fn collect(v: Vec<T>) -> Vec<T> {
+    let mut c = vec()
+    for x in v {
+        c.push(x)
+    }
+    c
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    for c in s.chars() {
+        print(c)
+    }
+}
+
+fn to_str(n: Int) -> Str {
+    format("%d", n)
+}
+
+fn to_float(n: Int) -> Float {
+    n
+}
+
+fn trunc(x: Float) -> Int {
+    x
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    s.chars().count()
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    a + b
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut v = vec()
+    for c in s.chars() {
+        v.push(to_str(c).to_str())
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("%d", n)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    if s.chars().all(is_digit) {
+        Some(s.parse().unwrap())
+    } else {
+        None
+    }
+}
+
+fn is_digit(c: Char) -> Bool {
+    "0123456789".chars().contains(c)
+}
+
+fn add(acc: Int, item: Int) -> Int {
+    acc + item
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut c = 0
+    for _ in v {
+        c = c + 1
+    }
+    c
+}
+
+fn collect(v: Vec<T>) -> Vec<T> {
+    let mut c = vec()
+    for x in v {
+        c.push(x)
+    }
+    c
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    for c in s.chars() {
+        print(c)
+    }
+}
+
+fn to_str(n: Int) -> Str {
+    format("%d", n)
+}
+
+fn to_float(n: Int) -> Float {
+    n
+}
+
+fn trunc(x:

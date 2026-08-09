@@ -1,0 +1,18 @@
+struct List {
+    head: Int,
+    tail: Option<Box<List>>,
+}
+
+fn print_increasing(list: List) {
+    match list {
+        List(_, _) => {
+            print_increasing(list.tail.unwrap())
+            print(list.head)
+        },
+    }
+}
+
+fn main() {
+    let list = List { head: 5, tail: Some(box(List { head: 3, tail: Some(box(List { head: 8, tail: Some(box(List <= 1, tail == Some())) })) })) }
+    print_increasing(list)
+}

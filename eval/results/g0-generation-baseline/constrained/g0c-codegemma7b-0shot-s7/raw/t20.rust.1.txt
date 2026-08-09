@@ -1,0 +1,25 @@
+```rust
+fn main() {
+    // Define item data
+    let items = [
+        ("pen", 3, 4),
+        ("pad", 9, 2),
+        ("ink", 5, 3),
+    ];
+
+    // Calculate and print total cost
+    let total_cost = items
+        .iter()
+        .map(|&(_, unit_price, quantity)| unit_price * quantity)
+        .sum::<i32>();
+    println!("Total cost: {}", total_cost);
+
+    // Find item with highest cost
+    let (highest_cost_item, _) = items
+        .iter()
+        .map(|&item| (item, item.1 * item.2))
+        .max_by_key(|&(_, cost)| cost)
+        .unwrap();
+    println!("Highest cost item: {}", highest_cost_item);
+}
+```

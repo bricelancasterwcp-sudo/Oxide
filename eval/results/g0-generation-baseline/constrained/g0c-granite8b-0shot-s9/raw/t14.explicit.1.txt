@@ -1,0 +1,17 @@
+fn main() {
+    let s = "mississippi"
+    let mut count = 0
+    let mut unique_chars = 0
+    let mut unique = Vec()
+    for c in &s {
+        if c == "s" {
+            count = count + 1
+        }
+        if !unique.contains(c) {
+            unique_chars = unique_chars + 1
+            unique.push(c)
+        }
+    }
+    print(count)
+    print(unique_chars)
+}

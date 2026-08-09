@@ -1,0 +1,9 @@
+fn main() {
+    let numbers = vec(4, 1, 7, 3, 9, 2)
+    let filtered: Vec<Int> = numbers.filter || x > 3 || collect()
+    for n in filtered {
+        print(n)
+        print_str("\n")
+    }
+    print(filtered.len())
+}

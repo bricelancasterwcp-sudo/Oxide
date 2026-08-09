@@ -1,0 +1,17 @@
+use std::collections::HashSet;
+
+fn main() {
+    let text = "mississippi";
+    let mut count_s = 0;
+    let mut distinct_chars = HashSet::new();
+
+    for c in text.chars() {
+        if c == 's' {
+            count_s += 1;
+        }
+        distinct_chars.insert(c);
+    }
+
+    println!("Number of 's': {}", count_s);
+    println!("Number of distinct characters: {}", distinct_chars.len());
+}

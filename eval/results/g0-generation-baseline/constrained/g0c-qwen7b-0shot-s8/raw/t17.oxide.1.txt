@@ -1,0 +1,17 @@
+struct List { elements: Vec<Int> }
+
+fn lookup(list: List, pos: Int) -> Option<Int> {
+    get(list.elements, pos)
+}
+
+fn main() {
+    let list = List { elements: push(push(push(vec(), 10), 20), 30) }
+    match lookup(list, 1) {
+        Some(n) => print(n),
+        None => print(-1),
+    }
+    match lookup(list, 5) {
+        Some(n) => print(n),
+        None => print(-1),
+    }
+}

@@ -1,0 +1,27 @@
+fn print_number(n: Int) {
+    print(n)
+}
+
+fn print_list(lst: &Vec<Int>) {
+    let mut temp = clone(&lst)
+    while temp.len() > 0 {
+        print_number(pop(&muttemp))
+    }
+}
+
+fn pop(lst: &Vec<Int>) -> Int {
+    get(lst, lst.len() - 1).unwrap()
+}
+
+fn main() {
+    let numbers = vec(5, 4, 3, 2, 1)
+    print_list(&numbers)
+}
+
+fn main() {
+    let numbers = vec(5, 4, 3, 2, 1)
+    let mut temp = numbers
+    while temp.len() > 0 {
+        print_number(pop(&muttemp))
+    }
+}

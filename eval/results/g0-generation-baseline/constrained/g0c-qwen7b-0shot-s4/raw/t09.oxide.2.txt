@@ -1,0 +1,8 @@
+struct VecInt { values: Vec<Int> }
+
+fn main() {
+    let v = VecInt { values: vec(vec(1, 2, 3, 4, 5)) }
+    for i in range(v.values.len() - 1, -1, -1) {
+        print(get(v.values, i)?)
+    }
+}

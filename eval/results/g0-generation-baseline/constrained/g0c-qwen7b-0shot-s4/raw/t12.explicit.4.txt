@@ -1,0 +1,17 @@
+fn reverse_string(s: &Str) -> Str {
+    let chars = chars(s)
+    let mut reversed = ""
+    for c in chars {
+        reversed = concat(c, reversed)
+    }
+    drop chars
+    reversed
+}
+
+fn main() {
+    let text = "stack"
+    let reversed = reverse_string(&text)
+    drop text
+    print(&reversed)
+    drop reversed
+}

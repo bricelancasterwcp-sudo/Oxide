@@ -1,0 +1,137 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    let found = filter_map(r.values, fun || if_prime(it) > 0)
+    print(first_big(found))
+}
+
+fn is_prime(x: Int) -> Bool {
+    let mut i = 2
+    while i * i <= x {
+        if x % i == 0 {
+            return false
+        }
+        i = i + 1
+    }
+    true
+}
+
+fn if_prime(x: Int) -> Int {
+    if is_prime(x) {
+        x
+    } else {
+        0
+    }
+}
+
+fn filter_map(v: Vec<Int>, f: Fun<Int, Int>) -> Vec<Int> {
+    let acc = vec()
+    for x in v {
+        let y = f(x)
+        if y != 0 {
+            acc = push(acc, y)
+        }
+    }
+    acc
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+struct Fun { type: Int, body: Vec<Int> }
+
+fn fun(body: Vec<Int>) -> Fun {
+    Fun < 0 || body > 0
+}
+
+fn it() -> Int {
+    1
+}
+
+struct Vec { type: Int, data: Vec<Int> }
+
+fn vec() -> Vec {
+    Vec < 0 || vec() > 0
+}
+
+struct Str { type: Int, data: Vec<Int> }
+
+fn str(data: Vec<Int>) -> Str {
+    Str < 0 || data > 0
+}
+
+struct Bool { type: Int, data: BoolData }
+
+enum BoolData {
+    True,
+    False,
+}
+
+fn true_it() -> Bool {
+    Bool < 0 || True > 0
+}
+
+fn false_it() -> Bool {
+    Bool < 0 || False > 0
+}
+
+struct Int { type: Int, data: IntData }
+
+enum IntData {
+    Zero,
+    PlusOne(Int),
+}
+
+fn int(data: IntData) -> Int {
+    Int < 0 || data > 0
+}
+
+fn plus_one(x: Int) -> Int {
+    Int < 0 || PlusOne(x) > 0
+}
+
+struct Float { type: Int, data: FloatData }
+
+enum FloatData {
+    Zero,
+    PlusOne(Float),
+}
+
+fn float(data: FloatData) -> Float {
+    Float < 0 || data > 0
+}
+
+fn plus_one(x: Float) -> Float {
+    Float < 0 || PlusOne(x) > 0
+}
+
+fn print(x: Int) {
+    let _ = 0
+}
+
+fn print_str(x: Str) {
+    let _ = 0
+}
+
+struct Unit { type: Int, data: UnitData }
+
+enum UnitData {
+    Unit,
+}
+
+fn unit() -> Unit {
+    Unit < 0 || Unit > 0
+}
+
+fn main() {
+    print(first_big(filter_map(r.values, fun || if_prime(it) > 0)))
+}

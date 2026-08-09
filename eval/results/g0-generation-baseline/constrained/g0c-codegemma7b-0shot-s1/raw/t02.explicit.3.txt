@@ -1,0 +1,18 @@
+fn count_transforms(mutn: Int) -> Int {
+    let mut steps = 0
+    while mutn != 1 {
+        if mutn % 2 == 0 {
+            mutn = mutn / 2
+        } else {
+            mutn = 3 * mutn + 1
+        }
+        steps = steps + 1
+    }
+    steps
+}
+
+fn main() {
+    let result = count_transforms(27)
+    print(result)
+    drop result
+}

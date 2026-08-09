@@ -1,0 +1,11 @@
+fn main() {
+    for text in &["level", "stereo", "rotor"] {
+        println!("{}", is_palindrome(text));
+    }
+}
+
+fn is_palindrome(s: &str) -> bool {
+    let s = s.to_lowercase();
+    let s = s.replace(|c: char| !c.is_ascii_alphanumeric(), "");
+    s == s[::-1]
+}

@@ -1,0 +1,15 @@
+fn fibonacci(n: Int) -> Int {
+    let a = 1
+    let b = 1
+    for _ in 0 < n {
+        let temp = a
+        a = b
+        b = temp + b
+    }
+    b
+}
+
+fn main() {
+    print(fibonacci(20))
+    drop fibonacci
+}

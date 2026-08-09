@@ -1,0 +1,8 @@
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5)
+    while !nums.is_empty() {
+        let last = nums.pop().unwrap()
+        print(last)
+    }
+    drop nums
+}

@@ -1,0 +1,12 @@
+fn print_int(x: Int) {
+    print(x)
+}
+
+fn main() {
+    let v = vec()
+    push(push(push(push(v, 5), 3), 8), 1)
+    push(push(push(push(v, 9), 2), 7), 4)
+    push(push(push(push(v, 6), 0), 1), 9)
+    print_int(v.len())
+    drop v
+}

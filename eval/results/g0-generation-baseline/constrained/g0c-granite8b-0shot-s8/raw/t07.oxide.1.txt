@@ -1,0 +1,31 @@
+struct Multiples { n: Int, i: Int }
+
+fn build_list(n: Int) -> Multiples {
+    Multiples(n, 1)
+}
+
+fn next(m: Multiples) -> Option<Int> {
+    let n = m.n
+    let i = m.i
+    if i > 8 {
+        None
+    } else {
+        Some(n * i)
+    }
+}
+
+fn sum_list(m: Multiples) -> Int {
+    let n = m.n
+    let i = m.i
+    if i > 8 {
+        n
+    } else {
+        sum_list(Multiples(n, i + 1)) + n * i
+    }
+}
+
+fn main() {
+    let m = build_list(3)
+    let total = sum_list(m)
+    print(total)
+}

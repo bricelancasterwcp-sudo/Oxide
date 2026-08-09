@@ -1,0 +1,8 @@
+fn main() {
+    let mut v = vec(5, 3, 8, 1, 9, 2)
+    for x in range(0, len(v)) {
+        print(get(v, x)?)
+        let y = get(v, x)?
+        push(v, y)
+    }
+}

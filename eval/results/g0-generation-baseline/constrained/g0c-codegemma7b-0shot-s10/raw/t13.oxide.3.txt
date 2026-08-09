@@ -1,0 +1,15 @@
+fn is_palindrome(text: Str) -> Bool {
+    let len = str_len(text)
+    for i in 0.to(len / 2) {
+        if chars(text).get(i) != chars(text).get(len - i - 1) {
+            return false
+        }
+    }
+    true
+}
+
+fn main() {
+    print(is_palindrome(Str("level")))
+    print(is_palindrome(Str("stereo")))
+    print(is_palindrome(Str("rotor")))
+}

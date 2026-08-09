@@ -1,0 +1,7 @@
+fn main() {
+    let mut sum = 0
+    for x in 0.to_int().to_vec_int().iter().take(10) {
+        sum = sum.to_int().add(x.to_int().mul(x.to_int())).to_int()
+    }
+    print(sum)
+}

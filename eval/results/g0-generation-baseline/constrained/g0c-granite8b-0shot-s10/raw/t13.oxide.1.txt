@@ -1,0 +1,278 @@
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s, len(s) - i - 1)?)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn is_palindrome(s: Str) -> Bool {
+    s == reverse_str(s)
+}
+
+fn reverse_str(s: Str) -> Str {
+    let mut reversed = vec()
+    for i in range(0, len(s)) {
+        reversed = push(reversed, get(s,

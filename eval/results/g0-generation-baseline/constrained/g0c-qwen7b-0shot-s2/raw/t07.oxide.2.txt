@@ -1,0 +1,21 @@
+fn multiples_of_three(n: Int) -> Vec<Int> {
+    let mut result = vec()
+    for i in range(1, n + 1) {
+        result = push(result, i * 3)
+    }
+    result
+}
+
+fn sum_of_elements(v: Vec<Int>) -> Int {
+    let mut sum = 0
+    for x in v {
+        sum = sum + x
+    }
+    sum
+}
+
+fn main() {
+    let multiples = multiples_of_three(8)
+    let total = sum_of_elements(multiples)
+    print(total)
+}

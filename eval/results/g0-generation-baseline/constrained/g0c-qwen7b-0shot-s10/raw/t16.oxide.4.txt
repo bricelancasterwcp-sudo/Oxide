@@ -1,0 +1,8 @@
+fn main() {
+    for d in vec(5, 0, 4) {
+        match 100 / d {
+            Some(q) => print(q),
+            None => print_str("undefined"),
+        }
+    }
+}

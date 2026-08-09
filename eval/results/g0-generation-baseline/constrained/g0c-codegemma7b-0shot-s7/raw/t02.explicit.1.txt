@@ -1,0 +1,13 @@
+fn main() {
+    let mut a = 27
+    let mut steps = 0
+    while a != 1 {
+        if a % 2 == 0 {
+            a = a / 2
+        } else {
+            a = 3 * a + 1
+        }
+        steps = steps + 1
+    }
+    print(steps)
+}

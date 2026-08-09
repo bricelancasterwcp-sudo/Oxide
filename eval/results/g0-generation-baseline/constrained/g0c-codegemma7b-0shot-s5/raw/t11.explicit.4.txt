@@ -1,0 +1,98 @@
+fn print_sorted(list: &Vec<Int>) {
+    let mut sorted_list = clone(&list)
+    sort(&mut)
+    for x in &sorted_list {
+        print(x)
+        print("\n")
+    }
+    drop sorted_list
+}
+
+fn sort(list: &Vec<Int>) -> Vec<Int> {
+    let mut sorted_list = clone(&list)
+    let mut min_pos = 0
+    for i in 0 < sorted_list.len() {
+        min_pos = 0
+        for j in 0 < sorted_list.len() {
+            if sorted_list.get(j) < sorted_list.get(min_pos) {
+                min_pos = j
+            }
+        }
+        let tmp = sorted_list.get(min_pos)
+        sorted_list.set(min_pos, sorted_list.get(i))
+        sorted_list.set(i, tmp)
+    }
+    sorted_list
+}
+
+fn main() {
+    let list = vec(5, 3, 8, 1, 9, 2)
+    print_sorted(&list)
+    drop list
+}
+
+fn sort(list: &Vec<Int>) -> Vec<Int> {
+    let mut sorted_list = clone(&list)
+    let mut min_pos = 0
+    for i in 0 < sorted_list.len() {
+        min_pos = 0
+        for j in 0 < sorted_list.len() {
+            if sorted_list.get(j) < sorted_list.get(min_pos) {
+                min_pos = j
+            }
+        }
+        let tmp = sorted_list.get(min_pos)
+        sorted_list.set(min_pos, sorted_list.get(i))
+        sorted_list.set(i, tmp)
+    }
+    sorted_list
+}
+
+fn print_sorted(list: &Vec<Int>) {
+    let mut sorted_list = clone(&list)
+    sort(&mut)
+    for x in &sorted_list {
+        print(x)
+        print("\n")
+    }
+    drop sorted_list
+}
+
+fn main() {
+    let list = vec(5, 3, 8, 1, 9, 2)
+    print_sorted(&list)
+    drop list
+}
+
+fn sort(list: &Vec<Int>) -> Vec<Int> {
+    let mut sorted_list = clone(&list)
+    let mut min_pos = 0
+    for i in 0 < sorted_list.len() {
+        min_pos = 0
+        for j in 0 < sorted_list.len() {
+            if sorted_list.get(j) < sorted_list.get(min_pos) {
+                min_pos = j
+            }
+        }
+        let tmp = sorted_list.get(min_pos)
+        sorted_list.set(min_pos, sorted_list.get(i))
+        sorted_list.set(i, tmp)
+    }
+    sorted_list
+}
+
+fn print_sorted(list: &Vec<Int>) {
+    let mut sorted_list = clone(&list)
+    sort(&mut)
+    for x in &sorted_list {
+        print(x)
+        print("\n")
+    }
+    drop sorted_list
+}
+
+fn main() {
+    let list = vec(5, 3, 8, 1, 9, 2)
+    print_sorted(&list)
+    drop list
+}

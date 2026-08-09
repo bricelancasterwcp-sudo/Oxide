@@ -1,0 +1,15 @@
+fn main() {
+    let mut i = 27;
+    let mut steps = 0;
+    
+    while i != 1 {
+        if i % 2 == 0 {
+            i /= 2;
+        } else {
+            i = 3 * i + 1;
+        }
+        steps += 1;
+    }
+    
+    println!("{}", steps);
+}

@@ -1,0 +1,14 @@
+```rust
+fn main() {
+    let x = 252;
+    let y = 105;
+    let mut a = x;
+    let mut b = y;
+    while b != 0 {
+        let temp = b;
+        b = a % b;
+        a = temp;
+    }
+    println!("{}", a);
+}
+```

@@ -1,0 +1,221 @@
+fn area(l: Int, w: Int) -> Int {
+    l * w
+}
+
+fn perimeter(l: Int, w: Int) -> Int {
+    2 * l + 2 * w
+}
+
+fn main() {
+    let r1 = Shape { l: 3, w: 4, t: Rectangle }
+    let r2 = Shape { l: 2, w: 5, t: Rectangle }
+    let t = Shape { a: 3, b: 4, c: 5, t: Triangle }
+    println(perimeter(r1.l, r1.w))
+    println(perimeter(r2.l, r2.w))
+    println(perimeter(t.a, t.b))
+    println(perimeter(t.b, t.c))
+    println(perimeter(t.c, t.a))
+}
+
+enum Shape {
+    Rectangle(Int, Int),
+    Triangle(Int, Int, Int),
+}
+
+fn area(l: Int, w: Int) -> Int {
+    l * w
+}
+
+fn perimeter(l: Int, w: Int) -> Int {
+    2 * l + 2 * w
+}
+
+fn main() {
+    let r1 = Shape { l: 3, w: 4, t: Rectangle }
+    let r2 = Shape { l: 2, w: 5, t: Rectangle }
+    let t = Shape { a: 3, b: 4, c: 5, t: Triangle }
+    println(perimeter(r1.l, r1.w))
+    println(perimeter(r2.l, r2.w))
+    println(perimeter(t.a, t.b))
+    println(perimeter(t.b, t.c))
+    println(perimeter(t.c, t.a))
+}
+
+enum Shape {
+    Rectangle(Int, Int),
+    Triangle(Int, Int, Int),
+}
+
+fn area(l: Int, w: Int) -> Int {
+    l * w
+}
+
+fn perimeter(l: Int, w: Int) -> Int {
+    2 * l + 2 * w
+}
+
+fn main() {
+    let r1 = Shape { l: 3, w: 4, t: Rectangle }
+    let r2 = Shape { l: 2, w: 5, t: Rectangle }
+    let t = Shape { a: 3, b: 4, c: 5, t: Triangle }
+    println(perimeter(r1.l, r1.w))
+    println(perimeter(r2.l, r2.w))
+    println(perimeter(t.a, t.b))
+    println(perimeter(t.b, t.c))
+    println(perimeter(t.c, t.a))
+}
+
+enum Shape {
+    Rectangle(Int, Int),
+    Triangle(Int, Int, Int),
+}
+
+fn area(l: Int, w: Int) -> Int {
+    l * w
+}
+
+fn perimeter(l: Int, w: Int) -> Int {
+    2 * l + 2 * w
+}
+
+fn main() {
+    let r1 = Shape { l: 3, w: 4, t: Rectangle }
+    let r2 = Shape { l: 2, w: 5, t: Rectangle }
+    let t = Shape { a: 3, b: 4, c: 5, t: Triangle }
+    println(perimeter(r1.l, r1.w))
+    println(perimeter(r2.l, r2.w))
+    println(perimeter(t.a, t.b))
+    println(perimeter(t.b, t.c))
+    println(perimeter(t.c, t.a))
+}
+
+enum Shape {
+    Rectangle(Int, Int),
+    Triangle(Int, Int, Int),
+}
+
+fn area(l: Int, w: Int) -> Int {
+    l * w
+}
+
+fn perimeter(l: Int, w: Int) -> Int {
+    2 * l + 2 * w
+}
+
+fn main() {
+    let r1 = Shape { l: 3, w: 4, t: Rectangle }
+    let r2 = Shape { l: 2, w: 5, t: Rectangle }
+    let t = Shape { a: 3, b: 4, c: 5, t: Triangle }
+    println(perimeter(r1.l, r1.w))
+    println(perimeter(r2.l, r2.w))
+    println(perimeter(t.a, t.b))
+    println(perimeter(t.b, t.c))
+    println(perimeter(t.c, t.a))
+}
+
+enum Shape {
+    Rectangle(Int, Int),
+    Triangle(Int, Int, Int),
+}
+
+fn area(l: Int, w: Int) -> Int {
+    l * w
+}
+
+fn perimeter(l: Int, w: Int) -> Int {
+    2 * l + 2 * w
+}
+
+fn main() {
+    let r1 = Shape { l: 3, w: 4, t: Rectangle }
+    let r2 = Shape { l: 2, w: 5, t: Rectangle }
+    let t = Shape { a: 3, b: 4, c: 5, t: Triangle }
+    println(perimeter(r1.l, r1.w))
+    println(perimeter(r2.l, r2.w))
+    println(perimeter(t.a, t.b))
+    println(perimeter(t.b, t.c))
+    println(perimeter(t.c, t.a))
+}
+
+enum Shape {
+    Rectangle(Int, Int),
+    Triangle(Int, Int, Int),
+}
+
+fn area(l: Int, w: Int) -> Int {
+    l * w
+}
+
+fn perimeter(l: Int, w: Int) -> Int {
+    2 * l + 2 * w
+}
+
+fn main() {
+    let r1 = Shape { l: 3, w: 4, t: Rectangle }
+    let r2 = Shape { l: 2, w: 5, t: Rectangle }
+    let t = Shape { a: 3, b: 4, c: 5, t: Triangle }
+    println(perimeter(r1.l, r1.w))
+    println(perimeter(r2.l, r2.w))
+    println(perimeter(t.a, t.b))
+    println(perimeter(t.b, t.c))
+    println(perimeter(t.c, t.a))
+}
+
+enum Shape {
+    Rectangle(Int, Int),
+    Triangle(Int, Int, Int),
+}
+
+fn area(l: Int, w: Int) -> Int {
+    l * w
+}
+
+fn perimeter(l: Int, w: Int) -> Int {
+    2 * l + 2 * w
+}
+
+fn main() {
+    let r1 = Shape { l: 3, w: 4, t: Rectangle }
+    let r2 = Shape { l: 2, w: 5, t: Rectangle }
+    let t = Shape { a: 3, b: 4, c: 5, t: Triangle }
+    println(perimeter(r1.l, r1.w))
+    println(perimeter(r2.l, r2.w))
+    println(perimeter(t.a, t.b))
+    println(perimeter(t.b, t.c))
+    println(perimeter(t.c, t.a))
+}
+
+enum Shape {
+    Rectangle(Int, Int),
+    Triangle(Int, Int, Int),
+}
+
+fn area(l: Int, w: Int) -> Int {
+    l * w
+}
+
+fn perimeter(l: Int, w: Int) -> Int {
+    2 * l + 2 * w
+}
+
+fn main() {
+    let r1 = Shape { l: 3, w: 4, t: Rectangle }
+    let r2 = Shape { l: 2, w: 5, t: Rectangle }
+    let t = Shape { a: 3, b: 4, c: 5, t: Triangle }
+    println(perimeter(r1.l, r1.w))
+    println(perimeter(r2.l, r2.w))
+    println(perimeter(t.a, t.b))
+    println(perimeter(t.b, t.c))
+    println(perimeter(t.c, t.a))
+}
+
+enum Shape {
+    Rectangle(Int, Int),
+    Triangle(Int, Int, Int),
+}
+
+fn area(l: Int, w: Int) -> Int {
+    l * w
+}
+
+fn

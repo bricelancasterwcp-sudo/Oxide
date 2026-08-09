@@ -1,0 +1,14 @@
+fn main() {
+    let num = 100;
+    let divisor1 = 5;
+    let divisor2 = 0;
+    let divisor3 = 4;
+
+    println!("Division by {}: {}", divisor1, num / divisor1);
+    if divisor2 == 0 {
+        println!("Division by {} is undefined", divisor2);
+    } else {
+        println!("Division by {}: {}", divisor2, num / divisor2);
+    }
+    println!("Division by {}: {}", divisor3, num / divisor3);
+}

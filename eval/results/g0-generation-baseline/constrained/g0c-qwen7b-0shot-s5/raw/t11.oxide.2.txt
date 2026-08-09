@@ -1,0 +1,7 @@
+fn main() {
+    let numbers = vec(5, 3, 8, 1, 9, 2)
+    for i in range(0, len(numbers)) {
+        let x = get(numbers, i)?
+        print(x)
+    }
+}

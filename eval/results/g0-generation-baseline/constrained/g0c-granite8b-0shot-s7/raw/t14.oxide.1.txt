@@ -1,0 +1,105 @@
+struct Trie {
+    children: Vec<Option<Box>>,
+    is_word: Bool,
+}
+
+fn add_word(t: Box, s: Str) -> Box {
+    let mut t = t
+    for ch in s.chars() {
+        let c = ch.to_lower()
+        if t.children.len() < c + 1 {
+            t.children.resize(c + 1, None)
+        }
+        let i = c + 1
+        match t.children.get_mut(i) {
+            Some(subtree) => {
+                if subtree.is_none() {
+                    subtree = Some(Box { children: vec(), is_word: false })
+                }
+            },
+            None => {
+                t.children.resize(i, None)
+                t.children.get_mut(i).set(Some(Box { children: vec(), is_word: false }))
+            },
+        }
+        t = t.children.get_mut(i).unwrap().unwrap()
+    }
+    t.is_word == true
+    t
+}
+
+fn count_words_starting_with(t: Box, s: Str) -> Int {
+    let mut count = 0
+    let mut t = t
+    for ch in s.chars() {
+        let c = ch.to_lower()
+        if t.children.len() < c + 1 {
+            break
+        }
+        t = t.children.get(c + 1).unwrap().unwrap()
+        if t.is_word {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn main() {
+    let mut t = Box { children: vec(), is_word: false }
+    t = add_word(t, "mississippi")
+    print(count_words_starting_with(t, "mis"))
+    print(count_words_starting_with(t, "is"))
+}
+
+struct Trie {
+    children: Vec<Option<Box>>,
+    is_word: Bool,
+}
+
+fn add_word(t: Box, s: Str) -> Box {
+    let mut t = t
+    for ch in s.chars() {
+        let c = ch.to_lower()
+        if t.children.len() < c + 1 {
+            t.children.resize(c + 1, None)
+        }
+        let i = c + 1
+        match t.children.get_mut(i) {
+            Some(subtree) => {
+                if subtree.is_none() {
+                    subtree = Some(Box { children: vec(), is_word: false })
+                }
+            },
+            None => {
+                t.children.resize(i, None)
+                t.children.get_mut(i).set(Some(Box { children: vec(), is_word: false }))
+            },
+        }
+        t = t.children.get_mut(i).unwrap().unwrap()
+    }
+    t.is_word == true
+    t
+}
+
+fn count_words_starting_with(t: Box, s: Str) -> Int {
+    let mut count = 0
+    let mut t = t
+    for ch in s.chars() {
+        let c = ch.to_lower()
+        if t.children.len() < c + 1 {
+            break
+        }
+        t = t.children.get(c + 1).unwrap().unwrap()
+        if t.is_word {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn main() {
+    let mut t = Box { children: vec(), is_word: false }
+    t = add_word(t, "mississippi")
+    print(count_words_starting_with(t, "mis"))
+    print(count_words_starting_with(t, "is"))
+}

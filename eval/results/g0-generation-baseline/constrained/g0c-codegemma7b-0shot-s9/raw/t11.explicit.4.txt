@@ -1,0 +1,327 @@
+fn main() {
+    let mut nums = vec(5, 3, 8, 1, 9, 2)
+    for x in &mut {
+        let y = pop(&nums)
+        let z = pop(&nums)
+        if y < z {
+            push(nums, y)
+            push(nums, z)
+        } else {
+            push(nums, z)
+            push(nums, y)
+        }
+    }
+    for x in &nums {
+        print(x)
+        print("\n")
+    }
+    drop nums
+}
+
+fn pop(v: &Vec<Int>) -> Int {
+    return get(v, len(v) - 1)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    return get(v, len(v))
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    return v.at(i)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn print(s: Str) {
+    print(s)
+}
+
+fn drop_int(x: Int) {
+    drop x
+}
+
+fn drop_vec(x: Vec<Int>) {
+    drop x
+}
+
+fn main() {
+    let mut nums = vec(5, 3, 8, 1, 9, 2)
+    for x in &mut {
+        let y = pop(&nums)
+        let z = pop(&nums)
+        if y < z {
+            push(nums, y)
+            push(nums, z)
+        } else {
+            push(nums, z)
+            push(nums, y)
+        }
+    }
+    for x in &nums {
+        print(x)
+        print("\n")
+    }
+    drop nums
+}
+
+fn pop(v: &Vec<Int>) -> Int {
+    return get(v, len(v) - 1)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    return get(v, len(v))
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    return v.at(i)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn print(s: Str) {
+    print(s)
+}
+
+fn drop_int(x: Int) {
+    drop x
+}
+
+fn drop_vec(x: Vec<Int>) {
+    drop x
+}
+
+fn main() {
+    let mut nums = vec(5, 3, 8, 1, 9, 2)
+    for x in &mut {
+        let y = pop(&nums)
+        let z = pop(&nums)
+        if y < z {
+            push(nums, y)
+            push(nums, z)
+        } else {
+            push(nums, z)
+            push(nums, y)
+        }
+    }
+    for x in &nums {
+        print(x)
+        print("\n")
+    }
+    drop nums
+}
+
+fn pop(v: &Vec<Int>) -> Int {
+    return get(v, len(v) - 1)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    return get(v, len(v))
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    return v.at(i)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn print(s: Str) {
+    print(s)
+}
+
+fn drop_int(x: Int) {
+    drop x
+}
+
+fn drop_vec(x: Vec<Int>) {
+    drop x
+}
+
+fn main() {
+    let mut nums = vec(5, 3, 8, 1, 9, 2)
+    for x in &mut {
+        let y = pop(&nums)
+        let z = pop(&nums)
+        if y < z {
+            push(nums, y)
+            push(nums, z)
+        } else {
+            push(nums, z)
+            push(nums, y)
+        }
+    }
+    for x in &nums {
+        print(x)
+        print("\n")
+    }
+    drop nums
+}
+
+fn pop(v: &Vec<Int>) -> Int {
+    return get(v, len(v) - 1)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    return get(v, len(v))
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    return v.at(i)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn print(s: Str) {
+    print(s)
+}
+
+fn drop_int(x: Int) {
+    drop x
+}
+
+fn drop_vec(x: Vec<Int>) {
+    drop x
+}
+
+fn main() {
+    let mut nums = vec(5, 3, 8, 1, 9, 2)
+    for x in &mut {
+        let y = pop(&nums)
+        let z = pop(&nums)
+        if y < z {
+            push(nums, y)
+            push(nums, z)
+        } else {
+            push(nums, z)
+            push(nums, y)
+        }
+    }
+    for x in &nums {
+        print(x)
+        print("\n")
+    }
+    drop nums
+}
+
+fn pop(v: &Vec<Int>) -> Int {
+    return get(v, len(v) - 1)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    return get(v, len(v))
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    return v.at(i)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn print(s: Str) {
+    print(s)
+}
+
+fn drop_int(x: Int) {
+    drop x
+}
+
+fn drop_vec(x: Vec<Int>) {
+    drop x
+}
+
+fn main() {
+    let mut nums = vec(5, 3, 8, 1, 9, 2)
+    for x in &mut {
+        let y = pop(&nums)
+        let z = pop(&nums)
+        if y < z {
+            push(nums, y)
+            push(nums, z)
+        } else {
+            push(nums, z)
+            push(nums, y)
+        }
+    }
+    for x in &nums {
+        print(x)
+        print("\n")
+    }
+    drop nums
+}
+
+fn pop(v: &Vec<Int>) -> Int {
+    return get(v, len(v) - 1)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    return get(v, len(v))
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    return v.at(i)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn print(s: Str) {
+    print(s)
+}
+
+fn drop_int(x: Int) {
+    drop x
+}
+
+fn drop_vec(x: Vec<Int>) {
+    drop x
+}
+
+fn main() {
+    let mut nums = vec(5, 3, 8, 1, 9, 2)
+    for x in &mut {
+        let y = pop(&nums)
+        let z = pop(&nums)
+        if y < z {
+            push(nums, y)
+            push(nums, z)
+        } else {
+            push(nums, z)
+            push(nums, y)
+        }
+    }
+    for x in &nums {
+        print

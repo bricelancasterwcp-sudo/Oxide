@@ -1,0 +1,18 @@
+fn divide(dividend: Int, divisor: Int) -> Result<Int, Str> {
+    if divisor == 0 {
+        Err("undefined".to_string())
+    } else {
+        Ok(dividend / divisor)
+    }
+}
+
+fn main() {
+    let divisors = vec(5, 0, 4)
+    for divisor in &divisors {
+        match divide(100, divisor) {
+            Ok(quotient) => print(quotient),
+            Err(message) => print_str(message),
+        }
+    }
+    drop divisors
+}

@@ -1,0 +1,21 @@
+fn perimeter_rectangle(height: Int, width: Int) -> Int {
+    let top = height
+    let left = width
+    let bottom = height
+    let right = width
+    2 * (top + left + bottom + right)
+}
+
+fn perimeter_triangle(side1: Int, side2: Int, side3: Int) -> Int {
+    let a = side1
+    let b = side2
+    let c = side3
+    a + b + c
+}
+
+fn main() {
+    let rectangle_perimeter = perimeter_rectangle(3, 4)
+    let triangle_perimeter = perimeter_triangle(3, 4, 5)
+    print(rectangle_perimeter)
+    print(triangle_perimeter)
+}

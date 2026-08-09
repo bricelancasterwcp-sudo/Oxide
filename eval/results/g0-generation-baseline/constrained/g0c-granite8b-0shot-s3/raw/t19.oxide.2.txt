@@ -1,0 +1,17 @@
+struct Rectangle { width: Int, height: Int }
+
+fn area(r: Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: Rectangle) -> Int {
+    r.width * 2 + r.height * 2
+}
+
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print_str("Area: ")
+    print(area(r))
+    print_str("\nPerimeter: ")
+    print(perimeter(r))
+}

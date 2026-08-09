@@ -1,0 +1,14 @@
+fn main() {
+    let divisor = 5
+    let result = 100 / divisor
+    print(result)
+    if divisor == 0 {
+        print("undefined")
+    } else {
+        let result = 100 / divisor
+        print(result)
+    }
+    let divisor = 4
+    let result = 100 / divisor
+    print(result)
+}

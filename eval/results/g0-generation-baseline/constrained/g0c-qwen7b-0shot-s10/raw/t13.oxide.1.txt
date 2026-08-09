@@ -1,0 +1,11 @@
+fn is_palindrome(s: Str) -> Bool {
+    let chars = chars(s)
+    let reversed: Str = chars.iter().map(into_str).collect()
+    s == reversed
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}

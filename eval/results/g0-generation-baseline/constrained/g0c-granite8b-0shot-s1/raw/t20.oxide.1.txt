@@ -1,0 +1,246 @@
+fn main() {
+    let pen = Pen { price: 3, quantity: 4 }
+    let pad = Pad { price: 9, quantity: 2 }
+    let ink = Ink { price: 5, quantity: 3 }
+    print(pen + pad + ink)
+    let best = pen + pad + ink
+    let max = max(pen, pad, ink)
+    print(max.name)
+}
+
+struct Pen { price: Int, quantity: Int }
+
+struct Pad { price: Int, quantity: Int }
+
+struct Ink { price: Int, quantity: Int }
+
+fn add(a: Pen, b: Pen) -> Pen {
+    Pen(a.price + b.price, a.quantity + b.quantity)
+}
+
+fn name(p: Pen) -> Str {
+    "pen"
+}
+
+fn name(p: Pad) -> Str {
+    "pad"
+}
+
+fn name(p: Ink) -> Str {
+    "ink"
+}
+
+fn max(a: Pen, b: Pen, c: Pen) -> Pen {
+    let x = if a > b { a } else { b }
+    if x > c {
+        x
+    } else {
+        c
+    }
+}
+
+fn add(a: Pen, b: Pad) -> Pen {
+    Pen(a.price + b.price, a.quantity + b.quantity)
+}
+
+fn add(a: Pen, b: Ink) -> Pen {
+    Pen(a.price + b.price, a.quantity + b.quantity)
+}
+
+fn add(a: Pad, b: Pen) -> Pad {
+    Pad(a.price + b.price, a.quantity + b.quantity)
+}
+
+fn add(a: Pad, b: Pad) -> Pad {
+    Pad(a.price + b.price, a.quantity + b.quantity)
+}
+
+fn add(a: Pad, b: Ink) -> Pad {
+    Pad(a.price + b.price, a.quantity + b.quantity)
+}
+
+fn add(a: Ink, b: Pen) -> Ink {
+    Ink(a.price + b.price, a.quantity + b.quantity)
+}
+
+fn add(a: Ink, b: Pad) -> Ink {
+    Ink(a.price + b.price, a.quantity + b.quantity)
+}
+
+fn add(a: Ink, b: Ink) -> Ink {
+    Ink(a.price + b.price, a.quantity + b.quantity)
+}
+
+fn greater(a: Pen, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pen, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Pad) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Pad, b: Ink) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Pen) -> Bool {
+    a.price * a.quantity > b.price * b.quantity
+}
+
+fn greater(a: Ink, b: Pad) -> Bool

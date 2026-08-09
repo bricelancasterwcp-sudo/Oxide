@@ -1,0 +1,25 @@
+fn count_s(s: &Str) -> Int {
+    let mut count = 0
+    for c in chars(s) {
+        if c == "s" {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn count_distinct(s: &Str) -> Int {
+    let mut seen: Vec<Str> = vec()
+    for c in chars(s) {
+        if !contains(&seen, c) {
+            seen = push(seen, c)
+        }
+    }
+    len(&seen)
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_s(text))
+    print(count_distinct(text))
+}

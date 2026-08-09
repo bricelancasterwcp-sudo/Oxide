@@ -1,0 +1,94 @@
+fn count_s(s: &Str) -> Int {
+    let mut count = 0
+    for c in chars(s) {
+        if c == "s" {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn count_distinct(s: &Str) -> Int {
+    let mut seen: Vec<Str> = vec()
+    for c in chars(s) {
+        if !contains(&seen, &c) {
+            seen = push(seen, c)
+        }
+    }
+    len(&seen)
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_s(text))
+    print(count_distinct(text))
+}
+
+fn contains(v: &Vec<Str>, x: &Str) -> Bool {
+    for i in 0 < len(v) {
+        if v.get(i) == x {
+            return true
+        }
+    }
+    false
+}
+
+fn len(v: &Vec<Str>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut result = v
+    result.append(x)
+    result
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut result: Vec<Str> = vec()
+    for c in s.chars() {
+        result.append(Str(c))
+    }
+    result
+}
+
+fn str(c: Char) -> Str {
+    Str(c)
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print(c)
+    }
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut result = Str("")
+    let mut x = n
+    while x > 0 {
+        result = concat(str((x % 10) + 48), result)
+        x = trunc(x / 10)
+    }
+    result
+}
+
+fn trunc(x: Int) -> Int {
+    if x < 0 {
+        return x
+    } else {
+        return x - (x % 1)
+    }
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_s(text))
+    print(count_distinct(text))
+}

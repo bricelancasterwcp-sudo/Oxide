@@ -1,0 +1,69 @@
+fn main() {
+    let list = vec(3, 8, -2, 12, 7)
+    let mut pos = 0
+    let mut max = list(0)
+    for x in list {
+        if x > 0 {
+            pos = pos + 1
+        }
+        if x > max {
+            max = x
+        }
+    }
+    print(pos)
+    print(max)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int) -> Vec<Int> {
+    vec(a, b, c, d, e)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut v = v
+    v.push(x)
+    v
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= len(v) {
+        None
+    } else {
+        Some(v(i))
+    }
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn main() {
+    let list = vec(3, 8, -2, 12, 7)
+    let mut pos = 0
+    let mut max = list(0)
+    for x in list {
+        if x > 0 {
+            pos = pos + 1
+        }
+        if x > max {
+            max = x
+        }
+    }
+    print(pos)
+    print(max)
+}

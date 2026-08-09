@@ -1,0 +1,14 @@
+fn next_seq(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn main() {
+    let a = 1
+    let b = 1
+    for i in 0 < 19 {
+        let next = next_seq(a, b)
+        print(next)
+        a = b
+        b = next
+    }
+}

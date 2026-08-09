@@ -1,0 +1,22 @@
+fn divisors_sum(n: Int) -> Int {
+    let mut sum = 1
+    let limit = n / 2
+    let mut i = 2
+    while i <= limit {
+        if n % i == 0 {
+            sum = sum + i
+        }
+        i = i + 1
+    }
+    sum
+}
+
+fn main() {
+    let mut num = 2
+    while num < 1000 {
+        if divisors_sum(num) == num {
+            print(num)
+        }
+        num = num + 1
+    }
+}

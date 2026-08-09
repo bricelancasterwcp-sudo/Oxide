@@ -1,0 +1,13 @@
+fn main() {
+    let mut list = vec(4, 1, 7, 3, 9, 2)
+    let mut new_list = vec()
+    for value in &list {
+        if value > 3 {
+            new_list = push(new_list, value)
+        }
+    }
+    for value in &new_list {
+        print(value)
+    }
+    print(new_list.len())
+}

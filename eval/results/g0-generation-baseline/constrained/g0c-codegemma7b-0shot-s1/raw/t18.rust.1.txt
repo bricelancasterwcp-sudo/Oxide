@@ -1,0 +1,15 @@
+use std::io;
+
+fn main() {
+    rectangle(3, 4);
+    triangle(3, 4, 5);
+    rectangle(2, 5);
+}
+
+fn rectangle(l: i32, b: i32) {
+    println!("{}",(2*l + 2*b));
+}
+
+fn triangle(a: i32, b: i32, c: i32) {
+    println!("{}",(a+b+c));
+}

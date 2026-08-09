@@ -1,0 +1,398 @@
+struct Item {
+    name: Str,
+    price: Int,
+    quantity: Int,
+}
+
+fn calculate_cost(item: Item) -> Int {
+    item.price * item.quantity
+}
+
+fn main() {
+    let pen = Item { name: "pen", price: 3, quantity: 4 }
+    let pad = Item { name: "pad", price: 9, quantity: 2 }
+    let ink = Item { name: "ink", price: 5, quantity: 3 }
+    let total_cost = calculate_cost(pen) + calculate_cost(pad) + calculate_cost(ink)
+    print(total_cost)
+    let mut items = vec(pen, pad, ink)
+    items.sort_by_key(item_cost)
+    let most_expensive_item = items.last().unwrap()
+    print_str(most_expensive_item.name)
+}
+
+fn item_cost(item: Item) -> Int {
+    item.price * item.quantity
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn vec(a: Item, b: Item, c: Item) -> Vec<Item> {
+    vec(a, b, c)
+}
+
+fn sort_by_key(items: Vec<Item>, key: Int) -> Vec<Item> {
+    items
+}
+
+fn unwrap(items: Vec<Item>, index: Int) -> Item {
+    items.get(index).unwrap().clone()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+

@@ -1,0 +1,30 @@
+```rust
+fn main() {
+    let pen = (3, 4);
+    let pad = (9, 2);
+    let ink = (5, 3);
+
+    let pen_cost = pen.0 * pen.1;
+    let pad_cost = pad.0 * pad.1;
+    let ink_cost = ink.0 * ink.1;
+
+    let total_cost = pen_cost + pad_cost + ink_cost;
+
+    println!("Total cost: {}", total_cost);
+
+    let mut highest_cost = pen_cost;
+    let mut highest_item = "pen";
+
+    if pad_cost > highest_cost {
+        highest_cost = pad_cost;
+        highest_item = "pad";
+    }
+
+    if ink_cost > highest_cost {
+        highest_cost = ink_cost;
+        highest_item = "ink";
+    }
+
+    println!("Highest cost item: {}", highest_item);
+}
+```

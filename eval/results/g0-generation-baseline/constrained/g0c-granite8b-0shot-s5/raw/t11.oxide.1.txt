@@ -1,0 +1,265 @@
+fn main() {
+    let list = push(vec(), 5)
+    let list = push(list, 3)
+    let list = push(list, 8)
+    let list = push(list, 1)
+    let list = push(list, 9)
+    let list = push(list, 2)
+    let mut list = sort(list)
+    while list != vec() {
+        print(pop(list).unwrap())
+    }
+}
+
+fn pop(mutvec: Vec<Int>) -> Option<Int> {
+    match len(vec) {
+        GreaterThan(x) => {
+            let x = get(vec, x - 1).unwrap()
+            let vec = slice(vec, 0, x - 1)
+            Some(x)
+        },
+        LessThan(x) => {
+            match x {
+                EqualsTo(x) => {
+                    let vec = slice(vec, 0, 0)
+                    None
+                },
+            }
+        },
+    }
+}
+
+fn slice(vec: Vec<Int>, a: Int, b: Int) -> Vec<Int> {
+    let vec = clone(vec)
+    let vec = slice_mut(vec, a, b)
+    let vec = clone(vec)
+    vec
+}
+
+fn slice_mut(mutvec: Vec<Int>, a: Int, b: Int) -> Vec<Int> {
+    let len = trunc(b - a)
+    let vec = vec()
+    for i in range(0, len) {
+        let x = get(mutvec, a + i).unwrap()
+        let vec = push(vec, x)
+    }
+    vec
+}
+
+fn sort(vec: Vec<Int>) -> Vec<Int> {
+    if len(vec) > 1 {
+        let pivot = get(vec, 0).unwrap()
+        let left = filter(vec, LessThan(pivot))
+        let right = filter(vec, GreaterThan(pivot))
+        let left = sort(left)
+        let right = sort(right)
+        let vec = concat(left, push(right, pivot))
+        vec
+    } else {
+        vec
+    }
+}
+
+fn filter(vec: Vec<Int>, pred: Int) -> Vec<Int> {
+    let vec = clone(vec)
+    let vec = filter_mut(vec, pred)
+    let vec = clone(vec)
+    vec
+}
+
+fn filter_mut(mutvec: Vec<Int>, pred: Int) -> Vec<Int> {
+    let mut i = 0
+    while i < len(mutvec) {
+        if pred == get(mutvec, i).unwrap() {
+            let item = get(mutvec, i).unwrap()
+            let j = len(mutvec) - 1
+            let vec = slice(mutvec, 0, i)
+            let vec = push(vec, item)
+            let vec = slice(vec, 0, j)
+            mutvec = vec
+        } else {
+            i = i + 1
+        }
+    }
+    mutvec
+}
+
+enum CompOp {
+    GreaterThan(Int),
+    LessThan(Int),
+    EqualTo(Int),
+}
+
+fn main() {
+    let list = push(vec(), 5)
+    let list = push(list, 3)
+    let list = push(list, 8)
+    let list = push(list, 1)
+    let list = push(list, 9)
+    let list = push(list, 2)
+    let mut list = sort(list)
+    while list != vec() {
+        print(pop(list).unwrap())
+    }
+}
+
+fn pop(mutvec: Vec<Int>) -> Option<Int> {
+    match len(vec) {
+        GreaterThan(x) => {
+            let x = get(vec, x - 1).unwrap()
+            let vec = slice(vec, 0, x - 1)
+            Some(x)
+        },
+        LessThan(x) => {
+            match x {
+                EqualTo(x) => {
+                    let vec = slice(vec, 0, 0)
+                    None
+                },
+            }
+        },
+    }
+}
+
+fn slice(vec: Vec<Int>, a: Int, b: Int) -> Vec<Int> {
+    let vec = clone(vec)
+    let vec = slice_mut(vec, a, b)
+    let vec = clone(vec)
+    vec
+}
+
+fn slice_mut(mutvec: Vec<Int>, a: Int, b: Int) -> Vec<Int> {
+    let len = trunc(b - a)
+    let vec = vec()
+    for i in range(0, len) {
+        let x = get(mutvec, a + i).unwrap()
+        let vec = push(vec, x)
+    }
+    vec
+}
+
+fn sort(vec: Vec<Int>) -> Vec<Int> {
+    if len(vec) > 1 {
+        let pivot = get(vec, 0).unwrap()
+        let left = filter(vec, LessThan(pivot))
+        let right = filter(vec, GreaterThan(pivot))
+        let left = sort(left)
+        let right = sort(right)
+        let vec = concat(left, push(right, pivot))
+        vec
+    } else {
+        vec
+    }
+}
+
+fn filter(vec: Vec<Int>, pred: Int) -> Vec<Int> {
+    let vec = clone(vec)
+    let vec = filter_mut(vec, pred)
+    let vec = clone(vec)
+    vec
+}
+
+fn filter_mut(mutvec: Vec<Int>, pred: Int) -> Vec<Int> {
+    let mut i = 0
+    while i < len(mutvec) {
+        if pred == get(mutvec, i).unwrap() {
+            let item = get(mutvec, i).unwrap()
+            let j = len(mutvec) - 1
+            let vec = slice(mutvec, 0, i)
+            let vec = push(vec, item)
+            let vec = slice(vec, 0, j)
+            mutvec = vec
+        } else {
+            i = i + 1
+        }
+    }
+    mutvec
+}
+
+enum CompOp {
+    GreaterThan(Int),
+    LessThan(Int),
+    EqualTo(Int),
+}
+
+fn main() {
+    let list = push(vec(), 5)
+    let list = push(list, 3)
+    let list = push(list, 8)
+    let list = push(list, 1)
+    let list = push(list, 9)
+    let list = push(list, 2)
+    let mut list = sort(list)
+    while list != vec() {
+        print(pop(list).unwrap())
+    }
+}
+
+fn pop(mutvec: Vec<Int>) -> Option<Int> {
+    match len(vec) {
+        GreaterThan(x) => {
+            let x = get(vec, x - 1).unwrap()
+            let vec = slice(vec, 0, x - 1)
+            Some(x)
+        },
+        LessThan(x) => {
+            match x {
+                EqualTo(x) => {
+                    let vec = slice(vec, 0, 0)
+                    None
+                },
+            }
+        },
+    }
+}
+
+fn slice(vec: Vec<Int>, a: Int, b: Int) -> Vec<Int> {
+    let vec = clone(vec)
+    let vec = slice_mut(vec, a, b)
+    let vec = clone(vec)
+    vec
+}
+
+fn slice_mut(mutvec: Vec<Int>, a: Int, b: Int) -> Vec<Int> {
+    let len = trunc(b - a)
+    let vec = vec()
+    for i in range(0, len) {
+        let x = get(mutvec, a + i).unwrap()
+        let vec = push(vec, x)
+    }
+    vec
+}
+
+fn sort(vec: Vec<Int>) -> Vec<Int> {
+    if len(vec) > 1 {
+        let pivot = get(vec, 0).unwrap()
+        let left = filter(vec, LessThan(pivot))
+        let right = filter(vec, GreaterThan(pivot))
+        let left = sort(left)
+        let right = sort(right)
+        let vec = concat(left, push(right, pivot))
+        vec
+    } else {
+        vec
+    }
+}
+
+fn filter(vec: Vec<Int>, pred: Int) -> Vec<Int> {
+    let vec = clone(vec)
+    let vec = filter_mut(vec, pred)
+    let vec = clone(vec)
+    vec
+}
+
+fn filter_mut(mutvec: Vec<Int>, pred: Int) -> Vec<Int> {
+    let mut i = 0
+    while i < len(mutvec) {
+        if pred == get(mutvec, i).unwrap() {
+            let item = get(mutvec, i).unwrap()
+            let j = len(mutvec) - 1
+            let vec = slice(mutvec, 0, i)
+            let vec = push(vec, item)
+            let vec = slice(vec, 0, j)
+            mutvec = vec
+        } else {
+            i = i + 

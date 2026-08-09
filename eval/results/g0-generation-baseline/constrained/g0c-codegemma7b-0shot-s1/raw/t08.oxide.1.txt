@@ -1,0 +1,7 @@
+fn main() {
+    let values = vec(3, 8, -2, 12, 7)
+    let positives = values.iter().filter(is_positive).count()
+    let largest = values.iter().copied().max_by(cmp_int)
+    print(positives)
+    print(largest)
+}

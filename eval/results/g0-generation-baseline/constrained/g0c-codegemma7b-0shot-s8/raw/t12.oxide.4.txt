@@ -1,0 +1,295 @@
+fn reverse(s: Str) -> Str {
+    let mut rev = vec()
+    for c in chars(s) {
+        rev = push(rev, c)
+    }
+    str_join(rev.as_slice())
+}
+
+fn main() {
+    print(reverse("stack"))
+}
+
+fn str_join(s: Slice<Str>) -> Str {
+    let mut out = Str("")
+    for i in 0.upto(len(s) - 1) {
+        out = concat(out, s.get(i).unwrap())
+    }
+    out
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut c = vec()
+    for i in 0.upto(str_len(s) - 1) {
+        c = push(c, str_get(s, i).unwrap())
+    }
+    c
+}
+
+fn str_get(s: Str, i: Int) -> Option<Str> {
+    if i >= 0 && i < str_len(s) {
+        Some(Str(s.chars().nth(i).unwrap()))
+    } else {
+        None
+    }
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut c = 0
+    for _ in v {
+        c = c + 1
+    }
+    c
+}
+
+fn str_len(s: Str) -> Int {
+    let mut c = 0
+    for _ in s.chars() {
+        c = c + 1
+    }
+    c
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut c = v
+    c.push(x)
+    c
+}
+
+fn str_join(s: Slice<Str>) -> Str {
+    let mut out = Str("")
+    for i in 0.upto(len(s) - 1) {
+        out = concat(out, s.get(i).unwrap())
+    }
+    out
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let mut c = String(a.chars().chain(b.chars()))
+    Str(c)
+}
+
+fn slice(v: Vec<T>) -> Slice<T> {
+    let mut c = v
+    c.as_slice()
+}
+
+fn upto(a: Int, b: Int) -> Range {
+    Range(a, b)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.upto(b) {
+        v = push(v, i)
+    }
+    v
+}
+
+fn str(s: String) -> Str {
+    Str(s)
+}
+
+fn to_string(s: Str) -> String {
+    let mut c = String(s.chars())
+    c
+}
+
+fn as_slice(v: Vec<T>) -> Slice<T> {
+    let mut c = v
+    c.as_slice()
+}
+
+fn unwrap(o: Option<T>) -> T {
+    o.unwrap()
+}
+
+fn none() -> Option<T> {
+    None
+}
+
+fn some(x: T) -> Option<T> {
+    Some(x)
+}
+
+fn print(x: Any) {
+    println(to_string(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    if i >= 0 && i < len(v) {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn any(x: T) -> Any {
+    x
+}
+
+fn any_str(s: Str) -> Any {
+    s
+}
+
+fn any_vec(v: Vec<T>) -> Any {
+    v
+}
+
+fn any_option(o: Option<T>) -> Any {
+    o
+}
+
+fn any_range(r: Range) -> Any {
+    r
+}
+
+fn any_unit() -> Any {
+    Unit
+}
+
+fn any_int(i: Int) -> Any {
+    i
+}
+
+fn any_float(f: Float) -> Any {
+    f
+}
+
+fn any_bool(b: Bool) -> Any {
+    b
+}
+
+fn is_none(o: Option<T>) -> Bool {
+    o == None
+}
+
+fn is_some(o: Option<T>) -> Bool {
+    o != None
+}
+
+fn is_ok(r: Result<T, E>) -> Bool {
+    r != Err(_)
+}
+
+fn is_err(r: Result<T, E>) -> Bool {
+    r == Err(_)
+}
+
+fn ok(x: T) -> Result<T, E> {
+    Ok(x)
+}
+
+fn err(e: E) -> Result<T, E> {
+    Err(e)
+}
+
+fn match_(e: Any) -> Any {
+    match e {
+        Any(x) => x,
+        Any_Str(s) => s,
+        Any_Vec(v) => v,
+        Any_Option(o) => o,
+        Any_Range(r) => r,
+        Any_Unit => Unit,
+        Any_Int(i) => i,
+        Any_Float(f) => f,
+        Any_Bool(b) => b,
+        _ => None,
+    }
+}
+
+fn downcast_any_str(a: Any) -> Str {
+    a.downcast_any_str().unwrap()
+}
+
+fn downcast_any_vec(a: Any) -> Vec<Str> {
+    a.downcast_any_vec().unwrap()
+}
+
+fn downcast_any_option(a: Any) -> Option<Str> {
+    a.downcast_any_option().unwrap()
+}
+
+fn downcast_any_range(a: Any) -> Range {
+    a.downcast_any_range().unwrap()
+}
+
+fn downcast_any_unit(a: Any) -> Unit {
+    a.downcast_any_unit().unwrap()
+}
+
+fn downcast_any_int(a: Any) -> Int {
+    a.downcast_any_int().unwrap()
+}
+
+fn downcast_any_float(a: Any) -> Float {
+    a.downcast_any_float().unwrap()
+}
+
+fn downcast_any_bool(a: Any) -> Bool {
+    a.downcast_any_bool().unwrap()
+}
+
+fn downcast_any_to_any(a: Any) -> Any {
+    a.downcast_any_to_any().unwrap()
+}
+
+fn downcast_any_to_any_str(a: Any) -> Str {
+    a.downcast_any_to_any_str().unwrap()
+}
+
+fn downcast_any_to_any_vec(a: Any) -> Vec<Str> {
+    a.downcast_any_to_any_vec().unwrap()
+}
+
+fn downcast_any_to_any_option(a: Any) -> Option<Str> {
+    a.downcast_any_to_any_option().unwrap()
+}
+
+fn downcast_any_to_any_range(a: Any) -> Range {
+    a.downcast_any_to_any_range().unwrap()
+}
+
+fn downcast_any_to_any_unit(a: Any) -> Unit {
+    a.downcast_any_to_any_unit().unwrap()
+}
+
+fn downcast_any_to_any_int(a: Any) -> Int {
+    a.downcast_any_to_any_int().unwrap()
+}
+
+fn downcast_any_to_any_float(a: Any) -> Float {
+    a.downcast_any_to_any_float().unwrap()
+}
+
+fn downcast_any_to_any_bool(a: Any) -> Bool {
+    a.downcast_any_to_any_bool().unwrap()
+}
+
+fn is_same(a: Any, b: Any) -> Bool {
+    a == b
+}
+
+fn is_eq(a: Any, b: Any) -> Bool {
+    a == b
+}
+
+fn is_ne(a: Any, b: Any) -> Bool {
+    a != b
+}
+
+fn is_lt(a: Any, b: Any) -> Bool {
+    a < b
+}
+
+fn reverse(s: Str) -> Str {
+    let mut rev = vec()
+    for c in chars(s) {
+        rev = push(rev, c)
+    }
+    str_join(rev.as_slice())

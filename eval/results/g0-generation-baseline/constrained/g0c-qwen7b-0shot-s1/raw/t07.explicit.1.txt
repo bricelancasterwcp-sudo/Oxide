@@ -1,0 +1,343 @@
+fn main() {
+    let mut multiples = Vec(Int)
+    for i in range(1, 9) {
+        let multiple = i * 3
+        multiples = push(multiples, multiple)
+    }
+    let sum = sum_vec(&multiples)
+    print(sum)
+    drop multiples
+}
+
+fn sum_vec(v: &Vec<Int>) -> Int {
+    let mut total = 0
+    for x in v {
+        total = total + x
+    }
+    total
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut result = Vec(Int)
+    let mut current = a
+    while current < b {
+        result = push(result, current)
+        current = current + 1
+    }
+    result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut new_v = v
+    new_v = push(new_v, x)
+    new_v
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    let chars = chars(s)
+    for c in chars {
+        print_char(c)
+    }
+    print_char("\n")
+}
+
+fn print_char(c: Str) {
+    print_str(c)
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut chars = Vec(Str)
+    let mut num = n
+    if num == 0 {
+        return "0"
+    }
+    while num != 0 {
+        let digit = num % 10
+        let char = char_from_digit(digit)
+        chars = push(chars, char)
+        num = num / 10
+    }
+    let mut result = Str
+    for i in range(0, length(chars)) {
+        let c = get(chars, i)
+        result = concat(result, c)
+    }
+    reverse(result)
+}
+
+fn char_from_digit(digit: Int) -> Str {
+    let mut chars = Vec(Str)
+    chars = push(chars, "0")
+    chars = push(chars, "1")
+    chars = push(chars, "2")
+    chars = push(chars, "3")
+    chars = push(chars, "4")
+    chars = push(chars, "5")
+    chars = push(chars, "6")
+    chars = push(chars, "7")
+    chars = push(chars, "8")
+    chars = push(chars, "9")
+    get(chars, digit)
+}
+
+fn reverse(s: Str) -> Str {
+    let mut chars = chars(s)
+    let mut result = Str
+    for i in range(0, length(chars)) {
+        let c = get(chars, length(chars) - i - 1)
+        result = concat(result, c)
+    }
+    result
+}
+
+fn length(v: Vec<T>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn get(v: Vec<T>, i: Int) -> T {
+    let mut result = T
+    for j in range(0, i) {
+        result = get(v, j)
+    }
+    result
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut new_v = v
+    new_v = push(new_v, x)
+    new_v
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let mut result = Str
+    for c in chars(a) {
+        result = concat(result, c)
+    }
+    for c in chars(b) {
+        result = concat(result, c)
+    }
+    result
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = Vec(Str)
+    for i in range(0, str_len(s)) {
+        let c = substring(s, i, i + 1)
+        result = push(result, c)
+    }
+    result
+}
+
+fn substring(s: Str, start: Int, end: Int) -> Str {
+    let mut result = Str
+    for i in range(start, end) {
+        let c = get(s, i)
+        result = concat(result, c)
+    }
+    result
+}
+
+fn str_len(s: Str) -> Int {
+    let mut count = 0
+    for _ in chars(s) {
+        count = count + 1
+    }
+    count
+}
+
+fn print_char(c: Str) {
+    print_str(c)
+}
+
+fn to_float(n: Int) -> Float {
+    let mut result = 0.0
+    let mut num = n
+    while num != 0 {
+        let digit = num % 10
+        result = result + to_float(digit) / to_float(10)
+        num = num / 10
+    }
+    result
+}
+
+fn to_int(f: Float) -> Int {
+    let mut result = 0
+    let mut num = f
+    while num != 0 {
+        let digit = to_int(num % 10)
+        result = result + digit * 10
+        num = num / 10
+    }
+    result
+}
+
+fn main() {
+    let mut multiples = Vec(Int)
+    for i in range(1, 9) {
+        let multiple = i * 3
+        multiples = push(multiples, multiple)
+    }
+    let sum = sum_vec(&multiples)
+    print(sum)
+    drop multiples
+}
+
+fn sum_vec(v: &Vec<Int>) -> Int {
+    let mut total = 0
+    for x in v {
+        total = total + x
+    }
+    total
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut result = Vec(Int)
+    let mut current = a
+    while current < b {
+        result = push(result, current)
+        current = current + 1
+    }
+    result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut new_v = v
+    new_v = push(new_v, x)
+    new_v
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    let chars = chars(s)
+    for c in chars {
+        print_char(c)
+    }
+    print_char("\n")
+}
+
+fn print_char(c: Str) {
+    print_str(c)
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut chars = Vec(Str)
+    let mut num = n
+    if num == 0 {
+        return "0"
+    }
+    while num != 0 {
+        let digit = num % 10
+        let char = char_from_digit(digit)
+        chars = push(chars, char)
+        num = num / 10
+    }
+    let mut result = Str
+    for i in range(0, length(chars)) {
+        let c = get(chars, i)
+        result = concat(result, c)
+    }
+    reverse(result)
+}
+
+fn char_from_digit(digit: Int) -> Str {
+    let mut chars = Vec(Str)
+    chars = push(chars, "0")
+    chars = push(chars, "1")
+    chars = push(chars, "2")
+    chars = push(chars, "3")
+    chars = push(chars, "4")
+    chars = push(chars, "5")
+    chars = push(chars, "6")
+    chars = push(chars, "7")
+    chars = push(chars, "8")
+    chars = push(chars, "9")
+    get(chars, digit)
+}
+
+fn reverse(s: Str) -> Str {
+    let mut chars = chars(s)
+    let mut result = Str
+    for i in range(0, length(chars)) {
+        let c = get(chars, length(chars) - i - 1)
+        result = concat(result, c)
+    }
+    result
+}
+
+fn length(v: Vec<T>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn get(v: Vec<T>, i: Int) -> T {
+    let mut result = T
+    for j in range(0, i) {
+        result = get(v, j)
+    }
+    result
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut new_v = v
+    new_v = push(new_v, x)
+    new_v
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let mut result = Str
+    for c in chars(a) {
+        result = concat(result, c)
+    }
+    for c in chars(b) {
+        result = concat(result, c)
+    }
+    result
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = Vec(Str)
+    for i in range(0, str_len(s)) {
+        let c = substring(s, i, i + 1)
+        result = push(result, c)
+    }
+    result
+}
+
+fn substring(s: Str, start: Int, end: Int) -> Str {
+    let mut result = Str
+    for i in range(start, end) {
+        let c = get(s, i)
+        result = concat(result, c)
+    }
+    result
+}
+
+fn str_len(s: Str) -> Int {
+    let mut count = 0
+    for _ in chars(s) {
+        count = count + 1
+    }
+    count
+}
+
+fn print_char(c: Str) {
+    print_str(c)
+}
+
+fn to_float(n: Int) -> Float {
+    let mut result = 0.0
+    let mut num = n

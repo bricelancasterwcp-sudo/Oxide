@@ -1,0 +1,13 @@
+fn divide(dividend: Int, divisor: Int) -> Int {
+    if divisor == 0 {
+        0
+    } else {
+        dividend / divisor
+    }
+}
+
+fn main() {
+    print(divide(100, 5))
+    print(if divide(100, 0) == 0 { "undefined" } else { divide(100, 0).to_string() })
+    print(divide(100, 4))
+}

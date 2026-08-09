@@ -1,0 +1,17 @@
+fn look_up_list(list: &Vec<Int>, index: Int) -> Int {
+    let mut idx = 0
+    for num in list {
+        if idx == index {
+            return num
+        }
+        idx = idx + 1
+    }
+    return -1
+}
+
+fn main() {
+    let list = push(push(push(vec(), 10), 20), 30)
+    print(look_up_list(&list, 1))
+    print(look_up_list(&list, 5))
+    drop list
+}

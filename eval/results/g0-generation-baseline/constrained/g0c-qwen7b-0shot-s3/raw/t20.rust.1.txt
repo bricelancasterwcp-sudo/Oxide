@@ -1,0 +1,18 @@
+```rust
+fn main() {
+    let pen_cost = 3 * 4;
+    let pad_cost = 9 * 2;
+    let ink_cost = 5 * 3;
+    let total_cost = pen_cost + pad_cost + ink_cost;
+
+    println!("Combined cost of all items: {}", total_cost);
+
+    let items = vec![("pen", pen_cost), ("pad", pad_cost), ("ink", ink_cost)];
+    let (item_with_highest_cost, _) = items
+        .iter()
+        .max_by_key(|&(_, cost)| cost)
+        .unwrap();
+
+    println!("Item with the highest cost: {}", item_with_highest_cost);
+}
+```

@@ -1,0 +1,12 @@
+fn is_prime(x: Int) -> Bool {
+    2 < x && range(2, x).filter(lambda || is_divisible(x, _)).len() == 0
+}
+
+fn is_divisible(x: Int, y: Int) -> Bool {
+    x % y == 0
+}
+
+fn main() {
+    let primes = range(2, 100).filter(is_prime)
+    print(primes.len())
+}

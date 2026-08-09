@@ -1,0 +1,10 @@
+```rust
+fn main() {
+    let texts = ["level", "stereo", "rotor"];
+
+    for text in texts {
+        let is_palindrome = text == text.chars().rev().collect::<String>();
+        println!("{}", is_palindrome);
+    }
+}
+```

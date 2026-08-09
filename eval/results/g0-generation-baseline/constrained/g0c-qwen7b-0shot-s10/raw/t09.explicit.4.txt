@@ -1,0 +1,11 @@
+fn reverse_print(v: &Vec<Int>) {
+    for x in (0).range(v.len()).map(Int.to_usize).map(v.get) {
+        print(x)
+    }
+}
+
+fn main() {
+    let nums = push(push(push(push(vec(), 5), 4), 3), 2).push(1)
+    reverse_print(&nums)
+    drop nums
+}

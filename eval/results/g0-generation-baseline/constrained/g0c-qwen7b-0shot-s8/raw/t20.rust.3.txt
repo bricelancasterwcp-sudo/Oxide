@@ -1,0 +1,21 @@
+fn main() {
+    let pen_unit_price = 3;
+    let pen_quantity = 4;
+    let pad_unit_price = 9;
+    let pad_quantity = 2;
+    let ink_unit_price = 5;
+    let ink_quantity = 3;
+
+    let pen_cost = pen_unit_price * pen_quantity;
+    let pad_cost = pad_unit_price * pad_quantity;
+    let ink_cost = ink_unit_price * ink_quantity;
+
+    let total_cost = pen_cost + pad_cost + ink_cost;
+
+    println!("Combined cost of all items: {}", total_cost);
+
+    let items = vec![("Pen", pen_cost), ("Pad", pad_cost), ("Ink", ink_cost)];
+    let most_expensive_item = items.iter().max_by_key(|&(_, cost)| cost).unwrap();
+
+    println!("Item with the highest cost: {}", most_expensive_item.0);
+}

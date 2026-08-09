@@ -1,0 +1,263 @@
+fn main() {
+    let v = vec(10, 20, 30)
+    print(get(&v, 1).unwrap_or(-1))
+    print(get(&v, 5).unwrap_or(-1))
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v.get(i).unwrap())
+    } else {
+        None
+    }
+}
+
+fn get(v:

@@ -1,0 +1,25 @@
+fn sum_parse(v: &Vec<Str>) -> Int {
+    let total = 0
+    let mut count = 0
+    for s in v {
+        match parse_int(s) {
+            Some(n) => total == total + n,
+            None => count == count + 1,
+        }
+    }
+    total
+}
+
+fn parse_and_print(v: Vec<Str>) {
+    let nums = vec(vec("12"), vec("x"), vec("30"))
+    let total = sum_parse(&nums)
+    let count = nums.len() - total / 10
+    print(total)
+    print_str(" ")
+    print(count)
+}
+
+fn main() {
+    let nums = vec(vec("12"), vec("x"), vec("30"))
+    parse_and_print(nums)
+}

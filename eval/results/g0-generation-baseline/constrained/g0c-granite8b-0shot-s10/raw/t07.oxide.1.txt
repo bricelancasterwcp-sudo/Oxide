@@ -1,0 +1,14 @@
+struct Multiples {
+    list: Vec<Int>,
+    next: Int,
+}
+
+fn main() {
+    let mut state = Multiples { list: vec(), next: 3 }
+    let mut sum = 0
+    for _ in 0 <= 8 {
+        sum = sum + state.next
+        state = Multiples { list: push(state.list, state.next), next: state.next + 3 }
+    }
+    print(sum)
+}

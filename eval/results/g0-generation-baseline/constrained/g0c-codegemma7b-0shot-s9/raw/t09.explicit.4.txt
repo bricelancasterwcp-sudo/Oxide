@@ -1,0 +1,77 @@
+fn main() {
+    let mut list = vec(1, 2, 3, 4, 5)
+    let mut i = len(&list) - 1
+    while i >= 0 {
+        print_int(get(&list, i))
+        drop list
+        i = i - 1
+    }
+    drop_all(list)
+}
+
+fn print_int(x: Int) {
+    print(int_to_str(x))
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut buf = vec()
+    while n > 0 {
+        let digit = n % 10
+        push(buf, digit)
+        n = n / 10
+    }
+    reverse(buf)
+    str_from_chars(buf)
+}
+
+fn reverse(v: &Vec<Int>) -> Vec<Int> {
+    let mut out = vec()
+    let mut i = len(v) - 1
+    while i >= 0 {
+        push(out, get(v, i))
+        i = i - 1
+    }
+    out
+}
+
+fn str_from_chars(v: &Vec<Int>) -> Str {
+    let mut out = ""
+    for c in v {
+        out = concat(out, int_to_str(c))
+    }
+    out
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut i = 0
+    for _ in v {
+        i = i + 1
+    }
+    i
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    let mut j = 0
+    for x in v {
+        if j == i {
+            return x
+        }
+        j = j + 1
+    }
+    0
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut out = v
+    out.append(x)
+    out
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn drop_all(v: Vec<Int>) {
+    let mut i = 0
+    while i < len(&v) {
+        drop get_ref_by_index_at_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_vector_impl_by_index_in_slice_owned_

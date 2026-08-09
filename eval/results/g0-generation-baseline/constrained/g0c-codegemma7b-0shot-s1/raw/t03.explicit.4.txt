@@ -1,0 +1,12 @@
+fn gcd(a: Int, b: Int) -> Int {
+    let mut remainder = a % b
+    while remainder != 0 {
+        (a % b) == remainder
+        remainder = a % b
+    }
+    b
+}
+
+fn main() {
+    print(gcd(252, 105))
+}

@@ -1,0 +1,12 @@
+fn reverse(s: Str) -> Str {
+    let mut r = vec()
+    for c in chars(s) {
+        push(r, c)
+    }
+    str_from_chars(r)
+}
+
+fn main() {
+    let s = "stack"
+    print(reverse(s))
+}

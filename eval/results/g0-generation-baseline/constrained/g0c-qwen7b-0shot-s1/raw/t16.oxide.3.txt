@@ -1,0 +1,210 @@
+struct Division { dividend: Int, divisor: Int }
+
+fn main() {
+    let div1 = Division { dividend: 100, divisor: Divisor(5) }
+    let div2 = Division { dividend: 100, divisor: Divisor(0) }
+    let div3 = Division { dividend: 100, divisor: Divisor(4) }
+    match div1.divisor {
+        Divisor(d) => print(div1.dividend / d),
+        _ => print_str("undefined"),
+    }
+    match div2.divisor {
+        Divisor(d) => print(div2.dividend / d),
+        _ => print_str("undefined"),
+    }
+    match div3.divisor {
+        Divisor(d) => print(div3.dividend / d),
+        _ => print_str("undefined"),
+    }
+}
+
+enum Divisor {
+    Value(Int),
+    Zero,
+}
+
+fn main() {
+    let div1 = Division { dividend: 100, divisor: Divisor(5) }
+    let div2 = Division { dividend: 100, divisor: Divisor(0) }
+    let div3 = Division { dividend: 100, divisor: Divisor(4) }
+    match div1.dividend / match_divisor(div1.divisor) {
+        _ => print(div1.dividend / match_divisor(div1.divisor)),
+    }
+    match div2.dividend / match_divisor(div2.divisor) {
+        _ => print(div2.dividend / match_divisor(div2.divisor)),
+    }
+    match div3.dividend / match_divisor(div3.divisor) {
+        _ => print(div3.dividend / match_divisor(div3.divisor)),
+    }
+}
+
+fn match_divisor(d: Divisor) -> Int {
+    match d {
+        Divisor(_val) => _val,
+        Divisor(_zero) => 1,
+    }
+}
+
+fn main() {
+    let div1 = Division { dividend: 100, divisor: Divisor(5) }
+    let div2 = Division { dividend: 100, divisor: Divisor(0) }
+    let div3 = Division { dividend: 100, divisor: Divisor(4) }
+    match div1.dividend / match_divisor(div1.divisor) {
+        _ => print(div1.dividend / match_divisor(div1.divisor)),
+    }
+    match div2.dividend / match_divisor(div2.divisor) {
+        _ => print(div2.dividend / match_divisor(div2.divisor)),
+    }
+    match div3.dividend / match_divisor(div3.divisor) {
+        _ => print(div3.dividend / match_divisor(div3.divisor)),
+    }
+}
+
+fn match_divisor(d: Divisor) -> Int {
+    match d {
+        Divisor(_val) => _val,
+        Divisor(_zero) => 1,
+    }
+}
+
+fn main() {
+    let div1 = Division { dividend: 100, divisor: Divisor(5) }
+    let div2 = Division { dividend: 100, divisor: Divisor(0) }
+    let div3 = Division { dividend: 100, divisor: Divisor(4) }
+    match div1.dividend / match_divisor(div1.divisor) {
+        _ => print(div1.dividend / match_divisor(div1.divisor)),
+    }
+    match div2.dividend / match_divisor(div2.divisor) {
+        _ => print(div2.dividend / match_divisor(div2.divisor)),
+    }
+    match div3.dividend / match_divisor(div3.divisor) {
+        _ => print(div3.dividend / match_divisor(div3.divisor)),
+    }
+}
+
+fn match_divisor(d: Divisor) -> Int {
+    match d {
+        Divisor(_val) => _val,
+        Divisor(_zero) => 1,
+    }
+}
+
+fn main() {
+    let div1 = Division { dividend: 100, divisor: Divisor(5) }
+    let div2 = Division { dividend: 100, divisor: Divisor(0) }
+    let div3 = Division { dividend: 100, divisor: Divisor(4) }
+    match div1.dividend / match_divisor(div1.divisor) {
+        _ => print(div1.dividend / match_divisor(div1.divisor)),
+    }
+    match div2.dividend / match_divisor(div2.divisor) {
+        _ => print(div2.dividend / match_divisor(div2.divisor)),
+    }
+    match div3.dividend / match_divisor(div3.divisor) {
+        _ => print(div3.dividend / match_divisor(div3.divisor)),
+    }
+}
+
+fn match_divisor(d: Divisor) -> Int {
+    match d {
+        Divisor(_val) => _val,
+        Divisor(_zero) => 1,
+    }
+}
+
+fn main() {
+    let div1 = Division { dividend: 100, divisor: Divisor(5) }
+    let div2 = Division { dividend: 100, divisor: Divisor(0) }
+    let div3 = Division { dividend: 100, divisor: Divisor(4) }
+    match div1.dividend / match_divisor(div1.divisor) {
+        _ => print(div1.dividend / match_divisor(div1.divisor)),
+    }
+    match div2.dividend / match_divisor(div2.divisor) {
+        _ => print(div2.dividend / match_divisor(div2.divisor)),
+    }
+    match div3.dividend / match_divisor(div3.divisor) {
+        _ => print(div3.dividend / match_divisor(div3.divisor)),
+    }
+}
+
+fn match_divisor(d: Divisor) -> Int {
+    match d {
+        Divisor(_val) => _val,
+        Divisor(_zero) => 1,
+    }
+}
+
+fn main() {
+    let div1 = Division { dividend: 100, divisor: Divisor(5) }
+    let div2 = Division { dividend: 100, divisor: Divisor(0) }
+    let div3 = Division { dividend: 100, divisor: Divisor(4) }
+    match div1.dividend / match_divisor(div1.divisor) {
+        _ => print(div1.dividend / match_divisor(div1.divisor)),
+    }
+    match div2.dividend / match_divisor(div2.divisor) {
+        _ => print(div2.dividend / match_divisor(div2.divisor)),
+    }
+    match div3.dividend / match_divisor(div3.divisor) {
+        _ => print(div3.dividend / match_divisor(div3.divisor)),
+    }
+}
+
+fn match_divisor(d: Divisor) -> Int {
+    match d {
+        Divisor(_val) => _val,
+        Divisor(_zero) => 1,
+    }
+}
+
+fn main() {
+    let div1 = Division { dividend: 100, divisor: Divisor(5) }
+    let div2 = Division { dividend: 100, divisor: Divisor(0) }
+    let div3 = Division { dividend: 100, divisor: Divisor(4) }
+    match div1.dividend / match_divisor(div1.divisor) {
+        _ => print(div1.dividend / match_divisor(div1.divisor)),
+    }
+    match div2.dividend / match_divisor(div2.divisor) {
+        _ => print(div2.dividend / match_divisor(div2.divisor)),
+    }
+    match div3.dividend / match_divisor(div3.divisor) {
+        _ => print(div3.dividend / match_divisor(div3.divisor)),
+    }
+}
+
+fn match_divisor(d: Divisor) -> Int {
+    match d {
+        Divisor(_val) => _val,
+        Divisor(_zero) => 1,
+    }
+}
+
+fn main() {
+    let div1 = Division { dividend: 100, divisor: Divisor(5) }
+    let div2 = Division { dividend: 100, divisor: Divisor(0) }
+    let div3 = Division { dividend: 100, divisor: Divisor(4) }
+    match div1.dividend / match_divisor(div1.divisor) {
+        _ => print(div1.dividend / match_divisor(div1.divisor)),
+    }
+    match div2.dividend / match_divisor(div2.divisor) {
+        _ => print(div2.dividend / match_divisor(div2.divisor)),
+    }
+    match div3.dividend / match_divisor(div3.divisor) {
+        _ => print(div3.dividend / match_divisor(div3.divisor)),
+    }
+}
+
+fn match_divisor(d: Divisor) -> Int {
+    match d {
+        Divisor(_val) => _val,
+        Divisor(_zero) => 1,
+    }
+}
+
+fn main() {
+    let div1 = Division { dividend: 100, divisor: Divisor(5) }
+    let div2 = Division { dividend: 100, divisor: Divisor(0) }
+    let div3 = Division { dividend: 100, divisor: Divisor(4) }
+    match div1.dividend / match_divisor(div1.divisor) {
+        _ => print(div1.dividend / match_divisor(div1.divisor)),
+    }
+    match div2.dividend / match_divisor(div2.divisor) {
+        _ =>

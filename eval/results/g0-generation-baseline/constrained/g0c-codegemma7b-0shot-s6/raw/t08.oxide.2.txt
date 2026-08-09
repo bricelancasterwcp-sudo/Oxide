@@ -1,0 +1,15 @@
+fn main() {
+    let list = vec(3, 8, -2, 12, 7)
+    let mut pos = 0
+    let mut max = list(0)
+    for x in list {
+        if x > 0 {
+            pos = pos + 1
+        }
+        if x > max {
+            max = x
+        }
+    }
+    print(pos)
+    print(max)
+}

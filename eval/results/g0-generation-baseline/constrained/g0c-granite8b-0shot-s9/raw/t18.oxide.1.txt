@@ -1,0 +1,19 @@
+struct Rectangle { width: Int, height: Int }
+
+struct Triangle { side1: Int, side2: Int, side3: Int }
+
+fn perimeter(s: Shape) -> Int {
+    match s {
+        Rectangle(w, h) => w + h + w + h,
+        Triangle(s1, s2, s3) => s1 + s2 + s3,
+    }
+}
+
+fn main() {
+    let rectangle = Rectangle { width: 3, height: 4 }
+    let triangle = Triangle { side1: 3, side2: 4, side3: 5 }
+    let shapes: Vec<Shape> = push(push(push(vec(), rectangle), triangle), rectangle)
+    for s in shapes {
+        print(perimeter(s))
+    }
+}

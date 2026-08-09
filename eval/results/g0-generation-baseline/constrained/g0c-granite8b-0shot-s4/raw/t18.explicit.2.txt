@@ -1,0 +1,16 @@
+fn rectangle(height: Int, width: Int) -> Int {
+    height + width + height + width
+}
+
+fn triangle(a: Int, b: Int, c: Int) -> Int {
+    a + b + c
+}
+
+fn main() {
+    let rect = rectangle(3, 4)
+    let tri = triangle(3, 4, 5)
+    print(rect)
+    drop rect
+    print(tri)
+    drop tri
+}

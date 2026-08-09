@@ -1,0 +1,7 @@
+fn main() {
+    println!("{}", 100 / 5); // 20
+    if 0 == 0 {
+        println!("undefined"); // undefined
+    }
+    println!("{}", 100 / 4); // 25
+}

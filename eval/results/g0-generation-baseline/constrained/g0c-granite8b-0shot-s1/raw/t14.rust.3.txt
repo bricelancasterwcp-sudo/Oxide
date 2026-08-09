@@ -1,0 +1,14 @@
+```rust
+fn main() {
+    let text = "mississippi";
+
+    let s_count = text.matches('s').count();
+    let distinct_chars = text
+        .chars()
+        .collect::<std::collections::HashSet<char>>()
+        .len();
+
+    println!("'s' occurs {} times in the text.", s_count);
+    println!("The text contains {} distinct characters.", distinct_chars);
+}
+```

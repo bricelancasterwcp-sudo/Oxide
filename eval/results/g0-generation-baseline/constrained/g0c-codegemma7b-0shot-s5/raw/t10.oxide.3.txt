@@ -1,0 +1,12 @@
+fn main() {
+    let list = vec(4, 1, 7, 3, 9, 2)
+    let mut kept_count = 0
+    for x in list {
+        if x > 3 {
+            print(x)
+            print("\n")
+            kept_count = kept_count + 1
+        }
+    }
+    print(kept_count)
+}

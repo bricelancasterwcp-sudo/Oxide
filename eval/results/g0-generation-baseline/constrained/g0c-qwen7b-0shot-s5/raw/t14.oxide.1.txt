@@ -1,0 +1,28 @@
+struct Reading { label: Str, values: Vec<Str> }
+
+fn count_s(text: Str) -> Int {
+    let count = 0
+    for c in chars(text) {
+        if c == "s" {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_chars(text: Str) -> Int {
+    let mut chars_map = Reading { label: "map", values: vec() }
+    for c in chars(text) {
+        if !get(chars_map.values, c) {
+            push(chars_map.values, c)
+        }
+    }
+    len(chars_map.values)
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_s(text))
+    let distinct_count = distinct_chars(text)
+    print(distinct_count)
+}

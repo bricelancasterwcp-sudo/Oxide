@@ -1,0 +1,12 @@
+fn reverse_print(v: Vec<Int>) {
+    let mut i = len(v) - 1
+    while i >= 0 {
+        print(&v)
+        i = i - 1
+    }
+}
+
+fn main() {
+    let nums = vec(vec(1, 2, 3, 4, 5))
+    reverse_print(nums)
+}

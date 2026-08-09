@@ -1,0 +1,50 @@
+fn filter_greater_than_3(vec: Vec<Int>) -> Vec<Int> {
+    let mut new_vec = vec()
+    for value in vec {
+        if value > 3 {
+            push(new_vec, value)
+        }
+    }
+    new_vec
+}
+
+fn print_vec(vec: Vec<Int>) {
+    for value in vec {
+        print(value)
+    }
+}
+
+fn print_length(vec: Vec<Int>) {
+    let length = len(vec)
+    print(length)
+}
+
+fn main() {
+    let numbers = vec(4, 1, 7, 3, 9, 2)
+    let filtered_numbers = filter_greater_than_3(numbers)
+    print_vec(filtered_numbers)
+    print_str("Kept ")
+    print_length(filtered_numbers)
+    print_str(" values")
+}
+
+fn filter_greater_than_3(vec: Vec<Int>) -> Vec<Int> {
+    let mut new_vec = vec()
+    for value in vec {
+        if value > 3 {
+            push(new_vec, value)
+        }
+    }
+    new_vec
+}
+
+fn main() {
+    let numbers = vec(4, 1, 7, 3, 9, 2)
+    let filtered_numbers = filter_greater_than_3(numbers)
+    for value in filtered_numbers {
+        print(value)
+    }
+    print_str("Kept ")
+    print(len(filtered_numbers))
+    print_str(" values")
+}

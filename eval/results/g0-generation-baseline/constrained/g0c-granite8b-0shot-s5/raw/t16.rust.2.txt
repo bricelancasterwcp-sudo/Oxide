@@ -1,0 +1,5 @@
+fn main() {
+    println!("{}", 100/5);
+    println!("undefined"); // 0 is not a divisor, so this should print "undefined"
+    println!("{}", 100/4);
+}

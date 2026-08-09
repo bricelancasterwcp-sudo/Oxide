@@ -1,0 +1,9 @@
+fn main() {
+    let mut nums = push(push(push(push(push(vec(), 5), 3), 8), 1), 9)
+    print(get(&nums, 0))
+    print(get(&nums, 1))
+    print(get(&nums, 2))
+    print(get(&nums, 3))
+    print(get(&nums, 4))
+    drop nums
+}

@@ -1,0 +1,23 @@
+struct Multiples { values: Vec<Int> }
+
+fn first_eight_multiples_of_three() -> Multiples {
+    let mut multiples = Multiples { values: vec() }
+    for i in range(1, 9) {
+        multiples.values == push(multiples.values, i * 3)
+    }
+    multiples
+}
+
+fn sum(v: Vec<Int>) -> Int {
+    let mut sum = 0
+    for x in v {
+        sum = sum + x
+    }
+    sum
+}
+
+fn main() {
+    let multiples = first_eight_multiples_of_three()
+    let sum_of_multiples = sum(multiples.values.clone())
+    print(sum_of_multiples)
+}

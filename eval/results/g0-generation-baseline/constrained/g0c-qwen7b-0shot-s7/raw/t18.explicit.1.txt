@@ -1,0 +1,16 @@
+fn perimeter_rectangle(length: Int, width: Int) -> Int {
+    2 * (length + width)
+}
+
+fn perimeter_triangle(a: Int, b: Int, c: Int) -> Int {
+    a + b + c
+}
+
+fn main() {
+    let rect1 = (3 * 4).to_int().unwrap_or_default()
+    let triangle = (3 + 4 + 5).to_int().unwrap_or_default()
+    let rect2 = (2 * 5).to_int().unwrap_or_default()
+    print(perimeter_rectangle(3, 4))
+    print(perimeter_triangle(3, 4, 5))
+    print(perimeter_rectangle(2, 5))
+}

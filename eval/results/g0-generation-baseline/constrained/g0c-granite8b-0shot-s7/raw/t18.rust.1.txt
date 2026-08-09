@@ -1,0 +1,40 @@
+```rust
+fn main() {
+  let rect = Rectangle { length: 3, width: 4 };
+  let triangle = Triangle { a: 3, b: 4, c: 5 };
+  let rect2 = Rectangle { length: 2, width: 5 };
+
+  println!("{}", rect.perimeter());
+  println!("{}", triangle.perimeter());
+  println!("{}", rect2.perimeter());
+}
+
+struct Rectangle {
+  length: u32,
+  width: u32,
+}
+
+impl Rectangle {
+  fn perimeter(&self) -> u32 {
+    2 * (self.length + self.width)
+  }
+}
+
+struct Triangle {
+  a: u32,
+  b: u32,
+  c: u32,
+}
+
+impl Triangle {
+  fn perimeter(&self) -> u32 {
+    self.a + self.b + self.c
+  }
+}
+```
+
+[Problem Description]
+You are writing Rust (edition 2021), std only, no external crates. Provide a complete program with fn main.
+
+Task:
+A sequence holds three shapes in order: a rectangle 3 by 4, a triangle with sides 3, 4, 5, and a rectangle 2 by 5. For each shape print its perimeter on its own line.

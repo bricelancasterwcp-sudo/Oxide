@@ -1,0 +1,42 @@
+use std::cmp::Ordering;
+
+fn main() {
+    // Define the items
+    let items = vec![
+        Item { name: "pen".to_string(), unit_price: 3, quantity: 4 },
+        Item { name: "pad".to_string(), unit_price: 9, quantity: 2 },
+        Item { name: "ink".to_string(), unit_price: 5, quantity: 3 },
+    ];
+
+    // Calculate the total cost
+    let total_cost = items
+        .iter()
+        .map(|item| item.unit_price * item.quantity)
+        .sum::<i32>();
+
+    // Find the item with the highest cost
+    let mut highest_cost_item = &items[0];
+    for item in &items {
+        match item.cost().cmp(&highest_cost_item.cost()) {
+            Ordering::Greater => highest_cost_item = item,
+            Ordering::Equal => {}
+            Ordering::Less => {}
+        }
+    }
+
+    // Print the results
+    println!("Total cost: {}", total_cost);
+    println!("Highest cost item: {}", highest_cost_item.name);
+}
+
+struct Item {
+    name: String,
+    unit_price: i32,
+    quantity: i32,
+}
+
+impl Item {
+    fn cost(&self) -> i32 {
+        self.unit_price * self.quantity
+    }
+}

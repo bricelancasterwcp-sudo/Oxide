@@ -1,0 +1,15 @@
+struct List { head: Int, tail: Vec<Int> }
+
+fn get(v: Vec<Int>, i: Int) -> Int {
+    if i == 0 {
+        v.head
+    } else {
+        get(v.tail, i - 1)
+    }
+}
+
+fn main() {
+    let v = List { head: 10, tail: push(push(vec(), 20), 30) }
+    print(get(v.tail, 1))
+    print(get(v.tail, 5))
+}

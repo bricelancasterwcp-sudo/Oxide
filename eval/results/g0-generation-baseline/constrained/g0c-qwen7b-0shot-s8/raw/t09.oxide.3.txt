@@ -1,0 +1,21 @@
+struct List { head: Option<Int>, tail: Option<Box<List>> }
+
+fn print_reverse(lst: Option<Box<List>>) {
+    match lst {
+        Some(boxed_list) => {
+            print_reverse(boxed_list.tail.clone())
+            print(boxed_list.head.unwrap())
+            print_str("\n")
+        },
+        None => return_none(),
+    }
+}
+
+fn return_none() {
+    print_str("\n")
+}
+
+fn main() {
+    let lst = Some(Box { head: 5, tail: Some(Box { head: 4, tail: Some(Box { head: 3, tail: Some(Box { head: 2, tail: Some(Box) }) }) }) })
+    print_reverse(lst)
+}

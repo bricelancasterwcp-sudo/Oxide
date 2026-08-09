@@ -1,0 +1,20 @@
+use std::io::{self, Write};
+
+fn main() -> io::Result<()> {
+    let input_strings = ["12", "x", "30"];
+    let mut successful_parses = 0;
+    let mut failed_parses = 0;
+
+    for string in input_strings {
+        if let Ok(number) = string.parse::<i32>() {
+            successful_parses += number;
+        } else {
+            failed_parses += 1;
+        }
+    }
+
+    print!("Sum of successful parses: {}\n", successful_parses);
+    print!("Count of failed parses: {}\n", failed_parses);
+
+    Ok(())
+}

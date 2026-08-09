@@ -1,0 +1,18 @@
+fn is_palindrome(s: Str) -> Bool {
+    let mut chars = chars(s)
+    let len = str_len(s)
+    for i in range(0, trunc(len / 2)) {
+        let first = chars.next()?
+        let second = chars.next()?
+        if first != second {
+            return false
+        }
+    }
+    true
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}

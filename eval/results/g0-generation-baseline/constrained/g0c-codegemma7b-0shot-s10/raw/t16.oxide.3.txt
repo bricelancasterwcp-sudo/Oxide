@@ -1,0 +1,363 @@
+fn main() {
+    let v = 100
+    let r = div(v, 5)
+    print(r)
+    print(div(v, 0))
+    print(div(v, 4))
+}
+
+fn div(v: Int, d: Int) -> Str {
+    if d == 0 {
+        return "undefined"
+    }
+    let r = int_to_str(trunc(float(v) / float(d)))
+    return r
+}
+
+fn float(i: Int) -> Float {
+    return i
+}
+
+fn int_to_str(i: Int) -> Str {
+    return ""
+}
+
+fn print(s: Str) {
+    return
+}
+
+fn print_str(s: Str) {
+    return
+}
+
+fn trunc(f: Float) -> Int {
+    return 0
+}
+
+fn main() {
+    let v = 100
+    let r = div(v, 5)
+    print(r)
+    print(div(v, 0))
+    print(div(v, 4))
+}
+
+fn div(v: Int, d: Int) -> Str {
+    if d == 0 {
+        return "undefined"
+    }
+    let r = int_to_str(trunc(float(v) / float(d)))
+    return r
+}
+
+fn float(i: Int) -> Float {
+    return i
+}
+
+fn int_to_str(i: Int) -> Str {
+    return ""
+}
+
+fn print(s: Str) {
+    return
+}
+
+fn print_str(s: Str) {
+    return
+}
+
+fn trunc(f: Float) -> Int {
+    return 0
+}
+
+fn main() {
+    let v = 100
+    let r = div(v, 5)
+    print(r)
+    print(div(v, 0))
+    print(div(v, 4))
+}
+
+fn div(v: Int, d: Int) -> Str {
+    if d == 0 {
+        return "undefined"
+    }
+    let r = int_to_str(trunc(float(v) / float(d)))
+    return r
+}
+
+fn float(i: Int) -> Float {
+    return i
+}
+
+fn int_to_str(i: Int) -> Str {
+    return ""
+}
+
+fn print(s: Str) {
+    return
+}
+
+fn print_str(s: Str) {
+    return
+}
+
+fn trunc(f: Float) -> Int {
+    return 0
+}
+
+fn main() {
+    let v = 100
+    let r = div(v, 5)
+    print(r)
+    print(div(v, 0))
+    print(div(v, 4))
+}
+
+fn div(v: Int, d: Int) -> Str {
+    if d == 0 {
+        return "undefined"
+    }
+    let r = int_to_str(trunc(float(v) / float(d)))
+    return r
+}
+
+fn float(i: Int) -> Float {
+    return i
+}
+
+fn int_to_str(i: Int) -> Str {
+    return ""
+}
+
+fn print(s: Str) {
+    return
+}
+
+fn print_str(s: Str) {
+    return
+}
+
+fn trunc(f: Float) -> Int {
+    return 0
+}
+
+fn main() {
+    let v = 100
+    let r = div(v, 5)
+    print(r)
+    print(div(v, 0))
+    print(div(v, 4))
+}
+
+fn div(v: Int, d: Int) -> Str {
+    if d == 0 {
+        return "undefined"
+    }
+    let r = int_to_str(trunc(float(v) / float(d)))
+    return r
+}
+
+fn float(i: Int) -> Float {
+    return i
+}
+
+fn int_to_str(i: Int) -> Str {
+    return ""
+}
+
+fn print(s: Str) {
+    return
+}
+
+fn print_str(s: Str) {
+    return
+}
+
+fn trunc(f: Float) -> Int {
+    return 0
+}
+
+fn main() {
+    let v = 100
+    let r = div(v, 5)
+    print(r)
+    print(div(v, 0))
+    print(div(v, 4))
+}
+
+fn div(v: Int, d: Int) -> Str {
+    if d == 0 {
+        return "undefined"
+    }
+    let r = int_to_str(trunc(float(v) / float(d)))
+    return r
+}
+
+fn float(i: Int) -> Float {
+    return i
+}
+
+fn int_to_str(i: Int) -> Str {
+    return ""
+}
+
+fn print(s: Str) {
+    return
+}
+
+fn print_str(s: Str) {
+    return
+}
+
+fn trunc(f: Float) -> Int {
+    return 0
+}
+
+fn main() {
+    let v = 100
+    let r = div(v, 5)
+    print(r)
+    print(div(v, 0))
+    print(div(v, 4))
+}
+
+fn div(v: Int, d: Int) -> Str {
+    if d == 0 {
+        return "undefined"
+    }
+    let r = int_to_str(trunc(float(v) / float(d)))
+    return r
+}
+
+fn float(i: Int) -> Float {
+    return i
+}
+
+fn int_to_str(i: Int) -> Str {
+    return ""
+}
+
+fn print(s: Str) {
+    return
+}
+
+fn print_str(s: Str) {
+    return
+}
+
+fn trunc(f: Float) -> Int {
+    return 0
+}
+
+fn main() {
+    let v = 100
+    let r = div(v, 5)
+    print(r)
+    print(div(v, 0))
+    print(div(v, 4))
+}
+
+fn div(v: Int, d: Int) -> Str {
+    if d == 0 {
+        return "undefined"
+    }
+    let r = int_to_str(trunc(float(v) / float(d)))
+    return r
+}
+
+fn float(i: Int) -> Float {
+    return i
+}
+
+fn int_to_str(i: Int) -> Str {
+    return ""
+}
+
+fn print(s: Str) {
+    return
+}
+
+fn print_str(s: Str) {
+    return
+}
+
+fn trunc(f: Float) -> Int {
+    return 0
+}
+
+fn main() {
+    let v = 100
+    let r = div(v, 5)
+    print(r)
+    print(div(v, 0))
+    print(div(v, 4))
+}
+
+fn div(v: Int, d: Int) -> Str {
+    if d == 0 {
+        return "undefined"
+    }
+    let r = int_to_str(trunc(float(v) / float(d)))
+    return r
+}
+
+fn float(i: Int) -> Float {
+    return i
+}
+
+fn int_to_str(i: Int) -> Str {
+    return ""
+}
+
+fn print(s: Str) {
+    return
+}
+
+fn print_str(s: Str) {
+    return
+}
+
+fn trunc(f: Float) -> Int {
+    return 0
+}
+
+fn main() {
+    let v = 100
+    let r = div(v, 5)
+    print(r)
+    print(div(v, 0))
+    print(div(v, 4))
+}
+
+fn div(v: Int, d: Int) -> Str {
+    if d == 0 {
+        return "undefined"
+    }
+    let r = int_to_str(trunc(float(v) / float(d)))
+    return r
+}
+
+fn float(i: Int) -> Float {
+    return i
+}
+
+fn int_to_str(i: Int) -> Str {
+    return ""
+}
+
+fn print(s: Str) {
+    return
+}
+
+fn print_str(s: Str) {
+    return
+}
+
+fn trunc(f: Float) -> Int {
+    return 0
+}
+
+fn main() {
+    let v = 100
+    let r =

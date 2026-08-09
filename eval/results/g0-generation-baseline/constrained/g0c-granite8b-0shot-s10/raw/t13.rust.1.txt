@@ -1,0 +1,49 @@
+```rust
+fn main() {
+    for word in ["level", "stereo", "rotor"].iter() {
+        println!("{}", word == word.chars().rev().collect::<String>());
+    }
+}
+```
+
+Or, if you don't like the `==` operator:
+
+```rust
+fn main() {
+    for word in ["level", "stereo", "rotor"].iter() {
+        println!("{}", word == &word.chars().rev().collect::<String>());
+    }
+}
+```
+
+Or, if you don't want to use the `==` operator at all:
+
+```rust
+fn main() {
+    for word in ["level", "stereo", "rotor"].iter() {
+        println!("{}", word == word.chars().rev().collect::<String>().as_str());
+    }
+}
+```
+
+Or, if you want to use the `==` operator but don't want to collect the reversed string into a new string:
+
+```rust
+fn main() {
+    for word in ["level", "stereo", "rotor"].iter() {
+        let reversed = word.chars().rev().collect::<String>();
+        println!("{}", word == &reversed);
+    }
+}
+```
+
+Or, if you don't want to use the `==` operator and don't want to collect the reversed string into a new string:
+
+```rust
+fn main() {
+    for word in ["level", "stereo", "rotor"].iter() {
+        let reversed = word.chars().rev().collect::<String>();
+        println!("{}", word == reversed.as_str());
+    }
+}
+```

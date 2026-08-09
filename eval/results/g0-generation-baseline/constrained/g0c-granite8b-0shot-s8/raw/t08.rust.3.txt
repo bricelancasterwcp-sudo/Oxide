@@ -1,0 +1,9 @@
+fn main() {
+    let numbers = vec![3, 8, -2, 12, 7];
+
+    let positive_count = numbers.iter().filter(|&n| *n > 0).count();
+    let largest = numbers.iter().max().unwrap();
+
+    println!("Positive values: {}", positive_count);
+    println!("Largest value: {}", largest);
+}

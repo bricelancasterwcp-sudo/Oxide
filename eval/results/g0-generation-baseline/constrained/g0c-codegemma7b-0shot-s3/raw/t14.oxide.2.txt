@@ -1,0 +1,310 @@
+fn count_s(s: Str) -> Int {
+    let mut count = 0
+    for c in chars(s) {
+        if c == "s" {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn count_uniq(s: Str) -> Int {
+    let mut seen: Vec<Str> = vec()
+    for c in chars(s) {
+        if !contains(seen, c) {
+            seen = push(seen, c)
+        }
+    }
+    len(seen)
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_s(text))
+    print(count_uniq(text))
+}
+
+fn contains(v: Vec<Str>, x: Str) -> Bool {
+    for y in v {
+        if y == x {
+            return true
+        }
+    }
+    false
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result: Vec<Str> = vec()
+    let mut cursor = 0
+    while cursor < str_len(s) {
+        result = push(result, str_slice(s, cursor, cursor + 1))
+        cursor = cursor + 1
+    }
+    result
+}
+
+fn str_slice(s: Str, start: Int, end: Int) -> Str {
+    let mut result: Str = ""
+    for i in start < end {
+        result = concat(result, str_char(s, i))
+    }
+    result
+}
+
+fn str_char(s: Str, i: Int) -> Str {
+    let mut result: Str = ""
+    for c in chars(s) {
+        if len(result) == i {
+            result = concat(result, c)
+        }
+    }
+    result
+}
+
+fn str_len(s: Str) -> Int {
+    let mut count = 0
+    for _ in chars(s) {
+        count = count + 1
+    }
+    count
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut result: Vec<T> = v
+    result = result + vec(x)
+    result
+}
+
+fn print(x: T) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print_char(c)
+    }
+}
+
+fn print_char(c: Str) {
+    if c == "0" {
+        print_str("zero")
+    } else if c == "1" {
+        print_str("one")
+    } else if c == "2" {
+        print_str("two")
+    } else {
+        print_str(c)
+    }
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut result: Str = ""
+    let mut copy = n
+    while copy != 0 {
+        let digit = trunc(copy % 10)
+        copy = trunc(copy / 10)
+        result = concat(str_char(result, digit), result)
+    }
+    if result == "" {
+        result = "0"
+    }
+    result
+}
+
+fn trunc(x: Int) -> Int {
+    if x >= 0 {
+        x
+    } else {
+        -x
+    }
+}
+
+fn bool(b: Bool) -> Int {
+    if b {
+        1
+    } else {
+        0
+    }
+}
+
+fn str(s: Str) -> Int {
+    let mut result = 0
+    let mut shift = 1
+    for c in chars(s) {
+        result = result + shift * int(c)
+        shift = shift * 256
+    }
+    result
+}
+
+fn int(c: Str) -> Int {
+    if c == "0" {
+        0
+    } else if c == "1" {
+        1
+    } else if c == "2" {
+        2
+    } else {
+        panic("bad int")
+    }
+}
+
+fn unit() -> Int {
+    0
+}
+
+fn str_to_int(s: Str) -> Option<Int> {
+    let mut result = 0
+    let mut shift = 1
+    for c in chars(s) {
+        if c >= "0" && c <= "9" {
+            result = result + shift * int(c)
+            shift = shift * 10
+        } else {
+            return None
+        }
+    }
+    Some(result)
+}
+
+fn ok(x: T) -> Result<T, Unit> {
+    Ok(x)
+}
+
+fn err(e: Unit) -> Result<Unit, Unit> {
+    Err(e)
+}
+
+fn from_err(r: Result<T, Unit>) -> T {
+    match r {
+        Ok(x) => x,
+        Err(_) => panic("failed"),
+    }
+}
+
+fn from_ok(r: Result<T, Unit>) -> T {
+    match r {
+        Ok(x) => x,
+        Err(e) => panic("failed"),
+    }
+}
+
+fn match_(e: T, patterns: Vec<Pattern>) -> Result<T, Unit> {
+    for pattern in patterns {
+        let result = pattern.match_(e)
+        if result != None {
+            return result
+        }
+    }
+    Err(unit())
+}
+
+fn while_(cond: Bool, body: FnMutWithoutArgsVoid) -> Unit {
+    while cond {
+        body()
+    }
+}
+
+fn for_(start: Int, end: Int, body: FnMutWithArgsVoid) -> Unit {
+    for i in start < end {
+        body(i)
+    }
+}
+
+fn break_() -> Unit {
+    panic("break")
+}
+
+fn continue_() -> Unit {
+    panic("continue")
+}
+
+fn if_(cond: Bool, then: FnMutWithoutArgsVoid, else_: FnMutWithoutArgsVoid) -> Unit {
+    if cond {
+        then()
+    } else {
+        else_()
+    }
+}
+
+fn return_(e: T) -> T {
+    panic("return")
+}
+
+struct Pattern {
+    match_type: MatchType,
+    value: AnyValue,
+}
+
+enum MatchType {
+    Literal,
+    Range,
+}
+
+enum AnyValue {
+    Int(Int),
+    Str(Str),
+    Unit,
+}
+
+fn pattern(match_type: MatchType, value: AnyValue) -> Pattern {
+    Pattern(match_type, value)
+}
+
+fn literal(value: AnyValue) -> Pattern {
+    pattern(MatchType, value)
+}
+
+fn range(start: Int, end: Int) -> Pattern {
+    pattern(MatchType, AnyValue(Int(start), Int(end)))
+}
+
+fn match_(self: Pattern, e: T) -> Result<T, Unit> {
+    match self.match_type {
+        MatchType(literal) => match self.value {
+            AnyValue(value) => match value {
+                Int(i) => if e == i { ok(e) } else { None },
+                Str(s) => if e == s { ok(e) } else { None },
+                Unit => if e == unit() { ok(e) } else { None },
+            },
+        },
+        MatchType(range) => match self.value {
+            AnyValue(start, end) => {
+                let start_int = start.as_int()
+                let end_int = end.as_int()
+                if e >= start_int && e < end_int {
+                    ok(e)
+                } else {
+                    None
+                }
+            },
+        },
+    }
+}
+
+fn as_int(self: AnyValue) -> Int {
+    match self {
+        AnyValue(i) => i,
+        AnyValue(_, _) => panic("not an int"),
+        AnyValue(unit) => panic("not an int"),
+    }
+}
+
+fn as_str(self: AnyValue) -> Str {
+    match self {
+        AnyValue(s) => s,
+        AnyValue(_, _) => panic("not a str"),
+        AnyValue(unit) => panic("not a str"),
+    }
+}
+
+fn as_unit(self: AnyValue) -> Unit {
+    match

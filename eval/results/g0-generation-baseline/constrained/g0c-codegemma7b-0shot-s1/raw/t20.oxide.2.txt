@@ -1,0 +1,27 @@
+fn total_cost(prices: Vec<Int>, quantities: Vec<Int>) -> Int {
+    let mut sum = 0
+    for i in 0.len(prices) {
+        sum = sum + prices.get(i).unwrap_or(0) * quantities.get(i).unwrap_or(0)
+    }
+    sum
+}
+
+fn find_most_expensive(prices: Vec<Int>, names: Vec<Str>) -> Str {
+    let mut max_price = 0
+    let mut most_expensive = ""
+    for i in 0.len(prices) {
+        if prices.get(i).unwrap_or(0) > max_price {
+            max_price = prices.get(i).unwrap_or(0)
+            most_expensive = names.get(i).unwrap_or("")
+        }
+    }
+    most_expensive
+}
+
+fn main() {
+    let prices = vec(3, 9, 5)
+    let quantities = vec(4, 2, 3)
+    let names = vec("pen", "pad", "ink")
+    print(total_cost(prices, quantities))
+    print(find_most_expensive(prices, names))
+}

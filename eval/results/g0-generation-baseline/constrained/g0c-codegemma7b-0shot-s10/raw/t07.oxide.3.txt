@@ -1,0 +1,17 @@
+fn main() {
+    let mut result = vec()
+    let mut i = 0
+    let mut n = 0
+    while n < 8 {
+        i = i + 1
+        if i % 3 == 0 {
+            result = push(result, i)
+            n = n + 1
+        }
+    }
+    let mut sum = 0
+    for x in result {
+        sum = sum + x
+    }
+    print(sum)
+}

@@ -1,0 +1,474 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    let r2 = Reading { label: "lab2", ..r }
+    let total = fold(r2.values, 0, fun(acc, n) == acc + n * n)
+    print(total)
+}
+
+fn fold(v: Vec<Int>, acc: Int, f: Fun<Int, Int, Int>) -> Int {
+    for x in v {
+        acc = f(acc, x)
+    }
+    acc
+}
+
+fn fun(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Fun {
+    f: Fun0,
+}
+
+struct Fun0 {
+    f: Fun1,
+}
+
+struct Fun1 {
+    f: Fun2,
+}
+
+struct Fun2 {
+    f: Fun3,
+}
+
+struct Fun3 {
+    f: Fun4,
+}
+
+struct Fun4 {
+    f: Fun5,
+}
+
+struct Fun5 {
+    f: Fun6,
+}
+
+struct Fun6 {
+    f: Fun7,
+}
+
+struct Fun7 {
+    f: Fun8,
+}
+
+struct Fun8 {
+    f: Fun9,
+}
+
+struct Fun9 {
+    f: Fun10,
+}
+
+struct Fun10 {
+    f: Fun11,
+}
+
+struct Fun11 {
+    f: Fun12,
+}
+
+struct Fun12 {
+    f: Fun13,
+}
+
+struct Fun13 {
+    f: Fun14,
+}
+
+struct Fun14 {
+    f: Fun15,
+}
+
+struct Fun15 {
+    f: Fun16,
+}
+
+struct Fun16 {
+    f: Fun17,
+}
+
+struct Fun17 {
+    f: Fun18,
+}
+
+struct Fun18 {
+    f: Fun19,
+}
+
+struct Fun19 {
+    f: Fun20,
+}
+
+struct Fun20 {
+    f: Fun21,
+}
+
+struct Fun21 {
+    f: Fun22,
+}
+
+struct Fun22 {
+    f: Fun23,
+}
+
+struct Fun23 {
+    f: Fun24,
+}
+
+struct Fun24 {
+    f: Fun25,
+}
+
+struct Fun25 {
+    f: Fun26,
+}
+
+struct Fun26 {
+    f: Fun27,
+}
+
+struct Fun27 {
+    f: Fun28,
+}
+
+struct Fun28 {
+    f: Fun29,
+}
+
+struct Fun29 {
+    f: Fun30,
+}
+
+struct Fun30 {
+    f: Fun31,
+}
+
+struct Fun31 {
+    f: Fun32,
+}
+
+struct Fun32 {
+    f: Fun33,
+}
+
+struct Fun33 {
+    f: Fun34,
+}
+
+struct Fun34 {
+    f: Fun35,
+}
+
+struct Fun35 {
+    f: Fun36,
+}
+
+struct Fun36 {
+    f: Fun37,
+}
+
+struct Fun37 {
+    f: Fun38,
+}
+
+struct Fun38 {
+    f: Fun39,
+}
+
+struct Fun39 {
+    f: Fun40,
+}
+
+struct Fun40 {
+    f: Fun41,
+}
+
+struct Fun41 {
+    f: Fun42,
+}
+
+struct Fun42 {
+    f: Fun43,
+}
+
+struct Fun43 {
+    f: Fun44,
+}
+
+struct Fun44 {
+    f: Fun45,
+}
+
+struct Fun45 {
+    f: Fun46,
+}
+
+struct Fun46 {
+    f: Fun47,
+}
+
+struct Fun47 {
+    f: Fun48,
+}
+
+struct Fun48 {
+    f: Fun49,
+}
+
+struct Fun49 {
+    f: Fun50,
+}
+
+struct Fun50 {
+    f: Fun51,
+}
+
+struct Fun51 {
+    f: Fun52,
+}
+
+struct Fun52 {
+    f: Fun53,
+}
+
+struct Fun53 {
+    f: Fun54,
+}
+
+struct Fun54 {
+    f: Fun55,
+}
+
+struct Fun55 {
+    f: Fun56,
+}
+
+struct Fun56 {
+    f: Fun57,
+}
+
+struct Fun57 {
+    f: Fun58,
+}
+
+struct Fun58 {
+    f: Fun59,
+}
+
+struct Fun59 {
+    f: Fun60,
+}
+
+struct Fun60 {
+    f: Fun61,
+}
+
+struct Fun61 {
+    f: Fun62,
+}
+
+struct Fun62 {
+    f: Fun63,
+}
+
+struct Fun63 {
+    f: Fun64,
+}
+
+struct Fun64 {
+    f: Fun65,
+}
+
+struct Fun65 {
+    f: Fun66,
+}
+
+struct Fun66 {
+    f: Fun67,
+}
+
+struct Fun67 {
+    f: Fun68,
+}
+
+struct Fun68 {
+    f: Fun69,
+}
+
+struct Fun69 {
+    f: Fun70,
+}
+
+struct Fun70 {
+    f: Fun71,
+}
+
+struct Fun71 {
+    f: Fun72,
+}
+
+struct Fun72 {
+    f: Fun73,
+}
+
+struct Fun73 {
+    f: Fun74,
+}
+
+struct Fun74 {
+    f: Fun75,
+}
+
+struct Fun75 {
+    f: Fun76,
+}
+
+struct Fun76 {
+    f: Fun77,
+}
+
+struct Fun77 {
+    f: Fun78,
+}
+
+struct Fun78 {
+    f: Fun79,
+}
+
+struct Fun79 {
+    f: Fun80,
+}
+
+struct Fun80 {
+    f: Fun81,
+}
+
+struct Fun81 {
+    f: Fun82,
+}
+
+struct Fun82 {
+    f: Fun83,
+}
+
+struct Fun83 {
+    f: Fun84,
+}
+
+struct Fun84 {
+    f: Fun85,
+}
+
+struct Fun85 {
+    f: Fun86,
+}
+
+struct Fun86 {
+    f: Fun87,
+}
+
+struct Fun87 {
+    f: Fun88,
+}
+
+struct Fun88 {
+    f: Fun89,
+}
+
+struct Fun89 {
+    f: Fun90,
+}
+
+struct Fun90 {
+    f: Fun91,
+}
+
+struct Fun91 {
+    f: Fun92,
+}
+
+struct Fun92 {
+    f: Fun93,
+}
+
+struct Fun93 {
+    f: Fun94,
+}
+
+struct Fun94 {
+    f: Fun95,
+}
+
+struct Fun95 {
+    f: Fun96,
+}
+
+struct Fun96 {
+    f: Fun97,
+}
+
+struct Fun97 {
+    f: Fun98,
+}
+
+struct Fun98 {
+    f: Fun99,
+}
+
+struct Fun99 {
+    f: Fun100,
+}
+
+struct Fun100 {
+    f: Fun101,
+}
+
+struct Fun101 {
+    f: Fun102,
+}
+
+struct Fun102 {
+    f: Fun103,
+}
+
+struct Fun103 {
+    f: Fun104,
+}
+
+struct Fun104 {
+    f: Fun105,
+}
+
+struct Fun105 {
+    f: Fun106,
+}
+
+struct Fun106 {
+    f: Fun107,
+}
+
+struct Fun107 {
+    f: Fun108,
+}
+
+struct Fun108 {
+    f: Fun109,
+}
+
+struct Fun109 {
+    f: Fun110,
+}
+
+struct Fun110 {
+    f: Fun111,
+}
+
+struct Fun111 {
+    f: Fun112,
+}
+
+struct Fun112 {
+    f: Fun113

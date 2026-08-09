@@ -1,0 +1,8 @@
+fn main() {
+    let mut vec = vec![4, 1, 7, 3, 9, 2];
+    vec.retain(|x| *x > 3);
+    for x in vec.iter() {
+        println!("{}", x);
+    }
+    println!("{}", vec.len());
+}

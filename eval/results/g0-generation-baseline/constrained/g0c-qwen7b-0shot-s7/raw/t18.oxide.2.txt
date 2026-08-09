@@ -1,0 +1,20 @@
+struct Rectangle { width: Float, height: Float }
+
+struct Triangle { a: Float, b: Float, c: Float }
+
+fn perimeter_rectangle(r: Rectangle) -> Float {
+    2.0 * (r.width + r.height)
+}
+
+fn perimeter_triangle(t: Triangle) -> Float {
+    t.a + t.b + t.c
+}
+
+fn main() {
+    let r1 = Rectangle { width: 3.0, height: 4.0 }
+    let t1 = Triangle { a: 3.0, b: 4.0, c: 5.0 }
+    let r2 = Rectangle { width: 2.0, height: 5.0 }
+    print(perimeter_rectangle(r1))
+    print(perimeter_triangle(t1))
+    print(perimeter_rectangle(r2))
+}

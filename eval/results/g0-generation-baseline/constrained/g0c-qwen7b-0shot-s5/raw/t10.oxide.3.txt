@@ -1,0 +1,21 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn keep_greater_than_three(v: Vec<Int>) -> Vec<Int> {
+    let mut kept = vec()
+    for x in v {
+        if x > 3 {
+            kept = push(kept, x)
+        }
+    }
+    kept
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(push(push(vec(), 4), 1), 7), 3) }
+    let kept = keep_greater_than_three(r.values.clone())
+    for x in kept {
+        print(x)
+        print_str("\n")
+    }
+    print(len(kept))
+}

@@ -1,0 +1,6 @@
+fn main() {
+    let s = "stack"
+    let chars = chars(s)
+    let reversed: Str = concat(concat(concat(concat("", chars.get(4)?), chars.get(3)?), chars.get(2)?), chars.get(1)?)
+    print_str(reversed)
+}

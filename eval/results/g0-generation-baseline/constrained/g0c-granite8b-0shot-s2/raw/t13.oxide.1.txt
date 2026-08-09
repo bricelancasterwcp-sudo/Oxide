@@ -1,0 +1,10 @@
+fn is_palindrome(word: Str) -> Bool {
+    let rev = word.chars().rev().collect()
+    word == rev
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}

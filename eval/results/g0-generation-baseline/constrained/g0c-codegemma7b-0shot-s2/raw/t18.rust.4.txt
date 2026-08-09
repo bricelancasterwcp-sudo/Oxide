@@ -1,0 +1,13 @@
+fn main() {
+    // Rectangle 1
+    let rect1_perimeter = 2 * (3 + 4);
+    println!("Rectangle 1 Perimeter: {}", rect1_perimeter);
+
+    // Triangle
+    let triangle_perimeter = 2 * (3 + 4 + 5);
+    println!("Triangle Perimeter: {}", triangle_perimeter);
+
+    // Rectangle 2
+    let rect2_perimeter = 2 * (2 + 5);
+    println!("Rectangle 2 Perimeter: {}", rect2_perimeter);
+}

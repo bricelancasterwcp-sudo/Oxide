@@ -1,0 +1,10 @@
+fn main() {
+    let mut a: Int = 1
+    let mut b: Int = 1
+    for _ in range(0, 20) {
+        let next: Int = a + b
+        a = b
+        b = next
+    }
+    print(b)
+}

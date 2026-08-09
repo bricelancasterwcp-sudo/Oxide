@@ -1,0 +1,8 @@
+fn main() {
+    let text = "mississippi".chars().collect_vec()
+    let count_s = text.iter().filter_map(x || if_eq(x, "s")).count()
+    let distinct_chars = text.iter().collect_set().len()
+    print(count_s)
+    print_str("\n")
+    print(distinct_chars)
+}

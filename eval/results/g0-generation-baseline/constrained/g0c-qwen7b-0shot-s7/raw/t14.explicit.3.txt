@@ -1,0 +1,24 @@
+fn count_chars(s: &Str) -> Int {
+    let count = 0
+    let mut seen = Vec()
+    for c in chars(s) {
+        let c = str_len(c)
+        if c == 115 {
+            count = count + 1
+        }
+        if !contains(&seen, c) {
+            seen = push(seen, c)
+        }
+    }
+    drop seen
+    count
+}
+
+fn main() {
+    let s = "mississippi"
+    let count_s = count_chars(s)
+    print(count_s)
+    let unique_chars = count_chars(s)
+    print(unique_chars)
+    drop s
+}

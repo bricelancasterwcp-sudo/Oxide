@@ -1,0 +1,11 @@
+fn main() {
+    let mut nums = vec(5, 3, 8, 1, 9, 2)
+    let mut i = 0
+    while i < 6 {
+        let min = range(i, 6).unwrap()
+        print(&nums)
+        nums = push(nums, min)
+        drop min
+        i = i + 1
+    }
+}

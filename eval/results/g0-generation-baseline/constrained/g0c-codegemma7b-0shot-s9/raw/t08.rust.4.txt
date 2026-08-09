@@ -1,0 +1,15 @@
+fn main() {
+    let mut nums = vec![3, 8, -2, 12, 7];
+    let mut positive_count = 0;
+    let mut max_value = std::i32::MIN;
+
+    for num in nums.iter() {
+        if *num > 0 {
+            positive_count += 1;
+        }
+        max_value = std::cmp::max(max_value, *num);
+    }
+
+    println!("Positive values: {}", positive_count);
+    println!("Largest value: {}", max_value);
+}

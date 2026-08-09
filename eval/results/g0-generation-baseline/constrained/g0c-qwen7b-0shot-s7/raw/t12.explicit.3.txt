@@ -1,0 +1,8 @@
+fn reverse_print(s: &Str) {
+    let chars = chars(s).rev().collect_vec().join("")
+    print(chars)
+}
+
+fn main() {
+    reverse_print("stack")
+}

@@ -1,0 +1,314 @@
+fn main() {
+    let mut ok = 0
+    let mut fail = 0
+    for s in vec_str("12", "x", "30") {
+        match parse_int(s) {
+            Some(n) => ok == ok + n,
+            None => fail == fail + 1,
+        }
+    }
+    print(ok)
+    print(fail)
+}
+
+fn vec_str(a: Str, b: Str, c: Str) -> Vec<Str> {
+    vec(a, b, c)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    match int_to_str(parse_int(s)?) {
+        Ok(n) => Some(n),
+        Err(_) => None,
+    }
+}
+
+fn int_to_str(n: Int) -> Result<Int, String> {
+    if n >= 0 && n <= 9 {
+        Ok(n)
+    } else {
+        Err("not a digit".to_string())
+    }
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    let mut chars = chars(s)
+    for c in chars {
+        print_char(c)
+    }
+}
+
+fn print_char(c: Str) {
+    print_str(c)
+}
+
+fn to_str(i: Int) -> Str {
+    if i < 0 {
+        "-".to_string() + to_str(-i)
+    } else if i < 10 {
+        (i + 48).to_string()
+    } else {
+        to_str(i / 10) + to_str(i % 10)
+    }
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = vec()
+    for i in 0.to_int() < len(s) {
+        result.push(get(s, i)?)
+    }
+    result
+}
+
+fn len(s: Str) -> Int {
+    int_to_str(s.len())
+}
+
+fn get(s: Str, i: Int) -> Option<Str> {
+    if i >= 0 && i < len(s) {
+        Some(s.chars().nth(i).unwrap().to_string())
+    } else {
+        None
+    }
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut result = v
+    result.push(x)
+    result
+}
+
+fn vec() -> Vec<T> {
+    let mut result = vec()
+    result
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn bool(b: Bool) -> Int {
+    if b {
+        1
+    } else {
+        0
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut result = vec()
+    for i in a.to_int() < b {
+        result.push(i)
+    }
+    result
+}
+
+fn sum(v: Vec<T>) -> T {
+    let mut result = v.first()?
+    for x in v.iter().skip(1) {
+        result = result + x
+    }
+    result
+}
+
+fn count(v: Vec<T>) -> Int {
+    int_to_str(v.len())
+}
+
+fn if_else(cond: Bool, then: T, els: T) -> T {
+    if cond {
+        then
+    } else {
+        els
+    }
+}
+
+fn break_continue(cond: Bool) -> Bool {
+    if cond {
+        true
+    } else {
+        false
+    }
+}
+
+fn for_loop(init: T, cond: T, body: T) -> T {
+    let mut result = init
+    for x in cond {
+        result = body
+    }
+    result
+}
+
+fn while_loop(cond: T, body: T) -> T {
+    let mut result = cond
+    while result {
+        result = body
+    }
+    result
+}
+
+fn match_expr(e: T, patterns: Vec<T>) -> T {
+    for pattern in patterns {
+        match e {
+            _ => continue_,
+            _ => return_value,
+        }
+    }
+    panic("match failed")
+}
+
+fn return_value(v: T) -> T {
+    v
+}
+
+fn continue_(v: T) -> T {
+    v
+}
+
+fn panic(msg: Str) -> T {
+    panic(msg)
+}
+
+fn any(v: Vec<T>) -> T {
+    if v.len() > 0 {
+        v.first()?
+    } else {
+        None
+    }
+}
+
+fn all(v: Vec<T>) -> T {
+    if v.len() > 0 {
+        Some(v.first()?.clone())
+    } else {
+        None
+    }
+}
+
+fn none(v: Vec<T>) -> T {
+    if v.len() > 0 {
+        None
+    } else {
+        Some(v.first()?.clone())
+    }
+}
+
+fn first(v: Vec<T>) -> T {
+    if v.len() > 0 {
+        v.first()?.clone()
+    } else {
+        None
+    }
+}
+
+fn last(v: Vec<T>) -> T {
+    if v.len() > 0 {
+        v.last()?.clone()
+    } else {
+        None
+    }
+}
+
+fn filter(v: Vec<T>, f: T) -> Vec<T> {
+    let mut result = vec()
+    for x in v {
+        if f {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn map(v: Vec<T>, f: T) -> Vec<T> {
+    let mut result = vec()
+    for x in v {
+        result.push(f)
+    }
+    result
+}
+
+fn flat_map(v: Vec<T>, f: T) -> Vec<T> {
+    let mut result = vec()
+    for x in v {
+        result.extend(f)
+    }
+    result
+}
+
+fn zip(a: Vec<T>, b: Vec<T>) -> Vec<T> {
+    let mut result = vec()
+    for i in 0.to_int() < a.len() {
+        result.push(a.get(i)?.clone())
+        result.push(b.get(i)?.clone())
+    }
+    result
+}
+
+fn enumerate(v: Vec<T>) -> Vec<T> {
+    let mut result = vec()
+    for i in 0.to_int() < v.len() {
+        result.push(i.to_string())
+        result.push(v.get(i)?.clone())
+    }
+    result
+}
+
+fn reverse(v: Vec<T>) -> Vec<T> {
+    let mut result = vec()
+    for i in (0.to_int() < v.len()).rev() {
+        result.push(v.get(i)?.clone())
+    }
+    result
+}
+
+fn sort(v: Vec<T>) -> Vec<T> {
+    let mut result = v
+    result.sort()
+    result
+}
+
+fn sort_by(v: Vec<T>, f: T) -> Vec<T> {
+    let mut result = v
+    result.sort_by(f)
+    result
+}
+
+fn unique(v: Vec<T>) -> Vec<T> {
+    let mut result = vec()
+    for x in v {
+        if !result.contains(x) {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn dedup(v: Vec<T>) -> Vec<T> {
+    let mut result = vec()
+    for x in v {
+        if !result.contains(x) {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn group_by(v: Vec<T>, f: T) -> Vec<T> {
+    let mut result = vec()
+    for x in v {
+        let key = f(x)
+        let entry = result.iter().position_entry_by_key(key)
+        match entry {
+            Some(e) => e.value.push(x),
+            

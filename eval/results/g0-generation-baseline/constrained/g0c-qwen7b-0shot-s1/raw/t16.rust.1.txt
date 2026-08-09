@@ -1,0 +1,9 @@
+fn main() {
+    for divisor in vec![5, 0, 4] {
+        if divisor == 0 {
+            println!("undefined");
+        } else {
+            println!("{}", 100 / divisor);
+        }
+    }
+}

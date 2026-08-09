@@ -1,0 +1,13 @@
+fn main() {
+    let divisor1 = 5;
+    let divisor2 = 0;
+    let divisor3 = 4;
+
+    let quotient1 = 100 / divisor1;
+    let quotient2 = if divisor2 == 0 { "undefined" } else { 100 / divisor2 };
+    let quotient3 = 100 / divisor3;
+
+    println!("Quotient of 100 / {}: {}", divisor1, quotient1);
+    println!("Quotient of 100 / {}: {}", divisor2, quotient2);
+    println!("Quotient of 100 / {}: {}", divisor3, quotient3);
+}

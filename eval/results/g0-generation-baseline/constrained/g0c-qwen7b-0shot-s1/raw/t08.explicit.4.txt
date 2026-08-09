@@ -1,0 +1,19 @@
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7)
+    let mut positive_count = 0
+    let mut max_value = 0
+    for x in &nums {
+        if x > 0 {
+            positive_count = positive_count + 1
+        }
+        if x > max_value {
+            max_value = x
+        }
+    }
+    print_str("Positive values: ")
+    print(positive_count)
+    print_str("\n")
+    print_str("Largest value: ")
+    print(max_value)
+    drop nums
+}

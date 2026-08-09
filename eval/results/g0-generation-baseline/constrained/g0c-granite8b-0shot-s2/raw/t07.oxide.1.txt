@@ -1,0 +1,55 @@
+fn main() {
+    let mut x = 3
+    let mut y = 0
+    while x < 24 {
+        y = push(y, x)
+        x = x + 3
+    }
+    print(sum(y))
+}
+
+fn sum(v: Vec<Int>) -> Int {
+    let mut result = 0
+    for value in v {
+        result = result + value
+    }
+    result
+}
+
+fn push(v: Vec<Int>, value: Int) -> Vec<Int> {
+    clone(v).push(value)
+}
+
+fn sum(v: Vec<Int>) -> Int {
+    let mut result = 0
+    for value in v {
+        result = result + value
+    }
+    result
+}
+
+fn push(v: Vec<Int>, value: Int) -> Vec<Int> {
+    clone(v).push(value)
+}
+
+fn sum(v: Vec<Int>) -> Int {
+    let mut result = 0
+    for value in v {
+        result = result + value
+    }
+    result
+}
+
+fn push(v: Vec<Int>, value: Int) -> Vec<Int> {
+    clone(v).push(value)
+}
+
+fn main() {
+    let mut x = 3
+    let mut y = 0
+    while x < 24 {
+        y = push(y, x)
+        x = x + 3
+    }
+    print(sum(y))
+}

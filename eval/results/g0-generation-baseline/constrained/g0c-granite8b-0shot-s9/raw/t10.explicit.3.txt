@@ -1,0 +1,26 @@
+fn filter(list: Vec<Int>, limit: Int) -> Vec<Int> {
+    let mut result = vec()
+    for num in list {
+        if num > limit {
+            push(result, num)
+        }
+    }
+    result
+}
+
+fn count(list: Vec<Int>) -> Int {
+    let mut total = 0
+    for num in list {
+        total = total + 1
+    }
+    total
+}
+
+fn main() {
+    let list = push(push(push(push(vec(), 4), 1), 7), 3)
+    let filtered = filter(&list, 3)
+    let num_kept = count(&filtered)
+    print(num_kept)
+    drop filtered
+    drop list
+}

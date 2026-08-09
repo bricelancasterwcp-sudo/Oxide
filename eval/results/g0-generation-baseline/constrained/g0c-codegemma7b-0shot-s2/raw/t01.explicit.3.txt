@@ -1,0 +1,9 @@
+fn main() {
+    let sum = 0
+    for i in 0.to_int() {
+        let square = i * i
+        sum = sum + square
+    }
+    print(sum)
+    drop sum
+}

@@ -1,0 +1,12 @@
+```rust
+fn is_palindrome(text: &str) -> bool {
+    let text = text.to_lowercase();
+    text == text.chars().rev().collect::<String>()
+}
+
+fn main() {
+    println!("{}", is_palindrome("level"));
+    println!("{}", is_palindrome("stereo"));
+    println!("{}", is_palindrome("rotor"));
+}
+```

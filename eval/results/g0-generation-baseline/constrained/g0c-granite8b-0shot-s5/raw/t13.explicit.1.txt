@@ -1,0 +1,16 @@
+fn read_forward(text: &Str) -> Bool {
+    text == text.chars().rev().collect()
+}
+
+fn read_backward(text: &Str) -> Bool {
+    text == text.chars().rev().collect()
+}
+
+fn main() {
+    print(read_forward("level"))
+    print(read_backward("level"))
+    print(read_forward("stereo"))
+    print(read_backward("stereo"))
+    print(read_forward("rotor"))
+    print(read_backward("rotor"))
+}

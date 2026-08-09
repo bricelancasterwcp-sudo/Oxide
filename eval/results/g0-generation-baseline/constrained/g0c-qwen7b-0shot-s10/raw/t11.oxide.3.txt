@@ -1,0 +1,23 @@
+struct List { elements: Vec<Int> }
+
+fn sort(mutlst: List) -> List {
+    let elements = lst.elements.clone().unwrap_or(vec())  // Clone the elements vector to avoid move
+    for i in 0 < len(elements) {
+        for j in i + 1 < len(elements) {
+            if elements.get(i) > elements.get(j) {
+                let temp = elements.get(i)
+                elements.set(i, elements.get(j))
+                elements.set(j, temp)
+            }
+        }
+    }
+    List(elements)
+}
+
+fn main() {
+    let lst = List { elements: push(push(push(push(push(vec(), 5), 3), 8), 1), 9), elements: 2 }  // Corrected field name
+    let sorted_lst = sort(lst)
+    for x in sorted_lst.elements {
+        print(x)
+    }
+}

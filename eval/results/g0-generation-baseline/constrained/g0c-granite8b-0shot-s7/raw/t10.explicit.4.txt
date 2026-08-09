@@ -1,0 +1,21 @@
+fn filter_greater_than_three(list: Vec<Int>, limit: Int) -> Vec<Int> {
+    let mut filtered_list = vec()
+    for element in list {
+        if element > limit {
+            drop filtered_list
+            filtered_list = push(filtered_list, element)
+        }
+    }
+    drop filtered_list
+    filtered_list
+}
+
+fn main() {
+    let list = vec(4, 1, 7, 3, 9, 2)
+    let filtered = filter_greater_than_three(list, 3)
+    for element in filtered {
+        print(element)
+    }
+    drop filtered
+    print(len(&filtered))
+}

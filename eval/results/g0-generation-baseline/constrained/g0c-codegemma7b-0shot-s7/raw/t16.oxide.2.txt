@@ -1,0 +1,102 @@
+fn main() {
+    println(trunc(div(100, 5)))
+    println(trunc(div(100, 0)))
+    println(trunc(div(100, 4)))
+}
+
+fn div(a: Int, b: Int) -> Int {
+    if b == 0 {
+        return -1
+    }
+    a / b
+}
+
+fn trunc(a: Int) -> Int {
+    if a >= 0 {
+        a
+    } else {
+        -a - 1
+    }
+}
+
+fn println(n: Int) {
+    if n == -1 {
+        print_str("undefined")
+    } else {
+        print_int(n)
+    }
+    print_str("\n")
+}
+
+fn print_int(n: Int) {
+    let mut digits: Vec<Int> = vec()
+    let mut n2 = n
+    while n2 != 0 {
+        digits.push(trunc(div(n2, 10)))
+        n2 = trunc(div(n2, 10))
+    }
+    for d in digits.chars().rev() {
+        print(d)
+    }
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print(c)
+    }
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result: Vec<Str> = vec()
+    let mut index = 0
+    while index < str_len(s) {
+        result.push(get(s, index)?)
+        index = index + 1
+    }
+    result
+}
+
+fn get(s: Str, i: Int) -> Option<Str> {
+    if i < 0 || i >= str_len(s) {
+        return None
+    }
+    let mut result: Str = Str { length: 1, data: vec() }
+    result.data.push(s.data.chars().nth(i).unwrap())
+    Some(result)
+}
+
+fn str_len(s: Str) -> Int {
+    let mut count = 0
+    for _ in s.data.chars() {
+        count = count + 1
+    }
+    count
+}
+
+fn print(c: Str) {
+    for b in chars(c) {
+        print_byte(b.data.chars().nth(0).unwrap())
+    }
+}
+
+fn print_byte(b: Char) {
+    let mut buf: Vec<Char> = vec()
+    buf.push(b)
+    let s = str_from_chars(buf)
+    print_str(s)
+}
+
+fn str_from_chars(cs: Vec<Char>) -> Str {
+    let mut result: Str = Str { length: 0, data: vec() }
+    for c in cs {
+        result.data.push(c)
+    }
+    result.length == str_len(result)
+    result
+}
+
+fn main() {
+    println(trunc(div(100, 5)))
+    println(trunc(div(100, 0)))
+    println(trunc(div(100, 4)))
+}

@@ -1,0 +1,19 @@
+fn main() {
+    let tasks = vec()
+    let mut points = 0
+    for s in lines(read_str()) {
+        let parts = split(s, ": ")
+        let name = parts.get(0)
+        let points = parse_int(parts.get(1))?
+        let task = Task { name: name, points: points }
+        tasks = push(tasks, task)
+        points = points + task.points
+    }
+    for t in tasks {
+        print_str(t.name)
+        print(" ")
+        print(t.points)
+        print_str("\n")
+    }
+    print(points)
+}

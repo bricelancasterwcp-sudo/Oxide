@@ -1,0 +1,17 @@
+fn first_eight() -> Vec<Int> {
+    let mut v = vec()
+    let mut n = 1
+    while v.len() < 8 {
+        if n % 3 == 0 {
+            v.push(n)
+        }
+        n = n + 1
+    }
+    v
+}
+
+fn main() {
+    let nums = first_eight()
+    let sum = nums.iter().fold(0, Add)
+    print(sum)
+}

@@ -1,0 +1,35 @@
+struct IntWrapper { value: Int }
+
+fn divisors(n: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in range(1, n) {
+        if n % i == 0 {
+            v = push(v, i)
+        }
+    }
+    v
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn reduce(init: Int, v: Vec<Int>, add: Int) -> Int {
+    let mut sum = init
+    for x in v {
+        sum = add(sum, x)
+    }
+    sum
+}
+
+fn main() {
+    let max_number = 1000
+    let mut n = 2
+    while n < max_number {
+        let sum_of_divisors = reduce(0, divisors(n), add)
+        if sum_of_divisors == n {
+            print(IntWrapper { value: n })
+        }
+        n = n + 1
+    }
+}

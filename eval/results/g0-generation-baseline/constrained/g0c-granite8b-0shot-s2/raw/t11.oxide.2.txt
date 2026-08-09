@@ -1,0 +1,72 @@
+fn sort(mutVs: Vec<Int>) -> Vec<Int> {
+    for i in range(0, len(mutVs)) {
+        for j in range(i + 1, len(mutVs)) {
+            if get(mutVs, j)? < get(mutVs, i)? {
+                swap(mutVs, i, j)
+            }
+        }
+    }
+    mutVs
+}
+
+fn main() {
+    let v = push(push(push(push(vec(), 5), 3), 8), 1)
+    print(len(sort(push(v, 9), 2)))
+}
+
+fn swap(mutVs: Vec<Int>, i: Int, j: Int) {
+    let tmp = get(mutVs, i)?
+    mutVs = functional_update(mutVs, i, get(mutVs, j)?)
+    mutVs = functional_update(mutVs, j, tmp)
+}
+
+fn functional_update(v: Vec<Int>, i: Int, x: Int) -> Vec<Int> {
+    push(push(vec(), x), get(v, i)?)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < len(v) {
+        Some(clone(get_ref(v, i)?))
+    } else {
+        None
+    }
+}
+
+fn get_ref(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < len(v) {
+        Some(v + i)
+    } else {
+        None
+    }
+}
+
+fn print(x: Int) {
+    print_str("Int: ")
+    print_str(str_from_int(x))
+    print_str("\n")
+}
+
+fn str_from_int(n: Int) -> Str {
+    let mut buf = vec()
+    let mut n = n
+    while n > 0 {
+        buf = push(buf, to_int(to_float(n % 10) + 0.5) + 48)
+        n = trunc(n / 10)
+    }
+    concat(buf, " ")
+}
+
+fn print_str(s: Str) {
+    for c in s {
+        print(to_int(c))
+    }
+}
+
+fn main() {
+    let v = push(push(push(push(vec(), 5), 3), 8), 1)
+    let sorted = sort(push(v, 9), 2)
+    print(len(sorted))
+    for n in sorted {
+        print(n)
+    }
+}

@@ -1,0 +1,259 @@
+fn count_s_and_distinct(text: &Str) -> Str {
+    let mut s_count = 0
+    let mut distinct_chars = vec()
+    for c in text.chars() {
+        if c == b_s {
+            s_count = s_count + 1
+        }
+        if !distinct_chars.contains(&c) {
+            distinct_chars.push(c)
+        }
+    }
+    format("s: {}, distinct: {}", s_count, distinct_chars.len())
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_s_and_distinct(&text))
+}
+
+fn b_s() -> Str {
+    return "s".to_string()
+}
+
+fn vec() -> Vec<Str> {
+    return Vec.new()
+}
+
+fn format(format_string: &Str, format_args: &Vec<Str>) -> Str {
+    let mut result = format_string.to_string()
+    for i in 0.to_int() < format_args.len().to_int() {
+        result = result.replace("{}", &format_args)
+    }
+    return result
+}
+
+fn print(text: &Str) {
+    println(text)
+}
+
+fn println(text: &Str) {
+    print(text)
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn print(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &Vec<Str>) {
+    print(format(text, format_args))
+    print("\n")
+}
+
+fn println(text: &Str, format_args: &

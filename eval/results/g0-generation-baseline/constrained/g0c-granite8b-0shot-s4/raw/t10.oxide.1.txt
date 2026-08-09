@@ -1,0 +1,27 @@
+struct List { head: Int, tail: Option<Box<List>> }
+
+fn filter_gt3(list: List) -> List {
+    let head = match list.head {
+        _ => list.head,
+    }
+    let tail = match list.tail {
+        None => None,
+        Some(mutboxed_list) => Some(Box { filter_gt3: filter_gt3(mutboxed_list.filter_gt3) }) <= Box.filter_gt3,
+    }
+    List(head, tail)
+}
+
+fn length(list: List) -> Int {
+    let mut acc = 0
+    for item in list {
+        acc = acc + 1
+    }
+    acc
+}
+
+fn main() {
+    let list = List(4, Some(Box { head: 1, tail: Some(Box { head: 7, tail: Some(Box { head: 3, tail: Some(Box { head: 9, tail: Some() }) }) }) }) <= Box.head, tail <= Box.tail, Box.filter_gt3, Box.length)
+    let List { head, tail } = filter_gt3(list)
+    print(head)
+    print(length(filter_gt3(tail)))
+}

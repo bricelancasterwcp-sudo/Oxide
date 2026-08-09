@@ -1,0 +1,16 @@
+struct Item { name: Str, price: Int, quantity: Int }
+
+fn total_cost(items: Vec<Item>) -> Int {
+    items.iter().map(item || item.price * item.quantity).sum()
+}
+
+fn highest_cost_item(items: Vec<Item>) -> Str {
+    items.iter().max_by_key(item || item.price * item.quantity).unwrap().name
+}
+
+fn main() {
+    let items = vec(Item { name: "pen", price: 3, quantity: 4 }, Item { name: "pad", price: 9, quantity: 2 }, Item { name: "ink", price: 5, quantity: 3 })
+    print(total_cost(items))
+    let item = highest_cost_item(items)
+    print_str(item)
+}

@@ -1,0 +1,432 @@
+fn main() {
+    let s = "mississippi"
+    let count_s = s.chars().filter(char_eq(&bns)).count()
+    let distinct_chars = s.chars().collect_uniq().len()
+    print(count_s)
+    print(distinct_chars)
+}
+
+fn char_eq(bns: &Byte, c: &Byte) -> Bool {
+    bns == c
+}
+
+fn collect_uniq(vec: Vec<Str>) -> Vec<Str> {
+    let mut result = Vec()
+    for x in vec {
+        if !result.contains(&x) {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn count(vec: Vec<Str>, value: &Str) -> Int {
+    vec.iter().filter(char_eq(value)).count()
+}
+
+fn print(x: Int) {
+    print_int(x)
+}
+
+fn print_int(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+fn to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn filter(vec: Vec<Str>, predicate: &FnMut) -> Vec<Str> {
+    let mut result = Vec()
+    for x in vec {
+        if predicate(&x) {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn contains(vec: Vec<Str>, value: &Str) -> Bool {
+    vec.iter().any(char_eq(value))
+}
+
+fn any(vec: Vec<Str>, predicate: &FnMut) -> Bool {
+    vec.iter().any(predicate)
+}
+
+fn push(vec: Vec<Str>, value: Str) -> Vec<Str> {
+    let mut result = vec
+    result.push(value)
+    result
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn clone(x: Str) -> Str {
+    x.clone()
+}
+
+fn str_len(s: Str) -> Int {
+    s.len()
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    s.chars().map(to_string).collect()
+}
+
+fn to_string(c: Byte) -> Str {
+    c.to_string()
+}
+
+fn int_to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn print_byte(b: Byte) {
+    print_int(b)
+}
+
+fn print_int(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+fn to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn filter(vec: Vec<Byte>, predicate: &FnMut) -> Vec<Byte> {
+    let mut result = Vec()
+    for x in vec {
+        if predicate(&x) {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn contains(vec: Vec<Byte>, value: &Byte) -> Bool {
+    vec.iter().any(char_eq(value))
+}
+
+fn any(vec: Vec<Byte>, predicate: &FnMut) -> Bool {
+    vec.iter().any(predicate)
+}
+
+fn push(vec: Vec<Byte>, value: Byte) -> Vec<Byte> {
+    let mut result = vec
+    result.push(value)
+    result
+}
+
+fn vec() -> Vec<Byte> {
+    Vec()
+}
+
+fn clone(x: Byte) -> Byte {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    s.len()
+}
+
+fn chars(s: Str) -> Vec<Byte> {
+    s.chars().map(int_to_byte).collect()
+}
+
+fn int_to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn print_byte(b: Byte) {
+    print_int(b)
+}
+
+fn print_int(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+fn to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn filter(vec: Vec<Int>, predicate: &FnMut) -> Vec<Int> {
+    let mut result = Vec()
+    for x in vec {
+        if predicate(&x) {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn contains(vec: Vec<Int>, value: &Int) -> Bool {
+    vec.iter().any(char_eq(value))
+}
+
+fn any(vec: Vec<Int>, predicate: &FnMut) -> Bool {
+    vec.iter().any(predicate)
+}
+
+fn push(vec: Vec<Int>, value: Int) -> Vec<Int> {
+    let mut result = vec
+    result.push(value)
+    result
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn clone(x: Int) -> Int {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    s.len()
+}
+
+fn chars(s: Str) -> Vec<Int> {
+    s.chars().map(int_to_byte).collect()
+}
+
+fn int_to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn print_byte(b: Byte) {
+    print_int(b)
+}
+
+fn print_int(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+fn to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn filter(vec: Vec<Float>, predicate: &FnMut) -> Vec<Float> {
+    let mut result = Vec()
+    for x in vec {
+        if predicate(&x) {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn contains(vec: Vec<Float>, value: &Float) -> Bool {
+    vec.iter().any(char_eq(value))
+}
+
+fn any(vec: Vec<Float>, predicate: &FnMut) -> Bool {
+    vec.iter().any(predicate)
+}
+
+fn push(vec: Vec<Float>, value: Float) -> Vec<Float> {
+    let mut result = vec
+    result.push(value)
+    result
+}
+
+fn vec() -> Vec<Float> {
+    Vec()
+}
+
+fn clone(x: Float) -> Float {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    s.len()
+}
+
+fn chars(s: Str) -> Vec<Float> {
+    s.chars().map(int_to_byte).collect()
+}
+
+fn int_to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn print_byte(b: Byte) {
+    print_int(b)
+}
+
+fn print_int(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+fn to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn filter(vec: Vec<Bool>, predicate: &FnMut) -> Vec<Bool> {
+    let mut result = Vec()
+    for x in vec {
+        if predicate(&x) {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn contains(vec: Vec<Bool>, value: &Bool) -> Bool {
+    vec.iter().any(char_eq(value))
+}
+
+fn any(vec: Vec<Bool>, predicate: &FnMut) -> Bool {
+    vec.iter().any(predicate)
+}
+
+fn push(vec: Vec<Bool>, value: Bool) -> Vec<Bool> {
+    let mut result = vec
+    result.push(value)
+    result
+}
+
+fn vec() -> Vec<Bool> {
+    Vec()
+}
+
+fn clone(x: Bool) -> Bool {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    s.len()
+}
+
+fn chars(s: Str) -> Vec<Bool> {
+    s.chars().map(int_to_byte).collect()
+}
+
+fn int_to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn print_byte(b: Byte) {
+    print_int(b)
+}
+
+fn print_int(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+fn to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn filter(vec: Vec<Unit>, predicate: &FnMut) -> Vec<Unit> {
+    let mut result = Vec()
+    for x in vec {
+        if predicate(&x) {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn contains(vec: Vec<Unit>, value: &Unit) -> Bool {
+    vec.iter().any(char_eq(value))
+}
+
+fn any(vec: Vec<Unit>, predicate: &FnMut) -> Bool {
+    vec.iter().any(predicate)
+}
+
+fn push(vec: Vec<Unit>, value: Unit) -> Vec<Unit> {
+    let mut result = vec
+    result.push(value)
+    result
+}
+
+fn vec() -> Vec<Unit> {
+    Vec()
+}
+
+fn clone(x: Unit) -> Unit {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    s.len()
+}
+
+fn chars(s: Str) -> Vec<Unit> {
+    s.chars().map(int_to_byte).collect()
+}
+
+fn int_to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn to_byte(n: Int) -> Byte {
+    n.to_byte()
+}
+
+fn print_byte(b: Byte) {
+    print_int(b)
+}
+
+fn print_int(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_str(n)
+}
+
+fn to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn filter(vec: Vec<Vec<T>>, predicate: &FnMut) -> Vec<Vec<T>> {
+    let mut result =

@@ -1,0 +1,16 @@
+struct IntList { head: Int, tail: Vec<Int> }
+
+fn reverse(input: IntList) -> IntList {
+    let mut result = IntList { head: 0, tail: vec() }
+    for x in input.tail {
+        result = IntList { head: x, tail: result }
+    }
+    result
+}
+
+fn main() {
+    let l = IntList { head: 1, tail: push(push(vec(), 2), 3) }
+    for x in reverse(l).tail.iter().rev() {
+        print(x)
+    }
+}

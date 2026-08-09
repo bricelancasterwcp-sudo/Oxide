@@ -1,0 +1,20 @@
+struct List {
+    data: Vec<Int>,
+    len: Int,
+}
+
+fn get_element(list: List, position: Int) -> Option<Int> {
+    if position < 0 || position >= list.len {
+        None
+    } else {
+        Some(list.data.get(position)?)
+    }
+}
+
+fn main() {
+    let list = List { data: vec(10, 20, 30), len: 3 }
+    match get_element(list, 1) {
+        Some(element) => print(element),
+        None => print_str("Position is out of bounds"),
+    }
+}

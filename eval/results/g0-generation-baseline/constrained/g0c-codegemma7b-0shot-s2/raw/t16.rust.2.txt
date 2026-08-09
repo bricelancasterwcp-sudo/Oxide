@@ -1,0 +1,14 @@
+fn main() {
+    assert_eq!(100 / 5, 20);
+    println!("{}", 100 / 5);
+
+    if 0 == 0 {
+        assert_eq!(100 / 0, std::f64::NAN as i32);
+        println!("{}", 100 / 0);
+    } else {
+        println!("undefined");
+    }
+
+    assert_eq!(100 / 4, 25);
+    println!("{}", 100 / 4);
+}

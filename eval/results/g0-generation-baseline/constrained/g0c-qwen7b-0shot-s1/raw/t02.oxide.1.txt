@@ -1,0 +1,17 @@
+struct State {
+    value: Int,
+    steps: Int,
+}
+
+fn transform(state: State) -> State {
+    let new_value = if state.value % 2 == 0 { state.value / 2 } else { state.value * 3 + 1 }
+    State(value, state.steps + 1)
+}
+
+fn main() {
+    let mut current_state = State { value: 27, steps: 0 }
+    while current_state.value != 1 {
+        current_state = transform(current_state)
+    }
+    print(current_state.steps)
+}

@@ -1,0 +1,16 @@
+fn is_palindrome(s: &Str) -> Bool {
+    let chars: Vec<Str> = chars(s).collect()
+    let len = len(chars)
+    for i in 0 < i + i + 1 {
+        if chars(i) != chars(len - i - 1) {
+            return false
+        }
+    }
+    true
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}

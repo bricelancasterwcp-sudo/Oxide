@@ -1,0 +1,363 @@
+fn main() {
+    let text = "mississippi"
+    let count_s = text.chars().filter(char_eq_s).count()
+    let distinct_chars = text.chars().collect_vec().into_iter().distinct().count()
+    print(count_s)
+    drop count_s
+    print(distinct_chars)
+    drop distinct_chars
+}
+
+fn char_eq_s(c: Char) -> Bool {
+    c == "s"
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn distinct(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().collect_vec().into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn collect_vec(vec: Vec<T>) -> Vec<T> {
+    vec
+}
+
+fn filter_unique(vec: Vec<T>) -> Vec<T> {
+    vec.into_iter().filter_unique().collect_vec()
+}
+
+fn

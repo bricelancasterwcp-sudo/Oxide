@@ -1,0 +1,11 @@
+fn main() {
+    let mut list = [10, 20, 30];
+
+    for pos in 0..6 {
+        let value = list.get(pos);
+        match value {
+            Some(val) => println!("{}", val),
+            None => println!("-1"),
+        }
+    }
+}

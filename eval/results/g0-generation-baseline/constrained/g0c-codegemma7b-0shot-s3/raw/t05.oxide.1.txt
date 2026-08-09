@@ -1,0 +1,14 @@
+fn sum(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn main() {
+    let mut a = 1
+    let mut b = 1
+    for _ in 1.range(20) {
+        let c = sum(a, b)
+        a = b
+        b = c
+    }
+    print(a)
+}

@@ -1,0 +1,13 @@
+struct Sequence {
+    values: Vec<Int>,
+}
+
+fn main() {
+    let mut s = Sequence { values: push(push(vec(), 1), 1) }
+    for _ in range(0, 18) {
+        let n = s.values.len() - 1
+        let next = get(s.values, n)? + get(s.values, n - 1)?
+        s.values == push(s.values, next)
+    }
+    print(get(s.values, 19)?)
+}

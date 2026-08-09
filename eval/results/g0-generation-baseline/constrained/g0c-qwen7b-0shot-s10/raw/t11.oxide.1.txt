@@ -1,0 +1,22 @@
+struct List { elements: Vec<Int> }
+
+fn sort(mutlst: List) -> List {
+    for i in 0 < len(lst.elements) {
+        for j in i + 1 < len(lst.elements) {
+            if lst.elements.get(i) > lst.elements.get(j) {
+                let temp = lst.elements.get(i)
+                lst.elements.set(i, lst.elements.get(j))
+                lst.elements.set(j, temp)
+            }
+        }
+    }
+    lst
+}
+
+fn main() {
+    let lst = List { elements: push(push(push(push(push(vec(), 5), 3), 8), 1), 9), lst: 2 }  // Note: The 'lst' field is redundant in '
+    let sorted_lst = sort(lst)
+    for x in sorted_lst.elements {
+        print(x)
+    }
+}

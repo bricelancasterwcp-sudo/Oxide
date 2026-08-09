@@ -1,0 +1,14 @@
+fn perimeter(shape: Shape) -> Int {
+    match shape {
+        Rectangle(w, h) => 2 * (w + h),
+        Triangle(a, b, c) => a + b + c,
+    }
+}
+
+fn main() {
+    let shapes = vec(Shape(3, 4), Shape(3, 4, 5), Shape(2, 5))
+    for shape in &shapes {
+        print(perimeter(shape))
+    }
+    drop shapes
+}

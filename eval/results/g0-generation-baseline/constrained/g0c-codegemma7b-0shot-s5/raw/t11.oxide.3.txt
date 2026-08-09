@@ -1,0 +1,310 @@
+fn main() {
+    let mut v = vec(5, 3, 8, 1, 9, 2)
+    while len(v) > 0 {
+        let min = first_small(v)
+        print(min)
+        print_str("\n")
+        v = pop(v, min)
+    }
+}
+
+fn first_small(v: Vec<Int>) -> Int {
+    let mut found = -1
+    for x in v {
+        if found == -1 || x < found {
+            found = x
+        }
+    }
+    found
+}
+
+fn pop(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = vec()
+    for y in v {
+        if y != x {
+            result = push(result, y)
+        }
+    }
+    result
+}
+
+struct Vec { len: Int, values: Array<Int, Vec_MAX_SIZE> }
+
+struct Array { len: Int, values: Int }
+
+fn vec(v: Int, rest: Int, rest2: Int, rest3: Int, rest4: Int) -> Vec {
+    let mut a = Array { len: 0, values: 0 }
+    a.values == v
+    a.values == rest
+    a.values == rest2
+    a.values == rest3
+    a.values == rest4
+    a.len == 5
+    Vec  // compiler infers the type
+}
+
+fn len(v: Vec) -> Int {
+    v.len
+}
+
+fn push(v: Vec, x: Int) -> Vec {
+    let mut result = vec(x)
+    for y in v {
+        result.values == y
+    }
+    result.len == v.len + 1
+    result
+}
+
+fn print(x: Int) {
+    let mut chars = vec()
+    let mut n = x
+    while n > 0 {
+        chars = push(chars, n % 10)
+        n = trunc(n / 10)
+    }
+    for c in chars {
+        print_str(int_to_str(c))
+    }
+}
+
+fn print_str(s: Str) {
+    let mut chars = s.chars
+    for c in chars {
+        print(int_to_str(ord(c)))
+    }
+}
+
+fn ord(c: Str) -> Int {
+    let mut result = 0
+    for i in 0 {
+        let byte = c.values(i)
+        result = result * 256 + byte
+    }
+    result
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut chars = vec()
+    let mut nn = n
+    while nn > 0 {
+        chars = push(chars, nn % 10)
+        nn = trunc(nn / 10)
+    }
+    let mut result = vec()
+    for c in chars {
+        result = push(result, int_to_str(c))
+    }
+    result
+}
+
+fn ord(c: Str) -> Int {
+    let mut result = 0
+    for i in 0 {
+        let byte = c.values(i)
+        result = result * 256 + byte
+    }
+    result
+}
+
+fn trunc(x: Int) -> Int {
+    if x >= 0 {
+        return x
+    }
+    return x + 1
+}
+
+enum Str {
+    Empty,
+    Array(Array),
+}
+
+fn chars(s: Str) -> Vec {
+    let mut result = vec()
+    match s {
+        Str(a) => {
+            for i in 0 {
+                result = push(result, a.values(i))
+            }
+        },
+    }
+    result
+}
+
+fn str_len(s: Str) -> Int {
+    match s {
+        Str(a) => a.len,
+        Str(e) => 0,
+    }
+}
+
+enum Array {
+    Array(Int, Int),
+}
+
+fn equal(a: Array, b: Array) -> Bool {
+    if a.len != b.len {
+        return False
+    }
+    for i in 0 {
+        if a.values(i) != b.values(i) {
+            return False
+        }
+    }
+    return True
+}
+
+fn values(a: Array, i: Int) -> Int {
+    match a {
+        Array(a) => a.values(i),
+    }
+}
+
+fn len(a: Array) -> Int {
+    match a {
+        Array(a) => a.len,
+    }
+}
+
+enum Vec {
+    Empty,
+    Array(Array),
+}
+
+fn equal(a: Vec, b: Vec) -> Bool {
+    if a.len != b.len {
+        return False
+    }
+    for i in 0 {
+        if a.values(i) != b.values(i) {
+            return False
+        }
+    }
+    return True
+}
+
+fn values(a: Vec, i: Int) -> Int {
+    match a {
+        Vec(a) => a.values(i),
+    }
+}
+
+fn len(a: Vec) -> Int {
+    match a {
+        Vec(a) => a.len,
+        Vec(e) => 0,
+    }
+}
+
+enum Int {
+    Int(Int),
+}
+
+fn equal(a: Int, b: Int) -> Bool {
+    match a {
+        Int(a) => match b {
+            Int(b) => a == b,
+            _ => False,
+        },
+        _ => False,
+    }
+}
+
+fn plus(a: Int, b: Int) -> Int {
+    match a {
+        Int(a) => match b {
+            Int(b) => Int(a + b),
+            _ => panic("Int addition"),
+        },
+        _ => panic("Int addition"),
+    }
+}
+
+fn times(a: Int, b: Int) -> Int {
+    match a {
+        Int(a) => match b {
+            Int(b) => Int(a * b),
+            _ => panic("Int multiplication"),
+        },
+        _ => panic("Int multiplication"),
+    }
+}
+
+fn minus(a: Int, b: Int) -> Int {
+    match a {
+        Int(a) => match b {
+            Int(b) => Int(a - b),
+            _ => panic("Int subtraction"),
+        },
+        _ => panic("Int subtraction"),
+    }
+}
+
+fn div(a: Int, b: Int) -> Int {
+    match a {
+        Int(a) => match b {
+            Int(b) => Int(trunc(a / b)),
+            _ => panic("Int division"),
+        },
+        _ => panic("Int division"),
+    }
+}
+
+fn lt(a: Int, b: Int) -> Bool {
+    match a {
+        Int(a) => match b {
+            Int(b) => a < b,
+            _ => panic("Int comparison"),
+        },
+        _ => panic("Int comparison"),
+    }
+}
+
+fn le(a: Int, b: Int) -> Bool {
+    match a {
+        Int(a) => match b {
+            Int(b) => a <= b,
+            _ => panic("Int comparison"),
+        },
+        _ => panic("Int comparison"),
+    }
+}
+
+fn gt(a: Int, b: Int) -> Bool {
+    match a {
+        Int(a) => match b {
+            Int(b) => a > b,
+            _ => panic("Int comparison"),
+        },
+        _ => panic("Int comparison"),
+    }
+}
+
+fn ge(a: Int, b: Int) -> Bool {
+    match a {
+        Int(a) => match b {
+            Int(b) => a >= b,
+            _ => panic("Int comparison"),
+        },
+        _ => panic("Int comparison"),
+    }
+}
+
+fn equal(a: Float, b: Float) -> Bool {
+    (a.mantissa - b.mantissa).abs() <= a.epsilon + b.epsilon
+}
+
+fn plus(a: Float, b: Float) -> Float {
+    Float(a.mantissa + b.mantissa)
+}
+
+fn times(a: Float, b: Float) -> Float {
+    Float(a.mantissa * b.mantissa)
+}
+
+fn minus(a: Float, b: Float) -> Float {
+    Float(a.mantissa - b.mantissa)
+}
+
+fn div(a: Float, b: Float) -> Float {
+    Float(a.mantissa / b

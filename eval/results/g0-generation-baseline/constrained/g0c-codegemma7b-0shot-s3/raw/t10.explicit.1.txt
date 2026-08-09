@@ -1,0 +1,12 @@
+fn main() {
+    let mut nums = vec(4, 1, 7, 3, 9, 2)
+    let mut count = 0
+    for x in &mut {
+        if x > &mut {
+            count = count + 1
+            print(x)
+            println
+        }
+    }
+    print(count)
+}

@@ -1,0 +1,8 @@
+fn main() {
+    let divisors = vec(5, 0, 4)
+    for d in divisors {
+        match 100 / d {
+            _ => print(if d == 0 { "undefined" } else { int_to_str(100 / d) }),
+        }
+    }
+}

@@ -1,0 +1,11 @@
+fn main() {
+    let a = "12".parse::<i32>().unwrap_or(0);
+    let b = "x".parse::<i32>().unwrap_or(0);
+    let c = "30".parse::<i32>().unwrap_or(0);
+
+    let sum = vec![a, b, c].into_iter().filter(|v| v.is_ok()).map(|v| v.unwrap()).sum();
+    println!("{}", sum);
+
+    let count = vec![a, b, c].into_iter().filter(|v| v.is_ok()).count();
+    println!("{}", count);
+}

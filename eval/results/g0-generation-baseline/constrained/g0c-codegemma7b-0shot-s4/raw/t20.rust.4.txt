@@ -1,0 +1,34 @@
+use std::io;
+
+fn main() {
+    let mut total_cost = 0;
+    let mut highest_cost = 0;
+    let mut highest_cost_item = "";
+
+    // Pen
+    let pen_cost = 3 * 4;
+    total_cost += pen_cost;
+    if pen_cost > highest_cost {
+        highest_cost = pen_cost;
+        highest_cost_item = "Pen";
+    }
+
+    // Pad
+    let pad_cost = 9 * 2;
+    total_cost += pad_cost;
+    if pad_cost > highest_cost {
+        highest_cost = pad_cost;
+        highest_cost_item = "Pad";
+    }
+
+    // Ink
+    let ink_cost = 5 * 3;
+    total_cost += ink_cost;
+    if ink_cost > highest_cost {
+        highest_cost = ink_cost;
+        highest_cost_item = "Ink";
+    }
+
+    println!("Total cost: {}", total_cost);
+    println!("Highest cost item: {}", highest_cost_item);
+}

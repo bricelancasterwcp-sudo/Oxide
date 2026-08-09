@@ -1,0 +1,289 @@
+fn main() {
+    let pen = Item { name: "pen", price: 3, quantity: 4 }
+    let pad = Item { name: "pad", price: 9, quantity: 2 }
+    let ink = Item { name: "ink", price: 5, quantity: 3 }
+    let items = push(push(push(vec(), pen), pad), ink)
+    let total_cost = sum_items(&items)
+    let item = max_cost(&items)
+    print(total_cost)
+    print(item.name)
+    drop items
+}
+
+fn sum_items(items: &Vec<Item>) -> Int {
+    let total = 0
+    for item in &items {
+        total = total + item.price * item.quantity
+    }
+    total
+}
+
+fn max_cost(items: &Vec<Item>) -> Item {
+    let mut best = Item { name: "", price: 0, quantity: 0 }
+    for item in &items {
+        if item.price * item.quantity > best.price * best.quantity {
+            best = item
+        }
+    }
+    best
+}
+
+struct Item { name: Str, price: Int, quantity: Int }
+
+fn print(x: Int) {
+    print_str(to_str(x))
+    print_str("\n")
+}
+
+fn print_str(s: Str) {
+    let _ = s
+}
+
+fn to_str(n: Int) -> Str {
+    let n_str = trunc(n).to_string()
+    n_str
+}
+
+fn vec() -> Vec<T> {
+    let v = Vec { data: BoxedSlice { data: 0, len: 0 } }
+    v
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let new_len = v.data.len + 1
+    let new_data = BoxedSlice { data: v.data.data, len: new_len }
+    let v = Vec { data: new_data }
+    v
+}
+
+fn len(v: Vec<T>) -> Int {
+    v.data.len
+}
+
+struct Vec { data: BoxedSlice<T> }
+
+struct BoxedSlice { data: T, len: Int }
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    if i >= 0 && i < len(&v) {
+        Some(v.data.data + i)
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in range(a, b) {
+        v = push(v, i)
+    }
+    v
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    let n = len(&s)
+    n
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let n = str_len(&a) + str_len(&b)
+    let s = vec(n)
+    for i in range(0, n) {
+        if i < str_len(&a) {
+            s = set(s, i, get(a, i))
+        } else {
+            s = set(s, i, get(b, i - str_len(&a)))
+        }
+    }
+    s
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let v = vec()
+    for i in range(0, str_len(&s)) {
+        let c = sub(s, i, 1)
+        v = push(v, c)
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    let n_str = trunc(n).to_string()
+    n_str
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    let n = to_float(trunc(to_float(s)))
+    if n == trunc(n) {
+        Some(n)
+    } else {
+        None
+    }
+}
+
+fn to_float(n: Int) -> Float {
+    let f = trunc(n).to_float()
+    f
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn main() {
+    let items = push(push(push(vec(), pen), pad), ink)
+    let total_cost = sum_items(&items)
+    let item = max_cost(&items)
+    print(total_cost)
+    print(item.name)
+    drop items
+}
+
+fn sum_items(items: &Vec<Item>) -> Int {
+    let total = 0
+    for item in &items {
+        total = total + item.price * item.quantity
+    }
+    total
+}
+
+fn max_cost(items: &Vec<Item>) -> Item {
+    let mut best = Item { name: "", price: 0, quantity: 0 }
+    for item in &items {
+        if item.price * item.quantity > best.price * best.quantity {
+            best = item
+        }
+    }
+    best
+}
+
+struct Item { name: Str, price: Int, quantity: Int }
+
+fn print(x: Int) {
+    print_str(to_str(x))
+    print_str("\n")
+}
+
+fn print_str(s: Str) {
+    let _ = s
+}
+
+fn to_str(n: Int) -> Str {
+    let n_str = trunc(n).to_string()
+    n_str
+}
+
+fn vec() -> Vec<T> {
+    let v = Vec { data: BoxedSlice { data: 0, len: 0 } }
+    v
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let new_len = v.data.len + 1
+    let new_data = BoxedSlice { data: v.data.data, len: new_len }
+    let v = Vec { data: new_data }
+    v
+}
+
+fn len(v: Vec<T>) -> Int {
+    v.data.len
+}
+
+struct Vec { data: BoxedSlice<T> }
+
+struct BoxedSlice { data: T, len: Int }
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    if i >= 0 && i < len(&v) {
+        Some(v.data.data + i)
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in range(a, b) {
+        v = push(v, i)
+    }
+    v
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    let n = len(&s)
+    n
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let n = str_len(&a) + str_len(&b)
+    let s = vec(n)
+    for i in range(0, n) {
+        if i < str_len(&a) {
+            s = set(s, i, get(a, i))
+        } else {
+            s = set(s, i, get(b, i - str_len(&a)))
+        }
+    }
+    s
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let v = vec()
+    for i in range(0, str_len(&s)) {
+        let c = sub(s, i, 1)
+        v = push(v, c)
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    let n_str = trunc(n).to_string()
+    n_str
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    let n = to_float(trunc(to_float(s)))
+    if n == trunc(n) {
+        Some(n)
+    } else {
+        None
+    }
+}
+
+fn to_float(n: Int) -> Float {
+    let f = trunc(n).to_float()
+    f
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn main() {
+    let items = push(push(push(vec(), pen), pad), ink)
+    let total_cost = sum_items(&items)
+    let item = max_cost(&items)
+    print(total_cost)
+    print(item.name)
+    drop items
+}
+
+fn sum_items(items: &Vec<Item>) -> Int {
+    let total = 0
+    for item in &items {
+        total = total + item.price * item.quantity
+    }
+    total
+}
+
+fn max_cost(items: &Vec<Item>) -> Item {
+    let mut best = Item { name: "", price: 0, quantity: 0 }
+   

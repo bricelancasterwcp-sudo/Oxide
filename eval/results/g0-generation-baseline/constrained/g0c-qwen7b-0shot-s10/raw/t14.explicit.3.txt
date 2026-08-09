@@ -1,0 +1,18 @@
+fn count_s_and_distinct(s: &Str) -> Vec<Int> {
+    let mut count = 0
+    for c in s.chars() {
+        if c == "s" {
+            count = count + 1
+        }
+    }
+    let distinct = s.chars().collect()
+    let distinct_count = distinct.len()
+    vec(count, distinct_count)
+}
+
+fn main() {
+    let text = "mississippi"
+    let result = count_s_and_distinct(&text)
+    print(result)
+    drop text
+}

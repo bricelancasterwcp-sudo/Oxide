@@ -1,0 +1,16 @@
+fn rectangle_perimeter(a: Int, b: Int) -> Int {
+    2 * (a + b)
+}
+
+fn triangle_perimeter(a: Int, b: Int, c: Int) -> Int {
+    a + b + c
+}
+
+fn main() {
+    let r1 = (3 * 4).clone()
+    let r2 = (2 * 5).clone()
+    let t = (3 + 4 + 5).clone()
+    print(rectangle_perimeter(3, 4))
+    print(triangle_perimeter(3, 4, 5))
+    print(rectangle_perimeter(2, 5))
+}

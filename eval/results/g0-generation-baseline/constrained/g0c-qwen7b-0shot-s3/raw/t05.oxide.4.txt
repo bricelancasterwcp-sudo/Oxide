@@ -1,0 +1,13 @@
+struct Fibonacci { a: Int, b: Int }
+
+fn next(f: Fibonacci) -> Fibonacci {
+    Fibonacci(f.b, f.a + f.b)
+}
+
+fn main() {
+    let mut fib = Fibonacci(1, 1)
+    for _ in 1.20 {
+        fib = next(fib)
+    }
+    print(fib.a)
+}

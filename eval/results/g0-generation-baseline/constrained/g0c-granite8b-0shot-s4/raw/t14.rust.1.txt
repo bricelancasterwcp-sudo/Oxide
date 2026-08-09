@@ -1,0 +1,16 @@
+```rust
+fn main() {
+    let s = "mississippi";
+    let s_char = s.chars().collect::<Vec<char>>();
+    let mut s_count = 0;
+    let mut s_set = std::collections::HashSet::new();
+    for c in s_char.iter() {
+        if c == &'s' {
+            s_count += 1;
+        }
+        s_set.insert(c);
+    }
+    println!("Number of 's': {}", s_count);
+    println!("Number of distinct characters: {}", s_set.len());
+}
+```

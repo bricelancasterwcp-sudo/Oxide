@@ -1,0 +1,31 @@
+struct Perfect { num: Int, sum: Int }
+
+fn is_perfect(n: Int) -> Bool {
+    let mut s = 0
+    for d in range(1, n) {
+        if n % d == 0 {
+            s = s + d
+        }
+    }
+    s == n
+}
+
+fn next_perfect() -> Option<Perfect> {
+    let n = 1 + get(range(2, 1000), 0)?
+    if is_perfect(n) {
+        Some(Perfect { num: n, sum: 0 })
+    } else {
+        next_perfect()
+    }
+}
+
+fn main() {
+    let mut p = next_perfect()?
+    while True {
+        print(p.num)
+        p = Perfect { num: p.num + 1, sum: p.sum + p.num }
+        if !is_perfect(p.num) {
+            break
+        }
+    }
+}

@@ -1,0 +1,8 @@
+fn main() {
+    let mut multiples = vec()
+    for i in range(1, 9) {
+        multiples = push(multiples, i * 3)
+    }
+    let sum: Int = multiples.iter().map(x || x).sum()
+    print(sum)
+}

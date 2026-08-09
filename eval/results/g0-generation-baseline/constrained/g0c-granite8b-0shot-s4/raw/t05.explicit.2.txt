@@ -1,0 +1,11 @@
+fn main() {
+    let mut a = 1
+    let mut b = 1
+    for _ in 0.range(19) {
+        let c = a + b
+        drop a
+        a = b
+        b = c
+    }
+    print(b)
+}

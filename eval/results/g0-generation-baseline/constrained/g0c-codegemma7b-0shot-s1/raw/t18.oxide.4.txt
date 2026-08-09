@@ -1,0 +1,16 @@
+fn triangle_perimeter(a: Int, b: Int, c: Int) -> Int {
+    a + b + c
+}
+
+fn rectangle_perimeter(a: Int, b: Int) -> Int {
+    2 * a + 2 * b
+}
+
+fn main() {
+    let r1 = rectangle_perimeter(3, 4)
+    let r2 = rectangle_perimeter(2, 5)
+    let t = triangle_perimeter(3, 4, 5)
+    print(2 * r1 + 4)
+    print(2 * r2 + 10)
+    print(2 * t + 12)
+}

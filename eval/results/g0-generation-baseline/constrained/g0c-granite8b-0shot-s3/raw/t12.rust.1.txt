@@ -1,0 +1,9 @@
+```rust
+fn main() {
+    let text = "stack";
+    let mut chars = text.chars().rev();
+    while let Some(c) = chars.next() {
+        print!("{}", c);
+    }
+}
+```

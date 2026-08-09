@@ -1,0 +1,14 @@
+fn main() {
+    let pen = (3.00 * 4.00).to_string()
+    let pad = (9.00 * 2.00).to_string()
+    let ink = (5.00 * 3.00).to_string()
+    let total_cost = pen.parse().unwrap() + pad.parse().unwrap() + ink.parse().unwrap()
+    print(total_cost)
+    if pen.parse().unwrap() > pad.parse().unwrap() && pen.parse().unwrap() > ink.parse().unwrap() {
+        print("Pen")
+    } else if pad.parse().unwrap() > pen.parse().unwrap() && pad.parse().unwrap() > ink.parse().unwrap() {
+        print("Pad")
+    } else if ink.parse().unwrap() > pen.parse().unwrap() && ink.parse().unwrap() > pad.parse().unwrap() {
+        print("Ink")
+    }
+}

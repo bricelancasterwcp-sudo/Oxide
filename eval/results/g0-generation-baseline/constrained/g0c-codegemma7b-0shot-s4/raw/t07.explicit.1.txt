@@ -1,0 +1,9 @@
+fn main() {
+    let mut numbers = vec(3, 6, 9, 12, 15, 18, 21, 24)
+    let mut total = 0
+    for x in &numbers {
+        total = total + x
+    }
+    print(total)
+    drop numbers
+}

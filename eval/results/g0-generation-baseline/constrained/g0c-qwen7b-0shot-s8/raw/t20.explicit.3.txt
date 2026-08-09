@@ -1,0 +1,16 @@
+fn main() {
+    let pen_cost = (3.0 * 4.0).floor() + 0.5
+    let pad_cost = (9.0 * 2.0).floor() + 0.5
+    let ink_cost = (5.0 * 3.0).floor() + 0.5
+    let total_cost = pen_cost + pad_cost + ink_cost
+    print_str("Total cost: ")
+    print(total_cost)
+    print_str("\n")
+    if pen_cost > pad_cost && pen_cost > ink_cost {
+        print_str("Pen is the most expensive item.\n")
+    } else if pad_cost > pen_cost && pad_cost > ink_cost {
+        print_str("Pad is the most expensive item.\n")
+    } else {
+        print_str("Ink is the most expensive item.\n")
+    }
+}

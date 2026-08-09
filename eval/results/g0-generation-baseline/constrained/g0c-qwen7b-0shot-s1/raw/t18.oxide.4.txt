@@ -1,0 +1,26 @@
+struct Point { x: Int, y: Int }
+
+struct Rectangle { width: Int, height: Int }
+
+struct Triangle { sides: Vec<Int> }
+
+fn perimeter_rect(rect: Rectangle) -> Int {
+    2 * (rect.width + rect.height)
+}
+
+fn perimeter_tri(tri: Triangle) -> Int {
+    let sum: Int = tri.sides.iter().sum()
+    sum
+}
+
+fn main() {
+    let rect1 = Rectangle { width: 3, height: 4 }
+    let rect2 = Rectangle { width: 2, height: 5 }
+    let tri = Triangle { sides: vec() }
+    tri.sides.push(3)
+    tri.sides.push(4)
+    tri.sides.push(5)
+    print(perimeter_rect(rect1))
+    print(perimeter_tri(tri))
+    print(perimeter_rect(rect2))
+}

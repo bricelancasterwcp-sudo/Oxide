@@ -1,0 +1,306 @@
+fn main() {
+    let mut sum = 0
+    let mut fails = 0
+    for s in vec_str("12", "x", "30") {
+        match parse_int(s) {
+            Some(n) => sum == sum + n,
+            None => fails == fails + 1,
+        }
+    }
+    print(sum)
+    print(fails)
+}
+
+fn vec_str(v: String, s: String, t: String) -> Vec<String> {
+    vec(v, s, t)
+}
+
+fn parse_int(s: String) -> Option<Int> {
+    match int_to_str(parse_int(s)) {
+        Some(n) => Some(n),
+        None => None,
+    }
+}
+
+fn int_to_str(n: Option<Int>) -> Option<String> {
+    match n {
+        Some(n) => Some(format(n)),
+        None => None,
+    }
+}
+
+fn format(n: Int) -> String {
+    let mut s = String
+    while n > 0 {
+        let r = n % 10
+        let c = (r + 48)
+        s = char(c) + s
+        n = n / 10
+    }
+    s
+}
+
+fn char(c: Int) -> String {
+    let s = format(c)
+    s
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Option<String>) {
+    match s {
+        Some(n) => print_str(n),
+        None => print_str(),
+    }
+}
+
+fn print_str(s: String) {
+    let mut stdout = std_out()
+    for c in s.chars() {
+        let mut b = byte(c)
+        write_byte(stdout, b)
+    }
+    write_byte(stdout, byte())
+}
+
+fn std_out() -> Int {
+    extern_fn()
+}
+
+fn write_byte(fd: Int, b: Int) {
+    extern_fn()
+}
+
+fn byte(c: Char) -> Int {
+    let i = Int(c) - Int(0)
+    i
+}
+
+fn char(c: Int) -> Char {
+    let i = Int(c) + Int(0)
+    Char(i)
+}
+
+fn format(n: Int) -> String {
+    let mut s = String
+    while n > 0 {
+        let r = n % 10
+        let c = (r + 48)
+        s = char(c) + s
+        n = n / 10
+    }
+    s
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Option<String>) {
+    match s {
+        Some(n) => print_str(n),
+        None => print_str(),
+    }
+}
+
+fn print_str(s: String) {
+    let mut stdout = std_out()
+    for c in s.chars() {
+        let mut b = byte(c)
+        write_byte(stdout, b)
+    }
+    write_byte(stdout, byte())
+}
+
+fn std_out() -> Int {
+    extern_fn()
+}
+
+fn write_byte(fd: Int, b: Int) {
+    extern_fn()
+}
+
+fn byte(c: Char) -> Int {
+    let i = Int(c) - Int(0)
+    i
+}
+
+fn char(c: Int) -> Char {
+    let i = Int(c) + Int(0)
+    Char(i)
+}
+
+fn format(n: Int) -> String {
+    let mut s = String
+    while n > 0 {
+        let r = n % 10
+        let c = (r + 48)
+        s = char(c) + s
+        n = n / 10
+    }
+    s
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Option<String>) {
+    match s {
+        Some(n) => print_str(n),
+        None => print_str(),
+    }
+}
+
+fn print_str(s: String) {
+    let mut stdout = std_out()
+    for c in s.chars() {
+        let mut b = byte(c)
+        write_byte(stdout, b)
+    }
+    write_byte(stdout, byte())
+}
+
+fn std_out() -> Int {
+    extern_fn()
+}
+
+fn write_byte(fd: Int, b: Int) {
+    extern_fn()
+}
+
+fn byte(c: Char) -> Int {
+    let i = Int(c) - Int(0)
+    i
+}
+
+fn char(c: Int) -> Char {
+    let i = Int(c) + Int(0)
+    Char(i)
+}
+
+fn format(n: Int) -> String {
+    let mut s = String
+    while n > 0 {
+        let r = n % 10
+        let c = (r + 48)
+        s = char(c) + s
+        n = n / 10
+    }
+    s
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Option<String>) {
+    match s {
+        Some(n) => print_str(n),
+        None => print_str(),
+    }
+}
+
+fn print_str(s: String) {
+    let mut stdout = std_out()
+    for c in s.chars() {
+        let mut b = byte(c)
+        write_byte(stdout, b)
+    }
+    write_byte(stdout, byte())
+}
+
+fn std_out() -> Int {
+    extern_fn()
+}
+
+fn write_byte(fd: Int, b: Int) {
+    extern_fn()
+}
+
+fn byte(c: Char) -> Int {
+    let i = Int(c) - Int(0)
+    i
+}
+
+fn char(c: Int) -> Char {
+    let i = Int(c) + Int(0)
+    Char(i)
+}
+
+fn format(n: Int) -> String {
+    let mut s = String
+    while n > 0 {
+        let r = n % 10
+        let c = (r + 48)
+        s = char(c) + s
+        n = n / 10
+    }
+    s
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Option<String>) {
+    match s {
+        Some(n) => print_str(n),
+        None => print_str(),
+    }
+}
+
+fn print_str(s: String) {
+    let mut stdout = std_out()
+    for c in s.chars() {
+        let mut b = byte(c)
+        write_byte(stdout, b)
+    }
+    write_byte(stdout, byte())
+}
+
+fn std_out() -> Int {
+    extern_fn()
+}
+
+fn write_byte(fd: Int, b: Int) {
+    extern_fn()
+}
+
+fn byte(c: Char) -> Int {
+    let i = Int(c) - Int(0)
+    i
+}
+
+fn char(c: Int) -> Char {
+    let i = Int(c) + Int(0)
+    Char(i)
+}
+
+fn format(n: Int) -> String {
+    let mut s = String
+    while n > 0 {
+        let r = n % 10
+        let c = (r + 48)
+        s = char(c) + s
+        n = n / 10
+    }
+    s
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Option<String>) {
+    match s {
+        Some(n) => print_str(n),
+        None => print_str(),
+    }
+}
+
+fn print_str(s: String) {
+    let mut stdout = std_out()
+    for c in s.chars() {

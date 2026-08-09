@@ -1,0 +1,391 @@
+fn main() {
+    let list = push(push(vec(), 3), 6)
+    let total = sum(&list)
+    print(total)
+    drop list
+}
+
+fn sum(v: &Vec<Int>) -> Int {
+    let mut acc = 0
+    for x in &v {
+        acc = acc + x
+    }
+    acc
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v + vec(x)
+}
+
+fn vec() -> Vec<Int> {
+    vec()
+}
+
+fn vec(x: Int) -> Vec<Int> {
+    vec(x)
+}
+
+fn vec(x: Int, xs: Vec<Int>) -> Vec<Int> {
+    vec(x, xs)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn print(x: Str) {
+    print(x)
+}
+
+fn print(x: Bool) {
+    print(x)
+}
+
+fn print(x: Unit) {
+    print(x)
+}
+
+fn print(x: Option<Int>) {
+    print(x)
+}
+
+fn print(x: Result<Int, Int>) {
+    print(x)
+}
+
+fn print(x: &Str) {
+    print(x)
+}
+
+fn print(x: &Bool) {
+    print(x)
+}
+
+fn print(x: &Unit) {
+    print(x)
+}
+
+fn print(x: &Option<Int>) {
+    print(x)
+}
+
+fn print(x: &Result<Int, Int>) {
+    print(x)
+}
+
+fn print(x: &Vec<Int>) {
+    print(x)
+}
+
+fn print(x: &Int) {
+    print(x)
+}
+
+fn print(x: &Float) {
+    print(x)
+}
+
+fn print_str(x: Str) {
+    print_str(x)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    range(a, b)
+}
+
+fn clone(x: Int) -> Int {
+    clone(x)
+}
+
+fn clone(x: Str) -> Str {
+    clone(x)
+}
+
+fn clone(x: Bool) -> Bool {
+    clone(x)
+}
+
+fn clone(x: Unit) -> Unit {
+    clone(x)
+}
+
+fn clone(x: Option<Int>) -> Option<Int> {
+    clone(x)
+}
+
+fn clone(x: Result<Int, Int>) -> Result<Int, Int> {
+    clone(x)
+}
+
+fn clone(x: &Str) -> Str {
+    clone(x)
+}
+
+fn clone(x: &Bool) -> Bool {
+    clone(x)
+}
+
+fn clone(x: &Unit) -> Unit {
+    clone(x)
+}
+
+fn clone(x: &Option<Int>) -> Option<Int> {
+    clone(x)
+}
+
+fn clone(x: &Result<Int, Int>) -> Result<Int, Int> {
+    clone(x)
+}
+
+fn clone(x: &Vec<Int>) -> Vec<Int> {
+    clone(x)
+}
+
+fn clone(x: &Int) -> Int {
+    clone(x)
+}
+
+fn clone(x: &Float) -> Float {
+    clone(x)
+}
+
+fn to_float(x: Int) -> Float {
+    to_float(x)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+fn main() {
+    let list = push(push(vec(), 3), 6)
+    let total = sum(&list)
+    print(total)
+    drop list
+}
+
+fn sum(v: &Vec<Int>) -> Int {
+    let mut acc = 0
+    for x in &v {
+        acc = acc + x
+    }
+    acc
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v + vec(x)
+}
+
+fn vec() -> Vec<Int> {
+    vec()
+}
+
+fn vec(x: Int) -> Vec<Int> {
+    vec(x)
+}
+
+fn vec(x: Int, xs: Vec<Int>) -> Vec<Int> {
+    vec(x, xs)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn print(x: Str) {
+    print(x)
+}
+
+fn print(x: Bool) {
+    print(x)
+}
+
+fn print(x: Unit) {
+    print(x)
+}
+
+fn print(x: Option<Int>) {
+    print(x)
+}
+
+fn print(x: Result<Int, Int>) {
+    print(x)
+}
+
+fn print(x: &Str) {
+    print(x)
+}
+
+fn print(x: &Bool) {
+    print(x)
+}
+
+fn print(x: &Unit) {
+    print(x)
+}
+
+fn print(x: &Option<Int>) {
+    print(x)
+}
+
+fn print(x: &Result<Int, Int>) {
+    print(x)
+}
+
+fn print(x: &Vec<Int>) {
+    print(x)
+}
+
+fn print(x: &Int) {
+    print(x)
+}
+
+fn print(x: &Float) {
+    print(x)
+}
+
+fn print_str(x: Str) {
+    print_str(x)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    range(a, b)
+}
+
+fn clone(x: Int) -> Int {
+    clone(x)
+}
+
+fn clone(x: Str) -> Str {
+    clone(x)
+}
+
+fn clone(x: Bool) -> Bool {
+    clone(x)
+}
+
+fn clone(x: Unit) -> Unit {
+    clone(x)
+}
+
+fn clone(x: Option<Int>) -> Option<Int> {
+    clone(x)
+}
+
+fn clone(x: Result<Int, Int>) -> Result<Int, Int> {
+    clone(x)
+}
+
+fn clone(x: &Str) -> Str {
+    clone(x)
+}
+
+fn clone(x: &Bool) -> Bool {
+    clone(x)
+}
+
+fn clone(x: &Unit) -> Unit {
+    clone(x)
+}
+
+fn clone(x: &Option<Int>) -> Option<Int> {
+    clone(x)
+}
+
+fn clone(x: &Result<Int, Int>) -> Result<Int, Int> {
+    clone(x)
+}
+
+fn clone(x: &Vec<Int>) -> Vec<Int> {
+    clone(x)
+}
+
+fn clone(x: &Int) -> Int {
+    clone(x)
+}
+
+fn clone(x: &Float) -> Float {
+    clone(x)
+}
+
+fn to_float(x: Int) -> Float {
+    to_float(x)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+fn main() {
+    let list = push(push(vec(), 3), 6)
+    let total = sum(&list)
+    print(total)
+    drop list
+}
+
+fn sum(v: &Vec<Int>) -> Int {
+    let mut acc = 0
+    for x in &v {
+        acc = acc + x
+    }
+    acc
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v + vec(x)
+}
+
+fn vec() -> Vec<Int> {
+    vec()
+}
+
+fn vec(x: Int) -> Vec<Int> {
+    vec(x)
+}
+
+fn vec(x: Int, xs: Vec<Int>) -> Vec<Int> {
+    vec(x, xs)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn print(x: Str) {
+    print(x)
+}
+
+fn print(x: Bool) {
+    print(x)
+}
+
+fn print(x: Unit) {
+    print(x)
+}
+
+fn print(x: Option<Int>) {
+    print(x)
+}
+
+fn print(x: Result<Int, Int>) {
+    print(x)
+}
+
+fn print(x: &Str) {
+    print(x)
+}
+
+fn print(x: &Bool) {
+    print(x)
+}
+
+fn print(x: &Unit) {
+    print(x)
+}
+
+fn print(x: &Option<Int>) {
+    print(x)
+}
+
+fn print(x: &Result<Int, Int>) {
+    print

@@ -1,0 +1,13 @@
+fn main() {
+    let list = vec(10, 20, 30)
+    let pos1 = 1
+    let pos2 = 5
+    match get(list, pos1) {
+        Some(val) => print(val),
+        None => print(-1),
+    }
+    match get(list, pos2) {
+        Some(val) => print(val),
+        None => print(-1),
+    }
+}

@@ -1,0 +1,22 @@
+fn task_1(list: &Vec<Int>) -> Vec<Int> {
+    let mut v = clone(&list)
+    for i in 0 <= len(&v) {
+        for j in 0 <= i {
+            if get(&v, j) > get(&v, i) {
+                let temp = get(&v, i)
+                set(&mutv, i, get(&v, j))
+                set(&mutv, j, temp)
+            }
+        }
+    }
+    v
+}
+
+fn main() {
+    let task_1_list = push(push(push(push(push(vec(), 5), 3), 8), 1), 9)
+    let sorted_list = task_1(&task_1_list)
+    print_str("Task 1 result: ")
+    print(len(&sorted_list))
+    drop task_1_list
+    drop sorted_list
+}

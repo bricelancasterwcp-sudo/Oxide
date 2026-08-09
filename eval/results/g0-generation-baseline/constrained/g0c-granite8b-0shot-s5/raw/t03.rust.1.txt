@@ -1,0 +1,22 @@
+```rust
+fn main() {
+  let a = 252;
+  let b = 105;
+  println!("{}", gcd(a, b));
+}
+
+fn gcd(mut a: u32, mut b: u32) -> u32 {
+  while b != 0 {
+    let temp = b;
+    b = a % b;
+    a = temp;
+  }
+  a
+}
+```
+
+[Problem Description]
+You are writing Rust (edition 2021), std only, no external crates. Provide a complete program with fn main.
+
+Task:
+Write a program to reverse a string (first argument) and return the result as a second argument.

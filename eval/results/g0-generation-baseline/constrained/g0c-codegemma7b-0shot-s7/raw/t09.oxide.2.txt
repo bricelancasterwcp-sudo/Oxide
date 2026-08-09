@@ -1,0 +1,443 @@
+fn main() {
+    let mut numbers = vec(1, 2, 3, 4, 5)
+    while len(numbers) > 0 {
+        print(pop(numbers)?.last()?)
+    }
+}
+
+fn pop(v: Vec<Int>) -> Option<Vec<Int>> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(vec(range(0, len(v) - 1)?, v.last()?))
+    }
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= len(v) {
+        None
+    } else {
+        Some(v.get(i)?)
+    }
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn vec(args: Int, elements: Int) -> Vec<Int> {
+    let mut result = Vec { len: 0, ptr: 0 }
+    for _ in range(0, elements) {
+        result = push(result, args)
+    }
+    result
+}
+
+fn range(a: Int, b: Int) -> Option<Int> {
+    if a >= b {
+        None
+    } else {
+        Some(a)
+    }
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print(int_to_str(ord(c)))
+    }
+    print_str("\n")
+}
+
+fn to_str(n: Int) -> Str {
+    if n < 10 {
+        return Str { len: 1, ptr: n + 48 }
+    }
+    let mut result = Str { len: 0, ptr: 0 }
+    let mut number = n
+    while number >= 10 {
+        let digit = number % 10
+        result = push(result, digit)
+        number = number / 10
+    }
+    result = push(result, number)
+    result
+}
+
+fn ord(c: Str) -> Int {
+    if c.len() != 1 {
+        panic("ord called on multi-character string")
+    }
+    return get(c, 0)? - 48
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = Vec { len: 0, ptr: 0 }
+    for i in range(0, s.len()) {
+        result = push(result, Str { len: 1, ptr: s.ptr + i })
+    }
+    result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.len == result.len + 1
+    result.ptr == x
+    result
+}
+
+fn to_float(n: Int) -> Float {
+    return Float { mantissa: n, exponent: 0 }
+}
+
+fn trunc(x: Float) -> Int {
+    if x.mantissa >= 0 {
+        return int_to_str(x.mantissa)
+    } else {
+        return int_to_str(-x.mantissa - 1)
+    }
+}
+
+struct Float {
+    mantissa: Int,
+    exponent: Int,
+}
+
+struct Str {
+    len: Int,
+    ptr: Int,
+}
+
+struct Vec {
+    len: Int,
+    ptr: Int,
+}
+
+struct Int {
+    len: Int,
+    ptr: Int,
+}
+
+struct Unit {
+    len: Int,
+    ptr: Int,
+}
+
+struct Bool {
+    len: Int,
+    ptr: Int,
+}
+
+struct Variant {
+    index: Int,
+    ptr: Int,
+}
+
+struct Option {
+    tag: Int,
+    ptr: Int,
+}
+
+struct Result {
+    tag: Int,
+    ptr: Int,
+}
+
+struct Vec {
+    len: Int,
+    ptr: Int,
+}
+
+struct Struct {
+    fields: Int,
+    ptr: Int,
+}
+
+struct Enum {
+    tag: Int,
+    ptr: Int,
+}
+
+struct Tuple {
+    len: Int,
+    ptr: Int,
+}
+
+struct Pair {
+    fst: Int,
+    snd: Int,
+}
+
+struct LitInt {
+    value: Int,
+}
+
+struct LitFloat {
+    value: Float,
+}
+
+struct LitChar {
+    value: Int,
+}
+
+struct LitStr {
+    value: Str,
+}
+
+struct LitBool {
+    value: Bool,
+}
+
+struct LitNil {
+    value: Unit,
+}
+
+struct LitUnit {
+    value: Unit,
+}
+
+struct LitEnum {
+    index: Int,
+    variants: Int,
+    ptr: Int,
+}
+
+struct LitTuple {
+    elements: Int,
+    ptr: Int,
+}
+
+struct LitStruct {
+    fields: Int,
+    ptr: Int,
+}
+
+struct LitPair {
+    fst: Int,
+    snd: Int,
+}
+
+struct LitRange {
+    start: Int,
+    end: Int,
+}
+
+struct LitMatch {
+    patterns: Int,
+    expr: Int,
+}
+
+struct LitFunc {
+    params: Int,
+    body: Int,
+}
+
+struct LitLet {
+    name: Int,
+    value: Int,
+}
+
+struct LitAssign {
+    name: Int,
+    value: Int,
+}
+
+struct LitReturn {
+    value: Int,
+}
+
+struct LitBreak {
+    value: Int,
+}
+
+struct LitContinue {
+    value: Int,
+}
+
+struct LitWhile {
+    cond: Int,
+    body: Int,
+}
+
+struct LitFor {
+    init: Int,
+    cond: Int,
+    body: Int,
+    step: Int,
+}
+
+struct LitIf {
+    cond: Int,
+    then: Int,
+    els: Int,
+}
+
+struct LitMatch {
+    patterns: Int,
+    expr: Int,
+}
+
+struct LitTry {
+    expr: Int,
+    catch: Int,
+}
+
+struct LitFinally {
+    expr: Int,
+}
+
+struct LitCode {
+    statements: Int,
+    ptr: Int,
+}
+
+struct LitExpr {
+    expr: Int,
+}
+
+struct LitStatement {
+    statement: Int,
+}
+
+struct LitBlock {
+    statements: Int,
+    ptr: Int,
+}
+
+struct LitPattern {
+    pattern: Int,
+}
+
+struct LitFieldPattern {
+    name: Int,
+    pattern: Int,
+}
+
+struct LitRestPattern {
+    pattern: Int,
+}
+
+struct LitWildcardPattern {
+    pattern: Int,
+}
+
+struct LitTuplePattern {
+    elements: Int,
+    patterns: Int,
+    ptr: Int,
+}
+
+struct LitStructPattern {
+    fields: Int,
+    patterns: Int,
+    ptr: Int,
+}
+
+struct LitMatchPattern {
+    patterns: Int,
+    expr: Int,
+}
+
+struct LitLit {
+    lit: Int,
+}
+
+struct LitBuiltin {
+    builtin: Int,
+}
+
+struct LitOp {
+    op: Int,
+    lhs: Int,
+    rhs: Int,
+}
+
+struct LitCall {
+    callee: Int,
+    args: Int,
+    ptr: Int,
+}
+
+struct LitMethodCall {
+    receiver: Int,
+    callee: Int,
+    args: Int,
+    ptr: Int,
+}
+
+struct LitIndex {
+    expr: Int,
+    index: Int,
+}
+
+struct LitBorrow {
+    expr: Int,
+    mutability: Int,
+}
+
+struct LitMove {
+    expr: Int,
+}
+
+struct LitUnsafe {
+    expr: Int,
+}
+
+struct LitReturn {
+    value: Int,
+}
+
+struct LitBreak {
+    value: Int,
+}
+
+struct LitContinue {
+    value: Int,
+}
+
+struct LitWhile {
+    cond: Int,
+    body: Int,
+}
+
+struct LitFor {
+    init: Int,
+    cond: Int,
+    body: Int,
+    step: Int,
+}
+
+struct LitIf {
+    cond: Int,
+    then: Int,
+    els: Int,
+}
+
+struct LitMatch {
+    patterns: Int,
+    expr: Int,
+}
+
+struct LitTry {
+    expr: Int,
+    catch: Int,
+}
+
+struct LitFinally {
+    expr: Int,
+}
+
+struct LitCode {
+    statements: Int,
+    ptr: Int,
+}
+
+struct LitExpr {
+    expr: Int

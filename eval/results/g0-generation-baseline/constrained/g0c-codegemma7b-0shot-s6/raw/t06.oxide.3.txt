@@ -1,0 +1,18 @@
+fn is_perfect(n: Int) -> Bool {
+    let mut sum = 0
+    for i in 1.range(n) {
+        if n % i == 0 {
+            sum = sum + i
+        }
+    }
+    sum == n
+}
+
+fn main() {
+    for i in 1.range(1000) {
+        if is_perfect(i) {
+            print(i)
+            print_str("\n")
+        }
+    }
+}

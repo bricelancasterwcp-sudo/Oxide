@@ -1,0 +1,23 @@
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < len(v) {
+        Some(get_at(v, i))
+    } else {
+        None
+    }
+}
+
+fn get_at(v: Vec<Int>, i: Int) -> Int {
+    get(v, i)?
+}
+
+fn main() {
+    let v = push(push(push(vec(), 10), 20), 30)
+    match get(v, 1) {
+        Some(x) => print(x),
+        None => print_str("out of bounds"),
+    }
+    match get(v, 5) {
+        Some(x) => print(x),
+        None => print_str("out of bounds"),
+    }
+}

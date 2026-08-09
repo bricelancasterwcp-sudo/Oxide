@@ -1,0 +1,8 @@
+use std::io::Write;
+
+fn main() {
+    let mut text = String::from("stack");
+    text.retain(|c| !c.is_whitespace());
+    text.chars().rev().for_each(|c| { Write::write(&mut std::io::stdout(), &c).unwrap(); });
+    println!();
+}

@@ -1,0 +1,6 @@
+fn main() {
+    let l = IntList { head: 5, tail: push(push(vec(), 4), 3) }
+    for x in reverse(l).tail.iter().rev() {
+        print(x)
+    }
+}

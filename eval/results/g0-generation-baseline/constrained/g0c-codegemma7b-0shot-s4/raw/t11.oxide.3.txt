@@ -1,0 +1,13 @@
+fn main() {
+    let mut list = vec(5, 3, 8, 1, 9, 2)
+    for x in range(0, len(list)) {
+        let mut y = get(list, x)?
+        for z in range(x + 1, len(list)) {
+            if get(list, z)? < y {
+                y = get(list, z)?
+            }
+        }
+        print(y)
+        list = push(push(list, y), y)
+    }
+}

@@ -1,0 +1,49 @@
+fn main() {
+    let rect1 = Rectangle { width: 3, height: 4 };
+    let rect2 = Rectangle { width: 2, height: 5 };
+    let tri = Triangle { a: 3, b: 4, c: 5 };
+
+    println!(
+        "Perimeter of rectangle 1 is {}.",
+        calculate_perimeter(&rect1)
+    );
+    println!(
+        "Perimeter of rectangle 2 is {}.",
+        calculate_perimeter(&rect2)
+    );
+    println!(
+        "Perimeter of triangle is {}.",
+        calculate_perimeter(&tri)
+    );
+}
+
+fn calculate_perimeter(shape: &dyn Shape) -> u32 {
+    shape.perimeter()
+}
+
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+struct Triangle {
+    a: u32,
+    b: u32,
+    c: u32,
+}
+
+impl Shape for Rectangle {
+    fn perimeter(&self) -> u32 {
+        2 * (self.width + self.height)
+    }
+}
+
+impl Shape for Triangle {
+    fn perimeter(&self) -> u32 {
+        self.a + self.b + self.c
+    }
+}
+
+trait Shape {
+    fn perimeter(&self) -> u32;
+}

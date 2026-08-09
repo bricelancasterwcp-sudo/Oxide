@@ -1,0 +1,24 @@
+fn parse_and_sum(s1: &Str, s2: &Str, s3: &Str) -> Int {
+    let num1 = parse_int(s1)
+    let num2 = parse_int(s2)
+    let num3 = parse_int(s3)
+    let sum = match num1 {
+        Some(n) => n,
+        None => 0,
+    }  // drop num1
+    let sum = match num2 {
+        Some(n) => sum + n,
+        None => sum,
+    }  // drop num2
+    let sum = match num3 {
+        Some(n) => sum + n,
+        None => sum,
+    }  // drop num3
+    sum
+}
+
+fn main() {
+    let nums = parse_and_sum(&str_to_int, &str_to_int, &str_to_int)
+    print(nums)
+    drop nums
+}

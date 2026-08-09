@@ -1,0 +1,420 @@
+fn area(width: Int, height: Int) -> Int {
+    width * height
+}
+
+fn perimeter(width: Int, height: Int) -> Int {
+    2 * (width + height)
+}
+
+fn main() {
+    let rect = Rectangle(7, 4)
+    print(area(&rect, rect.width()))
+    print(perimeter(&rect, rect.height()))
+    drop rect
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r: &Rectangle) -> Int {
+    r.height
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn new(width: Int, height: Int) -> Rectangle {
+    Rectangle(width, height)
+}
+
+fn width(r: &Rectangle) -> Int {
+    r.width
+}
+
+fn height(r:

@@ -1,0 +1,15 @@
+use std::collections::HashSet;
+
+fn main() {
+    let text = "mississippi";
+
+    // Count occurrences of "s"
+    let s_count = text.chars().filter(|c| c == 's').count();
+
+    // Count distinct characters
+    let distinct_chars: HashSet<char> = text.chars().collect();
+    let distinct_count = distinct_chars.len();
+
+    println!("'s' occurs {} times", s_count);
+    println!("There are {} distinct characters", distinct_count);
+}

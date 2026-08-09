@@ -1,0 +1,32 @@
+fn count_chars(s: &Str) -> Int {
+    let mut count = 0
+    for c in chars(s) {
+        if c == "s" {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn count_distinct(s: &Str) -> Int {
+    let mut chars_map = Vec()
+    for c in chars(s) {
+        let mut found = false
+        for i in 0 < chars_map.len() {
+            if chars_map.get(i) == c {
+                found = true
+                break
+            }
+        }
+        if !found {
+            chars_map = push(chars_map, c)
+        }
+    }
+    chars_map.len()
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_chars(&text))
+    print(count_distinct(&text))
+}

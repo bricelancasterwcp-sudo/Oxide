@@ -1,0 +1,17 @@
+fn main() {
+    let list = push(push(push(vec(), 3), 8), -2)
+    let list = push(list, 12)
+    let list = push(list, 7)
+    let positive = 0
+    let largest = 0
+    for x in &list {
+        if x > largest {
+            largest = x
+        }
+        if x > 0 {
+            positive = positive + 1
+        }
+    }
+    print(positive)
+    print(largest)
+}

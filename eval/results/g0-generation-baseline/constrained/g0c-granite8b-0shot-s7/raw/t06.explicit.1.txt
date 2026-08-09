@@ -1,0 +1,255 @@
+fn main() {
+    for i in 2.to(1000) {
+        let sum = sum_factors(i) - i
+        if sum == i {
+            println(i)
+        }
+    }
+}
+
+fn sum_factors(n: Int) -> Int {
+    let mut total = 0
+    let mut i = 1
+    while i <= n {
+        if n % i == 0 {
+            total = total + i
+        }
+        i = i + 1
+    }
+    total
+}
+
+fn sum_factors(n: Int) -> Int {
+    2.to(n).filter(is_factor(n)).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).filter(is_factor(n))).sum() - n
+}
+
+fn is_factor(n: Int) -> FnOnce<Int> {
+    move || n % _ == 0
+}
+
+fn sum_factors(n: Int) -> Int {
+    (2.to(n).

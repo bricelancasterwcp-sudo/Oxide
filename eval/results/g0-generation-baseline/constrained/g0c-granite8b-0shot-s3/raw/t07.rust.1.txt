@@ -1,0 +1,15 @@
+```rust
+fn main() {
+    let mut multiples = Vec::new();
+    let mut num = 3;
+
+    while multiples.len() < 8 {
+        multiples.push(num);
+        num += 3;
+    }
+
+    let sum: u32 = multiples.into_iter().sum();
+
+    println!("{}", sum);
+}
+```

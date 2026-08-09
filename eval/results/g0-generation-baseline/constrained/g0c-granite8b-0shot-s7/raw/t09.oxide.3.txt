@@ -1,0 +1,271 @@
+struct Item { value: Int }
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 5 }), Item { value: 4 }), Item { value: 3 }), Item { value: 2 })
+    for item in reverse(items) {
+        print(item.value)
+    }
+}
+
+fn reverse(v: Vec<Item>) -> Vec<Item> {
+    let mut result = vec()
+    for item in v {
+        result = push(result, item)
+    }
+    result
+}
+
+struct Item { value: Int }
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 5 }), Item { value: 4 }), Item { value: 3 }), Item { value: 2 })
+    let mut items = reverse(items)
+    while !empty(items) {
+        let item = pop(items)
+        print(item.value)
+    }
+}
+
+fn reverse(v: Vec<Item>) -> Vec<Item> {
+    let mut result = vec()
+    for item in v {
+        result = push(result, item)
+    }
+    result
+}
+
+fn empty(v: Vec<Item>) -> Bool {
+    len(v) == 0
+}
+
+fn pop(v: Vec<Item>) -> Item {
+    let first = get(v, 0)?
+    let rest = slice(v, 1, len(v))
+    Item(value == first.value, rest == rest)
+}
+
+struct Item { value: Int }
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 5 }), Item { value: 4 }), Item { value: 3 }), Item { value: 2 })
+    let mut items = reverse(items)
+    while !empty(items) {
+        let item = pop(items)
+        print(item.value)
+        items = pop(items)
+    }
+}
+
+fn reverse(v: Vec<Item>) -> Vec<Item> {
+    let mut result = vec()
+    for item in v {
+        result = push(result, item)
+    }
+    result
+}
+
+fn empty(v: Vec<Item>) -> Bool {
+    len(v) == 0
+}
+
+fn pop(v: Vec<Item>) -> Item {
+    let first = get(v, 0)?
+    let rest = slice(v, 1, len(v))
+    Item(value == first.value, rest == rest)
+}
+
+struct Item { value: Int }
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 5 }), Item { value: 4 }), Item { value: 3 }), Item { value: 2 })
+    let mut items = reverse(items)
+    while !empty(items) {
+        let item = pop(items)
+        print(item.value)
+        items = pop(items)
+    }
+}
+
+fn reverse(v: Vec<Item>) -> Vec<Item> {
+    let mut result = vec()
+    for item in v {
+        result = push(result, item)
+    }
+    result
+}
+
+fn empty(v: Vec<Item>) -> Bool {
+    len(v) == 0
+}
+
+fn pop(v: Vec<Item>) -> Item {
+    let first = get(v, 0)?
+    let rest = slice(v, 1, len(v))
+    Item(value == first.value, rest == rest)
+}
+
+struct Item { value: Int }
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 5 }), Item { value: 4 }), Item { value: 3 }), Item { value: 2 })
+    let mut items = reverse(items)
+    while !empty(items) {
+        let item = pop(items)
+        print(item.value)
+        items = pop(items)
+    }
+}
+
+fn reverse(v: Vec<Item>) -> Vec<Item> {
+    let mut result = vec()
+    for item in v {
+        result = push(result, item)
+    }
+    result
+}
+
+fn empty(v: Vec<Item>) -> Bool {
+    len(v) == 0
+}
+
+fn pop(v: Vec<Item>) -> Item {
+    let first = get(v, 0)?
+    let rest = slice(v, 1, len(v))
+    Item(value == first.value, rest == rest)
+}
+
+struct Item { value: Int }
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 5 }), Item { value: 4 }), Item { value: 3 }), Item { value: 2 })
+    let mut items = reverse(items)
+    while !empty(items) {
+        let item = pop(items)
+        print(item.value)
+        items = pop(items)
+    }
+}
+
+fn reverse(v: Vec<Item>) -> Vec<Item> {
+    let mut result = vec()
+    for item in v {
+        result = push(result, item)
+    }
+    result
+}
+
+fn empty(v: Vec<Item>) -> Bool {
+    len(v) == 0
+}
+
+fn pop(v: Vec<Item>) -> Item {
+    let first = get(v, 0)?
+    let rest = slice(v, 1, len(v))
+    Item(value == first.value, rest == rest)
+}
+
+struct Item { value: Int }
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 5 }), Item { value: 4 }), Item { value: 3 }), Item { value: 2 })
+    let mut items = reverse(items)
+    while !empty(items) {
+        let item = pop(items)
+        print(item.value)
+        items = pop(items)
+    }
+}
+
+fn reverse(v: Vec<Item>) -> Vec<Item> {
+    let mut result = vec()
+    for item in v {
+        result = push(result, item)
+    }
+    result
+}
+
+fn empty(v: Vec<Item>) -> Bool {
+    len(v) == 0
+}
+
+fn pop(v: Vec<Item>) -> Item {
+    let first = get(v, 0)?
+    let rest = slice(v, 1, len(v))
+    Item(value == first.value, rest == rest)
+}
+
+struct Item { value: Int }
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 5 }), Item { value: 4 }), Item { value: 3 }), Item { value: 2 })
+    let mut items = reverse(items)
+    while !empty(items) {
+        let item = pop(items)
+        print(item.value)
+        items = pop(items)
+    }
+}
+
+fn reverse(v: Vec<Item>) -> Vec<Item> {
+    let mut result = vec()
+    for item in v {
+        result = push(result, item)
+    }
+    result
+}
+
+fn empty(v: Vec<Item>) -> Bool {
+    len(v) == 0
+}
+
+fn pop(v: Vec<Item>) -> Item {
+    let first = get(v, 0)?
+    let rest = slice(v, 1, len(v))
+    Item(value == first.value, rest == rest)
+}
+
+struct Item { value: Int }
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 5 }), Item { value: 4 }), Item { value: 3 }), Item { value: 2 })
+    let mut items = reverse(items)
+    while !empty(items) {
+        let item = pop(items)
+        print(item.value)
+        items = pop(items)
+    }
+}
+
+fn reverse(v: Vec<Item>) -> Vec<Item> {
+    let mut result = vec()
+    for item in v {
+        result = push(result, item)
+    }
+    result
+}
+
+fn empty(v: Vec<Item>) -> Bool {
+    len(v) == 0
+}
+
+fn pop(v: Vec<Item>) -> Item {
+    let first = get(v, 0)?
+    let rest = slice(v, 1, len(v))
+    Item(value == first.value, rest == rest)
+}
+
+struct Item { value: Int }
+
+fn main() {
+    let items = push(push(push(push(vec(), Item { value: 5 }), Item { value: 4 }), Item { value: 3 }), Item { value: 2 })
+    let mut items = reverse(items)
+    while !empty(items) {
+        let item = pop(items)
+        print(item.value)
+        items = pop(items)
+    }
+}
+
+fn reverse(v: Vec<Item>) -> Vec<Item> {
+    let mut result = vec()
+    for item

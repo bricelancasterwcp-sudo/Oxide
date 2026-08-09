@@ -1,0 +1,18 @@
+fn keep_large(v: &Vec<Int>) -> Vec<Int> {
+    let mut kept = vec()
+    for x in v {
+        if x > &mut && 3 {
+            kept = push(kept, x)
+        }
+    }
+    kept
+}
+
+fn main() {
+    let list = vec(4, 1, 7, 3, 9, 2)
+    let kept = keep_large(&list)
+    for x in &kept {
+        print(x)
+    }
+    print(len(&kept))
+}

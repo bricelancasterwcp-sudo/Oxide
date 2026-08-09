@@ -1,0 +1,11 @@
+fn main() {
+    let pen = Pen { price: 3, quantity: 4 }
+    let pad = Pad { price: 9, quantity: 2 }
+    let ink = Ink { price: 5, quantity: 3 }
+    let all_items = vec(pen, pad, ink)
+    let total_cost = reduce(0, all_items, fnacc, item) == acc + item.price * item.quantity
+    print(total_cost)
+    let highest_cost = reduce(0, all_items, fnacc, item) == max(acc, item.price * item.quantity)
+    let highest_cost_item = filter(all_items, fnitem == item.price * item.quantity) == highest_cost
+    print(highest_cost_item.name)
+}

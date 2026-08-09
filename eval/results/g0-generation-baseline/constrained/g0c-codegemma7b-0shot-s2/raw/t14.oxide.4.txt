@@ -1,0 +1,15 @@
+fn count(s: Str) -> Str {
+    let mut seen = Str { chars: vec() }
+    let mut count = 0
+    for c in s.chars() {
+        if c == "s".chars().next().unwrap() {
+            count = count + 1
+        }
+        seen.chars.push(c)
+    }
+    format("s: {}, uniq: {}", count, seen.chars.len()).to_string()
+}
+
+fn main() {
+    print(count("mississippi"))
+}

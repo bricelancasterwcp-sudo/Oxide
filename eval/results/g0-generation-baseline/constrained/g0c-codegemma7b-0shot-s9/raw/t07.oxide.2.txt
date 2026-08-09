@@ -1,0 +1,96 @@
+fn main() {
+    let mut acc = vec(0, 0, 0, 0, 0, 0, 0, 0)
+    for n in range(1, 33) {
+        let x = n * 3
+        if len(acc) < 8 {
+            acc = push(acc, x)
+        } else {
+            print(sum(acc))
+            break
+        }
+    }
+}
+
+fn sum(v: Vec<Int>) -> Int {
+    let mut s = 0
+    for x in v {
+        s = s + x
+    }
+    s
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let mut l = 0
+    for _ in v {
+        l = l + 1
+    }
+    l
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a + 1 < b {
+        v = push(v, i)
+    }
+    v
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut v2 = vec()
+    for e in v {
+        v2 = push(v2, e)
+    }
+    v2 = push(v2, x)
+    v2
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    let mut l = s
+    for c in s {
+        print_char(c)
+    }
+}
+
+fn print_char(c: Char) {
+    print_str(Str(c))
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = Str("")
+    for d in n {
+        s = push(s, Char(d))
+    }
+    s
+}
+
+fn char(c: Char) -> Str {
+    let mut s = Str("")
+    s = push(s, c)
+    s
+}
+
+fn vec(e0: T, e1: T, e2: T, e3: T, e4: T, e5: T, e6: T, e7: T) -> Vec<T> {
+    let mut v = Vec(e0)
+    v = push(v, e1)
+    v = push(v, e2)
+    v = push(v, e3)
+    v = push(v, e4)
+    v = push(v, e5)
+    v = push(v, e6)
+    v = push(v, e7)
+    v
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: vec(3, 6, 9, 12, 15, 18, 21, 24) }
+    print(first_big(r.values))
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}

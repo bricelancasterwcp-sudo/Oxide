@@ -1,0 +1,82 @@
+struct Perfect {
+    n: Int,
+    sum: Int,
+}
+
+fn next_perfect(state: Perfect) -> Perfect {
+    let Perfect { n, sum } = state
+    for d in range(1, n) {
+        if n % d == 0 {
+            return Perfect { n: n + 1, sum: sum + d }
+        }
+    }
+    Perfect(n + 1, sum)
+}
+
+fn is_perfect(n: Int) -> Bool {
+    n >= 1 && n <= 1000 && n == sum_divisors(n)
+}
+
+fn sum_divisors(n: Int) -> Int {
+    let mut sum = 0
+    for d in range(1, n) {
+        if n % d == 0 {
+            sum = sum + d
+        }
+    }
+    sum
+}
+
+fn main() {
+    let mut p = Perfect(2, 0)
+    loop_while(p.n <= 1000, p, next_perfect, is_perfect, print)
+}
+
+fn loop_while(cond: Bool, init: T, step: T2, test: T3, work: T4) -> R {
+    let mut state = init
+    while test(state) {
+        if !cond {
+            break
+        }
+        state = step(state)
+        work(state)
+    }
+    state
+}
+
+fn print(n: Int) {
+    print_str(str_cat(str_cat(str_cat("Perfect #", int_to_str(n)), " ("), int_to_str(sum_divisors(n))), ")")
+}
+
+fn str_cat(a: Str, b: Str) -> Str {
+    let s = concat(a, b)
+    clone(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    concat(range(48, 48 + n % 10), int_to_str(n / 10))
+}
+
+struct Option {
+    value: Int,
+}
+
+fn print_option(x: Option) {
+    match x {
+        None => print_str("None"),
+        Some(n) => print_int(n),
+    }
+}
+
+fn some_func(n: Int) -> Option {
+    if n > 0 {
+        Some(n)
+    } else {
+        None
+    }
+}
+
+fn main() {
+    print_option(some_func(3))
+    print_option(some_func(-1))
+}

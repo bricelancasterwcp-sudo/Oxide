@@ -1,0 +1,11 @@
+fn main() {
+    let mut x = 1
+    let mut y = 1
+    for i in range(0, 20) {
+        let sum = x + y
+        x = y
+        y = sum
+        print(sum)
+        print("\n")
+    }
+}

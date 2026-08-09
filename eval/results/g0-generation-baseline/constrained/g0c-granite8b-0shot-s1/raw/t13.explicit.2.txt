@@ -1,0 +1,17 @@
+fn print(s: &Str) {
+    loop
+}
+
+fn main() {
+    print("level")
+}
+
+fn print(s: &Str) {
+    for c in &chars_rev_str_s {
+        print_str(str_c)
+    }
+}
+
+fn main() {
+    print("level")
+}

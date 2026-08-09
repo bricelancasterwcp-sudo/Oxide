@@ -1,0 +1,17 @@
+fn main() {
+    let numbers = [3, 8, -2, 12, 7];
+    let mut positive_count = 0;
+    let mut max_value = numbers[0]; // Initialize max_value with the first element
+
+    for &num in &numbers {
+        if num > 0 {
+            positive_count += 1;
+        }
+        if num > max_value {
+            max_value = num;
+        }
+    }
+
+    println!("Positive values: {}", positive_count);
+    println!("Largest value: {}", max_value);
+}

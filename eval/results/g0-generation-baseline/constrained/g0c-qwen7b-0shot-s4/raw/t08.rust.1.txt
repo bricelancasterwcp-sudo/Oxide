@@ -1,0 +1,19 @@
+```rust
+fn main() {
+    let list = [3, 8, -2, 12, 7];
+    let mut positive_count = 0;
+    let mut max_value = i32::MIN;
+
+    for &value in &list {
+        if value > 0 {
+            positive_count += 1;
+        }
+        if value > max_value {
+            max_value = value;
+        }
+    }
+
+    println!("Positive count: {}", positive_count);
+    println!("Max value: {}", max_value);
+}
+```

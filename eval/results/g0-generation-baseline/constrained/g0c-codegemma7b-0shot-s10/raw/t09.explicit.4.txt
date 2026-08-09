@@ -1,0 +1,8 @@
+fn main() {
+    let mut nums = vec(1, 2, 3, 4, 5)
+    for x in &mut && nums {
+        print_str(x)
+        drop x
+    }
+    drop nums
+}

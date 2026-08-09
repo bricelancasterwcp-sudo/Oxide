@@ -1,0 +1,27 @@
+fn main() {
+    let text = "mississippi"
+    let s_count = text.chars().filter(char_eq("s")).count()
+    let distinct_count = text.chars().collect().len()
+    print(s_count)
+    print(distinct_count)
+}
+
+fn char_eq(c: Str) -> Str {
+    move || c == &c
+}
+
+fn count(f: Str, v: Vec<Str>) -> Int {
+    v.into_iter().filter(f).count()
+}
+
+fn collect(v: Vec<Str>) -> Vec<Str> {
+    v.into_iter().collect()
+}
+
+fn main() {
+    let text = "mississippi"
+    let s_count = count(char_eq("s"), collect(text.chars().map(str)))
+    let distinct_count = collect(text.chars().collect()).len()
+    print(s_count)
+    print(distinct_count)
+}

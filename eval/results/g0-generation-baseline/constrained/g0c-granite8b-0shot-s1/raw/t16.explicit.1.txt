@@ -1,0 +1,16 @@
+fn div_ten(a: Int, b: Int, c: Int) -> Int {
+    let y = a / 10
+    if b == 0 {
+        y
+    } else if c == 4 {
+        y + 1
+    } else {
+        y + 2
+    }
+}
+
+fn main() {
+    print(div_ten(100, 5, 4))
+    print(div_ten(100, 0, 4))
+    print(div_ten(100, 5, 0))
+}

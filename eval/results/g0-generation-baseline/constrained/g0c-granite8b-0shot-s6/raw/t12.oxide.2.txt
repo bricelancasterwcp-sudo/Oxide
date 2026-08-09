@@ -1,0 +1,61 @@
+struct Stack {
+    vec: Vec<Char>,
+}
+
+fn print_rev(s: Stack) {
+    let mut chars = s.vec
+    while len(chars) > 0 {
+        print(get(chars, len(chars) - 1)?)
+        chars = vec_pop(chars)?
+    }
+}
+
+fn vec_pop(v: Vec<Char>) -> Option<Vec<Char>> {
+    match len(v) {
+        _ => Some(vec_take(v, len(v) - 1)?),
+    }
+}
+
+fn vec_take(v: Vec<Char>, i: Int) -> Option<Vec<Char>> {
+    if i < 0 || i >= len(v) {
+        None
+    } else {
+        Some(concat(vec_take(v, i - 1)?, vec(get(v, i)?)))
+    }
+}
+
+fn main() {
+    let s = Stack { vec: str_to_vec("stack") }
+    print_rev(s)
+}
+
+struct Stack {
+    vec: Vec<Char>,
+}
+
+fn print_rev(s: Stack) {
+    let mut chars = s.vec
+    while len(chars) > 0 {
+        print(get(chars, len(chars) - 1)?)
+        chars = vec_pop(chars)?
+    }
+}
+
+fn vec_pop(v: Vec<Char>) -> Option<Vec<Char>> {
+    match len(v) {
+        _ => Some(vec_take(v, len(v) - 1)?),
+    }
+}
+
+fn vec_take(v: Vec<Char>, i: Int) -> Option<Vec<Char>> {
+    if i < 0 || i >= len(v) {
+        None
+    } else {
+        Some(concat(vec_take(v, i - 1)?, vec(get(v, i)?)))
+    }
+}
+
+fn main() {
+    let s = Stack { vec: str_to_vec("stack") }
+    print_rev(s)
+}

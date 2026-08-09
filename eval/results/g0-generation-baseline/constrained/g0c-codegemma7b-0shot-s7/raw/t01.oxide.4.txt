@@ -1,0 +1,288 @@
+fn main() {
+    let sum = range(0, 10).iter().map(int_to_str).map(parse_int).filter(Option_is_some).map(Option_unwrap).map(square).fold(0, add)
+    print(sum)
+}
+
+fn square(n: Int) -> Int {
+    n * n
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.to_int() + 1.to_int() - 1.to_int() + 1.to_int() {
+        if i < b.to_int() {
+            push(v, i.to_int())
+        }
+    }
+    v
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    if s.chars().all(char_is_digit) {
+        Some(str_to_int(s))
+    } else {
+        None
+    }
+}
+
+fn str_to_int(s: Str) -> Int {
+    let mut n = 0
+    for c in s.chars() {
+        n = n * 10 + (c - 48)
+    }
+    n
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = ""
+    let mut nn = n
+    while nn > 0 {
+        let digit = nn % 10
+        s = char_to_digit(digit) + s
+        nn = nn / 10
+    }
+    s
+}
+
+fn char_to_digit(n: Int) -> Str {
+    (n + 48).to_char().to_string()
+}
+
+fn char_is_digit(c: Char) -> Bool {
+    c >= 48 && c <= 57
+}
+
+fn bool_is_true(b: Bool) -> Bool {
+    b
+}
+
+fn bool_is_false(b: Bool) -> Bool {
+    !b
+}
+
+fn option_is_none(o: Option<Int>) -> Bool {
+    o == None
+}
+
+fn option_is_some(o: Option<Int>) -> Bool {
+    o != None
+}
+
+fn option_unwrap(o: Option<Int>) -> Int {
+    o.unwrap()
+}
+
+fn result_is_ok(r: Result<Int, String>) -> Bool {
+    r.is_ok()
+}
+
+fn result_is_err(r: Result<Int, String>) -> Bool {
+    r.is_err()
+}
+
+fn result_ok_or_default(r: Result<Int, String>) -> Int {
+    r.ok_or(0)
+}
+
+fn result_unwrap(r: Result<Int, String>) -> Int {
+    r.unwrap()
+}
+
+fn result_unwrap_err(r: Result<Int, String>) -> String {
+    r.unwrap_err()
+}
+
+fn vec_is_empty(v: Vec<Int>) -> Bool {
+    v.len() == 0
+}
+
+fn vec_push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn vec_len(v: Vec<Int>) -> Int {
+    len(v)
+}
+
+fn vec_get(v: Vec<Int>, i: Int) -> Option<Int> {
+    get(v, i)
+}
+
+fn vec_chars(s: Str) -> Vec<Str> {
+    chars(s)
+}
+
+fn vec_concat(a: Vec<Str>, b: Vec<Str>) -> Vec<Str> {
+    concat(a, b)
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    print_str(Str { data: s.chars().collect() })
+}
+
+struct Str {
+    data: Vec<Char>,
+}
+
+fn print_str(s: Str) {
+    for c in s.data {
+        print(c)
+    }
+}
+
+fn print_char(c: Char) {
+    print_str(Str { data: vec(c) })
+}
+
+fn print_newline() {
+    print_str(Str { data: vec(10) })
+}
+
+fn print_space() {
+    print_str(Str { data: vec(32) })
+}
+
+fn print_tab() {
+    print_str(Str { data: vec(9) })
+}
+
+fn print_bool(b: Bool) {
+    if b {
+        print_str("true")
+    } else {
+        print_str("false")
+    }
+}
+
+fn print_option(o: Option<Int>) {
+    if o == None {
+        print_str("None")
+    } else {
+        print_str("Some(")
+        print(o.unwrap())
+        print_str(")")
+    }
+}
+
+fn print_result(r: Result<Int, String>) {
+    if r.is_ok() {
+        print_str("Ok(")
+        print(r.unwrap())
+        print_str(")")
+    } else {
+        print_str("Err(")
+        print_str(r.unwrap_err())
+        print_str(")")
+    }
+}
+
+fn print_vec(v: Vec<Int>) {
+    print_str("Vec(")
+    for i in 0.to_int() + 1.to_int() - 1.to_int() + 1.to_int() {
+        if i < v.len() {
+            print(v.get(i).unwrap())
+            if i < v.len() - 1 {
+                print_str(",")
+            }
+        }
+    }
+    print_str(")")
+}
+
+fn print_struct(s: Str) {
+    print_str("Str { data: ")
+    print_vec(s.data)
+    print_str(" }")
+}
+
+fn main() {
+    let sum = range(0, 10).iter().map(int_to_str).map(parse_int).filter(Option_is_some).map(Option_unwrap).map(square).fold(0, add)
+    print(sum)
+}
+
+fn square(n: Int) -> Int {
+    n * n
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.to_int() + 1.to_int() - 1.to_int() + 1.to_int() {
+        if i < b.to_int() {
+            push(v, i.to_int())
+        }
+    }
+    v
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    if s.chars().all(char_is_digit) {
+        Some(str_to_int(s))
+    } else {
+        None
+    }
+}
+
+fn str_to_int(s: Str) -> Int {
+    let mut n = 0
+    for c in s.chars() {
+        n = n * 10 + (c - 48)
+    }
+    n
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = ""
+    let mut nn = n
+    while nn > 0 {
+        let digit = nn % 10
+        s = char_to_digit(digit) + s
+        nn = nn / 10
+    }
+    s
+}
+
+fn char_to_digit(n: Int) -> Str {
+    (n + 48).to_char().to_string()
+}
+
+fn char_is_digit(c: Char) -> Bool {
+    c >= 48 && c <= 57
+}
+
+fn bool_is_true(b: Bool) -> Bool {
+    b
+}
+
+fn bool_is_false(b: Bool) -> Bool {
+    !b
+}
+
+fn option_is_none(o: Option<Int>) -> Bool {
+    o == None
+}
+
+fn option_is_some(o: Option<Int>) -> Bool {
+    o != None
+}
+
+fn option_unwrap(o: Option<Int>) -> Int {
+    o.unwrap()
+}
+
+fn result_is_ok(r: Result<Int, String>) -> Bool {
+    r.is_ok()
+}
+
+fn result_is_err(

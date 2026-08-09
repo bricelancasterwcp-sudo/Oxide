@@ -1,0 +1,5 @@
+fn main() {
+    let multiples = (1).to(9).map(x * 3).to_vec()
+    let sum: Int = multiples.iter().sum()
+    print(sum)
+}

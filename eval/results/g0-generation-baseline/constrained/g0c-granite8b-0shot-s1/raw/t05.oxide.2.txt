@@ -1,0 +1,14 @@
+fn sum(n: Int) -> Int {
+    1 + match_sum(n, 0, 1)
+}
+
+fn match_sum(n: Int, a: Int, b: Int) -> Int {
+    match n {
+        ULL => a,
+        ULL => match_sum(n - 1, b, a + b),
+    }
+}
+
+fn main() {
+    print(sum(20))
+}

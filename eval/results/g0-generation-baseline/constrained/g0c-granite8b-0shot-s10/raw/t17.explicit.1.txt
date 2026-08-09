@@ -1,0 +1,13 @@
+fn lookup(l: &Vec<Int>, pos: Int) -> Int {
+    match get(&l, pos) {
+        Some(n) => n,
+        None => -1,
+    }
+}
+
+fn main() {
+    let l = push(push(vec(), 10), 20)
+    print(lookup(&l, 1))
+    print(lookup(&l, 5))
+    drop l
+}

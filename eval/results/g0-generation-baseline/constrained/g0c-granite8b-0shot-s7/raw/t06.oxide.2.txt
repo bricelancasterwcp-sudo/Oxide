@@ -1,0 +1,24 @@
+struct Perfect {
+    n: Int,
+    sum: Int,
+}
+
+fn is_perfect(n: Int) -> Bool {
+    let mut s = 0
+    for d in range(1, n) {
+        if n % d == 0 {
+            s = s + d
+        }
+    }
+    n == s
+}
+
+fn main() {
+    let mut p = Perfect { n: 2, sum: 0 }
+    for n in range(2, 1000) {
+        if is_perfect(n) {
+            print(n)
+            p = Perfect { n: n, sum: 0 }
+        }
+    }
+}

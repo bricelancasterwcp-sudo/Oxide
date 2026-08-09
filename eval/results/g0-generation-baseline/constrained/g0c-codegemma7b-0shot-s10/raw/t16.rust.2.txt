@@ -1,0 +1,9 @@
+fn main() {
+    println!("{}", 100 / 5); // Output: 20
+    if 0 == 0 {
+        println!("undefined");
+    } else {
+        println!("{}", 100 / 0); // Output: undefined
+    }
+    println!("{}", 100 / 4); // Output: 25
+}

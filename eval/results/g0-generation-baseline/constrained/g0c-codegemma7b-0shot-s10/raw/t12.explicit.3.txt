@@ -1,0 +1,13 @@
+fn reverse(text: &Str) -> Str {
+    let mut result = vec_str()
+    for c in text.chars().rev() {
+        result = push(result, c.to_string())
+    }
+    concat(&result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse(&text))
+    drop text
+}

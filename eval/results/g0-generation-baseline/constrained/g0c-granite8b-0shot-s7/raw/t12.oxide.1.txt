@@ -1,0 +1,17 @@
+struct Stack {
+    items: Vec<Char>,
+}
+
+fn reverse(s: Str) -> Str {
+    let chars = chars(s)
+    let mut items = vec()
+    while !chars.is_empty() {
+        items = push(items, chars.first()?)
+        chars = chars.rest()
+    }
+    chars_to_str(items)
+}
+
+fn main() {
+    print(reverse("Hello"))
+}

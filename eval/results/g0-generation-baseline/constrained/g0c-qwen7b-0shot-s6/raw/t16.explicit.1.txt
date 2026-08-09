@@ -1,0 +1,773 @@
+fn main() {
+    let a = div(100, 5)
+    print(a)
+    drop a
+    let b = div(100, 0)
+    if b.is_none() {
+        print_str("undefined")
+    } else {
+        print(b.unwrap())
+    }
+    drop b
+    let c = div(100, 4)
+    print(c)
+    drop c
+}
+
+fn div(a: Int, b: Int) -> Option<Int> {
+    if b == 0 {
+        None
+    } else {
+        Some(a / b)
+    }
+}
+
+fn print(x: Int) {
+    print_str(&int_to_str_x)
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn div(a: Int, b: Int) -> Option<Int> {
+    if b == 0 {
+        None
+    } else {
+        Some(a / b)
+    }
+}
+
+fn drop_x() {
+    drop x
+}
+
+fn drop_y() {
+    drop y
+}
+
+fn drop_z() {
+    drop z
+}
+
+fn drop_a() {
+    drop a
+}
+
+fn drop_b() {
+    drop b
+}
+
+fn drop_c() {
+    drop c
+}
+
+fn drop_d() {
+    drop d
+}
+
+fn drop_e() {
+    drop e
+}
+
+fn drop_f() {
+    drop f
+}
+
+fn drop_g() {
+    drop g
+}
+
+fn drop_h() {
+    drop h
+}
+
+fn drop_i() {
+    drop i
+}
+
+fn drop_j() {
+    drop j
+}
+
+fn drop_k() {
+    drop k
+}
+
+fn drop_l() {
+    drop l
+}
+
+fn drop_m() {
+    drop m
+}
+
+fn drop_n() {
+    drop n
+}
+
+fn drop_o() {
+    drop o
+}
+
+fn drop_p() {
+    drop p
+}
+
+fn drop_q() {
+    drop q
+}
+
+fn drop_r() {
+    drop r
+}
+
+fn drop_s() {
+    drop s
+}
+
+fn drop_t() {
+    drop t
+}
+
+fn drop_u() {
+    drop u
+}
+
+fn drop_v() {
+    drop v
+}
+
+fn drop_w() {
+    drop w
+}
+
+fn drop_x() {
+    drop x
+}
+
+fn drop_y() {
+    drop y
+}
+
+fn drop_z() {
+    drop z
+}
+
+fn drop_a() {
+    drop a
+}
+
+fn drop_b() {
+    drop b
+}
+
+fn drop_c() {
+    drop c
+}
+
+fn drop_d() {
+    drop d
+}
+
+fn drop_e() {
+    drop e
+}
+
+fn drop_f() {
+    drop f
+}
+
+fn drop_g() {
+    drop g
+}
+
+fn drop_h() {
+    drop h
+}
+
+fn drop_i() {
+    drop i
+}
+
+fn drop_j() {
+    drop j
+}
+
+fn drop_k() {
+    drop k
+}
+
+fn drop_l() {
+    drop l
+}
+
+fn drop_m() {
+    drop m
+}
+
+fn drop_n() {
+    drop n
+}
+
+fn drop_o() {
+    drop o
+}
+
+fn drop_p() {
+    drop p
+}
+
+fn drop_q() {
+    drop q
+}
+
+fn drop_r() {
+    drop r
+}
+
+fn drop_s() {
+    drop s
+}
+
+fn drop_t() {
+    drop t
+}
+
+fn drop_u() {
+    drop u
+}
+
+fn drop_v() {
+    drop v
+}
+
+fn drop_w() {
+    drop w
+}
+
+fn drop_x() {
+    drop x
+}
+
+fn drop_y() {
+    drop y
+}
+
+fn drop_z() {
+    drop z
+}
+
+fn drop_a() {
+    drop a
+}
+
+fn drop_b() {
+    drop b
+}
+
+fn drop_c() {
+    drop c
+}
+
+fn drop_d() {
+    drop d
+}
+
+fn drop_e() {
+    drop e
+}
+
+fn drop_f() {
+    drop f
+}
+
+fn drop_g() {
+    drop g
+}
+
+fn drop_h() {
+    drop h
+}
+
+fn drop_i() {
+    drop i
+}
+
+fn drop_j() {
+    drop j
+}
+
+fn drop_k() {
+    drop k
+}
+
+fn drop_l() {
+    drop l
+}
+
+fn drop_m() {
+    drop m
+}
+
+fn drop_n() {
+    drop n
+}
+
+fn drop_o() {
+    drop o
+}
+
+fn drop_p() {
+    drop p
+}
+
+fn drop_q() {
+    drop q
+}
+
+fn drop_r() {
+    drop r
+}
+
+fn drop_s() {
+    drop s
+}
+
+fn drop_t() {
+    drop t
+}
+
+fn drop_u() {
+    drop u
+}
+
+fn drop_v() {
+    drop v
+}
+
+fn drop_w() {
+    drop w
+}
+
+fn drop_x() {
+    drop x
+}
+
+fn drop_y() {
+    drop y
+}
+
+fn drop_z() {
+    drop z
+}
+
+fn drop_a() {
+    drop a
+}
+
+fn drop_b() {
+    drop b
+}
+
+fn drop_c() {
+    drop c
+}
+
+fn drop_d() {
+    drop d
+}
+
+fn drop_e() {
+    drop e
+}
+
+fn drop_f() {
+    drop f
+}
+
+fn drop_g() {
+    drop g
+}
+
+fn drop_h() {
+    drop h
+}
+
+fn drop_i() {
+    drop i
+}
+
+fn drop_j() {
+    drop j
+}
+
+fn drop_k() {
+    drop k
+}
+
+fn drop_l() {
+    drop l
+}
+
+fn drop_m() {
+    drop m
+}
+
+fn drop_n() {
+    drop n
+}
+
+fn drop_o() {
+    drop o
+}
+
+fn drop_p() {
+    drop p
+}
+
+fn drop_q() {
+    drop q
+}
+
+fn drop_r() {
+    drop r
+}
+
+fn drop_s() {
+    drop s
+}
+
+fn drop_t() {
+    drop t
+}
+
+fn drop_u() {
+    drop u
+}
+
+fn drop_v() {
+    drop v
+}
+
+fn drop_w() {
+    drop w
+}
+
+fn drop_x() {
+    drop x
+}
+
+fn drop_y() {
+    drop y
+}
+
+fn drop_z() {
+    drop z
+}
+
+fn drop_a() {
+    drop a
+}
+
+fn drop_b() {
+    drop b
+}
+
+fn drop_c() {
+    drop c
+}
+
+fn drop_d() {
+    drop d
+}
+
+fn drop_e() {
+    drop e
+}
+
+fn drop_f() {
+    drop f
+}
+
+fn drop_g() {
+    drop g
+}
+
+fn drop_h() {
+    drop h
+}
+
+fn drop_i() {
+    drop i
+}
+
+fn drop_j() {
+    drop j
+}
+
+fn drop_k() {
+    drop k
+}
+
+fn drop_l() {
+    drop l
+}
+
+fn drop_m() {
+    drop m
+}
+
+fn drop_n() {
+    drop n
+}
+
+fn drop_o() {
+    drop o
+}
+
+fn drop_p() {
+    drop p
+}
+
+fn drop_q() {
+    drop q
+}
+
+fn drop_r() {
+    drop r
+}
+
+fn drop_s() {
+    drop s
+}
+
+fn drop_t() {
+    drop t
+}
+
+fn drop_u() {
+    drop u
+}
+
+fn drop_v() {
+    drop v
+}
+
+fn drop_w() {
+    drop w
+}
+
+fn drop_x() {
+    drop x
+}
+
+fn drop_y() {
+    drop y
+}
+
+fn drop_z() {
+    drop z
+}
+
+fn drop_a() {
+    drop a
+}
+
+fn drop_b() {
+    drop b
+}
+
+fn drop_c() {
+    drop c
+}
+
+fn drop_d() {
+    drop d
+}
+
+fn drop_e() {
+    drop e
+}
+
+fn drop_f() {
+    drop f
+}
+
+fn drop_g() {
+    drop g
+}
+
+fn drop_h() {
+    drop h
+}
+
+fn drop_i() {
+    drop i
+}
+
+fn drop_j() {
+    drop j
+}
+
+fn drop_k() {
+    drop k
+}
+
+fn drop_l() {
+    drop l
+}
+
+fn drop_m() {
+    drop m
+}
+
+fn drop_n() {
+    drop n
+}
+
+fn drop_o() {
+    drop o
+}
+
+fn drop_p() {
+    drop p
+}
+
+fn drop_q() {
+    drop q
+}
+
+fn drop_r() {
+    drop r
+}
+
+fn drop_s() {
+    drop s
+}
+
+fn drop_t() {
+    drop t
+}
+
+fn drop_u() {
+    drop u
+}
+
+fn drop_v() {
+    drop v
+}
+
+fn drop_w() {
+    drop w
+}
+
+fn drop_x() {
+    drop x
+}
+
+fn drop_y() {
+    drop y
+}
+
+fn drop_z() {
+    drop z
+}
+
+fn drop_a() {
+    drop a
+}
+
+fn drop_b() {
+    drop b
+}
+
+fn drop_c() {
+    drop c
+}
+
+fn drop_d() {
+    drop d
+}
+
+fn drop_e() {
+    drop e
+}
+
+fn drop_f() {
+    drop f
+}
+
+fn drop_g() {
+    drop g
+}
+
+fn drop_h() {
+    drop h
+}
+
+fn drop_i() {
+    drop i
+}
+
+fn drop_j() {
+    drop j
+}
+
+fn drop_k() {
+    drop k
+}
+
+fn drop_l() {
+    drop l
+}
+
+fn drop_m() {
+    drop m
+}
+
+fn drop_n() {
+    drop n
+}
+
+fn drop_o() {
+    drop o
+}
+
+fn drop_p() {
+    drop p
+}
+
+fn drop_q() {
+    drop q
+}
+
+fn drop_r() {
+    drop r
+}
+
+fn drop_s() {
+    drop s
+}
+
+fn drop_t() {
+    drop t
+}
+
+fn drop_u() {
+    drop u
+}
+
+fn drop_v() {
+    drop v
+}
+
+fn drop_w() {
+    drop w
+}
+
+fn drop_x() {

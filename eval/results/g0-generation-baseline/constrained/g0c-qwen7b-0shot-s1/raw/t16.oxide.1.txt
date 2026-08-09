@@ -1,0 +1,10 @@
+struct Division { dividend: Int, divisor: Int }
+
+fn main() {
+    let div1 = Division { dividend: 100, divisor: 5 }
+    let div2 = Division { dividend: 100, divisor: 0 }
+    let div3 = Division { dividend: 100, divisor: 4 }
+    print(div1.dividend / div1.divisor)
+    print(div2.dividend / div2.divisor)
+    print(div3.dividend / div3.divisor)
+}

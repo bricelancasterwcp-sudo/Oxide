@@ -1,0 +1,305 @@
+fn main() {
+    let text = str_len("mississippi")
+    let mut s_count = 0
+    let mut seen: Vec<Str> = vec()
+    for c in chars(text) {
+        if c == "s" {
+            s_count = s_count + 1
+        } else {
+            seen = push(seen, c)
+        }
+    }
+    print(s_count)
+    print(len(&seen))
+    drop text
+    drop seen
+}
+
+fn str_len(s: Str) -> Int {
+    int_to_str(s.len())
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result: Vec<Str> = vec()
+    for c in s.chars() {
+        result = push(result, str_len(c.to_string()))
+    }
+    result
+}
+
+fn push(mutvec: Vec<Str>, x: Str) -> Vec<Str> {
+    vec_push(&mutvec, x)
+    mutvec
+}
+
+fn vec_push(v: &Vec<Str>, x: Str) {
+    let mut v = v.clone()
+    v.push(x)
+    drop v
+}
+
+fn len(v: &Vec<Str>) -> Int {
+    int_to_str(v.len())
+}
+
+fn int_to_str(n: Int) -> Int {
+    n
+}
+
+fn drop_impl(v: &Vec<Str>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Str) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Int) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Float) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Bool) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Unit) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Option<Str>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Option<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Option<Float>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Option<Bool>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Option<Unit>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Result<Str, Str>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Result<Int, Str>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Result<Float, Str>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Result<Bool, Str>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Result<Unit, Str>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Float>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Bool>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Unit>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Str>, i: Int) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Int>, i: Int) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Float>, i: Int) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Bool>, i: Int) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Unit>, i: Int) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Str>, r: Range<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Int>, r: Range<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Float>, r: Range<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Bool>, r: Range<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Unit>, r: Range<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Range<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Str>>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Int>>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Float>>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Bool>>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Unit>>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Str>>, i: Int) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Int>>, i: Int) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Float>>, i: Int) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Bool>>, i: Int) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Unit>>, i: Int) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Str>>, r: Range<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Int>>, r: Range<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Float>>, r: Range<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Bool>>, r: Range<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Unit>>, r: Range<Int>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Range<Int>>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Result<Str, Str>>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Result<Int, Str>>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Result<Float, Str>>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Result<Bool, Str>>) {
+    let v = v.clone()
+    drop v
+}
+
+fn drop_impl(v: &Vec<Result<Unit, Str>>) {
+    let v

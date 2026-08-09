@@ -1,0 +1,11 @@
+fn main() {
+    let mut result = Vec::new();
+    for i in 1..=24 {
+        if i % 3 == 0 {
+            result.push(i);
+            if result.len() == 8 { break; }
+        }
+    }
+    let sum: i32 = result.iter().sum();
+    println!("{}", sum);
+}

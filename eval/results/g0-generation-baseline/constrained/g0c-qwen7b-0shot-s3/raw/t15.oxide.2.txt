@@ -1,0 +1,17 @@
+fn main() {
+    let nums = vec("12", "x", "30")
+    let mut sum = 0
+    let mut count = 0
+    for num_str in nums {
+        match parse_int(num_str) {
+            Some(num) => {
+                sum = sum + num
+            },
+            None => {
+                count = count + 1
+            },
+        }
+    }
+    print(sum)
+    print(count)
+}

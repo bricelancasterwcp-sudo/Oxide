@@ -1,0 +1,12 @@
+struct Rgb { r: Int, g: Int, b: Int }
+
+fn is_grayscale(c: Rgb) -> Bool {
+    c.r == c.g && c.g == c.b
+}
+
+fn main() {
+    let texts = vec("level", "stereo", "rotor")
+    for text in texts {
+        print(is_grayscale(clone(text)))
+    }
+}

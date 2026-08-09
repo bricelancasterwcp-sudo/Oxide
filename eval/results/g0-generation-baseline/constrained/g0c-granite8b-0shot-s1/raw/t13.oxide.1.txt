@@ -1,0 +1,11 @@
+struct Rgb { r: Int, g: Int, b: Int }
+
+fn is_grayscale(c: Rgb) -> Bool {
+    c.r == c.g && c.g == c.b
+}
+
+fn main() {
+    for text in vec("level", "stereo", "rotor") {
+        print(is_grayscale(text))
+    }
+}

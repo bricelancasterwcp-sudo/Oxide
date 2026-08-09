@@ -1,0 +1,25 @@
+fn calculate_item_cost(unit_price: Int, quantity: Int) -> Int {
+    unit_price * quantity
+}
+
+fn find_most_expensive_item(items: Vec<Item>) -> Item {
+    let mut most_expensive_item = Item { name: "None".to_string(), cost: 0 }
+    for item in items {
+        if item.cost > most_expensive_item.cost {
+            most_expensive_item = item
+        }
+    }
+    most_expensive_item
+}
+
+struct Item {
+    name: String,
+    cost: Int,
+}
+
+fn main() {
+    let items = vec(Item { name: "Pen".to_string(), cost: calculate_item_cost(3, 4) }, Item { name: "Pad".to_string(), cost: calculate_item_cost(9, 2) }, Item { name: "Ink".to_string(), cost: calculate_item_cost(5, 3) })
+    let total_cost = items.iter().map(Item { name: "None".to_string(), cost: 0 }).fold(0, calculate_item_cost).cost
+    print(total_cost)
+    print(find_most_expensive_item(items).name)
+}

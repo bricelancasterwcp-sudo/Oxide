@@ -1,0 +1,15 @@
+struct Point {
+    x: Int,
+    y: Int,
+}
+
+fn area(p: Point) -> Int {
+    p.x * p.y
+}
+
+fn main() {
+    let origin = Point { x: 0, y: 0 }
+    print(area(origin))
+    let p = Point { x: 1, y: 2 }
+    print(area(p))
+}

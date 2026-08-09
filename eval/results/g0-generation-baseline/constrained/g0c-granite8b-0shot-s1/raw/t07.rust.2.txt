@@ -1,0 +1,17 @@
+Here's the fixed program:
+
+```rust
+fn main() {
+    let mut num = 3;
+    let mut sum = 0;
+    for _ in 0..8 {
+        sum += num;
+        num += 3;
+    }
+    println!("{}", sum);
+}
+```
+
+The issue with the original program was that the loop condition was `1..8`, which meant that the loop ran for 7 iterations instead of 8. This caused the sum to be calculated incorrectly, resulting in an output of 84 instead of the expected sum.
+
+The corrected program uses `0..8` as the loop condition, ensuring that the loop runs for 8 iterations. Additionally, the variable `num` is initialized with a value of 3, which is the first positive multiple of 3.

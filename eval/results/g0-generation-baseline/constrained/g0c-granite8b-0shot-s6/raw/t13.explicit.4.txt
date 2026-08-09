@@ -1,0 +1,26 @@
+fn main() {
+    for c in "level".chars().rev() {
+        print_str(&c)
+    }
+    print_str("\n")
+    for c in "level".chars() {
+        print_str(&c)
+    }
+    print_str("\n")
+    for c in "stereo".chars().rev() {
+        print_str(&c)
+    }
+    print_str("\n")
+    for c in "stereo".chars() {
+        print_str(&c)
+    }
+    print_str("\n")
+    for c in "rotor".chars().rev() {
+        print_str(&c)
+    }
+    print_str("\n")
+    for c in "rotor".chars() {
+        print_str(&c)
+    }
+    print_str("\n")
+}

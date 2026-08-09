@@ -1,0 +1,28 @@
+fn main() {
+    println!("{}", Rectangle { length: 3, width: 4 }.perimeter());
+    println!("{}", Triangle { a: 3, b: 4, c: 5 }.perimeter());
+    println!("{}", Rectangle { length: 2, width: 5 }.perimeter());
+}
+
+struct Rectangle {
+    length: u32,
+    width: u32,
+}
+
+impl Rectangle {
+    fn perimeter(&self) -> u32 {
+        2 * (self.length + self.width)
+    }
+}
+
+struct Triangle {
+    a: u32,
+    b: u32,
+    c: u32,
+}
+
+impl Triangle {
+    fn perimeter(&self) -> u32 {
+        self.a + self.b + self.c
+    }
+}

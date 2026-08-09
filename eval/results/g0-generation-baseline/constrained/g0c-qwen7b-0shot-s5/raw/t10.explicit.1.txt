@@ -1,0 +1,17 @@
+fn filter_print(nums: &Vec<Int>, limit: Int) -> Int {
+    let count = 0
+    for x in &nums {
+        if x > limit {
+            print(x)
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn main() {
+    let nums = push(push(push(push(push(vec(), 4), 1), 7), 3), 9)
+    let kept_count = filter_print(&nums, 3)
+    print_str("Values kept:")
+    print(kept_count)
+}

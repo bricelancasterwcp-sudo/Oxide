@@ -1,0 +1,20 @@
+fn filter(v: &Vec<Int>, limit: Int) -> Vec<Int> {
+    let mut result = vec()
+    for x in &v {
+        if x > limit {
+            result = push(result, x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let nums = vec(4, 1, 7, 3, 9, 2)
+    let filtered = filter(&nums, 3)
+    for x in &filtered {
+        print(x)
+    }
+    print(concat(int_to_str(vec_len(&filtered)), " values were kept"))
+    drop nums
+    drop filtered
+}

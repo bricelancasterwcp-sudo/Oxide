@@ -1,0 +1,273 @@
+fn main() {
+    let mut multiples = vec()
+    let limit = 24
+    for i in range(1, 9) {
+        multiples = push(multiples, i * 3)
+    }
+    let sum = sum_big(&multiples, 0)
+    print(sum)
+    drop multiples
+}
+
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    concat(v, vec(x))
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut vec = vec()
+    let mut i = a
+    while i < b {
+        vec = push(vec, i)
+        i = i + 1
+    }
+    vec
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn concat(a: Vec<Int>, b: Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in &a {
+        result = push(result, x)
+    }
+    for x in &b {
+        result = push(result, x)
+    }
+    result
+}
+
+fn print(x: Int) {
+    let s = int_to_str(x)
+    print_str(s)
+}
+
+fn print_str(s: Str) {
+    let _ = s
+}
+
+fn int_to_str(n: Int) -> Str {
+    let digits = vec("0123456789")
+    let mut result = Str
+    let mut n_copy = n
+    while n_copy > 0 {
+        let digit = n_copy % 10
+        n_copy = n_copy / 10
+        let char = digits.get(digit)
+        result = concat(vec(char), result)
+    }
+    result
+}
+
+fn drop_name(name: Int) {
+    let _ = name
+}
+
+fn drop_vec(v: Vec<Int>) {
+    let _ = v
+}
+
+fn drop_str(s: Str) {
+    let _ = s
+}
+
+fn drop_result(r: Result<Str, Str>) {
+    let _ = r
+}
+
+fn drop_option(o: Option<Str>) {
+    let _ = o
+}
+
+fn drop_bool(b: Bool) {
+    let _ = b
+}
+
+fn drop_unit(u: Unit) {
+    let _ = u
+}
+
+fn drop_vec_of_vecs(vv: Vec<Vec<Int>>) {
+    let _ = vv
+}
+
+fn drop_vec_of_strs(vs: Vec<Str>) {
+    let _ = vs
+}
+
+fn drop_vec_of_results(vr: Vec<Result<Str, Str>>) {
+    let _ = vr
+}
+
+fn drop_vec_of_options(vo: Vec<Option<Str>>) {
+    let _ = vo
+}
+
+fn drop_vec_of_bools(vb: Vec<Bool>) {
+    let _ = vb
+}
+
+fn drop_vec_of_units(vu: Vec<Unit>) {
+    let _ = vu
+}
+
+fn drop_vec_of_vecs_of_vecs(vvv: Vec<Vec<Vec>>) {
+    let _ = vvv
+}
+
+fn drop_vec_of_vecs_of_strs(vvs: Vec<Vec<Str>>) {
+    let _ = vvs
+}
+
+fn drop_vec_of_vecs_of_results(vvr: Vec<Vec<Result>>) {
+    let _ = vvr
+}
+
+fn drop_vec_of_vecs_of_options(vvo: Vec<Vec<Option>>) {
+    let _ = vvo
+}
+
+fn drop_vec_of_vecs_of_bools(vvb: Vec<Vec<Bool>>) {
+    let _ = vvb
+}
+
+fn drop_vec_of_vecs_of_units(vvu: Vec<Vec<Unit>>) {
+    let _ = vvu
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs(vvvv: Vec<Vec<Vec>>) {
+    let _ = vvvv
+}
+
+fn drop_vec_of_vecs_of_vecs_of_strs(vvvvs: Vec<Vec<Vec>>) {
+    let _ = vvvvs
+}
+
+fn drop_vec_of_vecs_of_vecs_of_results(vvvvr: Vec<Vec<Vec>>) {
+    let _ = vvvvr
+}
+
+fn drop_vec_of_vecs_of_vecs_of_options(vvvvo: Vec<Vec<Vec>>) {
+    let _ = vvvvo
+}
+
+fn drop_vec_of_vecs_of_vecs_of_bools(vvvvb: Vec<Vec<Vec>>) {
+    let _ = vvvvb
+}
+
+fn drop_vec_of_vecs_of_vecs_of_units(vvvvu: Vec<Vec<Vec>>) {
+    let _ = vvvvu
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs(vvvvv: Vec<Vec<Vec>>) {
+    let _ = vvvvv
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_strs(vvvvvvs: Vec<Vec<Vec>>) {
+    let _ = vvvvvvs
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_results(vvvvvvr: Vec<Vec<Vec>>) {
+    let _ = vvvvvvr
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_options(vvvvvvo: Vec<Vec<Vec>>) {
+    let _ = vvvvvvo
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_bools(vvvvvvb: Vec<Vec<Vec>>) {
+    let _ = vvvvvvb
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_units(vvvvvvu: Vec<Vec<Vec>>) {
+    let _ = vvvvvvu
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs(vvvvvvv: Vec<Vec<Vec>>) {
+    let _ = vvvvvvv
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_strs(vvvvvvvvs: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvs
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_results(vvvvvvvvr: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvr
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_options(vvvvvvvvo: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvo
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_bools(vvvvvvvvb: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvb
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_units(vvvvvvvvu: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvu
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs(vvvvvvvvv: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvv
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_strs(vvvvvvvvvvs: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvs
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_results(vvvvvvvvvvr: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvr
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_options(vvvvvvvvvvo: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvo
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_bools(vvvvvvvvvvb: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvb
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_units(vvvvvvvvvvu: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvu
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs(vvvvvvvvvvv: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvv
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_strs(vvvvvvvvvvvvs: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvvvs
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_results(vvvvvvvvvvvvr: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvvvr
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_options(vvvvvvvvvvvvo: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvvvo
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_bools(vvvvvvvvvvvvb: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvvvb
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_units(vvvvvvvvvvvvu: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvvvu
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs(vvvvvvvvvvvvv: Vec<Vec<Vec>>) {
+    let _ = vvvvvvvvvvvvv
+}
+
+fn drop_vec_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs_of_vecs

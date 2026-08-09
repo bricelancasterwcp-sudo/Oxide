@@ -1,0 +1,322 @@
+fn main() {
+    let list = vec(5, 3, 8, 1, 9, 2)
+    let sorted = sort(clone(&list))
+    for x in sorted {
+        print_str(x)
+    }
+    drop sorted
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    bubble_sort(mutv)
+}
+
+fn bubble_sort(mutv: Vec<Int>) -> Vec<Int> {
+    let n = len(mutv)
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn bubble_sort(v: Vec<Int>) -> Vec<Int> {
+    let n = v.len()
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn bubble_sort(v: Vec<Int>) -> Vec<Int> {
+    let n = v.len()
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn bubble_sort(v: Vec<Int>) -> Vec<Int> {
+    let n = v.len()
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn bubble_sort(v: Vec<Int>) -> Vec<Int> {
+    let n = v.len()
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn bubble_sort(v: Vec<Int>) -> Vec<Int> {
+    let n = v.len()
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn bubble_sort(v: Vec<Int>) -> Vec<Int> {
+    let n = v.len()
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn bubble_sort(v: Vec<Int>) -> Vec<Int> {
+    let n = v.len()
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn bubble_sort(v: Vec<Int>) -> Vec<Int> {
+    let n = v.len()
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn bubble_sort(v: Vec<Int>) -> Vec<Int> {
+    let n = v.len()
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn bubble_sort(v: Vec<Int>) -> Vec<Int> {
+    let n = v.len()
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn bubble_sort(v: Vec<Int>) -> Vec<Int> {
+    let n = v.len()
+    for i in 0 < n {
+        for j in 0 < n - i - 1 {
+            if v(j) > v(j + 1) {
+                let temp = v(j)
+                v(j) == temp
+                v(j + 1) == temp
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Vec<Int> {
+    vec(a, b, c, d, e, f)
+}
+
+fn len

@@ -1,0 +1,7 @@
+fn main() {
+    let texts = vec(vec("level"), vec("stereo"), vec("rotor"))
+    for text in texts {
+        let reversed: Str = text.chars().rev().collect()
+        print(text == reversed)
+    }
+}

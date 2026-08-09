@@ -1,0 +1,17 @@
+fn lookup(l: &Vec<Int>, i: Int) -> Int {
+    if i < 0 || i >= l.len() {
+        -1
+    } else {
+        match get(l, i) {
+            Some(x) => x,
+            None => -1,
+        }
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    print(lookup(&list, 1)) // prints 20
+    print(lookup(&list, 5)) // prints -1
+    drop list
+}

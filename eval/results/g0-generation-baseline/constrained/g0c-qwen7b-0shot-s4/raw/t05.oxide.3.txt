@@ -1,0 +1,17 @@
+struct Sequence { a: Int, b: Int }
+
+fn next(s: Sequence) -> Sequence {
+    Sequence(s.b, s.a + s.b)
+}
+
+fn nth(n: Int) -> Int {
+    let mut s = Sequence(1, 1)
+    for _ in 0 < n {
+        s = next(s)
+    }
+    s.a
+}
+
+fn main() {
+    print(nth(20))
+}

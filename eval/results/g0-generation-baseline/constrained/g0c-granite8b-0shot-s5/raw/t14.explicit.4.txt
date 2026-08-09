@@ -1,0 +1,20 @@
+fn count_and_distinct_chars(word: Str) -> Str {
+    let mut distinct_chars = vec()
+    let mut count = 0
+    for char in &chars_in_word {
+        if !distinct_chars.contains(&char) {
+            distinct_chars = push(distinct_chars, char)
+        }
+        if char == "s" {
+            count = count + 1
+        }
+    }
+    print_str(str_from_int(count))
+    print_str(" ")
+    print_str(str_from_int(len(distinct_chars)))
+    return ""
+}
+
+fn main() {
+    count_and_distinct_chars("mississippi")
+}

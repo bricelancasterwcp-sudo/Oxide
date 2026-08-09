@@ -1,0 +1,24 @@
+struct Pen { unit_price: Int, quantity: Int }
+
+struct Pad { unit_price: Int, quantity: Int }
+
+struct Ink { unit_price: Int, quantity: Int }
+
+fn cost(p: Pen) -> Int {
+    p.unit_price * p.quantity
+}
+
+fn main() {
+    let pen = Pen { unit_price: 3, quantity: 4 }
+    let pad = Pad { unit_price: 9, quantity: 2 }
+    let ink = Ink { unit_price: 5, quantity: 3 }
+    let total_cost = cost(pen) + cost(pad) + cost(ink)
+    print(total_cost)
+    let max_cost = max(total_cost, cost(pen), cost(pad), cost(ink))
+    match max_cost {
+        _ => print_str("No item"),
+        _ => print_str("Pen"),
+        _ => print_str("Pad"),
+        _ => print_str("Ink") < Rust,
+    }
+}

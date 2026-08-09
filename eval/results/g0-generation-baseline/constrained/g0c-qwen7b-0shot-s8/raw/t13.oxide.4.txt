@@ -1,0 +1,60 @@
+fn is_palindrome(s: Str) -> Bool {
+    let reversed: Str = chars(s).map(x, int_to_str(x)).join("")
+    s == reversed
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    s.split("").filter(x, x != "").collect()
+}
+
+fn map(f: FnStr, v: Vec<Str>) -> Vec<Str> {
+    v.map(f)
+}
+
+fn join(v: Vec<Str>, sep: Str) -> Str {
+    v.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, v: Vec<Str>) -> Vec<Str> {
+    v.filter(f)
+}
+
+fn collect(v: Vec<Str>) -> Vec<Str> {
+    v
+}
+
+fn map(f: FnStr, v: Vec<Str>) -> Vec<Str> {
+    v.map(f)
+}
+
+fn join(v: Vec<Str>, sep: Str) -> Str {
+    v.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, v: Vec<Str>) -> Vec<Str> {
+    v.filter(f)
+}
+
+fn collect(v: Vec<Str>) -> Vec<Str> {
+    v
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}

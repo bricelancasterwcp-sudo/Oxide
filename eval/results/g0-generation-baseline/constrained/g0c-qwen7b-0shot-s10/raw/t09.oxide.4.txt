@@ -1,0 +1,37 @@
+struct List { head: Option<Box<Node>>, tail: Option<Box<List>> }
+
+struct Node { value: Int }
+
+fn push(list: List, value: Int) -> List {
+    List(Some(Box { value: value, tail: Some(Box { head: Some(Box { value: 0, tail: None }), tail: None }) }), None)
+}
+
+fn reverse(list: List) -> List {
+    let mut reversed = List(None, None)
+    let mut current = list
+    while letSome(node) == current.head {
+        reversed = List(Some(Box { value: node.value, tail: Some(Box { head: Some(Box { value: 0, tail: None }), tail: None }) }), None)
+        current = match node.tail {
+            Some(next) => next,
+            None => breakcurrent,
+        }
+    }
+    reversed
+}
+
+fn print_list(list: List) {
+    let mut current = list
+    while letSome(node) == current.head {
+        print(node.value)
+        current = match node.tail {
+            Some(next) => next,
+            None => breakcurrent,
+        }
+    }
+}
+
+fn main() {
+    let list = push(push(push(push(push(List(None, None), 1), 2), 3), 4), 5)
+    let reversed = reverse(list)
+    print_list(reversed)
+}

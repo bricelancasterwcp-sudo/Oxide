@@ -1,0 +1,16 @@
+fn triangle(a: Int, b: Int, c: Int) -> Int {
+    return a + b + c
+}
+
+fn rectangle(a: Int, b: Int) -> Int {
+    return 2 * (a + b)
+}
+
+fn main() {
+    let r1 = rectangle(3, 4)
+    let t1 = triangle(3, 4, 5)
+    let r2 = rectangle(2, 5)
+    print(r1)
+    print(t1)
+    print(r2)
+}

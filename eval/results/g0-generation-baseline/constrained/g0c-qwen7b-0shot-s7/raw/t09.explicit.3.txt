@@ -1,0 +1,11 @@
+fn reverse_print(v: Vec<Int>) {
+    let mut iter = v.iter().rev().peekable()
+    while letSome(x) == iter.next() {
+        print(x)
+    }
+}
+
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5)
+    reverse_print(nums.clone())
+}

@@ -1,0 +1,89 @@
+fn keep_large(v: &Vec<Int>) -> Vec<Int> {
+    let mut kept = vec()
+    for x in v {
+        if x > &mut && 3 {
+            kept = push(kept, x)
+        }
+    }
+    kept
+}
+
+fn main() {
+    let list = vec(4, 1, 7, 3, 9, 2)
+    let kept = keep_large(&list)
+    for x in &kept {
+        print(x)
+    }
+    print(len(&kept))
+}
+
+fn push(v: Vec<Int>, x: &Int) -> Vec<Int> {
+    let mut vec = v
+    vec.push(x)
+    vec
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut i = 0
+    for _ in v {
+        i = i + 1
+    }
+    i
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(v: &Vec<Int>) {
+    for x in v {
+        print(x)
+    }
+}
+
+fn print(f: Float) {
+    print(f)
+}
+
+fn print(b: Bool) {
+    print(b)
+}
+
+fn print(ch: &Char) {
+    print(ch)
+}
+
+fn print() {
+    print()
+}
+
+fn clone(x: &Int) -> Int {
+    let mut y = 0
+    y = y + x
+    y
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= len(v) {
+        None
+    } else {
+        Some(clone(&v))
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a + 1 < b {
+        v.push(i)
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = ""
+    for digit in n {
+        s = s + &char_to_str_digit_unsafe_unchecked_no_panic_guaranteed_ok_because_we_are_in_oxide_and_we_know_that_it_will_not_panic_because_it_is_just_a_digit_and_it_will_not_overflow_the_integer_size_because_it_is_just_a_digit_anyway_no_really_i_am_just_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_kidding_i_am_not_

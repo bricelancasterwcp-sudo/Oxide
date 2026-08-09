@@ -1,0 +1,21 @@
+fn is_palindrome(word: &String) -> Bool {
+    let mut front = 0
+    let mut back = word.len() - 1
+    while front < back {
+        if word.chars().nth(front) != word.chars().nth(back) {
+            return false
+        }
+        front = front + 1
+        back = back - 1
+    }
+    true
+}
+
+fn main() {
+    let level = "level".to_string()
+    let stereo = "stereo".to_string()
+    let rotor = "rotor".to_string()
+    print(is_palindrome(&level))
+    print(is_palindrome(&stereo))
+    print(is_palindrome(&rotor))
+}

@@ -1,0 +1,317 @@
+fn main() {
+    let mut nums = vec(1, 2, 3, 4, 5)
+    for x in &mut {
+        print(pop(&nums).unwrap())
+    }
+    drop nums
+}
+
+fn pop(v: &Vec<Int>) -> Option<Int> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(v.len() - 1)
+    }
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = str_empty()
+    let mut c = n
+    while c > 0 {
+        s = concat(char(c % 10 + 48), s)
+        c = c / 10
+    }
+    s
+}
+
+fn char(n: Int) -> Str {
+    if n < 10 {
+        str_char(n + 48)
+    } else {
+        str_char(n - 10 + 48)
+    }
+}
+
+fn str_empty() -> Str {
+    Str("")
+}
+
+fn str_char(c: Int) -> Str {
+    Str(string(c))
+}
+
+fn string(c: Int) -> String {
+    std_string(c)
+}
+
+fn std_string(c: Int) -> String {
+    char(c).chars().next().unwrap().to_string()
+}
+
+fn print_str(s: Str) {
+    std_print_str(s)
+}
+
+fn std_print_str(s: Str) {
+    std_print(string(s))
+}
+
+fn std_print(s: String) {
+    std_print_str(Str(s))
+}
+
+fn std_print_str(s: Str) {
+    println(s)
+}
+
+fn std_print(s: String) {
+    println(s)
+}
+
+fn std_print(s: Str) {
+    println(s)
+}
+
+fn main() {
+    let mut nums = vec(1, 2, 3, 4, 5)
+    for x in &mut {
+        print(pop(&nums).unwrap())
+    }
+    drop nums
+}
+
+fn pop(v: &Vec<Int>) -> Option<Int> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(v.len() - 1)
+    }
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = str_empty()
+    let mut c = n
+    while c > 0 {
+        s = concat(char(c % 10 + 48), s)
+        c = c / 10
+    }
+    s
+}
+
+fn char(n: Int) -> Str {
+    if n < 10 {
+        str_char(n + 48)
+    } else {
+        str_char(n - 10 + 48)
+    }
+}
+
+fn str_empty() -> Str {
+    Str("")
+}
+
+fn str_char(c: Int) -> Str {
+    Str(string(c))
+}
+
+fn string(c: Int) -> String {
+    std_string(c)
+}
+
+fn std_string(c: Int) -> String {
+    char(c).chars().next().unwrap().to_string()
+}
+
+fn print_str(s: Str) {
+    std_print_str(s)
+}
+
+fn std_print_str(s: Str) {
+    std_print(string(s))
+}
+
+fn std_print(s: String) {
+    std_print_str(Str(s))
+}
+
+fn std_print_str(s: Str) {
+    println(s)
+}
+
+fn std_print(s: String) {
+    println(s)
+}
+
+fn std_print(s: Str) {
+    println(s)
+}
+
+fn main() {
+    let mut nums = vec(1, 2, 3, 4, 5)
+    for x in &mut {
+        print(pop(&nums).unwrap())
+    }
+    drop nums
+}
+
+fn pop(v: &Vec<Int>) -> Option<Int> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(v.len() - 1)
+    }
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = str_empty()
+    let mut c = n
+    while c > 0 {
+        s = concat(char(c % 10 + 48), s)
+        c = c / 10
+    }
+    s
+}
+
+fn char(n: Int) -> Str {
+    if n < 10 {
+        str_char(n + 48)
+    } else {
+        str_char(n - 10 + 48)
+    }
+}
+
+fn str_empty() -> Str {
+    Str("")
+}
+
+fn str_char(c: Int) -> Str {
+    Str(string(c))
+}
+
+fn string(c: Int) -> String {
+    std_string(c)
+}
+
+fn std_string(c: Int) -> String {
+    char(c).chars().next().unwrap().to_string()
+}
+
+fn print_str(s: Str) {
+    std_print_str(s)
+}
+
+fn std_print_str(s: Str) {
+    std_print(string(s))
+}
+
+fn std_print(s: String) {
+    std_print_str(Str(s))
+}
+
+fn std_print_str(s: Str) {
+    println(s)
+}
+
+fn std_print(s: String) {
+    println(s)
+}
+
+fn std_print(s: Str) {
+    println(s)
+}
+
+fn main() {
+    let mut nums = vec(1, 2, 3, 4, 5)
+    for x in &mut {
+        print(pop(&nums).unwrap())
+    }
+    drop nums
+}
+
+fn pop(v: &Vec<Int>) -> Option<Int> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(v.len() - 1)
+    }
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = str_empty()
+    let mut c = n
+    while c > 0 {
+        s = concat(char(c % 10 + 48), s)
+        c = c / 10
+    }
+    s
+}
+
+fn char(n: Int) -> Str {
+    if n < 10 {
+        str_char(n + 48)
+    } else {
+        str_char(n - 10

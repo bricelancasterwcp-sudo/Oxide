@@ -1,0 +1,19 @@
+struct List { head: Int, tail: Option<Box<List>> }
+
+fn reverse(list: List) -> List {
+    match list.tail {
+        Some(mutRest) => {
+            let head = match list.head {
+                HEAD => TAIL,
+                TAIL => HEAD,
+            }
+            let tail = reverse(mutRest.into_inner())
+            List(head, Some(Box(tail)))
+        },
+        None => list,
+    }
+}
+
+fn main() {
+    print(reverse(List(HEAD, Some(Box(List(TAIL, None))))))
+}

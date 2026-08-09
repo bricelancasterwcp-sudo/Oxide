@@ -1,0 +1,11 @@
+fn sum_of_squares(n: Int) -> Float {
+    let mut acc = 0.0
+    for i in range(0, n + 1) {
+        acc = acc + to_float(i) * to_float(i)
+    }
+    acc
+}
+
+fn main() {
+    print(sum_of_squares(9))
+}

@@ -1,0 +1,9 @@
+fn main() {
+    let list = push(push(push(push(push(push(push(push(vec(), 10), 20), 30), 40), 50), 60), 70), 80)
+    let position_1 = get(&list, 1)
+    print(position_1)
+    drop position_1
+    let position_5 = get(&list, 5)
+    print(position_5)
+    drop position_5
+}

@@ -1,0 +1,13 @@
+fn main() {
+    let result1 = 100 / 5;
+    let result2 = 100 / 0;
+    let result3 = 100 / 4;
+
+    match result2 {
+        0 => println!("undefined"),
+        _ => println!("{}", result1),
+    }
+
+    println!("{}", result2);
+    println!("{}", result3);
+}

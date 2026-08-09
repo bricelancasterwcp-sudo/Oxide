@@ -1,0 +1,10 @@
+fn main() {
+    let mut nums = vec()
+    let mut total = 0
+    for i in 0.step_to(8, 3) {
+        nums = push(nums, i)
+        total = total + i
+    }
+    print(total)
+    drop nums
+}

@@ -1,0 +1,10 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn main() {
+    let values = vec(4, 1, 7, 3, 9, 2)
+    let kept = values.filter(x, x > 3)
+    for x in kept {
+        print(x)
+    }
+    print(len(kept))
+}

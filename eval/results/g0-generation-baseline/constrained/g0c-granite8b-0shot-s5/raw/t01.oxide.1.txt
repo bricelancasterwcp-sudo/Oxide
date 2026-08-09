@@ -1,0 +1,346 @@
+fn main() {
+    printed(sum_squares(0, 10))
+}
+
+fn sum_squares(from: Int, to: Int) -> Int {
+    let sum = 0
+    for i in range(from, to) {
+        let square = i * i
+        sum = sum + square
+    }
+    sum
+}
+
+fn printed(n: Int) {
+    print(n)
+}
+
+fn range(from: Int, to: Int) -> Vec<Int> {
+    vec()
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v
+}
+
+fn print(x: Int) {
+    nop(x)
+}
+
+fn nop(x: Int) {
+    nop(x)
+}
+
+fn nop(x: Str) {
+    nop(x)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    None
+}
+
+fn add(x: Int, y: Int) -> Int {
+    x + y
+}
+
+fn add(x: Int, y: Float) -> Float {
+    x + y
+}
+
+fn add(x: Float, y: Int) -> Float {
+    x + y
+}
+
+fn add(x: Float, y: Float) -> Float {
+    x + y
+}
+
+fn len(v: Vec<Int>) -> Int {
+    nop(v)
+}
+
+fn print_str(x: Str) {
+    nop(x)
+}
+
+fn clone(x: Int) -> Int {
+    nop(x)
+}
+
+fn clone(x: Str) -> Str {
+    nop(x)
+}
+
+fn clone(x: Vec<Int>) -> Vec<Int> {
+    nop(x)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    nop(s)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    None
+}
+
+fn to_float(x: Int) -> Float {
+    nop(x)
+}
+
+fn trunc(x: Float) -> Int {
+    nop(x)
+}
+
+fn main() {
+    printed(sum_squares(0, 10))
+}
+
+fn sum_squares(from: Int, to: Int) -> Int {
+    let sum = 0
+    for i in range(from, to) {
+        let square = i * i
+        sum = sum + square
+    }
+    sum
+}
+
+fn printed(n: Int) {
+    print(n)
+}
+
+fn range(from: Int, to: Int) -> Vec<Int> {
+    nop(from)
+    nop(to)
+    Vec()
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    nop(v)
+    nop(x)
+    v
+}
+
+fn print(x: Int) {
+    nop(x)
+}
+
+fn nop(x: Int) {
+    nop(x)
+}
+
+fn nop(x: Str) {
+    nop(x)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    nop(v)
+    nop(i)
+    None
+}
+
+fn add(x: Int, y: Int) -> Int {
+    nop(x)
+    nop(y)
+    x + y
+}
+
+fn add(x: Int, y: Float) -> Float {
+    nop(x)
+    nop(y)
+    x + y
+}
+
+fn add(x: Float, y: Int) -> Float {
+    nop(x)
+    nop(y)
+    x + y
+}
+
+fn add(x: Float, y: Float) -> Float {
+    nop(x)
+    nop(y)
+    x + y
+}
+
+fn len(v: Vec<Int>) -> Int {
+    nop(v)
+    nop(0)
+}
+
+fn print_str(x: Str) {
+    nop(x)
+}
+
+fn clone(x: Int) -> Int {
+    nop(x)
+}
+
+fn clone(x: Str) -> Str {
+    nop(x)
+}
+
+fn clone(x: Vec<Int>) -> Vec<Int> {
+    nop(x)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    nop(s)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    nop(s)
+}
+
+fn to_float(x: Int) -> Float {
+    nop(x)
+}
+
+fn trunc(x: Float) -> Int {
+    nop(x)
+}
+
+fn main() {
+    printed(sum_squares(0, 10))
+}
+
+fn sum_squares(from: Int, to: Int) -> Int {
+    nop(0)
+    let sum = 0
+    for i in range(from, to) {
+        nop(0)
+        let square = i * i
+        nop(0)
+        sum = sum + square
+    }
+    nop(0)
+    sum
+}
+
+fn printed(n: Int) {
+    nop(0)
+    print(n)
+}
+
+fn range(from: Int, to: Int) -> Vec<Int> {
+    nop(from)
+    nop(to)
+    Vec()
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    nop(v)
+    nop(x)
+    v
+}
+
+fn print(x: Int) {
+    nop(x)
+}
+
+fn nop(x: Int) {
+    nop(x)
+}
+
+fn nop(x: Str) {
+    nop(x)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    nop(v)
+    nop(i)
+    None
+}
+
+fn add(x: Int, y: Int) -> Int {
+    nop(x)
+    nop(y)
+    x + y
+}
+
+fn add(x: Int, y: Float) -> Float {
+    nop(x)
+    nop(y)
+    x + y
+}
+
+fn add(x: Float, y: Int) -> Float {
+    nop(x)
+    nop(y)
+    x + y
+}
+
+fn add(x: Float, y: Float) -> Float {
+    nop(x)
+    nop(y)
+    x + y
+}
+
+fn len(v: Vec<Int>) -> Int {
+    nop(v)
+    nop(0)
+}
+
+fn print_str(x: Str) {
+    nop(x)
+}
+
+fn clone(x: Int) -> Int {
+    nop(x)
+}
+
+fn clone(x: Str) -> Str {
+    nop(x)
+}
+
+fn clone(x: Vec<Int>) -> Vec<Int> {
+    nop(x)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    nop(s)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    nop(s)
+}
+
+fn to_float(x: Int) -> Float {
+    nop(x)
+}
+
+fn trunc(x: Float) -> Int {
+    nop(x)
+}
+
+fn main() {
+    printed(sum_squares(0, 10))
+}
+
+fn sum_squares(from: Int, to: Int) -> Int {
+    nop(0)
+    let sum = 0
+    for i in range(from, to) {
+        nop(0)
+        let square = i * i
+        nop(0)
+        sum = sum + square
+    }
+    nop(0)
+    sum
+}
+
+fn printed(n: Int) {
+    nop(0)
+    print

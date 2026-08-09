@@ -1,0 +1,15 @@
+fn main() {
+    for n in range(2, 1000) {
+        let mut sum = 0
+        let mut d = 1
+        while d < n {
+            if n % d == 0 {
+                sum = sum + d
+            }
+            d = d + 1
+        }
+        if sum == n {
+            print_str(n.to_str() + "\n")
+        }
+    }
+}

@@ -1,0 +1,20 @@
+fn filter(list: Vec<Int>, min: Int) -> Vec<Int> {
+    let mut result = vec()
+    for num in &list {
+        if num > min {
+            push(result, num)
+        }
+    }
+    drop result
+    result
+}
+
+fn main() {
+    let list = vec(4, 1, 7, 3, 9, 2)
+    let filtered = filter(list, 3)
+    for num in &filtered {
+        print(num)
+        print("\n")
+    }
+    print(len(&filtered))
+}

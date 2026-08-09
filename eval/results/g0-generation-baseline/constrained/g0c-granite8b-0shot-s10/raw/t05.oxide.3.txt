@@ -1,0 +1,16 @@
+struct Seq { a: Int, b: Int }
+
+fn seq(n: Int) -> Seq {
+    let a = 1
+    let b = 1
+    for i in range(2, n) {
+        let c = a + b
+        a = b
+        b = c
+    }
+    Seq(a, b)
+}
+
+fn main() {
+    print(seq(20).b)
+}

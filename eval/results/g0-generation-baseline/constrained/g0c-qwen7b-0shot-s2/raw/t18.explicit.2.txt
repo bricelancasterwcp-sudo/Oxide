@@ -1,0 +1,63 @@
+fn perimeter(shape: Shape) -> Int {
+    match shape {
+        Rectangle(w, h) => 2 * (w + h),
+        Triangle(a, b, c) => a + b + c,
+        Circle(r) => 2 * 3.14 * r,
+    }
+}
+
+fn main() {
+    let shapes = vec(Rectangle(3, 4), Triangle(3, 4, 5), Rectangle(2, 5))
+    for shape in &shapes {
+        print(perimeter(shape))
+    }
+    drop shapes
+}
+
+struct Rectangle {
+    w: Int,
+    h: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+struct Circle {
+    r: Float,
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+    Circle(Circle),
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn vec(shapes: Vec<Shape>) -> Vec<Shape> {
+    shapes
+}
+
+fn perimeter(shape: Shape) -> Int {
+    match shape {
+        Shape(_rectangle) => {
+            let Rectangle { w, h } = rectangle.clone().unwrap_or_else(Shape(Rectangle { w: 0, h: 0 }).unwrap_or_else(Rectangle { w: 0, h: 0 }))
+            2 * (w + h)
+        },
+        Shape(_triangle) => 0,
+        Shape(_circle) => 0,
+    }
+}
+
+fn main() {
+    let shapes = vec(Shape(Rectangle { w: 3, h: 4 }), Shape(Triangle { a: 3, b: 4, c: 5 }), Shape(Rectangle { w: 2, h: 5 }))
+    for shape in &shapes {
+        print(perimeter(shape))
+    }
+    drop shapes
+}

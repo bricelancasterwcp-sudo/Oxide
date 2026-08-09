@@ -1,0 +1,17 @@
+fn sum_proper(n: Int) -> Int {
+    let mut total = 0
+    for x in 1.range(n) {
+        if n % x == 0 {
+            total = total + x
+        }
+    }
+    total - n
+}
+
+fn main() {
+    for n in 1.range(1000) {
+        if n == sum_proper(n) {
+            print(n)
+        }
+    }
+}

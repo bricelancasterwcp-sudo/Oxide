@@ -1,0 +1,24 @@
+fn parse_int(s: Str) -> Option<Int> {
+    match s.parse_int() {
+        Ok(i) => Some(i),
+        Err(_) => None,
+    }
+}
+
+fn main() {
+    let nums = vec("12", "x", "30")
+    let mut sum = 0
+    let mut count = 0
+    for n in nums {
+        match parse_int(n) {
+            Some(i) => {
+                sum = sum + i
+            },
+            None => {
+                count = count + 1
+            },
+        }
+    }
+    print(sum)
+    print(count)
+}

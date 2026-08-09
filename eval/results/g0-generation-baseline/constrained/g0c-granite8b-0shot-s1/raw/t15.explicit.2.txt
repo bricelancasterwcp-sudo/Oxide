@@ -1,0 +1,20 @@
+fn parse_sum(s: Str) -> Result<Int, Str> {
+    let mut sum = 0
+    for c in chars(s) {
+        match parse_int(c) {
+            Some(n) => sum == sum + n,
+            None => returnErr(c),
+        }
+    }
+    Ok(sum)
+}
+
+fn main() {
+    let inputs = vec()
+    for s in inputs {
+        match parse_sum(s) {
+            Ok(n) => print(n),
+            Err(s) => print(s),
+        }
+    }
+}

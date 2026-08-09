@@ -1,0 +1,366 @@
+fn triangle(a: Float, b: Float, c: Float) -> Float {
+    return (a + b + c) / 2.0
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn main() {
+    let shapes = vec(Shape(Rectangle(3.0, 4.0)), Shape(Triangle(3.0, 4.0, 5.0)), Shape(Rectangle(2.0, 5.0)))
+    for shape in &shapes {
+        print(perimeter(&shape))
+    }
+}
+
+enum Shape {
+    Rectangle(Float, Float),
+    Triangle(Float, Float, Float),
+}
+
+struct Rectangle {
+    width: Float,
+    height: Float,
+}
+
+struct Triangle {
+    a: Float,
+    b: Float,
+    c: Float,
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape) => shape.perimeter(),
+    }
+}
+
+fn perimeter(s: &Shape) -> Float {
+    match s {
+        Shape(shape

@@ -1,0 +1,335 @@
+fn main() {
+    let mut total = 0
+    let mut count = 0
+    for arg in std_input() {
+        if letOk(num) == parse_int(arg) {
+            total = total + num
+            count = count + 1
+        }
+    }
+    print(total)
+    print(count)
+}
+
+fn std_input() -> Vec<String> {
+    let mut input = Vec.new()
+    while letOk(line) == std_input_line() {
+        input.push(line)
+    }
+    input
+}
+
+fn std_input_line() -> Option<String> {
+    let mut line = String.new()
+    std_input_char().map(move || line.push(c))
+}
+
+fn std_input_char() -> Option<Char> {
+    std_input_byte().map(move || char(b))
+}
+
+fn std_input_byte() -> Option<Byte> {
+    std_input_bytes().next()
+}
+
+fn std_input_bytes() -> Bytes {
+    std_input_bytes_from(std_input_stream())
+}
+
+fn std_input_bytes_from(stream: InputStream) -> Bytes {
+    let mut bytes = Bytes.new()
+    for byte in stream {
+        bytes.push(byte)
+    }
+    bytes
+}
+
+fn std_input_stream() -> InputStream {
+    std_input_stream_from(std_input_device())
+}
+
+fn std_input_stream_from(device: Device) -> InputStream {
+    device.input()
+}
+
+fn std_input_device() -> Device {
+    std_input_device_from(std_input_context())
+}
+
+fn std_input_device_from(context: Context) -> Device {
+    context.device(0)
+}
+
+fn std_input_context() -> Context {
+    std_input_context_from(std_input_handle())
+}
+
+fn std_input_context_from(handle: Handle) -> Context {
+    handle.context()
+}
+
+fn std_input_handle() -> Handle {
+    std_input_handle_from(std_input_connection())
+}
+
+fn std_input_handle_from(connection: Connection) -> Handle {
+    connection.handle()
+}
+
+fn std_input_connection() -> Connection {
+    std_input_connection_from(std_input_port())
+}
+
+fn std_input_connection_from(port: Port) -> Connection {
+    port.connection()
+}
+
+fn std_input_port() -> Port {
+    std_input_port_from(std_input_socket())
+}
+
+fn std_input_port_from(socket: Socket) -> Port {
+    socket.port()
+}
+
+fn std_input_socket() -> Socket {
+    std_input_socket_from(std_input_address())
+}
+
+fn std_input_socket_from(address: Address) -> Socket {
+    address.socket()
+}
+
+fn std_input_address() -> Address {
+    std_input_address_from(std_input_url())
+}
+
+fn std_input_address_from(url: Url) -> Address {
+    url.address()
+}
+
+fn std_input_url() -> Url {
+    std_input_url_from(std_input_string())
+}
+
+fn std_input_url_from(string: String) -> Url {
+    Url.parse(string)
+}
+
+fn std_input_string() -> String {
+    std_input_line().unwrap()
+}
+
+fn parse_int(arg: String) -> Option<Int> {
+    match parse_int_impl(arg) {
+        Ok(num) => Some(num),
+        Err(_) => None,
+    }
+}
+
+fn parse_int_impl(arg: String) -> Result<Int, Error> {
+    let mut num = 0
+    for c in arg.chars() {
+        num = num * 10 + c - b
+    }
+    Ok(num)
+}
+
+fn print(arg: Int) {
+    print(arg)
+}
+
+fn print(arg: String) {
+    print(arg)
+}
+
+fn print(arg: Char) {
+    print(arg)
+}
+
+fn print(arg: Byte) {
+    print(arg)
+}
+
+fn print(arg: Bytes) {
+    print(arg)
+}
+
+fn print(arg: Vec<String>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Char>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Byte>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Bytes>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Int>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Float>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Bool>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Str>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Unit>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<String>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<Char>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<Byte>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<Bytes>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<Int>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<Float>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<Bool>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<Str>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<Unit>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecString>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecChar>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecByte>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecBytes>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecInt>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecFloat>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecBool>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecStr>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecUnit>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecString>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecChar>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecByte>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecBytes>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecInt>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecFloat>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecBool>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecStr>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecUnit>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecVecString>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecVecChar>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecVecByte>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecVecBytes>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecVecInt>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecVecFloat>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecVecBool>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecVecStr>>) {
+    print(arg)
+}
+
+fn print(arg: Vec<Vec<VecVecVecUnit>>) {
+    print(arg)

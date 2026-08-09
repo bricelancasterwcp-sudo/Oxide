@@ -1,0 +1,20 @@
+fn main() {
+    let mut sum = 0
+    let mut count = 0
+    for s in vec_str("12", "x", "30") {
+        match parse_int(s) {
+            Some(n) => {
+                sum = sum + n
+                count = count + 1
+            },
+            None => {
+                print_str("failed to parse ")
+                print(s)
+                print_str("\n")
+            },
+        }
+    }
+    print(sum)
+    print(" ")
+    print(count)
+}

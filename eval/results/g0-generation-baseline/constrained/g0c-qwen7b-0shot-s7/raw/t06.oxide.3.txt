@@ -1,0 +1,25 @@
+fn divisors(n: Int) -> Vec<Int> {
+    let mut ds = vec()
+    for i in range(1, n) {
+        if n % i == 0 {
+            ds = push(ds, i)
+        }
+    }
+    ds
+}
+
+fn is_perfect(n: Int) -> Bool {
+    n == sum(divisors(n))
+}
+
+fn sum(v: Vec<Int>) -> Int {
+    v.iter().fold(0, (x) + (y) || x + y)
+}
+
+fn main() {
+    for n in range(1, 1000) {
+        if is_perfect(n) {
+            print(n)
+        }
+    }
+}

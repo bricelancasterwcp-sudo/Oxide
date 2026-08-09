@@ -1,0 +1,533 @@
+fn area(s: &Shape) -> Int {
+    match s {
+        Shape(r) => r.area(),
+        _ => 0,
+    }
+}
+
+fn perimeter(s: &Shape) -> Int {
+    match s {
+        Shape(r) => r.perimeter(),
+        _ => 0,
+    }
+}
+
+fn main() {
+    let s1 = Shape(Rectangle(3, 4))
+    let s2 = Shape(Triangle(3, 4, 5))
+    let s3 = Shape(Rectangle(2, 5))
+    print(area(&s1))
+    print(perimeter(&s1))
+    print(area(&s2))
+    print(perimeter(&s2))
+    print(area(&s3))
+    print(perimeter(&s3))
+}
+
+struct Rectangle { width: Int, height: Int }
+
+struct Triangle { side1: Int, side2: Int, side3: Int }
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+struct Shape {
+    kind: ShapeKind,
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+enum ShapeKind {
+    Rectangle(Rectangle),
+    Triangle

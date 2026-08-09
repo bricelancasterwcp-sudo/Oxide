@@ -1,0 +1,9 @@
+fn main() {
+    println!("{:?}", items());
+}
+
+fn items() -> Vec<(String, f64)> {
+    vec![("pen".to_string(), 3. * 4.),
+         ("pad".to_string(), 9. * 2.),
+         ("ink".to_string(), 5. * 3.)]
+}

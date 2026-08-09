@@ -1,0 +1,5 @@
+fn main() {
+    let multiples = (1).take(8).map(x * 3).collect()
+    let sum = multiples.iter().sum()
+    print(sum)
+}

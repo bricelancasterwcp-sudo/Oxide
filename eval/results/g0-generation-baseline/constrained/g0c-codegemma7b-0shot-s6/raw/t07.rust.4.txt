@@ -1,0 +1,15 @@
+use std::io;
+
+fn main() {
+    let mut multiples_of_three: Vec<u32> = Vec::new();
+
+    for i in 1..=24 {
+        if i % 3 == 0 {
+            multiples_of_three.push(i);
+        }
+    }
+
+    let sum_of_multiples = multiples_of_three.iter().sum::<u32>();
+
+    println!("Sum of multiples of three: {}", sum_of_multiples);
+}

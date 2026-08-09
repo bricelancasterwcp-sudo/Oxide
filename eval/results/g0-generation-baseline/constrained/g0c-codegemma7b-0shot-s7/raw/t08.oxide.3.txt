@@ -1,0 +1,337 @@
+fn main() {
+    let list = vec(3, 8, -2, 12, 7)
+    let mut positive = 0
+    let mut largest = -1000000000
+    for x in list {
+        if x > 0 {
+            positive = positive + 1
+        }
+        if x > largest {
+            largest = x
+        }
+    }
+    print(positive)
+    print(largest)
+}
+
+fn vec(x: Int, y: Int, z: Int, w: Int, t: Int) -> Vec<Int> {
+    return vec(x, y, z, w, t)
+}
+
+fn print(x: Int) -> Unit {
+    print_str(to_str(x))
+}
+
+fn to_str(x: Int) -> Str {
+    return int_to_str(x)
+}
+
+fn print_str(x: Str) -> Unit {
+    print(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return x.to_string()
+}
+
+fn format(x: Int) -> Str {
+    return x.to_string()
+}
+
+fn len(x: Vec<Int>) -> Int {
+    return x.len()
+}
+
+fn get(x: Vec<Int>, y: Int) -> Option<Int> {
+    if y >= len(x) {
+        return None
+    } else {
+        return Some(x.get(y).unwrap())
+    }
+}
+
+fn push(x: Vec<Int>, y: Int) -> Vec<Int> {
+    return vec(y, x)
+}
+
+fn format(x: Float) -> Str {
+    return x.to_string()
+}
+
+fn to_float(x: Int) -> Float {
+    return x.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    return x.trunc()
+}
+
+fn print(x: Float) -> Unit {
+    print_str(to_str(x))
+}
+
+fn to_str(x: Float) -> Str {
+    return format(x)
+}
+
+fn format(x: Str) -> Str {
+    return x.to_string()
+}
+
+fn str_len(x: Str) -> Int {
+    return x.len()
+}
+
+fn chars(x: Str) -> Vec<Str> {
+    let mut result = vec()
+    for c in x.chars() {
+        result = push(result, c.to_string())
+    }
+    return result
+}
+
+fn print(x: Str) -> Unit {
+    print_str(x)
+}
+
+fn print_str(x: Str) -> Unit {
+    print(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return x.to_string()
+}
+
+fn parse_int(x: Str) -> Option<Int> {
+    return x.parse()
+}
+
+fn to_float(x: Int) -> Float {
+    return x.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    return x.trunc()
+}
+
+fn print(x: Float) -> Unit {
+    print_str(to_str(x))
+}
+
+fn to_str(x: Float) -> Str {
+    return format(x)
+}
+
+fn format(x: Str) -> Str {
+    return x.to_string()
+}
+
+fn str_len(x: Str) -> Int {
+    return x.len()
+}
+
+fn chars(x: Str) -> Vec<Str> {
+    let mut result = vec()
+    for c in x.chars() {
+        result = push(result, c.to_string())
+    }
+    return result
+}
+
+fn print(x: Str) -> Unit {
+    print_str(x)
+}
+
+fn print_str(x: Str) -> Unit {
+    print(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return x.to_string()
+}
+
+fn parse_int(x: Str) -> Option<Int> {
+    return x.parse()
+}
+
+fn to_float(x: Int) -> Float {
+    return x.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    return x.trunc()
+}
+
+fn print(x: Float) -> Unit {
+    print_str(to_str(x))
+}
+
+fn to_str(x: Float) -> Str {
+    return format(x)
+}
+
+fn format(x: Str) -> Str {
+    return x.to_string()
+}
+
+fn str_len(x: Str) -> Int {
+    return x.len()
+}
+
+fn chars(x: Str) -> Vec<Str> {
+    let mut result = vec()
+    for c in x.chars() {
+        result = push(result, c.to_string())
+    }
+    return result
+}
+
+fn print(x: Str) -> Unit {
+    print_str(x)
+}
+
+fn print_str(x: Str) -> Unit {
+    print(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return x.to_string()
+}
+
+fn parse_int(x: Str) -> Option<Int> {
+    return x.parse()
+}
+
+fn to_float(x: Int) -> Float {
+    return x.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    return x.trunc()
+}
+
+fn print(x: Float) -> Unit {
+    print_str(to_str(x))
+}
+
+fn to_str(x: Float) -> Str {
+    return format(x)
+}
+
+fn format(x: Str) -> Str {
+    return x.to_string()
+}
+
+fn str_len(x: Str) -> Int {
+    return x.len()
+}
+
+fn chars(x: Str) -> Vec<Str> {
+    let mut result = vec()
+    for c in x.chars() {
+        result = push(result, c.to_string())
+    }
+    return result
+}
+
+fn print(x: Str) -> Unit {
+    print_str(x)
+}
+
+fn print_str(x: Str) -> Unit {
+    print(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return x.to_string()
+}
+
+fn parse_int(x: Str) -> Option<Int> {
+    return x.parse()
+}
+
+fn to_float(x: Int) -> Float {
+    return x.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    return x.trunc()
+}
+
+fn print(x: Float) -> Unit {
+    print_str(to_str(x))
+}
+
+fn to_str(x: Float) -> Str {
+    return format(x)
+}
+
+fn format(x: Str) -> Str {
+    return x.to_string()
+}
+
+fn str_len(x: Str) -> Int {
+    return x.len()
+}
+
+fn chars(x: Str) -> Vec<Str> {
+    let mut result = vec()
+    for c in x.chars() {
+        result = push(result, c.to_string())
+    }
+    return result
+}
+
+fn print(x: Str) -> Unit {
+    print_str(x)
+}
+
+fn print_str(x: Str) -> Unit {
+    print(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    return x.to_string()
+}
+
+fn parse_int(x: Str) -> Option<Int> {
+    return x.parse()
+}
+
+fn to_float(x: Int) -> Float {
+    return x.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    return x.trunc()
+}
+
+fn print(x: Float) -> Unit {
+    print_str(to_str(x))
+}
+
+fn to_str(x: Float) -> Str {
+    return format(x)
+}
+
+fn format(x: Str) -> Str {
+    return x.to_string()
+}
+
+fn str_len(x: Str) -> Int {
+    return x.len()
+}
+
+fn chars(x: Str) -> Vec<Str> {
+    let mut result = vec()
+    for c in x.chars() {
+        result = push(result, c.to_string())
+    }
+    return result
+}
+
+fn print(x: Str) -> Unit {
+    print_str(x)
+}
+
+fn print_str(x: Str) -> Unit {

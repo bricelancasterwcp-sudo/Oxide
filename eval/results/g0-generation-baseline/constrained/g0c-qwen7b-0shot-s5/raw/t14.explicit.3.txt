@@ -1,0 +1,31 @@
+fn main() {
+    let text = "mississippi"
+    let s_count = text.chars().filter(char_eq("s")).count()
+    let distinct_count = text.chars().collect().len()
+    print(s_count)
+    print(distinct_count)
+}
+
+fn char_eq(c: Str) -> Box<FnMutchar> {
+    Box(move || c == &c)
+}
+
+fn count(f: Box<FnMutchar>, v: Vec<Char>) -> Int {
+    v.into_iter().filter(f).count()
+}
+
+fn collect(v: Vec<Char>) -> Vec<Str> {
+    v.into_iter().map(char_to_str).collect()
+}
+
+fn char_to_str(c: Char) -> Str {
+    format("{}{}", c, "")
+}
+
+fn main() {
+    let text = "mississippi"
+    let s_count = count(char_eq("s"), collect(text.chars().map(char_to_str)))
+    let distinct_count = collect(text.chars().collect()).len()
+    print(s_count)
+    print(distinct_count)
+}

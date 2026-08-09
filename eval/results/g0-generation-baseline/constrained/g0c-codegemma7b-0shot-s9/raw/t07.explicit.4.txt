@@ -1,0 +1,250 @@
+fn main() {
+    let mut v = vec_int(0, 0, 0, 0, 0, 0, 0, 0)
+    let mut i = 1
+    while i <= 24 {
+        if i % 3 == 0 {
+            v = push(v, i)
+        }
+        i = i + 1
+    }
+    let mut total = 0
+    for x in &v {
+        total = total + x
+    }
+    print(total)
+    drop_vec(v)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut v = v
+    v = append(v, x)
+    drop_vec(v)
+}
+
+fn append(mutv: Vec<Int>, x: Int) -> Vec<Int> {
+    let len = len(mutv)
+    mutv = set(mutv, len, x)
+    drop_vec(mutv)
+}
+
+fn set(mutv: Vec<Int>, mutpos: Int, mutval: Int) -> Vec<Int> {
+    mutv = swap(mutv, mutpos, mutpos)
+    mutv = write(mutv, mutpos, mutval)
+    drop_vec(mutv)
+}
+
+fn swap(mutv: Vec<Int>, mutpos1: Int, mutpos2: Int) -> Vec<Int> {
+    let temp = get(mutv, mutpos1)
+    mutv = write(mutv, mutpos1, get(mutv, mutpos2))
+    mutv = write(mutv, mutpos2, temp)
+    drop_vec(mutv)
+}
+
+fn write(mutv: Vec<Int>, mutpos: Int, mutval: Int) -> Vec<Int> {
+    let mutv = clone(mutv)
+    mutv = assign(mutv, mutpos, mutval)
+    drop_vec(mutv)
+}
+
+fn assign(mutv: Vec<Int>, mutpos: Int, mutval: Int) -> Vec<Int> {
+    mutv = write(mutv, mutpos, mutval)
+    drop_vec(mutv)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Int {
+    let v = v
+    let v = v + i
+    let v = read(v)
+    drop_int(v)
+}
+
+fn read(pos: Int) -> Int {
+    pos
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let v = v
+    let v = v + 0
+    let v = read(v)
+    drop_int(v)
+}
+
+fn vec_int(i1: Int, i2: Int, i3: Int, i4: Int, i5: Int, i6: Int, i7: Int, i8: Int) -> Vec<Int> {
+    let v = vec_int_uninit(8)
+    let mut v = v
+    v = write(v, 0, i1)
+    v = write(v, 1, i2)
+    v = write(v, 2, i3)
+    v = write(v, 3, i4)
+    v = write(v, 4, i5)
+    v = write(v, 5, i6)
+    v = write(v, 6, i7)
+    v = write(v, 7, i8)
+    drop_vec(v)
+}
+
+fn vec_int_uninit(size: Int) -> Vec<Int> {
+    size
+}
+
+fn print(i: Int) {
+    i
+}
+
+fn drop_int(i: Int) {
+    i
+}
+
+fn drop_vec(v: Vec<Int>) {
+    v
+}
+
+fn copy_int(i: Int) -> Int {
+    i
+}
+
+fn copy_vec(v: Vec<Int>) -> Vec<Int> {
+    v
+}
+
+fn clone(v: Vec<Int>) -> Vec<Int> {
+    let v = v
+    let v = copy_vec(v)
+    drop_vec(v)
+}
+
+fn drop_ref(i: &Int) {
+    i
+}
+
+fn copy_ref(i: &Int) -> Int {
+    let i = i
+    let i = copy_int(i)
+    drop_int(i)
+}
+
+fn drop_ref_vec(i: &Vec<Int>) {
+    i
+}
+
+fn copy_ref_vec(i: &Vec<Int>) -> Vec<Int> {
+    let i = i
+    let i = copy_vec(i)
+    drop_vec(i)
+}
+
+fn drop_ref_ref(i: &Int) {
+    i
+}
+
+fn copy_ref_ref(i: &Int) -> Int {
+    let i = i
+    let i = copy_int(i)
+    drop_int(i)
+}
+
+fn drop_ref_ref_vec(i: &Vec<Int>) {
+    i
+}
+
+fn copy_ref_ref_vec(i: &Vec<Int>) -> Vec<Int> {
+    let i = i
+    let i = copy_vec(i)
+    drop_vec(i)
+}
+
+fn drop_ref_ref_ref(i: &Int) {
+    i
+}
+
+fn copy_ref_ref_ref(i: &Int) -> Int {
+    let i = i
+    let i = copy_int(i)
+    drop_int(i)
+}
+
+fn drop_ref_ref_ref_vec(i: &Vec<Int>) {
+    i
+}
+
+fn copy_ref_ref_ref_vec(i: &Vec<Int>) -> Vec<Int> {
+    let i = i
+    let i = copy_vec(i)
+    drop_vec(i)
+}
+
+fn drop_ref_ref_ref_ref(i: &Int) {
+    i
+}
+
+fn copy_ref_ref_ref_ref(i: &Int) -> Int {
+    let i = i
+    let i = copy_int(i)
+    drop_int(i)
+}
+
+fn drop_ref_ref_ref_ref_vec(i: &Vec<Int>) {
+    i
+}
+
+fn copy_ref_ref_ref_ref_vec(i: &Vec<Int>) -> Vec<Int> {
+    let i = i
+    let i = copy_vec(i)
+    drop_vec(i)
+}
+
+fn drop_ref_ref_ref_ref_ref(i: &Int) {
+    i
+}
+
+fn copy_ref_ref_ref_ref_ref(i: &Int) -> Int {
+    let i = i
+    let i = copy_int(i)
+    drop_int(i)
+}
+
+fn drop_ref_ref_ref_ref_ref_ref_vec(i: &Vec<Int>) {
+    i
+}
+
+fn copy_ref_ref_ref_ref_ref_ref_vec(i: &Vec<Int>) -> Vec<Int> {
+    let i = i
+    let i = copy_vec(i)
+    drop_vec(i)
+}
+
+fn drop_ref_ref_ref_ref_ref_ref_ref_ref(i: &Int) {
+    i
+}
+
+fn copy_ref_ref_ref_ref_ref_ref_ref_ref(i: &Int) -> Int {
+    let i = i
+    let i = copy_int(i)
+    drop_int(i)
+}
+
+fn drop_ref_ref_ref_ref_ref_ref_ref_ref_ref_vec(i: &Vec<Int>) {
+    i
+}
+
+fn copy_ref_ref_ref_ref_ref_ref_ref_ref_ref_vec(i: &Vec<Int>) -> Vec<Int> {
+    let i = i
+    let i = copy_vec(i)
+    drop_vec(i)
+}
+
+fn drop_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(i: &Int) {
+    i
+}
+
+fn copy_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(i: &Int) -> Int {
+    let i = i
+    let i = copy_int(i)
+    drop_int(i)
+}
+
+fn drop_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_vec(i: &Vec<Int>) {
+    i
+}
+
+fn copy_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref_ref(i

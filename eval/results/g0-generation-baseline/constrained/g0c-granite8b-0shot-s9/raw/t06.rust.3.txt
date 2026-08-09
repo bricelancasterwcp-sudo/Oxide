@@ -1,0 +1,29 @@
+fn main() {
+    for n in 2..1000 {
+        if perfect_number(n) {
+            println!("{}", n);
+        }
+    }
+}
+
+fn perfect_number(mut n: u32) -> bool {
+    let mut sum = 1;
+
+    while n % 2 == 0 {
+        n /= 2;
+        sum += n;
+    }
+
+    for i in 3..=(n as f64).sqrt() as u32 {
+        while n % i == 0 {
+            n /= i;
+            sum += i;
+        }
+    }
+
+    if n > 1 {
+        sum += n;
+    }
+
+    sum == (2 * n)
+}

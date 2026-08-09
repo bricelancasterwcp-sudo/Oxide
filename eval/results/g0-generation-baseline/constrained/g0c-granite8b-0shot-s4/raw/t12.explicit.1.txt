@@ -1,0 +1,12 @@
+fn main() {
+    let text = "stack"
+    let mut chars = Vec()
+    for c in text.chars() {
+        chars.push(c)
+    }
+    let mut reversed = String()
+    for c in &chars {
+        reversed = reversed + c
+    }
+    print(reversed)
+}

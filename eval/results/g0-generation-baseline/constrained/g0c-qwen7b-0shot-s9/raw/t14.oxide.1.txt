@@ -1,0 +1,18 @@
+fn main() {
+    let text = "mississippi"
+    let mut count_s = 0
+    let mut distinct_chars = 0
+    let mut chars_used = vec()
+    for c in text.chars() {
+        if c == "s" {
+            count_s = count_s + 1
+        }
+        if !chars_used.contains(c) {
+            distinct_chars = distinct_chars + 1
+            chars_used = push(chars_used, c)
+        }
+    }
+    print(count_s)
+    print_str(" ")
+    print(distinct_chars)
+}

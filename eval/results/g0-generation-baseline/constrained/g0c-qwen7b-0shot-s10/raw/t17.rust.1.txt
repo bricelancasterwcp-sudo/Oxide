@@ -1,0 +1,14 @@
+```rust
+fn main() {
+    let list = [10, 20, 30];
+    let positions = [1, 5];
+
+    for &pos in &positions {
+        if pos < list.len() {
+            println!("{}", list[pos]);
+        } else {
+            println!("-1");
+        }
+    }
+}
+```

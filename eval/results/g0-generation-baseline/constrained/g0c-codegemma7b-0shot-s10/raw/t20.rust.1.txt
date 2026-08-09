@@ -1,0 +1,26 @@
+```rust
+fn main() {
+    let mut total_cost = 0;
+    let mut most_expensive_item = "";
+    let mut highest_cost = 0;
+
+    let items = [
+        ("Pen", 3, 4),
+        ("Pad", 9, 2),
+        ("Ink", 5, 3),
+    ];
+
+    for (name, unit_price, quantity) in items {
+        let cost = unit_price * quantity;
+        total_cost += cost;
+
+        if cost > highest_cost {
+            highest_cost = cost;
+            most_expensive_item = name;
+        }
+    }
+
+    println!("Total cost: {}", total_cost);
+    println!("Most expensive item: {}", most_expensive_item);
+}
+```

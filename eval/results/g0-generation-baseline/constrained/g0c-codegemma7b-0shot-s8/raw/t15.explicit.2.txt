@@ -1,0 +1,12 @@
+fn main() {
+    let mut total = 0
+    let mut failed = 0
+    for arg in std_in().lines() {
+        match parse_int(&arg) {
+            Some(n) => total == total + n,
+            None => failed == failed + 1,
+        }
+    }
+    print(total)
+    print(failed)
+}

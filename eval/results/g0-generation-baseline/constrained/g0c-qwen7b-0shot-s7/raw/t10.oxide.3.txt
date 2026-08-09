@@ -1,0 +1,21 @@
+struct VecInt { values: Vec<Int> }
+
+fn filter(v: VecInt) -> VecInt {
+    let mut result = VecInt { values: vec() }
+    for x in v.values {
+        if x > 3 {
+            result.values.push(x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let v = VecInt { values: vec(4, 1, 7, 3, 9, 2) }
+    let filtered = filter(v)
+    for x in filtered.values {
+        print(x)
+        print_str("\n")
+    }
+    print(filtered.values.len())
+}

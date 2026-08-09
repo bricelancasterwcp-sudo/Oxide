@@ -1,0 +1,9 @@
+const INPUT: &str = "mississippi";
+
+fn main() {
+    let s_count = INPUT.matches('s').count();
+    let distinct_char_count = INPUT.chars().unique().count();
+
+    println!("s occurs {} times", s_count);
+    println!("distinct characters: {}", distinct_char_count);
+}

@@ -1,0 +1,262 @@
+fn main() {
+    let total = 0
+    for x in 0.to_int().to_string().chars().map(char_to_digit).filter(Some) {
+        total = total + x * x
+    }
+    print(total)
+}
+
+fn char_to_digit(c: Char) -> Option<Int> {
+    if c >= "0".chars().next()? && c <= "9".chars().next()? {
+        Some(c.to_digit(10)?)
+    } else {
+        None
+    }
+}
+
+fn to_int(s: Str) -> Int {
+    let mut result = 0
+    for c in s.chars() {
+        result = result * 10 + (c.to_digit(10)? - "0".chars().next()?.to_digit(10)?)
+    }
+    result
+}
+
+fn to_string(i: Int) -> Str {
+    let mut result = String.new()
+    let mut n = i
+    while n > 0 {
+        result = (char_from_digit((n % 10)? + "0".chars().next()?.to_digit(10)?)).to_string() + &result
+        n = n / 10
+    }
+    result
+}
+
+fn char_from_digit(d: Int) -> Char {
+    (d + "0".chars().next()?.to_digit(10)?)
+}
+
+fn filter(f: FnMutNonNull<Int, Int>, xs: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in xs {
+        if f(x) {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn map(f: FnMutNonNull<Int, Int>, xs: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in xs {
+        result.push(f(x))
+    }
+    result
+}
+
+fn chars(s: Str) -> Vec<Char> {
+    let mut result = vec()
+    for c in s.chars() {
+        result.push(c)
+    }
+    result
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut result = 0
+    for _ in v {
+        result = result + 1
+    }
+    result
+}
+
+fn print(x: Int) {
+    let s = to_string(x)
+    for c in s.chars() {
+        print_char(c)
+    }
+    print_str("\n")
+}
+
+fn print_str(s: Str) {
+    for c in s.chars() {
+        print_char(c)
+    }
+}
+
+fn print_char(c: Char) {
+    print_int(c.to_digit(10)?)
+}
+
+fn print_int(n: Int) {
+    if n >= 10 {
+        print_int(n / 10)
+    }
+    print_char((n % 10) + "0".chars().next()?.to_digit(10)?)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    result
+}
+
+fn vec() -> Vec<Int> {
+    let mut result = Vec.new()
+    result
+}
+
+fn main() {
+    let total = 0
+    for x in 0.to_int().to_string().chars().map(char_to_digit).filter(Some) {
+        total = total + x * x
+    }
+    print(total)
+}
+
+fn char_to_digit(c: Char) -> Option<Int> {
+    if c >= "0".chars().next()? && c <= "9".chars().next()? {
+        Some(c.to_digit(10)?)
+    } else {
+        None
+    }
+}
+
+fn to_int(s: Str) -> Int {
+    let mut result = 0
+    for c in s.chars() {
+        result = result * 10 + (c.to_digit(10)? - "0".chars().next()?.to_digit(10)?)
+    }
+    result
+}
+
+fn to_string(i: Int) -> Str {
+    let mut result = String.new()
+    let mut n = i
+    while n > 0 {
+        result = (char_from_digit((n % 10)? + "0".chars().next()?.to_digit(10)?)).to_string() + &result
+        n = n / 10
+    }
+    result
+}
+
+fn char_from_digit(d: Int) -> Char {
+    (d + "0".chars().next()?.to_digit(10)?)
+}
+
+fn filter(f: FnMutNonNull<Int, Int>, xs: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in xs {
+        if f(x) {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn map(f: FnMutNonNull<Int, Int>, xs: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in xs {
+        result.push(f(x))
+    }
+    result
+}
+
+fn chars(s: Str) -> Vec<Char> {
+    let mut result = vec()
+    for c in s.chars() {
+        result.push(c)
+    }
+    result
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut result = 0
+    for _ in v {
+        result = result + 1
+    }
+    result
+}
+
+fn print(x: Int) {
+    let s = to_string(x)
+    for c in s.chars() {
+        print_char(c)
+    }
+    print_str("\n")
+}
+
+fn print_str(s: Str) {
+    for c in s.chars() {
+        print_char(c)
+    }
+}
+
+fn print_char(c: Char) {
+    print_int(c.to_digit(10)?)
+}
+
+fn print_int(n: Int) {
+    if n >= 10 {
+        print_int(n / 10)
+    }
+    print_char((n % 10) + "0".chars().next()?.to_digit(10)?)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = v
+    result.push(x)
+    result
+}
+
+fn vec() -> Vec<Int> {
+    let mut result = Vec.new()
+    result
+}
+
+fn main() {
+    let total = 0
+    for x in 0.to_int().to_string().chars().map(char_to_digit).filter(Some) {
+        total = total + x * x
+    }
+    print(total)
+}
+
+fn char_to_digit(c: Char) -> Option<Int> {
+    if c >= "0".chars().next()? && c <= "9".chars().next()? {
+        Some(c.to_digit(10)?)
+    } else {
+        None
+    }
+}
+
+fn to_int(s: Str) -> Int {
+    let mut result = 0
+    for c in s.chars() {
+        result = result * 10 + (c.to_digit(10)? - "0".chars().next()?.to_digit(10)?)
+    }
+    result
+}
+
+fn to_string(i: Int) -> Str {
+    let mut result = String.new()
+    let mut n = i
+    while n > 0 {
+        result = (char_from_digit((n % 10)? + "0".chars().next()?.to_digit(10)?)).to_string() + &result
+        n = n / 10
+    }
+    result
+}
+
+fn char_from_digit(d: Int) -> Char {
+    (d + "0".chars().next()?.to_digit(10)?)
+}
+
+fn filter(f: FnMutNonNull<Int, Int>, xs: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in xs {
+        if f(x) {
+            result.push(x)
+        }
+    }
+    result

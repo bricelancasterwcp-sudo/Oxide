@@ -1,0 +1,271 @@
+fn main() {
+    struct_item(3, 4, "pen")
+    struct_item(9, 2, "pad")
+    struct_item(5, 3, "ink")
+}
+
+fn struct_item(unit_price: Float, quantity: Int, name: Str) {
+    let cost = unit_price * quantity
+    print(cost)
+    if cost > highest_cost {
+        highest_cost = cost
+        highest_name = name.clone()
+    }
+}
+
+fn print(x: Float) {
+    print_str(int_to_str(trunc(x)))
+    print_str(".")
+    print_str(int_to_str(trunc(100 * (x - trunc(x)))))
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print(c)
+    }
+}
+
+fn int_to_str(mut_n: Int) -> Str {
+    let mut result = vec()
+    while mut_n > 0 {
+        result = push(result, int_to_char(mut_n % 10))
+        mut_n = trunc(mut_n / 10)
+    }
+    let mut res = Str { chars: result }
+    reverse(res)
+    res
+}
+
+fn int_to_char(mut_n: Int) -> Str {
+    if mut_n < 10 {
+        StrChar(mut_n + 48)
+    } else {
+        StrChar(57)
+    }
+}
+
+fn reverse(mut_s: Str) -> Str {
+    let mut result = vec()
+    while len(mut_s) > 0 {
+        result = push(result, get(mut_s, len(mut_s) - 1)?)
+        mut_s = get(mut_s, len(mut_s) - 1)?
+    }
+    StrChar(result)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = vec()
+    for i in 0 < len(s) {
+        result = push(result, StrChar(get(s, i)?))
+    }
+    result
+}
+
+fn len(s: Str) -> Int {
+    let mut result = 0
+    for _ in s {
+        result = result + 1
+    }
+    result
+}
+
+fn get(s: Str, i: Int) -> Option<Int> {
+    if i >= 0 && i < len(s) {
+        Some(int_to_digit(get(s, i)?) - 48)
+    } else {
+        None
+    }
+}
+
+fn int_to_digit(mut_n: Int) -> Int {
+    if mut_n >= 48 && mut_n <= 57 {
+        mut_n
+    } else {
+        0
+    }
+}
+
+struct StrChar { chars: Vec<Int> }
+
+fn print(c: StrChar) {
+    for i in c.chars {
+        print_str(int_to_str(i))
+    }
+}
+
+struct Str { chars: Vec<Int> }
+
+fn print(s: Str) {
+    for c in s.chars {
+        print_str(int_to_str(c))
+    }
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let mut result = vec()
+    for c in a.chars {
+        result = push(result, c)
+    }
+    for c in b.chars {
+        result = push(result, c)
+    }
+    StrChar(result)
+}
+
+fn reverse(mut_s: Str) -> Str {
+    let mut result = vec()
+    while len(mut_s) > 0 {
+        result = push(result, get(mut_s, len(mut_s) - 1)?)
+        mut_s = get(mut_s, len(mut_s) - 1)?
+    }
+    StrChar(result)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = vec()
+    for i in 0 < len(s) {
+        result = push(result, StrChar(get(s, i)?))
+    }
+    result
+}
+
+fn len(s: Str) -> Int {
+    let mut result = 0
+    for _ in s {
+        result = result + 1
+    }
+    result
+}
+
+fn get(s: Str, i: Int) -> Option<Int> {
+    if i >= 0 && i < len(s) {
+        Some(int_to_digit(get(s, i)?) - 48)
+    } else {
+        None
+    }
+}
+
+fn int_to_digit(mut_n: Int) -> Int {
+    if mut_n >= 48 && mut_n <= 57 {
+        mut_n
+    } else {
+        0
+    }
+}
+
+fn vec() -> Vec<T> {
+    let mut result = vec()
+    result
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut result = v
+    result = push(result, x)
+    result
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut result = 0
+    for _ in v {
+        result = result + 1
+    }
+    result
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    if i >= 0 && i < len(v) {
+        Some(v.chars.get(i))
+    } else {
+        None
+    }
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn reverse(mut_v: Vec<T>) -> Vec<T> {
+    let mut result = vec()
+    while len(mut_v) > 0 {
+        result = push(result, get(mut_v, len(mut_v) - 1)?)
+        mut_v = get(mut_v, len(mut_v) - 1)?
+    }
+    result
+}
+
+fn print_str(s: Str) {
+    for c in s.chars {
+        print(c)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn int_to_str(mut_n: Int) -> Str {
+    let mut result = vec()
+    while mut_n > 0 {
+        result = push(result, int_to_char(mut_n % 10))
+        mut_n = trunc(mut_n / 10)
+    }
+    let mut res = Str { chars: result }
+    reverse(res)
+    res
+}
+
+fn int_to_char(mut_n: Int) -> Str {
+    if mut_n < 10 {
+        StrChar(mut_n + 48)
+    } else {
+        StrChar(57)
+    }
+}
+
+fn reverse(mut_s: Str) -> Str {
+    let mut result = vec()
+    while len(mut_s) > 0 {
+        result = push(result, get(mut_s, len(mut_s) - 1)?)
+        mut_s = get(mut_s, len(mut_s) - 1)?
+    }
+    StrChar(result)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = vec()
+    for i in 0 < len(s) {
+        result = push(result, StrChar(get(s, i)?))
+    }
+    result
+}
+
+fn len(s: Str) -> Int {
+    let mut result = 0
+    for _ in s {
+        result = result + 1
+    }
+    result
+}
+
+fn get(s: Str, i: Int) -> Option<Int> {
+    if i >= 0 && i < len(s) {
+        Some(int_to_digit(get(s, i)?) - 48)
+    } else {
+        None
+    }
+}
+
+fn int_to_digit(mut_n: Int) -> Int {
+    if mut_n >= 48 && mut_n <= 57 {
+        mut_n
+    } else {
+        0
+    }
+}
+
+fn main() {
+    let mut highest_cost = 0.0
+    let mut highest_name = ""
+    struct_item(3, 4, "pen")
+    struct_item(9, 2, "pad")
+    struct_item(5, 

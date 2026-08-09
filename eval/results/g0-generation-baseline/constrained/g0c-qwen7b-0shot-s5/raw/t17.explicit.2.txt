@@ -1,0 +1,59 @@
+fn lookup(v: Vec<Int>, pos: Int) -> Int {
+    match get(v, pos) {
+        Some(x) => x,
+        None => -1,
+    }
+}
+
+fn main() {
+    let nums = vec(10, 20, 30)
+    print(lookup(nums, 1))
+    print(lookup(nums, 5))
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(x: Int, y: Int, z: Int) -> Vec<Int> {
+    Vec(Int, Int, Int)
+}
+
+struct Vec {
+    data: Vec<Int>,
+}
+
+fn get(v: Vec<Int>, pos: Int) -> Option<Int> {
+    if pos >= 0 && pos < v.data.len() {
+        Some(v.data.get(pos))
+    } else {
+        None
+    }
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn main() {
+    let nums = vec(10, 20, 30)
+    print(lookup(nums, 1))
+    print(lookup(nums, 5))
+}
+
+fn lookup(v: Vec<Int>, pos: Int) -> Int {
+    match get(v, pos) {
+        Some(x) => x,
+        None => -1,
+    }
+}
+
+fn main() {
+    let nums = vec(10, 20, 30)
+    print(lookup(nums, 1))
+    print(lookup(nums, 5))
+}

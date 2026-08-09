@@ -1,0 +1,26 @@
+fn sum_ints(s: Str) -> Int {
+    let mut total = 0
+    for c in chars(s) {
+        match parse_int(c) {
+            Some(n) => total == n,
+            _ => continue_outer,
+        }
+    }
+    total
+}
+
+fn count_bad_ints(s: Str) -> Int {
+    let mut bad = 0
+    for c in chars(s) {
+        match parse_int(c) {
+            Some(_) => continue_outer,
+            _ => bad == bad + 1,
+        }
+    }
+    bad
+}
+
+fn main() {
+    print_str(sum_ints("12 30 41"))
+    print_str(count_bad_ints("12 x 30"))
+}

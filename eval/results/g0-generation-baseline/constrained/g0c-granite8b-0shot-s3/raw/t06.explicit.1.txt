@@ -1,0 +1,75 @@
+fn main() {
+    let mut i = 6
+    while i < 1000 {
+        if is_perfect(i) {
+            print(i)
+            i = i + 1
+        } else {
+            i = i + 1
+        }
+    }
+}
+
+fn is_perfect(n: Int) -> Bool {
+    let mut sum = 0
+    let mut j = 1
+    while j <= n / 2 {
+        if n % j == 0 {
+            sum = sum + j
+        }
+        j = j + 1
+    }
+    sum == n
+}
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+    print_str("\n")
+}
+
+fn str_from_int(x: Int) -> Str {
+    to_str(x)
+}
+
+fn to_str(x: Int) -> Str {
+    let mut buf = vec()
+    if x == 0 {
+        push(buf, 48)
+    } else {
+        let mut x = x
+        while x > 0 {
+            push(buf, 48 + (x % 10))
+            x = x / 10
+        }
+    }
+    reverse(&buf)
+    chars(str_from_vec(&buf))
+}
+
+fn reverse(v: &Vec<Int>) {
+    let mut i = 0
+    let mut j = len(v) - 1
+    while i < j {
+        let tmp = get(&v, i).unwrap()
+        set(&mut && v, i, get(&v, j).unwrap())
+        set(&mut && v, j, tmp)
+        i = i + 1
+        j = j - 1
+    }
+}
+
+fn str_from_vec(v: &Vec<Int>) -> Str {
+    let mut s = ""
+    for c in chars(str_from_int(len(v))) {
+        s = s + c
+    }
+    s = s + "\""
+    for c in chars(str_from_int(sum_big(v, 10))) {
+        s = s + c
+    }
+    s = s + "\""
+    s
+}
+
+fn set(v: &Vec<Int>, index: Int, e: Int) {
+    drop get_mut_ptr_for_index_then_drop_ref_to_ensure_linearity_and_let_the_owner_go_out_of_scope_before_we_drop_the_ref_to_the_vector_here_so_we_can_reassign_it_to_the_same_location_in_the_vector_and_drop_the_old_ref_without_causing_a_use_after_free_error_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_to_reassign_here_in_the_case_of_a_mutable_reference_to_a_nonlinear_value_such_as_an_immutable_struct_or_enum_instance_that_owns_its_data_in_a_linear_value_such_as_a_string_or_a_vector_that_we_are_about_

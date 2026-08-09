@@ -1,0 +1,27 @@
+use std::io;
+
+fn perfect(n: u64) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    let mut sum = 1;
+    let mut i = 2;
+    while i * i <= n {
+        if n % i == 0 {
+            sum += i;
+            if i != n / i {
+                sum += n / i;
+            }
+        }
+        i += 1;
+    }
+    sum == n
+}
+
+fn main() {
+    for n in 1..=999 {
+        if perfect(n) {
+            println!("{}", n);
+        }
+    }
+}

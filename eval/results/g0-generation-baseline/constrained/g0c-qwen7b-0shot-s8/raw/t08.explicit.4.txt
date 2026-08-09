@@ -1,0 +1,21 @@
+fn count_and_max(v: &Vec<Int>) -> Tuple<Int, Int> {
+    let mut count = 0
+    let mut max_val = -999999
+    for x in &v {
+        if x > 0 {
+            count = count + 1
+        }
+        if x > max_val {
+            max_val = x
+        }
+    }
+    Tuple(count, max_val)
+}
+
+fn main() {
+    let nums = push(push(push(push(vec(), 3), 8), -2), 12)
+    let result = count_and_max(&nums)
+    print(result.ans0)
+    print(result.ans1)
+    drop nums
+}

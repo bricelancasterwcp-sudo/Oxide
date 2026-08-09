@@ -1,0 +1,7 @@
+fn main() {
+    let numbers = vec(5, 3, 8, 1, 9, 2)
+    numbers.sort()
+    for x in numbers {
+        print(x)
+    }
+}

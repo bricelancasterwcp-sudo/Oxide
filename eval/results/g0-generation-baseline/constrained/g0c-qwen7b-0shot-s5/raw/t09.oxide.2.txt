@@ -1,0 +1,8 @@
+fn main() {
+    let v = vec(1, 2, 3, 4, 5)
+    let mut v = v
+    while v.len() > 0 {
+        print(get(v, v.len() - 1))
+        v = v.slice(0, v.len() - 1)
+    }
+}

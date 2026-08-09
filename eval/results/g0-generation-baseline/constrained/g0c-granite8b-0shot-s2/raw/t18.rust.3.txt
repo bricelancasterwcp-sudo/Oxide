@@ -1,0 +1,32 @@
+struct Triangle {
+    a: u32,
+    b: u32,
+    c: u32,
+}
+
+impl Triangle {
+    fn perimeter(&self) -> u32 {
+        self.a + self.b + self.c
+    }
+}
+
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn perimeter(&self) -> u32 {
+        2 * (self.width + self.height)
+    }
+}
+
+fn main() {
+    let triangle = Triangle { a: 3, b: 4, c: 5 };
+    let rectangle1 = Rectangle { width: 3, height: 4 };
+    let rectangle2 = Rectangle { width: 2, height: 5 };
+
+    println!("{}", triangle.perimeter());
+    println!("{}", rectangle1.perimeter());
+    println!("{}", rectangle2.perimeter());
+}

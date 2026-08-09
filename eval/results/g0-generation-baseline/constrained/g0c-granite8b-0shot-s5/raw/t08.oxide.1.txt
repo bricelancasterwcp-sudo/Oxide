@@ -1,0 +1,7 @@
+fn main() {
+    let a = vec(3, 8, -2, 12, 7)
+    let count = loop_with(0, a, (acc) || (n) || (v) || if_then(n > 0, add(acc, 1), acc))
+    print(count)
+    let largest = loop_with(-1000, a, (acc) || (n) || (v) || if_then(n > acc, n, acc))
+    print(largest)
+}

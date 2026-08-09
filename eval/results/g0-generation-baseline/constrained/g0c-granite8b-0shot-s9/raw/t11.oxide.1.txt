@@ -1,0 +1,65 @@
+struct List { head: Int, tail: Option<Box<List>> }
+
+fn increasing_order(xs: Vec<Int>) -> Vec<Int> {
+    let mut res = vec()
+    let mut remaining = xs
+    loop_increasing_order(remaining, None, 0, 0, 0, 0)
+}
+
+fn loop_increasing_order(remaining: Vec<Int>, mutacc: Vec<Int>, mutacc_len: Int, mutl: Int, mutr: Int, mutc: Int) -> Vec<Int> {
+    let mut remaining = remaining
+    let mut acc = acc
+    let mut acc_len = acc_len
+    let mut l = l
+    let mut r = r
+    let mut c = c
+    for x in remaining {
+        if x < l {
+            l = x
+        }
+        if x > r {
+            r = x
+        }
+        if x == c {
+            c = c + 1
+        }
+    }
+    match c {
+        None => {
+            let mutacc = acc
+            let mut acc_len = acc_len
+            for x in remaining {
+                if acc_len > 0 && acc.last() < Some(x) {
+                    acc_len = acc_len + 1
+                    acc = push(acc, x)
+                } else {
+                    loop_increasing_order(remaining, push(acc, x), acc_len + 1, l, r, c)
+                }
+            }
+        },
+        Some(c) => {
+            let mutacc = acc
+            let mut acc_len = acc_len
+            for x in remaining {
+                if x != c {
+                    if acc_len > 0 && acc.last() < Some(x) {
+                        acc_len = acc_len + 1
+                        acc = push(acc, x)
+                    } else {
+                        loop_increasing_order(remaining, push(acc, x), acc_len + 1, l, r, c)
+                    }
+                }
+            }
+        },
+    }
+}
+
+fn main() {
+    let xs = push(push(push(push(vec(), 5), 3), 8), 1)
+    let xs = push(xs, 9)
+    let xs = push(xs, 2)
+    let xs = increasing_order(xs)
+    for x in xs {
+        print(x)
+    }
+}

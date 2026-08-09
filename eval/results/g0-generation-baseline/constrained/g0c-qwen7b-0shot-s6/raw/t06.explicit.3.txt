@@ -1,0 +1,14 @@
+fn main() {
+    for num in 2.to(1000) {
+        let mut sum = 1
+        for i in 2.to(num / 2) {
+            if num % i == 0 {
+                sum = sum + i
+            }
+        }
+        if sum == num {
+            print(num)
+            print_str("\n")
+        }
+    }
+}
