@@ -2457,6 +2457,17 @@ as an expression statement. The scan does not see through a `NEWLINE`,
 for the reason §26 gives: an identifier at end of line is an expression
 statement, never the start of an assignment.
 
+**AST + dump amendment (§7/§8, §27, §35).** New node (same conventions):
+`FieldAssign(base: str, path: tuple[str,...], value)`, with `path`
+non-empty. It is a **distinct node, not a widened `Assign`**: §28 has
+`Assign` emit a `ReInit` that re-establishes ownership, which the
+Linearity rules below make exactly wrong for a field write, so a separate
+node forces every match site to decide rather than silently inherit.
+
+```
+FieldAssign  (field-assign PATH EXPR)   # PATH = BASE "." F1 ["." F2 …]
+```
+
 **Resolution.** The base must be an existing local or parameter;
 otherwise `OX0200`, with the same wording §28 uses for assignment. The
 base's `var_id` is recorded in `assign_of` under the `FieldAssign` node's
@@ -2514,7 +2525,18 @@ inadmissible after a field path, so the decoder settles on `==` and emits
 a **discarded comparison**. Measured over the committed G0 first attempts
 (oxide arm), that signature appears 18 times in 9 of 600 constrained
 programs and **exactly 0 of 600 unconstrained** — the §54 lesson in its
-third demonstrated instance, with a clean control. The demand is real but
-small (~1.5%), so no aggregate pass-rate change is predicted from this
-section alone; see
+third demonstrated instance, with a clean control.
+
+**18 is a LOWER BOUND, not an exact count.** The signature is counted in
+statement position only. Tail conversion is syntactic and unconditional,
+and an un-braced match-arm body is a bare expression rather than a block,
+so a deformed assignment falling last in either position is not an
+`ExprStmt` and is never counted. The tail column is therefore ambiguous
+in **both** directions — a tail `f.x == e` may be a legitimate `Bool`
+return, or a deformation that happened to land last — so pooling the two
+columns would overcount and the statement count alone undercounts. The
+counting tool and its pinned definition are `eval/deformation.py`.
+
+The demand is real but small (~1.5%), so no aggregate pass-rate change is
+predicted from this section alone; see
 `docs/superpowers/specs/2026-08-09-v03-g2-field-assignment-design.md`.

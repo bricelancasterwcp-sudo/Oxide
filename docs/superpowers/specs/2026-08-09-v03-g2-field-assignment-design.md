@@ -37,13 +37,26 @@ comparison, which no model writes deliberately:
 | qwen7b | 2 occ / 2 progs | 0 / 0 |
 | **total (of 600)** | **18 occ / 9 progs (1.5%)** | **0 / 0** |
 
-Tail-position hits are deliberately excluded: a tail `f.x == e` can be a
-legitimate `Bool` return (`c.r == c.g && c.g == c.b` in
-`C/g0c-granite8b-0shot-s1` t13 is correct code), so pooling the two
-positions would inflate the count with true positives of the model's own
-intent. Direct `p.x = e` in the unconstrained condition, where nothing
-deforms it and it is plain `OX0101`: **4 programs of 600** (granite 3,
-qwen 1, codegemma 0).
+Tail-position hits are reported as a separate column and excluded from
+the count, because the tail column is ambiguous in **both** directions.
+In one direction, a tail `f.x == e` can be a legitimate `Bool` return
+(`c.r == c.g && c.g == c.b` in `C/g0c-granite8b-0shot-s1` t13 is correct
+code), so pooling the two positions would inflate the count with true
+positives of the model's own intent. In the other direction, tail
+conversion is syntactic and unconditional — it applies to any block
+regardless of the enclosing function's return type — and an un-braced
+match-arm body (`pat => expr,`) is parsed as a bare expression rather
+than a block, so a deformed assignment that happens to fall LAST in
+either position lands in the tail column too and is never counted.
+
+**Consequently `18` is a lower bound on deformation, not an exact
+count.** Pooling the columns would overcount; the statement column alone
+undercounts. The two are kept separate for exactly this reason, and every
+claim built on the number below is a lower-bound claim.
+
+Direct `p.x = e` in the unconstrained condition, where nothing deforms it
+and it is plain `OX0101`: **4 programs of 600** (granite 3, qwen 1,
+codegemma 0).
 
 Two consequences, both load-bearing for what follows.
 
@@ -258,7 +271,7 @@ Pre-registered predictions, written before implementation:
 
 | endpoint | prediction |
 |---|---|
-| ExprStmt-position `f.x == e`, constrained oxide | 18 → **0** (the form is admitted, so the deformation has nowhere to go) |
+| ExprStmt-position `f.x == e`, constrained oxide | 18 → **0** (the form is admitted, so the deformation has nowhere to go). **A lower-bound endpoint**: 18 counts statement position only, and a deformation falling last lands in the tail column, which is ambiguous in both directions. Read the prediction as "the lower bound goes to 0", and read a residual tail count as uninterpretable rather than as surviving deformation. |
 | the same signature, unconstrained | 0 → 0 (unchanged; there was never anything to deform) |
 | aggregate first-attempt pass rate, g2 alone | **no detectable change** — 1.5% prevalence cannot move it, and any apparent movement should be read as noise, not effect |
 | `OX0300` Bool-vs-Unit sub-class | small fall in the families carrying the signature (codegemma, granite), plausibly zero net |
