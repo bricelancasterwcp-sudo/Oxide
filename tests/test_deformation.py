@@ -6,6 +6,8 @@ assignment. A TAIL-position one may be a legitimate Bool return, so the two
 are counted separately and never pooled.
 """
 
+import pytest
+
 from eval.deformation import field_assign_deformations
 
 
@@ -89,3 +91,33 @@ def test_real_field_assignment_is_not_a_signature():
 
 def test_unparseable_source_does_not_raise():
     assert field_assign_deformations("&&& not a program") == (0, 0)
+
+
+# ---- Dialect selection ----
+
+# `&P` in a parameter: ordinary explicit-dialect source, a syntax error in
+# core. The core parser's error recovery discards the whole function, so
+# the signature inside it is invisible -- a WRONG NUMBER, not a failure.
+EXPLICIT_SIGNATURE_SOURCE = "fn f(p: &P) -> Int {\n    p.a == 5\n    drop p\n    0\n}"
+
+
+def test_explicit_dialect_source_is_counted_by_the_explicit_parser():
+    assert field_assign_deformations(EXPLICIT_SIGNATURE_SOURCE, "explicit") == (1, 0)
+
+
+def test_the_core_parser_silently_undercounts_explicit_source():
+    """The reason `dialect` exists, pinned as behaviour rather than left
+    as a caveat: with the wrong parser this returns 0, not an error."""
+    assert field_assign_deformations(EXPLICIT_SIGNATURE_SOURCE) == (0, 0)
+
+
+def test_default_dialect_is_core_oxide():
+    """The pre-registered 18 is an oxide-arm number; the default must not
+    move it."""
+    src = "fn main() {\n    a.values == 5\n    print(1)\n}"
+    assert field_assign_deformations(src) == field_assign_deformations(src, "oxide")
+
+
+def test_unknown_dialect_raises_rather_than_returning_a_number():
+    with pytest.raises(ValueError):
+        field_assign_deformations("fn main() {\n    print(1)\n}", "rust")
