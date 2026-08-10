@@ -8,9 +8,9 @@ The failures below are not embarrassing footnotes — they are the most
 transferable result of the run, and they were all invisible to a green
 test suite.
 
-## The headline: seven tests that pinned nothing
+## The headline: eight tests that pinned nothing
 
-Seven times, a test that looked like it pinned a behaviour **passed against
+Eight times, a test that looked like it pinned a behaviour **passed against
 a deliberately broken implementation**. In every single case the
 implementation was correct and the test was not. Every one was caught only
 by mutating the source and re-running — never by reading the test.
@@ -24,6 +24,7 @@ by mutating the source and re-running — never by reading the test.
 | 5 | place-write emits no clone | append `.clone()` to the assignment target |
 | 6 | keyword-field escaping | drop `escape()` from the emitted path |
 | 7 | walker sees the RHS | delete `support.py`'s `ast.FieldAssign` case |
+| 8 | place write, *nested* path | clone the intermediate segment (see below — rustc **accepts** this one) |
 
 Findings 5–7 all emit Rust that `rustc` **rejects** (E0070, a keyword
 error, E0369) — i.e. the project's central accepted-implies-compiles
@@ -84,27 +85,38 @@ because a reviewer or implementer refused to "fix" the code to match:
 
 Verify fixtures against the real pipeline before writing them into a plan.
 
-## Open follow-up — close before the g3 campaign
+## The eighth instance — CLOSED (`2c22c02`)
 
-**The place-write guard is pinned only for single-segment paths.** Mutating
-the emitter to clone an *intermediate* segment yields:
+**The place-write guard was pinned only for single-segment paths.** Mutating
+the emitter to clone an *intermediate* segment yields `o.i.clone().n = 5;`,
+which passed the entire suite **and `rustc` accepts it**.
 
-```
-o.i.clone().v = 5;
-```
+This one deserves its own entry, because it is not the same failure as the
+other seven. The two clone failures are *not* equivalent:
 
-which passes the entire suite **and `rustc` accepts it** — it compiles with
-only an `unused_mut` warning and prints the *old* value. The assignment is
-silently lost into a temporary, exactly as §56's Codegen paragraph warns.
+| target | emitted | rustc |
+|---|---|---|
+| single segment | `p.name.clone() = s;` | **REJECTS** — E0070, not a place |
+| intermediate | `o.i.clone().n = 5;` | **ACCEPTS** — it *is* a place |
 
-This is the only known defect class here that **escapes the `rustc` oracle
-entirely**: accepted-implies-compiles cannot catch it, because the emitted
-Rust is valid and merely wrong. Multi-segment paths are currently covered
-only at the parse/admission/sema level.
+A cloned intermediate compiles with only an `unused_mut` warning and the
+write vanishes into the temporary. So this is the one §56 defect class that
+**escapes the `rustc` oracle entirely** — accepted-implies-compiles is no
+defence, because the emitted Rust is valid and merely wrong. Every prior
+codegen guard here could lean on rustc rejecting the mutant; this one
+cannot.
 
-**Fix:** a nested-path fixture with a non-copy intermediate plus a
-**runtime stdout assertion** — "it compiles" is insufficient by
-construction here.
+**Closed** by `tests/test_codegen_field_assign.py` section 4: a nested
+fixture with a non-copy intermediate (every user struct is non-copy, so
+`o.i` is exactly the shape §36 clones on a read) plus a **runtime stdout
+assertion**. Mutation-verified: under the clone-the-intermediate mutant,
+`rustc` exits 0, the program prints `1` instead of `5`, and **the other
+1399 tests all pass** — these two are the sole killers, which is the
+measurement of how much coverage there was before.
+
+The transferable rule: **when the oracle cannot see the defect, the test
+must assert on behaviour, not on acceptance.** "It compiles" was
+insufficient here by construction.
 
 ## Also recorded
 
