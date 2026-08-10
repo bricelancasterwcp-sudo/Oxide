@@ -590,7 +590,9 @@ print(f'ran {len(ran)} cells')
 "
 ```
 
-30 cells × 20 probes = **600 repairs**, roughly 20–25 minutes. **No grammar constraint** — the probe supplies a syntactically correct program and only the ownership defect is wrong, so a grammar would test nothing here (`--grammar` is not passed, matching how the other three families were run).
+30 cells × 20 probes = **600 repairs**, roughly 20–25 minutes. **No grammar constraint** — the probe supplies a syntactically correct program and only the ownership defect is wrong, so a grammar would test nothing here (`--grammar` is not passed).
+
+> **Do not describe this as "matching how the other three families were run."** It does not, and that sentence is how a false claim about another run's configuration reached a commit message once already (retracted in `b42c324`). The truth, in the terms the REPORT must use: the `rust` arm is unconstrained everywhere, in every run, by design. The `oxide` and `explicit` arms ran **unconstrained here** and **grammar-constrained** for the three local reference families (`qwen2.5-coder-7b`, `codegemma-7b`, `granite-code-8b`). The fourth reference row, Claude Opus 5, was unconstrained on **all three** arms — verify that against `eval/results/ownership-probe-frontier/REPORT.md` rather than against any downstream prose. So the `oxide`/`explicit` figures here are **not** comparable to the three local families, and the REPORT must say so.
 
 If it dies mid-run, re-run the identical command. Finished cells are skipped; the half-finished one is redone.
 
@@ -627,6 +629,8 @@ Create `eval/results/ownership-probe-deepseek/REPORT.md` following the house sty
 - **What this does not show:** one MoE subject cannot separate "MoE" from "stronger" from "different pretraining mix"; the window remains descriptive over five points, not causal; and the three-family results are untouched by this run.
 - The provenance: tag, digest, quantization, `num_ctx`, llama.cpp build.
 
+> **Correction — do not copy this plan's "16.70 GB against a 16.30 GB card" justification.** It is a unit error, repeated throughout this document: 16.70 GB is a **decimal** GGUF size from the ollama registry, while the "16.30 GB" card is `llama-server`'s **16303 MiB** with the decimal point moved. In consistent units the `q8_0` weights (15926 MiB) *fit* a 16303 MiB card by ~380 MiB, so "it does not fit the card even with nothing else running" is false. The pin is still physically forced, for the correct reason: **weights plus the measured runtime overhead** (~2160 MiB of KV cache and compute buffers at `num_ctx` 8192) come to ~18090 MiB, which overruns the whole card, and `q6_K` OOMs the same way. Quote VRAM in MiB or GiB, never mixed with decimal GB. The corrected wording lives in `SPEC.md` §48 and `eval/results/ownership-probe-deepseek/REPORT.md`; those are authoritative over the snapshots embedded in this plan.
+
 - [ ] **Step 7: Commit**
 
 ```bash
@@ -634,7 +638,11 @@ git add eval/results/ownership-probe-deepseek/
 git commit -m "data(eval): DeepSeek-Coder-V2-Lite ownership probe — capability-window test
 
 600 repairs, 20 classes x 3 arms x 10 seeds, q5_K_M, num_ctx 8192, no
-grammar constraint -- matching how the other three families were run.
+grammar constraint on any arm. That does NOT match the three local
+reference families: rust is unconstrained everywhere, but their oxide and
+explicit arms were grammar-constrained and these were not, so the
+oxide/explicit figures are not comparable to theirs. (The fourth reference
+row, Claude Opus 5, was unconstrained on all three arms.)
 
 The pre-registration was written before the model was pulled and is quoted
 in the REPORT ahead of the results: if the rust arm beats qwen's 89.0 the
