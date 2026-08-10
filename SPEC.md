@@ -2460,11 +2460,12 @@ Restrictions:
   section's rewrite is a parse-time rewrite of that surface spelling, fired
   inside `_postfix`'s call-building branch, keyed on the parsed callee being
   a bare `Var("vec")`. The receiver-form `x.vec(...)` (§53; `vec` is in the
-  parser's builtin-method name set only because that set mirrors
-  `src.sema.types.BUILTINS` mechanically) builds its flat `vec(x, ...)` Call
-  directly inside §53's own method-desugar path and is never re-entered by
-  this section's rewrite — the two Part XI rewrites are parse-time rewrites
-  of different surface spellings and deliberately do not compose. `x.vec(...)`
+  parser's builtin-method name set, which is hand-maintained in parallel
+  with `src.sema.types.BUILTINS` — `tests/test_parser.py` asserts the two
+  stay in sync) builds its flat `vec(x, ...)` Call directly inside §53's
+  own method-desugar path and is never re-entered by this section's
+  rewrite — the two Part XI rewrites are parse-time rewrites of different
+  surface spellings and deliberately do not compose. `x.vec(...)`
   therefore keeps its pre-§55 `OX0303` arity failure.
 - Synthesized nodes carry the *original* `vec(...)` call's span (mirroring
   §53's precedent of never inventing a misleading span for a generated
