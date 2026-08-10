@@ -25,6 +25,7 @@ from eval.llamacpp import LlamaCppClient, grammar_digest
 from eval.llamacpp import load_grammar as _load_grammar  # patchable seam
 from eval.models import (
     DEFAULT_NUM_CTX,
+    DEFAULT_QUANT,
     ContextOverflowError,
     ModelClient,
     ModelError,
@@ -219,13 +220,20 @@ NUM_CTX = {
 # q8_0 across the ladder, held constant so the capability curve was not
 # confounded. DeepSeek-V2-Lite breaks that physically rather than
 # editorially: MoE activates 2.4B of ~16B parameters per token but every
-# expert must be VRAM-resident, so the whole weight set must fit, and its
-# q8_0 GGUF is 16.70 GB against a 16.30 GB card -- it does not fit the
-# card even with nothing else running. This is the roster's growth path,
-# not a DeepSeek quirk: on 16 GB, any subject stronger than this ladder
-# needs sub-q8. Treated exactly as NUM_CTX treats granite's 4096 -- pinned
-# per family, arm-fair WITHIN the slug, recorded, and read as a covariate.
-DEFAULT_QUANT = "q8_0"
+# expert must be VRAM-resident, so the whole weight set must fit -- and
+# the weights are not the whole bill. On this 16303 MiB card, with ~1760
+# MiB held by the desktop session, llama-server needed 13459 MiB to serve
+# the 11302 MiB q5_K_M weights at num_ctx 8192: ~2160 MiB of KV cache and
+# compute buffers on top of the weights, measured, not projected. q8_0's
+# weights are 15926 MiB -- already over the ~14544 MiB actually free, and
+# ~18090 MiB once the measured overhead is added, which overruns the
+# entire card. q6_K (13418 MiB) OOMs the same way once overhead is
+# counted. So q5_K_M is physically forced, not a policy choice. All VRAM
+# figures here are MiB; do NOT mix them with the registry's decimal-GB
+# GGUF sizes. This is the roster's growth path, not a DeepSeek quirk: on
+# 16 GB, any subject stronger than this ladder needs sub-q8. Treated
+# exactly as NUM_CTX treats granite's 4096 -- pinned per family, arm-fair
+# WITHIN the slug, recorded, and read as a covariate.
 QUANT = {
     "deepseek16b_lite": "q5_K_M",
 }
@@ -272,15 +280,24 @@ def make_arm_clients(
     shares the same window (``NUM_CTX``, defaulting to
     ``DEFAULT_NUM_CTX``), so the pin stays arm-fair within a model while
     still tracking that model's own capability (SPEC section 48).
+
+    ``quantization`` is plumbed the same way and for the same reason.
+    It is what ``OllamaClient.preflight`` asserts against /api/tags, so
+    passing the slug's own pin is what lets a registered subject run at
+    all: hard-coded, the guard rejected ``deepseek16b_lite`` -- a
+    SPEC-registered subject -- on the default backend.
     """
     num_ctx = NUM_CTX.get(slug, DEFAULT_NUM_CTX)
+    quantization = quant_for(slug)
     if backend == "ollama":
         if constrained:
             raise ModelError(
                 "--constrained requires --backend llamacpp: Ollama accepts "
                 "a grammar option and silently ignores it"
             )
-        client = OllamaClient(MODELS[slug], num_ctx=num_ctx)
+        client = OllamaClient(
+            MODELS[slug], num_ctx=num_ctx, quantization=quantization
+        )
         return {arm: client for arm in harness.ARMS}
     clients: dict[str, ModelClient] = {}
     for arm in harness.ARMS:

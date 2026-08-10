@@ -30,6 +30,13 @@ DEFAULT_HOST = "http://localhost:11434"
 # keeping the KV cache small enough that 7B-q8 still fits the card.
 DEFAULT_NUM_CTX = 8192
 
+# The quantization a client EXPECTS to find pulled, checked at preflight.
+# Like DEFAULT_NUM_CTX this is a default, not a universal: SPEC section 48
+# pins quantization per family, and the driver passes the slug's pin in.
+# Every slug on the q8_0 ladder takes this value, so the guard behaves for
+# them exactly as it did when the rule was hard-coded.
+DEFAULT_QUANT = "q8_0"
+
 # Deliberately crude. A real tokenizer would be a dependency the eval
 # venv does not have and cannot gain (PEP-668, no PyTorch on 3.14). The
 # guard exists to catch a prompt that overruns the window by a wide
@@ -233,6 +240,7 @@ class OllamaClient:
         top_p: float = 0.95,
         num_predict: int = 2048,
         num_ctx: int = DEFAULT_NUM_CTX,
+        quantization: str = DEFAULT_QUANT,
         host: str = DEFAULT_HOST,
         timeout_s: int = 120,
         retries: int = 3,
@@ -244,6 +252,7 @@ class OllamaClient:
         self.top_p = top_p
         self.num_predict = num_predict
         self.num_ctx = num_ctx
+        self.quantization = quantization
         self.host = host.rstrip("/")
         self.timeout_s = timeout_s
         self.retries = retries
@@ -370,6 +379,13 @@ class OllamaClient:
     def preflight(self) -> dict:
         """Assert the model is pulled at the pinned quantization.
 
+        The pin is ``self.quantization``, supplied per SLUG by
+        ``driver.quant_for`` and defaulting to ``DEFAULT_QUANT``. It is
+        deliberately not a hard-coded ``q8_0``: SPEC section 48's control
+        is per-family constancy, not one value across the whole roster,
+        and a hard-coded literal would reject the roster's own registered
+        subjects (``deepseek16b_lite`` is pinned at ``q5_K_M``).
+
         Returns the provenance payload section 49 requires in the run
         manifest: which weights, at what precision, served by which
         daemon. Without it a 14-hour result cannot be traced back to the
@@ -387,11 +403,14 @@ class OllamaClient:
                 continue
             details = entry.get("details", {})
             quant = details.get("quantization_level", "?")
-            if quant != "Q8_0":
+            if str(quant).lower() != self.quantization.lower():
                 raise ModelError(
-                    f"{self.model} is {quant}, expected Q8_0 -- uniform "
-                    f"quantization is the control that keeps the capability "
-                    f"curve from being confounded with precision"
+                    f"{self.model} is {quant}, expected "
+                    f"{self.quantization} -- quantization is pinned PER "
+                    f"FAMILY (SPEC section 48) and held constant within a "
+                    f"family, so the capability curve is not confounded "
+                    f"with precision inside a subject's own runs. Pull the "
+                    f"pinned tag rather than relaxing this check."
                 )
             return {
                 "model": self.model,

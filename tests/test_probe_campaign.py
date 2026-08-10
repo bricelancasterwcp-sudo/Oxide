@@ -76,12 +76,14 @@ def test_resume_runs_each_cell_exactly_once(tmp_path, monkeypatch):
     monkeypatch.setattr(pc, "run_cell", fake_run_cell)
 
     arms, seeds = ("oxide", "explicit"), (1, 2)
-    pc.run_campaign(tmp_path, arms, seeds, client_factory=lambda arm: None)
+    pc.run_campaign(tmp_path, arms, seeds, client_factory=lambda arm: None,
+                    provenance={"model": "deepseek"})
     assert sorted(ran) == [("explicit", 1), ("explicit", 2),
                            ("oxide", 1), ("oxide", 2)]
 
     ran.clear()
-    pc.run_campaign(tmp_path, arms, seeds, client_factory=lambda arm: None)
+    pc.run_campaign(tmp_path, arms, seeds, client_factory=lambda arm: None,
+                    provenance={"model": "deepseek"})
     assert ran == []  # everything already complete
 
 
@@ -90,6 +92,57 @@ def test_provenance_is_written_once_per_campaign(tmp_path):
     obj = json.loads((tmp_path / "provenance.json").read_text(encoding="utf-8"))
     assert obj["model"] == "deepseek"
     assert obj["n_ctx"] == 8192
+
+
+def test_campaign_refuses_to_start_without_provenance(tmp_path, monkeypatch):
+    """write_provenance used to be optional -- run_campaign never called
+    it -- so a campaign could land 600 repairs on disk with no record of
+    which weights produced them. That is precisely how the 6a pilot's
+    demand table became permanently irreproducible, which this module's
+    docstring names as its reason for existing. The refusal must come
+    BEFORE any cell runs: refusing after 600 GPU-minutes is not a guard."""
+    import pytest
+
+    from eval.probe import ProbeError
+
+    ran: list[tuple[str, int]] = []
+    monkeypatch.setattr(
+        pc, "run_cell",
+        lambda root, arm, seed, cf: ran.append((arm, seed)),
+    )
+    with pytest.raises(ProbeError, match="provenance"):
+        pc.run_campaign(tmp_path, ("oxide",), (1,),
+                        client_factory=lambda arm: None)
+    assert ran == []
+    assert not (tmp_path / "provenance.json").exists()
+
+
+def test_campaign_writes_provenance_before_the_first_cell(tmp_path, monkeypatch):
+    """Written up front, not at the end: a campaign that dies mid-run must
+    still be traceable to its weights."""
+    seen: list[bool] = []
+
+    def fake_run_cell(root, arm, seed, client_factory):
+        seen.append((root / "provenance.json").is_file())
+
+    monkeypatch.setattr(pc, "run_cell", fake_run_cell)
+    pc.run_campaign(tmp_path, ("oxide",), (1, 2),
+                    client_factory=lambda arm: None,
+                    provenance={"model": "deepseek16b_lite", "num_ctx": 8192})
+    assert seen == [True, True]
+    obj = json.loads((tmp_path / "provenance.json").read_text(encoding="utf-8"))
+    assert obj["model"] == "deepseek16b_lite"
+
+
+def test_campaign_accepts_provenance_already_on_disk(tmp_path, monkeypatch):
+    """Resume path: the first invocation wrote it, so a later resume need
+    not pass it again -- but the file must be there."""
+    monkeypatch.setattr(
+        pc, "run_cell", lambda root, arm, seed, cf: None
+    )
+    pc.write_provenance(tmp_path, {"model": "deepseek16b_lite"})
+    assert pc.run_campaign(tmp_path, ("oxide",), (1,),
+                           client_factory=lambda arm: None) == [("oxide", 1)]
 
 
 def test_reset_partial_unblocks_run_corpus_append_guard(tmp_path):

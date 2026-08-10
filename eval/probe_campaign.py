@@ -24,7 +24,7 @@ import shutil
 from pathlib import Path
 from typing import Callable
 
-from eval.probe import _select, load_probes, run_corpus
+from eval.probe import ProbeError, _select, load_probes, run_corpus
 
 SEEDS = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
@@ -92,8 +92,34 @@ def run_campaign(
     seeds: tuple[int, ...],
     *,
     client_factory: Callable[[str], object],
+    provenance: dict | None = None,
 ) -> list[tuple[str, int]]:
-    """Run every unfinished cell. Returns the cells it ran."""
+    """Run every unfinished cell. Returns the cells it ran.
+
+    PROVENANCE IS REQUIRED, not optional. Pass ``provenance`` and it is
+    written before the first cell runs; omit it and ``provenance.json``
+    must already exist under ``root``, or the campaign refuses to start.
+    There is no third path in which 600 repairs land on disk with no
+    record of which weights produced them -- that is exactly how the 6a
+    pilot's demand table became permanently irreproducible, and this
+    module's own docstring cites that as its reason for existing. A
+    provenance step that a caller can simply forget to invoke reproduces
+    the hazard it was added to prevent.
+
+    The check runs on resume too, and that is deliberate: a resumed
+    campaign is where a forgotten first step is least likely to be
+    noticed.
+    """
+    root = Path(root)
+    if provenance is not None:
+        write_provenance(root, provenance)
+    elif not (root / "provenance.json").is_file():
+        raise ProbeError(
+            f"refusing to start: no provenance for this campaign. Pass "
+            f"provenance=... or write {root / 'provenance.json'} first. "
+            f"A run whose weights cannot be identified afterwards is not "
+            f"a result, it is 600 repairs of unattributable text."
+        )
     ran: list[tuple[str, int]] = []
     for arm, seed in pending_cells(root, arms, seeds):
         run_cell(root, arm, seed, client_factory)

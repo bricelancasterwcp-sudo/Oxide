@@ -418,8 +418,9 @@ def test_preflight_rejects_missing_model(monkeypatch):
 
 
 def test_preflight_rejects_wrong_quantization(monkeypatch):
-    # This is what actually enforces the uniform-quantization control:
-    # the 1.5b already on this machine is Q4_K_M and must be rejected.
+    # This is what actually enforces SPEC section 48's per-family pin:
+    # the 1.5b already on this machine is Q4_K_M, is pinned at q8_0 like
+    # the rest of the ladder, and must be rejected.
     tags = {
         "models": [
             {
@@ -430,6 +431,74 @@ def test_preflight_rejects_wrong_quantization(monkeypatch):
         ]
     }
     with pytest.raises(ModelError, match="Q4_K_M"):
+        _client(monkeypatch, _FakeHTTP(tags)).preflight()
+
+
+def _quant_client(monkeypatch, http, tag, quantization):
+    monkeypatch.setattr("eval.models._request", http)
+    return OllamaClient(tag, quantization=quantization, sleep=lambda _s: None)
+
+
+def test_preflight_accepts_the_slugs_own_pinned_quantization(monkeypatch):
+    """The bug this pins: the guard hard-coded Q8_0, so the SPEC-registered
+    deepseek16b_lite subject could not preflight on the default backend at
+    all -- and the refusal cited an invariant SPEC section 48 had already
+    retired. Ollama reports Q5_K_M where the pin reads q5_K_M, so the
+    comparison must also be case-insensitive."""
+    tag = "deepseek-coder-v2:16b-lite-instruct-q5_K_M"
+    tags = {
+        "models": [
+            {
+                "name": tag,
+                "digest": "6065d4880bf9",
+                "details": {
+                    "quantization_level": "Q5_K_M",
+                    "context_length": 163840,
+                },
+            }
+        ]
+    }
+    http = _FakeHTTP(tags, {"version": "0.6.8"})
+    info = _quant_client(monkeypatch, http, tag, "q5_K_M").preflight()
+    assert info["quantization_level"] == "Q5_K_M"
+    assert info["digest"] == "6065d4880bf9"
+
+
+def test_preflight_still_rejects_a_mismatch_against_a_non_default_pin(
+    monkeypatch,
+):
+    """A guard that stopped guarding would be worse than the bug it
+    replaced. Pinned at q5_K_M, a q8_0 blob is still refused -- the check
+    tracks the slug's pin in BOTH directions, it does not merely widen."""
+    tag = "deepseek-coder-v2:16b-lite-instruct-q5_K_M"
+    tags = {
+        "models": [
+            {
+                "name": tag,
+                "digest": "abc",
+                "details": {"quantization_level": "Q8_0"},
+            }
+        ]
+    }
+    http = _FakeHTTP(tags, {"version": "0.6.8"})
+    with pytest.raises(ModelError, match="expected q5_K_M"):
+        _quant_client(monkeypatch, http, tag, "q5_K_M").preflight()
+
+
+def test_preflight_defaults_to_q8_0_when_no_pin_is_supplied(monkeypatch):
+    """Every existing slug behaves exactly as before the pin was plumbed:
+    an unparameterised client still demands q8_0."""
+    assert OllamaClient("qwen2.5-coder:7b-instruct-q8_0").quantization == "q8_0"
+    tags = {
+        "models": [
+            {
+                "name": "qwen2.5-coder:1.5b-instruct-q8_0",
+                "digest": "abc",
+                "details": {"quantization_level": "Q5_K_M"},
+            }
+        ]
+    }
+    with pytest.raises(ModelError, match="expected q8_0"):
         _client(monkeypatch, _FakeHTTP(tags)).preflight()
 
 
@@ -1104,6 +1173,60 @@ def test_make_arm_clients_threads_num_ctx_through_the_ollama_path_too():
     assert qwen["rust"].num_ctx == 8192
 
 
+def test_make_arm_clients_threads_the_quantization_pin_through_too():
+    """SPEC section 48 amended quantization from a universal q8_0 to a
+    per-family pin, but the amendment was inert: QUANT/quant_for were
+    read by tests only, and the one place quantization is enforced still
+    hard-coded Q8_0. `--models deepseek16b_lite` on the default backend
+    therefore raised ModelError against a SPEC-registered subject. The
+    pin must reach the client the same way num_ctx does."""
+    deepseek = driver.make_arm_clients("ollama", "deepseek16b_lite",
+                                       constrained=False,
+                                       host="http://localhost:8081")
+    assert {c.quantization for c in deepseek.values()} == {"q5_K_M"}
+    for slug in ("qwen0_5b", "qwen1_5b", "qwen7b", "codegemma7b", "granite8b"):
+        clients = driver.make_arm_clients("ollama", slug, constrained=False,
+                                          host="http://localhost:8081")
+        assert {c.quantization for c in clients.values()} == {"q8_0"}, slug
+
+
+def test_registered_deepseek_subject_preflights_on_the_default_backend(
+    monkeypatch,
+):
+    """The end-to-end failure scenario, not just its parts: build the
+    clients the way the driver does for the default backend, then
+    preflight. Before the fix this raised."""
+    tag = MODELS["deepseek16b_lite"]
+    tags = {
+        "models": [
+            {
+                "name": tag,
+                "digest": "6065d4880bf9",
+                "details": {
+                    "quantization_level": "Q5_K_M",
+                    "context_length": 163840,
+                },
+            }
+        ]
+    }
+    monkeypatch.setattr(
+        "eval.models._request", _FakeHTTP(tags, {"version": "0.6.8"})
+    )
+    clients = driver.make_arm_clients("ollama", "deepseek16b_lite",
+                                      constrained=False,
+                                      host="http://localhost:8081")
+    assert clients["oxide"].preflight()["quantization_level"] == "Q5_K_M"
+
+
+def test_every_pinned_tag_agrees_with_its_quantization_pin():
+    """MODELS and QUANT are two independent statements of the same fact.
+    Nothing else stops them drifting: a slug re-pinned to a new tag while
+    QUANT still names the old quantization would preflight-fail at run
+    time, hours after the edit, on a machine with the GPU already busy."""
+    for slug, tag in MODELS.items():
+        assert tag.endswith("-" + driver.quant_for(slug)), (slug, tag)
+
+
 def test_granite_preflight_passes_against_its_own_capped_4096_server(monkeypatch):
     # LlamaCppClient.preflight() already refuses when served n_ctx is
     # LESS than the client's own num_ctx pin -- verified here rather than
@@ -1293,8 +1416,11 @@ def test_model_slugs_map_to_pinned_tags():
 def test_quantization_is_q8_except_where_vram_forbids_it():
     """SPEC section 48: quantization was uniform q8_0; it is now a
     per-family pin, for the same reason num_ctx is. DeepSeek-V2-Lite's
-    q8_0 GGUF is 16.70 GB against a 16.30 GB card -- it does not fit the
-    card at all, so this is physical, not a policy choice."""
+    q8_0 weights are 15926 MiB and its measured runtime overhead ~2160
+    MiB, for ~18090 MiB against a 16303 MiB card -- physically forced,
+    not a policy choice. (VRAM in MiB throughout: the earlier "16.70 GB
+    vs 16.30 GB" mixed a decimal-GB GGUF size with a relabelled MiB
+    figure, and in consistent units those weights fit the raw card.)"""
     assert driver.DEFAULT_QUANT == "q8_0"
     assert driver.QUANT == {"deepseek16b_lite": "q5_K_M"}
     for slug in ("qwen0_5b", "qwen1_5b", "qwen7b", "codegemma7b", "granite8b"):
