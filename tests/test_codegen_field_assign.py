@@ -64,6 +64,18 @@ FA_EQ_RHS_SOURCE = (
     " print(f.flag) }"
 )
 
+# A NESTED path whose INTERMEDIATE segment is non-copy. Every user struct is
+# non-copy (`src.sema.types.is_copy`), so `o.i` is exactly the shape §36
+# appends `.clone()` to on a read -- and the single-segment sources above
+# cannot reach an intermediate at all.
+FA_NESTED_SOURCE = (
+    "struct Inner { n: Int }\n"
+    "struct Outer { i: Inner }\n"
+    "fn main() { let o = Outer { i: Inner { n: 1 } }\n"
+    " o.i.n = 5\n"
+    " print(o.i.n) }"
+)
+
 
 # ---- Helpers ----
 
@@ -182,3 +194,40 @@ def test_eq_only_inside_a_field_assign_rhs_compiles(tmp_path):
     """Accepted-implies-compiles: without the derive, E0369 `binary
     operation `==` cannot be applied to type `K`."""
     assert _run(_compile(_transpile_ok(FA_EQ_RHS_SOURCE), tmp_path)) == "false\n"
+
+
+# ---- 4. Every segment of the path is a place, not just the last ----
+
+
+def test_nested_path_intermediate_segment_is_a_bare_place():
+    """The single-segment guards above cannot reach an intermediate.
+
+    Cloning `o.i` would write into a temporary, exactly as cloning a
+    single-segment target does -- but the two failure modes are NOT
+    equivalent, and that is why this case needs its own fixture. A cloned
+    single-segment target (`p.name.clone() = s`) is not a place and rustc
+    REJECTS it (E0070). A cloned intermediate (`o.i.clone().n = 5`) IS a
+    place: rustc ACCEPTS it, compiling with only an `unused_mut` warning
+    while the write vanishes into the temporary.
+
+    So this is the one §56 defect class the rustc oracle cannot catch, and
+    accepted-implies-compiles is no defence against it. Note the emitted
+    program legitimately contains `.clone()` on the READ path
+    (`print(&(o.i.clone().n))`) per §36 -- only the assignment target must
+    be bare, so assert on the statement, never on the absence of `.clone()`.
+    """
+    rust = _transpile_ok(FA_NESTED_SOURCE)
+    assert "o.i.n = 5;" in rust
+    assert "o.i.clone().n = " not in rust
+
+
+@requires_rustc
+def test_nested_path_assignment_writes_through_at_runtime(tmp_path):
+    """The runtime assertion IS the test.
+
+    Both the correct and the defective emitter produce Rust that compiles
+    here, so a `@requires_rustc` compile check proves nothing on its own.
+    Only the printed value separates a write that landed in the struct (5)
+    from one that landed in a temporary and was discarded (1).
+    """
+    assert _run(_compile(_transpile_ok(FA_NESTED_SOURCE), tmp_path)) == "5\n"
