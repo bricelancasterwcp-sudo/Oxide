@@ -523,6 +523,16 @@ ss -lntp | grep ":8081 " || echo "port free"
 
 `pgrep -f llama-server` **self-matches** (the pgrep's own command line contains the string) — always match `bin/llama-server` or check the port. A stale server holds the port and answers the health check from the WRONG weights; that has silently killed a 600-repair run here before.
 
+**Then clear ollama out of VRAM, and check free memory — not total.** This is not hypothetical: the first launch attempt of this very campaign died with `ErrorOutOfDeviceMemory` because ollama had silently loaded `qwen2.5-coder:7b-instruct-q8_0` and was holding **9,590 MiB**. llama-server reported `16303 MiB, 4947 MiB free` and aborted. With 0.51 GB of headroom, **any** concurrent ollama load is fatal — during the run as well as before it, since ollama's default keepalive will happily reload a model if anything touches it.
+
+```bash
+ollama ps                      # must list no models
+ollama stop <model>            # for each one listed
+nvidia-smi --query-gpu=memory.free --format=csv,noheader
+```
+
+Require **≥ 13500 MiB free** before launching. Do not start the campaign against a server that loaded under a tighter budget — it will have silently placed layers differently or failed outright.
+
 Then start it in the background (never with a foreground `sleep`, which the harness kills):
 
 ```bash
