@@ -1,0 +1,17 @@
+{
+  "arms": {
+    "oxide": {
+      "diagnostic_histogram": {
+        "OX0001": 56,
+        "OX0101": 33,
+        "OX0102": 5,
+        "OX0308": 1,
+        "OX0400": 2
+      },
+      "lenient": 0.3,
+      "probes": 20,
+      "strict": 0.25
+    }
+  },
+  "probes": 20
+}

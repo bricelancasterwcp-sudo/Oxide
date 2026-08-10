@@ -1,0 +1,12 @@
+ ```rust
+fn main() {
+    let v = push(push(vec(), 1), 2);
+    print(len(&v));
+    let mut v2 = vec();
+    for x in &v {
+        v2 = push(v2, *x);
+    }
+    print(len(&v2));
+    drop v2;
+}
+```

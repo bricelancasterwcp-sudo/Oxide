@@ -1,0 +1,13 @@
+ ```rust
+fn main() {
+    let o = Some(concat("ab", "cd"));
+    match o {
+        Some(s) => print(str_len(s) * 5),
+        None => print(0),
+    }
+    match o {
+        Some(s) => print(str_len(s) * 6),
+        None => print(0),
+    }
+}
+```

@@ -1,0 +1,13 @@
+{
+  "backend": "llama.cpp",
+  "build_info": "b1-4988f6e",
+  "grammar_sha256": null,
+  "model": "deepseek16b_lite",
+  "model_path": "/mnt/extra/ollama-models/blobs/sha256-bc286970a24072cf23a4c905f28adb9f6a28c71743b07790185275a86dc72406",
+  "num_ctx": 8192,
+  "ollama_digest": "6065d4880bf9",
+  "quantization": "q5_K_M",
+  "server_n_ctx": 8192,
+  "slug": "deepseek16b_lite",
+  "tag": "deepseek-coder-v2:16b-lite-instruct-q5_K_M"
+}

@@ -1,0 +1,13 @@
+ ```
+fn main() {
+    let s = "hello"
+    let n = 5
+    if n > 3 {
+        if n > 4 {
+            let t = s.clone()  // Added clone() here
+            print(str_len(t) * 4)
+        }
+        print(str_len(s) * 6)
+    }
+}
+```

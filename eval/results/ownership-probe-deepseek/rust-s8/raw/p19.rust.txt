@@ -1,0 +1,11 @@
+ ```rust
+fn main() {
+    let s = String::from("hello world");
+    let n = 42;
+    let t = s.clone();
+    println!("{}", t.len());
+    if n > 3 {
+        println!("{}", s.len());
+    }
+}
+```

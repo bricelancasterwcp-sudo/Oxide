@@ -1,0 +1,15 @@
+ ```rust
+#[derive(Clone)]
+struct Pair {
+    a: Vec<i32>,
+    b: String,
+}
+
+fn main() {
+    let s = Pair { a: vec![1, 2], b: String::from("hello") };
+    let Pair { a, ref b } = s;
+    println!("{}", a.len());
+    println!("{}", b.len());
+    // println!("{}", s.b.len()); // This line would cause an error because `s.b` was moved
+}
+```

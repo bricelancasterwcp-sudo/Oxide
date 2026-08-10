@@ -1,0 +1,8 @@
+ ```rust
+fn main() {
+    let s = "abcdefghij";
+    print(str_len(s));
+    let t = concat(s.clone(), s); // Clone 's' to fix the ownership error
+    print(str_len(t));
+}
+```

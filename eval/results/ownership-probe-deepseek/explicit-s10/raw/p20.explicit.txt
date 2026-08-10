@@ -1,0 +1,17 @@
+ ```rust
+fn main() {
+    let v = range(0, 10);
+    print(len(&v));
+    let total = 0;
+    for x in &v {
+        if x > 4 {
+            let w = push(clone(&v), *x);
+            total = len(&w);
+            drop w;
+            break;
+        }
+    }
+    drop v;
+    print(total);
+}
+```

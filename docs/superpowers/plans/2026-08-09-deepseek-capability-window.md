@@ -14,7 +14,7 @@
 - Run tests with `.venv/bin/pytest tests/ -q` from `/home/brice/workspace/oxide`. Baseline at plan time: **1410 passed, 3 deselected**.
 - **Nothing under `eval/results/` may be modified.** It is the committed experimental record. Task 3 *adds* a new directory; it changes nothing existing.
 - **Do not edit** `LANGUAGE_CARD.md`, `LANGUAGE_CARD_EXPLICIT.md`, the `OX0306` suggestion string, the `ARMS`/`arm` data keys, the `__oxide_` codegen prefix, `.ox`, or `eval/grammar/oxide.gbnf` (SPEC §0 frozen surfaces).
-- Files stay under 800 lines. **Exception, pre-existing and out of scope:** `eval/grammar/build.py` is 857 lines; do not touch it and do not "fix" it.
+- **Source modules under `src/` and `eval/` stay under 800 lines. Test modules are exempt** — golden corpora and pinned fixtures make them legitimately long. Two pre-existing breaches are **out of scope for this plan**: `tests/test_6a.py` (2,860 lines, exempt as a test module) and `eval/grammar/build.py` (857 lines — do not touch it, do not "fix" it). This wording is deliberate: the g2 review ruled that restating a flat 800-line rule while editing a file that already breaches it is "how a constraint stops meaning anything", so the rule now says what it actually governs.
 - Commit messages omit any Claude/AI attribution.
 - **The pinned subject:** `deepseek-coder-v2:16b-lite-instruct-q5_K_M`, ollama digest `6065d4880bf9`, GGUF blob `sha256-bc286970a24072cf23a4c905f28adb9f6a28c71743b07790185275a86dc72406` under `/mnt/extra/ollama-models/blobs/`. Already pulled; do not re-pull.
 - **The pre-registration is binding and was written before any data existed.** It is reproduced in Task 3 and must not be softened after seeing results.
@@ -523,6 +523,16 @@ ss -lntp | grep ":8081 " || echo "port free"
 
 `pgrep -f llama-server` **self-matches** (the pgrep's own command line contains the string) — always match `bin/llama-server` or check the port. A stale server holds the port and answers the health check from the WRONG weights; that has silently killed a 600-repair run here before.
 
+**Then clear ollama out of VRAM, and check free memory — not total.** This is not hypothetical: the first launch attempt of this very campaign died with `ErrorOutOfDeviceMemory` because ollama had silently loaded `qwen2.5-coder:7b-instruct-q8_0` and was holding **9,590 MiB**. llama-server reported `16303 MiB, 4947 MiB free` and aborted. With 0.51 GB of headroom, **any** concurrent ollama load is fatal — during the run as well as before it, since ollama's default keepalive will happily reload a model if anything touches it.
+
+```bash
+ollama ps                      # must list no models
+ollama stop <model>            # for each one listed
+nvidia-smi --query-gpu=memory.free --format=csv,noheader
+```
+
+Require **≥ 13500 MiB free** before launching. Do not start the campaign against a server that loaded under a tighter budget — it will have silently placed layers differently or failed outright.
+
 Then start it in the background (never with a foreground `sleep`, which the harness kills):
 
 ```bash
@@ -580,7 +590,9 @@ print(f'ran {len(ran)} cells')
 "
 ```
 
-30 cells × 20 probes = **600 repairs**, roughly 20–25 minutes. **No grammar constraint** — the probe supplies a syntactically correct program and only the ownership defect is wrong, so a grammar would test nothing here (`--grammar` is not passed, matching how the other three families were run).
+30 cells × 20 probes = **600 repairs**, roughly 20–25 minutes. **No grammar constraint** — the probe supplies a syntactically correct program and only the ownership defect is wrong, so a grammar would test nothing here (`--grammar` is not passed).
+
+> **Do not describe this as "matching how the other three families were run."** It does not, and that sentence is how a false claim about another run's configuration reached a commit message once already (retracted in `b42c324`). The truth, in the terms the REPORT must use: the `rust` arm is unconstrained everywhere, in every run, by design. The `oxide` and `explicit` arms ran **unconstrained here** and **grammar-constrained** for the three local reference families (`qwen2.5-coder-7b`, `codegemma-7b`, `granite-code-8b`). The fourth reference row, Claude Opus 5, was unconstrained on **all three** arms — verify that against `eval/results/ownership-probe-frontier/REPORT.md` rather than against any downstream prose. So the `oxide`/`explicit` figures here are **not** comparable to the three local families, and the REPORT must say so.
 
 If it dies mid-run, re-run the identical command. Finished cells are skipped; the half-finished one is redone.
 
@@ -617,6 +629,8 @@ Create `eval/results/ownership-probe-deepseek/REPORT.md` following the house sty
 - **What this does not show:** one MoE subject cannot separate "MoE" from "stronger" from "different pretraining mix"; the window remains descriptive over five points, not causal; and the three-family results are untouched by this run.
 - The provenance: tag, digest, quantization, `num_ctx`, llama.cpp build.
 
+> **Correction — do not copy this plan's "16.70 GB against a 16.30 GB card" justification.** It is a unit error, repeated throughout this document: 16.70 GB is a **decimal** GGUF size from the ollama registry, while the "16.30 GB" card is `llama-server`'s **16303 MiB** with the decimal point moved. In consistent units the `q8_0` weights (15926 MiB) *fit* a 16303 MiB card by ~380 MiB, so "it does not fit the card even with nothing else running" is false. The pin is still physically forced, for the correct reason: **weights plus the measured runtime overhead** (~2160 MiB of KV cache and compute buffers at `num_ctx` 8192) come to ~18090 MiB, which overruns the whole card, and `q6_K` OOMs the same way. Quote VRAM in MiB or GiB, never mixed with decimal GB. The corrected wording lives in `SPEC.md` §48 and `eval/results/ownership-probe-deepseek/REPORT.md`; those are authoritative over the snapshots embedded in this plan.
+
 - [ ] **Step 7: Commit**
 
 ```bash
@@ -624,7 +638,11 @@ git add eval/results/ownership-probe-deepseek/
 git commit -m "data(eval): DeepSeek-Coder-V2-Lite ownership probe — capability-window test
 
 600 repairs, 20 classes x 3 arms x 10 seeds, q5_K_M, num_ctx 8192, no
-grammar constraint -- matching how the other three families were run.
+grammar constraint on any arm. That does NOT match the three local
+reference families: rust is unconstrained everywhere, but their oxide and
+explicit arms were grammar-constrained and these were not, so the
+oxide/explicit figures are not comparable to theirs. (The fourth reference
+row, Claude Opus 5, was unconstrained on all three arms.)
 
 The pre-registration was written before the model was pulled and is quoted
 in the REPORT ahead of the results: if the rust arm beats qwen's 89.0 the

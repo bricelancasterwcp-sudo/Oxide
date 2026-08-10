@@ -1804,9 +1804,9 @@ not be renegotiated after seeing results.
 
 | Parameter | Value |
 |---|---|
-| Models | Phase 6a rungs: `qwen2.5-coder` **instruct**, 0.5B / 1.5B / 7B (slugs `qwen0_5b` / `qwen1_5b` / `qwen7b`). G0 adds two more **instruct** families at `q8_0`: `codegemma:7b` (slug `codegemma7b`) and `granite-code:8b` (slug `granite8b`) — see `eval.driver.MODELS` for the pinned tags. |
-| Quantization | uniform `q8_0` across the ladder |
-| Backend | Phase 6a: Ollama HTTP (`http://localhost:11434`), version recorded. G0 (`qwen7b`, `codegemma7b`, `granite8b`) runs on llama.cpp (`llama-server`, `http://localhost:8081`) for both the constrained and unconstrained conditions instead — Ollama accepts a GBNF `grammar` option and silently ignores it, so constrained decoding requires llama.cpp (§50.4/`eval.llamacpp`). |
+| Models | Phase 6a rungs: `qwen2.5-coder` **instruct**, 0.5B / 1.5B / 7B (slugs `qwen0_5b` / `qwen1_5b` / `qwen7b`). G0 adds two more **instruct** families at `q8_0`: `codegemma:7b` (slug `codegemma7b`) and `granite-code:8b` (slug `granite8b`). The capability-window probe adds a sixth **instruct** family, `deepseek-coder-v2:16b-lite` (slug `deepseek16b_lite`), at `q5_K_M` rather than `q8_0` — see the Quantization row. Six slugs total; `eval.driver.MODELS` is the authority on the pinned tags and is the roster this row must agree with. |
+| Quantization | `q8_0`, **per-family** — see below (`q5_K_M` for `deepseek-coder-v2:16b-lite`) |
+| Backend | Phase 6a: Ollama HTTP (`http://localhost:11434`), version recorded. G0 (`qwen7b`, `codegemma7b`, `granite8b`) runs on llama.cpp (`llama-server`, `http://localhost:8081`) for both the constrained and unconstrained conditions instead — Ollama accepts a GBNF `grammar` option and silently ignores it, so constrained decoding requires llama.cpp (§50.4/`eval.llamacpp`). `deepseek16b_lite` also runs on llama.cpp (its capability-window probe was unconstrained on every arm). Both backends remain available to every slug; preflight asserts the slug's pinned quantization either way (§49). |
 | Temperature | 0.8 |
 | top_p | 0.95 |
 | `num_predict` (max gen tokens) | 2048 |
@@ -1820,9 +1820,48 @@ Base (non-instruct) variants are prohibited: they do not follow the
 output contract, and the resulting failures would measure format
 compliance rather than language competence.
 
-Quantization is held constant so the capability curve is not confounded
-with precision. Exact tags **and digests** are recorded in the run
-manifest at preflight.
+Quantization is held constant **within each family** so the capability
+curve is not confounded with precision inside a subject's own runs — see
+below for the one family where the pinned value differs from the rest of
+the ladder. Exact tags **and digests** are recorded in the run manifest
+at preflight.
+
+**The quantization pin is per-family, not universal — for the same reason
+`num_ctx` is.** `deepseek-coder-v2:16b-lite` is served at `q5_K_M`
+(`eval.driver.QUANT`; every other slug takes `DEFAULT_QUANT = q8_0`). MoE
+activates 2.4B of ~16B parameters per token, but every expert must be
+VRAM-resident, so the full weight set is what must fit — **and the weights
+are not the whole bill.** Serving a model also costs a KV cache and
+compute buffers, which this project measured rather than estimated: on
+this **16303 MiB** card, with ~**1760 MiB** held by the desktop session
+(~**14544 MiB** actually free), `llama-server` needed **13459 MiB** to
+serve the **11302 MiB** `q5_K_M` weight set at `num_ctx` 8192 — about
+**2160 MiB** of runtime overhead on top of the weights, leaving 1085 MiB
+free.
+
+Against that measured overhead, `q8_0` is out of reach: its **15926 MiB**
+of weights already exceed the ~14544 MiB free, and **~18090 MiB** of
+weights-plus-overhead exceeds the **entire** card. `q6_K` (**13418 MiB**)
+fails the same way once overhead is counted (~15580 MiB against ~14544
+MiB free). So `q5_K_M` is physically forced, not a policy choice —
+exactly the shape of granite's 4096 window.
+
+**Quote VRAM in MiB (or GiB) throughout, never in the registry's decimal
+GB.** The two are not interchangeable and mixing them has already
+produced a false justification here: the ollama registry's "16.70 GB"
+`q8_0` figure is decimal (15926 MiB), while the "16.30 GB" it was
+compared against was `llama-server`'s **16303 MiB** with the decimal
+point moved (15.92 GiB). Read in consistent units those weights *fit* the
+raw card by ~380 MiB, and the earlier "it does not fit the card even with
+nothing else running" was arithmetic, not physics. The conclusion is
+unchanged; only the reason is.
+
+The pin is applied
+uniformly across all three arms of that slug, so it stays arm-fair
+*within* the model, and it is recorded per run and read as a per-family
+covariate. Quantization is a capability reduction, so on a non-monotonic
+capability curve its direction of bias depends on which side of the peak
+the subject sits; the run's REPORT must state that rather than assume it.
 
 Temperature is deliberately non-zero. At temperature 0 all five seeds
 produce identical output and the variance estimate is vacuous.
@@ -2120,11 +2159,20 @@ Preflight reads `/api/tags` and records each model's `digest`,
 manifest. The last is recorded as **`model_context_length`** — the
 model's *capability* — and is not to be confused with **`num_ctx`**, the
 window the run actually used, which is recorded separately from the
-client. Both appear in every manifest. It **asserts `quantization_level == "Q8_0"` for all three
-models** — this is what actually enforces §48's uniform-quantization
-control, rather than trusting that the right tag was pulled. (The
-`qwen2.5-coder:1.5b` currently on this machine is Q4_K_M and must be
-rejected by name.)
+client. Both appear in every manifest. It **asserts that
+`quantization_level` matches the quantization pinned for that slug**
+(`eval.driver.quant_for`, i.e. `QUANT[slug]` falling back to
+`DEFAULT_QUANT = q8_0`), compared case-insensitively because Ollama
+reports `Q5_K_M` where the pin reads `q5_K_M`. This is what actually
+enforces §48's **per-family** quantization pin, rather than trusting
+that the right tag was pulled. It is deliberately not a hard-coded
+`Q8_0`: §48's control is constancy *within* a family, so a universal
+literal would reject `deepseek16b_lite` — a subject §48 itself registers
+— and would assert an invariant §48 no longer has. Every slug on the
+q8_0 ladder still gets exactly the check it always got. (The
+`qwen2.5-coder:1.5b` currently on this machine is Q4_K_M, is pinned at
+`q8_0` like the rest of the ladder, and must therefore still be
+rejected.)
 
 Per run id: health-check Ollama (poll until healthy, cap 10 min) → write
 `manifest.json` → 60 sessions → mark the run complete. On persistent

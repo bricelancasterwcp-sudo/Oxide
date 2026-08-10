@@ -1,0 +1,24 @@
+ ```rust
+fn main() {
+    let o = Some(concat("ab", "cd"))
+    match o {
+        Some(s) => {
+            print(str_len(&s) * 5)
+            drop s
+        },
+        None => print(0),
+    }
+    match clone(&o) {
+        Some(s) => {
+            print(str_len(&s) * 6)
+            drop s
+        },
+        None => print(0),
+    }
+    match o {
+        Some(_) => {},
+        None => {},
+    }
+    drop o
+}
+```

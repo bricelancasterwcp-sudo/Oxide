@@ -1,0 +1,11 @@
+ ```rust
+fn main() {
+    let s = "hello";
+    let n = 5;
+    if n > 3 {
+        let t = s.clone(); // Add clone() here to keep 's' available
+        print(str_len(t));
+    }
+    print(str_len(s));
+}
+```

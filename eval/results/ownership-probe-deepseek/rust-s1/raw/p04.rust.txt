@@ -1,0 +1,11 @@
+ fn main() {
+    let mut v = vec![1, 2];
+    println!("{}", v.len());
+    let v_len = v.len();
+    for x in &v {
+        if v.len() == v_len {
+            v.push(*x);
+        }
+    }
+    println!("{}", v.len());
+}

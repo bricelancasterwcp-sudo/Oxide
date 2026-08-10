@@ -1,0 +1,16 @@
+ ```rust
+fn main() {
+    let v = range(0, 10);
+    print(len(v));
+    let total = 0;
+    let mut temp_v = v; // Add this line to accumulate into a separate variable
+    for x in v {
+        if x > 4 {
+            temp_v = push(temp_v, x);
+            total = len(temp_v);
+            break;
+        }
+    }
+    print(total);
+}
+```

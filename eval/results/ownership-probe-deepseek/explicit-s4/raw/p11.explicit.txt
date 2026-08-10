@@ -1,0 +1,14 @@
+ ```rust
+struct Pair { a: Vec<Int>, b: Str }
+
+fn main() {
+    let s = Pair { a: push(push(vec(), 1), 2), b: "hello" }
+    let Pair { a, b } = s
+    print(len(&a))
+    drop a
+    print(str_len(&b))
+    drop b
+    print(str_len(&s.b))
+    drop s.clone()
+}
+```

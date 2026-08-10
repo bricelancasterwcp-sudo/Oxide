@@ -1,0 +1,12 @@
+ ```rust
+fn main() {
+    let mut v = vec![1, 2];
+    println!("{}", v.len());
+    let mut v_snapshot = v.clone();
+    for x in &v {
+        v_snapshot.push(*x);
+    }
+    v = v_snapshot;
+    println!("{}", v.len());
+}
+```

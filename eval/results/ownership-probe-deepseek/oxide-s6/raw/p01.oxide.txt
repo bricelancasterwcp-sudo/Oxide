@@ -1,0 +1,8 @@
+ ```rust
+fn main() {
+    let a = push(push(vec(), 1), 2);
+    let b = clone(a); // Corrected by adding clone(a)
+    print(len(a));
+    print(len(b));
+}
+```

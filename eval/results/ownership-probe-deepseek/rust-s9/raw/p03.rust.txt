@@ -1,0 +1,10 @@
+ fn main() {
+    let s = String::from("ab");
+    println!("{}", s.len());
+    let mut total = 0;
+    for _i in 0..3 {
+        let t = s.clone();
+        total += t.len();
+    }
+    println!("{}", total);
+}

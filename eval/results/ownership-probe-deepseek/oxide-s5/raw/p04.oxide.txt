@@ -1,0 +1,11 @@
+ ```rust
+fn main() {
+    let v = push(push(vec(), 1), 2);
+    print(len(v));
+    let mut v_iter = v;
+    for x in v {
+        v_iter = push(v_iter, x);
+    }
+    print(len(v_iter));
+}
+```

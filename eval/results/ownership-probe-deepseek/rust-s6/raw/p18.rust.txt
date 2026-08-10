@@ -1,0 +1,10 @@
+ fn concat(a: &String, b: &String) -> String {
+    a.clone() + b
+}
+
+fn main() {
+    let s = String::from("abcdefghij");
+    println!("{}", s.len());
+    let t = concat(&s, &s);
+    println!("{}", t.len());
+}

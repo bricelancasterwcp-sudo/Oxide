@@ -1,0 +1,18 @@
+ ```rust
+fn f(o: Option<Vec<Int>>) -> Option<Int> {
+    let v = o?
+    let w = v.clone()
+    Some(len(v) * 10 + len(w))
+}
+
+fn main() {
+    match f(Some(push(push(vec(), 1), 2))) {
+        Some(n) => print(n),
+        None => print(0),
+    }
+    match f(None) {
+        Some(n) => print(n),
+        None => print(99),
+    }
+}
+```

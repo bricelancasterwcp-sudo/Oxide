@@ -1,0 +1,22 @@
+{
+  "arms": {
+    "explicit": {
+      "diagnostic_histogram": {
+        "EX0002": 1,
+        "EX0003": 1,
+        "OX0001": 43,
+        "OX0100": 1,
+        "OX0101": 22,
+        "OX0102": 4,
+        "OX0306": 1,
+        "OX0400": 4,
+        "OX0401": 3,
+        "OX0403": 1
+      },
+      "lenient": 0.2,
+      "probes": 20,
+      "strict": 0.1
+    }
+  },
+  "probes": 20
+}

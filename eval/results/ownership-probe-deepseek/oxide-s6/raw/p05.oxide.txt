@@ -1,0 +1,10 @@
+ ```rust
+struct Bag { items: Vec<Int>, label: Str }
+
+fn main() {
+    let b = Bag { items: push(push(vec(), 1), 2), label: "x" }
+    print(len(b.items))
+    let c = b.items
+    print(len(c))
+}
+```

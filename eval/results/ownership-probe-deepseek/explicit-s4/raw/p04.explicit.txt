@@ -1,0 +1,12 @@
+ ```rust
+fn main() {
+    let v = push(push(vec(), 1), 2)
+    print(len(&v))
+    let mut temp_v = v;
+    for x in &temp_v {
+        temp_v = push(temp_v, x);
+    }
+    print(len(&temp_v))
+    drop temp_v
+}
+```

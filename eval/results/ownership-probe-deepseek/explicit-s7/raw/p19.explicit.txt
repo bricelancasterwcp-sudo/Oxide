@@ -1,0 +1,13 @@
+ ```rust
+fn main() {
+    let s = "hello world";
+    let n = 42;
+    let t = s;
+    print(str_len(&t));
+    drop t;
+    if n > 3 {
+        print(str_len(&s));
+    }
+    drop s;
+}
+```
