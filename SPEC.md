@@ -1820,9 +1820,11 @@ Base (non-instruct) variants are prohibited: they do not follow the
 output contract, and the resulting failures would measure format
 compliance rather than language competence.
 
-Quantization is held constant so the capability curve is not confounded
-with precision. Exact tags **and digests** are recorded in the run
-manifest at preflight.
+Quantization is held constant **within each family** so the capability
+curve is not confounded with precision inside a subject's own runs — see
+below for the one family where the pinned value differs from the rest of
+the ladder. Exact tags **and digests** are recorded in the run manifest
+at preflight.
 
 **The quantization pin is per-family, not universal — for the same reason
 `num_ctx` is.** `deepseek-coder-v2:16b-lite` is served at `q5_K_M`
