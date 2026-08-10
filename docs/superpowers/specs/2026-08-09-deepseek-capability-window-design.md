@@ -62,10 +62,10 @@ Secondary, recorded but not load-bearing:
 > *Quantization is held constant so the capability curve is not confounded.*
 
 That invariant cannot survive this subject, and the reason is physical
-rather than editorial. DeepSeek-V2-Lite is 15.7B total parameters; MoE
-activates 2.4B per token but **every expert must be VRAM-resident**, so the
-full weight set is what must fit. At `q8_0` that is ≈16.7 GB against an
-RTX 5080's 16.3 GB total (~14.7 GB free). It does not fit.
+rather than editorial. MoE activates 2.4B parameters per token but **every
+expert must be VRAM-resident**, so the full weight set is what must fit. The
+published `q8_0` GGUF is **16.70 GB** against an RTX 5080's **16.30 GB
+total** — it does not fit the card even with nothing else running.
 
 **This is the roster's growth path, not a DeepSeek quirk.** On 16 GB, *any*
 subject stronger than those already in the ladder needs sub-`q8_0`. The
@@ -85,14 +85,37 @@ Implementation: a `QUANT` dict beside `NUM_CTX` in `eval/driver.py`,
 defaulting to `q8_0`, with `deepseek16b_lite` as its sole entry, written
 into the manifest exactly as `num_ctx` is.
 
-**`q5_K_M` and not something else.** ≈11.0 GB of ~14.7 GB free — the closest
-to `q8_0` that leaves real headroom. `q6_K` (≈12.9 GB) is nearer the roster
-but leaves under 2 GB for KV cache and compute buffers, and this build
-throws intermittent `vk::DeviceLostError` under sustained load — a
-600-repair run *is* sustained load, and that failure has already killed a
-600-repair run on this machine once. `q4_K_M` is safe but is the largest
-capability departure on the exact axis this experiment reads, which would
-make a low delta unattributable between "near ceiling" and "q4 damaged it".
+**`q5_K_M` and not something else.** Sizes read from the ollama registry
+manifests rather than estimated, against **13.95 GB free** (16.30 GB card,
+1.56 GB held by the desktop session):
+
+| tag | GGUF | headroom | verdict |
+|---|---|---|---|
+| `16b-lite-instruct-q8_0` | **16.70 GB** | — | **does not fit the card at all** |
+| `16b-lite-instruct-q6_K` | 14.07 GB | −0.12 GB | does not fit free VRAM |
+| `16b-lite-instruct-q5_K_M` | **11.85 GB** | **2.10 GB** | **chosen** |
+| `16b-lite-instruct-q4_K_M` | 10.36 GB | 3.59 GB | fallback only |
+
+`q8_0` exceeds the *entire card*, which is what makes the §48 amendment
+physical rather than editorial. `q6_K` is not merely tight — at 14.07 GB it
+exceeds free VRAM outright, so it was never actually available. `q4_K_M` is
+the largest capability departure on the exact axis this experiment reads,
+which would make a low delta unattributable between "near ceiling" and "q4
+damaged it".
+
+**2.10 GB of headroom is the real risk in this design.** DeepSeek-V2's MLA
+compresses the KV cache substantially, so 8192 context should be cheap, but
+MoE compute buffers are not free and this build throws intermittent
+`vk::DeviceLostError` under sustained load — a failure that has already
+killed a 600-repair run on this machine once.
+
+**If it does not fit at 8192, fall back on QUANTIZATION, not context.**
+Dropping to `q4_K_M` adds 1.49 GB of headroom and deviates on one axis that
+is already declared a covariate. Reducing `num_ctx` instead would deviate on
+a *second* axis — stacking two confounds where the design has budgeted for
+one — and would additionally break comparability with the 8192 the other
+three families ran at. Whichever is used gets recorded in the manifest and
+named in the REPORT.
 
 ### The confound, stated rather than waved away
 
@@ -128,10 +151,12 @@ Small, and mostly registration.
    with the session is precisely how the 6a pilot's demand table became
    permanently irreproducible. Third application of that lesson, after
    `eval/deformation.py`.
-3. **The ollama tag must be verified, not assumed.** The exact string
-   `deepseek-coder-v2:16b-lite-instruct-q5_K_M` is a plausible reconstruction
-   of ollama's naming, not a verified fact. Confirm with `ollama show` before
-   pinning it, and pin whatever is actually there.
+3. **The ollama tag is verified.** `deepseek-coder-v2:16b-lite-instruct-q5_K_M`
+   resolves (registry manifest 200), as do the `q4_K_M`, `q6_K` and `q8_0`
+   siblings and a `16b-lite-base-*` line. **Pin the instruct tag
+   deliberately** — the roster is all-instruct, and a silent base/instruct
+   mismatch would be a capability difference read as a language effect.
+   Confirm the pulled digest with `ollama show` and record it in the manifest.
 
 ## Test plan
 
