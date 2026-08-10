@@ -1,0 +1,17 @@
+ ```rust
+fn size(o: Option<Vec<Int>>) -> Int {
+    match o {
+        Some(w) => len(&w),
+        None => 0,
+    }
+}
+
+fn main() {
+    let v = push(push(vec(), 1), 2)
+    let o = Some(v)
+    print(len(&v))
+    drop v
+    print(size(o))
+    drop v
+}
+```

@@ -1,0 +1,16 @@
+ ```rust
+fn main() {
+    let s = "ab";
+    print(str_len(&s) * 10);
+    let i = 0;
+    let total = 0;
+    while i < 3 {
+        let t = s;
+        total = total + str_len(&t) * 5;
+        drop t;
+        i = i + 1;
+    }
+    drop s;
+    print(total);
+}
+```

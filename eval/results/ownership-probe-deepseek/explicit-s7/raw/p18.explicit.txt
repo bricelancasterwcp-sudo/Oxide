@@ -1,0 +1,9 @@
+ ```rust
+fn main() {
+    let s = "abcdefghij"
+    print(str_len(&s))
+    let t = clone(s)
+    print(str_len(&t))
+    drop t
+}
+```

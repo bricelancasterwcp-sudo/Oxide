@@ -1,0 +1,11 @@
+ fn main() {
+    let o = Some(String::from("abcd"));
+    match o {
+        Some(ref s) => println!("{}", s.len() * 5),
+        None => println!("0"),
+    }
+    match o {
+        Some(ref s) => println!("{}", s.len() * 6),
+        None => println!("0"),
+    }
+}

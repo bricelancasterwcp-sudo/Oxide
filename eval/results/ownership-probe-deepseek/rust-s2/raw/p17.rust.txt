@@ -1,0 +1,15 @@
+ ```rust
+fn push_back(mut v: Vec<i32>, x: i32) -> Vec<i32> {
+    v.push(x);
+    v
+}
+
+fn main() {
+    let mut acc: Vec<i32> = (0..10).collect();
+    println!("{}", acc.len());
+    for i in 0..3 {
+        acc = push_back(acc.clone(), i);
+    }
+    println!("{}", acc.len());
+}
+```

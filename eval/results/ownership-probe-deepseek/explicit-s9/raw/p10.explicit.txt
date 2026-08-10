@@ -1,0 +1,12 @@
+ ```rust
+struct Point { x: Int, tag: Str }
+
+fn main() {
+    let p = Point { x: 11, tag: "hello" }
+    let q = Point { x: 55, ..p }
+    print(str_len(&p.tag))
+    drop p
+    print(&q.x)
+    drop q
+}
+```

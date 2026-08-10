@@ -1,0 +1,20 @@
+ ```rust
+fn total(v: Vec<Int>, flag: Bool) -> Int {
+    let w = v
+    if flag {
+        let r = len(&w) * 10
+        drop w
+        return r
+    }
+    drop w
+    let u = push(v, 3)
+    let r = len(&u) * 20
+    drop u
+    r
+}
+
+fn main() {
+    print(total(push(push(vec(), 1), 2), true))
+    print(total(push(push(vec(), 1), 2), false))
+}
+```

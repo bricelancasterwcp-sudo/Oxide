@@ -1,0 +1,16 @@
+ ```rust
+fn main() {
+    let v = range(0, 10);
+    print(len(v));
+    let total = 0;
+    let mut accumulated_vec = v;
+    for x in v {
+        if x > 4 {
+            accumulated_vec = push(accumulated_vec, x);
+            total = len(accumulated_vec);
+            break;
+        }
+    }
+    print(total);
+}
+```

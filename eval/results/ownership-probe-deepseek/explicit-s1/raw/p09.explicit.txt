@@ -1,0 +1,10 @@
+ ```
+fn main() {
+    let s = "hello"
+    let v = push(push(vec(), "world"), s)
+    print(len(&v))
+    drop v
+    print(str_len(&s))
+    drop s
+}
+```

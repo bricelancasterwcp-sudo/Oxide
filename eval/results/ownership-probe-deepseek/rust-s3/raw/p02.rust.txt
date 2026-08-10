@@ -1,0 +1,9 @@
+ ```rust
+fn main() {
+    let a = vec![1, 2];
+    let b = a.clone();
+    let c = a.clone();
+    println!("{}", b.len());
+    println!("{}", c.len());
+}
+```

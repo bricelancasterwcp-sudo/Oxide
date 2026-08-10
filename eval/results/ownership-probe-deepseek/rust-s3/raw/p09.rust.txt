@@ -1,0 +1,6 @@
+ fn main() {
+    let s = String::from("hello");
+    let v = vec![String::from("world"), s.clone()];
+    println!("{}", v.len());
+    println!("{}", s.len());
+}

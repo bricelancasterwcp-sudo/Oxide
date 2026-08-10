@@ -1,0 +1,12 @@
+ ```rust
+fn concat(a: &str, b: &str) -> String {
+    a.to_string() + b
+}
+
+fn main() {
+    let s = String::from("abcdefghij");
+    println!("{}", s.len());
+    let t = concat(&s, &s);
+    println!("{}", t.len());
+}
+```

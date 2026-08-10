@@ -1,0 +1,11 @@
+ ```rust
+fn main() {
+    let a = push(push(vec(), 1), 2)
+    let b = clone(&a)
+    let c = clone(&a)
+    print(len(&b))
+    drop b
+    print(len(&c))
+    drop c
+}
+```

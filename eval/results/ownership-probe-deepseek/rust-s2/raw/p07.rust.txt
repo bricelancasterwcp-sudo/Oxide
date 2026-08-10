@@ -1,0 +1,13 @@
+ ```rust
+struct Bag {
+    items: Vec<i32>,
+    label: String,
+}
+
+fn main() {
+    let v = vec![1, 2];
+    let b = Bag { items: v.clone(), label: String::from("hello") };
+    println!("{}", v.len());
+    println!("{}", b.label.len());
+}
+```

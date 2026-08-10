@@ -1,0 +1,16 @@
+ ```rust
+fn total(v: Vec<i32>, flag: bool) -> usize {
+    if flag {
+        let w = v.clone();
+        return w.len() * 10;
+    }
+    let mut u = v;
+    u.push(3);
+    u.len() * 20
+}
+
+fn main() {
+    println!("{}", total(vec![1, 2], true));
+    println!("{}", total(vec![1, 2], false));
+}
+```

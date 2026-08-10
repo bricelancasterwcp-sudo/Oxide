@@ -1,0 +1,9 @@
+ ```rust
+fn main() {
+    let a = push(push(vec(), 1), 2);
+    let b = a;
+    print(len(b));
+    let c = a;
+    print(len(c));
+}
+```

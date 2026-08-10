@@ -1,0 +1,14 @@
+ ```rust
+fn main() {
+    let s = String::from("ab");
+    println!("{}", s.len() * 10);
+    let mut i = 0;
+    let mut total = 0;
+    while i < 3 {
+        let t = s.clone();
+        total += t.len() * 5;
+        i += 1;
+    }
+    println!("{}", total);
+}
+```
