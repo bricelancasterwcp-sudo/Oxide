@@ -1,5 +1,7 @@
 # Black Oxide
 
+**A language built for verifier-in-the-loop repair.**
+
 A Rust-like language with **implicit linear types**: ownership works like
 Rust's, but there is no borrow syntax. The compiler infers moves, borrows, and
 destruction points; types are fully inferred. Black Oxide transpiles to Rust, and
@@ -33,14 +35,40 @@ No semicolons, no `&`, no lifetimes, no `mut`, no manual `drop`. The value in
 
 ## Why it exists
 
-The thesis is that **LLMs write Black Oxide more reliably than Rust**, because the
-compiler does the ownership bookkeeping instead of the programmer.
+Models **repair** implicit linearity far better than they repair explicit
+linearity. Hand one a correct program carrying a single ownership defect
+plus the compiler's diagnostic, and ask for a fix: **+59.0pp** on
+qwen2.5-coder-7b, **+35.0pp** on codegemma-7b, **+9.5pp** on
+granite-code-8b — three families, 600 repairs each, pooled p < 10⁻⁹. Both
+arms are languages the model has never seen, taught by cards of matched
+length, differing in exactly one thing: whether ownership is implicit.
 
-That claim is deliberately falsifiable, and this repository contains the
-apparatus built to falsify it — plus the results, including the ones that
-didn't go the thesis's way.
+That advantage has a ceiling, and the ceiling is part of the claim. Claude
+Opus 5 repairs both arms identically (11/12 each, **0.0pp**) — a model that
+already reasons about ownership correctly gains nothing. This is a
+small-model result, and the decomposition below shows only about **+10pp**
+of it is ownership rather than surface ergonomics.
 
-## Where the thesis actually stands
+Models do **not** write Black Oxide better than they write Rust. Asked to
+generate whole programs from a card under grammar-constrained decoding,
+they pass on the first attempt 57/45/42% of the time in Rust against
+26/14.5/9% in Black Oxide. That gap is pretraining exposure, not language
+design, and the v0.3 ergonomics work barely moved it.
+
+So the claim this repository is built to test is narrower, and more useful,
+than "models write it better":
+
+> **Implicit linearity pays in the repair loop** — a model proposes, a
+> fail-closed compiler objects with a specific diagnostic, the model fixes.
+> That is the loop real tooling runs, and it is where the evidence is.
+
+Whether the advantage survives once pretraining exposure is equalised is
+the next experiment: a token-matched fine-tune of Black Oxide against Rust
+(SPEC §32.4). Everything needed to falsify any of this is in the
+repository — including the results that went against the thesis, and a log
+of three headline claims withdrawn when they failed to replicate.
+
+## Where the evidence stands
 
 **Partially supported, with a capability window.** Ordered by how well each
 subject performs the task at all:
@@ -155,13 +183,22 @@ component is around +10pp; the rest is ergonomic.
 - A single magnitude. The per-family deltas span +10 to +53 and track how
   much the ergonomic change helped each model, not how well it reasons about
   ownership.
-- Anything about **writing** Black Oxide. These models cannot. A 7B model scores
-  **2/20** first-compile writing Black Oxide from the card, against 20/20 for Rust.
-  That gap is pretraining exposure, not language design.
+- Anything about **writing** Black Oxide. These models cannot. Under
+  constrained decoding at HEAD, first-attempt pass rates are **26 / 14.5 / 9%**
+  for Black Oxide against **57 / 45 / 42%** for Rust (qwen2.5-coder-7b /
+  codegemma-7b / granite-code-8b, 600 first attempts per family per arm),
+  and a frontier model prefers Rust 100 to 92. That gap is pretraining
+  exposure, not language design.
+
+  *Superseding an earlier figure:* this README previously cited the 6a
+  pilot's **2/20 against 20/20**. The Black Oxide side replicates — G0's
+  unconstrained qwen first-compile is 10.0% — but the Rust side does not.
+  20/20 was a 20-sample high against 56.5% measured over 600. The gap is
+  real and large; it is not 10× wide.
 
 ## How it was measured
 
-Whole-program generation could not test the thesis at all. Across ~530
+Whole-program generation could not test the ownership claim at all. Across ~530
 attempts in five configurations, **not one linearity diagnostic ever fired** —
 semantic analysis is strictly staged, so ownership sits behind lexing,
 parsing, name resolution, and type checking. Small models never cleared the
