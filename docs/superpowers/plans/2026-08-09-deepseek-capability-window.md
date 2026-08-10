@@ -14,7 +14,7 @@
 - Run tests with `.venv/bin/pytest tests/ -q` from `/home/brice/workspace/oxide`. Baseline at plan time: **1410 passed, 3 deselected**.
 - **Nothing under `eval/results/` may be modified.** It is the committed experimental record. Task 3 *adds* a new directory; it changes nothing existing.
 - **Do not edit** `LANGUAGE_CARD.md`, `LANGUAGE_CARD_EXPLICIT.md`, the `OX0306` suggestion string, the `ARMS`/`arm` data keys, the `__oxide_` codegen prefix, `.ox`, or `eval/grammar/oxide.gbnf` (SPEC §0 frozen surfaces).
-- Files stay under 800 lines. **Exception, pre-existing and out of scope:** `eval/grammar/build.py` is 857 lines; do not touch it and do not "fix" it.
+- **Source modules under `src/` and `eval/` stay under 800 lines. Test modules are exempt** — golden corpora and pinned fixtures make them legitimately long. Two pre-existing breaches are **out of scope for this plan**: `tests/test_6a.py` (2,860 lines, exempt as a test module) and `eval/grammar/build.py` (857 lines — do not touch it, do not "fix" it). This wording is deliberate: the g2 review ruled that restating a flat 800-line rule while editing a file that already breaches it is "how a constraint stops meaning anything", so the rule now says what it actually governs.
 - Commit messages omit any Claude/AI attribution.
 - **The pinned subject:** `deepseek-coder-v2:16b-lite-instruct-q5_K_M`, ollama digest `6065d4880bf9`, GGUF blob `sha256-bc286970a24072cf23a4c905f28adb9f6a28c71743b07790185275a86dc72406` under `/mnt/extra/ollama-models/blobs/`. Already pulled; do not re-pull.
 - **The pre-registration is binding and was written before any data existed.** It is reproduced in Task 3 and must not be softened after seeing results.
