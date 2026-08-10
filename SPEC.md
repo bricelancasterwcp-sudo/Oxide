@@ -2588,3 +2588,51 @@ counting tool and its pinned definition are `eval/deformation.py`.
 The demand is real but small (~1.5%), so no aggregate pass-rate change is
 predicted from this section alone; see
 `docs/superpowers/specs/2026-08-09-v03-g2-field-assignment-design.md`.
+
+## 57. `to_str` — a second name for `int_to_str`
+
+`to_str: fn(Int) -> Str` (read). Identical in signature, semantics, modes
+and emitted Rust to `int_to_str` (§29), which is unchanged and remains the
+card's spelling.
+
+```
+to_str(42)        ==  int_to_str(42)      // "42"
+n.to_str()        ==  to_str(n)           // §53 receiver form, free
+to_str(trunc(x))                          // Float goes through trunc
+```
+
+**`Int` only, not `Int|Float`.** The language has no type-based
+overloading, so one name cannot accept both. `Float -> Str` composes as
+`to_str(trunc(x))` and no observed call site asked for it directly.
+
+**Codegen (amends §29's prelude).** One more prelude function, appended
+after `trunc`:
+
+```rust
+fn to_str(x: i64) -> String {
+    x.to_string()
+}
+```
+
+The prelude is emitted whole and unconditionally, so no per-builtin
+machinery changes. `BUILTIN_REF["to_str"] = (False,)` — it takes its
+argument by value, exactly as `int_to_str` does.
+
+**Why this exists.** In the v0.3 taxonomy (dossier 3) models were said to
+"call conversions that don't exist". Measured over the 600 constrained
+oxide first attempts of the G0 baseline, that is not what the corpus
+shows: `int_to_str` and `parse_int` both already exist AND are both
+already on the card. What models lack is the shorter *spelling*. Of the
+three names reached for, only `to_str` is a genuine conversion demand —
+85.7% of its sites are plain calls `to_str(x)`, and the model writes
+`fn to_str` **itself 15 times across 6 programs**, which is a language
+telling you it lacks a name its users want.
+
+The other two names in that dossier were dropped on the same evidence and
+are deliberately NOT added: `to_string` is 63.9% string-literal receiver
+(`"lit".to_string()`), which is Rust's `&str -> String` and an identity
+function here because `Str` is already owned; and `to_int` is 70.6%
+*integer-literal* receiver inside malformed `for` headers
+(`for i in 2.to_int().range(x)`), which is the deferred `2.to(n)` range
+demand wearing a conversion's name, not parsing — and `parse_int` already
+covers parsing.
