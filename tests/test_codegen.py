@@ -136,6 +136,10 @@ fn to_float(x: i64) -> f64 {
 
 fn trunc(x: f64) -> i64 {
     x as i64
+}
+
+fn to_str(x: i64) -> String {
+    x.to_string()
 }"""
 
 R1_MAIN = """fn main() {
@@ -746,3 +750,32 @@ def test_variadic_vec_literal_runtime_stdout_matches_the_push_chain(
     chain_out = _run(_compile(_transpile_ok(chain), str(tmp_path)))
     # Assert
     assert variadic_out == chain_out == "3\n8\n-2\n"
+
+
+def test_to_str_emits_the_alias_and_keeps_int_to_str():
+    """§57: both names exist in the prelude and both are callable. The
+    prelude is emitted whole, so the presence of one must not remove the
+    other."""
+    rust, diags = transpile("fn main() { print_str(to_str(42)) }")
+    assert diags == [], diags
+    assert "fn to_str(x: i64) -> String {" in rust
+    assert "fn int_to_str(x: i64) -> String {" in rust
+
+
+@requires_rustc
+def test_to_str_compiles_and_runs(tmp_path):
+    """Accepted-implies-compiles, plus the runtime proof it really is
+    int_to_str: the program must print 42, not something else."""
+    src = "fn main() { print_str(to_str(42)) }"
+    rust, diags = transpile(src)
+    assert diags == [], diags
+    rs = tmp_path / "prog.rs"
+    rs.write_text(rust, encoding="utf-8")
+    exe = str(tmp_path / "prog")
+    proc = subprocess.run(
+        [RUSTC, "--edition", "2021", str(rs), "-o", exe],
+        capture_output=True, text=True,
+    )
+    assert proc.returncode == 0, proc.stderr
+    run = subprocess.run([exe], capture_output=True, text=True)
+    assert run.stdout == "42\n", run.stdout

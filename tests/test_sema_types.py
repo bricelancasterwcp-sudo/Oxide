@@ -775,3 +775,40 @@ def test_nested_path_accepts_a_valid_walk() -> None:
         " print(o.i.v) }"
     )
     assert codes(src) == []
+
+
+# ---------------------------------------------------------------------------
+# §57 to_str: a second name for int_to_str, not a new capability
+# ---------------------------------------------------------------------------
+
+
+def test_to_str_has_the_identical_signature_to_int_to_str() -> None:
+    """§57: an ALIAS. If the two signatures ever diverge, one of them is
+    wrong, and the card teaches int_to_str while models write to_str."""
+    from src.sema.types import BUILTINS
+
+    assert BUILTINS["to_str"] == BUILTINS["int_to_str"]
+
+
+def test_to_str_typechecks_int_to_str() -> None:
+    assert codes("fn main() { print_str(to_str(42)) }") == []
+
+
+def test_to_str_rejects_a_str_argument() -> None:
+    """Int -> Str only. `to_str("x")` is a type error, not a no-op --
+    the Rust `&str -> String` idiom has no meaning here."""
+    assert "OX0300" in codes('fn main() { print_str(to_str("x")) }')
+
+
+def test_to_str_rejects_a_float_argument() -> None:
+    """No overloading: Float goes through trunc explicitly."""
+    assert "OX0300" in codes("fn main() { print_str(to_str(1.5)) }")
+
+
+def test_float_reaches_to_str_through_trunc() -> None:
+    assert codes("fn main() { print_str(to_str(trunc(1.5))) }") == []
+
+
+def test_to_str_receiver_form_works_via_section_53() -> None:
+    """§53 mirrors BUILTINS mechanically, so `n.to_str()` comes free."""
+    assert codes("fn main() { let n = 42\n print_str(n.to_str()) }") == []
