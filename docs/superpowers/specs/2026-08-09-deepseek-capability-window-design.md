@@ -103,11 +103,30 @@ the largest capability departure on the exact axis this experiment reads,
 which would make a low delta unattributable between "near ceiling" and "q4
 damaged it".
 
-**2.10 GB of headroom is the real risk in this design.** DeepSeek-V2's MLA
-compresses the KV cache substantially, so 8192 context should be cheap, but
-MoE compute buffers are not free and this build throws intermittent
-`vk::DeviceLostError` under sustained load — a failure that has already
-killed a 600-repair run on this machine once.
+**Headroom is the real risk, and it is thinner than the GGUF size suggests.**
+Measured on the pulled model, not projected:
+
+| state | VRAM used | free |
+|---|---|---|
+| desktop only | 1.56 GB | 14.24 GB |
+| model resident (8192 ctx) | 15.05 GB | **0.77 GB** |
+| after one real repair | 15.33 GB | **0.51 GB** |
+
+llama-server takes ≈13.5 GB for an 11.85 GB model — roughly **2.2 GB of KV
+cache and compute buffers** that the GGUF size does not advertise, and a
+further ~0.28 GB is claimed on first real inference. The design's original
+"2.10 GB headroom" figure was wrong by about 4×: it subtracted the GGUF from
+free VRAM and ignored runtime allocation.
+
+DeepSeek-V2's MLA does compress the KV cache — this would be far worse
+without it — but 0.51 GB is a thin margin on a build that throws
+intermittent `vk::DeviceLostError` under sustained load, a failure that has
+already killed a 600-repair run on this machine once.
+
+**This promotes the campaign runner's checkpoint/resume from prudence to
+load-bearing.** It is what makes a mid-run device-lost cost minutes instead
+of the whole run, and its resume path must be tested before the run rather
+than discovered during it.
 
 **If it does not fit at 8192, fall back on QUANTIZATION, not context.**
 Dropping to `q4_K_M` adds 1.49 GB of headroom and deviates on one axis that
@@ -198,6 +217,25 @@ campaign runner, one ownership-probe run (20 classes × 3 arms × 10 seeds =
   needs dense controls at matched active- and total-parameter counts, and is
   a different experiment.
 - **The two-quantization control** described above.
+
+## Preflight: measured, not assumed
+
+Run before the design was finalised, on the pulled model. All of it holds.
+
+| check | result |
+|---|---|
+| ollama tag resolves | ✅ `deepseek-coder-v2:16b-lite-instruct-q5_K_M`, digest `6065d4880bf9` |
+| reported metadata | `deepseek2`, **15.7B**, ctx **163840**, **Q5_K_M** |
+| `deepseek2` on the Vulkan build | ✅ loads, MoE experts resident |
+| 8192 context satisfiable | ✅ log says `n_ctx_seq (8192) < n_ctx_train (163840)` — an **under-use** notice, the opposite of granite's "exceeds … capping" |
+| chat template in the GGUF | ✅ DeepSeek `User:`/`Assistant:` with `<｜end▁of▁sentence｜>` — **load-bearing**, because `eval/llamacpp.py` posts to `/v1/chat/completions` and llama-server templates from GGUF metadata, not from ollama's Modelfile |
+| end-to-end repair | ✅ `probe run --id p01 --arm oxide` → **strict 1.0, lenient 1.0** |
+| Vulkan errors during that run | ✅ none |
+
+The chat-template check is the one that could have silently ruined the
+experiment: a missing or wrong template degrades the subject in a way that
+reads as a capability deficit, which is precisely the axis this run
+measures.
 
 ## What would make this run worthless
 
