@@ -73,14 +73,28 @@ of three headline claims withdrawn when they failed to replicate.
 **Partially supported, with a capability window.** Ordered by how well each
 subject performs the task at all:
 
-All at 10 seeds, 600 repairs per subject, matched code:
+The three local families are at 10 seeds, 600 repairs each, on matched code.
+The frontier row is a **different instrument** — see the note under the table.
 
 | Subject | Black Oxide | explicit Black Oxide | paired delta | 2-SE |
 |---|---|---|---|---|
-| Claude Opus 5 | 92% | 92% | **0.0pp** | ceiling, arms identical |
+| Claude Opus 5 † | 92% | 92% | **0.0pp** | ceiling, arms identical |
 | qwen2.5-coder-7b | 73.0% | 14.0% | **+59.0pp** | `[+42.8, +75.2]` |
 | codegemma-7b | 46.5% | 11.5% | **+35.0pp** | `[+19.7, +50.3]` |
 | granite-code-8b | 20.5% | 11.0% | **+9.5pp** | `[+3.8, +15.2]` |
+
+† **The frontier row is not the same measurement as the three below it, and
+its rates are not comparable to theirs.** It ran **12 defect classes × 3
+arms × 1 seed = 36 repairs**, not 600, and was **unconstrained on every
+arm** — where the local families' Oxide and explicit arms were
+grammar-constrained. Its `92%` figures are 11/12 and 11/12. The 12 classes
+were chosen as the *hardest* at 7B: the first eight scored 23/23, so the
+remaining four were picked as hardest-for-Rust and the other eight were
+never run, on the grounds that confirming a ceiling with easier classes
+carries near-zero information. What this row establishes is that **the
+delta vanishes at frontier capability** — 0.0pp, arms identical class for
+class. It is not a like-for-like rate comparison. Source and full method:
+[`eval/results/ownership-probe-frontier/`](eval/results/ownership-probe-frontier/).
 
 All three local families are post-`mut` (SPEC §54), on matched code.
 
