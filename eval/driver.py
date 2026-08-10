@@ -199,6 +199,7 @@ MODELS = {
     "qwen7b": "qwen2.5-coder:7b-instruct-q8_0",
     "codegemma7b": "codegemma:7b-instruct-q8_0",
     "granite8b": "granite-code:8b-instruct-q8_0",
+    "deepseek16b_lite": "deepseek-coder-v2:16b-lite-instruct-q5_K_M",
 }
 
 # Per-slug context window pin (SPEC section 48): min(DEFAULT_NUM_CTX, the
@@ -213,6 +214,26 @@ MODELS = {
 NUM_CTX = {
     "granite8b": 4096,
 }
+
+# Per-slug quantization pin (SPEC section 48). Quantization WAS uniform
+# q8_0 across the ladder, held constant so the capability curve was not
+# confounded. DeepSeek-V2-Lite breaks that physically rather than
+# editorially: MoE activates 2.4B of ~16B parameters per token but every
+# expert must be VRAM-resident, so the whole weight set must fit, and its
+# q8_0 GGUF is 16.70 GB against a 16.30 GB card -- it does not fit the
+# card even with nothing else running. This is the roster's growth path,
+# not a DeepSeek quirk: on 16 GB, any subject stronger than this ladder
+# needs sub-q8. Treated exactly as NUM_CTX treats granite's 4096 -- pinned
+# per family, arm-fair WITHIN the slug, recorded, and read as a covariate.
+DEFAULT_QUANT = "q8_0"
+QUANT = {
+    "deepseek16b_lite": "q5_K_M",
+}
+
+
+def quant_for(slug: str) -> str:
+    """The pinned quantization for one slug (SPEC section 48)."""
+    return QUANT.get(slug, DEFAULT_QUANT)
 # The CLI's ``--backend`` token, translated to the human-readable label
 # recorded in the manifest's top-level "backend" field.
 # LlamaCppClient.preflight() independently writes "llama.cpp" (with the
@@ -624,7 +645,7 @@ def main(argv: list[str] | None = None) -> int:
         # 48/49): unlike Ollama, which can hold multiple pulled tags and
         # route by name per request, llama-server is started on ONE set of
         # weights and every request goes to whatever it currently has
-        # loaded. --models defaults to ALL FIVE slugs (see MODELS above),
+        # loaded. --models defaults to ALL SIX slugs (see MODELS above),
         # so the unguarded default would silently run every slug's
         # sessions against a single server's weights -- a full grid of
         # plausible-looking results attributed to the wrong models, with

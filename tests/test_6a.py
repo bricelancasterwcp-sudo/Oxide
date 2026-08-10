@@ -1223,7 +1223,7 @@ def test_main_refuses_llamacpp_with_more_than_one_slug(capsys):
     # can hold multiple pulled tags and route by name per request,
     # llama-server is started on ONE set of weights, and every request
     # goes to whatever it currently has loaded. --models defaults to ALL
-    # FIVE slugs (MODELS), so the unguarded default would silently run
+    # SIX slugs (MODELS), so the unguarded default would silently run
     # every slug's sessions against a single server's weights -- a full
     # grid of plausible-looking results attributed to the wrong models,
     # with no abort and no manifest cause. The guard must fire before ANY
@@ -1279,14 +1279,34 @@ def test_main_allows_ollama_with_multiple_slugs(monkeypatch):
     assert code == 0
 
 
-def test_model_slugs_map_to_pinned_q8_tags():
+def test_model_slugs_map_to_pinned_tags():
     assert MODELS == {
         "qwen0_5b": "qwen2.5-coder:0.5b-instruct-q8_0",
         "qwen1_5b": "qwen2.5-coder:1.5b-instruct-q8_0",
         "qwen7b": "qwen2.5-coder:7b-instruct-q8_0",
         "codegemma7b": "codegemma:7b-instruct-q8_0",
         "granite8b": "granite-code:8b-instruct-q8_0",
+        "deepseek16b_lite": "deepseek-coder-v2:16b-lite-instruct-q5_K_M",
     }
+
+
+def test_quantization_is_q8_except_where_vram_forbids_it():
+    """SPEC section 48: quantization was uniform q8_0; it is now a
+    per-family pin, for the same reason num_ctx is. DeepSeek-V2-Lite's
+    q8_0 GGUF is 16.70 GB against a 16.30 GB card -- it does not fit the
+    card at all, so this is physical, not a policy choice."""
+    assert driver.DEFAULT_QUANT == "q8_0"
+    assert driver.QUANT == {"deepseek16b_lite": "q5_K_M"}
+    for slug in ("qwen0_5b", "qwen1_5b", "qwen7b", "codegemma7b", "granite8b"):
+        assert driver.quant_for(slug) == "q8_0"
+    assert driver.quant_for("deepseek16b_lite") == "q5_K_M"
+
+
+def test_deepseek_takes_the_default_context_window():
+    """The OPPOSITE of granite: DeepSeek-V2 trains at 163840, so 8192 is
+    satisfiable and no cap applies. llama-server prints an under-use
+    notice, not the 'exceeds the training context ... capping' line."""
+    assert "deepseek16b_lite" not in driver.NUM_CTX
 
 
 def test_g0_model_slugs_are_pinned():

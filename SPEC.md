@@ -1805,7 +1805,7 @@ not be renegotiated after seeing results.
 | Parameter | Value |
 |---|---|
 | Models | Phase 6a rungs: `qwen2.5-coder` **instruct**, 0.5B / 1.5B / 7B (slugs `qwen0_5b` / `qwen1_5b` / `qwen7b`). G0 adds two more **instruct** families at `q8_0`: `codegemma:7b` (slug `codegemma7b`) and `granite-code:8b` (slug `granite8b`) — see `eval.driver.MODELS` for the pinned tags. |
-| Quantization | uniform `q8_0` across the ladder |
+| Quantization | `q8_0`, **per-family** — see below (`q5_K_M` for `deepseek-coder-v2:16b-lite`) |
 | Backend | Phase 6a: Ollama HTTP (`http://localhost:11434`), version recorded. G0 (`qwen7b`, `codegemma7b`, `granite8b`) runs on llama.cpp (`llama-server`, `http://localhost:8081`) for both the constrained and unconstrained conditions instead — Ollama accepts a GBNF `grammar` option and silently ignores it, so constrained decoding requires llama.cpp (§50.4/`eval.llamacpp`). |
 | Temperature | 0.8 |
 | top_p | 0.95 |
@@ -1823,6 +1823,20 @@ compliance rather than language competence.
 Quantization is held constant so the capability curve is not confounded
 with precision. Exact tags **and digests** are recorded in the run
 manifest at preflight.
+
+**The quantization pin is per-family, not universal — for the same reason
+`num_ctx` is.** `deepseek-coder-v2:16b-lite` is served at `q5_K_M`
+(`eval.driver.QUANT`; every other slug takes `DEFAULT_QUANT = q8_0`). MoE
+activates 2.4B of ~16B parameters per token, but every expert must be
+VRAM-resident, so the full weight set is what must fit: its `q8_0` GGUF is
+**16.70 GB** against a **16.30 GB** card. It does not fit the card even
+with nothing else running, so this is physically forced, not a policy
+choice — exactly the shape of granite's 4096 window. The pin is applied
+uniformly across all three arms of that slug, so it stays arm-fair
+*within* the model, and it is recorded per run and read as a per-family
+covariate. Quantization is a capability reduction, so on a non-monotonic
+capability curve its direction of bias depends on which side of the peak
+the subject sits; the run's REPORT must state that rather than assume it.
 
 Temperature is deliberately non-zero. At temperature 0 all five seeds
 produce identical output and the variance estimate is vacuous.
