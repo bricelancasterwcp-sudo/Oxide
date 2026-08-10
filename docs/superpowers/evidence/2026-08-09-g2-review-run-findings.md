@@ -61,9 +61,12 @@ Every instance has the same shape. The test's *assertion* was fine; its
 **"The tests pass" is not evidence that the tests work.** For any task
 whose deliverable is *pinning* existing behaviour, mutation verification
 is the acceptance criterion, not a nicety: break the thing on purpose,
-confirm the test fails, restore. Three of these were caught by reviewers
-who mutated rather than read; the other four were caught only because
-mutation was subsequently made standard procedure for the rest of the run.
+confirm the test fails, restore. Not one was caught by reading. The tally,
+by the gate that caught it: one at the Task 3 review, two at Task 4, one at
+Task 6, three at the final whole-branch review, and the eighth at the
+re-review of the final fix wave. The first was found by a reviewer who
+mutated on its own initiative; the rest were found only because mutation
+was then made standard procedure for every remaining gate.
 
 A corollary for fixture design: when a rule is conditional (on a type, on
 a node shape, on a position), the fixture must exercise the condition. A
