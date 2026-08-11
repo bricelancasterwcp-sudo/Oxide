@@ -2661,18 +2661,27 @@ are deliberately NOT added. `to_string` is **63.9%** string-literal
 receiver (`"lit".to_string()`) — `46/72`, over receiver occurrences only,
 with its 4 plain calls and 5 definitions outside the denominator
 entirely — which is Rust's `&str -> String` and an identity function here
-because `Str` is already owned. `to_int` is **70.6%** *numeric-literal*
+because `Str` is already owned. `to_int` is **69.2%** *numeric-literal*
 receiver inside malformed `for` headers (`for i in 2.to_int().range(x)`)
-— `36/51`, again over receiver occurrences only, and after dropping the
+— `36/52`, again over receiver occurrences only, and after dropping the
 single degenerate 291-occurrence program that raw occurrence counting
-would otherwise let dominate. (Two notes on that figure, recorded rather
-than quietly reconciled. Its numerator was previously described as
-*integer*-literal; the 36 is 32 integer-literal receivers **plus** 4
-float-literal ones (`0.0.to_int()`, `1.0.to_int()`), so *numeric*-literal
-is the label the arithmetic supports — strictly integer-literal would be
-32. And re-derived from the committed corpus the denominator lands on
-52, not 51: 343 receiver occurrences less the degenerate program's 291.
-Neither point changes the conclusion; the one-site difference moves the
-share to 69.2%.) Either way `to_int` is the deferred `2.to(n)` range
-demand wearing a conversion's name, not parsing — and `parse_int` already
-covers parsing.
+would otherwise let dominate. The 52 is 343 raw receiver occurrences less
+the 291 contributed by that one program (`g0c-qwen7b-0shot-s4` t01), and
+its classification sums exactly: **32 integer-literal + 4 float-literal +
+12 variable/field + 4 call-result = 52**. The derived variable-receiver
+slice — the part a real `to_int(Str) -> Option<Int>` could have served —
+is `12/52` = **23.1%**, and `parse_int` already covers it.
+
+> **Superseded figure.** This share was originally published as **70.6%
+> (`36/51`)**, and the derived slice as **23.5% (`12/51`)**. The
+> denominator was one site short; re-derivation against the committed
+> corpus gives 52, as the classification above shows. The numerator was
+> also described as *integer*-literal, but the 36 is 32 integer-literal
+> receivers **plus** 4 float-literal ones (`0.0.to_int()`,
+> `1.0.to_int()`) — *numeric*-literal is the label the arithmetic
+> supports; strictly integer-literal would be 32. Neither correction
+> changes the decision: `to_int` was not added, and would not be on
+> either set of figures.
+
+Either way `to_int` is the deferred `2.to(n)` range demand wearing a
+conversion's name, not parsing — and `parse_int` already covers parsing.
