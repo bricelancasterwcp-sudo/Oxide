@@ -2623,21 +2623,56 @@ The prelude is emitted whole and unconditionally, so no per-builtin
 machinery changes. `BUILTIN_REF["to_str"] = (False,)` — it takes its
 argument by value, exactly as `int_to_str` does.
 
+**`to_str` is now a reserved top-level name.** Like every other entry in
+`BUILTINS` (§16, `OX0203` "duplicate top-level name (incl. clash with a
+builtin)"), a user program that writes `fn to_str(...)` is now an
+`OX0203` error where before this section it was a legal user function.
+This is a real, if small, behavioural cost of the alias and not a
+side-effect worth leaving undocumented: the corpus evidence for adding
+the name is *models defining it themselves*, so the population that
+motivated the addition is exactly the population that now collides with
+it. Measured on the closing-baseline corpus, `duplicate top-level name
+'to_str'` fires in **1 of 600** constrained oxide first attempts (0 in
+both pre-change corpora, `g0c` and `g1c`), and in 5 attempts across 2
+sessions counting all four repair attempts.
+
 **Why this exists.** In the v0.3 taxonomy (dossier 3) models were said to
 "call conversions that don't exist". Measured over the 600 constrained
 oxide first attempts of the G0 baseline, that is not what the corpus
 shows: `int_to_str` and `parse_int` both already exist AND are both
 already on the card. What models lack is the shorter *spelling*. Of the
-three names reached for, only `to_str` is a genuine conversion demand —
-85.7% of its sites are plain calls `to_str(x)`, and the model writes
-`fn to_str` **itself 15 times across 6 programs**, which is a language
-telling you it lacks a name its users want.
+three names reached for, only `to_str` is a genuine conversion demand.
+
+**The three percentages below each use a different denominator**, stated
+here because none of them is reconstructable from the figure alone.
+`to_str` occurs **46 times across 9 programs**, split 21 plain calls
+`to_str(x)` / 15 `fn to_str` definitions / 10 receiver-form
+`x.to_str()`. The **85.7%** is `36/42`: the numerator is the 21 plain
+calls **together with** the 15 definitions, and the denominator is all 46
+occurrences less the 4 string-literal receivers. The definitions are
+therefore *inside* that 85.7% and must not be added on top of it — the
+share of `to_str` sites that are plain calls and nothing else is
+`21/46` = **45.7%**. It is the definitions that carry the argument in any
+case: the model writes `fn to_str` **itself 15 times across 6 programs**,
+which is a language telling you it lacks a name its users want.
 
 The other two names in that dossier were dropped on the same evidence and
-are deliberately NOT added: `to_string` is 63.9% string-literal receiver
-(`"lit".to_string()`), which is Rust's `&str -> String` and an identity
-function here because `Str` is already owned; and `to_int` is 70.6%
-*integer-literal* receiver inside malformed `for` headers
-(`for i in 2.to_int().range(x)`), which is the deferred `2.to(n)` range
+are deliberately NOT added. `to_string` is **63.9%** string-literal
+receiver (`"lit".to_string()`) — `46/72`, over receiver occurrences only,
+with its 4 plain calls and 5 definitions outside the denominator
+entirely — which is Rust's `&str -> String` and an identity function here
+because `Str` is already owned. `to_int` is **70.6%** *numeric-literal*
+receiver inside malformed `for` headers (`for i in 2.to_int().range(x)`)
+— `36/51`, again over receiver occurrences only, and after dropping the
+single degenerate 291-occurrence program that raw occurrence counting
+would otherwise let dominate. (Two notes on that figure, recorded rather
+than quietly reconciled. Its numerator was previously described as
+*integer*-literal; the 36 is 32 integer-literal receivers **plus** 4
+float-literal ones (`0.0.to_int()`, `1.0.to_int()`), so *numeric*-literal
+is the label the arithmetic supports — strictly integer-literal would be
+32. And re-derived from the committed corpus the denominator lands on
+52, not 51: 343 receiver occurrences less the degenerate program's 291.
+Neither point changes the conclusion; the one-site difference moves the
+share to 69.2%.) Either way `to_int` is the deferred `2.to(n)` range
 demand wearing a conversion's name, not parsing — and `parse_int` already
 covers parsing.
