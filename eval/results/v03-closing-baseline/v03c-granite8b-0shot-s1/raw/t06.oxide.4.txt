@@ -1,0 +1,93 @@
+fn main() {
+    let n = 1000
+    let mut p = vec()
+    let mut i = 1
+    while i < n {
+        if is_prime(i) {
+            p = push(p, i)
+        }
+        i = i + 1
+    }
+    let len = len(p)
+    let mut sum = 0
+    i = 0
+    while i < len {
+        sum = sum + get(p, i)?
+        i = i + 1
+    }
+    print(sum)
+}
+
+fn is_prime(n: Int) -> Bool {
+    if n < 2 {
+        return False
+    }
+    let upper_bound = trunc(sqrt(to_float(n)))
+    let mut i = 2
+    while i <= upper_bound {
+        if n % i == 0 {
+            return False
+        }
+        i = i + 1
+    }
+    True
+}
+
+fn sqrt(x: Float) -> Float {
+    x.sqrt()
+}
+
+fn main() {
+    let n = 1000
+    let mut p = vec()
+    let mut i = 1
+    while i < n {
+        if is_prime(i) {
+            p = push(p, i)
+        }
+        i = i + 1
+    }
+    let len = len(p)
+    let mut sum = 0
+    i = 0
+    while i < len {
+        sum = sum + get(p, i)?
+        i = i + 1
+    }
+    print(sum)
+}
+
+fn is_prime(n: Int) -> Bool {
+    if n < 2 {
+        return False
+    }
+    let upper_bound = trunc(sqrt(to_float(n)))
+    let mut i = 2
+    while i <= upper_bound {
+        if n % i == 0 {
+            return False
+        }
+        i = i + 1
+    }
+    True
+}
+
+fn main() {
+    let n = 1000
+    let mut p = vec()
+    let mut i = 1
+    while i < n {
+        if is_prime(i) {
+            p = push(p, i)
+        }
+        i = i + 1
+    }
+    let len = len(p)
+    let mut sum = 0
+    i = 0
+    while i < len {
+        sum = sum + get(p, i)?
+        i = i + 1
+    }
+    print(sum)
+}

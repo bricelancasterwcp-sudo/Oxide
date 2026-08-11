@@ -1,0 +1,20 @@
+fn parse_as_int(s: Str) -> Option<Int> {
+    match int_to_str(trunc(parse_int(s)?)) {
+        _ => Some(parse_int(s)?),
+        None => None,
+    }
+}
+
+fn main() {
+    let tests = vec("12", "x", "30")
+    let mut ok_count = 0
+    let mut fail_count = 0
+    for t in tests {
+        match parse_as_int(t) {
+            Some(n) => ok_count == ok_count + 1,
+            None => fail_count == fail_count + 1,
+        }
+    }
+    print(ok_count)
+    print(fail_count)
+}

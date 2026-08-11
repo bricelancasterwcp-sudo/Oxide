@@ -1,0 +1,14 @@
+struct GCD { a: Int, b: Int }
+
+fn gcd(a: Int, b: Int) -> Int {
+    if b == 0 {
+        a
+    } else {
+        gcd(b, a % b)
+    }
+}
+
+fn main() {
+    let r = GCD { a: 252, b: 105 }
+    print(gcd(r.a, r.b))
+}

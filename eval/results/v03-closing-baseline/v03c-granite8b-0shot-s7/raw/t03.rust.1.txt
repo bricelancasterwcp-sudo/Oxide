@@ -1,0 +1,15 @@
+```rust
+fn gcd(mut a: u32, mut b: u32) -> u32 {
+    while b != 0 {
+        let tmp = b;
+        b = a % b;
+        a = tmp;
+    }
+    a
+}
+
+fn main() {
+    let ans = gcd(252, 105);
+    println!("{}", ans);
+}
+```

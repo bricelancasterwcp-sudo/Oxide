@@ -1,0 +1,15 @@
+fn main() {
+    let s = "mississippi".to_string()
+    let mut c = 0
+    let mut d = 0
+    for x in s.chars() {
+        if x == "s".chars().nth(0).unwrap() {
+            c = c + 1
+        }
+        if !d.to_string().contains(x.to_string()) {
+            d = d + 1
+        }
+    }
+    print(c)
+    print(d)
+}

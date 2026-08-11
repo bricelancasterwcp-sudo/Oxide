@@ -1,0 +1,21 @@
+fn count_positive_and_largest(list: Vec<Int>) -> Vec<Int> {
+    let mut count_positive = 0
+    let mut largest = 0
+    for x in &list {
+        if x > 0 {
+            count_positive = count_positive + 1
+        }
+        if x > largest {
+            largest = x
+        }
+    }
+    push(push(vec(), count_positive), largest)
+}
+
+fn main() {
+    let list = push(push(push(push(vec(), 3), 8), -2), 12)
+    let result = count_positive_and_largest(&list)
+    print(result)
+    drop list
+    drop result
+}

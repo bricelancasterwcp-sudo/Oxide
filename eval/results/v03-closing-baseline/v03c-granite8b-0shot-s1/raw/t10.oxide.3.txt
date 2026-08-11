@@ -1,0 +1,23 @@
+fn filter_greater_than_three(v: Vec<Int>) -> Vec<Int> {
+    let mut filtered = vec()
+    for value in v {
+        if value > 3 {
+            filtered = push(filtered, value)
+        }
+    }
+    filtered
+}
+
+fn print_vector(v: Vec<Int>) {
+    for value in v {
+        print(value)
+        print_str("\n")
+    }
+}
+
+fn main() {
+    let values = vec(4, 1, 7, 3, 9, 2)
+    let filtered = filter_greater_than_three(values)
+    print_vector(filtered)
+    print(len(filtered))
+}

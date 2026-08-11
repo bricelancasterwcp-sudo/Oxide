@@ -1,0 +1,10 @@
+fn main() {
+    let list = push(push(push(push(vec(), 5), 4), 3), 2)
+    let mut i = len(&list)
+    while i > 0 {
+        print(get(&list, i - 1))
+        drop i
+        i = i - 1
+    }
+    drop list
+}

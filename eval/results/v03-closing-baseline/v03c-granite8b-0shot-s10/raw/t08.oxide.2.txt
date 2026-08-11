@@ -1,0 +1,26 @@
+struct List {
+    head: Int,
+    tail: Option<Box<List>>,
+}
+
+fn positive_count_and_largest(v: Vec<Int>) -> Option<Int> {
+    let mut positive_count = 0
+    let mut largest = None
+    for x in v {
+        if x > 0 {
+            positive_count = positive_count + 1
+            if largest.is_none() || x > largest.unwrap() {
+                largest = Some(x)
+            }
+        }
+    }
+    Some(positive_count)
+}
+
+fn main() {
+    let list = List { head: 3, tail: Some(Box { head: 8, tail: Some(Box { head: -2, tail: Some(Box { head: 12, tail: Some(Box { head: 7, tail: None }) }) }) }) }
+    match positive_count_and_largest(list) {
+        Some(n) => print(n),
+        None => print_str("no positive numbers"),
+    }
+}

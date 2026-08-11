@@ -1,0 +1,27 @@
+fn sort(v: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        let mut found = false
+        for i in range(0, result.len()) {
+            if result.get(i) > Some(x) {
+                result.insert(i, x)
+                found = true
+                break
+            }
+        }
+        if !found {
+            result.push(x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let nums = vec(5, 3, 8, 1, 9, 2)
+    let sorted = sort(&nums)
+    for x in &sorted {
+        print_str(int_to_str(x))
+    }
+    drop nums
+    drop sorted
+}

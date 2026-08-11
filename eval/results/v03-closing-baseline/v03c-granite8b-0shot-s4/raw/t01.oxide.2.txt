@@ -1,0 +1,89 @@
+struct Int {
+    value: Int32,
+}
+
+fn main() {
+    let sum = Int { value: 0 }
+    for x in range(0, 10) {
+        let x_squared = Int { value: x * x }
+        sum = sum + x_squared
+    }
+    print_int(sum.value)
+}
+
+fn print_int(n: Int32) {
+    print_str(int_to_str(n))
+}
+
+fn int_to_str(n: Int32) -> Str {
+    let mut s = vec()
+    let mut n = n
+    let mut d = 1
+    while d <= n {
+        d = d * 10
+        n = n / 10
+    }
+    while n > 0 {
+        let digit = n / d
+        s = push(s, int_to_str(digit))
+        n = n % d
+        d = d / 10
+    }
+    if s == vec() {
+        s = push(s, int_to_str(0))
+    }
+    concat(s, int_to_str(d))
+}
+
+fn range(start: Int32, end: Int32) -> Vec<Int> {
+    let mut v = vec()
+    for i in start.to_int() < end.to_int() {
+        v = push(v, Int { value: i })
+    }
+    v
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn to_int(n: Int32) -> Int {
+    Int(n)
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    a + b
+}
+
+fn vec() -> Vec<T> {
+    Vec()
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    v + vec(x)
+}
+
+fn len(v: Vec<T>) -> Int {
+    v.len()
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    if i < 0 || i >= len(v) {
+        None
+    } else {
+        Some(v.get(i.to_int()))
+    }
+}
+
+fn main() {
+    let sum = Int { value: 0 }
+    for x in range(0, 10) {
+        let x_squared = Int { value: x * x }
+        sum = sum + x_squared
+    }
+    print_int(sum.value)
+}

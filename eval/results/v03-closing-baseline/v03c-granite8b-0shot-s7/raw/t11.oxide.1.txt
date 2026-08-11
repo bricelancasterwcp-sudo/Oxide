@@ -1,0 +1,26 @@
+struct IntList { head: Int, tail: Vec<Int> }
+
+fn increasing_order(l: IntList) -> Vec<Int> {
+    let mut result = vec()
+    let mut v = l.tail
+    for x in push(vec(), l.head) {
+        while !v.is_empty() && get(v, 0).unwrap() < x {
+            push(result, get(v, 0).unwrap())
+            v = slice(v, 1, len(v))
+        }
+        push(result, x)
+    }
+    while !v.is_empty() {
+        push(result, get(v, 0).unwrap())
+        v = slice(v, 1, len(v))
+    }
+    result
+}
+
+fn main() {
+    let l = IntList { head: 5, tail: push(push(vec(), 3), 8) }
+    for x in increasing_order(l) {
+        print_str(int_to_str(x))
+        print_str("\n")
+    }
+}

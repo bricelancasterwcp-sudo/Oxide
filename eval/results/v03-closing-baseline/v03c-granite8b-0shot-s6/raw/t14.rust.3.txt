@@ -1,0 +1,7 @@
+```rust
+fn main() {
+    let text = "mississippi";
+    println!("Number of times 's' occurs: {}", text.matches('s').count());
+    println!("Number of distinct characters: {}", text.chars().collect::<std::collections::HashSet<_>>().len());
+}
+```

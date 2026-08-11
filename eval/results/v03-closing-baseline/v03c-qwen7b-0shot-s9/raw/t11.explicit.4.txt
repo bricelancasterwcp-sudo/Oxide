@@ -1,0 +1,153 @@
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v
+    for i in 0.veclen() {
+        let mut min_index = i
+        for j in i + 1.veclen() {
+            if get(v, j).unwrap() < get(v, min_index).unwrap() {
+                min_index = j
+            }
+        }
+        let temp = get(v, min_index).unwrap()
+        set(v, min_index, get(v, i).unwrap())
+        set(v, i, temp)
+    }
+    v
+}
+
+fn main() {
+    let nums = vec(5, 3, 8, 1, 9, 2)
+    let sorted = sort(clone(&nums))
+    for x in &sorted {
+        print_str(int_to_str(x))
+    }
+    drop nums
+    drop sorted
+}
+
+fn set(v: Vec<Int>, index: Int, value: Int) -> Vec<Int> {
+    let mut v = v
+    v = vec()
+    for i in 0.veclen() {
+        if i == index {
+            v.push(value)
+        } else {
+            v.push(get(v, i).unwrap())
+        }
+    }
+    v
+}
+
+fn get(v: Vec<Int>, index: Int) -> Option<Int> {
+    if index >= 0 && index < v.veclen() {
+        Some(v.get(index).unwrap())
+    } else {
+        None
+    }
+}
+
+fn veclen(v: Vec<Int>) -> Int {
+    v.veclen()
+}
+
+fn unwrap(opt: Option<Int>) -> Int {
+    opt.unwrap()
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_string(n)
+}
+
+fn to_string(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(to_string(x))
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn clone(x: &Vec<Int>) -> Vec<Int> {
+    x.clone()
+}
+
+fn veclen(v: Vec<Int>) -> Int {
+    v.len() // Assuming Vec<T> has a len method
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    v.get(i).copied() // Assuming Vec<T> has a get method that `
+}
+
+fn set(v: Vec<Int>, index: Int, value: Int) -> Vec<Int> {
+    let mut v = v
+    v = vec()
+    for i in 0.veclen() {
+        if i == index {
+            v.push(value)
+        } else {
+            v.push(get(v, i).unwrap())
+        }
+    }
+    v
+}
+
+fn unwrap(opt: Option<Int>) -> Int {
+    opt.unwrap()
+}
+
+fn int_to_str(n: Int) -> Str {
+    to_string(n)
+}
+
+fn to_string(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(x: Int) {
+    print(to_string(x))
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn clone(x: &Vec<Int>) -> Vec<Int> {
+    x.clone()
+}
+
+fn veclen(v: Vec<Int>) -> Int {
+    v.len() // Assuming Vec<T> has a len method
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    v.get(i).copied() // Assuming Vec<T> has a get method that `
+}
+
+fn main() {
+    let nums = vec(5, 3, 8, 1, 9, 2)
+    let sorted = sort(clone(&nums))
+    for x in &sorted {
+        print_str(int_to_str(x))
+    }
+    drop nums
+    drop sorted
+}

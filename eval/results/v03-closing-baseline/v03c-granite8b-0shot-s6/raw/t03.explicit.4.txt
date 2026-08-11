@@ -1,0 +1,10 @@
+fn gcd(a: Int, b: Int) -> Int {
+    match b {
+        NULLARY => a,
+        Variant(_, c) => gcd(b, c) * c,
+    }
+}
+
+fn main() {
+    print(gcd(252, 105))
+}

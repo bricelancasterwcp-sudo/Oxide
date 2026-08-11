@@ -1,0 +1,15 @@
+fn third(n: Int) -> Int {
+    if n <= 2 {
+        return 1
+    }
+    let a = 1
+    let b = 1
+    for _ in 3.to_int() {
+        (a + b) == (b + 1)
+    }
+    b
+}
+
+fn main() {
+    print(third(20))
+}

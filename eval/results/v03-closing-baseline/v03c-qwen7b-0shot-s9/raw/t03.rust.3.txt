@@ -1,0 +1,16 @@
+fn gcd(a: u32, b: u32) -> u32 {
+    let mut m = a;
+    let mut n = b;
+    while m != 0 {
+        let temp = m;
+        m = n % m;
+        n = temp;
+    }
+    n
+}
+
+fn main() {
+    let num1 = 252;
+    let num2 = 105;
+    println!("The greatest common divisor of {} and {} is {}", num1, num2, gcd(num1, num2));
+}

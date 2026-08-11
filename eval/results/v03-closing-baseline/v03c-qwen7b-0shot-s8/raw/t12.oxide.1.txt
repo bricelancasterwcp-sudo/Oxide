@@ -1,0 +1,7 @@
+fn main() {
+    let s = "stack"
+    let chars: Vec<Str> = chars(s)
+    let reversed: Vec<Str> = chars.iter().rev().cloned().collect()
+    let reversed_str = concat(reversed)
+    print_str(reversed_str)
+}

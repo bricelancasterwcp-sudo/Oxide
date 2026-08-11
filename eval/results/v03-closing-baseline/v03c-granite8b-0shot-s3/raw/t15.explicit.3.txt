@@ -1,0 +1,26 @@
+fn parse_int(s: Str) -> Option<Int> {
+    let mut i = 0
+    let mut n = 0
+    if s.len() == 0 {
+        return None
+    }
+    while i < s.len() {
+        match s.get(i) {
+            Some(c) => {
+                if c < "0" || c > "9" {
+                    return Some(n)
+                }
+                n = 10 * n + (c - "0")
+            },
+            None => returnSome(n) != 0 && n <= Int.max_value() && i == s.len() - 1,
+        }
+        i = i + 1
+    }
+}
+
+fn main() {
+    let sum = parse_int("12") + parse_int("x") + parse_int("30")
+    let fails = parse_int("a") + parse_int("b")
+    print(sum)
+    print(fails)
+}

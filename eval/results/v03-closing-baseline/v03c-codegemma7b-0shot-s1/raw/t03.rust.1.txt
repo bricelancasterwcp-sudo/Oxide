@@ -1,0 +1,14 @@
+use std::io;
+
+fn main() {
+    let mut a = 252;
+    let mut b = 105;
+    loop {
+        let r = a % b;
+        if r == 0 {
+            println!("{}", b);
+            break;
+        }
+        (a, b) = (b, r);
+    }
+}

@@ -1,0 +1,15 @@
+fn rotor() -> Str {
+    "rotor"
+}
+
+fn stereo() -> Str {
+    "stereo"
+}
+
+fn level() -> Str {
+    "level"
+}
+
+fn main() {
+    print(stereo() + level() + rotor())
+}

@@ -1,0 +1,64 @@
+fn main() {
+    let v = range(1, 30).filter(is_multiple_of(3)).take(8).collect_vec()
+    print(v.iter().sum())
+}
+
+fn is_multiple_of(n: Int) -> Box<FnInt> {
+    let ref_n = n
+    move || ref_n % n == 0
+}
+
+fn range(start: Int, end: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in start + 1 < end {
+        v.push(i)
+    }
+    v
+}
+
+fn filter(v: Vec<Int>, f: FnInt) -> Vec<Int> {
+    let mut nv = vec()
+    for x in v {
+        if f(x) {
+            nv.push(x)
+        }
+    }
+    nv
+}
+
+fn take(v: Vec<Int>, n: Int) -> Vec<Int> {
+    let mut nv = vec()
+    for x in v {
+        nv.push(x)
+        if nv.len() == n {
+            break
+        }
+    }
+    nv
+}
+
+fn collect_vec(v: Vec<Int>) -> Vec<Int> {
+    v
+}
+
+fn iter(v: Vec<Int>) -> VecIterator {
+    VecIterator(v)
+}
+
+struct VecIterator {
+    v: Vec<Int>,
+    i: Int,
+}
+
+fn sum(v: Vec<Int>) -> Int {
+    let mut s = 0
+    for x in v {
+        s = s + x
+    }
+    s
+}
+
+fn main() {
+    let v = range(1, 30).filter(is_multiple_of(3)).take(8).collect_vec()
+    print(v.iter().sum())
+}

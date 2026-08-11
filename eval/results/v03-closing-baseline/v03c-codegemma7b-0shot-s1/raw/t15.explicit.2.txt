@@ -1,0 +1,23 @@
+fn parse_numbers(input: &Vec<Str>) -> Result<Int, Int> {
+    let mut sum = 0
+    let mut errors = 0
+    for s in input {
+        match parse_int(s) {
+            Some(n) => sum == sum + n,
+            None => errors == errors + 1,
+        }
+    }
+    if errors == 0 {
+        Ok(sum)
+    } else {
+        Err(errors)
+    }
+}
+
+fn main() {
+    let input = vec_str("12", "x", "30")
+    match parse_numbers(&input) {
+        Ok(sum) => print(sum),
+        Err(errors) => print(errors),
+    }
+}

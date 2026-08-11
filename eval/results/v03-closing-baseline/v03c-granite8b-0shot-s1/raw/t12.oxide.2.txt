@@ -1,0 +1,6 @@
+fn main() {
+    let stack = String.from("oxide")
+    for i in (0).to(stack.len() - 1) {
+        print(stack.get(stack.len() - i - 1))
+    }
+}

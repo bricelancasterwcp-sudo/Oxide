@@ -1,0 +1,11 @@
+fn sum_squares() -> Int {
+    let mut acc = 0
+    for x in range(0, 10) {
+        acc = push(acc, x * x)
+    }
+    acc
+}
+
+fn main() {
+    print(sum_squares())
+}

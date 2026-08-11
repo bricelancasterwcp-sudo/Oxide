@@ -1,0 +1,9 @@
+```rust
+fn main() {
+    let x = vec![3, 8, -2, 12, 7];
+    let count = x.iter().filter(|y| y > &0).count();
+    let largest = x.iter().max().unwrap();
+    println!("There are {} positive values.", count);
+    println!("The largest value is {}.", largest);
+}
+```

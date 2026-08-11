@@ -1,0 +1,26 @@
+fn is_prime(n: &Int) -> Bool {
+    if n <= 1 {
+        return false
+    }
+    let mut i: Int = 2
+    while i * i <= n {
+        if n % i == 0 {
+            return false
+        }
+        i = i + 1
+    }
+    true
+}
+
+fn main() {
+    let mut primes: Vec<Int> = vec()
+    let mut i: Int = 2
+    while i < 100 {
+        if is_prime(&i) {
+            primes = push(primes, i)
+        }
+        i = i + 1
+    }
+    print(primes)
+    drop primes
+}

@@ -1,0 +1,9 @@
+fn main() {
+    let num = 100;
+
+    println!("{}", num / 5); // 20
+    if 0 == 0 { // fix: changed 0 != 0 to 0 == 0
+        println!("Undefined"); // undefined
+    }
+    println!("{}", num / 4); // 25
+}

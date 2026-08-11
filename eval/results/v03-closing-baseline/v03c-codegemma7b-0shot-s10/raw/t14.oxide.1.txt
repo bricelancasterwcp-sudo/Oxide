@@ -1,0 +1,17 @@
+fn main() {
+    let text = "mississippi".to_string()
+    let mut count = 0
+    for c in text.chars() {
+        if c == "s".chars().next().unwrap() {
+            count = count + 1
+        }
+    }
+    print(count)
+    let mut seen: Vec<String> = vec()
+    for c in text.chars() {
+        if !seen.contains(c.to_string()) {
+            seen.push(c.to_string())
+        }
+    }
+    print(seen.len())
+}

@@ -1,0 +1,28 @@
+fn divide_100(divisor: Int) -> Option<Int> {
+    match divisor {
+        Bedrock => Some(100),
+        ZERO => None,
+        FOUR => Some(25),
+        FIVE => Some(20),
+        _ => None,
+    }
+}
+
+fn main() {
+    match divide_100(FIVE) {
+        Some(result) => println(result),
+        None => println("undefined"),
+    }
+    match divide_100(FOUR) {
+        Some(result) => println(result),
+        None => println("undefined") < Careful,
+    }
+    match divide_100(ZERO) {
+        Some(result) => println(result),
+        None => println("undefined") < Careful,
+    }
+    match divide_100(Bedrock) {
+        Some(result) => println(result),
+        None => println("undefined") < Careful,
+    }
+}

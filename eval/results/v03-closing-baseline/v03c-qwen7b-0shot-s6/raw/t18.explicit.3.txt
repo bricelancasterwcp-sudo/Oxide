@@ -1,0 +1,16 @@
+fn rect_perim(w: Int, h: Int) -> Int {
+    2 * (w + h)
+}
+
+fn tri_perim(a: Int, b: Int, c: Int) -> Int {
+    a + b + c
+}
+
+fn main() {
+    let r1 = rect_perim(3, 4)
+    let t = tri_perim(3, 4, 5)
+    let r2 = rect_perim(2, 5)
+    print(r1)
+    print(t)
+    print(r2)
+}

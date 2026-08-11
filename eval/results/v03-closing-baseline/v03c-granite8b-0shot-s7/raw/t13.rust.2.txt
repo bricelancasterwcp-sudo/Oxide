@@ -1,0 +1,10 @@
+fn main(){
+    println!("{}", is_palindrome("level"));
+    println!("{}", is_palindrome("stereo"));
+    println!("{}", is_palindrome("rotor"));
+}
+
+fn is_palindrome(s: &str) -> bool {
+    let mut chars = s.chars();
+    chars.clone().eq(chars.clone().rev())
+}

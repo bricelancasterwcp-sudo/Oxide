@@ -1,0 +1,39 @@
+struct Rectangle { width: Int, height: Int }
+
+struct Triangle { side1: Int, side2: Int, side3: Int }
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn perimeter(shape: Shape) -> Int {
+    match shape {
+        Shape => match shape {
+            Shape => match shape {
+                Shape => match shape {
+                    Shape => match shape {
+                        Shape => match shape {
+                            Shape => shape.perimeter(),
+                            _ => 0,
+                        },
+                        _ => 0,
+                    },
+                    _ => 0,
+                },
+                _ => 0,
+            },
+            _ => 0,
+        },
+        _ => 0,
+    }
+}
+
+fn main() {
+    let sequence = Sequence { shape: Shape.from_width_and_height(3, 4) }
+    print(perimeter(sequence.shape))
+    let sequence = Sequence { shape: Shape.triangle_from_sides(3, 4, 5) }
+    print(perimeter(sequence.shape))
+    let sequence = Sequence { shape: Shape.rectangle_from_width_and_height(2, 5) }
+    print(perimeter(sequence.shape))
+}

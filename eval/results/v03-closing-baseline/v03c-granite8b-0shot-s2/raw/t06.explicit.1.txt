@@ -1,0 +1,234 @@
+fn main() {
+    perfect_numbers_up_to(1000)
+}
+
+fn perfect_numbers_up_to(upper: Int) {
+    let mut n = 2
+    while n < upper {
+        let sum_of_divisors = divisors_of(n)
+        let sum_copy = clone(&sum_of_divisors)
+        if sum_copy == n {
+            print(n)
+        }
+        drop sum_copy
+        n = n + 1
+    }
+}
+
+fn divisors_of(n: Int) -> Int {
+    let mut result = 0
+    for i in 1.int_to(n / 2).inclusive_range() {
+        if n % i == 0 {
+            result = result + i
+        }
+    }
+    result + 1
+}
+
+fn is_prime(n: Int) -> Bool {
+    divisors_of(n) == 2
+}
+
+fn is_palindrome(n: Int) -> Bool {
+    let digits = digits_of(n)
+    let reversed = reverse(&digits)
+    digits == reversed
+}
+
+fn digits_of(n: Int) -> Vec<Int> {
+    let mut result = vec()
+    let mut x = n
+    while x > 0 {
+        let digit = x % 10
+        result = push(result, digit)
+        x = x / 10
+    }
+    result
+}
+
+fn reverse(v: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for i in (0.int_to(len(&v))).inclusive_range() {
+        let value = get(&v, len(&v) - i - 1)
+        result = push(result, value)
+    }
+    result
+}
+
+fn fibonacci() -> Vec<Int> {
+    let mut a = 0
+    let mut b = 1
+    let mut result = vec()
+    while b < 4000000 {
+        result = push(result, b)
+        let a_copy = clone(&a)
+        let b_copy = clone(&b)
+        a = b_copy
+        b = a_copy + b_copy
+    }
+    result
+}
+
+fn is_even(n: Int) -> Bool {
+    n % 2 == 0
+}
+
+fn is_palindrome(n: Int) -> Bool {
+    let digits = digits_of(n)
+    let reversed = reverse(&digits)
+    digits == reversed
+}
+
+fn digits_of(n: Int) -> Vec<Int> {
+    let mut result = vec()
+    let mut x = n
+    while x > 0 {
+        let digit = x % 10
+        result = push(result, digit)
+        x = x / 10
+    }
+    result
+}
+
+fn reverse(v: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for i in (0.int_to(len(&v))).inclusive_range() {
+        let value = get(&v, len(&v) - i - 1)
+        result = push(result, value)
+    }
+    result
+}
+
+fn is_prime(n: Int) -> Bool {
+    divisors_of(n) == 2
+}
+
+fn divisors_of(n: Int) -> Int {
+    let mut result = 0
+    for i in 1.int_to(n / 2).inclusive_range() {
+        if n % i == 0 {
+            result = result + i
+        }
+    }
+    result + 1
+}
+
+fn reverse(v: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for i in (0.int_to(len(&v))).inclusive_range() {
+        let value = get(&v, len(&v) - i - 1)
+        result = push(result, value)
+    }
+    result
+}
+
+fn digits_of(n: Int) -> Vec<Int> {
+    let mut result = vec()
+    let mut x = n
+    while x > 0 {
+        let digit = x % 10
+        result = push(result, digit)
+        x = x / 10
+    }
+    result
+}
+
+fn is_palindrome(n: Int) -> Bool {
+    let digits = digits_of(n)
+    let reversed = reverse(&digits)
+    digits == reversed
+}
+
+fn is_even(n: Int) -> Bool {
+    n % 2 == 0
+}
+
+fn perfect_numbers_up_to(upper: Int) {
+    let mut n = 2
+    while n < upper {
+        let sum_of_divisors = divisors_of(n)
+        let sum_copy = clone(&sum_of_divisors)
+        if sum_copy == n {
+            print(n)
+        }
+        drop sum_copy
+        n = n + 1
+    }
+}
+
+fn fibonacci() -> Vec<Int> {
+    let mut a = 0
+    let mut b = 1
+    let mut result = vec()
+    while b < 4000000 {
+        result = push(result, b)
+        let a_copy = clone(&a)
+        let b_copy = clone(&b)
+        a = b_copy
+        b = a_copy + b_copy
+    }
+    result
+}
+
+fn is_prime(n: Int) -> Bool {
+    divisors_of(n) == 2
+}
+
+fn divisors_of(n: Int) -> Int {
+    let mut result = 0
+    for i in 1.int_to(n / 2).inclusive_range() {
+        if n % i == 0 {
+            result = result + i
+        }
+    }
+    result + 1
+}
+
+fn reverse(v: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for i in (0.int_to(len(&v))).inclusive_range() {
+        let value = get(&v, len(&v) - i - 1)
+        result = push(result, value)
+    }
+    result
+}
+
+fn digits_of(n: Int) -> Vec<Int> {
+    let mut result = vec()
+    let mut x = n
+    while x > 0 {
+        let digit = x % 10
+        result = push(result, digit)
+        x = x / 10
+    }
+    result
+}
+
+fn is_palindrome(n: Int) -> Bool {
+    let digits = digits_of(n)
+    let reversed = reverse(&digits)
+    digits == reversed
+}
+
+fn is_even(n: Int) -> Bool {
+    n % 2 == 0
+}
+
+fn perfect_numbers_up_to(upper: Int) {
+    let mut n = 2
+    while n < upper {
+        let sum_of_divisors = divisors_of(n)
+        let sum_copy = clone(&sum_of_divisors)
+        if sum_copy == n {
+            print(n)
+        }
+        drop sum_copy
+        n = n + 1
+    }
+}
+
+fn fibonacci() -> Vec<Int> {
+    let mut a = 0
+    let mut b = 1
+    let mut result = vec()
+    while b < 4

@@ -1,0 +1,9 @@
+fn main() {
+    let txt = str_len("stack")
+    let chars = chars(txt)
+    for i in (0.to_int() + chars.len().to_int()).to_int() {
+        print(chars.get(i).unwrap())
+    }
+    drop txt
+    drop chars
+}

@@ -1,0 +1,8 @@
+fn main() {
+    let level = "level".chars().collect().reverse().chars().collect() == "level".chars().collect()
+    let stereo = "stereo".chars().collect().reverse().chars().collect() == "stereo".chars().collect()
+    let rotor = "rotor".chars().collect().reverse().chars().collect() == "rotor".chars().collect()
+    println(level)
+    println(stereo)
+    println(rotor)
+}

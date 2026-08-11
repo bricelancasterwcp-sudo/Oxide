@@ -1,0 +1,32 @@
+{
+  "aborted_reason": null,
+  "backend": "llama.cpp",
+  "digest": null,
+  "ended_at": "2026-08-11T14:08:56.505098+00:00",
+  "grammar_sha256": {
+    "explicit": "d40a4923c4d519fa2a6c57ffc920a49268243e77bf584b67e1ac54d00bf5f8c3",
+    "oxide": "051e8cc5fc14e50276ae020cb41c07533bde269a7be419be1bede0c8ae977d84",
+    "rust": null
+  },
+  "model": "granite-code:8b-instruct-q8_0",
+  "model_context_length": null,
+  "model_slug": "granite8b",
+  "num_ctx": 4096,
+  "num_predict": 2048,
+  "ollama_version": null,
+  "preflight": {
+    "backend": "llama.cpp",
+    "build_info": "b1-4988f6e",
+    "model": "granite-code:8b-instruct-q8_0",
+    "model_path": "/mnt/extra/ollama-models/blobs/sha256-7f84501f2a7043104d50d8387b0a5c5ea0dd8149996b08b15103ceb28427eb9f",
+    "num_ctx": 4096,
+    "server_n_ctx": 4096
+  },
+  "quantization_level": null,
+  "run_id": "v03c-granite8b-0shot-s2",
+  "seed": 2,
+  "shots": 0,
+  "started_at": "2026-08-11T13:58:42.485103+00:00",
+  "temperature": 0.8,
+  "top_p": 0.95
+}

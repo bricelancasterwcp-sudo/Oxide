@@ -1,0 +1,50 @@
+fn main() {
+    let first_8_positive_multiples_of_3 = vec(3, 6, 9, 12, 15, 18, 21, 24)
+    let sum_of_the_elements = reduce(add, 0, first_8_positive_multiples_of_3)
+    print(sum_of_the_elements)
+}
+
+fn reduce(f: Func<Int, Int, Int>, base: Int, v: Vec<Int>) -> Int {
+    let mut acc = base
+    for x in v {
+        acc = f(acc, x)
+    }
+    acc
+}
+
+fn add(x: Int, y: Int) -> Int {
+    x + y
+}
+
+fn main() {
+    let v = push(push(vec(), 3), 42)
+    print(first_big(v))
+}
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+struct Reading { label: Str, values: Vec<Int> }
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}

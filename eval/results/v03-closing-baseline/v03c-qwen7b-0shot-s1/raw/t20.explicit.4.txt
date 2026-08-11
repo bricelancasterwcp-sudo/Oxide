@@ -1,0 +1,27 @@
+fn calc_cost(unit_price: Int, quantity: Int) -> Int {
+    unit_price * quantity
+}
+
+fn print_item_name(name: &Str) {
+    print(name)
+}
+
+fn main() {
+    let pen_cost = calc_cost(3, 4)
+    let pad_cost = calc_cost(9, 2)
+    let ink_cost = calc_cost(5, 3)
+    let total_cost = pen_cost + pad_cost + ink_cost
+    print(total_cost)
+    let mut max_cost = pen_cost
+    let max_item = &mut && "pen"
+    if pad_cost > max_cost {
+        max_cost = pad_cost
+        let max_item = &mut && "pad"
+    }
+    if ink_cost > max_cost {
+        max_cost = ink_cost
+        let max_item = &mut && "ink"
+    }
+    print_item_name(max_item)
+    drop max_item
+}

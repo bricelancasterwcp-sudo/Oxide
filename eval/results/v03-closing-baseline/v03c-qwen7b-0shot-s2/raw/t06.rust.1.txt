@@ -1,0 +1,13 @@
+```rust
+fn main() {
+    for num in 1..1000 {
+        if num == sum_of_divisors(num) {
+            println!("{}", num);
+        }
+    }
+}
+
+fn sum_of_divisors(n: u32) -> u32 {
+    (1..n).filter(|&x| n % x == 0).sum()
+}
+```

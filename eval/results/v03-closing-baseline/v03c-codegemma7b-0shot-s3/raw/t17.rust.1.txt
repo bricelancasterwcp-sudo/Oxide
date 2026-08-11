@@ -1,0 +1,17 @@
+fn main() {
+    let list = vec![10, 20, 30];
+
+    // Lookup element at position 1
+    if let Some(element) = list.get(1) {
+        println!("{}", element);
+    } else {
+        println!("-1");
+    }
+
+    // Lookup element at position 5
+    if let Some(element) = list.get(5) {
+        println!("{}", element);
+    } else {
+        println!("-1");
+    }
+}

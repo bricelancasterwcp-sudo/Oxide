@@ -1,0 +1,8 @@
+fn main() {
+    let list = vec(1, 2, 3, 4, 5)
+    for x in &list {
+        print_str(&x)
+        print_str("\n")
+    }
+    drop list
+}

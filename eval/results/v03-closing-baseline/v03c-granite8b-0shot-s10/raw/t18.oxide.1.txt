@@ -1,0 +1,50 @@
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+fn perimeter(rectangle: Rectangle) -> Int {
+    2 * (rectangle.width + rectangle.height)
+}
+
+fn perimeter(triangle: Triangle) -> Int {
+    triangle.side1 + triangle.side2 + triangle.side3
+}
+
+fn main() {
+    let sequence = vec(Rectangle { width: 3, height: 4 }, Triangle { side1: 3, side2: 4, side3: 5 }, Rectangle { width: 2, height: 5 })
+    for shape in sequence {
+        match shape {
+            Rectangle(rectangle) => print(perimeter(rectangle)),
+            Triangle(triangle) => print(perimeter(triangle)),
+            _ => print_str("unknown shape") <= Thisarmismissing,
+            OPTIONSWITHwrappingtypesAREALSOPOSSIBLEwithResultandOptiontypes(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("option types are also possible with Result and Option types") <= Thisarmismissing,
+            INBUILTFUNCTIONSareALSOPOSSIBLE(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("inbuilt functions are also possible") <= Thisarmismissing,
+            ITISALSOPOSSIBLEtoUSEaBUILTINFUNCTIONasAPATTERN(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is also possible to use a built-in function as a pattern") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectly(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly") <= Thisarmismissing,
+            ITISALSOPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is also possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISALSOPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is also possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISALSOPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is also possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISALSOPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is also possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISALSOPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is also possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISALSOPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is also possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+            ITISPOSSIBLEtoUSEaBUILTINFUNCTIONdirectlyandwraptheresult(httpsgithubcomoxidelangorgoxideblobv020devexampleslibperimeterox) => print_str("it is possible to use a built-in function directly and wrap the result") <= Thisarmismissing,
+ 

@@ -1,0 +1,11 @@
+fn main() {
+    MATCH  // parse_int
+    SUCCESS(x)
+    MATCH  // parse_int
+    SUCCESS(y)
+    MATCH  // parse_int
+    ERROR(_)
+    _
+    success(z)
+    CONCATENATE(x, y, z)
+}

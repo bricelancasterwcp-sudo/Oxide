@@ -1,0 +1,15 @@
+fn palindrome(text: String) -> String {
+    let text_len = text.len() / 2 - 1 + (text.len() % 2 == 1) - 1
+    for i in 0.max(text_len) - 1.min(text.len() - 1 - text_len) {
+        if text.chars().nth(i).unwrap() != text.chars().nth(text.len() - 1 - i).unwrap() {
+            return "false".to_string()
+        }
+    }
+    "true".to_string()
+}
+
+fn main() {
+    print(palindrome("level".to_string()))
+    print(palindrome("stereo".to_string()))
+    print(palindrome("rotor".to_string()))
+}

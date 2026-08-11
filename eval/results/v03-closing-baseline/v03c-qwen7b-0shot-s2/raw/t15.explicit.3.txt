@@ -1,0 +1,35 @@
+fn sum_valid_ints(ints: Vec<Str>) -> Int {
+    let mut sum = 0
+    let mut count = 0
+    for s in ints {
+        match parse_int(s) {
+            Some(n) => {
+                sum = sum + n
+            },
+            None => {
+                count = count + 1
+            },
+        }
+    }
+    sum
+}
+
+fn count_invalid_ints(ints: Vec<Str>) -> Int {
+    let mut count = 0
+    for s in ints {
+        if parse_int(s) == None {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn main() {
+    let nums = vec("12", "x", "30")
+    let valid_sum = sum_valid_ints(vec(nums.clone()))
+    let invalid_count = count_invalid_ints(vec(nums))
+    print(valid_sum)
+    drop valid_sum
+    print(invalid_count)
+    drop invalid_count
+}

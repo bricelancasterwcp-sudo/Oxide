@@ -1,0 +1,15 @@
+```rust
+fn main() {
+    let list = [10, 20, 30];
+    println!("{}", lookup(&list, 1));
+    println!("{}", lookup(&list, 5));
+}
+
+fn lookup(list: &[i32], position: usize) -> i32 {
+    if position < list.len() {
+        list[position]
+    } else {
+        -1
+    }
+}
+```

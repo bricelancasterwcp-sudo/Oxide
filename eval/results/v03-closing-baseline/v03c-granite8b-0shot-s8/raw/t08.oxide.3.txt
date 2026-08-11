@@ -1,0 +1,30 @@
+struct List { head: Int, tail: Vec<Int> }
+
+fn num_positives(l: List) -> Int {
+    let mut n = 0
+    for x in l.tail {
+        if x > 0 {
+            n = n + 1
+        }
+    }
+    if l.head > 0 {
+        n = n + 1
+    }
+    n
+}
+
+fn largest(l: List) -> Int {
+    let mut m = l.head
+    for x in l.tail {
+        if x > m {
+            m = x
+        }
+    }
+    m
+}
+
+fn main() {
+    let l = List { head: 3, tail: push(push(vec(), 8), -2) }
+    print(num_positives(l))
+    print(largest(l))
+}

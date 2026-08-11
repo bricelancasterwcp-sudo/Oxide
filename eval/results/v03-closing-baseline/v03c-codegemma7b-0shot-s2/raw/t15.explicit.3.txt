@@ -1,0 +1,294 @@
+fn parse(s: &Str) -> Option<Int> {
+    let mut digits = 0
+    let mut n = 0
+    for c in s.chars() {
+        if c >= bchar(48) && c <= bchar(57) {
+            digits = digits + 1
+            n = n * 10 + (c - bchar(48))
+        } else {
+            return None
+        }
+    }
+    Some(n)
+}
+
+fn main() {
+    let input = vec_str("12", "x", "30")
+    let mut sum = 0
+    let mut fail = 0
+    for s in input {
+        match parse(&s) {
+            Some(x) => sum == sum + x,
+            None => fail == fail + 1,
+        }
+    }
+    print(sum)
+    print(fail)
+}
+
+fn bchar(c: Int) -> Char {
+    Char(c)
+}
+
+fn vec_str(s: &Str, ss: &Str, sss: &Str) -> Vec<Str> {
+    vec(s, ss, sss)
+}
+
+fn print(x: Int) {
+    print_int(x)
+}
+
+fn print_int(x: Int) {
+    print_str(str_int(x))
+}
+
+fn str_int(x: Int) -> Str {
+    int_to_str(x)
+}
+
+fn int_to_str(x: Int) -> Str {
+    to_str(x)
+}
+
+fn to_str(x: Int) -> Str {
+    if x == 0 {
+        return str("0")
+    }
+    let mut digits: Vec<Char> = vec()
+    let mut n = x
+    while n > 0 {
+        digits.insert(0, Char((n % 10) + bchar(48)))
+        n = n / 10
+    }
+    let mut result: Str = str("")
+    for d in digits {
+        result = concat(result, str_char(d))
+    }
+    result
+}
+
+fn str_char(c: Char) -> Str {
+    chars(str(c)).first().unwrap()
+}
+
+fn len(s: &Str) -> Int {
+    str_len(s)
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    concat_str(a, b)
+}
+
+fn chars(s: &Str) -> Vec<Char> {
+    str_chars(s)
+}
+
+fn drop_str(s: &Str) {
+    drop_chars(s)
+}
+
+fn drop_chars(cs: &Vec<Char>) {
+    for c in cs {
+        drop_char(c)
+    }
+}
+
+fn drop_char(c: &Char) {
+    drop_int(int_char(c))
+}
+
+fn int_char(c: &Char) -> Int {
+    c.code_point().unwrap() - bchar(0)
+}
+
+fn drop_int(i: Int) {
+    drop_uint(uint(i))
+}
+
+fn uint(i: Int) -> UInt {
+    UInt(i)
+}
+
+fn drop_uint(u: UInt) {
+    let _ = u.get()
+}
+
+struct UInt {
+    value: Int,
+}
+
+fn new_uint(i: Int) -> UInt {
+    UInt(i)
+}
+
+fn get_uint(u: &UInt) -> Int {
+    u.value
+}
+
+struct Char {
+    value: Int,
+}
+
+fn new_char(i: Int) -> Char {
+    Char(i)
+}
+
+fn get_char(c: &Char) -> Int {
+    c.value
+}
+
+struct Vec {
+    length: Int,
+    capacity: Int,
+    values: Vec<Value>,
+}
+
+fn new_vec(length: Int, capacity: Int) -> Vec {
+    Vec(length, capacity, vec())
+}
+
+fn get_length(v: &Vec) -> Int {
+    v.length
+}
+
+fn push_vec(v: &Vec, value: Value) -> Vec {
+    if v.length == v.capacity {
+        let mut new_values = vec()
+        for i in 0.to(v.capacity) {
+            new_values.push(get_value(&v, i))
+        }
+        drop_vec(v)
+        new_values = push(new_values, value)
+        new_vec(v.length + 1, v.capacity * 2)
+    } else {
+        let mut new_values = vec()
+        for i in 0.to(v.length) {
+            new_values.push(get_value(&v, i))
+        }
+        drop_vec(v)
+        new_values = push(new_values, value)
+        new_vec(v.length + 1, v.capacity)
+    }
+}
+
+fn get_value(v: &Vec, i: Int) -> Value {
+    get_copy(&v, i)
+}
+
+fn get_copy(v: &Vec, i: Int) -> Value {
+    match get_value_raw(&v, i) {
+        Some(value) => value,
+        None => panic("Index out of bounds"),
+    }
+}
+
+fn get_value_raw(v: &Vec, i: Int) -> Option<Value> {
+    if i < v.length {
+        Some(v.values.get(i).unwrap().clone())
+    } else {
+        None
+    }
+}
+
+fn drop_vec(v: &Vec) {
+    for i in 0.to(v.length) {
+        drop_value(&v, i)
+    }
+    drop_values(&v)
+}
+
+fn drop_values(v: &Vec) {
+    drop_uint(uint(v.capacity))
+}
+
+fn drop_value(v: &Vec, i: Int) {
+    if i < v.length {
+        drop_value_raw(&v, i)
+    }
+}
+
+fn drop_value_raw(v: &Vec, i: Int) {
+    if i < v.length {
+        drop_copy(&v, i)
+    }
+}
+
+fn drop_copy(v: &Vec, i: Int) {
+    match get_value_raw(&v, i) {
+        Some(value) => drop_value_raw(&v, i),
+        None => panic("Index out of bounds"),
+    }
+}
+
+enum Value {
+    Int(Int),
+    Char(Char),
+    Vec(Vec),
+}
+
+fn new_value_int(i: Int) -> Value {
+    Value(Int(i))
+}
+
+fn new_value_char(c: Char) -> Value {
+    Value(Char(c))
+}
+
+fn new_value_vec(v: Vec) -> Value {
+    Value(Vec(v))
+}
+
+fn get_value_int(v: &Value) -> Int {
+    match v {
+        Value(v) => match v {
+            Int(i) => i.clone(),
+            _ => panic("Value is not an int"),
+        },
+    }
+}
+
+fn get_value_char(v: &Value) -> Char {
+    match v {
+        Value(v) => match v {
+            Char(c) => c.clone(),
+            _ => panic("Value is not a char"),
+        },
+    }
+}
+
+fn get_value_vec(v: &Value) -> Vec {
+    match v {
+        Value(v) => match v {
+            Vec(v) => v.clone(),
+            _ => panic("Value is not a vec"),
+        },
+    }
+}
+
+fn drop_value(v: &Value) {
+    match v {
+        Value(v) => match v {
+            Int(i) => drop_int(i),
+            Char(c) => drop_char(c),
+            Vec(v) => drop_vec(v),
+        },
+    }
+}
+
+fn drop_value_raw(v: &Value) {
+    match v {
+        Value(v) => match v {
+            Int(i) => drop_int(i),
+            Char(c) => drop_char(c),
+            Vec(v) => drop_vec(v),
+        },
+    }
+}
+
+fn drop_copy(v: &Value) {
+    match v {
+        Value(v) => match v {
+            Int(i) => drop_copy(&i),
+            Char(c) => drop_copy(&c),
+            Vec(v) => drop_copy(&v),
+        },

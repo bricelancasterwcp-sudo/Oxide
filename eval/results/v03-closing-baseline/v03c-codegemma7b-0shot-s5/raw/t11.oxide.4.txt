@@ -1,0 +1,286 @@
+fn main() {
+    let mut v = vec(5, 3, 8, 1, 9, 2)
+    while len(v) > 0 {
+        let min = first_small(v.clone())
+        print(min)
+        print_str("\n")
+        v = pop(v, min)
+    }
+}
+
+fn first_small(v: Vec<Int>) -> Int {
+    let mut found = -1
+    for x in v {
+        if found == -1 || x < found {
+            found = x
+        }
+    }
+    found
+}
+
+fn pop(mutv: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = vec()
+    for y in v {
+        if y != x {
+            result = push(result, y)
+        }
+    }
+    result
+}
+
+struct Vec { len: Int, values: Array<Int, Vec_MAX_SIZE> }
+
+struct Array { len: Int, values: Int }
+
+fn vec(v: Int, rest: Int, rest2: Int, rest3: Int, rest4: Int) -> Vec {
+    let mut a = Array { len: 0, values: 0 }
+    a.values = v
+    a.len = 1
+    if rest != 0 {
+        a.values = rest
+        a.len = 2
+        if rest2 != 0 {
+            a.values = rest2
+            a.len = 3
+            if rest3 != 0 {
+                a.values = rest3
+                a.len = 4
+                if rest4 != 0 {
+                    a.values = rest4
+                    a.len = 5
+                }
+            }
+        }
+    }
+    Vec
+}
+
+fn push(mutv: Vec, item: Int) -> Vec {
+    if v.len == Vec_MAX_SIZE {
+        print_str("push: overflow\n")
+        return v
+    }
+    v.values = item
+    v.len = v.len + 1
+    v
+}
+
+fn len(v: Vec) -> Int {
+    v.len
+}
+
+fn get(v: Vec, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len {
+        Some(v.values)
+    } else {
+        None
+    }
+}
+
+fn print(x: Int) {
+    let s = int_to_str(x)
+    print_str(s)
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print(ord(c))
+    }
+}
+
+fn int_to_str(n: Int) -> Str {
+    if n < 10 {
+        Str(n + 48)
+    } else {
+        let mut s = int_to_str(n / 10)
+        let n = n % 10
+        s = push(s, n + 48)
+        s
+    }
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut v = vec()
+    let mut c = s
+    while len(c) > 0 {
+        let last = get(c, len(c) - 1)
+        if last.is_none() {
+            print_str(".")
+            break
+        }
+        v = push(v, last.unwrap())
+        c = get(c, len(c) - 1).unwrap()
+    }
+    v
+}
+
+fn ord(c: Str) -> Int {
+    c.values
+}
+
+struct Str { values: Int }
+
+fn main() {
+    let mut v = vec(5, 3, 8, 1, 9, 2)
+    while len(v) > 0 {
+        let min = first_small(v.clone())
+        print(min)
+        print_str("\n")
+        v = pop(v, min)
+    }
+}
+
+fn first_small(v: Vec<Int>) -> Int {
+    let mut found = -1
+    for x in v {
+        if found == -1 || x < found {
+            found = x
+        }
+    }
+    found
+}
+
+fn pop(mutv: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = vec()
+    for y in v {
+        if y != x {
+            result = push(result, y)
+        }
+    }
+    result
+}
+
+struct Vec { len: Int, values: Array<Int, Vec_MAX_SIZE> }
+
+struct Array { len: Int, values: Int }
+
+fn vec(v: Int, rest: Int, rest2: Int, rest3: Int, rest4: Int) -> Vec {
+    let mut a = Array { len: 0, values: 0 }
+    a.values = v
+    a.len = 1
+    if rest != 0 {
+        a.values = rest
+        a.len = 2
+        if rest2 != 0 {
+            a.values = rest2
+            a.len = 3
+            if rest3 != 0 {
+                a.values = rest3
+                a.len = 4
+                if rest4 != 0 {
+                    a.values = rest4
+                    a.len = 5
+                }
+            }
+        }
+    }
+    Vec
+}
+
+fn push(mutv: Vec, item: Int) -> Vec {
+    if v.len == Vec_MAX_SIZE {
+        print_str("push: overflow\n")
+        return v
+    }
+    v.values = item
+    v.len = v.len + 1
+    v
+}
+
+fn len(v: Vec) -> Int {
+    v.len
+}
+
+fn get(v: Vec, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len {
+        Some(v.values)
+    } else {
+        None
+    }
+}
+
+fn print(x: Int) {
+    let s = int_to_str(x)
+    print_str(s)
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print(ord(c))
+    }
+}
+
+fn int_to_str(n: Int) -> Str {
+    if n < 10 {
+        Str(n + 48)
+    } else {
+        let mut s = int_to_str(n / 10)
+        let n = n % 10
+        s = push(s, n + 48)
+        s
+    }
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut v = vec()
+    let mut c = s
+    while len(c) > 0 {
+        let last = get(c, len(c) - 1)
+        if last.is_none() {
+            print_str(".")
+            break
+        }
+        v = push(v, last.unwrap())
+        c = get(c, len(c) - 1).unwrap()
+    }
+    v
+}
+
+fn ord(c: Str) -> Int {
+    c.values
+}
+
+struct Str { values: Int }
+
+fn main() {
+    let mut v = vec(5, 3, 8, 1, 9, 2)
+    while len(v) > 0 {
+        let min = first_small(v.clone())
+        print(min)
+        print_str("\n")
+        v = pop(v, min)
+    }
+}
+
+fn first_small(v: Vec<Int>) -> Int {
+    let mut found = -1
+    for x in v {
+        if found == -1 || x < found {
+            found = x
+        }
+    }
+    found
+}
+
+fn pop(mutv: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = vec()
+    for y in v {
+        if y != x {
+            result = push(result, y)
+        }
+    }
+    result
+}
+
+struct Vec { len: Int, values: Array<Int, Vec_MAX_SIZE> }
+
+struct Array { len: Int, values: Int }
+
+fn vec(v: Int, rest: Int, rest2: Int, rest3: Int, rest4: Int) -> Vec {
+    let mut a = Array { len: 0, values: 0 }
+    a.values = v
+    a.len = 1
+    if rest != 0 {
+        a.values = rest
+        a.len = 2
+        if rest2 != 0 {

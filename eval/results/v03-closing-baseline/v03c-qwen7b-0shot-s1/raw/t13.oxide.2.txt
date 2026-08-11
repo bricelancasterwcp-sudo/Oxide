@@ -1,0 +1,20 @@
+struct Palindrome { text: Str }
+
+fn is_palindrome(p: Palindrome) -> Bool {
+    let len = str_len(p.text)
+    for i in range(0, len / 2) {
+        if get(p.text, i) != get(p.text, len - i - 1) {
+            return false
+        }
+    }
+    true
+}
+
+fn main() {
+    let pal1 = Palindrome { text: "level" }
+    print(is_palindrome(pal1))
+    let pal2 = Palindrome { text: "stereo" }
+    print(is_palindrome(pal2))
+    let pal3 = Palindrome { text: "rotor" }
+    print(is_palindrome(pal3))
+}

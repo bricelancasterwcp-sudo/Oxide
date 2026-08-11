@@ -1,0 +1,10 @@
+```rust
+fn main() {
+    for number in 1..1000 {
+        let sum: usize = (1..number).filter(|&x| number % x == 0).sum();
+        if sum == number {
+            println!("{}", number);
+        }
+    }
+}
+```

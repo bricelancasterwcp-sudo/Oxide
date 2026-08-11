@@ -1,0 +1,378 @@
+fn main() {
+    let text = "mississippi"
+    let count_s = text.chars().filter(char_eq("s")).count()
+    let distinct_chars: Vec<Str> = text.chars().collect()
+    let distinct_count = distinct_chars.len()
+    print(count_s)
+    print(distinct_count)
+    drop text
+}
+
+fn char_eq(expected: &Str) -> Box<FnMutChar> {
+    Box(new(move || true))
+}
+
+fn filter(predicate: Box<FnMutChar>, iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().filter(predicate).cloned().collect()
+}
+
+fn count(iter: &Vec<Str>) -> Int {
+    iter.len()
+}
+
+fn collect(iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().cloned().collect()
+}
+
+fn len(v: &Vec<Str>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    print_int(x)
+}
+
+fn print_str(s: &Str) {
+    print_string(s)
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    v.push(x)
+}
+
+fn clone(x: &Str) -> Str {
+    x.to_string()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(char_to_string).collect()
+}
+
+fn int_to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn to_int(s: &Str) -> Option<Int> {
+    s.parse().ok()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc() // Assuming trunc is implemented for Float
+}
+
+fn main() {
+    let text = "mississippi"
+    let count_s = text.chars().filter(char_eq("s")).count()
+    let distinct_chars: Vec<Str> = text.chars().collect()
+    let distinct_count = distinct_chars.len()
+    print(count_s)
+    print(distinct_count)
+    drop text
+}
+
+fn char_eq(expected: &Str) -> Box<FnMutChar> {
+    Box(new(move || true))
+}
+
+fn filter(predicate: Box<FnMutChar>, iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().filter(predicate).cloned().collect()
+}
+
+fn count(iter: &Vec<Str>) -> Int {
+    iter.len()
+}
+
+fn collect(iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().cloned().collect()
+}
+
+fn len(v: &Vec<Str>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    print_int(x)
+}
+
+fn print_str(s: &Str) {
+    print_string(s)
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    v.push(x)
+}
+
+fn clone(x: &Str) -> Str {
+    x.to_string()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(char_to_string).collect()
+}
+
+fn int_to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn to_int(s: &Str) -> Option<Int> {
+    s.parse().ok()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc() // Assuming trunc is implemented for Float
+}
+
+fn main() {
+    let text = "mississippi"
+    let count_s = text.chars().filter(char_eq("s")).count()
+    let distinct_chars: Vec<Str> = text.chars().collect()
+    let distinct_count = distinct_chars.len()
+    print(count_s)
+    print(distinct_count)
+    drop text
+}
+
+fn char_eq(expected: &Str) -> Box<FnMutChar> {
+    Box(new(move || true))
+}
+
+fn filter(predicate: Box<FnMutChar>, iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().filter(predicate).cloned().collect()
+}
+
+fn count(iter: &Vec<Str>) -> Int {
+    iter.len()
+}
+
+fn collect(iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().cloned().collect()
+}
+
+fn len(v: &Vec<Str>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    print_int(x)
+}
+
+fn print_str(s: &Str) {
+    print_string(s)
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    v.push(x)
+}
+
+fn clone(x: &Str) -> Str {
+    x.to_string()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(char_to_string).collect()
+}
+
+fn int_to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn to_int(s: &Str) -> Option<Int> {
+    s.parse().ok()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc() // Assuming trunc is implemented for Float
+}
+
+fn main() {
+    let text = "mississippi"
+    let count_s = text.chars().filter(char_eq("s")).count()
+    let distinct_chars: Vec<Str> = text.chars().collect()
+    let distinct_count = distinct_chars.len()
+    print(count_s)
+    print(distinct_count)
+    drop text
+}
+
+fn char_eq(expected: &Str) -> Box<FnMutChar> {
+    Box(new(move || true))
+}
+
+fn filter(predicate: Box<FnMutChar>, iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().filter(predicate).cloned().collect()
+}
+
+fn count(iter: &Vec<Str>) -> Int {
+    iter.len()
+}
+
+fn collect(iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().cloned().collect()
+}
+
+fn len(v: &Vec<Str>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    print_int(x)
+}
+
+fn print_str(s: &Str) {
+    print_string(s)
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    v.push(x)
+}
+
+fn clone(x: &Str) -> Str {
+    x.to_string()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(char_to_string).collect()
+}
+
+fn int_to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn to_int(s: &Str) -> Option<Int> {
+    s.parse().ok()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc() // Assuming trunc is implemented for Float
+}
+
+fn main() {
+    let text = "mississippi"
+    let count_s = text.chars().filter(char_eq("s")).count()
+    let distinct_chars: Vec<Str> = text.chars().collect()
+    let distinct_count = distinct_chars.len()
+    print(count_s)
+    print(distinct_count)
+    drop text
+}
+
+fn char_eq(expected: &Str) -> Box<FnMutChar> {
+    Box(new(move || true))
+}
+
+fn filter(predicate: Box<FnMutChar>, iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().filter(predicate).cloned().collect()
+}
+
+fn count(iter: &Vec<Str>) -> Int {
+    iter.len()
+}
+
+fn collect(iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().cloned().collect()
+}
+
+fn len(v: &Vec<Str>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    print_int(x)
+}
+
+fn print_str(s: &Str) {
+    print_string(s)
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    v.push(x)
+}
+
+fn clone(x: &Str) -> Str {
+    x.to_string()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(char_to_string).collect()
+}
+
+fn int_to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn to_int(s: &Str) -> Option<Int> {
+    s.parse().ok()
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc() // Assuming trunc is implemented for Float
+}
+
+fn main() {
+    let text = "mississippi"
+    let count_s = text.chars().filter(char_eq("s")).count()
+    let distinct_chars: Vec<Str> = text.chars().collect()
+    let distinct_count = distinct_chars.len()
+    print(count_s)
+    print(distinct_count)
+    drop text
+}
+
+fn char_eq(expected: &Str) -> Box<FnMutChar> {
+    Box(new(move || true))
+}
+
+fn filter(predicate: Box<FnMutChar>, iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().filter(predicate).cloned().collect()
+}
+
+fn count(iter: &Vec<Str>) -> Int {
+    iter.len()
+}
+
+fn collect(iter: &Vec<Str>) -> Vec<Str> {
+    iter.iter().cloned().collect()
+}
+
+fn len(v: &Vec<Str>) -> Int {
+    v

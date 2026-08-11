@@ -1,0 +1,14 @@
+fn divide_and_print(dividend: Int, divisor: Int) {
+    if divisor == 0 {
+        print("undefined")
+    } else {
+        let quotient = dividend / divisor
+        print(quotient)
+    }
+}
+
+fn main() {
+    divide_and_print(100, 5)
+    divide_and_print(100, 0)
+    divide_and_print(100, 4)
+}

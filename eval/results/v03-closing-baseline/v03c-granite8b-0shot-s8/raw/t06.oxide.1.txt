@@ -1,0 +1,25 @@
+struct Perfect { num: Int, sum: Int }
+
+fn sum_of_factors(n: Int) -> Int {
+    let mut sum = 0
+    for i in range(1, n) {
+        if n % i == 0 {
+            sum = sum + i
+        }
+    }
+    sum
+}
+
+fn main() {
+    let mut total = vec()
+    for n in range(2, 1000) {
+        let sum = sum_of_factors(n)
+        if sum == n {
+            total = push(total, Perfect { num: n, sum: sum })
+        }
+    }
+    for p in total {
+        print(p.num)
+        print("\n")
+    }
+}

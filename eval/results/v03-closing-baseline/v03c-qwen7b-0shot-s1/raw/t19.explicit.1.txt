@@ -1,0 +1,14 @@
+fn area(w: Int, h: Int) -> Int {
+    w * h
+}
+
+fn perimeter(w: Int, h: Int) -> Int {
+    2 * (w + h)
+}
+
+fn main() {
+    let rect = (7.0.to_float()).trunc() * 4.0.to_float().trunc().to_int()
+    print(rect.area())
+    print(rect.perimeter())
+    drop rect
+}

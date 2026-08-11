@@ -1,0 +1,19 @@
+```rust
+fn main() {
+    let mut sum = 0;
+    let mut count = 0;
+
+    for line in ["12", "x", "30"] {
+        match line.parse::<i32>() {
+            Ok(num) => {
+                sum += num;
+                count += 1;
+            }
+            Err(_) => (),
+        }
+    }
+
+    println!("Sum: {}", sum);
+    println!("Failed: {}", 3 - count);
+}
+```

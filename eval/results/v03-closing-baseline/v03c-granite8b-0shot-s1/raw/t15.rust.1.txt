@@ -1,0 +1,25 @@
+fn main() {
+    let a = "12".parse::<i32>();
+    let b = "x".parse::<i32>();
+    let c = "30".parse::<i32>();
+
+    match a {
+        Ok(i) => println!("{}", i),
+        Err(_) => {}
+    }
+    match b {
+        Ok(i) => println!("{}", i),
+        Err(_) => {}
+    }
+    match c {
+        Ok(i) => println!("{}", i),
+        Err(_) => {}
+    }
+
+    let count = [a, b, c].iter().filter_map(|v| match v {
+        Ok(i) => Some(i),
+        Err(_) => None,
+    }).count();
+
+    println!("{}", count);
+}

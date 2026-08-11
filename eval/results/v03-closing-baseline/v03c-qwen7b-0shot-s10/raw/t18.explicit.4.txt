@@ -1,0 +1,56 @@
+fn perimeter_rect(rect: Rect) -> Int {
+    2 * (rect.width + rect.height)
+}
+
+fn perimeter_tri(tri: Tri) -> Int {
+    tri.a + tri.b + tri.c
+}
+
+fn perimeter(rect: Rect, triangle: Tri, rect2: Rect) -> Vec<Int> {
+    let mut perimeters = vec()
+    perimeters.push(perimeter_rect(rect))
+    perimeters.push(perimeter_tri(triangle))
+    perimeters.push(perimeter_rect(rect2))
+    perimeters
+}
+
+fn main() {
+    let rect = Rect { width: 3, height: 4 }
+    let triangle = Tri { a: 3, b: 4, c: 5 }
+    let rect2 = Rect { width: 2, height: 5 }
+    let perimeters = perimeter(rect, triangle, rect2)
+    for p in &perimeters {
+        print(p)
+    }
+    drop perimeters
+}
+
+struct Rect {
+    width: Int,
+    height: Int,
+}
+
+struct Tri {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn perimeter(rect: Rect, triangle: Tri, rect2: Rect) -> Vec<Int> {
+    let mut perimeters = vec()
+    perimeters.push(perimeter_rect(rect))
+    perimeters.push(perimeter_tri(triangle))
+    perimeters.push(perimeter_rect(rect2))
+    perimeters
+}
+
+fn main() {
+    let rect = Rect { width: 3, height: 4 }
+    let triangle = Tri { a: 3, b: 4, c: 5 }
+    let rect2 = Rect { width: 2, height: 5 }
+    let perimeters = perimeter(rect, triangle, rect2)
+    for p in &perimeters {
+        print(p)
+    }
+    drop perimeters
+}

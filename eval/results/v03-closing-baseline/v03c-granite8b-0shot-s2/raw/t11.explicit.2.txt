@@ -1,0 +1,289 @@
+fn task_1(list: &Vec<Int>) -> Vec<Int> {
+    let mut v = clone(&list)
+    for i in 0 <= len(&v) {
+        for j in 0 <= i {
+            if get(&v, j) > get(&v, i) {
+                swap(&mutv, i, j)
+            }
+        }
+    }
+    v
+}
+
+fn main() {
+    let task_1_list = push(push(push(push(push(vec(), 5), 3), 8), 1), 9)
+    let sorted_list = task_1(&task_1_list)
+    print_str("Task 1 result: ")
+    print(len(&sorted_list))
+    drop task_1_list
+    drop sorted_list
+}
+
+fn swap(v: &Vec<Int>, i: Int, j: Int) {
+    let temp = get(&v, i)
+    set(&mutv, i, get(&v, j))
+    set(&mutv, j, temp)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    v.get(i.trunc())
+}
+
+fn set(v: &Vec<Int>, i: Int, x: Int) {
+    v.set(i.trunc(), x)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn clone(v: &Vec<Int>) -> Vec<Int> {
+    v.clone()
+}
+
+fn push(v: &Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn print_str(s: Str) {
+    println_str(s)
+}
+
+fn println(x: Int) {
+    print_str(str_from_int(x))
+    print_str("\n")
+}
+
+fn println_str(s: Str) {
+    print_str(s)
+    print_str("\n")
+}
+
+fn str_from_int(i: Int) -> Str {
+    itoa(i)
+}
+
+fn itoa(i: Int) -> Str {
+    i.to_string()
+}
+
+fn vec() -> Vec<Int> {
+    Vec.new()
+}
+
+struct Vec {
+    data: Str,
+    len: Int,
+}
+
+fn new() -> Vec {
+    Vec.new()
+}
+
+fn len(v: &Vec) -> Int {
+    v.len
+}
+
+fn get(v: &Vec, i: Int) -> Int {
+    let index = (v.len - i - 1)
+    let byte = v.data.get(index)
+    byte.to_int()
+}
+
+fn set(v: &Vec, i: Int, x: Int) {
+    let index = (v.len - i - 1)
+    let byte = x.to_char()
+    v.data.set(index, byte)
+}
+
+fn push(v: &Vec, x: Int) -> Vec {
+    let data = v.data + x.to_char()
+    let len = v.len + 1
+    Vec.new(data, len)
+}
+
+fn clone(v: &Vec) -> Vec {
+    Vec.new(v.data, v.len)
+}
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+}
+
+fn print_str(s: Str) {
+    io.println_str(s)
+}
+
+struct Int {
+    value: Int,
+}
+
+struct Str {
+    value: Str,
+}
+
+fn to_int(s: Str) -> Int {
+    s.value.to_int()
+}
+
+fn to_char(i: Int) -> Str {
+    i.to_string().to_char()
+}
+
+fn println_str(s: Str) {
+    io.println_str(s)
+}
+
+struct Vec {
+    data: Str,
+    len: Int,
+}
+
+fn new() -> Vec {
+    Vec.new()
+}
+
+fn len(v: &Vec) -> Int {
+    v.len
+}
+
+fn get(v: &Vec, i: Int) -> Int {
+    let index = (v.len - i - 1)
+    let byte = v.data.get(index)
+    byte.to_int()
+}
+
+fn set(v: &Vec, i: Int, x: Int) {
+    let index = (v.len - i - 1)
+    let byte = x.to_char()
+    v.data.set(index, byte)
+}
+
+fn push(v: &Vec, x: Int) -> Vec {
+    let data = v.data + x.to_char()
+    let len = v.len + 1
+    Vec.new(data, len)
+}
+
+fn clone(v: &Vec) -> Vec {
+    Vec.new(v.data, v.len)
+}
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+}
+
+fn print_str(s: Str) {
+    io.println_str(s)
+}
+
+struct Int {
+    value: Int,
+}
+
+struct Str {
+    value: Str,
+}
+
+fn to_int(s: Str) -> Int {
+    s.value.to_int()
+}
+
+fn to_char(i: Int) -> Str {
+    i.to_string().to_char()
+}
+
+fn println_str(s: Str) {
+    io.println_str(s)
+}
+
+struct Vec {
+    data: Str,
+    len: Int,
+}
+
+fn new() -> Vec {
+    Vec.new()
+}
+
+fn len(v: &Vec) -> Int {
+    v.len
+}
+
+fn get(v: &Vec, i: Int) -> Int {
+    let index = (v.len - i - 1)
+    let byte = v.data.get(index)
+    byte.to_int()
+}
+
+fn set(v: &Vec, i: Int, x: Int) {
+    let index = (v.len - i - 1)
+    let byte = x.to_char()
+    v.data.set(index, byte)
+}
+
+fn push(v: &Vec, x: Int) -> Vec {
+    let data = v.data + x.to_char()
+    let len = v.len + 1
+    Vec.new(data, len)
+}
+
+fn clone(v: &Vec) -> Vec {
+    Vec.new(v.data, v.len)
+}
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+}
+
+fn print_str(s: Str) {
+    io.println_str(s)
+}
+
+struct Int {
+    value: Int,
+}
+
+struct Str {
+    value: Str,
+}
+
+fn to_int(s: Str) -> Int {
+    s.value.to_int()
+}
+
+fn to_char(i: Int) -> Str {
+    i.to_string().to_char()
+}
+
+fn println_str(s: Str) {
+    io.println_str(s)
+}
+
+struct Vec {
+    data: Str,
+    len: Int,
+}
+
+fn new() -> Vec {
+    Vec.new()
+}
+
+fn len(v: &Vec) -> Int {
+    v.len
+}
+
+fn get(v: &Vec, i: Int) -> Int {
+    let index = (v.len - i - 1)
+    let byte = v.data.get(index)
+    byte.to_int()
+}
+
+fn set(v: &Vec, i: Int, x: Int) {
+    let index = (v.len - i - 1)
+    let byte = x.to_char()
+    v.data.set(index, byte)

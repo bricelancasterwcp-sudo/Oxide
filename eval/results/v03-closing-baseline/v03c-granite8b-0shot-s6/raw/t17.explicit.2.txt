@@ -1,0 +1,14 @@
+fn lookup(list: &Vec<Int>, index: Int) -> Int {
+    if index >= 0 && index < len(&list) {
+        return get(&list, index)
+    } else {
+        return -1
+    }
+}
+
+fn main() {
+    let list = push(push(push(vec(), 10), 20), 30)
+    print(lookup(&list, 1))
+    print(lookup(&list, 5))
+    drop list
+}

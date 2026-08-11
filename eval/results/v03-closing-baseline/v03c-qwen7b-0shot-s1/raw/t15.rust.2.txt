@@ -1,0 +1,18 @@
+```rust
+fn main() {
+    let mut sum = 0;
+    let mut failed_count = 0;
+
+    let strings = vec!["12", "x", "30"];
+
+    for s in strings {
+        match s.parse::<i32>() {
+            Ok(num) => sum += num,
+            Err(_) => failed_count += 1,
+        }
+    }
+
+    println!("Sum of successful parses: {}", sum);
+    println!("Count of failed parses: {}", failed_count);
+}
+```

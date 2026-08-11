@@ -1,0 +1,10 @@
+fn main() {
+    let s = "stack"
+    let mut s = s
+    let mut c = s.chars()
+    while letSome(c) == c.next() {
+        print(c)
+        drop c
+    }
+    drop s
+}

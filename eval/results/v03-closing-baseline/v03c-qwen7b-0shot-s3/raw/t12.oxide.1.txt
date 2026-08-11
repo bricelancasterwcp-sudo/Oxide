@@ -1,0 +1,17 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn reverse(s: Str) -> Str {
+    let mut chars = chars(s)
+    let mut reversed = vec()
+    while !chars.is_empty() {
+        let ch = chars.pop()?
+        reversed = push(reversed, ch)
+    }
+    concat("", reversed)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    let reversed = reverse("stack")
+    print_str(reversed)
+}

@@ -1,0 +1,16 @@
+fn main() {
+    let numbers = ["12", "x", "30"];
+    let mut sum = 0;
+    let mut failures = 0;
+
+    for number in numbers {
+        if let Ok(parsed) = number.parse::<i32>() {
+            sum += parsed;
+        } else {
+            failures += 1;
+        }
+    }
+
+    println!("Sum: {}", sum);
+    println!("Failures: {}", failures);
+}

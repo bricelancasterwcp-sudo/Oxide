@@ -1,0 +1,16 @@
+fn count_chars(s: Str) -> Str {
+    let mut seen: Str = ""
+    let mut count = 0
+    for c in chars(s) {
+        if seen.len() == 0 || seen.chars().last().unwrap() != c {
+            seen.push(c)
+            count = count + 1
+        }
+    }
+    format("{} ({})", count, seen)
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_chars(text))
+}

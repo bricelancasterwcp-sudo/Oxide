@@ -1,0 +1,390 @@
+fn area(r: &Rectangle) -> Int {
+    (r.width * 2) + (r.height * 2)
+}
+
+fn perimeter(t: &Triangle) -> Int {
+    t.a + t.b + t.c
+}
+
+fn main() {
+    let s1 = Rectangle { width: 3, height: 4 }
+    let s2 = Triangle { a: 3, b: 4, c: 5 }
+    let s3 = Rectangle { width: 2, height: 5 }
+    println(area(&s1))
+    println(perimeter(&s2))
+    println(area(&s3))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut v = v
+    v.push(x)
+    v
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut i = 0
+    for _ in v {
+        i = i + 1
+    }
+    i
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= len(&v) {
+        None
+    } else {
+        Some(v.get(i).unwrap())
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a + 1 < b {
+        v.push(i)
+    }
+    v
+}
+
+fn clone(x: &Int) -> Int {
+    let mut x = x
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    let mut i = 0
+    for _ in s {
+        i = i + 1
+    }
+    i
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    let mut a = a
+    let mut b = b
+    a.to_string() + b.to_string()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut v = vec()
+    for c in s.chars() {
+        v.push(c.to_string())
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    match s.parse() {
+        Ok(x) => Some(x),
+        Err(_) => None,
+    }
+}
+
+fn to_float(n: &Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: &Int) -> Int {
+    x.trunc()
+}
+
+fn drop_unused(v: &Vec<Int>) {
+    drop v
+}
+
+fn drop_unused(x: &Int) {
+    drop x
+}
+
+fn drop_unused(s: &Str) {
+    drop s
+}
+
+fn drop_unused(a: &Int) {
+    drop a
+}
+
+fn drop_unused(b: &Int) {
+    drop b
+}
+
+fn drop_unused(c: &Int) {
+    drop c
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v
+}
+
+fn drop_unused(v: &Int) {
+    drop v

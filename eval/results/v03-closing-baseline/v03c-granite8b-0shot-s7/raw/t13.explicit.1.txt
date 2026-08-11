@@ -1,0 +1,8 @@
+fn main() {
+    let level = "level".to_string() == "elvel".to_string() && "level".to_string() == "level".to_string().chars().rev().collect() && "level".to_string() == "level".to_string().chars().rev().collect()
+    let stereo = "stereo".to_string() == "reters".to_string() && "stereo".to_string() == "stereo".to_string().chars().rev().collect() && "stereo".to_string() == "stereo".to_string().chars().rev().collect()
+    let rotor = "rotor".to_string() == "rotor".to_string() && "rotor".to_string() == "rotor".to_string().chars().rev().collect() && "rotor".to_string() == "rotor".to_string().chars().rev().collect()
+    print(level)
+    print(stereo)
+    print(rotor)
+}

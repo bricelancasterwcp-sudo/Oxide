@@ -1,0 +1,24 @@
+fn is_prime(n: Int) -> Bool {
+    if n == 2 {
+        return true
+    }
+    if n % 2 == 0 {
+        return false
+    }
+    for i in 3.step_to(n / 2, 2) {
+        if n % i == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn main() {
+    let count = 0
+    for i in 2.step(100, 1) {
+        if is_prime(i) {
+            count = count + 1
+        }
+    }
+    print(count)
+}

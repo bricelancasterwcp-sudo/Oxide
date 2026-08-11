@@ -1,0 +1,299 @@
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    for i in 0.range(v.len()) {
+        for j in (i + 1).range(v.len()) {
+            if get(v, i) > get(v, j) {
+                let temp = get(v, i).unwrap()
+                let val_j = get(v, j).unwrap()
+                let temp_idx = i
+                let val_j_idx = j
+                drop temp
+                drop val_j
+                set(v, temp_idx, val_j)
+                set(v, val_j_idx, temp)
+            }
+        }
+    }
+    v
+}
+
+fn main() {
+    let nums = vec(5, 3, 8, 1, 9, 2)
+    let sorted = sort(clone(&nums))
+    for x in &sorted {
+        print_str(&x)
+    }
+    drop nums
+    drop sorted
+}
+
+fn set(v: Vec<Int>, index: Int, value: Int) -> Vec<Int> {
+    let mut v = v
+    v.set(index, value)
+    v
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    range(a, b)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    get(v, i)
+}
+
+fn vec() -> Vec<Int> {
+    vec()
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn print(x: Int) {
+    print(x)
+}
+
+fn clone(x: Vec<Int>) -> Vec<Int> {
+    clone(x)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    len(v)
+}
+
+fn drop_name(v: Vec<Int>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Int) {
+    drop_name(v)
+}
+
+fn drop_name(v: Str) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Str>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<Int>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<Str>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecStr>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecVecInt>>) {
+    drop_name(v)
+}
+
+fn drop_name(v: Vec<Vec<VecVecVecVecVecVecVecVecVecVecVec

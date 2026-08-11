@@ -1,0 +1,24 @@
+```rust
+fn main() {
+    println!("{:?}", items());
+    println!("{}", best_item_name());
+}
+
+fn items() -> Vec<(String, f64)> {
+    vec![("pen".to_string(), 3. * 4.),
+         ("pad".to_string(), 9. * 2.),
+         ("ink".to_string(), 5. * 3.)]
+}
+
+fn best_item_name() -> String {
+    let mut max_cost = f64::MIN;
+    let mut best_item = String::new();
+    for (name, cost) in items() {
+        if cost > max_cost {
+            max_cost = cost;
+            best_item = name;
+        }
+    }
+    best_item
+}
+```

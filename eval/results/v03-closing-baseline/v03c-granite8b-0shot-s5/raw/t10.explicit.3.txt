@@ -1,0 +1,64 @@
+fn main() {
+    let mut list = push(push(push(push(vec(), 4), 1), 7), 3)
+    let mut i = 0
+    while i < len(&list) {
+        let val = get(&list, i)
+        if val > 3 {
+            print_str("Keep: ")
+            print(val)
+            print_str("\n")
+        }
+        i = i + 1
+    }
+    drop list
+    print(len(&list))
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    let result = match i >= 0 && i < len(&v) {
+        True => Some(v.get(i)),
+        False => None,
+    }
+    match result {
+        Some(r) => r,
+        None => Option.none(),
+    }
+}
+
+fn filter(v: &Vec<Int>, pred: &FnMutlich<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for i in range(0, len(&v)) {
+        let val = get(&v, i)
+        match val {
+            Some(x) => {
+                let res = pred(x)
+                match res {
+                    True => {
+                        let r = clone(&x)
+                        result = push(result, r)
+                    },
+                    False => {
+                        let _r = clone(&x)
+                    },
+                }
+            },
+            None => {
+                let _r = clone(&val)
+            },
+        }
+    }
+    result
+}
+
+fn main() {
+    let v = push(push(push(push(vec(), 4), 1), 7), 3)
+    let greater_than_3 = &fnmutlich || true
+    let filtered = filter(&v, greater_than_3)
+    for item in &filtered {
+        print(item)
+        print_str("\n")
+    }
+    print(len(&filtered))
+    drop v
+    drop filtered
+}

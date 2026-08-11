@@ -1,0 +1,538 @@
+fn area(r: Rect) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: Rect) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn main() {
+    let r = Rect { width: 7, height: 4 }
+    print(area(r))
+    print(perimeter(r))
+}
+
+struct Rect { width: Int, height: Int }
+
+enum Shape {
+    Circle(Float),
+    Rectangle(Rect),
+}
+
+enum Result {
+    Ok(Int),
+    Err,
+}
+
+enum Option {
+    Some(Int),
+    None,
+}
+
+enum Vec {
+    Empty,
+    Cons(Int, Box<Vec>),
+}
+
+enum Str {
+    Empty,
+    Cons(Char, Box<Str>),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Bool {
+    True,
+    False,
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Char {
+    Char(Char),
+}
+
+enum None {
+    None,
+}
+
+enum Some {
+    Some(Int),
+}
+
+enum Ok {
+    Ok(Int),
+}
+
+enum Err {
+    Err,
+}
+
+enum Cons {
+    Cons(Int, Box<Vec>),
+}
+
+enum Empty {
+    Empty,
+}
+
+enum None {
+    None,
+}
+
+enum Some {
+    Some(Int),
+}
+
+enum Ok {
+    Ok(Int),
+}
+
+enum Err {
+    Err,
+}
+
+enum Circle {
+    Circle(Float),
+}
+
+enum Rectangle {
+    Rectangle(Rect),
+}
+
+enum Variant {
+    Variant(Int, Int),
+}
+
+enum Nullary {
+    Nullary,
+}
+
+enum Pattern {
+    Pattern(Int, Int),
+}
+
+enum Break {
+    Break,
+}
+
+enum Continue {
+    Continue,
+}
+
+enum For {
+    For(Int, Int, Int),
+}
+
+enum While {
+    While(Int),
+}
+
+enum Return {
+    Return(Int),
+}
+
+enum If {
+    If(Int),
+}
+
+enum Match {
+    Match(Int),
+}
+
+enum Clone {
+    Clone(Int),
+}
+
+enum Push {
+    Push(Int, Box<Vec>),
+}
+
+enum Print {
+    Print(Int),
+}
+
+enum Get {
+    Get(Int, Int),
+}
+
+enum Range {
+    Range(Int, Int),
+}
+
+enum Str_len {
+    Str_len(Int),
+}
+
+enum Concat {
+    Concat(Int, Int),
+}
+
+enum Chars {
+    Chars(Int),
+}
+
+enum Int_to_str {
+    Int_to_str(Int),
+}
+
+enum Parse_int {
+    Parse_int(Int),
+}
+
+enum To_float {
+    To_float(Int),
+}
+
+enum Trunc {
+    Trunc(Int),
+}
+
+enum Operator {
+    Operator(Int, Int),
+}
+
+enum Condition {
+    Condition(Int, Int),
+}
+
+enum Comparison {
+    Comparison(Int, Int),
+}
+
+enum Method {
+    Method(Int, Int),
+}
+
+enum Call {
+    Call(Int, Int),
+}
+
+enum Tuple {
+    Tuple(Int, Int),
+}
+
+enum Array {
+    Array(Int, Int),
+}
+
+enum Enum {
+    Enum(Int, Int),
+}
+
+enum Struct {
+    Struct(Int, Int),
+}
+
+enum Union {
+    Union(Int, Int),
+}
+
+enum Pattern_matching {
+    Pattern_matching(Int, Int),
+}
+
+enum Implicit_linear_types {
+    Implicit_linear_types(Int, Int),
+}
+
+enum Ownership {
+    Ownership(Int, Int),
+}
+
+enum Types {
+    Types(Int, Int),
+}
+
+enum Syntax {
+    Syntax(Int, Int),
+}
+
+enum Builtins {
+    Builtins(Int, Int),
+}
+
+enum Example {
+    Example(Int, Int),
+}
+
+enum Reading {
+    Reading(Int, Int),
+}
+
+enum First_big {
+    First_big(Int, Int),
+}
+
+enum Second {
+    Second(Int, Int),
+}
+
+enum Main {
+    Main(Int, Int),
+}
+
+enum Rect {
+    Rect(Int, Int),
+}
+
+enum Shape {
+    Shape(Int, Int),
+}
+
+enum Result {
+    Result(Int, Int),
+}
+
+enum Option {
+    Option(Int, Int),
+}
+
+enum Vec {
+    Vec(Int, Int),
+}
+
+enum Str {
+    Str(Int, Int),
+}
+
+enum Unit {
+    Unit(Int, Int),
+}
+
+enum Bool {
+    Bool(Int, Int),
+}
+
+enum Int {
+    Int(Int, Int),
+}
+
+enum Float {
+    Float(Int, Int),
+}
+
+enum Char {
+    Char(Int, Int),
+}
+
+enum None {
+    None(Int, Int),
+}
+
+enum Some {
+    Some(Int, Int),
+}
+
+enum Ok {
+    Ok(Int, Int),
+}
+
+enum Err {
+    Err(Int, Int),
+}
+
+enum Cons {
+    Cons(Int, Int),
+}
+
+enum Empty {
+    Empty(Int, Int),
+}
+
+enum None {
+    None(Int, Int),
+}
+
+enum Some {
+    Some(Int, Int),
+}
+
+enum Ok {
+    Ok(Int, Int),
+}
+
+enum Err {
+    Err(Int, Int),
+}
+
+enum Circle {
+    Circle(Int, Int),
+}
+
+enum Rectangle {
+    Rectangle(Int, Int),
+}
+
+enum Variant {
+    Variant(Int, Int),
+}
+
+enum Nullary {
+    Nullary(Int, Int),
+}
+
+enum Pattern {
+    Pattern(Int, Int),
+}
+
+enum Break {
+    Break(Int, Int),
+}
+
+enum Continue {
+    Continue(Int, Int),
+}
+
+enum For {
+    For(Int, Int, Int),
+}
+
+enum While {
+    While(Int),
+}
+
+enum Return {
+    Return(Int),
+}
+
+enum If {
+    If(Int),
+}
+
+enum Match {
+    Match(Int),
+}
+
+enum Clone {
+    Clone(Int),
+}
+
+enum Push {
+    Push(Int, Box<Vec>),
+}
+
+enum Print {
+    Print(Int),
+}
+
+enum Get {
+    Get(Int, Int),
+}
+
+enum Range {
+    Range(Int, Int),
+}
+
+enum Str_len {
+    Str_len(Int),
+}
+
+enum Concat {
+    Concat(Int, Int),
+}
+
+enum Chars {
+    Chars(Int),
+}
+
+enum Int_to_str {
+    Int_to_str(Int),
+}
+
+enum Parse_int {
+    Parse_int(Int),
+}
+
+enum To_float {
+    To_float(Int),
+}
+
+enum Trunc {
+    Trunc(Int),
+}
+
+enum Operator {
+    Operator(Int, Int),
+}
+
+enum Condition {
+    Condition(Int, Int),
+}
+
+enum Comparison {
+    Comparison(Int, Int),
+}
+
+enum Method {
+    Method(Int, Int),
+}
+
+enum Call {
+    Call(Int, Int),
+}
+
+enum Tuple {
+    Tuple(Int, Int),
+}
+
+enum Array {
+    Array(Int, Int),
+}
+
+enum Enum {
+    Enum(Int, Int),
+}
+
+enum Struct {
+    Struct(Int, Int),
+}
+
+enum Union {
+    Union(Int, Int),
+}
+
+enum Pattern_matching {
+    Pattern_matching(Int, Int),
+}
+
+enum Implicit_linear_types {
+    Implicit_linear_types(Int, Int),
+}
+
+enum Ownership {
+    Ownership(Int, Int),
+}
+
+enum Types {
+    Types(Int, Int),
+}
+
+enum Syntax {
+    Syntax(Int, Int),
+}
+
+enum Builtins {
+    Builtins(Int, Int),
+}
+
+enum Example {
+    Example(Int, Int),
+}
+
+enum Reading {
+    Reading(Int, Int),
+}
+
+enum First_big {
+    First_big(Int, Int),
+}
+

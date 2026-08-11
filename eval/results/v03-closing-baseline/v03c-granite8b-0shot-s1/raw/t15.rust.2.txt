@@ -1,0 +1,17 @@
+```rust
+fn main() {
+    let a = "12".parse::<i32>().unwrap();
+    let b = "x".parse::<i32>().unwrap();
+    let c = "30".parse::<i32>().unwrap();
+
+    let sum: i32 = [a, b, c].iter().sum();
+    println!("{}", sum);
+
+    let count = [a, b, c].iter().filter_map(|v| match v {
+        Ok(i) => Some(i),
+        Err(_) => None,
+    }).count();
+
+    println!("{}", count);
+}
+```

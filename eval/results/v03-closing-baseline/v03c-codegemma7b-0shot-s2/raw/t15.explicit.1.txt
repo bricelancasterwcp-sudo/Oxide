@@ -1,0 +1,27 @@
+fn parse(s: &Str) -> Option<Int> {
+    let mut digits = 0
+    let mut n = 0
+    for c in s.chars() {
+        if c >= bchar(48) && c <= bchar(57) {
+            digits = digits + 1
+            n = n * 10 + (c - bchar(48))
+        } else {
+            return None
+        }
+    }
+    Some(n)
+}
+
+fn main() {
+    let input = vec_str("12", "x", "30")
+    let mut sum = 0
+    let mut fail = 0
+    for s in input {
+        match parse(&s) {
+            Some(x) => sum == sum + x,
+            None => fail == fail + 1,
+        }
+    }
+    print(sum)
+    print(fail)
+}

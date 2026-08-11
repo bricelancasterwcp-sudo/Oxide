@@ -1,0 +1,41 @@
+struct String {
+    bytes: Vec<Int>,
+}
+
+fn count_char(string: String, char: Int) -> Int {
+    let count = 0
+    let mut index = 0
+    while index < len(string.bytes) {
+        let byte = get(string.bytes, index)?
+        if byte == char {
+            count = count + 1
+        }
+        index = index + 1
+    }
+    count
+}
+
+fn count_chars(string: String) -> Vec<Int> {
+    let result = vec()
+    let mut index = 0
+    while index < len(string.bytes) {
+        let byte = get(string.bytes, index)?
+        result = push(result, byte)
+        index = index + 1
+    }
+    result
+}
+
+fn main() {
+    let s = String { bytes: push(push(vec(), 109), 105) }
+    let s2 = String { bytes: push(push(vec(), 115), 115) }
+    let s3 = String { bytes: push(push(vec(), 105), 115) }
+    let s4 = String { bytes: push(push(vec(), 105), 112) }
+    let s5 = String { bytes: push(push(vec(), 112), 105) }
+    let s6 = String { bytes: push(push(vec(), 112), 115) }
+    let strings = vec(s, s2, s3, s4, s5, s6)
+    let count_s = count_char(concat(s.bytes, s2.bytes), 115)
+    let distinct_chars = count_chars(clone(s))
+    print(count_s)
+    print(distinct_chars)
+}

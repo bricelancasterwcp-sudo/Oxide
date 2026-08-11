@@ -1,0 +1,25 @@
+fn is_prime(x: Int) -> Bool {
+    if x <= 1 {
+        return false
+    }
+    for i in 2.to(x - 1) {
+        if x % i == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn count_primes() -> Int {
+    let count = 0
+    for x in 2.to(99) {
+        if is_prime(x) {
+            let count = count + 1
+        }
+    }
+    count
+}
+
+fn main() {
+    print(count_primes())
+}

@@ -1,0 +1,21 @@
+struct DivisionResult { quotient: Int, divisor: Int }
+
+fn divide(dividend: Int, divisor: Int) -> DivisionResult {
+    if divisor == 0 {
+        DivisionResult(0, 0)
+    } else {
+        DivisionResult(dividend / divisor, divisor)
+    }
+}
+
+fn main() {
+    for divisor in vec(5, 0, 4) {
+        let result = divide(100, divisor)
+        if result.divisor == 0 {
+            print_str("undefined")
+        } else {
+            print(result.quotient)
+        }
+        print_str("\n")
+    }
+}

@@ -1,0 +1,16 @@
+struct VecInt { values: Vec<Int> }
+
+fn sort_ascending(v: VecInt) -> VecInt {
+    let mut sorted = v.values.clone()
+    while sorted.len() > 0 {
+        let min = sorted.iter().min().unwrap()
+        print(min)
+        sorted = sorted.into_iter().filter(x || x != min).collect()
+    }
+    VecInt(values == sorted)
+}
+
+fn main() {
+    let v = VecInt(values == vec(5, 3, 8, 1, 9, 2))
+    sort_ascending(v)
+}

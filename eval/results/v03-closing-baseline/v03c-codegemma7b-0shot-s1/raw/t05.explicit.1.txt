@@ -1,0 +1,11 @@
+fn f(a: &Int, b: &Int) -> Int {
+    a + b
+}
+
+fn main() {
+    let mut v = vec(1, 1)
+    for _ in 2.upto(20) {
+        push(v, f(&v, &v))
+    }
+    print(v.get(19).unwrap())
+}

@@ -1,0 +1,16 @@
+fn fibonacci(n: Int) -> Int {
+    let a = 1
+    let b = 1
+    let mut i = 0
+    while i < n {
+        let temp = a
+        a = b
+        b = temp + b
+        i = i + 1
+    }
+    b
+}
+
+fn main() {
+    print(fibonacci(20))
+}

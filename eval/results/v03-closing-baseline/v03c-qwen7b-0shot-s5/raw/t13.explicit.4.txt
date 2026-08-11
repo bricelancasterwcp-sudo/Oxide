@@ -1,0 +1,11 @@
+fn main() {
+    let level = "level".chars().eq("level".chars().rev()) || false
+    print(level)
+    drop level
+    let stereo = "stereo".chars().eq("stereo".chars().rev()) || false
+    print(stereo)
+    drop stereo
+    let rotor = "rotor".chars().eq("rotor".chars().rev()) || false
+    print(rotor)
+    drop rotor
+}

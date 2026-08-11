@@ -1,0 +1,6 @@
+fn main() {
+    let nums = push(push(push(push(push(push(vec(), 3), 6), 9), 12), 15), 18)
+    let sum = nums.get(0).unwrap() + nums.get(1).unwrap() + nums.get(2).unwrap() + nums.get(3).unwrap() + nums.get(4).unwrap() + nums.get(5).unwrap() + nums.get(6).unwrap() + nums.get(7).unwrap()
+    print(sum)
+    drop nums
+}

@@ -1,0 +1,10 @@
+use std::io::{stdin, StdinLock};
+
+fn main() {
+    let texts = vec!["level", "stereo", "rotor"];
+
+    for text in texts {
+        let is_palindrome = text.chars().rev().collect::<String>() == text;
+        println!("{}", is_palindrome);
+    }
+}

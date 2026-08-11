@@ -1,0 +1,3 @@
+fn main() {
+    let mut s = "stack".chars().rev().collect().to_string()
+}

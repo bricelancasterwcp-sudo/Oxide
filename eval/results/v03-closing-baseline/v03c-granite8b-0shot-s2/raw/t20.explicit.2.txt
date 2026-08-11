@@ -1,0 +1,31 @@
+fn pen_cost(pen: &Int, q: Int) -> Int {
+    pen * q
+}
+
+fn pad_cost(pad: &Int, q: Int) -> Int {
+    pad * q
+}
+
+fn ink_cost(ink: &Int, q: Int) -> Int {
+    ink * q
+}
+
+fn total_cost(p: Int, q: Int, i: Int) -> Int {
+    pen_cost(&p, q) + pad_cost(&q, i) + ink_cost(&i, p)
+}
+
+fn max_cost(p: Int, q: Int, i: Int) -> Str {
+    let total = total_cost(p, q, i)
+    if p > q && p > i {
+        "The Pen is the most expensive."
+    } else if q > p && q > i {
+        "The Pad is the most expensive."
+    } else {
+        "The Ink is the most expensive."
+    }
+}
+
+fn main() {
+    print(total_cost(3, 4, 5))
+    print(max_cost(3, 4, 5))
+}

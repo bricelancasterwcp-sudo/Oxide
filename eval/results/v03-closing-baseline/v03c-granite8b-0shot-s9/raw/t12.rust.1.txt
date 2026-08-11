@@ -1,0 +1,8 @@
+```rust
+fn main() {
+    let text = "stack";
+    let mut chars = text.chars().rev();
+    let result = chars.collect::<String>();
+    println!("{}", result);
+}
+```

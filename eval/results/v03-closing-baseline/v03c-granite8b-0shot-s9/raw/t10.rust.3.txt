@@ -1,0 +1,11 @@
+fn main() {
+    let mut count = 0;
+
+    for num in [4, 1, 7, 3, 9, 2].iter() {
+        if *num > 3 {
+            println!("{}", num);
+            count += 1;
+        }
+    }
+    println!("Kept {} values.", count);
+}

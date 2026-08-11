@@ -1,0 +1,57 @@
+fn main() {
+    let nums = parse_int("12") + parse_int("x") + parse_int("30")
+    let x = 15
+    if x > 0 {
+        print_str("positive")
+    } else {
+        print_str("non-positive")
+    }
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    if s == "x" {
+        None
+    } else {
+        Some(trunc(to_float(s).unwrap()))
+    }
+}
+
+fn print_str(s: Str) {
+    drop s
+}
+
+fn to_float(n: Int) -> Option<Float> {
+    if n == 0 {
+        None
+    } else {
+        Some(n.to_float())
+    }
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn vec() -> Vec<T> {
+    Vec()
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    v.push(x)
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn len(v: Vec<T>) -> Int {
+    v.len()
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    v.get(i)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let v = vec()
+    for i in a.to_int() + 1.to_int() + 1.to_int() * 1.to_int() - 1.to_int() + 1.to_int() * 1.to_int() - 1.to_int() * 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() - 1.to_int() * 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() * 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() * 1.to_int() + 1.to_int() * 1.to_int() + 1.to_int() - 1.to_int() * 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() * 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() * 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() * 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() * 1.to_int() - 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() * 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() * 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() * 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() * 1.to_int() - 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() - 1.to_int() + 1.to_int() + 1.to_int() - 1.to_int() +

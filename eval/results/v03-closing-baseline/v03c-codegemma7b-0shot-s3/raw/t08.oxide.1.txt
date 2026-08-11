@@ -1,0 +1,15 @@
+fn main() {
+    let mut v = vec(3, 8, -2, 12, 7)
+    let mut count = 0
+    let mut max = -1000000000
+    for x in v {
+        if x > 0 {
+            count = count + 1
+            if x > max {
+                max = x
+            }
+        }
+    }
+    print(count)
+    print(max)
+}

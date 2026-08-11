@@ -1,0 +1,58 @@
+fn main() {
+    let sum = reduce(0, range(0, 10), fnacc(i) == acc + i * i)
+    print(sum)
+}
+
+fn reduce(init: Int, v: Vec<Int>, f: Int, acc: Int) -> Int {
+    let result = match v {
+        Vec(refxs) => {
+            let mut acc = init
+            for x in refxs {
+                acc = f(x, acc)
+            }
+            acc
+        },
+        _ => init,
+    }
+    result
+}
+
+fn f(i: Int, acc: Int) -> Int {
+    acc + i * i
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.to_float() < b.to_float() {
+        v = push(v, i)
+    }
+    v
+}
+
+fn assert(b: Bool, s: Str) {
+    if !b {
+        print_str("assertion failed: ")
+        print_str(s)
+        print("\n")
+        break_
+    }
+}
+
+fn test_reduce() {
+    let s = reduce(0, vec(1, 2, 3), f, 0)
+    assert(s == 14, "reduce of squares failed")
+}
+
+fn test_range() {
+    assert(range(0, 10) == vec(0, 1, 2, 3, 4, 5, 6, 7, 8, 9), "bad range")
+    let v = range(0, 10)
+    for i in v {
+        print(i)
+    }
+    print("\n")
+}
+
+fn main() {
+    test_reduce()
+    test_range()
+}

@@ -1,0 +1,17 @@
+struct Prime { next: Option<Int> }
+
+fn next_prime(n: Int) -> Prime {
+    let p = if n < 2 { 2 } else { n + 1 }
+    let next = Some(p + 1)
+    Prime(next)
+}
+
+fn main() {
+    let mut p = next_prime(1)
+    let mut count = 0
+    while p.next < 100 {
+        p = next_prime(p.next)
+        count = count + 1
+    }
+    print(count)
+}

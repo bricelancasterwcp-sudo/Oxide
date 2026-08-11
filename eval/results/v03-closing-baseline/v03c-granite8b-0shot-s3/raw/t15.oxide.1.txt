@@ -1,0 +1,6 @@
+fn main() {
+    let x = parse_int("12")? + parse_int("x")? + parse_int("30")? + 0
+    print(x)
+    let y = len("foo") + len("bar")
+    print(y)
+}

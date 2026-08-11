@@ -1,0 +1,36 @@
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn is_prime(n: Int) -> Bool {
+    for i in range(2, n) {
+        if n % i == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn count_primes(n: Int) -> Int {
+    let primes = vec()
+    for i in range(2, n) {
+        if is_prime(i) {
+            let primes = push(primes, i)
+        }
+    }
+    sum_big(&primes, n - 1)
+}
+
+fn main() {
+    print(count_primes(100))
+}

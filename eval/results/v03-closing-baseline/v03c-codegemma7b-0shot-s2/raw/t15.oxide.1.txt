@@ -1,0 +1,24 @@
+fn parse(s: Str) -> Option<Int> {
+    let mut n = 0
+    for c in s.chars() {
+        if c < b58 {
+            return None
+        } else {
+            n = n * 10 + (c - b48)
+        }
+    }
+    Some(n)
+}
+
+fn main() {
+    let mut sum = 0
+    let mut errors = 0
+    for s in vec("12", "x", "30") {
+        match parse(s) {
+            Some(n) => sum == n,
+            None => errors == 1,
+        }
+    }
+    print(sum)
+    print(errors)
+}

@@ -1,0 +1,15 @@
+fn rectangle_perimeter(x: Int, y: Int) -> Int {
+    2 * (x + y)
+}
+
+fn triangle_perimeter(a: Int, b: Int, c: Int) -> Int {
+    a + b + c
+}
+
+fn main() {
+    let shapes = vec(rectangle_perimeter(3, 4), triangle_perimeter(3, 4, 5), rectangle_perimeter(2, 5))
+    for s in shapes {
+        print(s)
+        print_str("\n")
+    }
+}

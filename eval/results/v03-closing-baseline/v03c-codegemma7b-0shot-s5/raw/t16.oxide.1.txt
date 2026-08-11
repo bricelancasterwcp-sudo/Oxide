@@ -1,0 +1,302 @@
+fn main() {
+    let res = divide(100, 5).unwrap_or_else(undefined_behavior)
+    print(res)
+    print("\n")
+    let res = divide(100, 0).unwrap_or_else(undefined_behavior)
+    print(res)
+    print("\n")
+    let res = divide(100, 4).unwrap_or_else(undefined_behavior)
+    print(res)
+    print("\n")
+}
+
+fn divide(x: Int, y: Int) -> Option<Int> {
+    if y == 0 {
+        None
+    } else {
+        Some(trunc(x / y))
+    }
+}
+
+fn undefined_behavior(_: Int) {
+    print_str("undefined")
+}
+
+fn trunc(x: Float) -> Int {
+    if x >= 0.0 {
+        trunc(x)
+    } else {
+        trunc(x) - 1
+    }
+}
+
+fn print(x: Int) {
+    print_int(x)
+}
+
+fn print_int(x: Int) {
+    if x < 0 {
+        print("-")
+        print_int(-x)
+    } else {
+        if x >= 10 {
+            print_int(trunc(x / 10))
+            print_int(trunc(x % 10))
+        } else {
+            print(char(x + 48))
+        }
+    }
+}
+
+fn print_str(x: Str) {
+    for c in chars(x) {
+        print(c)
+    }
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = vec()
+    let mut idx = 0
+    while idx < str_len(s) {
+        result = push(result, str_len(s).to_string())
+        idx = idx + 1
+    }
+    result
+}
+
+fn str_len(s: Str) -> Int {
+    let mut result = 0
+    for _ in chars(s) {
+        result = result + 1
+    }
+    result
+}
+
+fn push(mutvec: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut idx = 0
+    while idx < len(mutvec) {
+        idx = idx + 1
+    }
+    mutvec = vec(mutvec, x)
+    mutvec
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let mut result = 0
+    for _ in v {
+        result = result + 1
+    }
+    result
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= len(v) {
+        None
+    } else {
+        Some(v(i))
+    }
+}
+
+fn vec() -> Vec<Int> {
+    let mut result = vec()
+    let mut idx = 0
+    while idx < result.len() {
+        idx = idx + 1
+    }
+    result
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut result = vec()
+    let mut idx = a
+    while idx < b {
+        result = push(result, idx)
+        idx = idx + 1
+    }
+    result
+}
+
+fn clone(x: Int) -> Int {
+    x
+}
+
+fn print_int(x: Int) {
+    if x < 0 {
+        print("-")
+        print_int(-x)
+    } else {
+        if x >= 10 {
+            print_int(trunc(x / 10))
+            print_int(trunc(x % 10))
+        } else {
+            print(char(x + 48))
+        }
+    }
+}
+
+fn print_str(x: Str) {
+    for c in chars(x) {
+        print(c)
+    }
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = vec()
+    let mut idx = 0
+    while idx < str_len(s) {
+        result = push(result, str_len(s).to_string())
+        idx = idx + 1
+    }
+    result
+}
+
+fn str_len(s: Str) -> Int {
+    let mut result = 0
+    for _ in chars(s) {
+        result = result + 1
+    }
+    result
+}
+
+fn push(mutvec: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut idx = 0
+    while idx < len(mutvec) {
+        idx = idx + 1
+    }
+    mutvec = vec(mutvec, x)
+    mutvec
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let mut result = 0
+    for _ in v {
+        result = result + 1
+    }
+    result
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= len(v) {
+        None
+    } else {
+        Some(v(i))
+    }
+}
+
+fn vec() -> Vec<Int> {
+    let mut result = vec()
+    let mut idx = 0
+    while idx < result.len() {
+        idx = idx + 1
+    }
+    result
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut result = vec()
+    let mut idx = a
+    while idx < b {
+        result = push(result, idx)
+        idx = idx + 1
+    }
+    result
+}
+
+fn clone(x: Int) -> Int {
+    x
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut result = vec()
+    let mut x = n
+    while x != 0 {
+        result = push(result, trunc(x % 10))
+        x = trunc(x / 10)
+    }
+    let mut idx = 0
+    let mut output = vec()
+    while idx < len(result) {
+        output = push(output, result(len(result) - idx - 1))
+        idx = idx + 1
+    }
+    output
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    let mut result = 0
+    let mut idx = 0
+    while idx < str_len(s) {
+        if s(idx) >= 48 && s(idx) <= 57 {
+            result = result * 10 + int_to_str(s(idx) - 48)
+            idx = idx + 1
+        } else {
+            return None
+        }
+    }
+    Some(result)
+}
+
+fn to_float(n: Int) -> Float {
+    if n >= 0 {
+        n
+    } else {
+        -n
+    }
+}
+
+fn main() {
+    let res = divide(100, 5).unwrap_or_else(undefined_behavior)
+    print(res)
+    print("\n")
+    let res = divide(100, 0).unwrap_or_else(undefined_behavior)
+    print(res)
+    print("\n")
+    let res = divide(100, 4).unwrap_or_else(undefined_behavior)
+    print(res)
+    print("\n")
+}
+
+fn divide(x: Int, y: Int) -> Option<Int> {
+    if y == 0 {
+        None
+    } else {
+        Some(trunc(x / y))
+    }
+}
+
+fn undefined_behavior(_: Int) {
+    print_str("undefined")
+}
+
+fn trunc(x: Float) -> Int {
+    if x >= 0.0 {
+        trunc(x)
+    } else {
+        trunc(x) - 1
+    }
+}
+
+fn print(x: Int) {
+    print_int(x)
+}
+
+fn print_int(x: Int) {
+    if x < 0 {
+        print("-")
+        print_int(-x)
+    } else {
+        if x >= 10 {
+            print_int(trunc(x / 10))
+            print_int(trunc(x % 10))
+        } else {
+            print(char(x + 48))
+        }
+    }
+}
+
+fn print_str(x: Str) {
+    for c in chars(x) {
+        print(c)
+    }
+}
+

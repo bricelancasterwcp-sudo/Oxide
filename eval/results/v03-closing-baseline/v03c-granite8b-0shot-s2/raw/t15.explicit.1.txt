@@ -1,0 +1,27 @@
+fn parse(s: Str) -> Option<Int> {
+    match s {
+        Str(c) => {
+            if c >= "0" && c <= "9" {
+                Some(c.to_int())
+            } else {
+                None
+            }
+        },
+        _ => None,
+    }
+}
+
+fn main() {
+    let s1 = "12"
+    let s2 = "x"
+    let s3 = "30"
+    let sum = match parse(s1) {
+        Some(n) => n,
+        _ => 0,
+    }
+    let count = match parse(s2) {
+        Some(_) => 1,
+        _ => 0,
+    }
+    print(sum + count)
+}

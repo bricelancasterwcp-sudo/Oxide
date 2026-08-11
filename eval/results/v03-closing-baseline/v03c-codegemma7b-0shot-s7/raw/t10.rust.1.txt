@@ -1,0 +1,16 @@
+fn main() {
+    let mut lst = vec![4, 1, 7, 3, 9, 2];
+    let mut count = 0;
+    lst.retain(|&x| {
+        if x > 3 {
+            count += 1;
+            true
+        } else {
+            false
+        }
+    });
+    for x in lst {
+        println!("{}", x);
+    }
+    println!("{}", count);
+}

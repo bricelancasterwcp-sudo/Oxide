@@ -1,0 +1,502 @@
+fn main() {
+    let nums = vec(5, 3, 8, 1, 9, 2)
+    let sorted = sort(nums)
+    for x in sorted {
+        print(x)
+    }
+    drop sorted
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn vec(x: Int, y: Int, z: Int, w: Int, u: Int, v: Int) -> Vec<Int> {
+    Vec(x, y, z, w, u, v)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    v.sort()
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.append(x)
+}
+
+fn sort(mutv: Vec<Int>)

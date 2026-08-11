@@ -1,0 +1,18 @@
+fn main() {
+    let mut numbers = vec![3, 8, -2, 12, 7];
+    let mut positive_count = 0;
+    let mut largest_value = std::i32::MIN;
+
+    for number in numbers.iter() {
+        if *number > 0 {
+            positive_count += 1;
+        }
+
+        if *number > largest_value {
+            largest_value = *number;
+        }
+    }
+
+    println!("Positive numbers: {}", positive_count);
+    println!("Largest value: {}", largest_value);
+}

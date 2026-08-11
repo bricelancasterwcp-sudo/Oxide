@@ -1,0 +1,44 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+
+fn triangle_perimeter(a: Int, b: Int, c: Int) -> Int {
+    a + b + c
+}
+
+fn rectangle_perimeter(a: Int, b: Int) -> Int {
+    2 * a + 2 * b
+}
+
+fn main() {
+    let r1 = rectangle_perimeter(3, 4)
+    let r2 = rectangle_perimeter(2, 5)
+    let t = triangle_perimeter(3, 4, 5)
+    print(r1)
+    print(r2)
+    print(t)
+}

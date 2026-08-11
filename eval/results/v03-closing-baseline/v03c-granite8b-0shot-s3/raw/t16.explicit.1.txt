@@ -1,0 +1,13 @@
+fn main() {
+    let a = 100
+    let b = a / 5
+    print(b)
+    drop b
+    let c = a / 0
+    print(c)
+    drop c
+    let d = 100
+    let e = d / 4
+    print(e)
+    drop e
+}

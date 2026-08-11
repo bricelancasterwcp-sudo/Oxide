@@ -1,0 +1,383 @@
+fn main() {
+    ASF  // missing ;
+}
+
+fn square(x: Int) -> Int {
+    ASF  // missing {
+    ASF  // missing return
+    ASF  // missing }
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+}
+
+fn main() {
+    ASF  // missing (
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing vec()
+    ASF  // missing ;
+}
+
+fn main() {
+    ASF  // missing for
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing x
+    ASF  // missing in
+}
+
+fn main() {
+    ASF  // missing range
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing return
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing return
+    ASF  // missing }
+}
+
+fn main() {
+    ASF  // missing print
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing print
+    ASF  // missing (
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing print
+    ASF  // missing (
+}
+
+fn main() {
+    ASF  // missing return
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing return
+    ASF  // missing }
+}
+
+fn main() {
+    ASF  // missing return
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing return
+    ASF  // missing }
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn sum_of_squares() -> Int {
+    ASF  // missing let
+    ASF  // missing =
+}
+
+fn main() {
+    ASF

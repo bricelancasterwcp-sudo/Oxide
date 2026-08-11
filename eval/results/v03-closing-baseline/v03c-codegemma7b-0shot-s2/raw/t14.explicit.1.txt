@@ -1,0 +1,15 @@
+fn main() {
+    let str = "mississippi".to_string()
+    let mut count = 0
+    let mut distinct = 0
+    for c in str.chars() {
+        if c == "s".chars().next().unwrap() {
+            count = count + 1
+        }
+        if !distinct.contains(&c) {
+            distinct = distinct + 1
+        }
+    }
+    print(count)
+    print(distinct)
+}

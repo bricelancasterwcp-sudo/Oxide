@@ -1,0 +1,14 @@
+fn main() {
+    let mut a: u64 = 1;
+    let mut b: u64 = 1;
+    let mut count: u64 = 0;
+
+    while count < 19 {
+        let temp = a;
+        a = b;
+        b += temp;
+        count += 1;
+    }
+
+    println!("{}", a);
+}

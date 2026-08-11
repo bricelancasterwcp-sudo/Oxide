@@ -1,0 +1,28 @@
+struct Item { name: Str, price: Int, quantity: Int }
+
+fn calculate_cost(items: Vec<Item>) -> Int {
+    let mut cost = 0
+    for item in items {
+        cost = add(cost, mul(item.price, item.quantity))
+    }
+    cost
+}
+
+fn find_most_expensive(items: Vec<Item>) -> Str {
+    let mut max = 0
+    let mut best = ""
+    for item in items {
+        let cost = mul(item.price, item.quantity)
+        if cost > max {
+            max = cost
+            best = item.name
+        }
+    }
+    best
+}
+
+fn main() {
+    let items = vec(Item { name: "pen", price: 3, quantity: 4 }, Item { name: "pad", price: 9, quantity: 2 }, Item { name: "ink", price: 5, quantity: 3 })
+    print(calculate_cost(items))
+    print(find_most_expensive(items))
+}

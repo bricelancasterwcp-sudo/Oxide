@@ -1,0 +1,10 @@
+fn term(n: Int) -> Int {
+    if n < 3 {
+        return 1
+    }
+    term(n - 1) + term(n - 2)
+}
+
+fn main() {
+    print(term(20))
+}

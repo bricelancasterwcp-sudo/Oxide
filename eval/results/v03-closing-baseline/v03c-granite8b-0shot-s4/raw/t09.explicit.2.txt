@@ -1,0 +1,195 @@
+fn main() {
+    let mut list = push(push(push(push(vec(), 1), 2), 3), 4)
+    for x in &mut * list {
+        print(x)
+        drop x
+    }
+}
+
+fn push(mut: Vec<Int>, x: Int) -> Vec<Int> {
+    mut
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn print(x: Int) {
+    x
+}
+
+fn drop_value(x: Int) {
+    x
+}
+
+fn drop_reference(x: &Int) {
+    x
+}
+
+fn drop_vector(x: Vec<Int>) {
+    x
+}
+
+fn drop_mut_vector(x: &Vec<Int>) {
+    x
+}
+
+fn clone_value(x: Int) -> Int {
+    x
+}
+
+fn clone_reference(x: &Int) -> Int {
+    x
+}
+
+fn clone_vector(x: Vec<Int>) -> Vec<Int> {
+    x
+}
+
+fn clone_mut_vector(x: &Vec<Int>) -> Vec<Int> {
+    x
+}
+
+fn clone_box_value(x: Box<Int>) -> Box<Int> {
+    x
+}
+
+fn clone_box_reference(x: &Box<Int>) -> Box<Int> {
+    x
+}
+
+fn clone_box_vector(x: Box<Vec<Int>>) -> Box<Vec<Int>> {
+    x
+}
+
+fn clone_box_mut_vector(x: &Box<Vec<Int>>) -> Box<Vec<Int>> {
+    x
+}
+
+fn clone_option_value(x: Option<Int>) -> Option<Int> {
+    x
+}
+
+fn clone_option_reference(x: &Option<Int>) -> Option<Int> {
+    x
+}
+
+fn clone_option_box_value(x: Option<Box<Int>>) -> Option<Box<Int>> {
+    x
+}
+
+fn clone_option_box_reference(x: &Option<Box<Int>>) -> Option<Box<Int>> {
+    x
+}
+
+fn clone_option_box_vector(x: Option<Box<Vec>>) -> Option<Box<Vec>> {
+    x
+}
+
+fn clone_option_box_mut_vector(x: &Option<Box<Vec>>) -> Option<Box<Vec>> {
+    x
+}
+
+fn clone_result_value(x: Result<Int, Int>) -> Result<Int, Int> {
+    x
+}
+
+fn clone_result_reference(x: &Result<Int, Int>) -> Result<Int, Int> {
+    x
+}
+
+fn clone_result_box_value(x: Result<Box<Int>, Int>) -> Result<Box<Int>, Int> {
+    x
+}
+
+fn clone_result_box_reference(x: &Result<Box<Int>, Int>) -> Result<Box<Int>, Int> {
+    x
+}
+
+fn clone_result_box_vector(x: Result<Box<Vec>, Int>) -> Result<Box<Vec>, Int> {
+    x
+}
+
+fn clone_result_box_mut_vector(x: &Result<Box<Vec>, Int>) -> Result<Box<Vec>, Int> {
+    x
+}
+
+fn clone_tuple_value(x: Int, y: Int) -> Int {
+    x
+}
+
+fn clone_tuple_reference(x: &Int, y: &Int) -> Int {
+    x
+}
+
+fn clone_tuple_box_value(x: Box<Int>, y: Box<Int>) -> Box<Int> {
+    x
+}
+
+fn clone_tuple_box_reference(x: &Box<Int>, y: &Box<Int>) -> Box<Int> {
+    x
+}
+
+fn clone_tuple_box_vector(x: Box<Vec<Int>>, y: Box<Vec<Int>>) -> Box<Vec<Int>> {
+    x
+}
+
+fn clone_tuple_box_mut_vector(x: &Box<Vec<Int>>, y: &Box<Vec<Int>>) -> Box<Vec<Int>> {
+    x
+}
+
+fn clone_struct_value(x: Int, y: Int) -> Int {
+    x
+}
+
+fn clone_struct_reference(x: &Int, y: &Int) -> Int {
+    x
+}
+
+fn clone_struct_box_value(x: Box<Int>, y: Box<Int>) -> Box<Int> {
+    x
+}
+
+fn clone_struct_box_reference(x: &Box<Int>, y: &Box<Int>) -> Box<Int> {
+    x
+}
+
+fn clone_struct_box_vector(x: Box<Vec<Int>>, y: Box<Vec<Int>>) -> Box<Vec<Int>> {
+    x
+}
+
+fn clone_struct_box_mut_vector(x: &Box<Vec<Int>>, y: &Box<Vec<Int>>) -> Box<Vec<Int>> {
+    x
+}
+
+fn clone_enum_value(x: Int, y: Int) -> Int {
+    x
+}
+
+fn clone_enum_reference(x: &Int, y: &Int) -> Int {
+    x
+}
+
+fn clone_enum_box_value(x: Box<Int>, y: Box<Int>) -> Box<Int> {
+    x
+}
+
+fn clone_enum_box_reference(x: &Box<Int>, y: &Box<Int>) -> Box<Int> {
+    x
+}
+
+fn clone_enum_box_vector(x: Box<Vec<Int>>, y: Box<Vec<Int>>) -> Box<Vec<Int>> {
+    x
+}
+
+fn clone_enum_box_mut_vector(x: &Box<Vec<Int>>, y: &Box<Vec<Int>>) -> Box<Vec<Int>> {
+    x
+}
+
+fn main() {
+    let mut list = push(push(push(push(vec(), 1), 2), 3), 4)
+    for x in &mut * list {
+        print(x)
+        drop x
+    }
+}

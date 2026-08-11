@@ -1,0 +1,14 @@
+fn main() {
+    let mut list = push(push(push(push(vec(), 1), 2), 3), 4)
+    let mut last = 0
+    while len(&list) > 0 {
+        let item = pop(&mut_list)
+        last = item
+        print_str("Item: ")
+        print(item)
+        print_str("\n")
+    }
+    print_str("Last: ")
+    print(last)
+    print_str("\n")
+}

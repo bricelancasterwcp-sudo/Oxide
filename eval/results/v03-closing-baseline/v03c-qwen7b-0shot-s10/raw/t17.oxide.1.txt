@@ -1,0 +1,22 @@
+struct List { items: Vec<Int> }
+
+fn get_item(list: List, pos: Int) -> Int {
+    let item = get(list.items, pos)?
+    item
+}
+
+fn main() {
+    let list = List { items: vec(10, 20, 30) }
+    let item1 = get_item(list, 1)
+    if item1 != -1 {
+        print(item1)
+    } else {
+        print(-1)
+    }
+    let item5 = get_item(list, 5)
+    if item5 != -1 {
+        print(item5)
+    } else {
+        print(-1)
+    }
+}

@@ -1,0 +1,29 @@
+fn count_positive(v: &Vec<Int>) -> Int {
+    let mut count = 0
+    for x in v {
+        if x > 0 {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn max_value(v: &Vec<Int>) -> Option<Int> {
+    let mut max = None
+    for x in v {
+        match max {
+            None => max == Some(x),
+            Some(y) => if x > y { max == Some(x) } else { max == Some(y) },
+        }
+    }
+    max
+}
+
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7)
+    let count = count_positive(&nums)
+    print(count)
+    let max = max_value(&nums)
+    print(max?)
+    drop nums
+}

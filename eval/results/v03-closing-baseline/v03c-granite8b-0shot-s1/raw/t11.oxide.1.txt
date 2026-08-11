@@ -1,0 +1,17 @@
+struct Task { name: Str, points: Int }
+
+fn main() {
+    let tasks = vec()
+    let points = 0
+    for x in 5.downto(1) {
+        tasks = push(tasks, Task { name: int_to_str(x), points: x })
+        points = points + x
+    }
+    for t in tasks {
+        print_str(t.name)
+        print_str(" ")
+        print(t.points)
+        print("\n")
+    }
+    print(points)
+}

@@ -1,0 +1,254 @@
+fn print_int(n: Int) {
+    print(int_to_str(n))
+}
+
+fn main() {
+    let rect = Rectangle { width: 3, height: 4 }
+    let triangle = Triangle { side1: 3, side2: 4, side3: 5 }
+    let square = Rectangle { width: 2, height: 5 }
+    print_int(perimeter(&rect))
+    print_int(perimeter(&triangle))
+    print_int(perimeter(&square))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    side1: Int,
+    side2: Int,
+    side3: Int,
+}
+
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        Shape(r) => 2 * (r.width + r.height),
+        Triangle(t) => t.side1 + t.side2 + t.side3,
+    }
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn area(shape: &Shape) -> Int {
+    match shape {
+        Shape(r) => r.width * r.height,
+        Triangle(t) => {
+            let s = (t.side1 + t.side2 + t.side3) / 2
+            s * (s - t.side1) * (s - t.side2) * (s - t.side3)
+        },
+    }
+}
+
+enum TriangleSides {
+    Side1(Int),
+    Side2(Int),
+    Side3(Int),
+}
+
+enum Shape2 {
+    Rectangle(Rectangle),
+    Triangle(TriangleSides, TriangleSides, TriangleSides),
+}
+
+fn perimeter2(shape: &Shape2) -> Int {
+    match shape {
+        Shape2(r) => 2 * (r.width + r.height),
+        Triangle(s1, s2, s3) => s1 + s2 + s3,
+    }
+}
+
+fn area2(shape: &Shape2) -> Int {
+    match shape {
+        Shape2(r) => r.width * r.height,
+        Triangle(s1, s2, s3) => {
+            let s = (s1 + s2 + s3) / 2
+            s * (s - s1) * (s - s2) * (s - s3)
+        },
+    }
+}
+
+enum Shape3 {
+    Rectangle(Rectangle),
+    Triangle(Int, Int, Int),
+}
+
+fn perimeter3(shape: &Shape3) -> Int {
+    match shape {
+        Shape3(r) => 2 * (r.width + r.height),
+        Triangle(s1, s2, s3) => s1 + s2 + s3,
+    }
+}
+
+fn area3(shape: &Shape3) -> Int {
+    match shape {
+        Shape3(r) => r.width * r.height,
+        Triangle(s1, s2, s3) => {
+            let s = (s1 + s2 + s3) / 2
+            s * (s - s1) * (s - s2) * (s - s3)
+        },
+    }
+}
+
+enum Shape4 {
+    Rectangle(Rectangle),
+    Triangle(TriangleSides),
+}
+
+fn perimeter4(shape: &Shape4) -> Int {
+    match shape {
+        Shape4(r) => 2 * (r.width + r.height),
+        Triangle(sides) => sides.side1 + sides.side2 + sides.side3,
+    }
+}
+
+fn area4(shape: &Shape4) -> Int {
+    match shape {
+        Shape4(r) => r.width * r.height,
+        Triangle(sides) => {
+            let s = (sides.side1 + sides.side2 + sides.side3) / 2
+            s * (s - sides.side1) * (s - sides.side2) * (s - sides.side3)
+        },
+    }
+}
+
+enum Shape5 {
+    Rectangle(Rectangle),
+    Triangle(TriangleSides),
+}
+
+fn perimeter5(shape: &Shape5) -> Int {
+    match shape {
+        Shape5(r) => 2 * (r.width + r.height),
+        Triangle(sides) => sides.side1 + sides.side2 + sides.side3,
+    }
+}
+
+fn area5(shape: &Shape5) -> Int {
+    match shape {
+        Shape5(r) => r.width * r.height,
+        Triangle(sides) => {
+            let s = (sides.side1 + sides.side2 + sides.side3) / 2
+            s * (s - sides.side1) * (s - sides.side2) * (s - sides.side3)
+        },
+    }
+}
+
+enum Shape6 {
+    Rectangle(Rectangle),
+    Triangle(TriangleSides),
+}
+
+fn perimeter6(shape: &Shape6) -> Int {
+    match shape {
+        Shape6(r) => 2 * (r.width + r.height),
+        Triangle(sides) => sides.side1 + sides.side2 + sides.side3,
+    }
+}
+
+fn area6(shape: &Shape6) -> Int {
+    match shape {
+        Shape6(r) => r.width * r.height,
+        Triangle(sides) => {
+            let s = (sides.side1 + sides.side2 + sides.side3) / 2
+            s * (s - sides.side1) * (s - sides.side2) * (s - sides.side3)
+        },
+    }
+}
+
+enum Shape7 {
+    Rectangle(Rectangle),
+    Triangle(TriangleSides),
+}
+
+fn perimeter7(shape: &Shape7) -> Int {
+    match shape {
+        Shape7(r) => 2 * (r.width + r.height),
+        Triangle(sides) => sides.side1 + sides.side2 + sides.side3,
+    }
+}
+
+fn area7(shape: &Shape7) -> Int {
+    match shape {
+        Shape7(r) => r.width * r.height,
+        Triangle(sides) => {
+            let s = (sides.side1 + sides.side2 + sides.side3) / 2
+            s * (s - sides.side1) * (s - sides.side2) * (s - sides.side3)
+        },
+    }
+}
+
+enum Shape8 {
+    Rectangle(Rectangle),
+    Triangle(TriangleSides),
+}
+
+fn perimeter8(shape: &Shape8) -> Int {
+    match shape {
+        Shape8(r) => 2 * (r.width + r.height),
+        Triangle(sides) => sides.side1 + sides.side2 + sides.side3,
+    }
+}
+
+fn area8(shape: &Shape8) -> Int {
+    match shape {
+        Shape8(r) => r.width * r.height,
+        Triangle(sides) => {
+            let s = (sides.side1 + sides.side2 + sides.side3) / 2
+            s * (s - sides.side1) * (s - sides.side2) * (s - sides.side3)
+        },
+    }
+}
+
+enum Shape9 {
+    Rectangle(Rectangle),
+    Triangle(TriangleSides),
+}
+
+fn perimeter9(shape: &Shape9) -> Int {
+    match shape {
+        Shape9(r) => 2 * (r.width + r.height),
+        Triangle(sides) => sides.side1 + sides.side2 + sides.side3,
+    }
+}
+
+fn area9(shape: &Shape9) -> Int {
+    match shape {
+        Shape9(r) => r.width * r.height,
+        Triangle(sides) => {
+            let s = (sides.side1 + sides.side2 + sides.side3) / 2
+            s * (s - sides.side1) * (s - sides.side2) * (s - sides.side3)
+        },
+    }
+}
+
+enum Shape10 {
+    Rectangle(Rectangle),
+    Triangle(TriangleSides),
+}
+
+fn perimeter10(shape: &Shape10) -> Int {
+    match shape {
+        Shape10(r) => 2 * (r.width + r.height),
+        Triangle(sides) => sides.side1 + sides.side2 + sides.side3,
+    }
+}
+
+fn area10(shape: &Shape10) -> Int {
+    match shape {
+        Shape10(r) => r.width * r.height,
+        Triangle(sides) => {
+            let s = (sides.side1 + sides.side2 + sides.side3) / 2
+            s * (s - sides.side1) * (s - sides.side2) * (s - sides.side3)
+        },
+    }
+}
+
+enum Shape11 {
+    Rectangle(Rectangle),
+    Triangle(TriangleSides),
+}

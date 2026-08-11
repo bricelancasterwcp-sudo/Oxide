@@ -1,0 +1,15 @@
+fn main() {
+    let strings = vec!["12", "x", "30"];
+    let mut sum = 0;
+    let mut failed_count = 0;
+
+    for s in strings {
+        match s.parse::<i32>() {
+            Ok(num) => sum += num,
+            Err(_) => failed_count += 1,
+        }
+    }
+
+    println!("Sum: {}", sum);
+    println!("Failed count: {}", failed_count);
+}

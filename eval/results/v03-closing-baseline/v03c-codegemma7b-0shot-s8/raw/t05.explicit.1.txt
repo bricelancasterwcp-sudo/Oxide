@@ -1,0 +1,11 @@
+fn sum(v: &Vec<Int>, i: Int) -> Int {
+    v.get(i - 1).unwrap() + v.get(i - 2).unwrap()
+}
+
+fn main() {
+    let mut seq = vec(1, 1)
+    for i in 20 {
+        seq = push(seq, sum(&seq, i))
+    }
+    print(seq.get(19).unwrap())
+}

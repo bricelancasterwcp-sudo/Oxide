@@ -1,0 +1,16 @@
+struct Point { x: Int, y: Int }
+
+fn len(v: Vec<Int>) -> Int {
+    let mut acc = 0
+    for x in v {
+        acc = acc + 1
+    }
+    acc
+}
+
+fn main() {
+    print(len(push(push(vec(), 3), 42)))
+    let a = Point { x: 1, y: 2 }
+    let b = Point { x: 3, y: 4 }
+    print(a.x + b.y)
+}

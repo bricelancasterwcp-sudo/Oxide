@@ -1,0 +1,14 @@
+fn reverse_print(v: &Vec<Int>) {
+    let mut i = v.len() - 1
+    while i >= 0 {
+        print(v.get(i).unwrap())
+        print_str("\n")
+        i = i - 1
+    }
+}
+
+fn main() {
+    let nums = push(push(push(push(vec(), 5), 4), 3), 2)
+    reverse_print(&nums)
+    drop nums
+}

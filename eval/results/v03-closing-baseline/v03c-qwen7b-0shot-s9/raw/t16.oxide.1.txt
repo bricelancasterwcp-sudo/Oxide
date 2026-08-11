@@ -1,0 +1,9 @@
+fn main() {
+    let divisors = vec(5, 0, 4)
+    for d in divisors {
+        match 100 / d {
+            Some(q) => print(q),
+            None => print_str("undefined"),
+        }
+    }
+}

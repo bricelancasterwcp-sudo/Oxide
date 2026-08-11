@@ -1,0 +1,36 @@
+fn main() {
+    let s1 = "12"
+    let s2 = "x"
+    let s3 = "30"
+    let mut sum = 0
+    let mut count = 0
+    let a = parse_int(s1)
+    let b = parse_int(s2)
+    let c = parse_int(s3)
+    match a {
+        Some(n) => {
+            sum = sum + n
+        },
+        None => {
+            count = count + 1
+        },
+    }
+    match b {
+        Some(n) => {
+            sum = sum + n
+        },
+        None => {
+            count = count + 1
+        },
+    }
+    match c {
+        Some(n) => {
+            sum = sum + n
+        },
+        None => {
+            count = count + 1
+        },
+    }
+    print(sum)
+    print(count)
+}

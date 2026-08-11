@@ -1,0 +1,22 @@
+fn lookup(list: Vec<Int>, pos: Int) -> Option<Int> {
+    if pos < 0 || pos >= len(&list) {
+        return None
+    }
+    get(&list, pos)
+}
+
+fn main() {
+    let list = push(push(vec(), 10), 20)
+    print(lookup(clone(&list), 0).unwrap())
+    print(lookup(clone(&list), 1).unwrap())
+    print(lookup(clone(&list), 2).unwrap())
+    print(lookup(clone(&list), 3).unwrap())
+    print(lookup(clone(&list), 4).unwrap())
+    print(lookup(clone(&list), 5).unwrap())
+    print(lookup(clone(&list), 6).unwrap())
+    print(lookup(clone(&list), 7).unwrap())
+    print(lookup(clone(&list), 8).unwrap())
+    print(lookup(clone(&list), 9).unwrap())
+    print(lookup(clone(&list), 10).unwrap())
+    print(lookup(clone(&list), 11).unwrap())
+}

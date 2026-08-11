@@ -1,0 +1,340 @@
+fn is_palindrome(s: Str) -> Bool {
+    let reversed: Str = chars(s).map(x, int_to_str(x)).join("")
+    s == reversed
+}
+
+fn main() {
+    print(is_palindrome("level"))
+    print(is_palindrome("stereo"))
+    print(is_palindrome("rotor"))
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    s.split("").filter(x, x != "").collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str>) -> Str {
+    xs.join(sep)
+}
+
+fn split(s: Str, sep: Str) -> Vec<Str> {
+    s.split(sep).collect()
+}
+
+fn filter(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.filter(f).collect()
+}
+
+fn collect(xs: Vec<Str>) -> Vec<Str> {
+    xs.collect()
+}
+
+fn map(f: FnStr, xs: Vec<Str>) -> Vec<Str> {
+    xs.map(f)
+}
+
+fn join(sep: Str, xs: Vec<Str

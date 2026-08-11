@@ -1,0 +1,18 @@
+fn reverse(list: &Vec<Int>) -> Vec<Int> {
+    let mut reversed = vec()
+    for i in range(0, len(list)) {
+        reversed = push(reversed, get(list, len(list) - 1 - i).unwrap())
+    }
+    reversed
+}
+
+fn main() {
+    let original = vec(1, 2, 3, 4, 5)
+    let reversed = reverse(&original)
+    for i in range(0, len(&reversed)) {
+        print(get(&reversed, i).unwrap())
+        print_str("\n")
+    }
+    drop original
+    drop reversed
+}

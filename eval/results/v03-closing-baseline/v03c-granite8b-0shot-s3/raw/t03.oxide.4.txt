@@ -1,0 +1,12 @@
+fn gcd(muta: Int, mutb: Int) -> Int {
+    while b != 0 {
+        let t = b
+        b = muta % t
+        muta = t
+    }
+    muta
+}
+
+fn main() {
+    print(gcd(252, 105))
+}

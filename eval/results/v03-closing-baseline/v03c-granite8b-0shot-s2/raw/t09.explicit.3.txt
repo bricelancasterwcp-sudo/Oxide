@@ -1,0 +1,10 @@
+fn print(x: &Int) {
+    print_str(&int_to_str * x)
+}
+
+fn main() {
+    let list = range(1, 6)
+    for i in range(5, 0) {
+        print(&get * &list, i)
+    }
+}

@@ -1,0 +1,13 @@
+fn gcd(mutua: Int, nonmutua: Int) -> Int {
+    let mut largest = nonmutua
+    while largest > 0 {
+        let remainder = mutua % largest
+        mutua = largest
+        largest = remainder
+    }
+    mutua
+}
+
+fn main() {
+    print(gcd(7, 3))
+}

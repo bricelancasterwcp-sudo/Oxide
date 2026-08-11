@@ -1,0 +1,7 @@
+fn main() {
+    let numbers = vec(3, 8, -2, 12, 7)
+    let positive = numbers.iter().filter(n || n > 0).count()
+    let largest = numbers.iter().fold(numbers.first().unwrap(), fmax)
+    print(positive)
+    print(largest)
+}

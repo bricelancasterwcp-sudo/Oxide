@@ -1,0 +1,3 @@
+fn main() {
+    print_str(level) == print_str(level.chars().rev().collect()) && print_str(stereo) == print_str(stereo.chars().rev().collect()) && print_str(rotor) == print_str(rotor.chars().rev().collect())
+}

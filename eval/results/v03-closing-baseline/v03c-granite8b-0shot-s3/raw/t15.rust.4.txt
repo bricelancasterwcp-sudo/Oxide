@@ -1,0 +1,7 @@
+fn main() {
+    let sum: i32 = std::env::args().filter_map(|arg| arg.parse().ok()).sum();
+    let count = std::env::args().filter_map(|arg| arg.parse().err()).count();
+
+    println!("{}", sum);
+    println!("{}", count);
+}

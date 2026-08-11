@@ -1,0 +1,51 @@
+fn main() {
+    let divisor = 5
+    let result = 100 / divisor
+    print(result)
+    let divisor = 0
+    let result = 100 / divisor
+    print(result)
+    let divisor = 4
+    let result = 100 / divisor
+    print(result)
+}
+
+fn print(x: Int) {
+    if x == undefined {
+        print("undefined")
+    } else {
+        print(x)
+    }
+}
+
+fn print(x: Str) {
+    print(x)
+}
+
+fn divide(a: Int, b: Int) -> Int {
+    if b == 0 {
+        undefined
+    } else {
+        a / b
+    }
+}
+
+fn undefined() -> Int {
+    unreachable()
+}
+
+fn unreachable() -> Int {
+    panic("unreachable")
+}
+
+fn main() {
+    let divisor = 5
+    let result = divide(100, divisor)
+    print(result)
+    let divisor = 0
+    let result = divide(100, divisor)
+    print(result)
+    let divisor = 4
+    let result = divide(100, divisor)
+    print(result)
+}

@@ -1,0 +1,25 @@
+fn is_palindrome(word: String) -> String {
+    let mut start = 0
+    let mut end = word.len() - 1
+    let mut result = String
+    while start <= end {
+        if word.chars().nth(start) != word.chars().nth(end) {
+            result = "false".to_string()
+            break
+        } else {
+            result = "true".to_string()
+        }
+        start = start + 1
+        end = end - 1
+    }
+    result
+}
+
+fn main() {
+    let word_level = "level".to_string()
+    let word_stereo = "stereo".to_string()
+    let word_rotor = "rotor".to_string()
+    println(is_palindrome(word_level))
+    println(is_palindrome(word_stereo))
+    println(is_palindrome(word_rotor))
+}

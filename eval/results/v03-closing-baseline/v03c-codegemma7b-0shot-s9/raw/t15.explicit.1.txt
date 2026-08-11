@@ -1,0 +1,17 @@
+fn main() {
+    let input = vec_str("12", "x", "30")
+    let mut sum = 0
+    let mut fail = 0
+    for word in &input {
+        match parse_int(word) {
+            Some(n) => {
+                sum = sum + n
+            },
+            None => {
+                fail = fail + 1
+            },
+        }
+    }
+    print(sum)
+    print(fail)
+}

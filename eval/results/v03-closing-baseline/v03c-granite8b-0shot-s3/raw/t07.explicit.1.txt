@@ -1,0 +1,14 @@
+fn main() {
+    let mut list = vec()
+    let mut i = 3
+    while i < 25 {
+        push(&mut, i)
+        i = i + 3
+    }
+    let mut total = 0
+    for item in &list {
+        total = total + item
+    }
+    print(total)
+    drop list
+}

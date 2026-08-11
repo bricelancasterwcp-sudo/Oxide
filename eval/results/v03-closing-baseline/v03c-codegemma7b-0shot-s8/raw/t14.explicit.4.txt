@@ -1,0 +1,365 @@
+fn count_s(s: &Str) -> Int {
+    let mut count = 0
+    for c in chars(s) {
+        if c == "s" {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn count_distinct(s: &Str) -> Int {
+    let mut seen: Vec<Str> = vec()
+    for c in chars(s) {
+        if !contains(&seen, &c) {
+            seen = push(seen, c)
+        }
+    }
+    len(&seen)
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_s(text))
+    print(count_distinct(text))
+    drop_all(&text)
+    print_newline()
+    drop_all(&text)
+    print_newline()
+}
+
+fn contains(v: &Vec<Str>, x: &Str) -> Bool {
+    for i in 0 < len(v) {
+        if v.get(i) == x {
+            return true
+        }
+    }
+    false
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut result: Vec<Str> = vec()
+    for i in 0 < str_len(s) {
+        result = push(result, s.get(i))
+    }
+    result
+}
+
+fn len(v: &Vec<Str>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn push(v: Vec<Str>, x: &Str) -> Vec<Str> {
+    let mut result = v
+    result.append(x)
+    result
+}
+
+fn get(v: &Vec<Str>, i: Int) -> Option<Str> {
+    if i < len(v) {
+        Some(v.get(i))
+    } else {
+        None
+    }
+}
+
+fn to_float(n: Int) -> Float {
+    n * 1.0
+}
+
+fn trunc(x: Float) -> Int {
+    if x < 0 {
+        (x - 0.5)
+    } else {
+        (x + 0.5)
+    }
+}
+
+fn print_str(s: &Str) {
+    println(s)
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    match s.parse() {
+        Ok(n) => Some(n),
+        Err(_) => None,
+    }
+}
+
+fn clone(x: &Str) -> Str {
+    x.to_string()
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn print_newline() {
+    print_str("\n")
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    a.to_string() + &b
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut result: Vec<Int> = vec()
+    for i in a < b {
+        result = push(result, i)
+    }
+    result
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Vec<Str>) {
+    for x in v {
+        drop

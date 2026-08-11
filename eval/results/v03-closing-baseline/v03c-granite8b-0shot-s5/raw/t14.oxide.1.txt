@@ -1,0 +1,290 @@
+fn main() {
+    justo_print(num_occurrences("mississippi", "s") * num_distinct_chars("mississippi"))
+}
+
+fn num_occurrences(s: Str, c: Str) -> Int {
+    let mut count: Int = 0
+    for char in s.chars() {
+        if char == c {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn num_distinct_chars(s: Str) -> Int {
+    let mut seen = vec()
+    let mut count: Int = 0
+    for char in s.chars() {
+        if !seen.contains(char) {
+            seen = push(seen, char)
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn just_print(i: Int) {
+    print(i)
+}
+
+fn print(i: Int) {
+    print_str("i = ")
+    print_int(i)
+    print_str("\n")
+}
+
+fn print_str(s: Str) {
+    oxide_runtime_print_str(s)
+}
+
+fn print_int(i: Int) {
+    print_str(int_to_str(i))
+}
+
+fn oxide_runtime_print_str(s: Str) {
+    TODO_oxide_runtime_print_str(s)
+}
+
+fn oxide_runtime_print_int(i: Int) {
+    TODO_oxide_runtime_print_int(i)
+}
+
+fn todo() {
+    TODO_oxide()
+}
+
+enum WrapperKind {
+    Ok,
+    Err,
+}
+
+fn return_or_exit(kind: WrapperKind, v: Int) -> Int {
+    match kind {
+        WrapperKind_Ok => {
+            v
+        },
+        WrapperKind_Err => {
+            exit(v)
+        },
+    }
+}
+
+fn exit(code: Int) -> Int {
+    TODO_oxide_exit(code)
+}
+
+fn clone(x: Int) -> Int {
+    TODO_oxide_clone(x)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    TODO_oxide_concat(a, b)
+}
+
+fn len(v: Str) -> Int {
+    TODO_oxide_len(v)
+}
+
+fn chars(s: Str) -> Vec<Int> {
+    TODO_oxide_chars(s)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    TODO_oxide_parse_int(s)
+}
+
+fn str_to_int(s: Str) -> Option<Int> {
+    TODO_oxide_str_to_int(s)
+}
+
+fn to_float(x: Int) -> Float {
+    TODO_oxide_to_float(x)
+}
+
+fn trunc(x: Float) -> Int {
+    TODO_oxide_trunc(x)
+}
+
+fn range(from: Int, to: Int) -> Vec<Int> {
+    TODO_oxide_range(from, to)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    TODO_oxide_get(v, i)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    TODO_oxide_push(v, x)
+}
+
+fn vec() -> Vec<Int> {
+    TODO_oxide_vec()
+}
+
+fn main() {
+    oxide_runtime_main()
+}
+
+fn oxide_runtime_main() {
+    TODO_oxide_runtime_main()
+}
+
+enum WrapperKind {
+    Ok,
+    Err,
+}
+
+fn return_or_exit(kind: WrapperKind, v: Int) -> Int {
+    match kind {
+        WrapperKind_Ok => {
+            v
+        },
+        WrapperKind_Err => {
+            exit(v)
+        },
+    }
+}
+
+fn exit(code: Int) -> Int {
+    TODO_oxide_exit(code)
+}
+
+fn clone(x: Int) -> Int {
+    TODO_oxide_clone(x)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    TODO_oxide_concat(a, b)
+}
+
+fn len(v: Str) -> Int {
+    TODO_oxide_len(v)
+}
+
+fn chars(s: Str) -> Vec<Int> {
+    TODO_oxide_chars(s)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    TODO_oxide_parse_int(s)
+}
+
+fn str_to_int(s: Str) -> Option<Int> {
+    TODO_oxide_str_to_int(s)
+}
+
+fn to_float(x: Int) -> Float {
+    TODO_oxide_to_float(x)
+}
+
+fn trunc(x: Float) -> Int {
+    TODO_oxide_trunc(x)
+}
+
+fn range(from: Int, to: Int) -> Vec<Int> {
+    TODO_oxide_range(from, to)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    TODO_oxide_get(v, i)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    TODO_oxide_push(v, x)
+}
+
+fn vec() -> Vec<Int> {
+    TODO_oxide_vec()
+}
+
+fn main() {
+    oxide_runtime_main()
+}
+
+fn oxide_runtime_main() {
+    TODO_oxide_runtime_main()
+}
+
+enum WrapperKind {
+    Ok,
+    Err,
+}
+
+fn return_or_exit(kind: WrapperKind, v: Int) -> Int {
+    match kind {
+        WrapperKind_Ok => {
+            v
+        },
+        WrapperKind_Err => {
+            exit(v)
+        },
+    }
+}
+
+fn exit(code: Int) -> Int {
+    TODO_oxide_exit(code)
+}
+
+fn clone(x: Int) -> Int {
+    TODO_oxide_clone(x)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    TODO_oxide_concat(a, b)
+}
+
+fn len(v: Str) -> Int {
+    TODO_oxide_len(v)
+}
+
+fn chars(s: Str) -> Vec<Int> {
+    TODO_oxide_chars(s)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    TODO_oxide_parse_int(s)
+}
+
+fn str_to_int(s: Str) -> Option<Int> {
+    TODO_oxide_str_to_int(s)
+}
+
+fn to_float(x: Int) -> Float {
+    TODO_oxide_to_float(x)
+}
+
+fn trunc(x: Float) -> Int {
+    TODO_oxide_trunc(x)
+}
+
+fn range(from: Int, to: Int) -> Vec<Int> {
+    TODO_oxide_range(from, to)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    TODO_oxide_get(v, i)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    TODO_oxide_push(v, x)
+}
+
+fn vec() -> Vec<Int> {
+    TODO_oxide_vec()
+}
+
+fn main() {
+    oxide_runtime_main()
+}
+
+fn oxide_runtime_main() {
+    TODO_oxide_runtime_main()
+}
+
+enum WrapperKind {
+    Ok,
+    Err,
+}
+
+fn return_or_exit(kind

@@ -1,0 +1,18 @@
+fn keep_gtr_than_three(values: Vec<Int>) -> Vec<Int> {
+    let mut greater_than_3 = Vec { data: Vec(), len: 0 }
+    for value in &values {
+        if value > 3 {
+            push(greater_than_3, value)
+        }
+    }
+    greater_than_3
+}
+
+fn main() {
+    let values = vec(4, 1, 7, 3, 9, 2)
+    let kept = keep_gtr_than_three(values)
+    for value in &kept {
+        print(value)
+    }
+    print(len(&kept))
+}

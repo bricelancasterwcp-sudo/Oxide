@@ -1,0 +1,12 @@
+fn main() {
+    let a = parse_int("12")?
+    let b = parse_int("x")?
+    let c = parse_int("30")?
+    match (a + c) {
+        Some(sum) => print(sum),
+        None => print_str("error"),
+    }
+    print(match (b.is_none()) + (a.is_none()) + (c.is_none()) {
+            Some(_sum) => print_str("2"),
+        })? // 1
+}

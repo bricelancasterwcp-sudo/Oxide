@@ -1,0 +1,22 @@
+fn main() {
+    let mut numbers = vec(5, 3, 8, 1, 9, 2)
+    let mut i = 0
+    while i < 5 {
+        let min = get(&numbers, i)
+        let mut j = i + 1
+        while j < 6 {
+            let c = get(&numbers, j)
+            if min > c {
+                numbers = push(vec(c), numbers)
+                numbers = push(vec(min), numbers)
+                j = j + 1
+            }
+            j = j + 1
+        }
+        print(&numbers)
+        numbers = pop(&numbers)
+        i = i + 1
+    }
+    print(&numbers)
+    drop numbers
+}

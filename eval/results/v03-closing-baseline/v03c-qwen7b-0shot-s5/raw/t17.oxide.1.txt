@@ -1,0 +1,11 @@
+fn main() {
+    let list = push(push(push(vec(), 10), 20), 30)
+    match get(list, 1) {
+        Some(n) => print(n),
+        None => print(-1),
+    }
+    match get(list, 5) {
+        Some(n) => print(n),
+        None => print(-1),
+    }
+}

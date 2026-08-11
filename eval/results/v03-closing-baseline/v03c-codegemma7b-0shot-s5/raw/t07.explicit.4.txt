@@ -1,0 +1,17 @@
+fn main() {
+    let mut first_eight_multiples_of_three: Vec<Int> = vec()
+    for x in 0 {
+        if x % 3 == 0 {
+            first_eight_multiples_of_three = push(first_eight_multiples_of_three, x)
+        }
+        if first_eight_multiples_of_three.len() == 8 {
+            break
+        }
+    }
+    let mut total = 0
+    for x in &first_eight_multiples_of_three {
+        total = total + x
+    }
+    print(total)
+    drop first_eight_multiples_of_three
+}

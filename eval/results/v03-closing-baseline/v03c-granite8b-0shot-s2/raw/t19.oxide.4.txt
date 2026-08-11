@@ -1,0 +1,37 @@
+fn area(r: Rect) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: Rect) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn main() {
+    let r = Rect { width: 7, height: 4 }
+    print(area(r))
+    print(perimeter(r))
+}
+
+struct Rect { width: Int, height: Int }
+
+struct Circle { radius: Float }
+
+fn area(r: Rect) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: Rect) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn circumference(c: Circle) -> Float {
+    2 * 3.14 * c.radius
+}
+
+fn main() {
+    let r = Rect { width: 7, height: 4 }
+    print(area(r))
+    print(perimeter(r))
+    let c = Circle { radius: 5.0 }
+    print(circumference(c))
+}

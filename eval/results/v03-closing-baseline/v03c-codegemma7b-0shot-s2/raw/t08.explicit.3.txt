@@ -1,0 +1,25 @@
+fn count_pos(v: &Vec<Int>) -> Int {
+    let mut count = 0
+    for x in &v {
+        if x > &amp {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn max(v: &Vec<Int>) -> Int {
+    let mut max = &minus_inf
+    for x in &v {
+        if x > max {
+            max = x
+        }
+    }
+    max
+}
+
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7)
+    print(count_pos(&nums))
+    print(max(&nums))
+}

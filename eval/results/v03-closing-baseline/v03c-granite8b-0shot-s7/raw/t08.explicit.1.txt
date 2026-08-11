@@ -1,0 +1,18 @@
+fn main() {
+    let list = push(push(push(vec(), 3), 8), -2)
+    let mut count = 0
+    for x in &list {
+        if x > 0 {
+            count = count + 1
+        }
+    }
+    print(count)
+    let largest = list.get(0)
+    for x in &list {
+        if x > largest {
+            largest = x
+        }
+    }
+    drop largest
+    print(largest)
+}

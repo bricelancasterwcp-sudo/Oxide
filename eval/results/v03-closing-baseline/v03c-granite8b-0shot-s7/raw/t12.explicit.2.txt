@@ -1,0 +1,6 @@
+fn main() {
+    let stack = "stack"
+    let mut chars = stack.chars().collect()
+    chars.reverse()
+    print(chars.iter().collect())
+}

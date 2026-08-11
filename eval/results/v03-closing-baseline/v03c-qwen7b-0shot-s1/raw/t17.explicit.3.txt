@@ -1,0 +1,540 @@
+fn lookup(v: &Vec<Int>, pos: Int) -> Int {
+    match get(v, pos) {
+        Some(x) => x,
+        None => -1,
+    }
+}
+
+fn main() {
+    let nums = &vec10  //20  30)
+    print(lookup(nums, 1))
+    print(lookup(nums, 5))
+    drop nums
+}
+
+fn vec10() -> Vec<Int> {
+    vec(10, 20, 30)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec3(a, b, c)
+}
+
+fn vec3(a: Int, b: Int, c: Int) -> Vec<Int> {
+    Vec(Int, Int, Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec() -> Vec<Int> {
+    Vec(Int)
+}
+
+fn vec(a: Int) -> Vec<Int> {
+    Vec(Int

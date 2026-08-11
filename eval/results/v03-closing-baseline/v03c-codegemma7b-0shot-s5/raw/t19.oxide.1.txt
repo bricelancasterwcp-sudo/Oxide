@@ -1,0 +1,366 @@
+fn area(r: Rect) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: Rect) -> Int {
+    2 * r.width + 2 * r.height
+}
+
+fn main() {
+    let r = Rect { width: 7, height: 4 }
+    print(area(r))
+    print(perimeter(r))
+}
+
+struct Rect { width: Int, height: Int }
+
+enum Shape {
+    Circle(Float),
+    Rect(Int, Int),
+}
+
+struct Point { x: Int, y: Int }
+
+enum Result {
+    Ok(T),
+    Err(E),
+}
+
+enum Option {
+    Some(T),
+    None,
+}
+
+enum Match {
+    Match(T),
+    Wildcard,
+}
+
+enum Comparison {
+    LessThan(Int, Int),
+    GreaterThan(Int, Int),
+    LessThanOrEqual(Int, Int),
+    GreaterThanOrEqual(Int, Int),
+    EqualTo(Int, Int),
+    NotEqualTo(Int, Int),
+}
+
+enum Operator {
+    Plus(Int, Int),
+    Minus(Int, Int),
+    Multiply(Int, Int),
+    Divide(Int, Int),
+    Modulo(Int, Int),
+    And(Bool, Bool),
+    Or(Bool, Bool),
+    Xor(Bool, Bool),
+    Not(Bool),
+    UnaryMinus(Int),
+    BitwiseNot(Int),
+}
+
+enum Builtin {
+    Print(T),
+    PrintStr(Str),
+    Vec,
+    Push(Vec<T>, T),
+    Len(Vec<T>),
+    Get(Vec<T>, Int),
+    Range(Int, Int),
+    Clone(T),
+    StrLen(Str),
+    Concat(Str, Str),
+    Chars(Str),
+    IntToStr(Int),
+    ParseInt(Str),
+    ToFloat(Int),
+    Trunc(Float),
+}
+
+enum Instruction {
+    Let(Str, T),
+    Reassign(Str, T),
+    Return(T),
+    While(Bool, Vec<Instruction>),
+    For(Str, Vec<Instruction>, Int, Int),
+    Break,
+    Continue,
+    Expression(T),
+}
+
+enum Statement {
+    Let(Str, T),
+    Reassign(Str, T),
+    Return(T),
+    While(Bool, Vec<Instruction>),
+    For(Str, Vec<Instruction>, Int, Int),
+    Break,
+    Continue,
+    Expression(T),
+}
+
+enum Item {
+    Fn(Str, Vec<Item>, Type, Type),
+    Struct(Str, Vec<Item>),
+    Enum(Str, Vec<Item>),
+}
+
+enum Type {
+    Int,
+    Float,
+    Bool,
+    Str,
+    Unit,
+    Vec(Type),
+    Struct(Str, Vec<Type>),
+    Enum(Str, Vec<Type>),
+    Option(Type),
+    Result(Type, Type),
+}
+
+enum Function {
+    Fn(Str, Vec<Type>, Type, Type),
+    Struct(Str, Vec<Type>),
+    Enum(Str, Vec<Type>),
+}
+
+enum Error {
+    TypeError(Str),
+    OwnershipError(Str),
+}
+
+enum Warning {
+    UnusedVariable(Str),
+}
+
+enum LexicalToken {
+    Identifier(Str),
+    IntLiteral(Int),
+    FloatLiteral(Float),
+    StringLiteral(Str),
+    Symbol(Str),
+    Operator(Operator),
+    Comparison(Comparison),
+    Match(Match),
+    Keyword(Str),
+}
+
+enum ParserResult {
+    Ok(Vec<Instruction>),
+    Err(Error),
+}
+
+enum CompilerResult {
+    Ok,
+    Err(Error),
+    Warning(Warning),
+}
+
+enum CompilerMode {
+    Parsing,
+    Analyzing,
+    Optimizing,
+    CodeGeneration,
+}
+
+enum CompilerState {
+    Start,
+    EndOfFile,
+    ParsingItem,
+    ParsingFunctionBody,
+    ParsingExpression,
+    ParsingStatement,
+    ParsingType,
+    ParsingFunctionSignature,
+    ParsingEnumVariant,
+    ParsingStructField,
+    ParsingOperator,
+    ParsingComparison,
+    ParsingMatch,
+    ParsingInput,
+    ParsingOutput,
+    ParsingBuiltin,
+    ParsingLoop,
+    ParsingForLoop,
+    ParsingBreak,
+    ParsingContinue,
+    ParsingLet,
+    ParsingReassign,
+    ParsingReturn,
+    ParsingConst,
+    ParsingModulus,
+    ParsingAnd,
+    ParsingOr,
+    ParsingXor,
+    ParsingNot,
+    ParsingUnaryMinus,
+    ParsingBitwiseNot,
+    ParsingPlus,
+    ParsingMinus,
+    ParsingMultiply,
+    ParsingDivide,
+    ParsingStrCat,
+    ParsingClone,
+    ParsingVec,
+    ParsingVecPush,
+    ParsingVecLen,
+    ParsingVecGet,
+    ParsingRange,
+    ParsingStrLen,
+    ParsingChars,
+    ParsingIntToStr,
+    ParsingParseInt,
+    ParsingToFloat,
+    ParsingTrunc,
+}
+
+enum CompilerPhase {
+    Parsing,
+    Analyzing,
+    Optimizing,
+    CodeGeneration,
+}
+
+enum Compiler {
+    Mode(CompilerMode),
+    State(CompilerState),
+    Phase(CompilerPhase),
+    Result(CompilerResult),
+    Input(Str),
+    Output(Str),
+    Tokens(Vec<LexicalToken>),
+    ParserResult(ParserResult),
+    Instructions(Vec<Instruction>),
+    Types(Vec<Type>),
+    Functions(Vec<Function>),
+    Errors(Vec<Error>),
+    Warnings(Vec<Warning>),
+}
+
+enum CompilerMessage {
+    Info(Str),
+    Warning(Str),
+    Error(Str),
+}
+
+enum CompilerEvent {
+    ParsingInput(Str),
+    ParsingOutput(Str),
+    ParsingToken(LexicalToken),
+    ParsingError(Error),
+    ParsingWarning(Warning),
+    ParsingInstruction(Instruction),
+    ParsingType(Type),
+    ParsingFunction(Function),
+    ParsingPhase(CompilerPhase),
+    ParsingMode(CompilerMode),
+    ParsingState(CompilerState),
+    ParsingResult(ParserResult),
+    ParsingCompiler(Compiler),
+    ParsingMessage(CompilerMessage),
+}
+
+enum CompilerResultEvent {
+    ParsingResult(ParserResult),
+    ParsingError(Error),
+    ParsingWarning(Warning),
+    ParsingCompiler(Compiler),
+    ParsingMessage(CompilerMessage),
+}
+
+enum CompilerOutput {
+    Error(Error),
+    Warning(Warning),
+    Message(CompilerMessage),
+    Result(CompilerResult),
+}
+
+enum CompilerInput {
+    Input(Str),
+    Token(LexicalToken),
+    Instruction(Instruction),
+    Type(Type),
+    Function(Function),
+    Error(Error),
+    Warning(Warning),
+    Message(CompilerMessage),
+    Result(CompilerResult),
+}
+
+enum CompilerAction {
+    ParseInput,
+    ParseToken,
+    ParseInstruction,
+    ParseType,
+    ParseFunction,
+    AnalyzeParserResult,
+    AnalyzeErrors,
+    AnalyzeWarnings,
+    OptimizeInstructions,
+    GenerateCode,
+    ReportErrors,
+    ReportWarnings,
+    ReportMessage,
+    ReportResult,
+    HandleInput,
+    HandleToken,
+    HandleInstruction,
+    HandleType,
+    HandleFunction,
+    HandleError,
+    HandleWarning,
+    HandleMessage,
+    HandleResult,
+}
+
+enum CompilerStateEvent {
+    ParsingToken(LexicalToken),
+    ParsingError(Error),
+    ParsingWarning(Warning),
+    ParsingInstruction(Instruction),
+    ParsingType(Type),
+    ParsingFunction(Function),
+    ParsingPhase(CompilerPhase),
+    ParsingMode(CompilerMode),
+    ParsingState(CompilerState),
+    ParsingResult(ParserResult),
+    ParsingCompiler(Compiler),
+    ParsingMessage(CompilerMessage),
+}
+
+enum CompilerEventResult {
+    ParsingToken(LexicalToken),
+    ParsingError(Error),
+    ParsingWarning(Warning),
+    ParsingInstruction(Instruction),
+    ParsingType(Type),
+    ParsingFunction(Function),
+    ParsingPhase(CompilerPhase),
+    ParsingMode(CompilerMode),
+    ParsingState(CompilerState),
+    ParsingResult(ParserResult),
+    ParsingCompiler(Compiler),
+    ParsingMessage(CompilerMessage),
+    ParsingCompilerResult(CompilerResultEvent),
+    ParsingCompilerInput(CompilerInput),
+    ParsingCompilerAction(CompilerAction),
+    ParsingCompilerStateEvent(CompilerStateEvent),
+    ParsingCompilerEventResult(CompilerEventResult),
+}
+
+enum CompilerEventResultAction {
+    ParseToken,
+    ParseInstruction,
+    ParseType,
+    ParseFunction,
+    AnalyzeParserResult,
+    AnalyzeErrors,
+    AnalyzeWarnings,
+    OptimizeInstructions,
+    GenerateCode,
+    ReportErrors,
+    ReportWarnings,
+    ReportMessage,
+    ReportResult,
+    HandleInput,
+    HandleToken,

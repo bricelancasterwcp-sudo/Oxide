@@ -1,0 +1,22 @@
+fn main() {
+    for i in 2..1000 {
+        if perfect(i) {
+            println!("{}", i);
+        }
+    }
+}
+
+fn perfect(n: i32) -> bool {
+    let mut sum = 0;
+    let mut i = 1;
+    while i * i <= n {
+        if n % i == 0 {
+            sum += i;
+            if i * i != n {
+                sum += n / i;
+            }
+        }
+        i += 1;
+    }
+    sum == n && n > 0
+}

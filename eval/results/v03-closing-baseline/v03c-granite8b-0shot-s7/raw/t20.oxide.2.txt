@@ -1,0 +1,91 @@
+struct Item { name: Str, price: Int, quantity: Int }
+
+fn calculate_cost(items: Vec<Item>) -> Int {
+    let mut cost = 0
+    for item in items {
+        cost = add(cost, mul(item.price, item.quantity))
+    }
+    cost
+}
+
+fn find_most_expensive(items: Vec<Item>) -> Str {
+    let mut max = 0
+    let mut best = ""
+    for item in items {
+        let cost = mul(item.price, item.quantity)
+        if cost > max {
+            max = cost
+            best = item.name
+        }
+    }
+    best
+}
+
+fn main() {
+    let items = vec(Item { name: "pen", price: 3, quantity: 4 }, Item { name: "pad", price: 9, quantity: 2 }, Item { name: "ink", price: 5, quantity: 3 })
+    print(calculate_cost(items))
+    print(find_most_expensive(items))
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn mul(a: Int, b: Int) -> Int {
+    a * b
+}
+
+struct Point { x: Int, y: Int }
+
+fn distance(a: Point, b: Point) -> Float {
+    let dx = sub(a.x, b.x)
+    let dy = sub(a.y, b.y)
+    sqrt(add(mul(dx, dx), mul(dy, dy)))
+}
+
+fn midpoint(a: Point, b: Point) -> Point {
+    Point(add(a.x, b.x) / 2, add(a.y, b.y) / 2)
+}
+
+fn main() {
+    let a = Point(1, 2)
+    let b = Point(5, 6)
+    print(distance(a, b))
+    print(midpoint(a, b))
+}
+
+fn sqrt(x: Float) -> Float {
+    10.0 * x
+}
+
+fn sub(a: Int, b: Int) -> Int {
+    a - b
+}
+
+struct Person { name: Str, age: Int }
+
+fn older(a: Person, b: Person) -> Bool {
+    a.age > b.age
+}
+
+fn main() {
+    let a = Person("Alice", 27)
+    let b = Person("Bob", 25)
+    print(older(a, b))
+}
+
+fn first(v: Vec<T>) -> Option<T> {
+    if len(v) > 0 {
+        Some(get(v, 0)?)
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let v = vec(1, 2, 3)
+    match first(v) {
+        Some(x) => print(x),
+        None => print_str("empty vector"),
+    }
+}

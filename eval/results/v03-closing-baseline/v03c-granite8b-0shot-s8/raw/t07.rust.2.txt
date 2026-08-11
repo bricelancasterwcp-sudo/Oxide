@@ -1,0 +1,7 @@
+fn main() {
+    let mut result = 0;
+    for i in 3..27 {
+        result += i;
+    }
+    println!("{}", result);
+}

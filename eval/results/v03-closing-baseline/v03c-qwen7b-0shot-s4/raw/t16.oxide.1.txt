@@ -1,0 +1,45 @@
+fn main() {
+    let divisors = vec(5, 0, 4)
+    for d in divisors {
+        match 100 / d {
+            Quotient(q) => print(q),
+            Zero => print_str("undefined"),
+        }
+    }
+}
+
+enum Quotient {
+    Quotient(Int),
+}
+
+enum Zero {
+    Zero,
+}
+
+fn div(a: Int, b: Int) -> Quotient {
+    if b == 0 {
+        Zero
+    } else {
+        Quotient(a / b)
+    }
+}
+
+fn print(q: Quotient) {
+    match q {
+        Quotient(q) => print(q),
+    }
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn main() {
+    let divisors = vec(5, 0, 4)
+    for d in divisors {
+        match div(100, d) {
+            Quotient(q) => print(q),
+            Zero => print_str("undefined"),
+        }
+    }
+}

@@ -1,0 +1,14 @@
+fn main() {
+    let mut list = push(push(push(push(vec(), 4), 1), 7), 3)
+    let mut i = 0
+    while i < len(&list) {
+        let val = get(&list, i)
+        if val > 3 {
+            print_str("Keep: ")
+            print(val)
+            print_str("\n")
+        }
+        i = i + 1
+    }
+    print(len(&list))
+}

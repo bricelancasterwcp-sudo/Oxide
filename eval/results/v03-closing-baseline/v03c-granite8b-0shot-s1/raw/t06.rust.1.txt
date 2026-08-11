@@ -1,0 +1,16 @@
+fn main() {
+    let mut sum = 0;
+    let mut num = 0;
+    while num < 1000 {
+        num += 1;
+        sum = 0;
+        for i in 1..(num/2)+1 {
+            if num % i == 0 {
+                sum += i;
+            }
+        }
+        if num == sum {
+            println!("{}", num);
+        }
+    }
+}

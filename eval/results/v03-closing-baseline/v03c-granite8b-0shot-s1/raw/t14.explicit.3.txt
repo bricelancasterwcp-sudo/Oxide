@@ -1,0 +1,17 @@
+fn count_and_distinct_chars(input: &Str) -> Str {
+    let s = "mississippi".to_str()
+    let mut count = 0
+    let mut distinct = 0
+    for c in &s {
+        if c == "s" {
+            count = count + 1
+        }
+        distinct = distinct + 1
+    }
+    count.to_str() + " " + distinct.to_str()
+}
+
+fn main() {
+    let result = count_and_distinct_chars("mississippi")
+    print(result)
+}

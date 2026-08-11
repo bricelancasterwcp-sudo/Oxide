@@ -1,0 +1,16 @@
+fn steps(mutn: Int) -> Int {
+    let mut steps = 0
+    while mutn != 1 {
+        if mutn % 2 == 0 {
+            mutn = mutn / 2
+        } else {
+            mutn = mutn * 3 + 1
+        }
+        steps = steps + 1
+    }
+    steps
+}
+
+fn main() {
+    print(steps(27))
+}

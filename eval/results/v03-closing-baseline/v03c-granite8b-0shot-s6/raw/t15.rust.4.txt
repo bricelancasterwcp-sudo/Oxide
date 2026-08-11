@@ -1,0 +1,12 @@
+fn main() {
+    let sum = "12\nx\n30"
+        .lines()
+        .filter_map(|s| s.parse::<i32>().ok())
+        .sum();
+    let failed = "12\nx\n30"
+        .lines()
+        .filter_map(|s| s.parse::<i32>().err())
+        .count();
+    println!("{}", sum);
+    println!("{}", failed);
+}

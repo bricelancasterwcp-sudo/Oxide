@@ -1,0 +1,45 @@
+fn main() {
+    let pen = Item { unit_price: 3, quantity: 4 }
+    let pad = Item { unit_price: 9, quantity: 2 }
+    let ink = Item { unit_price: 5, quantity: 3 }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    let best_price_per_unit = cost / (pen.cost_per_unit() + pad.cost_per_unit() + ink.cost_per_unit())
+    let best = best_price_per_unit * (pen.cost_per_unit() + pad.cost_per_unit() + ink.cost_per_unit())
+    print(best)
+}
+
+struct Item {
+    unit_price: Int,
+    quantity: Int,
+}
+
+fn cost(item: Item) -> Int {
+    item.unit_price * item.quantity
+}
+
+fn cost_per_unit(item: Item) -> Int {
+    cost(item) / item.quantity
+}
+
+fn main() {
+    let pen = Item { unit_price: 3, quantity: 4 }
+    let pad = Item { unit_price: 9, quantity: 2 }
+    let ink = Item { unit_price: 5, quantity: 3 }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    let best_price_per_unit = cost / (pen.cost_per_unit() + pad.cost_per_unit() + ink.cost_per_unit())
+    let best = best_price_per_unit * (pen.cost_per_unit() + pad.cost_per_unit() + ink.cost_per_unit())
+    print(best)
+}
+
+fn main() {
+    let pen = Item { unit_price: 3, quantity: 4 }
+    let pad = Item { unit_price: 9, quantity: 2 }
+    let ink = Item { unit_price: 5, quantity: 3 }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    let best_price_per_unit = cost / (pen.cost_per_unit() + pad.cost_per_unit() + ink.cost_per_unit())
+    let best = best_price_per_unit * (pen.cost_per_unit() + pad.cost_per_unit() + ink.cost_per_unit())
+    print(best)
+}

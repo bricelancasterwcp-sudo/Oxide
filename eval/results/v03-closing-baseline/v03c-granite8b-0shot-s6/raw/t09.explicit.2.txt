@@ -1,0 +1,127 @@
+fn main() {
+    let list = push(push(push(push(vec(), 5), 4), 3), 2)
+    for x in &list {
+        drop x
+    }
+    drop list
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let v = v
+    let x = x
+    let new_vec = v
+    push(new_vec, x)
+}
+
+fn vec() -> Vec<Int> {
+    let new_vec = Vec()
+    new_vec
+}
+
+fn drop_value(v: Vec<Int>) {
+    let v = v
+    drop v
+}
+
+fn print_int(i: Int) {
+    let i = i
+    print(i)
+}
+
+fn print(s: Str) {
+    let s = s
+    print_str(s)
+}
+
+fn print_str(s: Str) {
+    let s = s
+    system_call(1, &s)
+}
+
+fn system_call(i: Int, s: Str) {
+    let i = i
+    let s = s
+    let result = system_call_inner(i, &s)
+    let result = result
+    drop result
+}
+
+fn system_call_inner(i: Int, s: Str) -> Int {
+    let i = i
+    let s = s
+    let result = 42
+    result
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let v = v
+    let result = 42
+    result
+}
+
+fn get(v: Vec<Int>, i: Int) -> Int {
+    let v = v
+    let i = i
+    let result = 42
+    result
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let a = a
+    let b = b
+    let result = Vec()
+    let result = result
+    drop result
+}
+
+fn clone(x: Int) -> Int {
+    let x = x
+    let result = x
+    result
+}
+
+fn int_to_str(n: Int) -> Str {
+    let n = n
+    let result = ""
+    result
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    let s = s
+    let result = None
+    result
+}
+
+fn to_float(n: Int) -> Float {
+    let n = n
+    let result = 0.0
+    result
+}
+
+fn trunc(x: Float) -> Int {
+    let x = x
+    let result = 0
+    result
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let a = a
+    let b = b
+    let result = ""
+    result
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let s = s
+    let result = Vec()
+    let result = result
+    drop result
+}
+
+fn main() {
+    let list = push(push(push(push(vec(), 5), 4), 3), 2)
+    for x in &list {
+        drop_value(x)
+    }
+    drop_value(list)
+}

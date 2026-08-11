@@ -1,0 +1,12 @@
+fn main() {
+    let sequence = vec(1, 1)
+    let mut a = 0
+    let mut b = 1
+    for _ in 0 <= 19 {
+        a = b
+        b = sequence.get(a).unwrap()
+        sequence = push(sequence, b)
+    }
+    print(b)
+    drop sequence
+}

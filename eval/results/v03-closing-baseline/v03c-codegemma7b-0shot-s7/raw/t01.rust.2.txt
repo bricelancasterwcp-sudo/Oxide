@@ -1,0 +1,7 @@
+fn main() {
+    let mut sum = 0;
+    for n in 0..=9 {
+        sum += n * n;
+    }
+    println!("{}", sum);
+}

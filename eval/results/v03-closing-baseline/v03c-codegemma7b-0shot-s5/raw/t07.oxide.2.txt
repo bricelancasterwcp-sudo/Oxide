@@ -1,0 +1,313 @@
+fn main() {
+    let mut a = vec()
+    let mut s = 0
+    for x in 0.step_by(3).take(8) {
+        a = push(a, x)
+        s = s + x
+    }
+    for y in a {
+        print(y)
+        print(" ")
+    }
+    print_str("\n")
+    print(s)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut temp = v
+    temp.push(x)
+    temp
+}
+
+fn step_by(start: Int, step: Int) -> Int {
+    start + step
+}
+
+fn take(v: Vec<Int>, n: Int) -> Vec<Int> {
+    let mut temp = vec()
+    for i in 0.to_int().max(n).to_int().min(v.len()) {
+        temp = push(temp, get(v, i)?)
+    }
+    temp
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= v.len() {
+        None
+    } else {
+        Some(v.get(i))
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    print(to_float(parse_int(s)?))
+}
+
+fn int_to_str(n: Int) -> Str {
+    if n == 0 {
+        return "0".to_string()
+    }
+    let mut digits = vec()
+    let mut x = n
+    while x != 0 {
+        digits = push(digits, trunc(x % 10))
+        x = trunc(x / 10)
+    }
+    let mut s = "0".to_string()
+    for d in digits {
+        s = concat(s, int_to_str(d))
+    }
+    s
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    let mut x = 0
+    let mut neg = false
+    for c in s.chars() {
+        if c == "-" {
+            neg = true
+        } else if c >= "0".chars().nth(0).unwrap() && c <= "9".chars().nth(0).unwrap() {
+            x = x * 10 + (c.to_digit(10).unwrap() - "0".to_digit(10).unwrap())
+        } else {
+            return None
+        }
+    }
+    if neg {
+        return Some(-x)
+    } else {
+        return Some(x)
+    }
+}
+
+fn to_float(n: Int) -> Float {
+    return n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    return x.trunc()
+}
+
+fn min(a: Int, b: Int) -> Int {
+    if a < b {
+        return a
+    } else {
+        return b
+    }
+}
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        return a
+    } else {
+        return b
+    }
+}
+
+fn to_int(x: Float) -> Int {
+    return x.to_int()
+}
+
+fn bool_to_int(b: Bool) -> Int {
+    if b {
+        return 1
+    } else {
+        return 0
+    }
+}
+
+fn vec() -> Vec<Int> {
+    return vec()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut temp = vec()
+    for c in s.chars() {
+        temp = push(temp, c.to_string())
+    }
+    temp
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    return a + b
+}
+
+fn print_char(c: Str) {
+    print(to_float(parse_int(c)?))
+}
+
+fn str_len(s: Str) -> Int {
+    return s.len()
+}
+
+fn clone(x: Int) -> Int {
+    return x
+}
+
+fn is_none(v: Option<Int>) -> Bool {
+    return v == None
+}
+
+fn unwrap(v: Option<Int>) -> Int {
+    return v.unwrap()
+}
+
+fn as_ref(v: Option<Int>) -> Option<Int> {
+    return v
+}
+
+fn as_mut(v: Option<Int>) -> Option<Int> {
+    return v
+}
+
+fn as_any(v: Option<Int>) -> Option<Int> {
+    return v
+}
+
+fn eq(a: Int, b: Int) -> Bool {
+    return a == b
+}
+
+fn neq(a: Int, b: Int) -> Bool {
+    return a != b
+}
+
+fn lt(a: Int, b: Int) -> Bool {
+    return a < b
+}
+
+fn gt(a: Int, b: Int) -> Bool {
+    return a > b
+}
+
+fn leq(a: Int, b: Int) -> Bool {
+    return a <= b
+}
+
+fn geq(a: Int, b: Int) -> Bool {
+    return a >= b
+}
+
+fn not(a: Bool) -> Bool {
+    return !a
+}
+
+fn and(a: Bool, b: Bool) -> Bool {
+    return a && b
+}
+
+fn or(a: Bool, b: Bool) -> Bool {
+    return a || b
+}
+
+fn bit_and(a: Int, b: Int) -> Int {
+    return a && b
+}
+
+fn bit_or(a: Int, b: Int) -> Int {
+    return a || b
+}
+
+fn bit_xor(a: Int, b: Int) -> Int {
+    return a && b
+}
+
+fn bit_not(a: Int) -> Int {
+    return !a
+}
+
+fn bit_shl(a: Int, b: Int) -> Int {
+    return a && b
+}
+
+fn bit_shr(a: Int, b: Int) -> Int {
+    return a && b
+}
+
+fn min_by(f: FnMut, a: Int, b: Int) -> Int {
+    if f(a, b) {
+        return a
+    } else {
+        return b
+    }
+}
+
+fn max_by(f: FnMut, a: Int, b: Int) -> Int {
+    if f(a, b) {
+        return a
+    } else {
+        return b
+    }
+}
+
+fn sort_by(f: FnMut, v: Vec<Int>) -> Vec<Int> {
+    let mut temp = v
+    temp.sort_by(f)
+    temp
+}
+
+fn filter_by(f: FnMut, v: Vec<Int>) -> Vec<Int> {
+    let mut temp = vec()
+    for x in v {
+        if f(x) {
+            temp = push(temp, x)
+        }
+    }
+    temp
+}
+
+fn map_by(f: FnMut, v: Vec<Int>) -> Vec<Int> {
+    let mut temp = vec()
+    for x in v {
+        temp = push(temp, f(x))
+    }
+    temp
+}
+
+fn any_by(f: FnMut, v: Vec<Int>) -> Bool {
+    for x in v {
+        if f(x) {
+            return true
+        }
+    }
+    false
+}
+
+fn all_by(f: FnMut, v: Vec<Int>) -> Bool {
+    for x in v {
+        if !f(x) {
+            return false
+        }
+    }
+    true
+}
+
+fn contains_by(f: FnMut, v: Vec<Int>, x: Int) -> Bool {
+    for y in v {
+        if f(y) {
+            return true
+        }
+    }
+    false
+}
+
+fn get_ref(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= v.len() {
+        None
+    } else {
+        Some(v.get(i))
+    }
+}
+
+fn get_mut(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= v.len() {
+        None
+    } else {
+        Some(v.get_mut

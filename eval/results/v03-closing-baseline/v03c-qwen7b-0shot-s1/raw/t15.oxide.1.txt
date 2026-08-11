@@ -1,0 +1,31 @@
+struct Result {
+    sum: Int,
+    count: Int,
+}
+
+fn parse_and_count(s1: Str, s2: Str, s3: Str) -> Result {
+    let mut sum = 0
+    let mut count = 0
+    if letSome(n) == parse_int(s1) {
+        sum = sum + n
+    } else {
+        count = count + 1
+    }
+    if letSome(n) == parse_int(s2) {
+        sum = sum + n
+    } else {
+        count = count + 1
+    }
+    if letSome(n) == parse_int(s3) {
+        sum = sum + n
+    } else {
+        count = count + 1
+    }
+    Result(sum, count)
+}
+
+fn main() {
+    let r = parse_and_count("12", "x", "30")
+    print(r.sum)
+    print(r.count)
+}

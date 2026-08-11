@@ -1,0 +1,24 @@
+```rust
+fn main(){
+    let mut count = 0;
+
+    for n in 2..100{
+        if is_prime(n){
+            count += 1;
+        }
+    }
+
+    println!("{}",count);
+}
+
+fn is_prime(n:u64) -> bool{
+    for i in 2..n/2+1{
+        if n % i == 0{
+            return false;
+        }
+    }
+    true
+}
+```
+
+Note: This program is written in Rust (edition 2021), std only, no external crates. The task is to print how many prime numbers are strictly less than 100. The solution provides a complete program with fn main and the function is_prime to check if a number is prime.

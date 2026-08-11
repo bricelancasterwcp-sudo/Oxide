@@ -1,0 +1,22 @@
+```rust
+fn main() {
+    for i in 2..1000 {
+        if perfect(i) {
+            println!("{}", i);
+        }
+    }
+}
+
+fn perfect(n: i32) -> bool {
+    let mut sum = 0;
+    for i in 1..(n as f32).sqrt() as i32 + 1 {
+        if n % i == 0 {
+            sum += i;
+            if i * i != n {
+                sum += n / i;
+            }
+        }
+    }
+    sum == n
+}
+```

@@ -1,0 +1,38 @@
+struct Pen {
+    unit_price: Int,
+    quantity: Int,
+}
+
+struct Pad {
+    unit_price: Int,
+    quantity: Int,
+}
+
+struct Ink {
+    unit_price: Int,
+    quantity: Int,
+}
+
+fn item_cost(item: Pen) -> Int {
+    item.unit_price * item.quantity
+}
+
+fn max_by(v: Vec<Int>, f: Int) -> Int {
+    let mut max = f
+    for x in v {
+        if x > max {
+            max = x
+        }
+    }
+    max
+}
+
+fn main() {
+    let pen = Pen { unit_price: 3, quantity: 4 }
+    let pad = Pad { unit_price: 9, quantity: 2 }
+    let ink = Ink { unit_price: 5, quantity: 3 }
+    let total_cost = item_cost(pen) + item_cost(pad) + item_cost(ink)
+    print(total_cost)
+    let max_cost_item = max_by(vec(pen, pad, ink), item_cost(pen))
+    print(max_cost_item.unit_price)
+}

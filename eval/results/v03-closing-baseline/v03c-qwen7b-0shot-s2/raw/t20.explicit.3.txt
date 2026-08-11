@@ -1,0 +1,15 @@
+fn main() {
+    let pen_cost = 3 * 4
+    let pad_cost = 9 * 2
+    let ink_cost = 5 * 3
+    let total_cost = pen_cost + pad_cost + ink_cost
+    print(total_cost)
+    let max_cost = if pen_cost > pad_cost { if pen_cost > ink_cost { pen_cost } else { ink_cost } } else { if pad_cost > ink_cost { pad_cost } else { ink_cost } }
+    if max_cost == pen_cost {
+        print("pen")
+    } else if max_cost == pad_cost {
+        print("pad")
+    } else {
+        print("ink")
+    }
+}

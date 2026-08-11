@@ -1,0 +1,10 @@
+struct R { field: Str }
+
+fn f(r: R) -> Str {
+    let R { field } = r
+    field
+}
+
+fn main() {
+    print(f(R { field: "level" }))
+}

@@ -1,0 +1,353 @@
+fn main() {
+    let text = str_len("mississippi")
+    let mut s_count = 0
+    let mut seen: Vec<Str> = vec()
+    for c in chars(text) {
+        if c == "s" {
+            s_count = s_count + 1
+        } else {
+            seen = push(seen, c)
+        }
+    }
+    print(s_count)
+    print(len(&seen))
+    drop text
+    drop seen
+}
+
+fn str_len(s: Str) -> Int {
+    int_to_str(s.len())
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result: Vec<Str> = vec()
+    for c in s.chars() {
+        result = push(result, str_len(c.to_string()))
+    }
+    result
+}
+
+fn push(mutvec: Vec<Str>, x: Str) -> Vec<Str> {
+    vec_push(&mutvec, x)
+    mutvec
+}
+
+fn vec_push(v: &Vec<Str>, x: Str) {
+    let mut v = v.clone()
+    v.push(x)
+    drop v
+}
+
+fn len(v: &Vec<Str>) -> Int {
+    int_to_str(v.len())
+}
+
+fn int_to_str(n: Int) -> Int {
+    n
+}
+
+fn drop_impl(v: &Vec<Str>) {
+    drop v
+}
+
+fn drop_impl(v: &Str) {
+    drop v
+}
+
+fn drop_impl(v: &Int) {
+    drop v
+}
+
+fn drop_impl(v: &Float) {
+    drop v
+}
+
+fn drop_impl(v: &Bool) {
+    drop v
+}
+
+fn drop_impl(v: &Unit) {
+    drop v
+}
+
+fn drop_impl(v: &Option<Str>) {
+    drop v
+}
+
+fn drop_impl(v: &Option<Int>) {
+    drop v
+}
+
+fn drop_impl(v: &Option<Float>) {
+    drop v
+}
+
+fn drop_impl(v: &Option<Bool>) {
+    drop v
+}
+
+fn drop_impl(v: &Option<Unit>) {
+    drop v
+}
+
+fn drop_impl(v: &Result<Str, Str>) {
+    drop v
+}
+
+fn drop_impl(v: &Result<Int, Str>) {
+    drop v
+}
+
+fn drop_impl(v: &Result<Float, Str>) {
+    drop v
+}
+
+fn drop_impl(v: &Result<Bool, Str>) {
+    drop v
+}
+
+fn drop_impl(v: &Result<Unit, Str>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Str>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Int>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Float>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Bool>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Unit>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Option<Str>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Option<Int>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Option<Float>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Option<Bool>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Option<Unit>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Result<Str, Str>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Result<Int, Str>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Result<Float, Str>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Result<Bool, Str>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Result<Unit, Str>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Vec>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Int>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Float>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Bool>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Unit>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Option>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Result>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Vec>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Int>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Float>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Bool>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Unit>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Option>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Result>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Vec>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Int>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Float>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Bool>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Unit>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Option>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Result>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Vec>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Int>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Float>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Bool>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Unit>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Option>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Result>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Vec>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Int>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Float>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Bool>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Unit>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Option>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Result>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Vec>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Int>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Float>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Bool>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Unit>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Option>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Result>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Vec>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Int>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Float>>) {
+    drop v
+}
+
+fn drop_impl(v: &Vec<Vec<Bool>>

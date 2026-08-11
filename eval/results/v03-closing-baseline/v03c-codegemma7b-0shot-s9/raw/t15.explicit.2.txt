@@ -1,0 +1,334 @@
+fn main() {
+    let input = vec_str("12", "x", "30")
+    let mut sum = 0
+    let mut fail = 0
+    for word in &input {
+        match parse_int(word) {
+            Some(n) => {
+                sum = sum + n
+            },
+            None => {
+                fail = fail + 1
+            },
+        }
+    }
+    print(sum)
+    print(fail)
+}
+
+fn vec_str(s: &Str, rest: &Str, rest_rest: &Str) -> Vec<Str> {
+    vec(s, rest, rest_rest)
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    match s.parse() {
+        Ok(n) => Some(n),
+        Err(_) => None,
+    }
+}
+
+fn print(i: Int) {
+    let s = int_to_str(i)
+    print_str(&s)
+}
+
+fn print_str(s: &Str) {
+    let c = chars(s)
+    for i in c {
+        print_char(i)
+    }
+    print_char(Unit)
+}
+
+fn print_char(c: Str) {
+    let n = str_len(&c)
+    for i in 0 < n {
+        push(push(vec(), i), c)
+    }
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = Str
+    if n < 0 {
+        s = push(s, char(45))
+        n = trunc(n)
+    }
+    while n > 0 {
+        let rem = n % 10
+        let digit = char(rem + 48)
+        s = push(s, digit)
+        n = trunc(n / 10)
+    }
+    if s == Str {
+        s = push(s, char(48))
+    }
+    str_rev(&s)
+}
+
+fn str_rev(s: &Str) -> Str {
+    let mut rev = Str
+    for i in s {
+        rev = push(rev, i)
+    }
+    rev
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut chars = vec()
+    for i in 0 < str_len(s) {
+        let c = get(s, i)
+        if c != None {
+            chars = push(chars, c)
+        }
+    }
+    chars
+}
+
+fn get(s: &Str, i: Int) -> Option<Str> {
+    if i >= str_len(s) {
+        None
+    } else {
+        Some(char(str_len(s) - 1 - i + 48))
+    }
+}
+
+fn str_len(s: &Str) -> Int {
+    let mut i = 0
+    for _ in s {
+        i = i + 1
+    }
+    i
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut new = v
+    new = new + x
+    new
+}
+
+fn vec() -> Vec<Str> {
+    let mut new = Vec
+    new
+}
+
+fn clone(x: &Str) -> Str {
+    let mut new = Str
+    for i in x {
+        new = push(new, i)
+    }
+    new
+}
+
+fn drop_str(s: &Str) {
+    drop s
+}
+
+fn drop_vec(v: &Vec<Str>) {
+    drop v
+}
+
+fn drop_char(c: &Str) {
+    drop c
+}
+
+fn drop_int(i: &Int) {
+    drop i
+}
+
+fn drop_unit(u: &Unit) {
+    drop u
+}
+
+fn drop_option(o: &Option<Int>) {
+    drop o
+}
+
+fn drop_result(r: &Result<Int, Str>) {
+    drop r
+}
+
+fn drop_fn(f: &FnInt) {
+    drop f
+}
+
+fn drop_enum(e: &Enum) {
+    drop e
+}
+
+fn drop_tuple(t: &Tuple) {
+    drop t
+}
+
+fn drop_struct(s: &Struct) {
+    drop s
+}
+
+fn drop_lifetime(l: &Lifetime) {
+    drop l
+}
+
+fn drop_param(p: &Param) {
+    drop p
+}
+
+fn drop_block(b: &Block) {
+    drop b
+}
+
+fn drop_unsafe(u: &Unsafe) {
+    drop u
+}
+
+fn drop_extern(e: &Extern) {
+    drop e
+}
+
+fn drop_crate(c: &Crate) {
+    drop c
+}
+
+fn drop_code(c: &Code) {
+    drop c
+}
+
+fn drop_raw(r: &Raw) {
+    drop r
+}
+
+fn drop_meta(m: &Meta) {
+    drop m
+}
+
+fn drop_plugin(p: &Plugin) {
+    drop p
+}
+
+fn drop_plugin_item(pi: &PluginItem) {
+    drop pi
+}
+
+fn drop_plugin_arg(pa: &PluginArg) {
+    drop pa
+}
+
+fn drop_plugin_result(pr: &PluginResult) {
+    drop pr
+}
+
+fn drop_plugin_error(pe: &PluginError) {
+    drop pe
+}
+
+fn drop_plugin_output(po: &PluginOutput) {
+    drop po
+}
+
+fn drop_plugin_input(pi: &PluginInput) {
+    drop pi
+}
+
+fn drop_plugin_item_result(pir: &PluginItemResult) {
+    drop pir
+}
+
+fn drop_plugin_item_error(pie: &PluginItemError) {
+    drop pie
+}
+
+fn drop_plugin_item_output(pio: &PluginItemOutput) {
+    drop pio
+}
+
+fn drop_plugin_item_input(pii: &PluginItemInput) {
+    drop pii
+}
+
+fn drop_plugin_arg_result(par: &PluginArgResult) {
+    drop par
+}
+
+fn drop_plugin_arg_error(pae: &PluginArgError) {
+    drop pae
+}
+
+fn drop_plugin_arg_output(pao: &PluginArgOutput) {
+    drop pao
+}
+
+fn drop_plugin_arg_input(pai: &PluginArgInput) {
+    drop pai
+}
+
+fn drop_plugin_result_result(prr: &PluginResultResult) {
+    drop prr
+}
+
+fn drop_plugin_result_error(pre: &PluginResultError) {
+    drop pre
+}
+
+fn drop_plugin_result_output(pro: &PluginResultOutput) {
+    drop pro
+}
+
+fn drop_plugin_result_input(pri: &PluginResultInput) {
+    drop pri
+}
+
+fn drop_plugin_error_result(per: &PluginErrorResult) {
+    drop per
+}
+
+fn drop_plugin_error_error(pee: &PluginValueError) {
+    drop pee
+}
+
+fn drop_plugin_error_output(peo: &PluginValueErrorOutput) {
+    drop peo
+}
+
+fn drop_plugin_error_input(pei: &PluginValueErrorInput) {
+    drop pei
+}
+
+fn drop_plugin_output_result(por: &PluginOutputResult) {
+    drop por
+}
+
+fn drop_plugin_output_error(poe: &PluginValueError) {
+    drop poe
+}
+
+fn drop_plugin_output_output(poo: &PluginValueErrorOutput) {
+    drop poo
+}
+
+fn drop_plugin_output_input(poi: &PluginValueErrorInput) {
+    drop poi
+}
+
+fn drop_plugin_input_result(pir: &PluginItemResultResult) {
+    drop pir
+}
+
+fn drop_plugin_input_error(pie: &PluginItemValueError) {
+    drop pie
+}
+
+fn drop_plugin_input_output(pio: &PluginItemValueErrorOutput) {
+    drop pio
+}
+
+fn drop_plugin_input_input(pii: &PluginItemValueErrorInput) {
+    drop pii
+}
+
+fn drop_plugin_item_result_result(pirr: &PluginItemResultResultResult) {
+    drop pirr
+}
+
+fn drop_plugin_item_result_error(pire: &PluginItemResultValueError) {
+    drop pire
+}
+
+fn drop_plugin_item_result_output(piro: &Plugin

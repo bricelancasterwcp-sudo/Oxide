@@ -1,0 +1,34 @@
+struct Pen { price: Int, quantity: Int }
+
+struct Pad { price: Int, quantity: Int }
+
+struct Ink { price: Int, quantity: Int }
+
+fn cost(p: Pen) -> Int {
+    p.price * p.quantity
+}
+
+fn cost(p: Pad) -> Int {
+    cost(p)
+}
+
+fn cost(p: Ink) -> Int {
+    cost(p)
+}
+
+fn main() {
+    let p: Pen = Pen { price: 3, quantity: 4 }
+    let a: Int = cost(p)
+    let p: Pad = Pad { price: 9, quantity: 2 }
+    let b: Int = cost(p)
+    let p: Ink = Ink { price: 5, quantity: 3 }
+    let c: Int = cost(p)
+    let d: Int = if a > b { a } else { b }
+    let e: Int = if a > c { a } else { c }
+    let f: Int = if d > e { d } else { e }
+    let g: Str = if a > b { "p" } else { "q" }
+    let h: Str = if a > c { "p" } else { "q" }
+    let i: Str = if d > e { "p" } else { "q" }
+    print(f)
+    print(i)
+}

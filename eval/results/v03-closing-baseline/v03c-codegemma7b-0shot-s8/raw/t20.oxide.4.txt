@@ -1,0 +1,348 @@
+fn main() {
+    let pen = Item { price: 3, quantity: 4 }
+    let pad = Item { price: 9, quantity: 2 }
+    let ink = Item { price: 5, quantity: 3 }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    let max = max_cost(pen, pad, ink)
+    print_str(max.name())
+}
+
+struct Item { price: Int, quantity: Int }
+
+fn cost(self: Item) -> Int {
+    self.price * self.quantity
+}
+
+fn max_cost(a: Item, b: Item, c: Item) -> Item {
+    if a.cost() > b.cost() {
+        if a.cost() > c.cost() {
+            a
+        } else {
+            c
+        }
+    } else {
+        if b.cost() > c.cost() {
+            b
+        } else {
+            c
+        }
+    }
+}
+
+enum Item {
+    Pen(Int),
+    Pad(Int),
+    Ink(Int),
+}
+
+fn name(self: Item) -> Str {
+    match self {
+        ItemPen(p) => "Pen",
+        ItemPad(p) => "Pad",
+        ItemInk(p) => "Ink",
+    }
+}
+
+fn price(self: Item) -> Int {
+    match self {
+        ItemPen(p) => p,
+        ItemPad(p) => p,
+        ItemInk(p) => p,
+    }
+}
+
+fn quantity(self: Item) -> Int {
+    match self {
+        ItemPen(p) => 1,
+        ItemPad(p) => 1,
+        ItemInk(p) => 1,
+    }
+}
+
+fn cost(self: Item) -> Int {
+    price(self) * quantity(self)
+}
+
+fn max_cost(a: Item, b: Item, c: Item) -> Item {
+    if a.cost() > b.cost() {
+        if a.cost() > c.cost() {
+            a
+        } else {
+            c
+        }
+    } else {
+        if b.cost() > c.cost() {
+            b
+        } else {
+            c
+        }
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    print(str_len(s))
+    for c in chars(s) {
+        print(ord(c))
+    }
+}
+
+fn print_char(c: Char) {
+    print(ord(c))
+}
+
+fn int_to_str(n: Int) -> Str {
+    if n == 0 {
+        return "0"
+    }
+    let mut digits = vec()
+    let mut nn = n
+    while nn != 0 {
+        digits.push(nn % 10)
+        nn = trunc(nn / 10)
+    }
+    let mut s = vec()
+    for d in digits {
+        s.push(char(d + ord("0")))
+    }
+    Str(s)
+}
+
+fn str_len(s: Str) -> Int {
+    let mut count = 0
+    for _ in chars(s) {
+        count = count + 1
+    }
+    count
+}
+
+fn chars(s: Str) -> Vec<Char> {
+    let mut v = vec()
+    let mut ss = s
+    while len(ss) > 0 {
+        let c = ss.chars().next().unwrap()
+        v.push(c)
+        ss = ss.slice(1, len(ss))
+    }
+    v
+}
+
+fn ord(c: Char) -> Int {
+    c - "a" + 1
+}
+
+fn trunc(x: Float) -> Int {
+    if x < 0.0 {
+        return x.floor().trunc()
+    }
+    x.ceil().trunc()
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut vv = v
+    vv.push(x)
+    vv
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < len(v) {
+        return Some(v.get(i).unwrap())
+    }
+    None
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a + 1 < b {
+        v.push(i)
+    }
+    v
+}
+
+fn clone(x: Int) -> Int {
+    x
+}
+
+fn str(v: Vec<Char>) -> Str {
+    Str(v)
+}
+
+fn char(n: Int) -> Char {
+    (n + ord("a") - 1)
+}
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+fn min(a: Int, b: Int) -> Int {
+    if a < b {
+        a
+    } else {
+        b
+    }
+}
+
+fn bool(b: Int) -> Bool {
+    if b == 0 {
+        BoolFalse
+    } else {
+        BoolTrue
+    }
+}
+
+enum Bool {
+    BoolFalse,
+    BoolTrue,
+}
+
+fn and(a: Bool, b: Bool) -> Bool {
+    if a == BoolTrue && b == BoolTrue {
+        BoolTrue
+    } else {
+        BoolFalse
+    }
+}
+
+fn or(a: Bool, b: Bool) -> Bool {
+    if a == BoolTrue || b == BoolTrue {
+        BoolTrue
+    } else {
+        BoolFalse
+    }
+}
+
+fn eq(a: Int, b: Int) -> Bool {
+    if a == b {
+        BoolTrue
+    } else {
+        BoolFalse
+    }
+}
+
+fn neq(a: Int, b: Int) -> Bool {
+    if a != b {
+        BoolTrue
+    } else {
+        BoolFalse
+    }
+}
+
+fn lt(a: Int, b: Int) -> Bool {
+    if a < b {
+        BoolTrue
+    } else {
+        BoolFalse
+    }
+}
+
+fn gt(a: Int, b: Int) -> Bool {
+    if a > b {
+        BoolTrue
+    } else {
+        BoolFalse
+    }
+}
+
+fn le(a: Int, b: Int) -> Bool {
+    if a <= b {
+        BoolTrue
+    } else {
+        BoolFalse
+    }
+}
+
+fn ge(a: Int, b: Int) -> Bool {
+    if a >= b {
+        BoolTrue
+    } else {
+        BoolFalse
+    }
+}
+
+fn not(a: Bool) -> Bool {
+    if a == BoolTrue {
+        BoolFalse
+    } else {
+        BoolTrue
+    }
+}
+
+fn is_none(o: Option<Int>) -> Bool {
+    if o == None {
+        BoolTrue
+    } else {
+        BoolFalse
+    }
+}
+
+fn is_some(o: Option<Int>) -> Bool {
+    if o == None {
+        BoolFalse
+    } else {
+        BoolTrue
+    }
+}
+
+fn match_(e: Int) -> Int {
+    match e {
+        _ => panic(),
+    }
+}
+
+fn match_any(e: Int) -> Int {
+    match e {
+        _ => 1,
+    }
+}
+
+fn match_bool(b: Bool) -> Int {
+    match b {
+        BoolFalse => 0,
+        BoolTrue => 1,
+    }
+}
+
+fn match_str(s: Str) -> Int {
+    match s {
+        Str(v) => {
+            let mut count = 0
+            for c in v {
+                count = count + 1
+            }
+            count
+        },
+    }
+}
+
+fn match_vec(v: Vec<Int>) -> Int {
+    match v {
+        Vec(v) => {
+            let mut count = 0
+            for _ in v {
+                count = count + 1
+            }
+            count
+        },
+    }
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4 }
+    let pad = Item { price: 9, quantity

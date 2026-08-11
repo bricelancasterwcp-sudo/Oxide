@@ -1,0 +1,32 @@
+fn is_prime(n: Int) -> Bool {
+    if n <= 1 {
+        False
+    } else if n <= 3 {
+        True
+    } else if n % 2 == 0 || n % 3 == 0 {
+        False
+    } else {
+        let mut i = 5
+        while i * i <= n {
+            if n % i == 0 || n % (i + 2) == 0 {
+                return False
+            }
+            i = i + 6
+        }
+        True
+    }
+}
+
+fn count_primes(max: Int) -> Int {
+    let mut count = 0
+    for n in 0 <= max {
+        if is_prime(n) {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn main() {
+    print(count_primes(99))
+}

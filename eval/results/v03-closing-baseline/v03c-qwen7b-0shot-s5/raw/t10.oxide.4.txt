@@ -1,0 +1,473 @@
+fn main() {
+    let numbers = vec(4, 1, 7, 3, 9, 2)
+    let filtered: Vec<Int> = filter(numbers, x || x > 3)
+    for n in filtered {
+        print(n)
+        print_str("\n")
+    }
+    print(len(filtered))
+    print_str("\n")
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to_str())
+}
+
+fn print_str(s: Str) {
+    console_log(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn console_log(s: Str) {
+    console.log(s)
+}
+
+fn filter(v: Vec<Int>, predicate: Intfn) -> Vec<Int> {
+    let mut result = vec()
+    for x in v {
+        if predicate(x) {
+            push(result, x)
+        }
+    }
+    result
+}
+
+fn print(x: Int) {
+    print_str(to_float(x).to

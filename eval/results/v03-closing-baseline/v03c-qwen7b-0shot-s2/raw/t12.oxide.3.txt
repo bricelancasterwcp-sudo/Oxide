@@ -1,0 +1,24 @@
+struct Stack { items: Vec<Str> }
+
+fn push(s: Stack, item: Str) -> Stack {
+    Stack   //{ items: push(s.items, item) }
+}
+
+fn pop(s: Stack) -> Option<Stack> {
+    let x = get(s.items, len(s.items) - 1)?
+    Some(Stack { items: get(s.items, 0)? })
+}
+
+fn main() {
+    let s = push(push(push(Stack { items: vec() }, "t".to_str()), "a".to_str()), "k".to_str())
+    match pop(s) {
+        Some(s1) => match pop(s1) {
+            Some(s2) => match pop(s2) {
+                Some(s3) => print_str(s3.items),
+                None => print_str("stack is empty"),
+            },
+            None => print_str("stack is empty"),
+        },
+        None => print_str("stack is empty"),
+    }
+}

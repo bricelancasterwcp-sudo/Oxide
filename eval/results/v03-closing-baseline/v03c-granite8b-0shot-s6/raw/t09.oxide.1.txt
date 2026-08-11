@@ -1,0 +1,20 @@
+struct List {
+    data: Vec<Int>,
+    len: Int,
+}
+
+fn reverse(l: List) -> List {
+    let mut reversed = List { data: vec(), len: 0 }
+    for i in range(0, l.len) {
+        reversed = push(reversed, get(l.data, l.len - i - 1)?)
+    }
+    reversed
+}
+
+fn main() {
+    let list = List { data: push(push(push(push(vec(), 1), 2), 3), 4), len: 5 }
+    let reversed_list = reverse(list)
+    for i in range(0, reversed_list.len) {
+        print(get(reversed_list.data, i)?)
+    }
+}

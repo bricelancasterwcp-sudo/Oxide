@@ -1,0 +1,336 @@
+fn main() {
+    let pen = Item { unit_price: 3, quantity: 4, name: "pen" }
+    let pad = Item { unit_price: 9, quantity: 2, name: "pad" }
+    let ink = Item { unit_price: 5, quantity: 3, name: "ink" }
+    let total_cost = pen.cost() + pad.cost() + ink.cost()
+    let biggest_cost = max(pen.cost(), max(pad.cost(), ink.cost()))
+    print(total_cost)
+    match biggest_cost {
+        Some(n) => print(n),
+        None => print_str("no items"),
+    }
+}
+
+struct Item { unit_price: Int, quantity: Int, name: Str }
+
+fn max(a: Int, b: Int) -> Option<Int> {
+    if a > b {
+        Some(a)
+    } else if b > a {
+        Some(b)
+    } else {
+        None
+    }
+}
+
+fn cost(self: Item) -> Int {
+    self.unit_price * self.quantity
+}
+
+fn name(self: Item) -> Str {
+    self.name
+}
+
+fn unit_price(self: Item) -> Int {
+    self.unit_price
+}
+
+fn quantity(self: Item) -> Int {
+    self.quantity
+}
+
+fn compare(self: Item, other: Item) -> Int {
+    self.cost().cmp(other.cost())
+}
+
+fn clone(self: Item) -> Item {
+    Item(self.unit_price, self.quantity, self.name.clone())
+}
+
+fn to_string(self: Item) -> Str {
+    format("Item(unit_price={}, quantity={}, name={})", self.unit_price, self.quantity, self.name)
+}
+
+fn debug_string(self: Item) -> Str {
+    format("Item(unit_price={}, quantity={}, name={})", self.unit_price, self.quantity, self.name)
+}
+
+fn from(self: Item) -> Item {
+    self
+}
+
+fn is_none(self: Item) -> Bool {
+    false
+}
+
+fn is_some(self: Item) -> Bool {
+    true
+}
+
+fn as_ref(self: Item) -> Item {
+    self
+}
+
+fn as_mut(self: Item) -> Item {
+    self
+}
+
+fn as_ptr(self: Item) -> Item {
+    self
+}
+
+fn as_const(self: Item) -> Item {
+    self
+}
+
+fn as_slice(self: Item) -> Item {
+    self
+}
+
+fn as_slice_mut(self: Item) -> Item {
+    self
+}
+
+fn as_slice_const(self: Item) -> Item {
+    self
+}
+
+fn as_slice_ptr(self: Item) -> Item {
+    self
+}
+
+fn as_slice_ptr_mut(self: Item) -> Item {
+    self
+}
+
+fn as_slice_ptr_const(self: Item) -> Item {
+    self
+}
+
+fn as_slice_ptr_const_mut(self: Item) -> Item {
+    self
+}
+
+fn as_str(self: Item) -> Item {
+    self
+}
+
+fn as_str_mut(self: Item) -> Item {
+    self
+}
+
+fn as_str_const(self: Item) -> Item {
+    self
+}
+
+fn as_str_ptr(self: Item) -> Item {
+    self
+}
+
+fn as_str_ptr_mut(self: Item) -> Item {
+    self
+}
+
+fn as_str_ptr_const(self: Item) -> Item {
+    self
+}
+
+fn as_str_ptr_const_mut(self: Item) -> Item {
+    self
+}
+
+fn as_str_slice(self: Item) -> Item {
+    self
+}
+
+fn as_str_slice_mut(self: Item) -> Item {
+    self
+}
+
+fn as_str_slice_const(self: Item) -> Item {
+    self
+}
+
+fn as_str_slice_ptr(self: Item) -> Item {
+    self
+}
+
+fn as_str_slice_ptr_mut(self: Item) -> Item {
+    self
+}
+
+fn as_str_slice_ptr_const(self: Item) -> Item {
+    self
+}
+
+fn as_str_slice_ptr_const_mut(self: Item) -> Item {
+    self
+}
+
+fn as_int(self: Item) -> Item {
+    self
+}
+
+fn as_int_mut(self: Item) -> Item {
+    self
+}
+
+fn as_int_const(self: Item) -> Item {
+    self
+}
+
+fn as_int_ptr(self: Item) -> Item {
+    self
+}
+
+fn as_int_ptr_mut(self: Item) -> Item {
+    self
+}
+
+fn as_int_ptr_const(self: Item) -> Item {
+    self
+}
+
+fn as_int_ptr_const_mut(self: Item) -> Item {
+    self
+}
+
+fn as_int_slice(self: Item) -> Item {
+    self
+}
+
+fn as_int_slice_mut(self: Item) -> Item {
+    self
+}
+
+fn as_int_slice_const(self: Item) -> Item {
+    self
+}
+
+fn as_int_slice_ptr(self: Item) -> Item {
+    self
+}
+
+fn as_int_slice_ptr_mut(self: Item) -> Item {
+    self
+}
+
+fn as_int_slice_ptr_const(self: Item) -> Item {
+    self
+}
+
+fn as_int_slice_ptr_const_mut(self: Item) -> Item {
+    self
+}
+
+fn as_float(self: Item) -> Item {
+    self
+}
+
+fn as_float_mut(self: Item) -> Item {
+    self
+}
+
+fn as_float_const(self: Item) -> Item {
+    self
+}
+
+fn as_float_ptr(self: Item) -> Item {
+    self
+}
+
+fn as_float_ptr_mut(self: Item) -> Item {
+    self
+}
+
+fn as_float_ptr_const(self: Item) -> Item {
+    self
+}
+
+fn as_float_ptr_const_mut(self: Item) -> Item {
+    self
+}
+
+fn as_float_slice(self: Item) -> Item {
+    self
+}
+
+fn as_float_slice_mut(self: Item) -> Item {
+    self
+}
+
+fn as_float_slice_const(self: Item) -> Item {
+    self
+}
+
+fn as_float_slice_ptr(self: Item) -> Item {
+    self
+}
+
+fn as_float_slice_ptr_mut(self: Item) -> Item {
+    self
+}
+
+fn as_float_slice_ptr_const(self: Item) -> Item {
+    self
+}
+
+fn as_float_slice_ptr_const_mut(self: Item) -> Item {
+    self
+}
+
+fn as_bool(self: Item) -> Item {
+    self
+}
+
+fn as_bool_mut(self: Item) -> Item {
+    self
+}
+
+fn as_bool_const(self: Item) -> Item {
+    self
+}
+
+fn as_bool_ptr(self: Item) -> Item {
+    self
+}
+
+fn as_bool_ptr_mut(self: Item) -> Item {
+    self
+}
+
+fn as_bool_ptr_const(self: Item) -> Item {
+    self
+}
+
+fn as_bool_ptr_const_mut(self: Item) -> Item {
+    self
+}
+
+fn as_bool_slice(self: Item) -> Item {
+    self
+}
+
+fn as_bool_slice_mut(self: Item) -> Item {
+    self
+}
+
+fn as_bool_slice_const(self: Item) -> Item {
+    self
+}
+
+fn as_bool_slice_ptr(self: Item) -> Item {
+    self
+}
+
+fn as_bool_slice_ptr_mut(self: Item) -> Item {
+    self
+}
+
+fn as_bool_slice_ptr_const(self: Item) -> Item {
+    self
+}
+
+fn as_bool_slice_ptr_const_mut(self: Item) -> Item {
+    self
+}

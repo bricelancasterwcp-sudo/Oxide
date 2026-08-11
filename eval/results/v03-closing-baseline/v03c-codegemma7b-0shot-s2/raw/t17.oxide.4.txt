@@ -1,0 +1,16 @@
+fn lookup_elements(list: Vec<Int>, positions: Vec<Int>) -> Vec<Int> {
+    let mut result = vec(positions.len(), -1)
+    for i in 0.to_int().until(positions.len()).step(1) {
+        let pos = positions.get(i)?
+        let element = get(list, pos).unwrap()
+        result.set(i, element)
+    }
+    result
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let positions = vec(1, 5)
+    let result = lookup_elements(list, positions)
+    print(result)
+}

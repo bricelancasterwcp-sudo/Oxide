@@ -1,0 +1,16 @@
+fn lookup(list: &Vec<Int>, pos: Int) -> Int {
+    if pos >= list.len() {
+        return -1
+    }
+    match list.get(pos) {
+        Some(x) => returnx,
+        None => returnlist.len() - 1,
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    print(lookup(&list, 1))
+    print(lookup(&list, 5))
+    print(lookup(&list, 10))
+}

@@ -1,0 +1,32 @@
+fn total_cost(items: Vec<Str>, prices: Vec<Int>, quantities: Vec<Int>) -> Int {
+    let mut total = 0
+    for i in 0 {
+        let item_price = prices.get(i).unwrap()
+        let item_quantity = quantities.get(i).unwrap()
+        total = total + item_price * item_quantity
+    }
+    total
+}
+
+fn max_cost_item(items: Vec<Str>, prices: Vec<Int>, quantities: Vec<Int>) -> Str {
+    let mut max_cost = 0
+    let mut max_item = ""
+    for i in 0 {
+        let item_price = prices.get(i).unwrap()
+        let item_quantity = quantities.get(i).unwrap()
+        let cost = item_price * item_quantity
+        if cost > max_cost {
+            max_cost = cost
+            max_item = items.get(i).unwrap()
+        }
+    }
+    max_item.to_string()
+}
+
+fn main() {
+    let items = vec("pen", "pad", "ink")
+    let prices = vec(3, 9, 5)
+    let quantities = vec(4, 2, 3)
+    print(total_cost(items, prices, quantities))
+    print(max_cost_item(items, prices, quantities))
+}

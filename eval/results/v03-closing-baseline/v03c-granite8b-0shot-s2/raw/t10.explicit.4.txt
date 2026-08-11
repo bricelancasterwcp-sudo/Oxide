@@ -1,0 +1,20 @@
+fn keep(v: Vec<Int>) -> Vec<Int> {
+    let mut out = vec()
+    for x in v {
+        if x > 3 {
+            out = push(out, x)
+        }
+    }
+    out
+}
+
+fn main() {
+    let orig = push(push(push(push(vec(), 4), 1), 7), 3)
+    let kept = keep(&orig)
+    for x in &kept {
+        print(x)
+    }
+    print(len(&kept))
+    drop orig
+    drop kept
+}

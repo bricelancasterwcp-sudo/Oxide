@@ -1,0 +1,12 @@
+```rust
+fn main() {
+    let mut a = 1;
+    let mut b = 1;
+    for _ in 0..18 {
+        let temp = a + b;
+        a = b;
+        b = temp;
+    }
+    println!("{}", b);
+}
+```

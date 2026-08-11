@@ -1,0 +1,38 @@
+fn sort_and_print(v: Vec<Int>) {
+    let mut sorted = v
+    while letSome(_, rest) == split(sorted, 2) {
+        sorted = merge(sorted, rest)
+    }
+    for x in sorted {
+        print(x)
+    }
+}
+
+fn split(v: Vec<Int>, n: Int) -> Vec<Vec<Int>> {
+    let mut result = vec()
+    while v.len() > 0 {
+        result.push(push(v, 0))
+    }
+    result
+}
+
+fn merge(a: Vec<Int>, b: Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    while a.len() > 0 || b.len() > 0 {
+        if a.len() == 0 {
+            result = push(result, pop(b))
+        } else if b.len() == 0 {
+            result = push(result, pop(a))
+        } else if pop(a) > pop(b) {
+            result = push(result, pop(a))
+        } else {
+            result = push(result, pop(b))
+        }
+    }
+    result
+}
+
+fn main() {
+    let v = push(push(push(push(push(vec(), 5), 3), 8), 1), 9, 2)
+    sort_and_print(v)
+}

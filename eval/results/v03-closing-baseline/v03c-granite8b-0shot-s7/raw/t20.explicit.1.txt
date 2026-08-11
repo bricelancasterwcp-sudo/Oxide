@@ -1,0 +1,302 @@
+fn main() {
+    let pen = Pen { price: 3, quantity: 4 }
+    let pad = Pad { price: 9, quantity: 2 }
+    let ink = Ink { price: 5, quantity: 3 }
+    let items = vec(pen, pad, ink)
+    let cost = total_cost(&items)
+    let most_expensive = most_expensive(&items)
+    print(format("Total cost is {}.", cost))
+    print(format("Most expensive item is {}.", most_expensive))
+}
+
+struct Pen {
+    price: Int,
+    quantity: Int,
+}
+
+struct Pad {
+    price: Int,
+    quantity: Int,
+}
+
+struct Ink {
+    price: Int,
+    quantity: Int,
+}
+
+fn total_cost(items: &Vec<Item>) -> Int {
+    let mut sum = 0
+    for item in &items {
+        sum = sum + cost(item)
+    }
+    sum
+}
+
+fn cost(item: &Item) -> Int {
+    item.price * item.quantity
+}
+
+fn most_expensive(items: &Vec<Item>) -> Str {
+    let mut best = Item { price: 0, quantity: 0 }
+    let mut best_price = 0
+    for item in &items {
+        if cost(item) > best_price {
+            best_price = cost(item)
+            best = clone(item)
+        }
+    }
+    item_name(&best)
+}
+
+fn item_name(item: &Item) -> Str {
+    match item {
+        Pen(pen) => format("Pen"),
+        Pad(pad) => format("Pad"),
+        Ink(ink) => format("Ink"),
+    }
+}
+
+enum Item {
+    Pen(Pen),
+    Pad(Pad),
+    Ink(Ink),
+}
+
+fn main() {
+    let x = 5
+    let y = 7
+    let z = add(x, y)
+    print(z)
+}
+
+fn add(x: Int, y: Int) -> Int {
+    let tmp = x + y
+    drop tmp
+    x + y
+}
+
+fn main() {
+    let x = 5
+    let y = 7
+    let z = add(x, y)
+    print(z)
+}
+
+fn add(x: Int, y: Int) -> Int {
+    x + y
+}
+
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5)
+    let lower = filter(&nums, 3)
+    let higher = filter(&nums, 4)
+    print(format("Numbers less than 3: {}.", lower))
+    print(format("Numbers greater than 4: {}.", higher))
+}
+
+fn filter(nums: &Vec<Int>, bound: Int) -> Vec<Int> {
+    let mut result = vec()
+    for num in &nums {
+        if num < bound {
+            push(&mut && result, &num)
+        }
+    }
+    result
+}
+
+fn main() {
+    let mut numbers = vec(1, 2, 3, 4, 5)
+    let mut primes = vec(2)
+    for num in &numbers {
+        if is_prime(num) {
+            push(&mut && primes, &num)
+        }
+    }
+    print(format("Primes: {}.", primes))
+    numbers = filter(&numbers, 2)
+    print(format("Numbers left: {}.", numbers))
+}
+
+fn is_prime(num: Int) -> Bool {
+    if num == 2 {
+        return true
+    }
+    if num < 2 || num % 2 == 0 {
+        return false
+    }
+    for i in range(3, trunc(sqrt(num)) + 1, 2) {
+        if num % i == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn main() {
+    let mut v = vec("a", "b", "c", "d")
+    for i in range(0, len(&v), 1) {
+        if i % 2 == 0 {
+            swap(&mut && v, i, 0)
+        }
+    }
+    print(format("Reordered: {}.", v))
+}
+
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5, 6)
+    let sorted = sort(&nums)
+    print(format("Sorted: {}.", sorted))
+}
+
+fn sort(nums: &Vec<Int>) -> Vec<Int> {
+    if len(&nums) < 2 {
+        return clone(&nums)
+    }
+    let pivot = nums.get(0)
+    let mut less = vec()
+    let mut greater = vec()
+    for num in &nums {
+        if num < pivot {
+            push(&mut && less, &num)
+        } else {
+            push(&mut && greater, &num)
+        }
+    }
+    let mut sorted = sort(&less)
+    push(&mut && sorted, pivot)
+    push(&mut && sorted, &sort && greater)
+    sorted
+}
+
+fn main() {
+    let v = vec(1, 2, 3, 4, 5)
+    for i in range(0, len(&v), 1) {
+        if i % 2 == 0 {
+            let tmp = get(&v, i)
+            drop v
+            v = push(&mut && v, tmp)
+        }
+    }
+    print(v)
+}
+
+fn main() {
+    let numbers = vec(2, 4, 3, 7, 6)
+    let sorted = sort(&numbers)
+    let mut iter = sorted.iter()
+    loop_while(&mut && iter)
+    let median = match iter {
+        One(x) => x,
+        Many(_) => error(),
+    }
+    print(median)
+}
+
+enum ManyOrOneInt {
+    Many(Vec<Int>),
+    One(Int),
+}
+
+fn main() {
+    let numbers = vec(2, 4, 3, 7, 6)
+    let sorted = sort(&numbers)
+    let mut iter = sorted.iter()
+    loop_while(&mut && iter)
+    let median = match iter {
+        One(x) => x,
+        Many(_) => error(),
+    }
+    print(median)
+}
+
+fn main() {
+    let x = 2
+    let y = 3
+    let z = x + y
+    print(format("x + y = {}.", z))
+}
+
+fn main() {
+    let x = 2
+    let y = 3
+    let z = add(x, y)
+    print(format("x + y = {}.", z))
+}
+
+fn add(x: Int, y: Int) -> Int {
+    let tmp = x + y
+    drop tmp
+    x + y
+}
+
+fn main() {
+    let x = 5
+    let y = 7
+    let z = add(x, y)
+    print(z)
+}
+
+fn add(x: Int, y: Int) -> Int {
+    x + y
+}
+
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5)
+    let lower = filter(&nums, 3)
+    let higher = filter(&nums, 4)
+    print(format("Numbers less than 3: {}.", lower))
+    print(format("Numbers greater than 4: {}.", higher))
+}
+
+fn filter(nums: &Vec<Int>, bound: Int) -> Vec<Int> {
+    let mut result = vec()
+    for num in &nums {
+        if num < bound {
+            push(&mut && result, &num)
+        }
+    }
+    result
+}
+
+fn main() {
+    let mut numbers = vec(1, 2, 3, 4, 5)
+    let mut primes = vec(2)
+    for num in &numbers {
+        if is_prime(num) {
+            push(&mut && primes, &num)
+        }
+    }
+    print(format("Primes: {}.", primes))
+    numbers = filter(&numbers, 2)
+    print(format("Numbers left: {}.", numbers))
+}
+
+fn is_prime(num: Int) -> Bool {
+    if num == 2 {
+        return true
+    }
+    if num < 2 || num % 2 == 0 {
+        return false
+    }
+    for i in range(3, trunc(sqrt(num)) + 1, 2) {
+        if num % i == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn main() {
+    let mut v = vec("a", "b", "c", "d")
+    for i in range(0, len(&v), 1) {
+        if i % 2 == 0 {
+            swap(&mut && v, i, 0)
+        }
+    }
+    print(format("Reordered: {}.", v))
+}
+
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5, 6)
+    let sorted = sort(&nums)
+   

@@ -1,0 +1,16 @@
+fn sum_of_multiples(limit: Int) -> Int {
+    let mut sum = 0
+    let mut count = 0
+    let mut multiple = 3
+    while count < limit {
+        sum = sum + multiple
+        count = count + 1
+        multiple = multiple + 3
+    }
+    sum
+}
+
+fn main() {
+    let result = sum_of_multiples(8)
+    print(result)
+}

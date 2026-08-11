@@ -1,0 +1,5 @@
+fn main() {
+    print(trunc(100 / 5))
+    print(trunc(100 / 0))
+    print(trunc(100 / 4))
+}

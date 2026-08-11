@@ -1,0 +1,32 @@
+struct String { data: Vec<Char> }
+
+fn count_s(s: String) -> Int {
+    let mut count = 0
+    for c in s.data {
+        if c == to_char(83) {
+            count = add(count, 1)
+        }
+    }
+    count
+}
+
+fn count_chars(s: String) -> Int {
+    let mut count = 0
+    let mut seen = vec()
+    for c in s.data {
+        let already_seen = contains(seen, c)
+        if not(already_seen) {
+            seen = push(seen, c)
+            count = add(count, 1)
+        }
+    }
+    count
+}
+
+fn main() {
+    let s = String { data: vec_from_str("mississippi") }
+    let s_count = count_s(s)
+    let s_chars_count = count_chars(s)
+    print(s_count)
+    print(s_chars_count)
+}

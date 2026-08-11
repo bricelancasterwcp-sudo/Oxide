@@ -1,0 +1,20 @@
+fn count_and_max(list: &Vec<Int>) -> Int {
+    let mut pos = 0
+    let mut max = 0
+    for x in &list {
+        if x > 0 {
+            pos = pos + 1
+        }
+        if x > max {
+            max = x
+        }
+    }
+    pos
+}
+
+fn main() {
+    let list = push(push(push(vec(), 3), 8), -2)
+    let pos = count_and_max(&list)
+    print(pos)
+    drop list
+}

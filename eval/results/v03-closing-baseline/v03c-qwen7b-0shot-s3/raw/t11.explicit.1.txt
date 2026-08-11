@@ -1,0 +1,27 @@
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut sorted = v
+    for i in 0 < len(&sorted) {
+        let min = i
+        for j in i + 1 < len(&sorted) {
+            if sorted(j) < sorted(min) {
+                min = j
+            }
+        }
+        let temp = sorted(min)
+        sorted(min) == sorted(i)
+        sorted(i) == temp
+    }
+    sorted
+}
+
+fn print_int(x: Int) {
+    print_str(to_float(x).to_string())
+}
+
+fn main() {
+    let nums = push(push(push(push(push(vec(), 5), 3), 8), 1), 9)
+    let sorted_nums = sort(nums)
+    for num in &sorted_nums {
+        print_int(num)
+    }
+}

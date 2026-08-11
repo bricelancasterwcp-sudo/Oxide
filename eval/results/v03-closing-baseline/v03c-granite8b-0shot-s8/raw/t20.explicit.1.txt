@@ -1,0 +1,139 @@
+fn main() {
+    let pen = Pen { unit_price: 3, quantity: 4 }
+    let pad = Pad { unit_price: 9, quantity: 2 }
+    let ink = Ink { unit_price: 5, quantity: 3 }
+    let all_items = vec(pen, pad, ink)
+    let total_cost = sum_items(&all_items)
+    print(total_cost)
+    print(get_most_expensive(&all_items))
+}
+
+fn sum_items(items: &Vec<Item>) -> Int {
+    let total = 0
+    for item in &items {
+        total = total + cost(item)
+    }
+    total
+}
+
+fn cost(item: &Item) -> Int {
+    item.unit_price * item.quantity
+}
+
+fn get_most_expensive(items: &Vec<Item>) -> Str {
+    let mut most_expensive = items.get(0)
+    for item in &items {
+        if cost(item) > cost(most_expensive) {
+            most_expensive = item
+        }
+    }
+    name(most_expensive)
+}
+
+fn name(item: &Item) -> Str {
+    match item {
+        Pen(p) => p.name,
+        Pad(p) => p.name,
+        Ink(p) => p.name,
+    }
+}
+
+struct Ink { unit_price: Int, quantity: Int, name: Str }
+
+struct Pad { unit_price: Int, quantity: Int, name: Str }
+
+struct Pen { unit_price: Int, quantity: Int, name: Str }
+
+struct Item {
+    unit_price: Int,
+    quantity: Int,
+    name: Str,
+}
+
+struct Vec { data: Str }
+
+fn vec() -> Vec {
+    Vec(String("[]"))
+}
+
+fn push(v: Vec, x: Str) -> Vec {
+    Vec(format("{} + {}", v.data, x))
+}
+
+fn len(v: Vec) -> Int {
+    v.data.len()
+}
+
+fn get(v: Vec, i: Int) -> Str {
+    v.data.chars().nth(i).unwrap()
+}
+
+fn range(a: Int, b: Int) -> Vec {
+    let mut result = vec()
+    for i in a.to(b - 1) {
+        result = push(result, format("{} ", i))
+    }
+    result
+}
+
+fn clone(x: Str) -> Str {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    s.len()
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    format("{}{}", a, b)
+}
+
+fn chars(s: Str) -> Vec {
+    let mut result = vec()
+    for c in s.chars() {
+        result = push(result, format("{} ", c))
+    }
+    result
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{}", n)
+}
+
+fn parse_int(s: Str) -> Option {
+    match s.parse() {
+        Ok(v) => Some(v),
+        Err(_) => None,
+    }
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn print(x: Str) -> Str {
+    format("{}\n", x)
+}
+
+fn print_str(s: Str) -> Str {
+    format("{}\n", s)
+}
+
+fn drop_example(n: Int) {
+    let x = 3
+    let y = 4
+    drop x
+    drop y
+}
+
+fn main() {
+    let x = 3
+    let y = 4
+    drop x
+    drop y
+    drop_example(5)
+}

@@ -1,0 +1,315 @@
+fn main() {
+    let pen = Pen { price: 3, quantity: 4 }
+    let pad = Pad { price: 9, quantity: 2 }
+    let ink = Ink { price: 5, quantity: 3 }
+    let price = pen.price + pen.quantity + pad.price + pad.quantity + ink.price + ink.quantity
+    let most_expensive = max(max(pen.price * pen.quantity, pad.price * pad.quantity), ink.price * ink.quantity)
+    print(price)
+    print(most_expensive)
+}
+
+struct Pen { price: Int, quantity: Int }
+
+struct Pad { price: Int, quantity: Int }
+
+struct Ink { price: Int, quantity: Int }
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+fn print(a: Int) {
+    print_int(a)
+}
+
+fn print_int(n: Int) {
+    print_str(str_from_int(n))
+}
+
+fn print_str(s: Str) {
+    print_str_inner(s)
+    print_str("\n")
+}
+
+fn print_str_inner(s: Str) {
+    let ptr = str_to_ptr(s)
+    let len = str_len(s)
+    let i = 0
+    while i < len {
+        print_char(get(ptr, i))
+        i = i + 1
+    }
+}
+
+fn str_from_int(n: Int) -> Str {
+    let mut s = String.new()
+    while n > 0 {
+        s = String.push(str_from_char(48 + (n % 10)), s)
+        n = n / 10
+    }
+    String.rev(s)
+}
+
+fn str_to_ptr(s: Str) -> Ptr<Char> {
+    let mut p = s
+    let mut ptr = Ptr.new()
+    while p > 0 {
+        ptr = Ptr.push(get(s, p - 1), ptr)
+        p = p - 1
+    }
+    ptr
+}
+
+fn get(p: Ptr<Char>, i: Int) -> Char {
+    get_inner(p, i)
+}
+
+fn get_inner(p: Ptr<Char>, i: Int) -> Char {
+    if i == 0 {
+        Ptr.get(p)
+    } else {
+        get_inner(Ptr.prev(p), i - 1)
+    }
+}
+
+fn str_len(s: Str) -> Int {
+    let mut len = 0
+    let mut p = s
+    while p > 0 {
+        len = len + 1
+        p = p - 1
+    }
+    len
+}
+
+fn str_to_char(s: Str) -> Char {
+    get(str_to_ptr(s), 0)
+}
+
+fn char_to_str(c: Char) -> Str {
+    String.push(c, String.new())
+}
+
+fn str_from_char(c: Char) -> Str {
+    String.push(c, String.new())
+}
+
+fn print_char(c: Char) {
+    putchar(c)
+}
+
+fn putchar(c: Char) {
+    let p = string_from_char(c)
+    print_str(p)
+}
+
+fn string_from_char(c: Char) -> Str {
+    let mut s = String.new()
+    s = String.push(c, s)
+    s
+}
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+struct String {
+    data: Ptr<Char>,
+    len: Int,
+}
+
+struct Ptr {
+    value: Char,
+    next: Ptr,
+}
+
+fn new() -> Ptr {
+    Ptr.new()
+}
+
+fn push(value: Char, next: Ptr) -> Ptr {
+    Ptr.push(value, next)
+}
+
+fn prev(p: Ptr) -> Ptr {
+    Ptr.prev(p)
+}
+
+fn get(p: Ptr) -> Char {
+    Ptr.get(p)
+}
+
+fn rev(p: Ptr) -> Ptr {
+    let mut result = new()
+    let mut current = p
+    while current > 0 {
+        result = push(get(current), result)
+        current = prev(current)
+    }
+    result
+}
+
+fn main() {
+    let pen = Pen { price: 3, quantity: 4 }
+    let pad = Pad { price: 9, quantity: 2 }
+    let ink = Ink { price: 5, quantity: 3 }
+    let price = pen.price + pen.quantity + pad.price + pad.quantity + ink.price + ink.quantity
+    let most_expensive = max(max(pen.price * pen.quantity, pad.price * pad.quantity), ink.price * ink.quantity)
+    print(price)
+    print(most_expensive)
+}
+
+struct Pen { price: Int, quantity: Int }
+
+struct Pad { price: Int, quantity: Int }
+
+struct Ink { price: Int, quantity: Int }
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+fn print(a: Int) {
+    print_int(a)
+}
+
+fn print_int(n: Int) {
+    print_str(str_from_int(n))
+}
+
+fn print_str(s: Str) {
+    print_str_inner(s)
+    print_str("\n")
+}
+
+fn print_str_inner(s: Str) {
+    let ptr = str_to_ptr(s)
+    let len = str_len(s)
+    let i = 0
+    while i < len {
+        print_char(get(ptr, i))
+        i = i + 1
+    }
+}
+
+fn str_from_int(n: Int) -> Str {
+    let mut s = String.new()
+    while n > 0 {
+        s = String.push(str_from_char(48 + (n % 10)), s)
+        n = n / 10
+    }
+    String.rev(s)
+}
+
+fn str_to_ptr(s: Str) -> Ptr {
+    let mut p = s
+    let mut ptr = Ptr.new()
+    while p > 0 {
+        ptr = Ptr.push(get(s, p - 1), ptr)
+        p = p - 1
+    }
+    ptr
+}
+
+fn get(p: Ptr, i: Int) -> Char {
+    get_inner(p, i)
+}
+
+fn get_inner(p: Ptr, i: Int) -> Char {
+    if i == 0 {
+        Ptr.get(p)
+    } else {
+        get_inner(Ptr.prev(p), i - 1)
+    }
+}
+
+fn str_len(s: Str) -> Int {
+    let mut len = 0
+    let mut p = s
+    while p > 0 {
+        len = len + 1
+        p = p - 1
+    }
+    len
+}
+
+fn str_to_char(s: Str) -> Char {
+    get(str_to_ptr(s), 0)
+}
+
+fn char_to_str(c: Char) -> Str {
+    String.push(c, String.new())
+}
+
+fn str_from_char(c: Char) -> Str {
+    String.push(c, String.new())
+}
+
+fn print_char(c: Char) {
+    putchar(c)
+}
+
+fn putchar(c: Char) {
+    let p = string_from_char(c)
+    print_str(p)
+}
+
+fn string_from_char(c: Char) -> Str {
+    let mut s = String.new()
+    s = String.push(c, s)
+    s
+}
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+struct String {
+    data: Ptr<Char>,
+    len: Int,
+}
+
+struct Ptr {
+    value: Char,
+    next: Ptr,
+}
+
+fn new() -> Ptr {
+    Ptr.new()
+}
+
+fn push(value: Char, next: Ptr) -> Ptr {
+    Ptr.push(value, next)
+}
+
+fn prev(p: Ptr) -> Ptr {
+    Ptr.prev(p)
+}
+
+fn get(p: Ptr) -> Char {
+    Ptr.get(p)
+}
+
+fn rev(p: Ptr) -> Ptr {
+    let mut result = new()
+    let mut current = p
+    while current > 0 {
+        result = push(get(current), result)
+        current = prev(current)
+   

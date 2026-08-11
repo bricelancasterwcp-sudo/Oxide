@@ -1,0 +1,15 @@
+```rust
+fn main() {
+    let num = 100;
+    let divisors = [5, 0, 4];
+
+    for &divisor in &divisors {
+        if divisor == 0 {
+            println!("undefined");
+        } else {
+            let quotient = num / divisor;
+            println!("{}", quotient);
+        }
+    }
+}
+```

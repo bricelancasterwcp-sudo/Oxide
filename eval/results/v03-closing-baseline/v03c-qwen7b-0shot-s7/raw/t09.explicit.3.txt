@@ -1,0 +1,10 @@
+fn reverse_print(v: Vec<Int>) {
+    for x in v.into_iter().rev() {
+        print(x)
+    }
+}
+
+fn main() {
+    let nums = vec(1, 2, 3, 4, 5)
+    reverse_print(nums)
+}

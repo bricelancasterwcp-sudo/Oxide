@@ -1,0 +1,9 @@
+```rust
+fn main() {
+    let num = 100;
+
+    println!("{}", num / 5); // 20
+    println!("{}", num / 0); // undefined
+    println!("{}", num / 4); // 25
+}
+```

@@ -1,0 +1,23 @@
+fn perfect(n: Int) -> Bool {
+    if n <= 1 {
+        return false
+    }
+    let mut sum = 1
+    let mut x = 2
+    while x * x <= n {
+        if n % x == 0 {
+            sum = sum + x + n / x
+        }
+        x = x + 1
+    }
+    return sum == n
+}
+
+fn main() {
+    for i in range(1, 1000) {
+        if perfect(i) {
+            print(i)
+            print_str("\n")
+        }
+    }
+}

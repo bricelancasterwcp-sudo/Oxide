@@ -1,0 +1,34 @@
+fn divisors(n: Int) -> Vec<Int> {
+    let mut result = vec()
+    let mut i = 1
+    while i * i <= n {
+        if n % i == 0 {
+            if i != n / i {
+                result = push(result, i)
+            }
+            result = push(result, n / i)
+        }
+        i = i + 1
+    }
+    result
+}
+
+fn is_perfect(n: Int) -> Bool {
+    let ds = divisors(n)
+    let mut sum = 0
+    for d in &ds {
+        sum = sum + d
+    }
+    drop ds // <- added drop here
+    sum == n
+}
+
+fn main() {
+    let mut i = 1
+    while i < 1000 {
+        if is_perfect(i) {
+            print(i)
+        }
+        i = i + 1
+    }
+}

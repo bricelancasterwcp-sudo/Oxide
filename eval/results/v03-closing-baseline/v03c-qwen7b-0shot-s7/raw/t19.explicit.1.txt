@@ -1,0 +1,18 @@
+fn area(width: Int, height: Int) -> Int {
+    width * height
+}
+
+fn perimeter(width: Int, height: Int) -> Int {
+    2 * (width + height)
+}
+
+fn main() {
+    let rect = (7.0.to_int()).clone()
+    let height = (4.0.to_int()).clone()
+    let area_result = area(rect, height)
+    print(area_result)
+    drop area_result
+    let perimeter_result = perimeter(rect, height)
+    print(perimeter_result)
+    drop perimeter_result
+}

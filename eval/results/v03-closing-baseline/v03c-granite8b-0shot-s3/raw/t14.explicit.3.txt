@@ -1,0 +1,27 @@
+fn count_s(s: &Str) -> Int {
+    let mut count = 0
+    for c in chars(&s) {
+        if c == "s" {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn count_distinct(s: &Str) -> Int {
+    let mut count = 0
+    let mut seen = clone(&s)
+    for c in chars(&s) {
+        if !seen.contains(&c) {
+            count = count + 1
+            seen = push(seen, c)
+        }
+    }
+    count
+}
+
+fn main() {
+    let s = "mississippi"
+    print(count_s(&s))
+    print(count_distinct(&s))
+}

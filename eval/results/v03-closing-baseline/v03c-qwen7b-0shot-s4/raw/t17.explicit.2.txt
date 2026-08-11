@@ -1,0 +1,22 @@
+fn main() {
+    let list = vec(10, 20, 30)
+    let pos1 = 1
+    let pos5 = 5
+    if pos1 < 3 {
+        match list.get(pos1) {
+            Some(x) => print(x),
+            None => print(-1),
+        }
+    } else {
+        print(-1)
+    }
+    if pos5 < 3 {
+        match list.get(pos5) {
+            Some(x) => print(x),
+            None => print(-1),
+        }
+    } else {
+        print(-1)
+    }
+    drop list
+}

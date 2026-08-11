@@ -1,0 +1,24 @@
+```rust
+fn main() {
+    let (pen_unit_price, pen_quantity) = (3, 4);
+    let (pad_unit_price, pad_quantity) = (9, 2);
+    let (ink_unit_price, ink_quantity) = (5, 3);
+
+    let pen_cost = pen_unit_price * pen_quantity;
+    let pad_cost = pad_unit_price * pad_quantity;
+    let ink_cost = ink_unit_price * ink_quantity;
+
+    let total_cost = pen_cost + pad_cost + ink_cost;
+    println!("Combined cost of all items: {}", total_cost);
+
+    let (highest_cost_item, item_name) = if pen_cost > pad_cost && pen_cost > ink_cost {
+        (pen_cost, "pen")
+    } else if pad_cost > ink_cost {
+        (pad_cost, "pad")
+    } else {
+        (ink_cost, "ink")
+    };
+
+    println!("Item with the highest cost: {} ({})", item_name, highest_cost_item);
+}
+```

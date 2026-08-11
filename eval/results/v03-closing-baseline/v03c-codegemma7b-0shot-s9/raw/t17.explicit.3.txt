@@ -1,0 +1,282 @@
+fn main() {
+    let list = vec(10, 20, 30)
+    print(get(&list, 1))
+    print(get(&list, 5))
+    print(drop_empty_list(&list))
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    if i >= v.len() || i < 0 {
+        return -1
+    } else {
+        return v.get(i).unwrap_or(&v)
+    }
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)) + &int_to_str)
+}
+
+fn vec(items: Int, items: Int, items: Int) -> Vec<Int> {
+    let mut v = Vec(items)
+    push(v, items)
+    push(v, items)
+    v
+}
+
+fn push(mut_vec: Vec<Int>, items: Int) -> Vec<Int> {
+    mut_vec.append(items)
+    mut_vec
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    if i >= v.len() || i < 0 {
+        return -1
+    } else {
+        return v.get(i).unwrap_or(&v)
+    }
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)) + &int_to_str)
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut digits: Vec<Int> = vec(0)
+    let mut num = n
+    while num > 0 {
+        digits.append(num % 10)
+        num = num / 10
+    }
+    let mut result: Str = str(digits.len())
+    for d in &digits {
+        result = concat(result, str(d))
+    }
+    result
+}
+
+fn str(n: Int) -> Str {
+    if n == 0 {
+        return "0"
+    } else {
+        let mut digits: Vec<Int> = vec(0)
+        let mut num = n
+        while num > 0 {
+            digits.append(num % 10)
+            num = num / 10
+        }
+        let mut result: Str = str(digits.len())
+        for d in &digits {
+            result = concat(result, str(d))
+        }
+        result
+    }
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    let mut result: Str = str(a.len() + b.len())
+    for c in a {
+        result = concat(result, str(c))
+    }
+    for c in b {
+        result = concat(result, str(c))
+    }
+    result
+}
+
+fn str(n: Int) -> Str {
+    if n == 0 {
+        return "0"
+    } else {
+        let mut digits: Vec<Int> = vec(0)
+        let mut num = n
+        while num > 0 {
+            digits.append(num % 10)
+            num = num / 10
+        }
+        let mut result: Str = str(digits.len())
+        for d in &digits {
+            result = concat(result, str(d))
+        }
+        result
+    }
+}
+
+fn print_str(n: Int) {
+    let mut i = 0
+    for c in &int_to_str {
+        if i == n {
+            break
+        }
+        print(c)
+        i = i + 1
+    }
+}
+
+fn str_len(s: Str) -> Int {
+    let mut len = 0
+    for _ in s {
+        len = len + 1
+    }
+    len
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}
+
+fn drop_empty_list(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    } else {
+        return v.to_vec()
+    }
+}

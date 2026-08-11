@@ -1,0 +1,12 @@
+fn square(n: Int) -> Int {
+    n * n
+}
+
+fn main() {
+    let mut total = 0
+    for n in 0.to(10) {
+        total = total + square(n)
+    }
+    print(total)
+    drop total
+}

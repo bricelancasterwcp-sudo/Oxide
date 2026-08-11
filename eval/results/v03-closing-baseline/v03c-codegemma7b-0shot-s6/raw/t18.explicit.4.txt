@@ -1,0 +1,285 @@
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+struct Area {
+    area: Int,
+}
+
+struct Perimeter {
+    perimeter: Int,
+}
+
+fn area(a: Int, b: Int) -> Area {
+    Area(a * b)
+}
+
+fn perimeter(a: Int, b: Int) -> Perimeter {
+    Perimeter(2 * a + 2 * b)
+}
+
+fn main() {
+    let r1 = Rectangle { width: 3, height: 4 }
+    let t1 = Triangle { a: 3, b: 4, c: 5 }
+    let r2 = Rectangle { width: 2, height: 5 }
+    print(perimeter(area(r1.width, r1.height).area, r1.width))
+    print(perimeter(area(t1.a, t1.b).area, t1.c))
+    print(perimeter(area(r2.width, r2.height).area, r2.width))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+struct Area {
+    area: Int,
+}
+
+struct Perimeter {
+    perimeter: Int,
+}
+
+fn area(a: Int, b: Int) -> Area {
+    Area(a * b)
+}
+
+fn perimeter(a: Int, b: Int) -> Perimeter {
+    Perimeter(2 * a + 2 * b)
+}
+
+fn main() {
+    let r1 = Rectangle { width: 3, height: 4 }
+    let t1 = Triangle { a: 3, b: 4, c: 5 }
+    let r2 = Rectangle { width: 2, height: 5 }
+    print(perimeter(area(r1.width, r1.height).area, r1.width))
+    print(perimeter(area(t1.a, t1.b).area, t1.c))
+    print(perimeter(area(r2.width, r2.height).area, r2.width))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+struct Area {
+    area: Int,
+}
+
+struct Perimeter {
+    perimeter: Int,
+}
+
+fn area(a: Int, b: Int) -> Area {
+    Area(a * b)
+}
+
+fn perimeter(a: Int, b: Int) -> Perimeter {
+    Perimeter(2 * a + 2 * b)
+}
+
+fn main() {
+    let r1 = Rectangle { width: 3, height: 4 }
+    let t1 = Triangle { a: 3, b: 4, c: 5 }
+    let r2 = Rectangle { width: 2, height: 5 }
+    print(perimeter(area(r1.width, r1.height).area, r1.width))
+    print(perimeter(area(t1.a, t1.b).area, t1.c))
+    print(perimeter(area(r2.width, r2.height).area, r2.width))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+struct Area {
+    area: Int,
+}
+
+struct Perimeter {
+    perimeter: Int,
+}
+
+fn area(a: Int, b: Int) -> Area {
+    Area(a * b)
+}
+
+fn perimeter(a: Int, b: Int) -> Perimeter {
+    Perimeter(2 * a + 2 * b)
+}
+
+fn main() {
+    let r1 = Rectangle { width: 3, height: 4 }
+    let t1 = Triangle { a: 3, b: 4, c: 5 }
+    let r2 = Rectangle { width: 2, height: 5 }
+    print(perimeter(area(r1.width, r1.height).area, r1.width))
+    print(perimeter(area(t1.a, t1.b).area, t1.c))
+    print(perimeter(area(r2.width, r2.height).area, r2.width))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+struct Area {
+    area: Int,
+}
+
+struct Perimeter {
+    perimeter: Int,
+}
+
+fn area(a: Int, b: Int) -> Area {
+    Area(a * b)
+}
+
+fn perimeter(a: Int, b: Int) -> Perimeter {
+    Perimeter(2 * a + 2 * b)
+}
+
+fn main() {
+    let r1 = Rectangle { width: 3, height: 4 }
+    let t1 = Triangle { a: 3, b: 4, c: 5 }
+    let r2 = Rectangle { width: 2, height: 5 }
+    print(perimeter(area(r1.width, r1.height).area, r1.width))
+    print(perimeter(area(t1.a, t1.b).area, t1.c))
+    print(perimeter(area(r2.width, r2.height).area, r2.width))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+struct Area {
+    area: Int,
+}
+
+struct Perimeter {
+    perimeter: Int,
+}
+
+fn area(a: Int, b: Int) -> Area {
+    Area(a * b)
+}
+
+fn perimeter(a: Int, b: Int) -> Perimeter {
+    Perimeter(2 * a + 2 * b)
+}
+
+fn main() {
+    let r1 = Rectangle { width: 3, height: 4 }
+    let t1 = Triangle { a: 3, b: 4, c: 5 }
+    let r2 = Rectangle { width: 2, height: 5 }
+    print(perimeter(area(r1.width, r1.height).area, r1.width))
+    print(perimeter(area(t1.a, t1.b).area, t1.c))
+    print(perimeter(area(r2.width, r2.height).area, r2.width))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+struct Area {
+    area: Int,
+}
+
+struct Perimeter {
+    perimeter: Int,
+}
+
+fn area(a: Int, b: Int) -> Area {
+    Area(a * b)
+}
+
+fn perimeter(a: Int, b: Int) -> Perimeter {
+    Perimeter(2 * a + 2 * b)
+}
+
+fn main() {
+    let r1 = Rectangle { width: 3, height: 4 }
+    let t1 = Triangle { a: 3, b: 4, c: 5 }
+    let r2 = Rectangle { width: 2, height: 5 }
+    print(perimeter(area(r1.width, r1.height).area, r1.width))
+    print(perimeter(area(t1.a, t1.b).area, t1.c))
+    print(perimeter(area(r2.width, r2.height).area, r2.width))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+struct Area {
+    area: Int,
+}
+
+struct Perimeter {
+    perimeter: Int,
+}
+
+fn area(a: Int, b: Int) -> Area {
+    Area(a * b)
+}
+
+fn perimeter(a: Int, b: Int) -> Perimeter {
+    Perimeter(2 * a + 2 * b)
+}
+
+fn main() {
+    let r1 = Rectangle { width: 3, height: 4 }
+    let t1 = Triangle { a: 3, b: 4, c: 5 }
+    let r2 = Rectangle { width: 2, height: 5 }
+    print(perimeter(area(r1.width, r1.height).area, r1.width))
+    print(perimeter

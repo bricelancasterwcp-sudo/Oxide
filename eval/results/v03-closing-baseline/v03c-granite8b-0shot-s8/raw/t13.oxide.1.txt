@@ -1,0 +1,279 @@
+fn main() {
+    print(level("rotor") == level("level") && level("level") == level("stereo") && level("stereo") == level("rotor"))
+}
+
+fn level(s: Str) -> Bool {
+    let v = chars(s)
+    let mut r = false
+    for i in range(0, len(v)) {
+        if v.get(i) == v.get(len(v) - i - 1) {
+            r = true
+        } else {
+            r = false
+            break
+        }
+    }
+    r
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut r = vec()
+    for i in range(0, str_len(s)) {
+        r = push(r, get(s, i).unwrap())
+    }
+    r
+}
+
+fn str_len(s: Str) -> Int {
+    let v = chars(s)
+    len(v)
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    if i < 0 || i >= len(v) {
+        None
+    } else {
+        Some(clone(v.get(i).unwrap()))
+    }
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut r = v
+    r = append(r, x)
+    r
+}
+
+fn append(v: Vec<T>, x: T) -> Vec<T> {
+    let mut r = vec()
+    for i in range(0, len(v)) {
+        r = push(r, clone(v.get(i).unwrap()))
+    }
+    push(r, x)
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut r = 0
+    while r < len(v) && get(v, r).unwrap() == clone(get(v, r).unwrap()) {
+        r = r + 1
+    }
+    r
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn print(x: T) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    print_str("[" + s + "]")
+}
+
+fn to_str(x: T) -> Str {
+    match x {
+        Int(n) => int_to_str(n),
+        Float(n) => float_to_str(n),
+        Bool(b) => bool_to_str(b),
+        Str(s) => s,
+        Unit => "()",
+        _ => "[TODO: implement me]" + type_name(x),
+    }
+}
+
+fn int_to_str(n: Int) -> Str {
+    if n < 0 {
+        "-" + int_to_str(-n)
+    } else {
+        let mut s = ""
+        let mut m = n
+        while m > 0 {
+            s = "0" + s
+            m = m / 10
+        }
+        s
+    }
+}
+
+fn float_to_str(n: Float) -> Str {
+    if n < 0 {
+        "-" + float_to_str(-n)
+    } else {
+        let n = trunc(n * 100.0)
+        let n = n / 100.0
+        if n == trunc(n) {
+            int_to_str(trunc(n) + 0) + ".00"
+        } else if n - trunc(n) < 0.000000000001 {
+            int_to_str(trunc(n))
+        } else if n - trunc(n) < 0.00000000001 {
+            int_to_str(trunc(n * 10.0)) + ".0"
+        } else {
+            int_to_str(trunc(n * 100.0)) + ".00"
+        }
+    }
+}
+
+fn bool_to_str(b: Bool) -> Str {
+    if b {
+        "true"
+    } else {
+        "false"
+    }
+}
+
+fn type_name(x: T) -> Str {
+    match x {
+        Int(_) => "Int",
+        Float(_) => "Float",
+        Bool(_) => "Bool",
+        Str(_) => "Str",
+        Vec(_) => "Vec<T>",
+        Option(_) => "Option<T>",
+        Result(_, _) => "Result<T, E>",
+        Unit => "Unit",
+        _ => "TODO implement me",
+    }
+}
+
+fn trunc(x: Float) -> Int {
+    if x < 0.0 {
+        trunc(-x) - 1
+    } else {
+        let i = x
+        if i < 0 {
+            i - 0.5
+        } else {
+            i + 0.5
+        }
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut r = vec()
+    for i in range(a, b) {
+        r = push(r, i)
+    }
+    r
+}
+
+fn for_in(x: T, f: Fn<T>) {
+    match x {
+        Vec(v) => for_in(v, f),
+        _ => {
+            for i in range(0, len(x)) {
+                f(get(x, i).unwrap())
+            }
+        },
+    }
+}
+
+fn main() {
+    print(level("rotor") == level("level") && level("level") == level("stereo") && level("stereo") == level("rotor"))
+}
+
+fn level(s: Str) -> Bool {
+    let v = chars(s)
+    let mut r = false
+    for i in range(0, len(v)) {
+        if v.get(i) == v.get(len(v) - i - 1) {
+            r = true
+        } else {
+            r = false
+            break
+        }
+    }
+    r
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut r = vec()
+    for i in range(0, str_len(s)) {
+        r = push(r, get(s, i).unwrap())
+    }
+    r
+}
+
+fn str_len(s: Str) -> Int {
+    let v = chars(s)
+    len(v)
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    if i < 0 || i >= len(v) {
+        None
+    } else {
+        Some(clone(v.get(i).unwrap()))
+    }
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    let mut r = v
+    r = append(r, x)
+    r
+}
+
+fn append(v: Vec<T>, x: T) -> Vec<T> {
+    let mut r = vec()
+    for i in range(0, len(v)) {
+        r = push(r, clone(v.get(i).unwrap()))
+    }
+    push(r, x)
+}
+
+fn len(v: Vec<T>) -> Int {
+    let mut r = 0
+    while r < len(v) && get(v, r).unwrap() == clone(get(v, r).unwrap()) {
+        r = r + 1
+    }
+    r
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn print(x: T) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    print_str("[" + s + "]")
+}
+
+fn to_str(x: T) -> Str {
+    match x {
+        Int(n) => int_to_str(n),
+        Float(n) => float_to_str(n),
+        Bool(b) => bool_to_str(b),
+        Str(s) => s,
+        Unit => "()",
+        _ => "[TODO: implement me]" + type_name(x),
+    }
+}
+
+fn int_to_str(n: Int) -> Str {
+    if n < 0 {
+        "-" + int_to_str(-n)
+    } else {
+        let mut s = ""
+        let mut m = n
+        while m > 0 {
+            s = "0" + s
+            m = m / 10
+        }
+        s
+    }
+}
+
+fn float_to_str(n: Float) -> Str {
+    if n < 0 {
+        "-" + float_to_str(-n)
+    } else {
+        let n = trunc(n * 100.0)
+        let n = n / 100.0
+        if n == trunc(n) {
+            int_to_str(trunc(n) + 0) + ".00"
+        } else if n - trunc(n) < 0.000000000001 {
+            int_to_str(trunc(n))
+        } else if n - trunc(n) < 0.

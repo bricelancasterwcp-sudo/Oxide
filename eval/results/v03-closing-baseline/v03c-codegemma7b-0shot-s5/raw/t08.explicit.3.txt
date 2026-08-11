@@ -1,0 +1,164 @@
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7)
+    let mut positive = 0
+    let mut largest = None
+    for x in &nums {
+        if x > &mut && 0 {
+            positive = positive + 1
+        }
+        if largest < x {
+            largest = Some(x)
+        }
+    }
+    print(positive)
+    print(largest)
+}
+
+fn vec(a: Int, b: Int, c: Int, d: Int, e: Int) -> Vec<Int> {
+    push(push(push(push(vec(), a), b), c), d)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut v = v
+    v.push(x)
+    v
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut x = 0
+    for _ in &v {
+        x = x + 1
+    }
+    x
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= len(v) {
+        None
+    } else {
+        Some(v.get(i))
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for x in a + 1 < b {
+        v.push(x)
+    }
+    v
+}
+
+fn clone(x: &Int) -> Int {
+    x.clone()
+}
+
+fn str_len(s: &Str) -> Int {
+    let mut x = 0
+    for _ in s.chars() {
+        x = x + 1
+    }
+    x
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    let mut s = a.to_string() + &b
+    s
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut v = vec()
+    for c in s.chars() {
+        v.push(c.to_string())
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    match s.parse() {
+        Ok(x) => Some(x),
+        Err(_) => None,
+    }
+}
+
+fn to_float(n: Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: Float) -> Int {
+    x.trunc()
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn print(x: Option<Int>) {
+    match x {
+        Some(x) => println(x),
+        None => println("None"),
+    }
+}
+
+fn print(x: &Str) {
+    println(x)
+}
+
+fn drop_all(v: Vec<Int>) {
+    for x in &v {
+        drop x
+    }
+}
+
+fn drop_all(v: Option<Int>) {
+    match v {
+        Some(x) => drop_all(vec(x)),
+        None => drop_all(vec()),
+    }
+}
+
+fn drop_all(v: &Vec<Int>) {
+    for x in &v {
+        drop x
+    }
+}
+
+fn drop_all(v: &Option<Int>) {
+    match v {
+        Some(x) => drop_all(vec(x)),
+        None => drop_all(vec()),
+    }
+}
+
+fn drop_all(v: Float) {
+    drop v
+}
+
+fn drop_all(v: &Float) {
+    drop v
+}
+
+fn drop_all(v: &Str) {
+    drop v
+}
+
+fn drop_all(v: Int) {
+    drop v
+}
+
+fn drop_all(v: &Int) {
+    drop v
+}
+
+fn drop_all(v: &Vec<Int>, i: Int) {
+    if i >= len(v) {
+        return
+    }
+    drop v
+}
+
+fn drop_all(v: &Option<Int>, i: Int) {
+    if i >= len(&vec_opt_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_to_int_ref_

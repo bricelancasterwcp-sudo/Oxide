@@ -1,0 +1,31 @@
+fn sum(x: Int, y: Int) -> Int {
+    x + y
+}
+
+fn main() {
+    let mut a = 1
+    let mut b = 1
+    let mut c = 0
+    for _ in 0.range(20) {
+        c = sum(a, b)
+        a = b
+        b = c
+    }
+    print(c)
+}
+
+fn sum(x: Int, y: Int) -> Int {
+    x + y
+}
+
+fn main() {
+    let mut a = 1
+    let mut b = 1
+    let mut c = 0
+    for _ in 0.range(20) {
+        c = sum(a, b)
+        a = b
+        b = c
+    }
+    print(c)
+}

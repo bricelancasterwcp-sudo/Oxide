@@ -1,0 +1,11 @@
+fn main() {
+    let level = "level"
+    let stereo = "stereo"
+    let rotor = "rotor"
+    print(level == stereo)
+    print(stereo == rotor)
+    print(rotor == level)
+    drop rotor
+    drop stereo
+    drop level
+}

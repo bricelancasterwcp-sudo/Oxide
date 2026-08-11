@@ -1,0 +1,24 @@
+struct Multiples { value: Int, next: Option<Multiples> }
+
+fn build_multiples(n: Int) -> Multiples {
+    let mut acc = None
+    for i in range(1, n + 1) {
+        acc = Some(Multiples { value: i * 3, next: acc })
+    }
+    acc.unwrap()
+}
+
+fn sum_multiples(m: Multiples) -> Int {
+    let mut sum = 0
+    let mut current = Some(m)
+    while letSome(Multiples { value: x, next: next }) == current {
+        sum = sum + x
+        current = next
+    }
+    sum
+}
+
+fn main() {
+    let multiples = build_multiples(8)
+    print(sum_multiples(multiples))
+}

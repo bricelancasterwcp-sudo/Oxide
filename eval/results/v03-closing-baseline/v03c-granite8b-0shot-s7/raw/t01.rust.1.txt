@@ -1,0 +1,5 @@
+```rust
+fn main() {
+    println!("{}", (0..10).map(|x| x * x).sum::<i32>());
+}
+```

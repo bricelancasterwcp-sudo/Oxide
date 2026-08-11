@@ -1,0 +1,24 @@
+fn divide_100(divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(100 / divisor)
+    }
+}
+
+fn main() {
+    match divide_100(5) {
+        Some(q) => print(q),
+        None => print_str("undefined")?,
+    }
+    print("\n")
+    match divide_100(0) {
+        Some(q) => print(q),
+        None => print_str("undefined")?,
+    }
+    print("\n")
+    match divide_100(4) {
+        Some(q) => print(q),
+        None => print_str("undefined")?,
+    }
+}

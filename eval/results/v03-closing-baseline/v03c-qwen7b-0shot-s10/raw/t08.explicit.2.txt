@@ -1,0 +1,20 @@
+fn count_and_max(v: &Vec<Int>) -> Tuple<Int, Int> {
+    let mut count = 0
+    let mut max = -9999
+    for x in v {
+        if x > 0 {
+            count = count + 1
+        }
+        if x > max {
+            max = x
+        }
+    }
+    Tuple(count, max)
+}
+
+fn main() {
+    let nums = vec(3, 8, -2, 12, 7)
+    let result = count_and_max(&nums)
+    print(result.both())
+    drop nums
+}

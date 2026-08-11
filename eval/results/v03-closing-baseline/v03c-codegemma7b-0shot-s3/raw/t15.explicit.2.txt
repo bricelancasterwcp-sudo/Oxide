@@ -1,0 +1,19 @@
+fn parse_and_sum(str_list: &Vec<Str>) -> Result<Int, Int> {
+    let mut sum = 0
+    let mut count = 0
+    for s in str_list {
+        if letSome(n) == parse_int(s) {
+            sum = sum + n
+            count = count + 1
+        }
+    }
+    Ok(sum)
+}
+
+fn main() {
+    let input_strings = vec("12", "x", "30")
+    match parse_and_sum(&input_strings) {
+        Ok(sum) => print(sum),
+        Err(count) => print(count) - print(input_strings.len() - count) - print(" failed") - print(" out of ") - print(input_strings.len()) - print(" strings") - print(".") - print("\n") - print("failed: ") - print(input_strings.len() - count) - print("\n") - print("successful: ") - print(count) - print("\n"),
+    }
+}

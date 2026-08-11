@@ -1,0 +1,355 @@
+fn main() {
+    let mut numbers = vec(5, 3, 8, 1, 9, 2)
+    let mut i = 0
+    while i < 5 {
+        let min = get(&numbers, i)
+        let mut j = i + 1
+        while j < 6 {
+            let c = get(&numbers, j)
+            if min > c {
+                numbers = push(numbers, c)
+                numbers = push(numbers, min)
+                j = j + 1
+            }
+            j = j + 1
+        }
+        print(&numbers)
+        numbers = pop(&numbers)
+        i = i + 1
+    }
+    print(&numbers)
+    drop numbers
+}
+
+fn pop(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    }
+    let mut nv = vec()
+    for i in 0 < v.len() - 1 {
+        nv = push(nv, get(v, i))
+    }
+    nv
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Int {
+    if i >= v.len() {
+        panic("Index out of bounds")
+    }
+    v.get(i)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut nv = vec()
+    for i in 0 < v.len() {
+        nv = push(nv, get(&v, i))
+    }
+    nv.push(x)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(x: &Int) {
+    print(x)
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 < v.len() {
+        print(&get, v, i)
+        print(" ")
+    }
+    print("\n")
+}
+
+fn print(s: &Str) {
+    print(s)
+}
+
+fn print(f: &Float) {
+    print(f)
+}
+
+fn print(b: &Bool) {
+    print(b)
+}
+
+fn print(v: &Vec<Int>) {
+    for i in 0 <

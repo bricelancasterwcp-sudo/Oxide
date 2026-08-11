@@ -1,0 +1,588 @@
+fn main() {
+    let r1 = Rectangle { width: 3, height: 4 }
+    let t1 = Triangle { side1: 3, side2: 4, side3: 5 }
+    let r2 = Rectangle { width: 2, height: 5 }
+    print(perimeter(r1))
+    print(perimeter(t1))
+    print(perimeter(r2))
+}
+
+fn perimeter(r: Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn perimeter(t: Triangle) -> Int {
+    t.side1 + t.side2 + t.side3
+}
+
+struct Rectangle { width: Int, height: Int }
+
+struct Triangle { side1: Int, side2: Int, side3: Int }
+
+struct Point { x: Int, y: Int }
+
+enum Shape {
+    Rectangle(Int, Int),
+    Triangle(Int, Int, Int),
+}
+
+enum Option {
+    Some(Int),
+    None,
+}
+
+enum Result {
+    Ok(Int),
+    Err(Int),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Str {
+    Str(String),
+}
+
+enum Vec {
+    Vec(Vec<Int>),
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Bool {
+    Bool(Bool),

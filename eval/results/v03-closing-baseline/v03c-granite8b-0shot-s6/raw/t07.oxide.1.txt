@@ -1,0 +1,9 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    let v = r.values
+    let mut i = 0
+    let sum = whilei < len(v) && (letx == 3) * 3 * i + v.get(i)?
+    print(sum)
+}

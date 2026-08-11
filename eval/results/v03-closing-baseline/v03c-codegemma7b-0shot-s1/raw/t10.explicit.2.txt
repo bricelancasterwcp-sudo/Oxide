@@ -1,0 +1,153 @@
+fn keep_large(v: &Vec<Int>) -> Vec<Int> {
+    let mut kept = vec()
+    for x in v {
+        if x > &mut && 3 {
+            kept = push(kept, x)
+        }
+    }
+    kept
+}
+
+fn main() {
+    let values = vec(4, 1, 7, 3, 9, 2)
+    let kept = keep_large(&values)
+    for x in &kept {
+        print(x)
+    }
+    print(len(&kept))
+}
+
+fn push(v: Vec<Int>, x: &Int) -> Vec<Int> {
+    vec(x, &v)
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut total = 0
+    for _ in v {
+        total = total + 1
+    }
+    total
+}
+
+fn print(x: Int) {
+    let s = int_to_str(x)
+    for c in chars(&s) {
+        print_str(c)
+    }
+    print_str("\n")
+}
+
+fn print_str(s: &Str) {
+    for c in chars(s) {
+        print_char(c)
+    }
+}
+
+fn print_char(c: &Str) {
+    let bytes = str_to_bytes(c)
+    for b in &bytes {
+        write_byte(b)
+    }
+}
+
+fn str_to_bytes(s: &Str) -> Vec<Int> {
+    let mut bytes = vec()
+    for c in chars(s) {
+        bytes = push(bytes, int_to_str(c))
+    }
+    bytes
+}
+
+fn write_byte(b: Int) {
+    let mut buf = vec(b)
+    write(&mut && buf)
+}
+
+fn write(buf: &Vec<Int>) {
+    let s = int_to_str(buf)
+    for c in chars(&s) {
+        print_char(c)
+    }
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut digits = vec()
+    let mut num = n
+    while num > 0 {
+        digits = push(digits, num % 10)
+        num = num / 10
+    }
+    let mut s = str()
+    for d in &digits {
+        s = concat(s, int_to_str(d))
+    }
+    s
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut chars = vec()
+    for c in s.chars() {
+        chars = push(chars, str(c))
+    }
+    chars
+}
+
+fn str(c: Char) -> Str {
+    let mut s = str()
+    s = concat(s, int_to_str(int(c)))
+    s
+}
+
+fn int(c: Char) -> Int {
+    let s = str(c)
+    parse_int(&s)
+}
+
+fn parse_int(s: &Str) -> Int {
+    let mut total = 0
+    for c in chars(s) {
+        total = total * 10 + int(c)
+    }
+    total
+}
+
+fn clone(x: &Int) -> Int {
+    let s = int_to_str(x)
+    parse_int(&s)
+}
+
+fn vec(x: Int) -> Vec<Int> {
+    let mut v = vec()
+    v = push(v, x)
+    v
+}
+
+fn push(mutv: Vec<Int>, x: Int) -> Vec<Int> {
+    mutv = vec(x, &mutv)
+    mutv
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let mut total = 0
+    for _ in v {
+        total = total + 1
+    }
+    total
+}
+
+fn drop_vec(v: &Vec<Int>) {
+    for _ in v {
+        print(".")
+    }
+    print("\n")
+}
+
+fn main() {
+    let values = vec(4, 1, 7, 3, 9, 2)
+    let kept = keep_large(&values)
+    for x in &kept {
+        print(x)
+    }
+    print(len(&kept))
+    drop_vec(&values)
+}

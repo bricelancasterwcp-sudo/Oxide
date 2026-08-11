@@ -1,0 +1,17 @@
+struct Summation { total: Int }
+
+fn square(x: Int) -> Int {
+    x * x
+}
+
+fn sum_squares() -> Int {
+    let mut acc = 0
+    for i in range(0, 10) {
+        acc = acc + square(i)
+    }
+    acc
+}
+
+fn main() {
+    print(sum_squares())
+}

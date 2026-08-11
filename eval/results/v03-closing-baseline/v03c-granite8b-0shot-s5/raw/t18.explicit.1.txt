@@ -1,0 +1,45 @@
+fn perim(s: &Shape) -> Int {
+    0
+}
+
+fn area(s: &Shape) -> Int {
+    0
+}
+
+fn main() {
+    let rect = Rectangle(3, 4)
+    let tri = Triangle(3, 4, 5)
+    let rect2 = Rectangle(2, 5)
+    print(perim(&rect))
+    print(area(&tri))
+    print(perim(&rect2))
+    print(area(&rect2))
+}
+
+fn is_equal_area(s1: &Shape, s2: &Shape) -> Bool {
+    area(s1) == area(s2)
+}
+
+fn is_equal_perim(s1: &Shape, s2: &Shape) -> Bool {
+    perim(s1) == perim(s2)
+}
+
+fn main() {
+    let rect = Rectangle(3, 4)
+    let tri = Triangle(3, 4, 5)
+    let rect2 = Rectangle(2, 5)
+    if is_equal_area(&rect, &tri) {
+        print("These shapes have equal area")
+    } else if is_equal_area(&rect, &rect2) {
+        print("These shapes have equal area")
+    } else {
+        print("These shapes have different areas")
+    }
+    if is_equal_perim(&rect, &tri) {
+        print("These shapes have equal perimeter")
+    } else if is_equal_perim(&rect, &rect2) {
+        print("These shapes have equal perimeter")
+    } else {
+        print("These shapes have different perimeter")
+    }
+}

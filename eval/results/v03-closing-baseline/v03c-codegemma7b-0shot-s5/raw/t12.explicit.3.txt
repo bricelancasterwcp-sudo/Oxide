@@ -1,0 +1,40 @@
+fn print_reverse(text: &Str) {
+    for c in text.chars().rev() {
+        print_str(c)
+    }
+}
+
+fn main() {
+    print_reverse("stack")
+}
+
+fn print_str(s: Str) {
+    print(chars(str_len(s)))
+}
+
+fn chars(n: Int) -> Vec<Str> {
+    if n == 0 {
+        return vec()
+    }
+    let mut result = vec(n)
+    for i in (0.to_int() + 1.to_int()).to_int() < n.to_int() {
+        result.push(int_to_str(i))
+    }
+    result
+}
+
+fn str_len(s: Str) -> Int {
+    Int(s.len())
+}
+
+fn int_to_str(n: Int) -> Str {
+    return Str(format("%d", n))
+}
+
+fn print(s: Str) {
+    println(s)
+}
+
+fn main() {
+    print_reverse("stack")
+}

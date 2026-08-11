@@ -1,0 +1,11 @@
+fn main() {
+    let input = vec![4, 1, 7, 3, 9, 2];
+    let mut keep_count = 0;
+    for num in input {
+        if num > 3 {
+            println!("{}", num);
+            keep_count += 1;
+        }
+    }
+    println!("Kept {} values", keep_count);
+}
