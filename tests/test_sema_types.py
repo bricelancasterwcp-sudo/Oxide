@@ -810,5 +810,13 @@ def test_float_reaches_to_str_through_trunc() -> None:
 
 
 def test_to_str_receiver_form_works_via_section_53() -> None:
-    """§53 mirrors BUILTINS mechanically, so `n.to_str()` comes free."""
+    """`n.to_str()` did NOT come free. The parser's §53 receiver-method set
+    (`src.parser.expressions.BUILTIN_METHOD_NAMES`) is **hand-maintained**
+    in parallel with `src.sema.types.BUILTINS` — the parser must not import
+    sema, which would invert the layering — and
+    `tests/test_parser.py::test_parser_and_sema_builtin_sets_stay_in_sync`
+    is what enforces the parallel. Adding `to_str` to `BUILTINS` alone left
+    it un-callable as a method; the line had to be added to the parser set
+    by hand (commit 2c91240), and the sync test is what caught the
+    omission. This test is the receiver form's own end-to-end guard."""
     assert codes("fn main() { let n = 42\n print_str(n.to_str()) }") == []
