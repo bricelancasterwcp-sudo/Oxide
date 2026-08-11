@@ -111,7 +111,7 @@ length. They differ in exactly one thing: whether ownership is implicit.
 
 ### The effect splits in two, and only one half is about ownership
 
-Adding builtin method syntax (SPEC Part XI) moved these numbers enormously —
+Adding builtin method syntax (SPEC §53) moved these numbers enormously —
 and the way it moved them is the finding:
 
 | Model | `OX0304` before → after | oxide strict change |
@@ -140,18 +140,53 @@ before the change.
 - the combined **+34.5pp `[+25.3, +43.7]`** mixes the two and should not be
   quoted as an ownership result
 
-### Two ergonomic fixes, and what each was worth
+### Ergonomic fixes, and what each was worth
 
-Both came from reading failing submissions rather than theorising, and both
-show the same dose-response — they helped exactly the models that had the
-problem:
+Every one came from reading failing submissions rather than theorising, and
+each shows the same dose-response — it helped exactly the models that had the
+problem.
+
+The two groups below are **measured on different instruments** and their
+numbers must not be read across: repair deltas come from the ownership probe,
+generation deltas from the constrained grid.
+
+**Measured on repair (v0.2.2).** Oxide strict change on the probe corpus:
 
 | Fix | mechanism removed | effect |
 |---|---|---|
 | **Method syntax** (§53) | `.clone()` → `OX0304`, 94→0 and 72→0 | **+42pp** (qwen), **+31pp** (codegemma), **−1.5pp** (granite, which never used it) |
 | **`mut` accepted** (§54) | `let mut acc` glued into `let mutacc`, `OX0200` 81→10 (qwen) and 42→**0** (codegemma) | **+5.5pp** (qwen), **+3.0pp** (codegemma), **0** (granite) |
 
-The second is the more instructive. Chasing `OX0200` — the largest remaining
+**Measured on generation (v0.3).** Three constrained campaigns, oxide arm,
+200 first attempts per family per arm — qwen / codegemma / granite:
+
+| Fix | mechanism removed | first-compile | first-pass |
+|---|---|---|---|
+| **`vec(...)` literal** (§55) | push-chain boilerplate; targeted counter 91→21, 69→13, 27→6 | **+4.5 / +3.5 / +2.0** | **+3.0 / +2.0 / +0.5** |
+| **field assignment + `to_str`** (§56, §57 — landed together, inseparable) | the constrained decoder's `f.x == e` substitution, 18→0; a naming gap | +1.5 / 0 / 0 | +1.5 / 0 / 0 |
+
+**One of the three did the work.** §55 took **10.0 of the 11.5 first-compile
+points** and 5.5 of the 7.0 first-pass points, and its per-family effect
+orders exactly as its measured demand did — 91 > 69 > 27 `vec` calls giving
++4.5 > +3.5 > +2.0. What is left is one family's 3 sessions of 200, and it is
+probably not §56 either: the family with the *most* deformation to remove
+(codegemma, 10 occurrences) moved 0.0, while the one that moved had the
+fewest (qwen, 2).
+
+Both were still worth shipping, for reasons that are not rate. §56 eliminated
+a *measurement* artifact — the grammar-constrained decoder substituting `=`
+for `==` in statement position, 18 occurrences to 0 — and its implementation
+surfaced the one defect class found in this project that **rustc accepts**,
+so the oracle never sees it. §57 provably could not have moved rates: of the
+programs reaching for `to_str`, none compiled either before or after the alias
+existed, so its largest possible effect on first-compile was 0.0pp. The wall
+those programs hit is the parser, and a builtin alias acts downstream of it.
+
+That is what a loop at diminishing returns looks like, and it is why the next
+step is a fine-tune track rather than a fourth ergonomic fix. Full accounting:
+[`eval/results/v03-synthesis/`](eval/results/v03-synthesis/).
+
+The `mut` fix is the more instructive of the repair pair. Chasing `OX0200` — the largest remaining
 error class — found that its largest single cause was **the measuring
 instrument deforming model output**. A grammar-constrained decoder cannot
 reject a token; it steers to the nearest valid string, so `mut acc` became
@@ -198,17 +233,28 @@ component is around +10pp; the rest is ergonomic.
   much the ergonomic change helped each model, not how well it reasons about
   ownership.
 - Anything about **writing** Black Oxide. These models cannot. Under
-  constrained decoding at HEAD, first-attempt pass rates are **26 / 14.5 / 9%**
-  for Black Oxide against **57 / 45 / 42%** for Rust (qwen2.5-coder-7b /
-  codegemma-7b / granite-code-8b, 600 first attempts per family per arm),
-  and a frontier model prefers Rust 100 to 92. That gap is pretraining
-  exposure, not language design.
+  constrained decoding at v0.3, first-attempt pass rates are
+  **30.5 / 16.5 / 9.5%** for Black Oxide against **56.5 / 45 / 42%** for Rust
+  (qwen2.5-coder-7b / codegemma-7b / granite-code-8b, 200 first attempts per
+  family per arm; at v0.2.2 the Black Oxide side was 26 / 14.5 / 9%). That gap
+  is pretraining exposure, not language design — and at frontier it closes
+  entirely: on whole-program authorship a frontier model scored **20/20 in all
+  three arms**, Rust and both Black Oxide dialects alike.
 
   *Superseding an earlier figure:* this README previously cited the 6a
   pilot's **2/20 against 20/20**. The Black Oxide side replicates — G0's
   unconstrained qwen first-compile is 10.0% — but the Rust side does not.
-  20/20 was a 20-sample high against 56.5% measured over 600. The gap is
+  20/20 was a 20-sample high against 56.5% measured over 200. The gap is
   real and large; it is not 10× wide.
+
+  *Two corrections to how this bullet read before v0.3:* its denominator said
+  600 first attempts per family per arm, which is **200** — 600 is per family,
+  across the three arms. And it cited "a frontier model prefers Rust 100 to
+  92", which is 12/12 against 11/12 from the **repair** probe rather than
+  generation, and whose single failure that probe's own report records as a
+  corpus defect, not a model failure. Neither figure supported a claim about
+  writing; the 20/20 generation result above is what the frontier data
+  actually says.
 
 ## How it was measured
 
