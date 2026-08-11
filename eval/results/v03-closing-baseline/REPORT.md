@@ -116,11 +116,50 @@ it appear where the forcing mechanism was never present). This is
 supporting context, not a new measurement of the `0 → 0` cell at v0.3
 HEAD.
 
-**4. g3, `to_str` unresolved plain calls: CONFIRMED, 0.**
-`eval.demand.scan_oxide_arm` on this root does not list `to_str` in
-`unresolved_calls` at all (only `to_int: 2` occurrences / 1 program
-appear) — the counter is structurally zero by construction now that
-`to_str` is in `BUILTINS`, exactly the mechanical claim predicted.
+**4. g3, `to_str` unresolved plain calls: VACUOUS — structurally true by
+construction, not a measurement. Recorded, not deleted.** The reading is
+0, and `eval.demand.scan_oxide_arm` on this root does not list `to_str`
+in `unresolved_calls` at all (only `to_int: 2` occurrences / 1 program
+appear). But that 0 is not evidence, and it should not have been scored
+in the same column as endpoints 2, 5, 6 and 7, which are.
+
+*Why it cannot fail.* `unresolved_calls` filters each candidate on `name
+not in BUILTINS` against the **live** table. The moment `to_str` entered
+`BUILTINS` its unresolved count became 0 for every possible input — this
+corpus, any earlier corpus, any future one. Run against the two
+**pre-change** corpora at current HEAD it duly reads **0 for `g0c` and 0
+for `g1c`** as well, corpora collected before `to_str` existed as a name
+the language had. No corpus can produce a nonzero value, so nothing about
+the change is being tested.
+
+It is vacuous a second time over, independently of that filter. Removing
+the `BUILTINS` clause entirely and re-running against all three corpora
+still gives **0 / 0 / 0**, because `unresolved_calls` also excludes names
+the program defines itself, and in this corpus *every* program that
+writes a plain `to_str(` call also writes `fn to_str` in the same file.
+There was never a population of bare, undefined `to_str` calls for the
+alias to rescue. (See "The g3 null is mechanical" below, which is the
+same fact seen from the other side.)
+
+*An undisclosed endpoint substitution sits underneath this.* The design
+document (`docs/superpowers/specs/2026-08-10-v03-g3-to-str-design.md`,
+its own pre-registered table) registered a **different** endpoint: "g3:
+`to_str`-shaped `OX0306` → 0". The implementation plan
+(`docs/superpowers/plans/2026-08-10-v03-g3-to-str.md`) replaced it with
+the demand-counter endpoint quoted at the top of this report, and did not
+say it had done so. Both documents predate the run, so this is **not**
+post-hoc endpoint selection — but the substitution was undisclosed, and
+it is disclosed here. It also bought nothing: the original
+operationalisation was equally vacuous. `OX0306` diagnostics mentioning
+`to_str` number **0 in `g0c`, 0 in `g1c`, 0 in `v03c`** — already sitting
+at their predicted value before the change landed, across every corpus
+this project has.
+
+The endpoint is kept on the scorecard rather than quietly dropped,
+marked for what it is. A prediction that no possible observation could
+have falsified is not a confirmed prediction, and the g3 code change
+therefore has **no** surviving endpoint that measures it: endpoint 5, the
+one that could have moved, missed.
 
 **5. g3, `fn to_str` self-definitions: prediction MISSED — flat, and
 within the counter's own demonstrated run-to-run noise.** Measured this
@@ -148,11 +187,31 @@ added as a **resolver-only** alias and never added to
 "narrowed to a to_str alias on measurement"). A model that has never
 seen `to_str` on its card has no new information telling it the name
 now exists, so nothing about its own decision to self-define `fn
-to_str` when it wants that spelling changes — the fix resolves the
-*call* mechanically without touching the *demand* signal at all.
+to_str` when it wants that spelling changes.
+
+**A correction to how that was previously put here.** An earlier version
+of this paragraph said the fix "resolves the *call* mechanically without
+touching the *demand* signal at all". The second half is false. Adding
+`to_str` to `BUILTINS` makes the name **reserved at top level**: a
+program that writes `fn to_str(...)` is now `OX0203 duplicate top-level
+name` (SPEC §16, §57) where before the change it was a legal user
+function. The demand signal is not untouched — it is **relocated**, out
+of taxonomy dossier 3 (models call conversions that don't exist) and into
+dossier 4 (builtin reimplementation → `OX0203`). Same programs, new
+friction, different filing cabinet. The corpus records the move directly:
+`duplicate top-level name 'to_str'` fires **1×** in the 600 v03c
+constrained oxide first attempts (5 occurrences across 5 attempts in 2
+sessions once all four repair attempts are counted), against **0× in
+`g0c` and 0× in `g1c`**. The cleanest instance is a controlled one —
+`v03c-codegemma7b-0shot-s8` t08's first attempt is **byte-identical** to
+its `g0c` counterpart, and the only difference in outcome is one extra
+diagnostic: 36 diagnostics became 37, the addition being
+`OX0203 duplicate top-level name 'to_str'`.
+
 Reported as a miss, not reinterpreted as a partial success; the brief's
-pre-registration governs, and the miss verdict is unchanged by this
-correction — only the over-reading of a +1 as directional is retracted.
+pre-registration governs, and the miss verdict is unchanged by either
+correction — only the over-reading of a +1 as directional, and the claim
+that the demand signal was untouched, are retracted.
 
 **6. Aggregate first-attempt pass rates: CONFIRMED — no detectable
 change, verified against the correct predecessor.** The immediate
@@ -231,6 +290,72 @@ identical is explicitly **not** claimed — see point 6's cross-server
 sampling note — and the pre-registration only committed to the rate
 level.
 
+## The g3 null is mechanical, not statistical: the demand never reaches the resolver
+
+This is the most useful thing this campaign produced about `to_str`, and
+it was available in data already on disk rather than requiring a new run.
+The pre-registration explained the expected null on **power** grounds
+(~1.5–2% prevalence against a ±5pp resolution floor). That argument is
+correct but weaker than what the corpus actually shows. The stronger
+statement is that the alias changed the outcome of **exactly zero
+sessions, and could not have**.
+
+Classify every oxide-arm **first attempt** whose extracted program
+contains the token `to_str` (`triples.jsonl`, `arm == "oxide"`,
+`attempt == 1`; `int_to_str` excluded by word boundary):
+
+| corpus | programs reaching for `to_str` | compiled | passed |
+|---|---|---|---|
+| `g0c` (pre-change) | 9 / 600 | **0** | **0** |
+| `g1c` (pre-change) | 11 / 600 | **0** | **0** |
+| `v03c` (this run, post-change) | 11 / 600 | **0** | **0** |
+
+**Not one of the 9 pre-change programs failed because `to_str` was
+missing.** Their first diagnostics:
+
+| first diagnostic | n | stage | what it actually says |
+|---|---|---|---|
+| `OX0101` expected token | 4 | parse | `expected '}' / ')' / field name, found EOF` |
+| `OX0103` expected type | 1 | parse | `expected type, found EOF` |
+| `OX0203` duplicate top-level name | 3 | resolve | `'main'`, `'push'`, and one 36-diagnostic degenerate cascade |
+| `OX0200` unknown identifier | 1 | resolve | **`unknown identifier 'Vec'`** — not `to_str` |
+
+Five of the nine never reach name resolution at all: they die in the
+parser, truncated mid-program. The remaining four reach the resolver and
+fail there on something unrelated — a `Vec` type name, a duplicate
+`main`, a duplicate `push` followed by an unknown `Stack`. Searching
+every diagnostic of all nine programs, **no diagnostic anywhere reports
+`to_str` as an unresolved name.** The only `to_str`-substring diagnostic
+in the set is `duplicate top-level name 'int_to_str'`, inside the
+degenerate cascade — a self-definition clash, not a missing conversion.
+
+The composition of the nine explains why. Six self-define `fn to_str`
+(the 15 occurrences of endpoint 5); four use the receiver form
+`x.to_str()` (10 occurrences); one does both. **Zero make a bare plain
+call to an undefined `to_str`.** A model that reaches for this spelling
+either brings its own definition or writes it as a method — so there was
+no unresolved-call population for the alias to convert, which is the same
+fact endpoint 4 reports from the counter's side.
+
+Post-change the picture is identical in kind: 11 programs, 0 compiled, 0
+passed, first diagnostics `OX0101` ×4, `OX0103` ×2, `OX0203` ×4,
+`OX0200` ×1 — with one of those `OX0203`s now being the new
+`duplicate top-level name 'to_str'` clash described in endpoint 5.
+
+**What this means, and it is a real result rather than a null.** The wall
+these programs hit is not the language's builtin set. It is the lexer and
+the parser, and behind them a handful of unrelated top-level name
+clashes. Resolution-stage ergonomics — which is what a builtin alias
+buys — is downstream of where these models are actually failing, so
+alias-shaped fixes cannot pay off until the upstream failures are fixed.
+That bears directly on whether the remaining conversion-name candidates
+in taxonomy dossier 3 are worth spending SPEC surface on: on this
+evidence, they are not, and the marginal fix should be aimed at
+truncation and parse failure instead. It also sets the ceiling the power
+argument only estimated: at 9–11 carrier programs per 600, and 0 of them
+compiling in any corpus before or after, the largest possible effect on
+first-compile rate was **0.0pp**, not "below the ±5pp floor".
+
 ## Comparability statement, verified against each cited run's own manifest
 
 | run | manifest `backend` (top-level) | oxide/explicit constrained? | rust constrained? | `num_ctx` (qwen/codegemma/granite) | grammar SHA (oxide / explicit) | `preflight.build_info` |
@@ -277,7 +402,14 @@ carrying a hidden grammar change on top of the language change.
   prevalence in generated programs — mechanically incapable of moving
   an aggregate pass rate by anything this design could detect, which is
   exactly why the null in endpoint 6 is read as a successful
-  confirmation and not a disappointment.
+  confirmation and not a disappointment. For the `to_str` half this is
+  the **secondary** argument only: the primary explanation is
+  mechanical, not statistical — see "The g3 null is mechanical" above,
+  where every one of the 9/11 carrier programs is shown to fail in the
+  parser or on an unrelated name clash, so the true effect was bounded
+  at 0.0pp rather than merely below the floor. The power argument is
+  retained because it is what the pre-registration committed to and it
+  still governs the `s.f = e` half.
 - **The self-definition counter is textual, not parse-gated** (by
   design — see `eval/demand.py`'s own docstring): it matches `fn
   to_str(` in raw text including inside comments or strings, and is an
@@ -334,6 +466,15 @@ Raw: 30 run dirs (`v03c-<slug>-0shot-s1`…`s10`), `cells.jsonl` +
 --models qwen7b,codegemma7b,granite8b --seeds 1-10 --run-prefix v03c`;
 `python -m eval.deformation eval/results/v03-closing-baseline`;
 `eval.demand.scan_oxide_arm(Path('eval/results/v03-closing-baseline'))`.
+The carrier-program and first-diagnostic breakdowns in "The g3 null is
+mechanical" are read from each run dir's `triples.jsonl`, filtered to
+`arm == "oxide"` and `attempt == 1`, selecting programs whose `code`
+matches `(?<![A-Za-z_0-9])to_str(?![A-Za-z_0-9])` (which excludes
+`int_to_str`) and tallying `diagnostics[0]["code"]`; the same filter over
+`g0c` and `g1c` produces their rows. Endpoint 4's cross-corpus zeros are
+`scan_oxide_arm` re-run at current HEAD against
+`eval/results/g0-generation-baseline/constrained` and
+`eval/results/g1-vec-literal/constrained`.
 The paired first-pass deltas quoted above (`eval.rollup`) were read via
 `eval.g0_report`'s own call into `rollup.paired_delta`/`paired_se`, not
 `eval.rollup`'s CLI. If reproducing them by invoking
