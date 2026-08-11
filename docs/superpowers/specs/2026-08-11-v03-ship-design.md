@@ -39,6 +39,26 @@ Oxide-arm first-pass rate, percentage points:
 (79%). The remaining 1.5 is one family's +3 sessions of 200, against
 SPEC §47's ±5pp resolution floor for this design.
 
+**First-compile is the sharper view, and the synthesis leads with it.**
+An ergonomic language fix acts on whether a program compiles; passing
+additionally requires the algorithm to be right, which no syntax change
+can supply. On that metric the same decomposition is more concentrated
+still — and §55's share is **dose-ordered in its own measured demand**:
+
+| family | g0c | g1c | v03c | §55 | §56+§57 | §55 demand (pre-change `vec` calls) |
+|---|---|---|---|---|---|---|
+| qwen | 30.0 | 34.5 | 36.0 | **+4.5** | +1.5 | 91 |
+| codegemma | 20.0 | 23.5 | 23.5 | **+3.5** | +0.0 | 69 |
+| granite | 31.0 | 33.0 | 33.0 | **+2.0** | +0.0 | 27 |
+
+§55 takes **10.0 of the 11.5 first-compile points** (87%), and its
+per-family effect orders exactly as the demand counts do (91 > 69 > 27 →
++4.5 > +3.5 > +2.0). A dose-response across independent families is the
+same evidentiary form that carried §53, and the opposite of the pattern
+that sank three earlier headlines here. The demand counts are the
+pre-change `vec`-call figures from `eval/results/g1-vec-literal/REPORT.md`
+(91 → 21, 69 → 13, 27 → 6).
+
 Both controls stay flat across the whole of v0.3 (g0c→v03c):
 
 | arm | qwen | codegemma | granite |
@@ -94,9 +114,16 @@ Permitted: the standing constraint forbids **modifying** anything under
 there, so it opens with a header stating that it has no `cells.jsonl` of
 its own and naming the three campaign roots it reads.
 
-**It must carry:** the two tables above; the §55/§56/§57 accounting; the
-79% figure; the diminishing-returns conclusion and its link to the
-pivot; and a "what this does not show" section.
+**It must carry:** the first-compile table (leading, with the
+dose-response), the first-pass table, and the controls table; the
+§55/§56/§57 accounting; the 87% and 79% figures; the
+diminishing-returns conclusion and its link to the pivot; and a "what
+this does not show" section.
+
+**Every rate in it must be reproduced, not recalled**, by running
+`eval.g0_report` against each of the three committed roots — the exact
+three commands are in the implementation plan, and all three were
+verified to reproduce the tables above before this design was written.
 
 **It must not duplicate** the closing-baseline REPORT. That document
 owns the endpoint scorecard, the comparability statement, the
@@ -119,8 +146,10 @@ fixes, and what each was worth` (line 143) becomes `### Ergonomic fixes,
 and what each was worth`, holding two separately labelled tables:
 
 - *Measured on repair* — the existing §53/§54 rows, unchanged.
-- *Measured on generation (v0.3)* — a new table, oxide first-pass, with
-  the g1c split above.
+- *Measured on generation (v0.3)* — a new table carrying the oxide arm's
+  **first-compile and first-pass** deltas with the g1c split above, so
+  the dose-response is visible and the "one change did the work"
+  conclusion is checkable from the README alone.
 
 The two metrics never share a column. Mixing a repair delta and a
 generation delta under one "effect" heading is the false-comparability
