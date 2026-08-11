@@ -1347,7 +1347,7 @@ when pinned as a numbered contract part.
    semantics would execute accumulation bugs as written rather than
    catching them, the isolated ownership benefit is only ~+10pp and
    0.0pp at frontier, and the largest measured win in the project came
-   from ERGONOMICS (Part XI method syntax, +42pp) at no semantic cost.
+   from ERGONOMICS (Part XI §53 method syntax, +42pp) at no semantic cost.
    Full reasoning: docs/superpowers/specs/2026-08-07-v03-gate-decision.md.
    The original proposal is retained below for the record:
    ~~invert the
@@ -1356,7 +1356,27 @@ when pinned as a numbered contract part.
    with OX04xx machinery applied only there. The eval's OX-code error
    distribution confirms or kills this. Also v0.3-track: restricted
    closures, enum-scoped variants (leading-dot), module system with
-   required signatures at module boundaries.
+   required signatures at module boundaries.~~
+
+   **What actually shipped as v0.3 — CLOSED 2026-08-11.** With the
+   inversion rejected, the version number went to the ergonomics track
+   instead: §55 `vec(...)`, §56 field assignment, §57 the `to_str`
+   alias — each selected from a measured friction in the G0 corpus
+   rather than proposed from taste, and bracketed by three constrained
+   campaigns (`g0c`, `g1c`, `v03c`). Outcome: §55 accounts for **87% of
+   the first-compile gain** and 79% of the first-pass gain, and its
+   per-family effect is dose-ordered in its own demand counts (91/69/27
+   `vec` calls → +4.5/+3.5/+2.0). §56 and §57 landed together and
+   jointly moved one family by 3 sessions of 200 and the other two not
+   at all — a residual the synthesis argues is noise rather than §56,
+   since the family with the most deformation to remove moved least.
+   §56 nevertheless eliminated a decoder-deformation artifact outright
+   (18 statement and 17 tail occurrences → 0), and §57 provably could
+   not have moved rates: its carrier programs fail upstream of the
+   resolver in every corpus, before and after. Read together this is a
+   loop at diminishing returns, which is the measured basis for
+   proceeding to item 4 rather than to a fourth ergonomic fix. Full
+   accounting: `eval/results/v03-synthesis/REPORT.md`.
 4. **Small-model track** (after v0.2.1 + harness): compiler-filtered data
    factory; token-MATCHED LoRA fine-tunes (Qwen-Coder-class ~1.5B/~7B) on
    Black Oxide vs Rust; eval pass@1, pass@N-with-`--check`-verifier,
@@ -2376,7 +2396,7 @@ in `harness.py` or `src/` is touched).
    `pytest -m live`. It still skips cleanly when the daemon is down or
    the model is not pulled.
 
-# Part XI — Builtin Method Syntax (v0.2.2)
+# Part XI — Generation Ergonomics (v0.3)
 
 ## 53. Receiver-first calls to builtins
 
