@@ -222,9 +222,19 @@ receivers **plus** 4 float-literal ones (`0.0.to_int()`, `1.0.to_int()`),
 so *numeric*-literal is the label the arithmetic supports — strictly
 integer-literal is 32, not 36; and its denominator of 51 lands on **52**
 on re-derivation (343 receiver occurrences less the degenerate program's
-291), making the share 69.2%. Neither affects what the row is used for,
-which is the conclusion that `to_int` is range sugar rather than a
-conversion. The `to_str` row's "**21** (+15 definitions)" column is
+291), making the share 69.2%. The full classification of those 52 sums
+exactly: 32 integer-literal + 4 float-literal + 12 variable/field + 4
+call-result.
+
+That second point propagates once. The bullet above this table derives a
+"**23.5% variable-receiver slice**" for `to_int`, which is the 12
+variable/field receivers over the same denominator — `12/51`. On the
+re-derived denominator it is `12/52` = **23.1%**. Neither this nor the
+70.6% → 69.2% shift affects what the row is used for, which is the
+conclusion that `to_int` is range sugar rather than a conversion and that
+`parse_int` already covers the slice a real conversion would serve.
+
+The `to_str` row's "**21** (+15 definitions)" column is
 accurate and is the phrasing SPEC §57 and the taxonomy have adopted: the
 15 definitions are *inside* the 85.7%, so the plain-call-only share is
 21/46 = 45.7%.

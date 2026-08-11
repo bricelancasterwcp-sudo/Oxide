@@ -322,8 +322,10 @@ missing.** Their first diagnostics:
 
 Five of the nine never reach name resolution at all: they die in the
 parser, truncated mid-program. The remaining four reach the resolver and
-fail there on something unrelated — a `Vec` type name, a duplicate
-`main`, a duplicate `push` followed by an unknown `Stack`. Searching
+fail there on something unrelated — a `Vec` type name; a duplicate
+`main`; a duplicate `push` followed by an unknown `Stack`; and one
+36-diagnostic degenerate cascade heading with a duplicate `len`.
+Searching
 every diagnostic of all nine programs, **no diagnostic anywhere reports
 `to_str` as an unresolved name.** The only `to_str`-substring diagnostic
 in the set is `duplicate top-level name 'int_to_str'`, inside the
@@ -339,8 +341,16 @@ fact endpoint 4 reports from the counter's side.
 
 Post-change the picture is identical in kind: 11 programs, 0 compiled, 0
 passed, first diagnostics `OX0101` ×4, `OX0103` ×2, `OX0203` ×4,
-`OX0200` ×1 — with one of those `OX0203`s now being the new
-`duplicate top-level name 'to_str'` clash described in endpoint 5.
+`OX0200` ×1. **None of those four `OX0203` heads is the new `to_str`
+clash** — they are `'push'`, `'len'`, `'main'`, `'push'`, the same kinds
+of unrelated collision as before. The new
+`duplicate top-level name 'to_str'` described in endpoint 5 does occur in
+this corpus, but never as a first diagnostic: it appears once, at
+diagnostic index 4 of `v03c-codegemma7b-0shot-s8` t08, inside a cascade
+that still heads with `duplicate top-level name 'len'` — the identical
+head that same byte-identical program had before the change. The clash is
+real and is recorded, but it does not change which diagnostic any program
+fails on first.
 
 **What this means, and it is a real result rather than a null.** The wall
 these programs hit is not the language's builtin set. It is the lexer and
