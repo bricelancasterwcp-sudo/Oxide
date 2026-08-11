@@ -1,0 +1,13 @@
+fn main() {
+    let mut a = 1;
+    let mut b = 1;
+    let mut sum = 0;
+
+    for _ in 0..20 {
+        sum = a + b;
+        a = b;
+        b = sum;
+    }
+
+    println!("{}", b);
+}

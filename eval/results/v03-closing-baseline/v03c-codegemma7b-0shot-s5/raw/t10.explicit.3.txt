@@ -1,0 +1,11 @@
+fn main() {
+    let mut num_list = vec(4, 1, 7, 3, 9, 2)
+    let mut num_count = 0
+    for num in &mutnum_list {
+        if num > &mut3 {
+            num_count = num_count + 1
+            println(num)
+        }
+    }
+    print(num_count)
+}

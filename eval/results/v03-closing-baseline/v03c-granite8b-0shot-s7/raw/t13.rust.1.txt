@@ -1,0 +1,19 @@
+```rust
+fn main(){
+    println!("{}", is_palindrome("level"));
+    println!("{}", is_palindrome("stereo"));
+    println!("{}", is_palindrome("rotor"));
+}
+
+fn is_palindrome(s: &str) -> bool {
+    let mut chars = s.chars();
+    chars.eq(chars.clone().rev())
+}
+```
+
+Explanation:
+1. The function `is_palindrome` takes a reference to a string `s` and returns a boolean indicating whether the string is a palindrome.
+2. Within the function, we use the `chars` method to obtain an iterator over the characters of the string.
+3. We then clone this iterator and call the `rev` method to create a reversed iterator.
+4. Finally, we use the `eq` method to compare the original iterator with the reversed iterator, and return the result.
+5. In the `main` function, we call `is_palindrome` for each of the texts "level", "stereo", and "rotor" and print the result using `println!`.

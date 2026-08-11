@@ -1,0 +1,310 @@
+fn main() {
+    let mut nums = vec(1, 2, 3, 4, 5)
+    while !nums.is_empty() {
+        print_str(&nums)
+        nums = pop(&nums)
+        drop nums
+    }
+}
+
+fn pop(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    }
+    return vec(v.get(0).unwrap(), &v)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= v.len() {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn is_empty(v: &Vec<Int>) -> Bool {
+    return v.len() == 0
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print_str(s: &Str) -> Unit {
+    print(s)
+}
+
+fn print(x: Int) -> Unit {
+    print(x)
+}
+
+fn vec(a: Int, b: Int) -> Vec<Int> {
+    return vec(a, b)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    return vec(x, &v)
+}
+
+fn unwrap(x: &Option<Int>) -> Int {
+    return x.unwrap()
+}
+
+fn as_ref(x: &Int) -> Int {
+    return x.clone()
+}
+
+fn drop_ref(x: &Int) -> Unit {
+    drop x
+}
+
+fn clone(x: &Int) -> Int {
+    return x.clone()
+}
+
+fn to_int(x: &Str) -> Option<Int> {
+    return Some(x.parse().unwrap())
+}
+
+fn to_str(x: &Int) -> Str {
+    return x.to_string()
+}
+
+fn main() {
+    let mut nums = vec(1, 2, 3, 4, 5)
+    while !nums.is_empty() {
+        print_str(&nums)
+        nums = pop(&nums)
+        drop nums
+    }
+}
+
+fn pop(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    }
+    let popped = vec(v.get(0).unwrap(), &v)
+    drop v
+    popped
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= v.len() {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn is_empty(v: &Vec<Int>) -> Bool {
+    return v.len() == 0
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print_str(s: &Str) -> Unit {
+    print(s)
+}
+
+fn print(x: Int) -> Unit {
+    print(x)
+}
+
+fn vec(a: Int, b: Int) -> Vec<Int> {
+    return vec(a, b)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    return vec(x, &v)
+}
+
+fn unwrap(x: &Option<Int>) -> Int {
+    return x.unwrap()
+}
+
+fn as_ref(x: &Int) -> Int {
+    return x.clone()
+}
+
+fn drop_ref(x: &Int) -> Unit {
+    drop x
+}
+
+fn clone(x: &Int) -> Int {
+    return x.clone()
+}
+
+fn to_int(x: &Str) -> Option<Int> {
+    return Some(x.parse().unwrap())
+}
+
+fn to_str(x: &Int) -> Str {
+    return x.to_string()
+}
+
+fn main() {
+    let mut nums = vec(1, 2, 3, 4, 5)
+    while !nums.is_empty() {
+        print_str(&nums)
+        nums = pop(&nums)
+        drop nums
+    }
+}
+
+fn pop(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    }
+    let popped = vec(v.get(0).unwrap(), &v)
+    drop v
+    popped
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= v.len() {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn is_empty(v: &Vec<Int>) -> Bool {
+    return v.len() == 0
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print_str(s: &Str) -> Unit {
+    print(s)
+}
+
+fn print(x: Int) -> Unit {
+    print(x)
+}
+
+fn vec(a: Int, b: Int) -> Vec<Int> {
+    return vec(a, b)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    return vec(x, &v)
+}
+
+fn unwrap(x: &Option<Int>) -> Int {
+    return x.unwrap()
+}
+
+fn as_ref(x: &Int) -> Int {
+    return x.clone()
+}
+
+fn drop_ref(x: &Int) -> Unit {
+    drop x
+}
+
+fn clone(x: &Int) -> Int {
+    return x.clone()
+}
+
+fn to_int(x: &Str) -> Option<Int> {
+    return Some(x.parse().unwrap())
+}
+
+fn to_str(x: &Int) -> Str {
+    return x.to_string()
+}
+
+fn main() {
+    let mut nums = vec(1, 2, 3, 4, 5)
+    while !nums.is_empty() {
+        print_str(&nums)
+        nums = pop(&nums)
+        drop nums
+    }
+}
+
+fn pop(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    }
+    let popped = vec(v.get(0).unwrap(), &v)
+    drop v
+    popped
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= v.len() {
+        return None
+    }
+    return Some(v.get(i).unwrap())
+}
+
+fn is_empty(v: &Vec<Int>) -> Bool {
+    return v.len() == 0
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    return v.len()
+}
+
+fn print_str(s: &Str) -> Unit {
+    print(s)
+}
+
+fn print(x: Int) -> Unit {
+    print(x)
+}
+
+fn vec(a: Int, b: Int) -> Vec<Int> {
+    return vec(a, b)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    return vec(x, &v)
+}
+
+fn unwrap(x: &Option<Int>) -> Int {
+    return x.unwrap()
+}
+
+fn as_ref(x: &Int) -> Int {
+    return x.clone()
+}
+
+fn drop_ref(x: &Int) -> Unit {
+    drop x
+}
+
+fn clone(x: &Int) -> Int {
+    return x.clone()
+}
+
+fn to_int(x: &Str) -> Option<Int> {
+    return Some(x.parse().unwrap())
+}
+
+fn to_str(x: &Int) -> Str {
+    return x.to_string()
+}
+
+fn main() {
+    let mut nums = vec(1, 2, 3, 4, 5)
+    while !nums.is_empty() {
+        print_str(&nums)
+        nums = pop(&nums)
+        drop nums
+    }
+}
+
+fn pop(v: &Vec<Int>) -> Vec<Int> {
+    if v.len() == 0 {
+        return vec()
+    }
+    let popped = vec(v.get(0).unwrap(), &v)
+    drop v
+    popped
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >=

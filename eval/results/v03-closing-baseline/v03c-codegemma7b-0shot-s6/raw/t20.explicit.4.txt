@@ -1,0 +1,270 @@
+fn main() {
+    let pen = Item { price: 3, quantity: 4 }
+    let pad = Item { price: 9, quantity: 2 }
+    let ink = Item { price: 5, quantity: 3 }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    println(cost)
+    println(most_expensive(&pen, &pad, &ink))
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+}
+
+fn cost(self: &Item) -> Int {
+    self.price * self.quantity
+}
+
+fn most_expensive(a: &Item, b: &Item, c: &Item) -> String {
+    if a.cost() >= b.cost() && a.cost() >= c.cost() {
+        "Pen"
+    } else if b.cost() >= a.cost() && b.cost() >= c.cost() {
+        "Pad"
+    } else {
+        "Ink"
+    }
+}
+
+fn clone(x: &Item) -> Item {
+    Item(x.price, x.quantity)
+}
+
+fn print(x: Int) {
+    print(to_string(x))
+}
+
+fn to_string(x: Int) -> String {
+    format(to_str(x))
+}
+
+fn to_str(x: Int) -> String {
+    IntToStr(x)
+}
+
+struct IntToStr {
+    value: Int,
+}
+
+fn format(format_string: String, value: IntToStr) -> String {
+    format(format_string, value.value)
+}
+
+fn print(s: String) {
+    print_str(Str(s))
+}
+
+struct Str {
+    value: String,
+}
+
+fn print_str(s: Str) {
+    print_str(s.value)
+}
+
+fn print_str(s: String) {
+    println(s)
+}
+
+fn println(s: String) {
+    println(s)
+}
+
+fn println(s: Int) {
+    println(to_string(s))
+}
+
+fn println(s: Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}", s.price, s.quantity))
+}
+
+fn println(s: &Item) {
+    println(format("Price: {}, Quantity: {}",

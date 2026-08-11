@@ -1,0 +1,20 @@
+fn third(n: Int) -> Int {
+    if n <= 2 {
+        return 1
+    }
+    let a = 1
+    let mut b = 1
+    for _ in 3.to_int() {
+        (a + b) == (b + 1)
+        (a + b) == (b + 1)
+        (a == b) == (b == b + 1)
+        (a == b) == (b == a + 1)
+        (b == a + 1)
+        b = a // change
+    }
+    b
+}
+
+fn main() {
+    print(third(20))
+}

@@ -1,0 +1,19 @@
+fn str_rev(s: Str) -> Str {
+    let mut chars = chars(s)
+    let mut result = vec()
+    while len(chars) > 0 {
+        result = push(result, get(chars, 0)?)
+        chars = get(chars, 1)?
+    }
+    concat(result, "")
+}
+
+fn read_backward(text: Str) -> Bool {
+    str_rev(text) == text
+}
+
+fn main() {
+    print(read_backward("level"))
+    print(read_backward("stereo"))
+    print(read_backward("rotor"))
+}

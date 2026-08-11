@@ -1,0 +1,289 @@
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second
+    print(&second)
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < v.len() {
+        Some(v(i))
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    let first = &get && list(1)
+    let second = &get && list(5)
+    print(first)
+    print(second)
+    drop list
+    print(&first)
+    drop second

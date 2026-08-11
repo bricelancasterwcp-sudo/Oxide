@@ -1,0 +1,21 @@
+fn palindrome(text: &Str) -> Bool {
+    let mut left = 0
+    let mut right = text.len() - 1
+    while left < right {
+        if text.chars().nth(left) != text.chars().nth(right) {
+            return false
+        }
+        left = left + 1
+        right = right - 1
+    }
+    true
+}
+
+fn main() {
+    let level = "level"
+    let stereo = "stereo"
+    let rotor = "rotor"
+    print(palindrome(&level))
+    print(palindrome(&stereo))
+    print(palindrome(&rotor))
+}

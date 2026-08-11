@@ -1,0 +1,414 @@
+fn main() {
+    for d in vec(5, 0, 4) {
+        match div(100, d) {
+            Some(q) => print(q),
+            None => print_str("undefined"),
+        }
+    }
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn vec(a: Int, b: Int, c: Int) -> Vec<Int> {
+    vec().push(a).push(b).push(c)
+}
+
+fn div(n: Int, d: Int) -> Option<Int> {
+    if d == 0 {
+        None
+    } else {
+        Some(n / d)
+    }
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    format("{:?}", n)
+}
+
+fn

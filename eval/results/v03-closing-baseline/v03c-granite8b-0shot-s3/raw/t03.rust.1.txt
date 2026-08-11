@@ -1,0 +1,15 @@
+```rust
+fn main() {
+    let a = 252;
+    let b = 105;
+    let mut remainder = a % b;
+
+    while remainder != 0 {
+        a = b;
+        b = remainder;
+        remainder = a % b;
+    }
+
+    println!("{}", b);
+}
+```

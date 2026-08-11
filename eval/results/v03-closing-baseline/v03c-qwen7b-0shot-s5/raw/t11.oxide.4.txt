@@ -1,0 +1,9 @@
+fn main() {
+    let numbers = vec(5, 3, 8, 1, 9, 2)
+    let mut sorted_numbers = numbers
+    while len(sorted_numbers) > 0 {
+        let min_index = range(0, len(sorted_numbers)).fold(0, move || leti, j) || sorted_numbers.get(i) <= sorted_numbers.get(j) || i
+        print(get(sorted_numbers, min_index))
+        sorted_numbers = concat(drop(sorted_numbers, min_index + 1), drop(sorted_numbers, 0, min_index))
+    }
+}

@@ -1,0 +1,245 @@
+fn main() {
+    let nums = push(push(push(push(vec(), 1), 2), 3), 4)
+    let reversed = reverse(&nums)
+    for x in reversed {
+        print(x)
+    }
+    drop nums
+    drop reversed
+}
+
+fn reverse(v: &Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in &v {
+        result = push(result, x)
+    }
+    result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut new_v = v.clone()
+    new_v.push(x)
+    new_v
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn drop_vec(v: Vec<Int>) {
+    drop v
+}
+
+fn drop_int(x: Int) {
+    drop x
+}
+
+fn drop_bool(b: Bool) {
+    drop b
+}
+
+fn drop_unit() {
+    drop unit
+}
+
+fn drop_str(s: Str) {
+    drop s
+}
+
+fn drop_result(r: Result<Int, Str>) {
+    drop r
+}
+
+fn drop_option(o: Option<Int>) {
+    drop o
+}
+
+fn drop_vec_int(v: Vec<Int>) {
+    drop v
+}
+
+fn drop_vec_str(v: Vec<Str>) {
+    drop v
+}
+
+fn drop_vec_vec_int(v: Vec<Vec<Int>>) {
+    drop v
+}
+
+fn drop_vec_vec_str(v: Vec<Vec<Str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_int(v: Vec<Vec<Vec_Int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_str(v: Vec<Vec<Vec_Str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_int>>) {
+    drop v
+}
+
+fn drop_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_str(v: Vec<Vec<Vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec_vec

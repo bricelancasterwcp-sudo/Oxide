@@ -1,0 +1,28 @@
+fn count_s(s: Str) -> Int {
+    let mut count = 0
+    let mut last_was_s = false
+    for c in chars(s) {
+        if c == "s" {
+            if !last_was_s {
+                count = count + 1
+            }
+            last_was_s = true
+        } else {
+            last_was_s = false
+        }
+    }
+    count
+}
+
+fn count_chars(s: Str) -> Int {
+    let mut count = 0
+    for _ in chars(s) {
+        count = count + 1
+    }
+    count
+}
+
+fn main() {
+    print(count_s("mississippi"))
+    print(count_chars("mississippi"))
+}

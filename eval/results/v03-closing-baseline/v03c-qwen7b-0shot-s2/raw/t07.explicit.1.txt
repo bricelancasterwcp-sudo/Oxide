@@ -1,0 +1,367 @@
+fn main() {
+    let multiples = vec(3, 6, 9, 12, 15, 18, 21, 24)
+    let sum = multiples.iter().fold(0, add)
+    print(sum)
+    drop multiples
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn vec(values: Int, rest: Vec<Int>) -> Vec<Int> {
+    if values == 0 {
+        rest
+    } else {
+        vec(values - 1, push(rest, values * 3))
+    }
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn iter(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    if v.len() == 0 {
+        acc
+    } else {
+        let x = get(v, 0)
+        iter(vec(len(v), drop_vec(v, 0)), f, f(acc, x))
+    }
+}
+
+fn drop_vec(v: Vec<Int>, i: Int) -> Vec<Int> {
+    if i == 0 {
+        vec(len(v) - 1, drop_vec(v, 1))
+    } else {
+        v
+    }
+}
+
+fn fold(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    iter(v, f, acc)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Int {
+    v.len()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn vec() -> Vec<Int> {
+    vec(0, vec())
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn iter(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    if v.len() == 0 {
+        acc
+    } else {
+        let x = get(v, 0)
+        iter(vec(len(v), drop_vec(v, 0)), f, f(acc, x))
+    }
+}
+
+fn drop_vec(v: Vec<Int>, i: Int) -> Vec<Int> {
+    if i == 0 {
+        vec(len(v) - 1, drop_vec(v, 1))
+    } else {
+        v
+    }
+}
+
+fn fold(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    iter(v, f, acc)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Int {
+    v.len()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn vec() -> Vec<Int> {
+    vec(0, vec())
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn iter(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    if v.len() == 0 {
+        acc
+    } else {
+        let x = get(v, 0)
+        iter(vec(len(v), drop_vec(v, 0)), f, f(acc, x))
+    }
+}
+
+fn drop_vec(v: Vec<Int>, i: Int) -> Vec<Int> {
+    if i == 0 {
+        vec(len(v) - 1, drop_vec(v, 1))
+    } else {
+        v
+    }
+}
+
+fn fold(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    iter(v, f, acc)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Int {
+    v.len()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn vec() -> Vec<Int> {
+    vec(0, vec())
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn iter(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    if v.len() == 0 {
+        acc
+    } else {
+        let x = get(v, 0)
+        iter(vec(len(v), drop_vec(v, 0)), f, f(acc, x))
+    }
+}
+
+fn drop_vec(v: Vec<Int>, i: Int) -> Vec<Int> {
+    if i == 0 {
+        vec(len(v) - 1, drop_vec(v, 1))
+    } else {
+        v
+    }
+}
+
+fn fold(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    iter(v, f, acc)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Int {
+    v.len()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn vec() -> Vec<Int> {
+    vec(0, vec())
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn iter(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    if v.len() == 0 {
+        acc
+    } else {
+        let x = get(v, 0)
+        iter(vec(len(v), drop_vec(v, 0)), f, f(acc, x))
+    }
+}
+
+fn drop_vec(v: Vec<Int>, i: Int) -> Vec<Int> {
+    if i == 0 {
+        vec(len(v) - 1, drop_vec(v, 1))
+    } else {
+        v
+    }
+}
+
+fn fold(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    iter(v, f, acc)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Int {
+    v.len()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn vec() -> Vec<Int> {
+    vec(0, vec())
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn iter(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    if v.len() == 0 {
+        acc
+    } else {
+        let x = get(v, 0)
+        iter(vec(len(v), drop_vec(v, 0)), f, f(acc, x))
+    }
+}
+
+fn drop_vec(v: Vec<Int>, i: Int) -> Vec<Int> {
+    if i == 0 {
+        vec(len(v) - 1, drop_vec(v, 1))
+    } else {
+        v
+    }
+}
+
+fn fold(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    iter(v, f, acc)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Int {
+    v.len()
+}
+
+fn len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn vec() -> Vec<Int> {
+    vec(0, vec())
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn iter(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    if v.len() == 0 {
+        acc
+    } else {
+        let x = get(v, 0)
+        iter(vec(len(v), drop_vec(v, 0)), f, f(acc, x))
+    }
+}
+
+fn drop_vec(v: Vec<Int>, i: Int) -> Vec<Int> {
+    if i == 0 {
+        vec(len(v) - 1, drop_vec(v, 1))
+    } else {
+        v
+    }
+}
+
+fn fold(v: Vec<Int>, f: Int, acc: Int) -> Int {
+    iter(v, f, acc)
+}
+
+fn get(v: Vec<Int>, i: Int) -> Int {
+    v.len()
+}
+
+fn len(v: Vec<Int>) -> Int

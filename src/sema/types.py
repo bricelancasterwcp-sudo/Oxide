@@ -132,6 +132,12 @@ BUILTINS: dict[str, BuiltinSig] = {
     # ---- v0.2.1 builtins (SPEC.md section 36), modes pinned ----
     "to_float": BuiltinSig(params=(INT,), ret=FLOAT, modes=("read",), generics=()),
     "trunc": BuiltinSig(params=(FLOAT,), ret=INT, modes=("read",), generics=()),
+    # ---- v0.3 builtins (SPEC.md section 57), modes pinned ----
+    # An ALIAS of int_to_str, which stays. Models reach for the shorter
+    # spelling untaught -- 85.7% of observed to_str sites are plain calls,
+    # and 6 programs defined `fn to_str` themselves rather than use the
+    # longer name. Int only: the language has no overloading.
+    "to_str": BuiltinSig(params=(INT,), ret=STR, modes=("read",), generics=()),
 }
 
 

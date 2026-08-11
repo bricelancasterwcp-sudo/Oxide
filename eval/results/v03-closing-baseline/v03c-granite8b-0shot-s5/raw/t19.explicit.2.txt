@@ -1,0 +1,13 @@
+fn area(self: &Rectangle) -> Int {
+    self.w * self.h
+}
+
+fn perimeter(self: &Rectangle) -> Int {
+    2 * (self.w + self.h)
+}
+
+fn main() {
+    let rect = Rectangle { w: 7, h: 4 }
+    print(area(&rect))
+    print(perimeter(&rect))
+}

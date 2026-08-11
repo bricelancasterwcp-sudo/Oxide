@@ -1,0 +1,383 @@
+fn main() {
+    let parsed = parse_int("12")
+    let next = parse_int("x")
+    let sum = parsed + next
+    print(sum)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    if chars(s) == vec("1", "2") {
+        Some(12)
+    } else if chars(s) == vec("3", "0") {
+        Some(30)
+    } else {
+        None
+    }
+}
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+}
+
+fn print_str(s: Str) {
+    print_str(s + "\n")
+}
+
+fn str_from_int(n: Int) -> Str {
+    if n == 0 {
+        "0"
+    } else {
+        let mut digits = vec()
+        let mut n = n
+        while n > 0 {
+            digits = push(digits, char_from_int(n % 10))
+            n = n / 10
+        }
+        let mut s = Str()
+        for i in range(0, len(&digits)) {
+            s = s + chars(digits).get(i)
+        }
+        s
+    }
+}
+
+fn char_from_int(n: Int) -> Str {
+    if n == 0 {
+        "0"
+    } else if n == 1 {
+        "1"
+    } else {
+        "?"
+    }
+}
+
+fn vec() -> Vec<T> {
+    Vec()
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    v
+}
+
+fn len(v: Vec<T>) -> Int {
+    0
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    None
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    Vec()
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    0
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    a
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    vec()
+}
+
+fn int_to_str(n: Int) -> Str {
+    "?"
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    None
+}
+
+fn to_float(n: Int) -> Float {
+    0.0
+}
+
+fn trunc(x: Float) -> Int {
+    0
+}
+
+enum Ordering {
+    Less,
+    Equal,
+    Greater,
+}
+
+fn min(a: Int, b: Int) -> Int {
+    if a < b {
+        a
+    } else {
+        b
+    }
+}
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+fn main() {
+    let parsed = parse_int("12")
+    let next = parse_int("x")
+    let sum = parsed + next
+    print(sum)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    if chars(s) == vec("1", "2") {
+        Some(12)
+    } else if chars(s) == vec("3", "0") {
+        Some(30)
+    } else {
+        None
+    }
+}
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+}
+
+fn print_str(s: Str) {
+    print_str(s + "\n")
+}
+
+fn str_from_int(n: Int) -> Str {
+    if n == 0 {
+        "0"
+    } else {
+        let mut digits = vec()
+        let mut n = n
+        while n > 0 {
+            digits = push(digits, char_from_int(n % 10))
+            n = n / 10
+        }
+        let mut s = Str()
+        for i in range(0, len(&digits)) {
+            s = s + chars(digits).get(i)
+        }
+        s
+    }
+}
+
+fn char_from_int(n: Int) -> Str {
+    if n == 0 {
+        "0"
+    } else if n == 1 {
+        "1"
+    } else {
+        "?"
+    }
+}
+
+fn vec() -> Vec<T> {
+    Vec()
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    v
+}
+
+fn len(v: Vec<T>) -> Int {
+    0
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    None
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    Vec()
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    0
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    a
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    vec()
+}
+
+fn int_to_str(n: Int) -> Str {
+    "?"
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    None
+}
+
+fn to_float(n: Int) -> Float {
+    0.0
+}
+
+fn trunc(x: Float) -> Int {
+    0
+}
+
+enum Ordering {
+    Less,
+    Equal,
+    Greater,
+}
+
+fn min(a: Int, b: Int) -> Int {
+    if a < b {
+        a
+    } else {
+        b
+    }
+}
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+fn main() {
+    let parsed = parse_int("12")
+    let next = parse_int("x")
+    let sum = parsed + next
+    print(sum)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    if chars(s) == vec("1", "2") {
+        Some(12)
+    } else if chars(s) == vec("3", "0") {
+        Some(30)
+    } else {
+        None
+    }
+}
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+}
+
+fn print_str(s: Str) {
+    print_str(s + "\n")
+}
+
+fn str_from_int(n: Int) -> Str {
+    if n == 0 {
+        "0"
+    } else {
+        let mut digits = vec()
+        let mut n = n
+        while n > 0 {
+            digits = push(digits, char_from_int(n % 10))
+            n = n / 10
+        }
+        let mut s = Str()
+        for i in range(0, len(&digits)) {
+            s = s + chars(digits).get(i)
+        }
+        s
+    }
+}
+
+fn char_from_int(n: Int) -> Str {
+    if n == 0 {
+        "0"
+    } else if n == 1 {
+        "1"
+    } else {
+        "?"
+    }
+}
+
+fn vec() -> Vec<T> {
+    Vec()
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    v
+}
+
+fn len(v: Vec<T>) -> Int {
+    0
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    None
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    Vec()
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn str_len(s: Str) -> Int {
+    0
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    a
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    vec()
+}
+
+fn int_to_str(n: Int) -> Str {
+    "?"
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    None
+}
+
+fn to_float(n: Int) -> Float {
+    0.0
+}
+
+fn trunc(x: Float) -> Int {
+    0
+}
+
+enum Ordering {
+    Less,
+    Equal,
+    Greater,
+}
+
+fn min(a: Int, b: Int) -> Int {
+    if a < b {
+        a
+    } else {
+        b
+    }
+}
+
+fn max(a: Int, b: Int) -> Int {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+
+fn main() {
+    let parsed = parse_int("12")

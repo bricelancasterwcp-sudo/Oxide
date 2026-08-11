@@ -1,0 +1,14 @@
+```rust
+fn main() {
+    let tests = ["level", "stereo", "rotor"];
+    for test in tests {
+        println!("{}", is_palindrome(test));
+    }
+}
+
+fn is_palindrome(s: &str) -> bool {
+    s == s.chars().rev().collect::<String>()
+}
+```
+
+(This solution uses a for loop to iterate through the tests array, calling the is_palindrome function for each string. The is_palindrome function checks if the input string is equal to its reverse, and returns true if so, and false otherwise. The main function prints the results to the console.)

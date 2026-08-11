@@ -1,0 +1,429 @@
+fn main() {
+    let level = "level".chars().all(char_eq_backwards(&level))
+    print(level)
+    drop level
+    let stereo = "stereo".chars().all(char_eq_backwards(&stereo))
+    print(stereo)
+    drop stereo
+    let rotor = "rotor".chars().all(char_eq_backwards(&rotor))
+    print(rotor)
+    drop rotor
+}
+
+fn char_eq_backwards(text: &Vec<Str>) -> Bool {
+    let len = len(text)
+    let half = len / 2
+    for i in 0 < half {
+        if text.get(i) != text.get(len - i - 1) {
+            return false
+        }
+    }
+    true
+}
+
+fn print(x: Bool) {
+    if x {
+        print_str("true")
+    } else {
+        print_str("false")
+    }
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print_char(c)
+    }
+}
+
+fn print_char(c: Str) {
+    let bytes = str_len(c)
+    for i in 0 < bytes {
+        print_byte(c.get(i))
+    }
+}
+
+fn print_byte(b: Byte) {
+    let ch = to_char(b)
+    if ch >= "0".to_char() && ch <= "9".to_char() {
+        print_char(ch)
+    } else if ch >= "a".to_char() && ch <= "z".to_char() {
+        print_char(ch)
+    } else if ch >= "A".to_char() && ch <= "Z".to_char() {
+        print_char(ch)
+    } else {
+        print_char("\\x")
+        print_byte(to_hex_digit(b / 16))
+        print_byte(to_hex_digit(b % 16))
+    }
+}
+
+fn to_hex_digit(n: Int) -> Byte {
+    if n >= 0 && n < 10 {
+        n + "0".to_byte()
+    } else if n >= 10 && n < 16 {
+        n - 10 + "a".to_byte()
+    } else {
+        "0".to_byte()
+    }
+}
+
+fn to_char(b: Byte) -> Str {
+    let mut chars = vec()
+    let mut n = b
+    while n > 0 {
+        chars.push(to_char_digit(n % 10))
+        n = n / 10
+    }
+    chars.reverse()
+    concat(chars, "")
+}
+
+fn to_char_digit(n: Int) -> Byte {
+    n + "0".to_byte()
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    push(v, x)
+}
+
+fn len(v: Vec<Str>) -> Int {
+    len(v)
+}
+
+fn get(v: Vec<Str>, i: Int) -> Option<Str> {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    range(a, b)
+}
+
+fn clone(x: Str) -> Str {
+    clone(x)
+}
+
+fn str_len(s: Str) -> Int {
+    str_len(s)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    chars(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+fn drop_name(name: Str) {
+    drop_name(name)
+}
+
+fn print_char(c: Str) {
+    print_char(c)
+}
+
+fn print_byte(b: Byte) {
+    print_byte(b)
+}
+
+fn to_char_digit(n: Int) -> Byte {
+    to_char_digit(n)
+}
+
+fn to_hex_digit(n: Int) -> Byte {
+    to_hex_digit(n)
+}
+
+fn to_char(b: Byte) -> Str {
+    to_char(b)
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    push(v, x)
+}
+
+fn len(v: Vec<Str>) -> Int {
+    len(v)
+}
+
+fn get(v: Vec<Str>, i: Int) -> Option<Str> {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    range(a, b)
+}
+
+fn clone(x: Str) -> Str {
+    clone(x)
+}
+
+fn str_len(s: Str) -> Int {
+    str_len(s)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    chars(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+fn drop_name(name: Str) {
+    drop_name(name)
+}
+
+fn print_char(c: Str) {
+    print_char(c)
+}
+
+fn print_byte(b: Byte) {
+    print_byte(b)
+}
+
+fn to_char_digit(n: Int) -> Byte {
+    to_char_digit(n)
+}
+
+fn to_hex_digit(n: Int) -> Byte {
+    to_hex_digit(n)
+}
+
+fn to_char(b: Byte) -> Str {
+    to_char(b)
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    push(v, x)
+}
+
+fn len(v: Vec<Str>) -> Int {
+    len(v)
+}
+
+fn get(v: Vec<Str>, i: Int) -> Option<Str> {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    range(a, b)
+}
+
+fn clone(x: Str) -> Str {
+    clone(x)
+}
+
+fn str_len(s: Str) -> Int {
+    str_len(s)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    chars(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+fn drop_name(name: Str) {
+    drop_name(name)
+}
+
+fn print_char(c: Str) {
+    print_char(c)
+}
+
+fn print_byte(b: Byte) {
+    print_byte(b)
+}
+
+fn to_char_digit(n: Int) -> Byte {
+    to_char_digit(n)
+}
+
+fn to_hex_digit(n: Int) -> Byte {
+    to_hex_digit(n)
+}
+
+fn to_char(b: Byte) -> Str {
+    to_char(b)
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    push(v, x)
+}
+
+fn len(v: Vec<Str>) -> Int {
+    len(v)
+}
+
+fn get(v: Vec<Str>, i: Int) -> Option<Str> {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    range(a, b)
+}
+
+fn clone(x: Str) -> Str {
+    clone(x)
+}
+
+fn str_len(s: Str) -> Int {
+    str_len(s)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    chars(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+fn drop_name(name: Str) {
+    drop_name(name)
+}
+
+fn print_char(c: Str) {
+    print_char(c)
+}
+
+fn print_byte(b: Byte) {
+    print_byte(b)
+}
+
+fn to_char_digit(n: Int) -> Byte {
+    to_char_digit(n)
+}
+
+fn to_hex_digit(n: Int) -> Byte {
+    to_hex_digit(n)
+}
+
+fn to_char(b: Byte) -> Str {
+    to_char(b)
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    push(v, x)
+}
+
+fn len(v: Vec<Str>) -> Int {
+    len(v)
+}
+
+fn get(v: Vec<Str>, i: Int) -> Option<Str> {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    range(a, b)
+}
+
+fn clone(x: Str) -> Str {
+    clone(x)
+}
+
+fn str_len(s: Str) -> Int {
+    str_len(s)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    chars(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn parse_int(s: Str) ->

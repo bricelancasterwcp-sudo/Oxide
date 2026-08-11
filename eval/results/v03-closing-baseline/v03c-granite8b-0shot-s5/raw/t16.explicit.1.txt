@@ -1,0 +1,383 @@
+fn main() {
+    let a = 100
+    let b = divide(a, 5)
+    let c = divide(b, 0)
+    let d = divide(c, 4)
+    print(d)
+    drop a
+    drop b
+    drop c
+    drop d
+}
+
+fn divide(x: Int, y: Int) -> Int {
+    if y == 0 {
+        return -1
+    } else {
+        return x / y
+    }
+}
+
+fn print(x: Int) {
+    if x == -1 {
+        print_str("undefined")
+    } else {
+        print_str(&int_to_str_buf)
+    }
+}
+
+fn int_to_str_buf(n: Int) -> Str {
+    let mut s = ""
+    for i in range(0, n) {
+        s = s + &int_to_str_buf
+    }
+    s
+}
+
+fn int_to_str(n: Int) -> Str {
+    &int_to_str_buf
+}
+
+fn print_str(s: &Str) {
+    let mut i = 0
+    while i < str_len(s) {
+        print_str(chars(s).get(i))
+        i = i + 1
+    }
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn drop_in_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    }
+}
+
+fn drop_in_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_else_branch() {
+    let x = 7
+    if x > 0 {
+        5
+    } else {
+        drop x
+        3
+    }
+}
+
+fn drop_in_nested_arm() {
+    let x = 7
+    if x > 0 {
+        let y = 10
+        drop x
+        drop y
+    }
+}
+
+fn drop_in_arm_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        let y = 10
+        drop y
+    }
+}
+
+fn drop_in_arm_and_nested_arm() {
+    let x = 7
+    if x > 0 {
+        let y = 10
+        drop x
+        drop y
+    } else {
+        let z = 15
+        drop z
+    }
+}
+
+fn drop_in_branch_and_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        let z = 15
+        drop z
+    }
+}
+
+fn drop_in_branch_and_nested_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        let y = 10
+        drop y
+    }
+}
+
+fn drop_in_nested_arm_and_branch() {
+    let x = 7
+    if x > 0 {
+        let y = 10
+        drop x
+        drop y
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_arm_and_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        let y = 10
+        drop y
+    }
+}
+
+fn drop_in_arm_and_nested_branch() {
+    let x = 7
+    if x > 0 {
+        let y = 10
+        drop x
+        drop y
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_nested_branch_and_arm() {
+    let x = 7
+    if x > 0 {
+        let y = 10
+        drop y
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_nested_arm_and_nested_arm() {
+    let x = 7
+    if x > 0 {
+        let y = 10
+        drop y
+    } else {
+        let z = 15
+        drop z
+    }
+}
+
+fn drop_in_arm_and_branch_and_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        let y = 10
+        drop y
+    }
+}
+
+fn drop_in_arm_and_branch_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_arm_and_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        let y = 10
+        drop y
+    }
+}
+
+fn drop_in_branch_and_arm_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_branch_and_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_branch_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_arm_and_branch_and_branch_and_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_arm_and_branch_and_branch_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_arm_and_branch_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_branch_and_arm_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_branch_and_branch_and_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_branch_and_branch_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_arm_and_branch_and_branch_and_branch_and_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_arm_and_branch_and_branch_and_branch_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_arm_and_branch_and_branch_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_branch_and_arm_and_branch_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_branch_and_branch_and_arm_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_branch_and_branch_and_branch_and_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_branch_and_branch_and_branch_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_arm_and_branch_and_branch_and_branch_and_branch_and_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_arm_and_branch_and_branch_and_branch_and_branch_and_branch() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn drop_in_branch_and_arm_and_branch_and_branch_and_branch_and_branch_and_arm() {
+    let x = 7
+    if x > 0 {
+        drop x
+    } else {
+        drop x
+    }
+}
+
+fn

@@ -1,0 +1,85 @@
+fn count_s_and_distinct(text: &Str) -> Str {
+    let mut s_count = 0
+    let mut distinct_chars = vec()
+    for c in text.chars() {
+        if c == b_s() {
+            s_count = s_count + 1
+        }
+        if !distinct_chars.contains(&c) {
+            distinct_chars.push(c)
+        }
+    }
+    format("s: {}, distinct: {}", s_count, distinct_chars.len())
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_s_and_distinct(&text))
+}
+
+fn b_s() -> Str {
+    return "s".to_string()
+}
+
+fn format(text: &Str, s_count: Int, distinct_chars_len: Int) -> Str {
+    return text.replace("{0}", &s_count)
+    return text.replace("{1}", &distinct_chars_len)
+}
+
+fn vec() -> Vec<Str> {
+    return Vec.new()
+}
+
+fn contains(v: &Vec<Str>, c: &Str) -> Bool {
+    for i in 0.to_int() {
+        if v.len().lt(&i) {
+            return false
+        }
+        if v.get(i).eq(c) {
+            return true
+        }
+    }
+    return false
+}
+
+fn push(v: Vec<Str>, c: &Str) -> Vec<Str> {
+    let mut new_v = v
+    new_v.push(c)
+    return new_v
+}
+
+fn len(v: &Vec<Str>) -> Int {
+    return v.len()
+}
+
+fn get(v: &Vec<Str>, i: Int) -> Option<Str> {
+    if v.len().lt(&i) {
+        return None
+    }
+    return Some(v.get(i))
+}
+
+fn lt(a: Int, b: Int) -> Bool {
+    return a < b
+}
+
+fn eq(a: &Str, b: &Str) -> Bool {
+    return a.eq(b)
+}
+
+fn to_string(s: &Str) -> Str {
+    return s.to_string()
+}
+
+fn to_int(i: Int) -> Int {
+    return i
+}
+
+fn print(s: &Str) -> Unit {
+    print(s)
+}
+
+fn main() {
+    let text = "mississippi"
+    print(count_s_and_distinct(&text))
+}

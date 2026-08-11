@@ -1,0 +1,360 @@
+fn main() {
+    let three = 3
+    let mut list = vec()
+    for i in 0.step(8, 3) {
+        list = push(list, i)
+    }
+    let total = sum(&list)
+    print(total)
+    drop list
+    drop three
+}
+
+fn sum(v: &Vec<Int>) -> Int {
+    let mut total = 0
+    for x in &v {
+        total = total + x
+    }
+    total
+}
+
+fn push(mut: Vec<Int>, x: Int) -> Vec<Int> {
+    mut = functional_update(mut, x)
+    drop mut
+    mut
+}
+
+fn functional_update(mut: Vec<Int>, x: Int) -> Vec<Int> {
+    mut
+}
+
+fn drop_ref() {
+    let x = 5
+    drop x
+}
+
+fn drop_owned() {
+    let x = 5
+    drop x
+}
+
+fn drop_owned_copy() {
+    let x = 5
+    drop clone_x
+    drop x
+}
+
+fn drop_owned_before_ref() {
+    let x = 5
+    drop x
+    let y = &x
+}
+
+fn drop_owned_after_ref() {
+    let x = 5
+    let y = &x
+    drop x
+}
+
+fn drop_owned_before_ref_in_if() {
+    let x = 5
+    drop x
+    if true {
+        let y = &x
+    }
+}
+
+fn drop_owned_after_ref_in_if() {
+    let x = 5
+    if true {
+        let y = &x
+    }
+    drop x
+}
+
+fn drop_owned_before_ref_in_loop() {
+    let x = 5
+    drop x
+    for i in 0.step(10, 1) {
+        let y = &x
+    }
+}
+
+fn drop_owned_after_ref_in_loop() {
+    let x = 5
+    for i in 0.step(10, 1) {
+        let y = &x
+    }
+    drop x
+}
+
+fn drop_owned_in_then() {
+    let x = 5
+    if true {
+        drop x
+    } else {
+        let y = &x
+    }
+}
+
+fn drop_owned_in_else() {
+    let x = 5
+    if false {
+        let y = &x
+    } else {
+        drop x
+    }
+}
+
+fn drop_owned_in_if_cond() {
+    let x = 5
+    let y = 1
+    if true && x > y {
+        drop x
+    } else {
+        let z = &x
+    }
+}
+
+fn drop_owned_in_match_arm() {
+    let x = 5
+    match 5 {
+        _ => {
+            drop x
+        },
+        _ => {
+            let y = &x
+        },
+    }
+}
+
+fn drop_owned_in_match_payload() {
+    let x = 5
+    match Some(x) {
+        Some(x) => {
+            drop x
+        },
+        None => {
+            let y = &x
+        },
+    }
+}
+
+fn return_owned() -> Vec<Int> {
+    let x = 5
+    return x
+}
+
+fn return_ref() -> Vec<Int> {
+    let x = 5
+    return &x
+}
+
+fn return_ref_with_drop() -> Vec<Int> {
+    let x = 5
+    return &x
+}
+
+fn return_ref_without_drop() -> Vec<Int> {
+    let x = 5
+    return &x
+}
+
+fn return_ref_to_owned_in_loop() -> Vec<Int> {
+    let x = 5
+    for i in 0.step(10, 1) {
+        return &x
+    }
+}
+
+fn return_ref_to_owned_in_if() -> Vec<Int> {
+    let x = 5
+    if true {
+        return &x
+    }
+    return &x
+}
+
+fn return_ref_to_owned_in_else() -> Vec<Int> {
+    let x = 5
+    if false {
+        return &x
+    } else {
+        return &x
+    }
+}
+
+fn return_ref_to_owned_in_if_cond() -> Vec<Int> {
+    let x = 5
+    let y = 1
+    if true && x > y {
+        return &x
+    } else {
+        return &x
+    }
+}
+
+fn return_ref_to_owned_in_match_arm() -> Vec<Int> {
+    let x = 5
+    match 5 {
+        _ => {
+            return &x
+        },
+        _ => {
+            return &x
+        },
+    }
+}
+
+fn return_ref_to_owned_in_match_payload() -> Vec<Int> {
+    let x = 5
+    match Some(x) {
+        Some(x) => {
+            return &x
+        },
+        None => {
+            return &x
+        },
+    }
+}
+
+fn drop_owned_in_lambda_call() {
+    let x = 5
+    let mut v = vec()
+    v = functional_update(v, 5)
+    v = functional_update(v, x)
+    drop v
+}
+
+fn drop_owned_in_lambda_with_ref_call() {
+    let x = 5
+    let mut v = vec()
+    v = functional_update(v, 5)
+    v = functional_update(v, x)
+    drop v
+}
+
+fn drop_owned_in_lambda_with_ref_call_after_drop() {
+    let x = 5
+    let mut v = vec()
+    v = functional_update(v, 5)
+    drop x
+    v = functional_update(v, x)
+    drop v
+}
+
+fn drop_owned_in_lambda_with_ref_capture() {
+    let x = 5
+    let mut v = vec()
+    v = functional_update(v, 5)
+    v = functional_update(v, &x)
+    drop v
+}
+
+fn drop_owned_in_lambda_with_ref_capture_after_drop() {
+    let x = 5
+    let mut v = vec()
+    v = functional_update(v, 5)
+    drop x
+    v = functional_update(v, &x)
+    drop v
+}
+
+fn drop_ref_in_lambda_with_ref_capture() {
+    let x = 5
+    let mut v = vec()
+    v = functional_update(v, 5)
+    v = functional_update(v, &x)
+    drop x
+    drop v
+}
+
+fn drop_ref_in_lambda_with_ref_capture_after_drop() {
+    let x = 5
+    let mut v = vec()
+    v = functional_update(v, 5)
+    drop x
+    v = functional_update(v, &x)
+    drop x
+    drop v
+}
+
+fn drop_owned_in_loop_body() {
+    let mut v = vec()
+    for i in 0.step(10, 1) {
+        let x = 5
+        drop x
+        v = functional_update(v, i)
+    }
+    drop v
+}
+
+fn drop_owned_in_if_body() {
+    let mut v = vec()
+    if true {
+        let x = 5
+        drop x
+        v = functional_update(v, 1)
+    }
+    drop v
+}
+
+fn drop_owned_in_else_body() {
+    let mut v = vec()
+    if false {
+        v = functional_update(v, 1)
+    } else {
+        let x = 5
+        drop x
+        v = functional_update(v, 1)
+    }
+    drop v
+}
+
+fn drop_owned_in_if_cond() {
+    let mut v = vec()
+    let x = 5
+    let y = 1
+    if true && x > y {
+        drop x
+        v = functional_update(v, 1)
+    } else {
+        v = functional_update(v, 2)
+    }
+    drop v
+}
+
+fn drop_owned_in_match_arm() {
+    let mut v = vec()
+    match 5 {
+        _ => {
+            let x = 5
+            drop x
+            v = functional_update(v, 1)
+        },
+        _ => {
+            v = functional_update(v, 2)
+        },
+    }
+    drop v
+}
+
+fn drop_owned_in_match_payload() {
+    let mut v = vec()
+    match Some(5) {
+        Some(x) => {
+            drop x
+            v = functional_update(v, 1)
+        },
+        None => {
+            v = functional_update(v, 2)
+        },
+    }
+    drop v
+}
+
+fn drop_owned_in_lambda_with_ref_capture() {
+    let mut v = vec()
+    let x = 5
+    v = functional_update(v, 5)
+    v = functional_update(

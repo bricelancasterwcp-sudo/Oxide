@@ -1,0 +1,6 @@
+fn main() {
+    let text = "stack"
+    let mut chars = text.chars().collect()
+    chars = chars.iter().rev().cloned().collect()
+    print_str(chars)
+}

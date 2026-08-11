@@ -1,0 +1,15 @@
+```rust
+fn main() {
+    let numbers = vec![4, 1, 7, 3, 9, 2];
+    let mut kept = 0;
+
+    for number in numbers {
+        if number > 3 {
+            println!("{}", number);
+            kept += 1;
+        }
+    }
+
+    println!("{} values were kept", kept);
+}
+```

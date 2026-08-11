@@ -1,0 +1,46 @@
+fn total(items: Vec<Item>) -> Float {
+    let mut acc = 0.0
+    for i in items {
+        acc = acc + i.cost()
+    }
+    acc
+}
+
+fn most_expensive(items: Vec<Item>) -> Str {
+    let mut max = Item { price: 0.0, qty: 0 }
+    let mut max_name = ""
+    for i in items {
+        if i.cost() > max.cost() {
+            max = i
+            max_name = i.name()
+        }
+    }
+    max_name
+}
+
+struct Item {
+    price: Float,
+    qty: Int,
+}
+
+fn cost(i: Item) -> Float {
+    i.price * i.qty
+}
+
+fn name(i: Item) -> Str {
+    if i.price == 3.0 && i.qty == 4 {
+        return "pen"
+    } else if i.price == 9.0 && i.qty == 2 {
+        return "pad"
+    } else if i.price == 5.0 && i.qty == 3 {
+        return "ink"
+    } else {
+        panic("Unknown item")
+    }
+}
+
+fn main() {
+    let items = vec(Item { price: 3.0, qty: 4 }, Item { price: 9.0, qty: 2 }, Item { price: 5.0, qty: 3 })
+    print(total(items))
+    print_str(most_expensive(items))
+}

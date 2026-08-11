@@ -1,0 +1,15 @@
+fn parse_sum(s: Str) -> Int {
+    let sum = 0
+    for x in chars(&s) {
+        if parse_int(x).is_some() {
+            sum = sum + parse_int(x).unwrap()
+        }
+    }
+    sum
+}
+
+fn main() {
+    let s = "1230"
+    print(parse_sum(s))
+    print(chars(&s).len())
+}

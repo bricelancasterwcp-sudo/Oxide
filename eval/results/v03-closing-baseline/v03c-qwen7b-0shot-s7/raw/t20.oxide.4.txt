@@ -1,0 +1,25 @@
+struct Item { name: Str, unit_price: Int, quantity: Int }
+
+fn calculate_cost(item: Item) -> Int {
+    item.unit_price * item.quantity
+}
+
+fn main() {
+    let pen = Item { name: "pen", unit_price: 3, quantity: 4 }
+    let pad = Item { name: "pad", unit_price: 9, quantity: 2 }
+    let ink = Item { name: "ink", unit_price: 5, quantity: 3 }
+    let total_cost = calculate_cost(pen) + calculate_cost(pad) + calculate_cost(ink)
+    print(total_cost)
+    let items = vec(pen, pad, ink)
+    let mut max_cost_item: Option<Item> = None
+    for item in items {
+        let cost = calculate_cost(item)
+        if max_cost_item.is_none() || cost > calculate_cost(max_cost_item.unwrap()) {
+            max_cost_item = Some(item)
+        }
+    }
+    match max_cost_item {
+        Some(item) => print_str(item.name),
+        None => print_str("empty list"),
+    }
+}

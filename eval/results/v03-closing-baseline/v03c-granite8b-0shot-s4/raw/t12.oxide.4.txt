@@ -1,0 +1,16 @@
+struct Stack { data: Vec<Str> }
+
+fn reverse(s: Str) -> Str {
+    let mut result = str()
+    for c in s.chars() {
+        result = push(result, c)
+    }
+    result
+}
+
+fn main() {
+    let s = Stack { data: push(push(vec(), "hello"), "!") }
+    let s2 = Stack { data: push(s.data, reverse(s.data)) }
+    print_str(get(s2.data, 0)?)
+    print_str(get(s2.data, 1)?)
+}

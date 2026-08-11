@@ -1,0 +1,22 @@
+struct IntResult { parsed: Option<Int>, failed: Option<Int> }
+
+fn parse_and_accumulate(s: Str, acc: IntResult) -> IntResult {
+    match parse_int(s) {
+        Some(n) => IntResult { parsed: Some(n + acc.parsed.unwrap_or(0)), failed: None },
+        None => IntResult { parsed: acc.parsed, failed: Some(s + acc.failed.unwrap_or("".to_string())) },
+    }
+}
+
+fn main() {
+    let results = vec("12", "x", "30")
+    let initial = IntResult { parsed: None, failed: None }
+    let result = results.fold(initial, parse_and_accumulate)
+    match result.parsed {
+        Some(n) => print(n),
+        None => print_str("No valid integers"),
+    }
+    match result.failed {
+        Some(s) => print(s),
+        None => print_str("No failed integers"),
+    }
+}

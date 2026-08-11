@@ -1,0 +1,16 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn filter_big(v: Vec<Int>) -> Vec<Int> {
+    let mut out = vec()
+    for x in v {
+        if x > 3 {
+            push(out, x)
+        }
+    }
+    out
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(len(filter_big(r.values)))
+}

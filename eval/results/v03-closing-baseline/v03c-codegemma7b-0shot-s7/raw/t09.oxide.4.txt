@@ -1,0 +1,294 @@
+fn main() {
+    let mut numbers = vec(1, 2, 3, 4, 5)
+    while len(numbers) > 0 {
+        print(get(numbers, len(numbers) - 1)?)
+        numbers = pop(numbers)?.unwrap()
+    }
+}
+
+fn pop(v: Vec<Int>) -> Option<Vec<Int>> {
+    if len(v) == 0 {
+        None
+    } else {
+        Some(vec(range(0, len(v) - 1)?, v.last()?))
+    }
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= len(v) {
+        None
+    } else {
+        Some(v.get(i)?)
+    }
+}
+
+fn len(v: Vec<Int>) -> Int {
+    let mut count = 0
+    for _ in v {
+        count = count + 1
+    }
+    count
+}
+
+fn vec(args: Int, elements: Int) -> Vec<Int> {
+    let mut result = Vec { len: 0, ptr: 0 }
+    for _ in range(0, elements) {
+        result = push(result, args)
+    }
+    result
+}
+
+fn range(a: Int, b: Int) -> Option<Int> {
+    if a >= b {
+        None
+    } else {
+        Some(a)
+    }
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print(int_to_str(ord(c)))
+    }
+    print_str("\n")
+}
+
+fn to_str(n: Int) -> Str {
+    if n < 10 {
+        return Str { len: 1, ptr: n + 48 }
+    }
+    let mut result = Str { len: 0, ptr: 0 }
+    let mut number = n
+    while number >= 10 {
+        let digit = number % 10
+        result = push(result, digit)
+        number = number / 10
+    }
+    result = push(result, number)
+    result
+}
+
+fn ord(c: Str) -> Int {
+    c.get(0)? - 48
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    if v.len == v.cap {
+        return vec(v, x)
+    } else {
+        let mut result = v
+        result.len = result.len + 1
+        result.ptr = result.ptr + 1
+        result.set(result.len - 1, x)
+        result
+    }
+}
+
+fn set(v: Vec<Int>, i: Int, x: Int) -> Vec<Int> {
+    if i >= v.len {
+        return v
+    } else {
+        let mut result = v
+        result.ptr = result.ptr + i
+        result.set(0, x)
+        result
+    }
+}
+
+struct Vec {
+    len: Int,
+    ptr: Int,
+}
+
+fn last(v: Vec<Int>) -> Option<Int> {
+    if v.len == 0 {
+        None
+    } else {
+        Some(v.get(v.len - 1)?)
+    }
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= v.len {
+        None
+    } else {
+        Some(v.ptr + i)
+    }
+}
+
+fn char(x: Int) -> Str {
+    Str
+    Let
+    ptr = x - 48
+    len = 1
+}
+
+fn ord(c: Str) -> Int {
+    c.get(0)? - 48
+}
+
+fn int_to_str(n: Int) -> Str {
+    if n < 10 {
+        return Str { len: 1, ptr: n + 48 }
+    }
+    let mut result = Str { len: 0, ptr: 0 }
+    let mut number = n
+    while number >= 10 {
+        let digit = number % 10
+        result = push(result, digit)
+        number = number / 10
+    }
+    result = push(result, number)
+    result
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    if v.len == v.cap {
+        return vec(v, x)
+    } else {
+        let mut result = v
+        result.len = result.len + 1
+        result.ptr = result.ptr + 1
+        result.set(result.len - 1, x)
+        result
+    }
+}
+
+fn set(v: Vec<Int>, i: Int, x: Int) -> Vec<Int> {
+    if i >= v.len {
+        return v
+    } else {
+        let mut result = v
+        result.ptr = result.ptr + i
+        result.set(0, x)
+        result
+    }
+}
+
+struct Str {
+    len: Int,
+    ptr: Int,
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = Vec { len: 0, ptr: 0 }
+    for i in range(0, s.len) {
+        result = push(result, char(s.get(i) - s.ptr))
+    }
+    result
+}
+
+fn get(s: Str, i: Int) -> Option<Int> {
+    if i >= s.len {
+        None
+    } else {
+        Some(s.ptr + i)
+    }
+}
+
+fn len(s: Str) -> Int {
+    s.len
+}
+
+fn str_len(s: Str) -> Int {
+    s.len
+}
+
+fn range(a: Int, b: Int) -> Option<Int> {
+    if a >= b {
+        None
+    } else {
+        Some(a)
+    }
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    for c in chars(s) {
+        print(int_to_str(ord(c)))
+    }
+    print_str("\n")
+}
+
+fn to_str(n: Int) -> Str {
+    if n < 10 {
+        return Str { len: 1, ptr: n + 48 }
+    }
+    let mut result = Str { len: 0, ptr: 0 }
+    let mut number = n
+    while number >= 10 {
+        let digit = number % 10
+        result = push(result, digit)
+        number = number / 10
+    }
+    result = push(result, number)
+    result
+}
+
+fn ord(c: Str) -> Int {
+    c.get(0)? - 48
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    if v.len == v.cap {
+        return vec(v, x)
+    } else {
+        let mut result = v
+        result.len = result.len + 1
+        result.ptr = result.ptr + 1
+        result.set(result.len - 1, x)
+        result
+    }
+}
+
+fn set(v: Vec<Int>, i: Int, x: Int) -> Vec<Int> {
+    if i >= v.len {
+        return v
+    } else {
+        let mut result = v
+        result.ptr = result.ptr + i
+        result.set(0, x)
+        result
+    }
+}
+
+struct Vec {
+    len: Int,
+    ptr: Int,
+}
+
+fn last(v: Vec<Int>) -> Option<Int> {
+    if v.len == 0 {
+        None
+    } else {
+        Some(v.get(v.len - 1)?)
+    }
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= v.len {
+        None
+    } else {
+        Some(v.ptr + i)
+    }
+}
+
+fn char(x: Int) -> Str {
+    Str
+    Let
+    ptr = x - 48
+    len = 1
+}
+
+fn ord(c: Str) -> Int {
+    c.get(0)? - 48
+}
+
+fn int_to_str(n: Int) -> Str {

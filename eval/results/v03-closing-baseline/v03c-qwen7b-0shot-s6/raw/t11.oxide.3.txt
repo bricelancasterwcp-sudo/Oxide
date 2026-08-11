@@ -1,0 +1,44 @@
+struct List { value: Int, next: Option<Box<List>> }
+
+fn sort(list: Option<Box<List>>) -> Option<Box<List>> {
+    match list {
+        None => None,
+        Some(mut_node) => {
+            let mut sorted_list = None
+            while letSome(mut_node) == list {
+                sorted_list = insert(sorted_list, mut_node.value)
+            }
+            sorted_list
+        },
+    }
+}
+
+fn insert(list: Option<Box<List>>, value: Int) -> Option<Box<List>> {
+    match list {
+        None => Some(Box(List { value: value })),
+        Some(mut_node) => {
+            if value < mut_node.value {
+                Some(Box(List { value: value, next: Some(mut_node) }))
+            } else {
+                Some(Box(List { value: mut_node.value, next: Some(insert(mut_node.next, value)) }))
+            }
+        },
+    }
+}
+
+fn print_list(list: Option<Box<List>>) {
+    match list {
+        None => print_str("\n"),
+        Some(mut_node) => {
+            print(mut_node.value)
+            print_str("\n")
+            print_list(mut_node.next)
+        },
+    }
+}
+
+fn main() {
+    let list = Some(Box(List { value: 5, next: Some(Box(List { value: 3, next: Some(Box(List { value: 8, next: Some()? })) })) }))
+    let sorted_list = sort(list.clone())
+    print_list(sorted_list.clone())
+}

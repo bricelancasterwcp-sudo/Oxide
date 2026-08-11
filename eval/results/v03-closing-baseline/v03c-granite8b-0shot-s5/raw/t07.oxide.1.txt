@@ -1,0 +1,373 @@
+fn main() {
+    let multiples = vec(3, 6, 9, 12, 15, 18, 21, 24).filter(is_multiple_of(3)).collect()
+    print_sum(multiples)
+}
+
+fn print_sum(multiples: Vec<Int>) {
+    let sum = reduce(0, multiples, add)
+    print(sum)
+}
+
+fn is_multiple_of(n: Int) -> Bool {
+    move || x % n == 0
+}
+
+fn reduce(init: Int, v: Vec<Int>, f: Int, fn1: Int, fn2: Int) -> Int {
+    match v {
+        Vec(n, ith, rest) => if n == 0 { init } else { reduce(f(init, ith), rest, f, fn1, fn2) },
+        Nullary => init,
+    }
+}
+
+fn add(x: Int, y: Int) -> Int {
+    x + y
+}
+
+struct Int {
+    value: Int,
+}
+
+struct Bool {
+    value: Bool,
+}
+
+struct Vec {
+    capacity: Int,
+    first: Int,
+    last: Int,
+}
+
+struct Str {
+    ptr: Int,
+    len: Int,
+}
+
+fn push(v: Vec, x: Int) -> Vec {
+    let cap = get(v, capacity)
+    let first = get(v, first)
+    let last = get(v, last)
+    if last == cap {
+        return v
+    } else {
+        let v = update(v, last, x)
+        let last = last + 1
+        update(v, last, last)
+    }
+}
+
+fn print(x: Int) {
+    let s = to_string(x)
+    let ptr = get(s, ptr)
+    let len = get(s, len)
+    sys_write(1, ptr, len)
+}
+
+fn to_string(x: Int) -> Str {
+    let s = Int { value: 10 }
+    let s = update(s, 0, x)
+    let s = update(s, 1, 1)
+    s
+}
+
+fn sys_write(fd: Int, ptr: Int, len: Int) {
+    let _ = fd
+    let _ = ptr
+    let _ = len
+}
+
+struct Unit {
+    _unit: Unit,
+}
+
+enum Option {
+    Some(Int),
+    Nullary,
+}
+
+enum Result {
+    Ok(Int),
+    Err(Str),
+}
+
+fn update(v: Int, i: Int, x: Int) -> Int {
+    v
+}
+
+fn get(v: Int, i: Int) -> Int {
+    v
+}
+
+fn match_example() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+    }
+    x
+}
+
+fn match_example_2() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => 0,
+    }
+    x
+}
+
+fn match_example_3() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => {
+            let y = match 1 {
+                Int(n) => n,
+                _ => 0,
+            }
+            y
+        },
+    }
+    x
+}
+
+fn match_example_4() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => {
+            let y = match 1 {
+                Int(n) => n,
+                _ => 0,
+            }
+            let z = match 1 {
+                Int(n) => n,
+                _ => 0,
+            }
+            z
+        },
+    }
+    x
+}
+
+fn match_example_5() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => {
+            let y = match 1 {
+                Int(n) => n,
+                _ => 0,
+            }
+            let z = match 1 {
+                Int(n) => n,
+                _ => 0,
+            }
+            let w = match 1 {
+                Int(n) => n,
+                _ => 0,
+            }
+            w
+        },
+    }
+    x
+}
+
+fn match_example_6() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => {
+            match 1 {
+                Int(n) => {
+                    let y = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let z = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let w = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    w
+                },
+                _ => 0,
+            }
+        },
+    }
+    x
+}
+
+fn match_example_7() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => {
+            match 1 {
+                Int(n) => {
+                    let y = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let z = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let w = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    w
+                },
+                _ => 0,
+            }
+        },
+    }
+    x
+}
+
+fn match_example_8() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => {
+            match 1 {
+                Int(n) => {
+                    let y = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let z = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let w = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    w
+                },
+                _ => 0,
+            }
+        },
+    }
+    x
+}
+
+fn match_example_9() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => {
+            match 1 {
+                Int(n) => {
+                    let y = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let z = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let w = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    w
+                },
+                _ => 0,
+            }
+        },
+    }
+    x
+}
+
+fn match_example_10() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => {
+            match 1 {
+                Int(n) => {
+                    let y = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let z = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let w = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    w
+                },
+                _ => 0,
+            }
+        },
+    }
+    x
+}
+
+fn match_example_11() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => {
+            match 1 {
+                Int(n) => {
+                    let y = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let z = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let w = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    w
+                },
+                _ => 0,
+            }
+        },
+    }
+    x
+}
+
+fn match_example_12() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => {
+            match 1 {
+                Int(n) => {
+                    let y = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let z = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let w = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    w
+                },
+                _ => 0,
+            }
+        },
+    }
+    x
+}
+
+fn match_example_13() -> Int {
+    let x = match 1 {
+        Int(n) => n,
+        _ => {
+            match 1 {
+                Int(n) => {
+                    let y = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let z = match 1 {
+                        Int(n) => n,
+                        _ => 0,
+                    }
+                    let w = match 1 {
+                        Int(n) => n

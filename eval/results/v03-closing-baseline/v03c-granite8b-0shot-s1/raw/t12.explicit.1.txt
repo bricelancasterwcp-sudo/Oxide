@@ -1,0 +1,12 @@
+fn stak() -> Str {
+    let a = "stack"
+    let b = a
+    let c = b
+    drop b
+    drop a
+    c
+}
+
+fn main() {
+    print(stak())
+}

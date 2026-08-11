@@ -1,0 +1,22 @@
+fn fib(n: Int) -> Int {
+    if n <= 1 {
+        n
+    } else {
+        let a = 1
+        let b = 1
+        for _ in 2.range(n) {
+            let next = a + b
+            drop a
+            a = b
+            b = next
+        }
+        drop a
+        drop b
+        b
+    }
+}
+
+fn main() {
+    let term = fib(20)
+    print(term)
+}

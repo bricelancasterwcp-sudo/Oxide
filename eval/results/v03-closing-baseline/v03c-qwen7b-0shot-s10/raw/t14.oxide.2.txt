@@ -1,0 +1,39 @@
+fn main() {
+    let s = "mississippi"
+    let count_s = s.chars().filter(char_eq_s).count()
+    let unique_chars: Vec<Str> = s.chars().collect()
+    let count_unique_chars = collect_unique_chars(unique_chars).into_iter().collect().len()
+    print(count_s)
+    print(count_unique_chars)
+}
+
+fn char_eq_s(c: Str) -> Bool {
+    c == "s"
+}
+
+fn collect_unique_chars(chars: Vec<Str>) -> Vec<Str> {
+    let mut unique_chars = Vec()
+    for c in chars {
+        if !unique_chars.contains(c) {
+            unique_chars.push(c)
+        }
+    }
+    unique_chars
+}
+
+fn into_iter_unique_chars(chars: Vec<Str>) -> Vec<Str> {
+    collect_unique_chars(chars).into_iter().collect()
+}
+
+fn count_unique_chars(chars: Vec<Str>) -> Int {
+    into_iter_unique_chars(chars).len()
+}
+
+fn main() {
+    let s = "mississippi"
+    let count_s = s.chars().filter(char_eq_s).count()
+    let unique_chars: Vec<Str> = s.chars().collect()
+    let count_unique_chars = count_unique_chars(unique_chars)
+    print(count_s)
+    print(count_unique_chars)
+}

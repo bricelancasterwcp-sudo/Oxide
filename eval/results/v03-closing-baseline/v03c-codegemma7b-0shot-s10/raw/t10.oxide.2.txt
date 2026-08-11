@@ -1,0 +1,13 @@
+fn main() {
+    let mut list = vec(4, 1, 7, 3, 9, 2)
+    let mut counter = 0
+    for x in list.iter_mut() {
+        if x > 3 {
+            print_str(format_str("{} ", x))
+            counter = counter + 1
+        } else {
+            list.remove(list.iter().position(Some(x)).unwrap())
+        }
+    }
+    print_str(format_str("\n{}", counter))
+}

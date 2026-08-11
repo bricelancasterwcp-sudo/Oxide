@@ -1,0 +1,14 @@
+fn main() {
+    let tasks = vec(5, 3, 8, 1, 9, 2)
+    let mut points = 0
+    for x in tasks.iter() {
+        points = points + x
+    }
+    for t in tasks {
+        print_str(int_to_str(t))
+        print_str(" ")
+        print(t)
+        print("\n")
+    }
+    print(points)
+}

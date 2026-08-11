@@ -1,0 +1,23 @@
+struct List { elements: Vec<Int> }
+
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut result = v
+    for i in range(0, len(result)) {
+        for j in range(0, len(result) - i - 1) {
+            if result.get(j)? > result.get(j + 1)? {
+                let temp = result.get(j)?
+                result.set(j, result.get(j + 1)?)
+                result.set(j + 1, temp)
+            }
+        }
+    }
+    result
+}
+
+fn main() {
+    let list = List { elements: vec(5, 3, 8, 1, 9, 2) }
+    let sorted = sort(list.elements)
+    for x in sorted {
+        print(x)
+    }
+}

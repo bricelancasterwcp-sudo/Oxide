@@ -1,0 +1,9 @@
+struct Stack { top: Vec<Str> }
+
+fn main() {
+    let stack = Stack { top: push(push(vec(), "d"), "e") }
+    let mut top = stack.top
+    print(get(top, 0)?)
+    top = push(top, "f")
+    stack.top = top
+}

@@ -1,0 +1,462 @@
+fn main() {
+    let text = "mississippi"
+    let count_s = text.chars().filter(char_eq_s).count()
+    let distinct_chars = text.chars().collect_to_set().len()
+    print_int(count_s)
+    print_int(distinct_chars)
+}
+
+fn char_eq_s(c: Str) -> Bool {
+    c == "s"
+}
+
+fn collect_to_set(v: Vec<Str>) -> Set<Str> {
+    let mut s = Set()
+    for x in v {
+        s.insert(x)
+    }
+    s
+}
+
+fn print_int(i: Int) {
+    print_str(i.to_str())
+}
+
+fn to_str(n: Int) -> Str {
+    match n {
+        None => "0",
+        Some(x) => x.to_str(),
+    }
+}
+
+fn print_str(s: Str) {
+    let mut chars = s.chars()
+    while letSome(c) == chars.next() {
+        print_char(c)
+    }
+}
+
+fn print_char(c: Char) {
+    let ascii = c.as_ascii()
+    let ptr = &ascii
+    unsafe * (ptr.add(0)) == ascii
+}
+
+fn unsafe_add(ptr: &Int, offset: Int) -> Int {
+    unsafe * (ptr.add(offset))
+}
+
+fn unsafe_deref(ptr: &Int) -> Int {
+    unsafe * ptr
+}
+
+fn unsafe_set(ptr: &Int, value: Int) {
+    unsafe * ptr == value
+}
+
+fn unsafe_ptr_to_int(ptr: &Int) -> Int {
+    unsafe * ptr
+}
+
+fn unsafe_int_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_ref(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_ref_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_mut(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_mut_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_const(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_const_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_null(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_null_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_void(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_void_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_type(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_type_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_enum(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_enum_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_variant(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_variant_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_field(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_field_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_method(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_method_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_operator(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_operator_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_keyword(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_keyword_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_literal(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_literal_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_comment(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_comment_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_whitespace(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_whitespace_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_newline(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_newline_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_tab(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_tab_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_backspace(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_backspace_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_carriage_return(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_carriage_return_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_escape(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_escape_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_unicode(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_unicode_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_binary(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_binary_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_octal(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_octal_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_hex(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_hex_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_radix(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_radix_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_float(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_float_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_int(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_int_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_char(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_char_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_bool(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_bool_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_string(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_string_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_vector(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_vector_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_function(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_function_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_enum_variant(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_enum_variant_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_struct_field(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_struct_field_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_variant(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_variant_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_field(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_field_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_discriminant(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_discriminant_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_tag(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_tag_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_payload(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_payload_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_padding(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_padding_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_footer(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_footer_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_header(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_header_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_variant_payload(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_variant_payload_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_variant_padding(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_variant_padding_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_variant_footer(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_variant_footer_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_variant_header(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_variant_header_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_variant_payload_padding(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_variant_payload_padding_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_variant_payload_footer(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_variant_payload_footer_to_ptr(ptr: Int) -> Int {
+    ptr
+}
+
+fn unsafe_ptr_to_union_variant_payload_header(ptr: &Int) -> Int {
+    ptr
+}
+
+fn unsafe_union_variant_payload_header_to_ptr(ptr: Int) -> Int {
+    ptr

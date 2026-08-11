@@ -1,0 +1,22 @@
+fn divide(dividend: Int, divisor: Int) -> Result<Int, Str> {
+    if divisor == 0 {
+        Err("undefined".into())
+    } else {
+        Ok(dividend / divisor)
+    }
+}
+
+fn main() {
+    match divide(100, 5) {
+        Ok(result) => print_str(result.to_string()),
+        Err(e) => print(e),
+    }
+    match divide(100, 0) {
+        Ok(result) => print_str(result.to_string()),
+        Err(e) => print(e),
+    }
+    match divide(100, 4) {
+        Ok(result) => print_str(result.to_string()),
+        Err(e) => print(e),
+    }
+}

@@ -1,0 +1,17 @@
+fn main() {
+    let word = "mississippi"
+    let mut count = 0
+    let mut distinct_count = 0
+    let mut previous_char = ""
+    for current_char in &chars_str {
+        if current_char == "s" {
+            count = count + 1
+        }
+        if current_char != previous_char {
+            distinct_count = distinct_count + 1
+        }
+        previous_char = current_char
+    }
+    print(count)
+    print(distinct_count)
+}

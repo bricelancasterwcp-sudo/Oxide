@@ -1,0 +1,27 @@
+fn reverse_string(text: &Str) -> Str {
+    let mut result = String.new()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    result
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(&text))
+    drop text
+}
+
+fn reverse_string(text: &Str) -> Str {
+    let mut result = String.new()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    result
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(&text))
+    drop text
+}

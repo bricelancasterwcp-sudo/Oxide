@@ -1,0 +1,14 @@
+fn main() {
+    let mut list = vec![4, 1, 7, 3, 9, 2];
+    let mut counter = 0;
+    list.retain(|&x| {
+        if x > 3 {
+            println!("{}", x);
+            counter += 1;
+            true
+        } else {
+            false
+        }
+    });
+    println!("{}", counter);
+}

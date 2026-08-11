@@ -1,0 +1,34 @@
+fn sort(vec: &Vec<Int>) -> Vec<Int> {
+    let mut v = clone(vec)
+    let len = len(&v)
+    while len > 1 {
+        let mut i = 0
+        while i < len - 1 {
+            if get(&v, i) > get(&v, i + 1) {
+                let x = get(&v, i)
+                set(&mut_v, i, get(&v, i + 1))
+                set(&mut_v, i + 1, x)
+            }
+            i = i + 1
+        }
+        drop v
+        v = mut_v
+        drop mut_v
+        mut_v = clone(vec)
+        drop len
+        len = len - 1
+    }
+    drop v
+    v
+}
+
+fn main() {
+    let numbers = push(push(push(push(vec(), 5), 3), 8), 1)
+    let sorted = sort(&numbers)
+    for n in &sorted {
+        print(n)
+        print("\n")
+    }
+    drop numbers
+    drop sorted
+}

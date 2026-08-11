@@ -1,0 +1,4 @@
+fn main() {
+    let sum: usize = (1..=8).map(|x| x * 3).sum();
+    println!("{}", sum);
+}

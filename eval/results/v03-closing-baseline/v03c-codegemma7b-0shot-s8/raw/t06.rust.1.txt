@@ -1,0 +1,13 @@
+fn main() {
+    for n in 0..1000 {
+        let mut sum = 0;
+        for i in 1..=(n / 2) {
+            if n % i == 0 {
+                sum += i;
+            }
+        }
+        if sum == n {
+            println!("{}", n);
+        }
+    }
+}

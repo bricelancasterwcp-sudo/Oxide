@@ -1,0 +1,356 @@
+fn main() {
+    let rect = Shape { width: 7, height: 4 }
+    print(area(&rect))
+    print(perimeter(&rect))
+    drop rect
+}
+
+struct Shape {
+    width: Int,
+    height: Int,
+}
+
+fn area(s: &Shape) -> Int {
+    s.width * s.height
+}
+
+fn perimeter(s: &Shape) -> Int {
+    2 * (s.width + s.height)
+}
+
+fn print(n: Int) {
+    print_str(str_len(to_str(n)) + " is " + to_str(n) + "\n")
+}
+
+fn print_str(s: Str) {
+    __print_str(s)
+}
+
+fn __print_str(s: Str) {
+    __print_str_helper(chars(s))
+}
+
+fn __print_str_helper(v: &Vec<Str>) {
+    match v {
+        Vec(refCons) => {
+            match refCons {
+                Some(refHead) => {
+                    print_str(refHead)
+                    if letcons(refTail) == v {
+                        __print_str_helper(refTail)
+                    }
+                },
+                _ => {
+                    __print_str("\n")
+                },
+            }
+        },
+        _ => {
+            __print_str("\n")
+        },
+    }
+}
+
+fn to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    clone(&s)
+}
+
+fn clone(x: T) -> T {
+    __clone_helper(x)
+}
+
+fn __clone_helper(x: T) -> T {
+    if letcons(x) {
+        let head = __clone_helper(refHead)
+        push(clone(refTail), head)
+    } else {
+        x
+    }
+}
+
+fn ifletcons(x: Vec<T>) -> Option<T> {
+    match x {
+        Vec(refCons) => {
+            match refCons {
+                Some(refHead) => {
+                    Some(refHead)
+                },
+                _ => {
+                    None
+                },
+            }
+        },
+        _ => {
+            None
+        },
+    }
+}
+
+fn str_len(s: Str) -> Int {
+    __str_len_helper(chars(s), 0)
+}
+
+fn __str_len_helper(v: &Vec<Str>, acc: Int) -> Int {
+    match v {
+        Vec(refCons) => {
+            match refCons {
+                Some(refHead) => {
+                    __str_len_helper(refTail, acc + 1)
+                },
+                _ => {
+                    acc
+                },
+            }
+        },
+        _ => {
+            acc
+        },
+    }
+}
+
+fn __print_str(s: Str) {
+    __print_str_helper(chars(s))
+}
+
+fn __print_str_helper(v: &Vec<Str>) {
+    match v {
+        Vec(refCons) => {
+            match refCons {
+                Some(refHead) => {
+                    print_str(refHead)
+                    if letcons(refTail) == v {
+                        __print_str_helper(refTail)
+                    }
+                },
+                _ => {
+                    __print_str("\n")
+                },
+            }
+        },
+        _ => {
+            __print_str("\n")
+        },
+    }
+}
+
+fn to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn clone(x: T) -> T {
+    __clone_helper(x)
+}
+
+fn __clone_helper(x: T) -> T {
+    if letcons(x) {
+        let head = __clone_helper(refHead)
+        push(clone(refTail), head)
+    } else {
+        x
+    }
+}
+
+fn ifletcons(x: Vec<T>) -> Option<T> {
+    match x {
+        Vec(refCons) => {
+            match refCons {
+                Some(refHead) => {
+                    Some(refHead)
+                },
+                _ => {
+                    None
+                },
+            }
+        },
+        _ => {
+            None
+        },
+    }
+}
+
+fn perimeter(s: &Shape) -> Int {
+    2 * (s.width + s.height)
+}
+
+fn area(s: &Shape) -> Int {
+    s.width * s.height
+}
+
+fn print(n: Int) {
+    print_str(str_len(to_str(n)) + " is " + to_str(n) + "\n")
+}
+
+fn print_str(s: Str) {
+    __print_str(s)
+}
+
+fn __print_str(s: Str) {
+    __print_str_helper(chars(s))
+}
+
+fn __print_str_helper(v: &Vec<Str>) {
+    match v {
+        Vec(refCons) => {
+            match refCons {
+                Some(refHead) => {
+                    print_str(refHead)
+                    if letcons(refTail) == v {
+                        __print_str_helper(refTail)
+                    }
+                },
+                _ => {
+                    __print_str("\n")
+                },
+            }
+        },
+        _ => {
+            __print_str("\n")
+        },
+    }
+}
+
+fn to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn clone(x: T) -> T {
+    __clone_helper(x)
+}
+
+fn __clone_helper(x: T) -> T {
+    if letcons(x) {
+        let head = __clone_helper(refHead)
+        push(clone(refTail), head)
+    } else {
+        x
+    }
+}
+
+fn ifletcons(x: Vec<T>) -> Option<T> {
+    match x {
+        Vec(refCons) => {
+            match refCons {
+                Some(refHead) => {
+                    Some(refHead)
+                },
+                _ => {
+                    None
+                },
+            }
+        },
+        _ => {
+            None
+        },
+    }
+}
+
+fn perimeter(s: &Shape) -> Int {
+    2 * (s.width + s.height)
+}
+
+fn area(s: &Shape) -> Int {
+    s.width * s.height
+}
+
+fn print(n: Int) {
+    print_str(str_len(to_str(n)) + " is " + to_str(n) + "\n")
+}
+
+fn print_str(s: Str) {
+    __print_str(s)
+}
+
+fn __print_str(s: Str) {
+    __print_str_helper(chars(s))
+}
+
+fn __print_str_helper(v: &Vec<Str>) {
+    match v {
+        Vec(refCons) => {
+            match refCons {
+                Some(refHead) => {
+                    print_str(refHead)
+                    if letcons(refTail) == v {
+                        __print_str_helper(refTail)
+                    }
+                },
+                _ => {
+                    __print_str("\n")
+                },
+            }
+        },
+        _ => {
+            __print_str("\n")
+        },
+    }
+}
+
+fn to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn clone(x: T) -> T {
+    __clone_helper(x)
+}
+
+fn __clone_helper(x: T) -> T {
+    if letcons(x) {
+        let head = __clone_helper(refHead)
+        push(clone(refTail), head)
+    } else {
+        x
+    }
+}
+
+fn ifletcons(x: Vec<T>) -> Option<T> {
+    match x {
+        Vec(refCons) => {
+            match refCons {
+                Some(refHead) => {
+                    Some(refHead)
+                },
+                _ => {
+                    None
+                },
+            }
+        },
+        _ => {
+            None
+        },
+    }
+}
+
+fn main() {
+    let rect = Shape { width: 7, height: 4 }
+    print(area(&rect))
+    print(perimeter(&rect))
+    drop rect
+}
+
+struct Shape {
+    width: Int,
+    height: Int,
+}
+
+fn area(s: &Shape) -> Int {
+    s.width * s.height
+}
+
+fn perimeter(s: &Shape) -> Int {
+    2 * (s.width + s.height)
+}
+
+fn print(n: Int) {
+    print_str(str_len(to_str(n)) + " is " + to_str(n) + "\n")
+}
+
+fn print_str(s: Str) {
+    __print_str(s)
+}
+
+fn __print_str(s: Str) {
+    __print_str_helper(chars(s))

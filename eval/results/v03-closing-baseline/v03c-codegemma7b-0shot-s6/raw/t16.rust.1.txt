@@ -1,0 +1,11 @@
+fn main() {
+    let divisor: [i32; 3] = [5, 0, 4];
+    let dividend: i32 = 100;
+    for d in divisor.iter() {
+        if d == &0 {
+            println!("undefined");
+        } else {
+            println!("{}", dividend / d);
+        }
+    }
+}

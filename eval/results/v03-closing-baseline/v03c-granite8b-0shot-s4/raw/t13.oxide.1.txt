@@ -1,0 +1,28 @@
+fn is_palindrome(s: Str) -> Bool {
+    let mut chars = chars(s)
+    let mut i = 0
+    let len = len(s)
+    let mut rev_chars = vec()
+    while i < len {
+        rev_chars = push(rev_chars, get(chars, len - 1 - i)?)
+        i = i + 1
+    }
+    print_str(concat(str_len(s), " ", str_len(rev_chars)))
+    chars = rev_chars
+    let mut same = true
+    i = 0
+    while i < len {
+        if get(chars, i)? != get(s, i)? {
+            same = false
+        }
+        i = i + 1
+    }
+    same
+}
+
+fn main() {
+    let tests = vec("level", "stereo", "rotor")
+    for t in tests {
+        print(is_palindrome(t))
+    }
+}

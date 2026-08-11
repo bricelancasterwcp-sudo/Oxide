@@ -1,0 +1,25 @@
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < len(v) {
+        Some(get_unsafe(v, i))
+    } else {
+        None
+    }
+}
+
+fn get_unsafe(v: Vec<Int>, i: Int) -> Int {
+    clone(get_ref(v, i))
+}
+
+fn get_ref(v: Vec<Int>, i: Int) -> Ref<Int> {
+    get_ref_at(v, i)
+}
+
+fn get_ref_at(v: Vec<Int>, i: Int) -> Ref<Int> {
+    v + i
+}
+
+fn main() {
+    let v = push(push(vec(), 10), 20)
+    print(get(v, 0)?.clone())
+    print(get(v, 2)?.clone())
+}

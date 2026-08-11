@@ -1,0 +1,316 @@
+fn perimeter(l: Float, w: Float) -> Float {
+    2.0 * (l + w)
+}
+
+fn main() {
+    let r1 = Rectangle { length: 3.0, width: 4.0 }
+    let t1 = Triangle { side1: 3.0, side2: 4.0, side3: 5.0 }
+    let r2 = Rectangle { length: 2.0, width: 5.0 }
+    print(perimeter(r1.length, r1.width))
+    print(perimeter(t1.side1, t1.side2))
+    print(perimeter(r2.length, r2.width))
+}
+
+struct Rectangle {
+    length: Float,
+    width: Float,
+}
+
+struct Triangle {
+    side1: Float,
+    side2: Float,
+    side3: Float,
+}
+
+fn print(x: Float) {
+    print(format("{:.2}", x))
+}
+
+fn print(s: Str) {
+    print(s)
+}
+
+fn print(i: Int) {
+    print(format("{}", i))
+}
+
+fn print(b: Bool) {
+    print(format("{}", b))
+}
+
+fn print(v: &Vec<Int>) {
+    print("[")
+    for i in 0.upto(v.len()) {
+        print(format("{}", v.get(i).unwrap()))
+        if i < v.len() - 1 {
+            print(", ")
+        }
+    }
+    print("]")
+}
+
+fn print(v: &Vec<Str>) {
+    print("[")
+    for i in 0.upto(v.len()) {
+        print(format("{}", v.get(i).unwrap()))
+        if i < v.len() - 1 {
+            print(", ")
+        }
+    }
+    print("]")
+}
+
+fn print(o: Option<Int>) {
+    match o {
+        Some(x) => print(x),
+        None => print("None"),
+    }
+}
+
+fn print(o: Option<Str>) {
+    match o {
+        Some(x) => print(x),
+        None => print("None"),
+    }
+}
+
+fn print(o: Option<Float>) {
+    match o {
+        Some(x) => print(x),
+        None => print("None"),
+    }
+}
+
+fn print(o: Option<Bool>) {
+    match o {
+        Some(x) => print(x),
+        None => print("None"),
+    }
+}
+
+fn print(o: Option<Vec<Int>>) {
+    match o {
+        Some(v) => print(&v),
+        None => print("None"),
+    }
+}
+
+fn print(o: Option<Vec<Str>>) {
+    match o {
+        Some(v) => print(&v),
+        None => print("None"),
+    }
+}
+
+fn print(o: Result<Int, Str>) {
+    match o {
+        Ok(x) => print(x),
+        Err(e) => print(e),
+    }
+}
+
+fn print(o: Result<Str, Str>) {
+    match o {
+        Ok(x) => print(x),
+        Err(e) => print(e),
+    }
+}
+
+fn print(o: Result<Float, Str>) {
+    match o {
+        Ok(x) => print(x),
+        Err(e) => print(e),
+    }
+}
+
+fn print(o: Result<Bool, Str>) {
+    match o {
+        Ok(x) => print(x),
+        Err(e) => print(e),
+    }
+}
+
+fn print(o: Result<Vec<Int>, Str>) {
+    match o {
+        Ok(v) => print(&v),
+        Err(e) => print(e),
+    }
+}
+
+fn print(o: Result<Vec<Str>, Str>) {
+    match o {
+        Ok(v) => print(&v),
+        Err(e) => print(e),
+    }
+}
+
+fn print(f: &Float) {
+    print(format("{:.2}", f))
+}
+
+fn print(f: &Str) {
+    print(f)
+}
+
+fn print(i: &Int) {
+    print(format("{}", i))
+}
+
+fn print(b: &Bool) {
+    print(format("{}", b))
+}
+
+fn print(v: &Vec<Int>) {
+    print("[")
+    for i in 0.upto(v.len()) {
+        print(format("{}", v.get(i).unwrap()))
+        if i < v.len() - 1 {
+            print(", ")
+        }
+    }
+    print("]")
+}
+
+fn print(v: &Vec<Str>) {
+    print("[")
+    for i in 0.upto(v.len()) {
+        print(format("{}", v.get(i).unwrap()))
+        if i < v.len() - 1 {
+            print(", ")
+        }
+    }
+    print("]")
+}
+
+fn print(o: Option<Int>) {
+    match o {
+        Some(x) => print(x),
+        None => print("None"),
+    }
+}
+
+fn print(o: Option<Str>) {
+    match o {
+        Some(x) => print(x),
+        None => print("None"),
+    }
+}
+
+fn print(o: Option<Float>) {
+    match o {
+        Some(x) => print(x),
+        None => print("None"),
+    }
+}
+
+fn print(o: Option<Bool>) {
+    match o {
+        Some(x) => print(x),
+        None => print("None"),
+    }
+}
+
+fn print(o: Option<Vec<Int>>) {
+    match o {
+        Some(v) => print(&v),
+        None => print("None"),
+    }
+}
+
+fn print(o: Option<Vec<Str>>) {
+    match o {
+        Some(v) => print(&v),
+        None => print("None"),
+    }
+}
+
+fn print(o: Result<Int, Str>) {
+    match o {
+        Ok(x) => print(x),
+        Err(e) => print(e),
+    }
+}
+
+fn print(o: Result<Str, Str>) {
+    match o {
+        Ok(x) => print(x),
+        Err(e) => print(e),
+    }
+}
+
+fn print(o: Result<Float, Str>) {
+    match o {
+        Ok(x) => print(x),
+        Err(e) => print(e),
+    }
+}
+
+fn print(o: Result<Bool, Str>) {
+    match o {
+        Ok(x) => print(x),
+        Err(e) => print(e),
+    }
+}
+
+fn print(o: Result<Vec<Int>, Str>) {
+    match o {
+        Ok(v) => print(&v),
+        Err(e) => print(e),
+    }
+}
+
+fn print(o: Result<Vec<Str>, Str>) {
+    match o {
+        Ok(v) => print(&v),
+        Err(e) => print(e),
+    }
+}
+
+fn print(f: Float) {
+    print(format("{:.2}", f))
+}
+
+fn print(f: Str) {
+    print(f)
+}
+
+fn print(i: Int) {
+    print(format("{}", i))
+}
+
+fn print(b: Bool) {
+    print(format("{}", b))
+}
+
+fn print(v: Vec<Int>) {
+    print("[")
+    for i in 0.upto(v.len()) {
+        print(format("{}", v.get(i).unwrap()))
+        if i < v.len() - 1 {
+            print(", ")
+        }
+    }
+    print("]")
+}
+
+fn print(v: Vec<Str>) {
+    print("[")
+    for i in 0.upto(v.len()) {
+        print(format("{}", v.get(i).unwrap()))
+        if i < v.len() - 1 {
+            print(", ")
+        }
+    }
+    print("]")
+}
+
+fn print(o: Option<Int>) {
+    match o {
+        Some(x) => print(x),
+        None => print("None"),
+    }
+}
+
+fn print(o: Option<Str>) {
+    match o {
+        Some

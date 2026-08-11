@@ -1,0 +1,10 @@
+```rust
+fn main() {
+    let list = vec![4, 1, 7, 3, 9, 2];
+    let filtered: Vec<_> = list.into_iter().filter(|&x| x > 3).collect();
+    for value in filtered {
+        println!("{}", value);
+    }
+    println!("{}", filtered.len());
+}
+```

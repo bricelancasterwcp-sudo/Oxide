@@ -1,0 +1,239 @@
+fn parse_many(nums: &Vec<String>) -> Result<Int, Int> {
+    let mut total = 0
+    let mut count = 0
+    for num in nums {
+        match parse_int(num) {
+            Some(n) => {
+                total = total + n
+                count = count + 1
+            },
+            None => {
+                count = count + 1
+            },
+        }
+    }
+    Ok(total)
+}
+
+fn main() {
+    let nums = vec("12", "x", "30")
+    match parse_many(&nums) {
+        Ok(t) => print(t),
+        Err(e) => print(e),
+    }
+    drop nums
+}
+
+fn parse_int(s: &String) -> Option<Int> {
+    let mut i = 0
+    let mut n = 0
+    while i < s.len() {
+        let c = s.chars().nth(i).unwrap()
+        if c >= bchar(0) && c <= bchar(9) {
+            n = n * 10 + (c - bchar(0))
+            i = i + 1
+        } else {
+            return None
+        }
+    }
+    Some(n)
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(int_to_str(x))
+}
+
+fn print(x: Int) {
+    print_str(str_len(int_to_str(x)))
+    print_str(

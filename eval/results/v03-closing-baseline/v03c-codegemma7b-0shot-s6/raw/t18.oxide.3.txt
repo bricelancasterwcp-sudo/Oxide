@@ -1,0 +1,28 @@
+struct Rectangle { width: Int, height: Int }
+
+struct Triangle { a: Int, b: Int, c: Int }
+
+fn area(r: Rectangle) -> Int {
+    return 2 * (r.width + r.height)
+}
+
+fn perimeter(r: Rectangle) -> Int {
+    return 2 * (r.width + r.height)
+}
+
+fn area(t: Triangle) -> Int {
+    return t.a + t.b + t.c
+}
+
+fn perimeter(t: Triangle) -> Int {
+    return t.a + t.b + t.c
+}
+
+fn main() {
+    let r1 = Rectangle { width: 3, height: 4 }
+    let t1 = Triangle { a: 3, b: 4, c: 5 }
+    let r2 = Rectangle { width: 2, height: 5 }
+    print(perimeter(r1))
+    print(perimeter(t1))
+    print(perimeter(r2))
+}

@@ -1,0 +1,73 @@
+fn main() {
+    let mut list = push(push(push(push(vec(), 5), 4), 3), 2)
+    while len(&list) > 0 {
+        print(get(&list, 0))
+        list = drop_last(&list)
+    }
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut v = v
+    v = push(v, x)
+    v
+}
+
+fn drop_last(v: &Vec<Int>) -> Vec<Int> {
+    let mut v = clone(v)
+    v = v.slice(0, len(&v) - 1)
+    v
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    let v = clone(v)
+    if i < 0 || i >= len(&v) {
+        None
+    } else {
+        Some(v.get(i))
+    }
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    let v = clone(v)
+    v.len()
+}
+
+fn print(s: Str) {
+    print_str(s)
+}
+
+fn print_str(s: Str) {
+    TODO()
+}
+
+fn vec() -> Vec<T> {
+    TODO()
+}
+
+fn clone(x: T) -> T {
+    TODO()
+}
+
+fn slice(v: &Vec<T>, start: Int, end: Int) -> Vec<T> {
+    TODO()
+}
+
+fn get(v: &Vec<T>, i: Int) -> T {
+    TODO()
+}
+
+fn len(v: &Vec<T>) -> Int {
+    TODO()
+}
+
+fn drop_last(v: &Vec<T>) -> Vec<T> {
+    TODO()
+}
+
+fn main() {
+    let mut list = push(push(push(push(vec(), 5), 4), 3), 2)
+    while len(&list) > 0 {
+        print(get(&list, 0))
+        list = drop_last(&list)
+    }
+}

@@ -1,0 +1,5 @@
+fn main() {
+    let list = [10, 20, 30];
+    println!("{}", list.get(1).unwrap_or(&-1)); // prints 20
+    println!("{}", list.get(5).unwrap_or(&-1)); // prints -1
+}

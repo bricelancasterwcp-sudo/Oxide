@@ -1,0 +1,433 @@
+fn main() {
+    print_str(level == str_rev(level))
+    print_str(stereo == str_rev(stereo))
+    print_str(rotor == str_rev(rotor))
+}
+
+fn str_rev(s: &Str) -> Str {
+    let mut rev = ""
+    for ch in chars(s) {
+        rev = ch + rev
+    }
+    rev
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(b: Bool) {
+    if b {
+        print_str("true")
+    } else {
+        print_str("false")
+    }
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut chars = Vec()
+    for i in range(0, str_len(s)) {
+        chars.push(get(s, i))
+    }
+    chars
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn get(s: &Str, i: Int) -> Str {
+    let mut res = ""
+    for ch in chars(s) {
+        if i == 0 {
+            res = ch
+            break
+        }
+        i = i - 1
+    }
+    res
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut new_v = v
+    new_v.push(x)
+    new_v
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn str_rev(s: &Str) -> Str {
+    let mut rev = ""
+    for ch in chars(s) {
+        rev = ch + rev
+    }
+    rev
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut chars = Vec()
+    for i in range(0, str_len(s)) {
+        chars.push(get(s, i))
+    }
+    chars
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn get(s: &Str, i: Int) -> Str {
+    let mut res = ""
+    for ch in chars(s) {
+        if i == 0 {
+            res = ch
+            break
+        }
+        i = i - 1
+    }
+    res
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut new_v = v
+    new_v.push(x)
+    new_v
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(b: Bool) {
+    if b {
+        print_str("true")
+    } else {
+        print_str("false")
+    }
+}
+
+fn str_rev(s: &Str) -> Str {
+    let mut rev = ""
+    for ch in chars(s) {
+        rev = ch + rev
+    }
+    rev
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut chars = Vec()
+    for i in range(0, str_len(s)) {
+        chars.push(get(s, i))
+    }
+    chars
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn get(s: &Str, i: Int) -> Str {
+    let mut res = ""
+    for ch in chars(s) {
+        if i == 0 {
+            res = ch
+            break
+        }
+        i = i - 1
+    }
+    res
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut new_v = v
+    new_v.push(x)
+    new_v
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(b: Bool) {
+    if b {
+        print_str("true")
+    } else {
+        print_str("false")
+    }
+}
+
+fn str_rev(s: &Str) -> Str {
+    let mut rev = ""
+    for ch in chars(s) {
+        rev = ch + rev
+    }
+    rev
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut chars = Vec()
+    for i in range(0, str_len(s)) {
+        chars.push(get(s, i))
+    }
+    chars
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn get(s: &Str, i: Int) -> Str {
+    let mut res = ""
+    for ch in chars(s) {
+        if i == 0 {
+            res = ch
+            break
+        }
+        i = i - 1
+    }
+    res
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut new_v = v
+    new_v.push(x)
+    new_v
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(b: Bool) {
+    if b {
+        print_str("true")
+    } else {
+        print_str("false")
+    }
+}
+
+fn str_rev(s: &Str) -> Str {
+    let mut rev = ""
+    for ch in chars(s) {
+        rev = ch + rev
+    }
+    rev
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut chars = Vec()
+    for i in range(0, str_len(s)) {
+        chars.push(get(s, i))
+    }
+    chars
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn get(s: &Str, i: Int) -> Str {
+    let mut res = ""
+    for ch in chars(s) {
+        if i == 0 {
+            res = ch
+            break
+        }
+        i = i - 1
+    }
+    res
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut new_v = v
+    new_v.push(x)
+    new_v
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(b: Bool) {
+    if b {
+        print_str("true")
+    } else {
+        print_str("false")
+    }
+}
+
+fn str_rev(s: &Str) -> Str {
+    let mut rev = ""
+    for ch in chars(s) {
+        rev = ch + rev
+    }
+    rev
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut chars = Vec()
+    for i in range(0, str_len(s)) {
+        chars.push(get(s, i))
+    }
+    chars
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn get(s: &Str, i: Int) -> Str {
+    let mut res = ""
+    for ch in chars(s) {
+        if i == 0 {
+            res = ch
+            break
+        }
+        i = i - 1
+    }
+    res
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut new_v = v
+    new_v.push(x)
+    new_v
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(b: Bool) {
+    if b {
+        print_str("true")
+    } else {
+        print_str("false")
+    }
+}
+
+fn str_rev(s: &Str) -> Str {
+    let mut rev = ""
+    for ch in chars(s) {
+        rev = ch + rev
+    }
+    rev
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut chars = Vec()
+    for i in range(0, str_len(s)) {
+        chars.push(get(s, i))
+    }
+    chars
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn get(s: &Str, i: Int) -> Str {
+    let mut res = ""
+    for ch in chars(s) {
+        if i == 0 {
+            res = ch
+            break
+        }
+        i = i - 1
+    }
+    res
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut new_v = v
+    new_v.push(x)
+    new_v
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(b: Bool) {
+    if b {
+        print_str("true")
+    } else {
+        print_str("false")
+    }
+}
+
+fn str_rev(s: &Str) -> Str {
+    let mut rev = ""
+    for ch in chars(s) {
+        rev = ch + rev
+    }
+    rev
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut chars = Vec()
+    for i in range(0, str_len(s)) {
+        chars.push(get(s, i))
+    }
+    chars
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn get(s: &Str, i: Int) -> Str {
+    let mut res = ""
+    for ch in chars(s) {
+        if i == 0 {
+            res = ch
+            break
+        }
+        i = i - 1
+    }
+    res
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut new_v = v
+    new_v.push(x)
+    new_v
+}
+
+fn vec() -> Vec<Str> {
+    Vec()
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn print(b: Bool) {
+    if b {
+        print_str

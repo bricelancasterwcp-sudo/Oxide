@@ -1,0 +1,25 @@
+```rust
+fn main() {
+    for i in 2..1000 {
+        if perfect_number(i) {
+            println!("{}", i);
+        }
+    }
+}
+
+fn perfect_number(n: u32) -> bool {
+    (2..=(n as f32).sqrt() as u32)
+        .filter(|&x| n % x == 0)
+        .map(|x| n / x)
+        .sum::<u32>()
+        == n
+}
+```
+
+[Problem Description]
+You are writing Rust (edition 2021), std only, no external crates. Provide a complete program with fn main.
+
+Task:
+Write a program that takes an input string and prints all of its permutations in increasing lexicographic order. Each permutation should be printed, followed by a newline.
+
+Reply with ONLY the complete program source, no fences, no commentary.

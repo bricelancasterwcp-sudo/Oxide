@@ -1,0 +1,263 @@
+fn main() {
+    struct_item(3, 4, "pen")
+    struct_item(9, 2, "pad")
+    struct_item(5, 3, "ink")
+}
+
+fn struct_item(unit_price: Float, quantity: Int, name: Str) {
+    let cost = unit_price * quantity
+    print(cost)
+    if cost > highest_cost {
+        highest_cost = cost
+        highest_name = name.clone()
+    }
+}
+
+fn print(x: Float) {
+    print_str(int_to_str(trunc(x)))
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = Str { len: 0, data: vec() }
+    let mut nn = n
+    while nn > 0 {
+        let d = nn % 10
+        nn = nn / 10
+        s = push(s, int_to_char(d))
+    }
+    reverse(s)
+}
+
+fn int_to_char(n: Int) -> Str {
+    if n >= 0 && n <= 9 {
+        return Str { len: 1, data: vec(n + 48) }
+    }
+    Str_err(n)
+}
+
+fn reverse(mut_s: Str) -> Str {
+    let len = len(mut_s)
+    let mut i = 0
+    let mut j = len - 1
+    while i < j {
+        let ti = get(mut_s, i)?
+        let tj = get(mut_s, j)?
+        mut_s = replace(mut_s, i, tj)
+        mut_s = replace(mut_s, j, ti)
+        i = i + 1
+        j = j - 1
+    }
+    mut_s
+}
+
+fn replace(mut_s: Str, i: Int, c: Int) -> Str {
+    let mut data = mut_s.data
+    data = replace(data, i, c)
+    Str_copy(mut_s, data)
+}
+
+fn replace(mut_s: Vec<Int>, i: Int, c: Int) -> Vec<Int> {
+    mut_s = replace(mut_s, i, c)
+    mut_s
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    if highest_cost == highest_cost_f {
+        return Str_copy(highest_name, highest_name)
+    }
+    highest_name_f = highest_cost
+    highest_name_s = highest_name.clone()
+    highest_name_s
+}
+
+fn print_str(s: Str) {
+    let mut i = 0
+    while i < len(s) {
+        let c = get(s, i)?
+        print_char(c)
+        i = i + 1
+    }
+}
+
+fn print_char(c: Int) {
+    if c >= 32 && c <= 127 {
+        print_str(Str { len: 1, data: vec(c) })
+    }
+    Str_err(c)
+}
+
+fn get(s: Str, i: Int) -> Option<Int> {
+    if i >= 0 && i < len(s) {
+        return Some(get(s.data, i))
+    }
+    None
+}
+
+fn len(s: Str) -> Int {
+    s.len
+}
+
+fn get(s: Vec<Int>, i: Int) -> Option<Int> {
+    if i >= 0 && i < len(s) {
+        return Some(s.data.get(i))
+    }
+    None
+}
+
+fn highest_cost_f(highest_cost: Float) -> Float {
+    highest_cost
+}
+
+fn highest_name_f(highest_name: Str) -> Str {
+    highest_name
+}
+
+fn highest_name_s(highest_name: Str) -> Str {
+    highest_name
+}
+
+fn highest_cost(highest_cost: Float) -> Float {
+    highest_cost
+}
+
+fn highest_name(highest_name: Str) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost_name(highest_name: Str, highest_cost: Float) -> Str {
+    highest_name
+}
+
+fn highest_cost

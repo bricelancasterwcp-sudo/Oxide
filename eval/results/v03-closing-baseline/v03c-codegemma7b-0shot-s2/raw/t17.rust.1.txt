@@ -1,0 +1,17 @@
+fn main() {
+    let numbers = vec![10, 20, 30];
+
+    // Look up element at position 1
+    if let Some(element) = numbers.get(1) {
+        println!("{}", element);
+    } else {
+        println!("-1");
+    }
+
+    // Look up element at position 5
+    if let Some(element) = numbers.get(5) {
+        println!("{}", element);
+    } else {
+        println!("-1");
+    }
+}

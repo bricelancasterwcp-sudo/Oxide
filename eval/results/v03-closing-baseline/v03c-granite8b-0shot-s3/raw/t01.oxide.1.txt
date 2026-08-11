@@ -1,0 +1,4 @@
+fn main() {
+    let sum = reduce(0, range(0, 10), fnacc(i) == acc + i * i)
+    print(sum)
+}

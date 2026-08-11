@@ -1,0 +1,31 @@
+struct PerfectNumber {
+    number: Int,
+    sum_of_divisors: Int,
+}
+
+fn is_perfect_number(n: Int) -> Bool {
+    let mut sum = 0
+    for i in range(1, n) {
+        if n % i == 0 {
+            sum = sum + i
+        }
+    }
+    sum == n
+}
+
+fn find_perfect_numbers() -> Vec<Int> {
+    let mut perfect_numbers = Vec()
+    for i in range(1, 1000) {
+        if is_perfect_number(i) {
+            perfect_numbers = push(perfect_numbers, i)
+        }
+    }
+    perfect_numbers
+}
+
+fn main() {
+    let perfect_numbers = find_perfect_numbers()
+    for n in perfect_numbers {
+        print(n)
+    }
+}

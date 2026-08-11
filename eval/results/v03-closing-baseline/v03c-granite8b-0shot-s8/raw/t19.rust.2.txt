@@ -1,0 +1,14 @@
+fn main() {
+    let width = 7;
+    let height = 4;
+    println!("The area is {} square pixels.", area(width, height));
+    println!("The perimeter is {} pixels.", perimeter(width, height));
+}
+
+fn area(width: u32, height: u32) -> u32 {
+    width * height
+}
+
+fn perimeter(width: u32, height: u32) -> u32 {
+    2 * (width + height)
+}

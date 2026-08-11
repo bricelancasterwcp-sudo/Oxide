@@ -1,0 +1,12 @@
+fn perfect_numbers(max: u32) -> Vec<u32> {
+    (2..max)
+        .filter(|&x| (2..(x / 2 + 1)).filter(|&y| x % y == 0).sum::<u32>() == x)
+        .collect()
+}
+
+fn main() {
+    let perfect_nums = perfect_numbers(1000);
+    for num in perfect_nums {
+        println!("{}", num);
+    }
+}

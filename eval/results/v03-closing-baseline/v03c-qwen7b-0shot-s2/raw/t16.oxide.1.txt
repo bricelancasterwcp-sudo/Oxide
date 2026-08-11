@@ -1,0 +1,24 @@
+struct Quotient { value: Int }
+
+fn divide(dividend: Int, divisor: Int) -> Option<Quotient> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(Quotient { value: dividend / divisor })
+    }
+}
+
+fn main() {
+    match divide(100, 5) {
+        Some(q) => print(q.value),
+        None => print_str("undefined"),
+    }
+    match divide(100, 0) {
+        Some(q) => print(q.value),
+        None => print_str("undefined"),
+    }
+    match divide(100, 4) {
+        Some(q) => print(q.value),
+        None => print_str("undefined"),
+    }
+}

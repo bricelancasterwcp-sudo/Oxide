@@ -1,0 +1,9 @@
+fn main() {
+    for divisor in vec(5, 0, 4) {
+        if divisor == 0 {
+            print_str("undefined\n")
+        } else {
+            print(trunc(100 / divisor), "\n")
+        }
+    }
+}

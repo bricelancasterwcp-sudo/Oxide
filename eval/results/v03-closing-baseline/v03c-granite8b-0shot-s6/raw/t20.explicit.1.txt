@@ -1,0 +1,348 @@
+fn main() {
+    let pen = pen(3, 4)
+    let pad = pad(9, 2)
+    let ink = ink(5, 3)
+    let all_items = push(push(push(vec(), pen), pad), ink)
+    let cost = sum_cost(&all_items)
+    print(cost)
+    let most_expensive = most_expensive(&all_items)
+    print_str(most_expensive)
+}
+
+fn pen(unit_price: Int, quantity: Int) -> Item {
+    Item(unit_price, quantity)
+}
+
+fn pad(unit_price: Int, quantity: Int) -> Item {
+    Item(unit_price, quantity)
+}
+
+fn ink(unit_price: Int, quantity: Int) -> Item {
+    Item(unit_price, quantity)
+}
+
+fn sum_cost(items: &Vec<Item>) -> Int {
+    let mut total = 0
+    for item in items {
+        total = total + cost(item)
+    }
+    total
+}
+
+fn cost(item: &Item) -> Int {
+    item.unit_price * item.quantity
+}
+
+fn most_expensive(items: &Vec<Item>) -> Str {
+    let mut most_expensive = "None"
+    let mut max_cost = 0
+    for item in items {
+        let current_cost = cost(item)
+        if current_cost > max_cost {
+            max_cost = current_cost
+            most_expensive = item.name
+        }
+    }
+    most_expensive
+}
+
+struct Item {
+    unit_price: Int,
+    quantity: Int,
+    name: Str,
+}
+
+fn item(unit_price: Int, quantity: Int, name: Str) -> Item {
+    Item(unit_price, quantity, name)
+}
+
+fn print(x: Int) {
+    println(format("{}", x))
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn println(s: Str) {
+    js.console.log(s)
+}
+
+fn format(s: Str, xs: Int) -> Str {
+    js.sprintf(s, xs)
+}
+
+fn vec() -> Vec<T> {
+    js.vector()
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    v.push(x)
+    v
+}
+
+fn len(v: Vec<T>) -> Int {
+    v.length
+}
+
+fn get(v: Vec<T>, i: Int) -> Option<T> {
+    if (i >= 0 && i < len(&v)) {
+        Some(v.at(i))
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.to(b - 1) {
+        v = push(v, i)
+    }
+    v
+}
+
+fn clone(x: T) -> T {
+    js.clone(x)
+}
+
+fn str_len(s: Str) -> Int {
+    s.length
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    a + b
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut v = vec()
+    for i in 0.to(str_len(&s) - 1) {
+        v = push(v, get(&s, i).unwrap())
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.toString()
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    js.parseInt(s)
+}
+
+fn to_float(n: Int) -> Float {
+    n.toFloat()
+}
+
+fn trunc(x: Float) -> Int {
+    x.toInt()
+}
+
+fn floor(x: Float) -> Int {
+    js.floor(x)
+}
+
+fn ceil(x: Float) -> Int {
+    js.ceil(x)
+}
+
+fn round(x: Float) -> Int {
+    js.round(x)
+}
+
+fn sqrt(x: Float) -> Float {
+    js.sqrt(x)
+}
+
+fn pow(x: Float, y: Float) -> Float {
+    js.pow(x, y)
+}
+
+fn log(x: Float) -> Float {
+    js.log(x)
+}
+
+fn sin(x: Float) -> Float {
+    js.sin(x)
+}
+
+fn cos(x: Float) -> Float {
+    js.cos(x)
+}
+
+fn tan(x: Float) -> Float {
+    js.tan(x)
+}
+
+fn asin(x: Float) -> Float {
+    js.asin(x)
+}
+
+fn acos(x: Float) -> Float {
+    js.acos(x)
+}
+
+fn atan(x: Float) -> Float {
+    js.atan(x)
+}
+
+fn atan2(y: Float, x: Float) -> Float {
+    js.atan2(y, x)
+}
+
+fn sinh(x: Float) -> Float {
+    js.sinh(x)
+}
+
+fn cosh(x: Float) -> Float {
+    js.cosh(x)
+}
+
+fn tanh(x: Float) -> Float {
+    js.tanh(x)
+}
+
+fn asinh(x: Float) -> Float {
+    js.asinh(x)
+}
+
+fn acosh(x: Float) -> Float {
+    js.acosh(x)
+}
+
+fn atanh(x: Float) -> Float {
+    js.atanh(x)
+}
+
+fn floor_div(a: Int, b: Int) -> Int {
+    floor(to_float(a) / to_float(b))
+}
+
+fn floor_mod(a: Int, b: Int) -> Int {
+    a - floor_div(a, b) * b
+}
+
+fn mod(a: Int, b: Int) -> Int {
+    a - trunc(to_float(a) / to_float(b)) * b
+}
+
+fn is_nan(x: Float) -> Bool {
+    js.isNaN(x)
+}
+
+fn is_infinite(x: Float) -> Bool {
+    js.isInfinite(x)
+}
+
+fn is_finite(x: Float) -> Bool {
+    js.isFinite(x)
+}
+
+fn is_nan(x: Int) -> Bool {
+    false
+}
+
+fn is_infinite(x: Int) -> Bool {
+    false
+}
+
+fn is_finite(x: Int) -> Bool {
+    true
+}
+
+fn is_nan(x: Bool) -> Bool {
+    false
+}
+
+fn is_infinite(x: Bool) -> Bool {
+    false
+}
+
+fn is_finite(x: Bool) -> Bool {
+    true
+}
+
+fn is_nan(x: Str) -> Bool {
+    false
+}
+
+fn is_infinite(x: Str) -> Bool {
+    false
+}
+
+fn is_finite(x: Str) -> Bool {
+    true
+}
+
+fn is_nan(x: Vec<T>) -> Bool {
+    false
+}
+
+fn is_infinite(x: Vec<T>) -> Bool {
+    false
+}
+
+fn is_finite(x: Vec<T>) -> Bool {
+    true
+}
+
+fn is_nan(x: Option<T>) -> Bool {
+    false
+}
+
+fn is_infinite(x: Option<T>) -> Bool {
+    false
+}
+
+fn is_finite(x: Option<T>) -> Bool {
+    true
+}
+
+fn is_nan(x: Result<T, E>) -> Bool {
+    false
+}
+
+fn is_infinite(x: Result<T, E>) -> Bool {
+    false
+}
+
+fn is_finite(x: Result<T, E>) -> Bool {
+    true
+}
+
+fn is_nan(x: T) -> Bool {
+    false
+}
+
+fn is_infinite(x: T) -> Bool {
+    false
+}
+
+fn is_finite(x: T) -> Bool {
+    true
+}
+
+fn eq(a: T, b: T) -> Bool {
+    js.equals(a, b)
+}
+
+fn ne(a: T, b: T) -> Bool {
+    !eq(a, b)
+}
+
+fn lt(a: T, b: T) -> Bool {
+    a < b
+}
+
+fn le(a: T, b: T) -> Bool {
+    a <= b
+}
+
+fn gt(a: T, b: T) -> Bool {
+    a > b
+}
+
+fn ge(a: T, b: T) -> Bool {
+    a >= b
+}
+
+fn abs(x: Int

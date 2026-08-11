@@ -1477,6 +1477,10 @@ fn to_float(x: i64) -> f64 {
 fn trunc(x: f64) -> i64 {
     x as i64
 }
+
+fn to_str(x: i64) -> String {
+    x.to_string()
+}
 ```
 
 ## 38. Test plan
@@ -2456,11 +2460,12 @@ Restrictions:
   section's rewrite is a parse-time rewrite of that surface spelling, fired
   inside `_postfix`'s call-building branch, keyed on the parsed callee being
   a bare `Var("vec")`. The receiver-form `x.vec(...)` (§53; `vec` is in the
-  parser's builtin-method name set only because that set mirrors
-  `src.sema.types.BUILTINS` mechanically) builds its flat `vec(x, ...)` Call
-  directly inside §53's own method-desugar path and is never re-entered by
-  this section's rewrite — the two Part XI rewrites are parse-time rewrites
-  of different surface spellings and deliberately do not compose. `x.vec(...)`
+  parser's builtin-method name set, which is hand-maintained in parallel
+  with `src.sema.types.BUILTINS` — `tests/test_parser.py` asserts the two
+  stay in sync) builds its flat `vec(x, ...)` Call directly inside §53's
+  own method-desugar path and is never re-entered by this section's
+  rewrite — the two Part XI rewrites are parse-time rewrites of different
+  surface spellings and deliberately do not compose. `x.vec(...)`
   therefore keeps its pre-§55 `OX0303` arity failure.
 - Synthesized nodes carry the *original* `vec(...)` call's span (mirroring
   §53's precedent of never inventing a misleading span for a generated
@@ -2588,3 +2593,95 @@ counting tool and its pinned definition are `eval/deformation.py`.
 The demand is real but small (~1.5%), so no aggregate pass-rate change is
 predicted from this section alone; see
 `docs/superpowers/specs/2026-08-09-v03-g2-field-assignment-design.md`.
+
+## 57. `to_str` — a second name for `int_to_str`
+
+`to_str: fn(Int) -> Str` (read). Identical in signature, semantics, modes
+and emitted Rust to `int_to_str` (§29), which is unchanged and remains the
+card's spelling.
+
+```
+to_str(42)        ==  int_to_str(42)      // "42"
+n.to_str()        ==  to_str(n)           // §53 receiver form, free
+to_str(trunc(x))                          // Float goes through trunc
+```
+
+**`Int` only, not `Int|Float`.** The language has no type-based
+overloading, so one name cannot accept both. `Float -> Str` composes as
+`to_str(trunc(x))` and no observed call site asked for it directly.
+
+**Codegen (amends §29's prelude).** One more prelude function, appended
+after `trunc`:
+
+```rust
+fn to_str(x: i64) -> String {
+    x.to_string()
+}
+```
+
+The prelude is emitted whole and unconditionally, so no per-builtin
+machinery changes. `BUILTIN_REF["to_str"] = (False,)` — it takes its
+argument by value, exactly as `int_to_str` does.
+
+**`to_str` is now a reserved top-level name.** Like every other entry in
+`BUILTINS` (§16, `OX0203` "duplicate top-level name (incl. clash with a
+builtin)"), a user program that writes `fn to_str(...)` is now an
+`OX0203` error where before this section it was a legal user function.
+This is a real, if small, behavioural cost of the alias and not a
+side-effect worth leaving undocumented: the corpus evidence for adding
+the name is *models defining it themselves*, so the population that
+motivated the addition is exactly the population that now collides with
+it. Measured on the closing-baseline corpus, `duplicate top-level name
+'to_str'` fires in **1 of 600** constrained oxide first attempts (0 in
+both pre-change corpora, `g0c` and `g1c`), and in 5 attempts across 2
+sessions counting all four repair attempts.
+
+**Why this exists.** In the v0.3 taxonomy (dossier 3) models were said to
+"call conversions that don't exist". Measured over the 600 constrained
+oxide first attempts of the G0 baseline, that is not what the corpus
+shows: `int_to_str` and `parse_int` both already exist AND are both
+already on the card. What models lack is the shorter *spelling*. Of the
+three names reached for, only `to_str` is a genuine conversion demand.
+
+**The three percentages below each use a different denominator**, stated
+here because none of them is reconstructable from the figure alone.
+`to_str` occurs **46 times across 9 programs**, split 21 plain calls
+`to_str(x)` / 15 `fn to_str` definitions / 10 receiver-form
+`x.to_str()`. The **85.7%** is `36/42`: the numerator is the 21 plain
+calls **together with** the 15 definitions, and the denominator is all 46
+occurrences less the 4 string-literal receivers. The definitions are
+therefore *inside* that 85.7% and must not be added on top of it — the
+share of `to_str` sites that are plain calls and nothing else is
+`21/46` = **45.7%**. It is the definitions that carry the argument in any
+case: the model writes `fn to_str` **itself 15 times across 6 programs**,
+which is a language telling you it lacks a name its users want.
+
+The other two names in that dossier were dropped on the same evidence and
+are deliberately NOT added. `to_string` is **63.9%** string-literal
+receiver (`"lit".to_string()`) — `46/72`, over receiver occurrences only,
+with its 4 plain calls and 5 definitions outside the denominator
+entirely — which is Rust's `&str -> String` and an identity function here
+because `Str` is already owned. `to_int` is **69.2%** *numeric-literal*
+receiver inside malformed `for` headers (`for i in 2.to_int().range(x)`)
+— `36/52`, again over receiver occurrences only, and after dropping the
+single degenerate 291-occurrence program that raw occurrence counting
+would otherwise let dominate. The 52 is 343 raw receiver occurrences less
+the 291 contributed by that one program (`g0c-qwen7b-0shot-s4` t01), and
+its classification sums exactly: **32 integer-literal + 4 float-literal +
+12 variable/field + 4 call-result = 52**. The derived variable-receiver
+slice — the part a real `to_int(Str) -> Option<Int>` could have served —
+is `12/52` = **23.1%**, and `parse_int` already covers it.
+
+> **Superseded figure.** This share was originally published as **70.6%
+> (`36/51`)**, and the derived slice as **23.5% (`12/51`)**. The
+> denominator was one site short; re-derivation against the committed
+> corpus gives 52, as the classification above shows. The numerator was
+> also described as *integer*-literal, but the 36 is 32 integer-literal
+> receivers **plus** 4 float-literal ones (`0.0.to_int()`,
+> `1.0.to_int()`) — *numeric*-literal is the label the arithmetic
+> supports; strictly integer-literal would be 32. Neither correction
+> changes the decision: `to_int` was not added, and would not be on
+> either set of figures.
+
+Either way `to_int` is the deferred `2.to(n)` range demand wearing a
+conversion's name, not parsing — and `parse_int` already covers parsing.

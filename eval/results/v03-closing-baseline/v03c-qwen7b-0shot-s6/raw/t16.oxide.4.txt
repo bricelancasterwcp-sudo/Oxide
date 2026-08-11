@@ -1,0 +1,10 @@
+fn main() {
+    let a = 100 / 5
+    print(a)
+    let b = 100 / 4
+    print(b)
+    let c = 100 / 0
+    match c {
+        _ => print_str("undefined"),
+    }
+}

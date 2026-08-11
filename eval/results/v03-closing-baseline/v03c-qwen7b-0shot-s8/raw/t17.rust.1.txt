@@ -1,0 +1,13 @@
+```rust
+fn main() {
+    let list = [10, 20, 30];
+    let positions = [1, 5];
+
+    for &pos in &positions {
+        match list.get(pos) {
+            Some(&value) => println!("{}", value),
+            None => println!("-1"),
+        }
+    }
+}
+```

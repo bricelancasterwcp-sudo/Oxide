@@ -1,0 +1,13 @@
+fn main() {
+    let mut list = vec![4, 1, 7, 3, 9, 2];
+    let mut count = 0;
+    for num in list.iter() {
+        if *num > 3 {
+            print!("{}\n", num);
+            count += 1;
+        } else {
+            list.retain(|x| x != &num);
+        }
+    }
+    print!("{} values were kept\n", count);
+}

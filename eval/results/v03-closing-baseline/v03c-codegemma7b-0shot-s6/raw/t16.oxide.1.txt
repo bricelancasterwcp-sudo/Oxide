@@ -1,0 +1,15 @@
+fn main() {
+    let divisor1 = 5
+    let divisor2 = 0
+    let divisor3 = 4
+    let dividend = 100
+    let quotient1 = dividend / divisor1
+    if divisor2 == 0 {
+        print_str("undefined")
+    } else {
+        let quotient2 = dividend / divisor2
+        print(quotient2)
+    }
+    let quotient3 = dividend / divisor3
+    print(quotient3)
+}

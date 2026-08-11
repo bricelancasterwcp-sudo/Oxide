@@ -1,0 +1,6 @@
+fn main() {
+    let text = "stack"
+    let chars: Vec<Str> = chars(text).collect()
+    let reversed: Vec<Str> = chars.rev().collect()
+    print_str(&reversed)
+}

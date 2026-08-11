@@ -1,0 +1,343 @@
+fn main() {
+    let nums = push(push(vec(), 5), 40)
+    let bigger = extend(clone(&nums), 70)
+    print(sum_big(&nums, 10))
+    drop nums
+    print(sum_big(&bigger, 10))
+    drop bigger
+}
+
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let mut total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn vec() -> Vec<Int> {
+    push(push(vec(), 3), 6)
+}
+
+fn print(x: Int) {
+    print_str(int_to_str(x))
+}
+
+fn print_str(s: Str) {
+    system_call_print_str(s)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    system_call_push_int(v, x)
+}
+
+fn len(v: Vec<Int>) -> Int {
+    system_call_len_vec(v)
+}
+
+fn clone(x: Int) -> Int {
+    system_call_clone_int(x)
+}
+
+fn int_to_str(n: Int) -> Str {
+    system_call_int_to_str(n)
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    system_call_parse_int(s)
+}
+
+fn system_call_print_str(s: Str) {
+    drop s
+}
+
+fn system_call_push_int(v: Vec<Int>, x: Int) -> Vec<Int> {
+    drop v
+    drop x
+    v
+}
+
+fn system_call_len_vec(v: Vec<Int>) -> Int {
+    drop v
+    0
+}
+
+fn system_call_clone_int(x: Int) -> Int {
+    drop x
+    x
+}
+
+fn system_call_int_to_str(n: Int) -> Str {
+    drop n
+    ""
+}
+
+fn system_call_parse_int(s: Str) -> Option<Int> {
+    drop s
+    None
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    drop v
+    drop i
+    None
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    drop a
+    drop b
+    vec()
+}
+
+fn to_float(x: Int) -> Float {
+    drop x
+    0.0
+}
+
+fn trunc(x: Float) -> Int {
+    drop x
+    0
+}
+
+fn parse_float(s: Str) -> Option<Float> {
+    drop s
+    None
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    drop s
+    vec()
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    drop a
+    drop b
+    ""
+}
+
+fn drop_option_int(x: Option<Int>) {
+    drop x
+}
+
+fn drop_option_str(x: Option<Str>) {
+    drop x
+}
+
+fn drop_result_int(x: Result<Int, Int>) {
+    drop x
+}
+
+fn drop_result_str(x: Result<Str, Str>) {
+    drop x
+}
+
+fn assert_eq_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn assert_eq_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn assert_eq_option_int(a: Option<Int>, b: Option<Int>) {
+    drop a
+    drop b
+}
+
+fn assert_eq_option_str(a: Option<Str>, b: Option<Str>) {
+    drop a
+    drop b
+}
+
+fn assert_eq_result_int(a: Result<Int, Int>, b: Result<Int, Int>) {
+    drop a
+    drop b
+}
+
+fn assert_eq_result_str(a: Result<Str, Str>, b: Result<Str, Str>) {
+    drop a
+    drop b
+}
+
+fn assert_eq_vec(a: Vec<Int>, b: Vec<Int>) {
+    drop a
+    drop b
+}
+
+fn assert_eq_vec_str(a: Vec<Str>, b: Vec<Str>) {
+    drop a
+    drop b
+}
+
+fn assert(b: Bool) {
+    drop b
+}
+
+fn system_call_assert_eq_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_eq_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_eq_option_int(a: Option<Int>, b: Option<Int>) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_eq_option_str(a: Option<Str>, b: Option<Str>) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_eq_result_int(a: Result<Int, Int>, b: Result<Int, Int>) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_eq_result_str(a: Result<Str, Str>, b: Result<Str, Str>) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_eq_vec(a: Vec<Int>, b: Vec<Int>) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_eq_vec_str(a: Vec<Str>, b: Vec<Str>) {
+    drop a
+    drop b
+}
+
+fn system_call_assert(b: Bool) {
+    drop b
+}
+
+fn assert_ne_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn assert_ne_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_ne_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_ne_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn assert_lt_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_lt_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn assert_le_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_le_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn assert_gt_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_gt_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn assert_ge_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_ge_int(a: Int, b: Int) {
+    drop a
+    drop b
+}
+
+fn assert_lt_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_lt_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn assert_le_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_le_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn assert_gt_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_gt_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn assert_ge_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_ge_str(a: Str, b: Str) {
+    drop a
+    drop b
+}
+
+fn assert_lt_option_int(a: Option<Int>, b: Option<Int>) {
+    drop a
+    drop b
+}
+
+fn system_call_assert_lt_option_int(a: Option<Int>, b: Option<Int>) {
+    drop a
+    drop b
+}
+
+fn assert_le_option_int(a: Option<Int>, b: Option<Int>) {
+    drop a
+    drop b
+}
+
+fn system_call_

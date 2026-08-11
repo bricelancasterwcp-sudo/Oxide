@@ -1,0 +1,20 @@
+use std::cmp::Ordering;
+
+fn main() {
+    let mut nums = vec![3, 8, -2, 12, 7];
+    let mut pos_count = 0;
+    let mut max_value = std::i32::MIN;
+
+    for num in nums.iter() {
+        if *num > 0 {
+            pos_count += 1;
+        }
+        match num.cmp(&max_value) {
+            Ordering::Greater => max_value = *num,
+            _ => (),
+        }
+    }
+
+    println!("Positive numbers: {}", pos_count);
+    println!("Largest value: {}", max_value);
+}

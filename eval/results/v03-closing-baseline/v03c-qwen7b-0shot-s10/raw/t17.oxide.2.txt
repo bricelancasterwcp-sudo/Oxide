@@ -1,0 +1,18 @@
+struct List { items: Vec<Int> }
+
+fn get_item(list: List, pos: Int) -> Option<Int> {
+    let item = get(list.items, pos)?
+    Some(item)
+}
+
+fn main() {
+    let list = List { items: vec(10, 20, 30) }
+    match get_item(list, 1) {
+        Some(item1) => print(item1),
+        None => print(-1),
+    }
+    match get_item(list, 5) {
+        Some(item5) => print(item5),
+        None => print(-1),
+    }
+}

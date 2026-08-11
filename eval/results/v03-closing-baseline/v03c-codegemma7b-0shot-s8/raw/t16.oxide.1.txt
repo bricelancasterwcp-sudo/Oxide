@@ -1,0 +1,6 @@
+fn main() {
+    let num = 100
+    print(num / 5)
+    print(num / 0)
+    print(num / 4)
+}

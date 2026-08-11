@@ -1,0 +1,24 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let found = -1
+    for x in v {
+        if x > 3 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(push(push(vec(), 4), 1), 7), 3), _push: push(push(vec(), 9), 2) }
+    let mut count = 0
+    for x in r.values {
+        if x > 3 {
+            print(x)
+            count = count + 1
+        }
+    }
+    print(count)
+}

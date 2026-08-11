@@ -1,0 +1,7 @@
+fn main() {
+    let numbers = vec(1, 2, 3, 4, 5)
+    for i in (0.to_int() + numbers.len()).to_int() - 1.to_int() {
+        print(get(numbers, i)?)
+        print_str("\n")
+    }
+}

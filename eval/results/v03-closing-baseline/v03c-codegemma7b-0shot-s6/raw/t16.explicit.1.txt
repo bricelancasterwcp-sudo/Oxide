@@ -1,0 +1,11 @@
+fn main() {
+    let divisor: Int = 5
+    let result: Int = 100 / divisor
+    print(result)
+    let divisor: Int = 0
+    let result: Int = 100 / divisor
+    print(result)
+    let divisor: Int = 4
+    let result: Int = 100 / divisor
+    print(result)
+}

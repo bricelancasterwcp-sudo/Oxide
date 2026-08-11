@@ -1,0 +1,97 @@
+struct List {
+    head: Option<Int>,
+    tail: Option<Box<List>>,
+}
+
+fn filter_gt3(l: List) -> List {
+    match l {
+        List => nullary,
+        List(h, t) => match h {
+            Some(v) => match v > 3 {
+                True => List(h, Some(Box.new(filter_gt3(t?)))),
+                False => filter_gt3(t?),
+            },
+            None => nullary,
+        },
+    }
+}
+
+fn print_list(l: List) {
+    match l {
+        List => nullary,
+        List(h, t) => match h {
+            Some(v) => {
+                print_int(v)
+                print_str("\n")
+                print_list(t?)
+            },
+            None => nullary,
+        },
+    }
+}
+
+fn count_values(l: List) -> Int {
+    match l {
+        List => 0,
+        List(h, t) => match h {
+            Some(v) => 1 + count_values(t?),
+            None => 0,
+        },
+    }
+}
+
+fn main() {
+    let l = List(Some(4), Some(Box.new(List(Some(1), Some(Box.new(List(Some(7), Some(Box.new(List()))?))))))? == List(Some(1), Some(Box.new(List(Some(7), Some(Box.new(List())))?)))? || List(Some(7), Some(Box.new(List(Some(3), Some(Box.new(List(Some(9), Some(Box.new()))?))))))? == List(Some(7), Some(Box.new(List(Some(3), Some(Box.new(List(Some(9), Some(Box.new())?))))))? || List(Some(9), Some(Box.new(List(Some(2), Some(Box.new())?))))))? == List(Some(9), Some(Box.new(List(Some(2), Some(Box.new())?))))?
+    let l2 = filter_gt3(l)
+    print_list(l2)
+    print_int(count_values(l2))
+}
+
+struct List {
+    head: Option<Int>,
+    tail: Option<Box<List>>,
+}
+
+fn filter_gt3(l: List) -> List {
+    match l {
+        List => nullary,
+        List(h, t) => match h {
+            Some(v) => match v > 3 {
+                True => List(h, Some(Box.new(filter_gt3(t?)))),
+                False => filter_gt3(t?),
+            },
+            None => nullary,
+        },
+    }
+}
+
+fn print_list(l: List) {
+    match l {
+        List => nullary,
+        List(h, t) => match h {
+            Some(v) => {
+                print_int(v)
+                print_str("\n")
+                print_list(t?)
+            },
+            None => nullary,
+        },
+    }
+}
+
+fn count_values(l: List) -> Int {
+    match l {
+        List => 0,
+        List(h, t) => match h {
+            Some(v) => 1 + count_values(t?),
+            None => 0,
+        },
+    }
+}
+
+fn main() {
+    let l = List(Some(4), Some(Box.new(List(Some(1), Some(Box.new(List(Some(7), Some(Box.new(List())?))))))? == List(Some(1), Some(Box.new(List(Some(7), Some(Box.new(List())?)))?)))? || List(Some(7), Some(Box.new(List(Some(3), Some(Box.new(List(Some(9), Some(Box.new())?))))))? == List(Some(7), Some(Box.new(List(Some(3), Some(Box.new(List(Some()))?))))))? || List(Some(9), Some(Box.new(List(Some(2), Some(Box.new())?)))))? == List(Some(9), Some(Box.new(List(Some(2), Some(Box.new())?))))?
+    let l2 = filter_gt3(l)
+    print_list(l2)
+    print_int(count_values(l2))
+}

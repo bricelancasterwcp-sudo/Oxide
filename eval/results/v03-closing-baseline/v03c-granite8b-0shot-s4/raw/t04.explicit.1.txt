@@ -1,0 +1,280 @@
+fn main() {
+    let n = 100
+    let mut i = 0
+    let mut primes = vec()
+    while i < n {
+        let is_prime = is_prime(i)
+        if is_prime {
+            primes = push(primes, i)
+        }
+        i = i + 1
+    }
+    print(primes.len())
+}
+
+fn is_prime(n: Int) -> Bool {
+    if n == 2 || n == 3 {
+        return true
+    }
+    if n < 2 || n % 2 == 0 || n % 3 == 0 {
+        return false
+    }
+    let mut i = 5
+    while i * i <= n {
+        if n % i == 0 || n % (i + 2) == 0 {
+            return false
+        }
+        i = i + 6
+    }
+    true
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut v = clone(&v)
+    v = v + 1
+    v
+}
+
+fn clone(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v
+    v = v + 1
+    v
+}
+
+fn vec() -> Vec<Int> {
+    let mut v = vec()
+    v = v + 1
+    v
+}
+
+fn print(x: Int) {
+    let x = x
+    println(x)
+}
+
+fn print_str(s: Str) {
+    let s = s
+    print(s)
+}
+
+fn println(x: Int) {
+    print_str(int_to_str(x))
+    print_str("\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = vec()
+    let mut n = n
+    let mut buf = vec()
+    while n > 0 {
+        let r = n % 10
+        buf = push(buf, 48 + r)
+        n = n / 10
+    }
+    let mut buf = reverse(buf)
+    while !buf.is_empty() {
+        s = push(s, buf.first())
+        buf = buf + 1
+    }
+    s
+}
+
+fn reverse(v: Vec<Int>) -> Vec<Int> {
+    let mut v = clone(&v)
+    let mut i = 0
+    let mut j = v.len() - 1
+    while i < j {
+        let t = v.get(i)
+        v.set(i, v.get(j))
+        v.set(j, t)
+        i = i + 1
+        j = j - 1
+    }
+    v
+}
+
+fn get(v: Vec<Int>, i: Int) -> Option<Int> {
+    if i < 0 || i >= v.len() {
+        return None
+    }
+    Some(v.get(i))
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    let mut i = a
+    while i < b {
+        v = push(v, i)
+        i = i + 1
+    }
+    v
+}
+
+fn to_float(x: Int) -> Float {
+    let x = x
+    x
+}
+
+fn trunc(x: Float) -> Int {
+    let x = x
+    x
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    let n = chars(s).len()
+    let mut i = 0
+    while i < n && s.get(i) == 48 {
+        i = i + 1
+    }
+    if i == n {
+        return None
+    }
+    let mut result = 0
+    while i < n {
+        let d = s.get(i) - 48
+        if d < 0 || d > 9 {
+            return None
+        }
+        result = result * 10 + d
+        i = i + 1
+    }
+    Some(result)
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut v = vec()
+    let n = s.len()
+    let mut i = 0
+    while i < n {
+        v = push(v, s.slice(i, i + 1))
+        i = i + 1
+    }
+    v
+}
+
+fn str_len(s: Str) -> Int {
+    s.len()
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    a + b
+}
+
+fn parse_float(s: Str) -> Option<Float> {
+    None
+}
+
+fn parse_bool(s: Str) -> Option<Bool> {
+    None
+}
+
+fn parse_str(s: Str) -> Option<Str> {
+    None
+}
+
+fn parse_vec(s: Str) -> Option<Vec<Str>> {
+    None
+}
+
+fn parse_struct(s: Str) -> Option<Vec<Str>> {
+    None
+}
+
+fn parse_enum(s: Str) -> Option<Str> {
+    None
+}
+
+fn parse_any(s: Str) -> Option<Any> {
+    None
+}
+
+fn clone_any(a: Any) -> Any {
+    a
+}
+
+fn main_parse_test() {
+    assert_parse_int("1234", 1234)
+    assert_parse_int("1234.5", None)
+    assert_parse_float("1234.5", 1234.5)
+    assert_parse_float("1234.", None)
+    assert_parse_bool("true", true)
+    assert_parse_bool("false", false)
+    assert_parse_bool("1", None)
+    assert_parse_str("\"foo\"", "foo")
+    assert_parse_str("1234", None)
+    assert_parse_vec("[1, 2, 3]", vec(1, 2, 3))
+    assert_parse_vec("[1, [2], 3]", None)
+    assert_parse_enum("Enum::Variant(1, 2.3, \"foo\")", "Enum::Variant(1, 2.3, \"foo\")")
+    assert_parse_any("[1, 2, 3]", vec(1, 2, 3))
+}
+
+fn assert_parse_int(s: Str, expected: Option<Int>) {
+    let got = parse_int(s)
+    assert(got == expected)
+}
+
+fn assert_parse_float(s: Str, expected: Option<Float>) {
+    let got = parse_float(s)
+    assert(got == expected)
+}
+
+fn assert_parse_bool(s: Str, expected: Option<Bool>) {
+    let got = parse_bool(s)
+    assert(got == expected)
+}
+
+fn assert_parse_str(s: Str, expected: Option<Str>) {
+    let got = parse_str(s)
+    assert(got == expected)
+}
+
+fn assert_parse_vec(s: Str, expected: Option<Vec<Str>>) {
+    let got = parse_vec(s)
+    assert(got == expected)
+}
+
+fn assert_parse_enum(s: Str, expected: Option<Str>) {
+    let got = parse_enum(s)
+    assert(got == expected)
+}
+
+fn assert_parse_any(s: Str, expected: Option<Any>) {
+    let got = parse_any(s)
+    assert(got == expected)
+}
+
+fn main_clone_test() {
+    assert_clone_int(1234, 1234)
+    assert_clone_float(1234.5, 1234.5)
+    assert_clone_bool(true, true)
+    assert_clone_str("foo", "foo")
+    assert_clone_vec(vec(1, 2, 3), vec(1, 2, 3))
+    assert_clone_enum("Enum::Variant(1, 2.3, \"foo\")", "Enum::Variant(1, 2.3, \"foo\")")
+}
+
+fn assert_clone_int(expected: Int, actual: Int) {
+    let got = clone_any(expected)
+    assert(got == actual)
+}
+
+fn assert_clone_float(expected: Float, actual: Float) {
+    let got = clone_any(expected)
+    assert(got == actual)
+}
+
+fn assert_clone_bool(expected: Bool, actual: Bool) {
+    let got = clone_any(expected)
+    assert(got == actual)
+}
+
+fn assert_clone_str(expected: Str, actual: Str) {
+    let got = clone_any(expected)
+    assert(got == actual)
+}
+
+fn assert_clone_vec(expected: Vec<Int>, actual: Vec<Int>) {
+    let got = clone_any(expected)
+    assert(got == actual)
+}
+
+fn assert_clone_enum(expected: Str, actual: Str) {

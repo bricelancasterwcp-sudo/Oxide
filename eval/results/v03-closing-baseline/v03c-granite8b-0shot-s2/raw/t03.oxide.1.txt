@@ -1,0 +1,12 @@
+fn main() {
+    let a = 252
+    let b = 105
+    let mut u = a
+    let mut v = b
+    while v != 0 {
+        let t = v
+        v = u % v
+        u = t
+    }
+    print(u)
+}

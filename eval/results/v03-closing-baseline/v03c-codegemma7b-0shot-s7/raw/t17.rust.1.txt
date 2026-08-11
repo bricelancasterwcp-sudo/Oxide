@@ -1,0 +1,5 @@
+fn main() {
+    let nums = vec![10, 20, 30];
+    println!("{}", nums[1]); // 20
+    println!("{}", nums[5]); // -1
+}

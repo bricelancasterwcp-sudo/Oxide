@@ -1,0 +1,82 @@
+fn main() {
+    let word = "mississippi".to_string()
+    let count = count_s(&word)
+    let distinct_count = distinct_chars(&word)
+    print(count)
+    print("\n")
+    print(distinct_count)
+}
+
+fn count_s(word: &Str) -> Int {
+    let mut count = 0
+    for c in chars(&word) {
+        if c == "s" {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct_chars(word: &Str) -> Int {
+    let mut distinct_count = 0
+    let mut chars_seen = vec()
+    for c in chars(&word) {
+        let found = get(&chars_seen, c)
+        if found == None {
+            distinct_count = distinct_count + 1
+            chars_seen = push(chars_seen, c)
+        }
+    }
+    distinct_count
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut v = vec()
+    for i in range(0, s.len()) {
+        let c = s.substr(i, 1)
+        v = push(v, c)
+    }
+    v
+}
+
+fn get(v: &Vec<Str>, x: Str) -> Option<Str> {
+    for y in &v {
+        if y == x {
+            return Some(x)
+        }
+    }
+    None
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    push(v, x)
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn print(x: Str) {
+    print_str(x)
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+fn main() {
+    let word = "mississippi".to_string()
+    let count = count_s(&word)
+    let distinct_count = distinct_chars(&word)
+    print(count)
+    print("\n")
+    print(distinct_count)
+}

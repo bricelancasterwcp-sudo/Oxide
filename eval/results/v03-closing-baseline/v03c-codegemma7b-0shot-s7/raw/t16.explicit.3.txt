@@ -1,0 +1,9 @@
+fn main() {
+    for divisor in vec(5, 0, 4) {
+        if divisor == 0 {
+            print("undefined\n")
+        } else {
+            print("quotient: {:?}\n".format(100 / divisor))
+        }
+    }
+}

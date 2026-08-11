@@ -153,3 +153,88 @@ The taxonomy (`docs/superpowers/specs/2026-08-09-v03-taxonomy.md`, dossier
 noting that `to_int`/`to_string` were dropped on measurement and why —
 recorded here so the taxonomy is not left asserting a superseded plan, in
 the same idiom as the withdrawn-claims log.
+
+---
+
+## CORRECTED 2026-08-11 — three claims in this document did not hold
+
+This document is **pre-registration** and its body above is deliberately
+left as written; the run has since happened and three of its claims are
+wrong. They are recorded here rather than edited out, in the
+withdrawn-claims idiom.
+
+**1. "The §53 receiver form `n.to_str()` comes free: the parser's
+builtin-method name set mirrors `BUILTINS` mechanically" (above, under
+*The change*) is false, and doubly so.** The parser's
+`BUILTIN_METHOD_NAMES` (`src/parser/expressions.py`) is **hand-maintained**
+in parallel with `src.sema.types.BUILTINS` — the parser must not import
+sema, which would invert the layering — and
+`tests/test_parser.py::test_parser_and_sema_builtin_sets_stay_in_sync` is
+what enforces the parallel. `n.to_str()` did **not** come free: a
+`"to_str"` line had to be added to the parser set by hand (commit
+`2c91240`), and the sync test is what caught the omission. The word
+"mechanically" is the same wording SPEC §55 was corrected to remove on
+this very branch, reintroduced here; §53 itself never claimed it.
+
+**2. The card-headroom reasoning is wrong twice, though its conclusion
+survives.** Above, under *Cards unchanged*:
+
+- "the builtin table is fenced ` ```text ` and is therefore exempt from
+  the 900-word cap (`tests/test_cards.py`)" — **false**. `word_count` in
+  that file is `len(path.read_text().split())`: it splits the whole file
+  and exempts nothing. The ` ```text ` exemption is from block
+  *validation* only (`checkable_blocks`, guarded by
+  `test_extractor_skips_text_blocks_only`) — fenced-`text` blocks are not
+  transpiled, but every word in them is still counted.
+- "the two **8.7%** apart against a 10% band" — **false**. 8.7% is
+  85/980, measured against the *explicit* card. The assertion is
+  `abs(explicit - core) <= 0.10 * core`, so the band is measured against
+  **core**: 85/895 = **9.5%** against 10%.
+- The conclusion still holds, but narrowly, not comfortably: core is
+  895 words against a strict `< 900`, so 899 is the maximum passing
+  count. A card row is ~3 words, landing at 898 — inside the cap with one
+  word to spare, not the slack the paragraph implies.
+
+**3. The pre-registered g3 endpoint in this document was silently
+replaced in the plan, and both versions were vacuous.** This document
+registered "g3: `to_str`-shaped `OX0306` → 0". The implementation plan
+(`docs/superpowers/plans/2026-08-10-v03-g3-to-str.md`) instead registered
+"g3: `to_str` unresolved plain calls → 0", measured by the new
+`eval/demand.py`, and did not disclose the substitution. Both documents
+predate the run, so nothing here is post-hoc — but the change of endpoint
+was undisclosed, and the substituted endpoint cannot fail:
+`unresolved_calls` filters on `name not in BUILTINS` against the **live**
+table, so once `to_str` is a builtin its count is 0 by construction, for
+any corpus, past or future. Measured against the pre-change corpora it
+reads 0 for `g0c` and `g1c` too. The originally registered endpoint was
+no better: `OX0306` diagnostics mentioning `to_str` number **0 in `g0c`,
+0 in `g1c`, and 0 in `v03c`** — already at its predicted value before the
+change. See the closing-baseline REPORT's endpoint 4, where the endpoint
+is scored as vacuous rather than confirmed.
+
+**4. Two residues in the site table under *What models actually reach
+for*.** That table is the only place the three denominators were ever
+stated (72 / 51 / 42); SPEC §57 and the taxonomy have since been amended
+to state them as well, because neither was reconstructable from the bare
+percentage. Re-derived from the committed corpus, two details of the
+`to_int` row do not hold: its 70.6% numerator is 32 integer-literal
+receivers **plus** 4 float-literal ones (`0.0.to_int()`, `1.0.to_int()`),
+so *numeric*-literal is the label the arithmetic supports — strictly
+integer-literal is 32, not 36; and its denominator of 51 lands on **52**
+on re-derivation (343 receiver occurrences less the degenerate program's
+291), making the share 69.2%. The full classification of those 52 sums
+exactly: 32 integer-literal + 4 float-literal + 12 variable/field + 4
+call-result.
+
+That second point propagates once. The bullet above this table derives a
+"**23.5% variable-receiver slice**" for `to_int`, which is the 12
+variable/field receivers over the same denominator — `12/51`. On the
+re-derived denominator it is `12/52` = **23.1%**. Neither this nor the
+70.6% → 69.2% shift affects what the row is used for, which is the
+conclusion that `to_int` is range sugar rather than a conversion and that
+`parse_int` already covers the slice a real conversion would serve.
+
+The `to_str` row's "**21** (+15 definitions)" column is
+accurate and is the phrasing SPEC §57 and the taxonomy have adopted: the
+15 definitions are *inside* the 85.7%, so the plain-call-only share is
+21/46 = 45.7%.

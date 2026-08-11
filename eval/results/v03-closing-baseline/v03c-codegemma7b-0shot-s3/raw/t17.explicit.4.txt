@@ -1,0 +1,13 @@
+fn lookup(v: &Vec<Int>, idx: Int) -> Int {
+    if idx >= 0 && idx < v.len() {
+        v.get(idx).unwrap_or(&v)
+    } else {
+        -1
+    }
+}
+
+fn main() {
+    let list = vec(10, 20, 30)
+    println(lookup(&list, 1))
+    println(lookup(&list, 5))
+}

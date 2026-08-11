@@ -1,0 +1,78 @@
+fn main() {
+    let rect = Rectangle { width: 7, height: 4 }
+    print(area(&rect))
+    drop rect
+    print(perimeter(&rect))
+    drop rect
+}
+
+struct Rectangle { width: Int, height: Int }
+
+fn area(rect: &Rectangle) -> Int {
+    rect.width * rect.height
+}
+
+fn perimeter(rect: &Rectangle) -> Int {
+    2 * (rect.width + rect.height)
+}
+
+fn origin() -> Point {
+    Point
+}
+
+fn move_x(p: &Point, x: Int) -> Point {
+    Point
+}
+
+struct Shape {
+    x: Int,
+    y: Int,
+    width: Int,
+    height: Int,
+}
+
+fn draw_shape(s: &Shape) {
+    draw_rect(&s)
+    draw_circle(&s)
+}
+
+fn draw_rect(r: &Rectangle) {
+    print("Drawing a rectangle")
+}
+
+fn draw_circle(c: &Circle) {
+    print("Drawing a circle")
+}
+
+struct Circle { radius: Int }
+
+fn area(c: &Circle) -> Int {
+    3 * c.radius * c.radius
+}
+
+fn perimeter(c: &Circle) -> Int {
+    2 * c.radius * 3
+}
+
+struct CircleWithOwner {
+    circle: Circle,
+    owner: String,
+}
+
+fn main() {
+    let shape = Shape { x: 1, y: 2, width: 3, height: 4 }
+    draw_shape(&shape)
+    drop shape
+}
+
+struct Book {
+    title: Str,
+    author: Str,
+    pages: Int,
+}
+
+fn main() {
+    let book = Book { title: "A Book", author: "An Author", pages: 100 }
+    print(&book)
+    drop book
+}

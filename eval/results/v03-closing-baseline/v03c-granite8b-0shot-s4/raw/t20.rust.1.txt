@@ -1,0 +1,13 @@
+fn main() {
+    let pen = (3, 4);
+    let pad = (9, 2);
+    let ink = (5, 3);
+
+    let items = [(pen, "pen"), (pad, "pad"), (ink, "ink")];
+
+    let total_cost = items.iter().map(|(cost, _)| cost).sum::<(u32, u32)>();
+    println!("total cost: {:?}", total_cost);
+
+    let (_, highest_cost_item) = items.iter().max_by_key(|(cost, _)| cost).unwrap();
+    println!("highest cost item: {}", highest_cost_item);
+}

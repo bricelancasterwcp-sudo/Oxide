@@ -1,0 +1,13 @@
+fn main() {
+    let mut sum = 0;
+    let mut failed = 0;
+    for num_str in &["12", "x", "30"] {
+        if let Ok(num) = num_str.parse::<i32>() {
+            sum += num;
+        } else {
+            failed += 1;
+        }
+    }
+    println!("Sum: {}", sum);
+    println!("Failed count: {}", failed);
+}

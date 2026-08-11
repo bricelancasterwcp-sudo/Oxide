@@ -1,0 +1,45 @@
+pub fn main() {
+    let rect = Rectangle { length: 3, width: 4 };
+    let tri = Triangle { a: 3, b: 4, c: 5 };
+    let rect1 = Rectangle { length: 2, width: 5 };
+
+    println!("{}", rect.perimeter());
+    println!("{}", tri.perimeter());
+    println!("{}", rect1.perimeter());
+}
+
+struct Rectangle {
+    length: u32,
+    width: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.length * self.width
+    }
+
+    fn can_hold(&self, other: &Self) -> bool {
+        self.length > other.length && self.width > other.width
+    }
+
+    fn perimeter(&self) -> u32 {
+        2 * (self.length + self.width)
+    }
+}
+
+struct Triangle {
+    a: u32,
+    b: u32,
+    c: u32,
+}
+
+impl Triangle {
+    fn perimeter(&self) -> u32 {
+        self.a + self.b + self.c
+    }
+
+    fn area(&self) -> u32 {
+        let s = (self.a + self.b + self.c) / 2;
+        f64::sqrt(s as f64 * (s - self.a) as f64 * (s - self.b) as f64 * (s - self.c) as f64).floor() as u32
+    }
+}

@@ -1,0 +1,8 @@
+fn main() {
+    let sum = "12\nx\n30"
+        .lines()
+        .filter_map(|s| s.parse().ok())
+        .sum::<i32>();
+    println!("sum is {}", sum);
+    println!("count of failed parses is {}", "12\nx\n30".lines().filter(|&l| l.parse::<i32>().is_err()).count());
+}

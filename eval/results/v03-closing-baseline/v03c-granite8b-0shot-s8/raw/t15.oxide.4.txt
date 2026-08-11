@@ -1,0 +1,24 @@
+struct Int {
+    value: Int,
+}
+
+fn parse_int(s: Str) -> Option<Int> {
+    Some(Int { value: 0 })
+}
+
+fn main() {
+    let sum = Int { value: 0 }
+    for s in vec() {
+        match parse_int(s) {
+            Some(n) => {
+                let new = Int { value: sum.value + n.value }
+                sum = new
+            },
+            None => {
+                print_str("bad string: ")
+                print(s)
+            },
+        }
+    }
+    print(sum)
+}

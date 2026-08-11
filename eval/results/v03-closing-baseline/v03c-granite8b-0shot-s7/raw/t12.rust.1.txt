@@ -1,0 +1,13 @@
+```rust
+fn main() {
+    let stack = "stack";
+    let mut chars = stack.chars().peekable();
+    while let Some(c) = chars.next_back() {
+        print!("{}", c);
+    }
+}
+```
+
+(Note that this prints a newline at the end, which is not part of the input string.)
+
+This solution uses the `chars()` method on the string to get an iterator over its characters. The `peekable()` method is used to create a "peekable" iterator, which allows us to look ahead one character at a time. The `next_back()` method is then used to iterate over the characters in reverse order, and the characters are printed using the `print!` macro. Finally, the `chars()` method is called again to get an iterator over the remaining characters in the original order, and the `while let` loop is used to print them out. The `main()` function is then defined to call this function.

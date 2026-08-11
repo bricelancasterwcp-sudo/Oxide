@@ -1,0 +1,372 @@
+fn area(r: Rect) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: Rect) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn main() {
+    let r = Rect { width: 7, height: 4 }
+    print(area(r))
+    print(perimeter(r))
+}
+
+struct Rect { width: Int, height: Int }
+
+struct Int { value: String }
+
+struct Float { value: String }
+
+struct Bool { value: String }
+
+struct Str { value: String }
+
+struct Unit { value: String }
+
+struct Vec { value: String }
+
+struct Option { value: String }
+
+struct Result { value: String }
+
+struct Rect { width: Int, height: Int }
+
+fn print(x: Int) {
+    print_str(x.value)
+}
+
+fn print_str(s: Str) {
+    print_str(s.value)
+}
+
+fn vec() -> Vec {
+    Vec
+}
+
+fn push(v: Vec, x: Int) -> Vec {
+    push(v, x)
+}
+
+fn len(v: Vec) -> Int {
+    len(v)
+}
+
+fn get(v: Vec, i: Int) -> Option {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec {
+    range(a, b)
+}
+
+fn clone(x: Int) -> Int {
+    clone(x)
+}
+
+fn str_len(s: Str) -> Int {
+    str_len(s)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: Str) -> Vec {
+    chars(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn parse_int(s: Str) -> Option {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+struct Int { value: String }
+
+struct Float { value: String }
+
+struct Bool { value: String }
+
+struct Str { value: String }
+
+struct Unit { value: String }
+
+struct Vec { value: String }
+
+struct Option { value: String }
+
+struct Result { value: String }
+
+struct Rect { width: Int, height: Int }
+
+fn print(x: Int) {
+    print_str(x.value)
+}
+
+fn print_str(s: Str) {
+    print_str(s.value)
+}
+
+fn vec() -> Vec {
+    Vec
+}
+
+fn push(v: Vec, x: Int) -> Vec {
+    push(v, x)
+}
+
+fn len(v: Vec) -> Int {
+    len(v)
+}
+
+fn get(v: Vec, i: Int) -> Option {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec {
+    range(a, b)
+}
+
+fn clone(x: Int) -> Int {
+    clone(x)
+}
+
+fn str_len(s: Str) -> Int {
+    str_len(s)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: Str) -> Vec {
+    chars(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn parse_int(s: Str) -> Option {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+struct Int { value: String }
+
+struct Float { value: String }
+
+struct Bool { value: String }
+
+struct Str { value: String }
+
+struct Unit { value: String }
+
+struct Vec { value: String }
+
+struct Option { value: String }
+
+struct Result { value: String }
+
+struct Rect { width: Int, height: Int }
+
+fn print(x: Int) {
+    print_str(x.value)
+}
+
+fn print_str(s: Str) {
+    print_str(s.value)
+}
+
+fn vec() -> Vec {
+    Vec
+}
+
+fn push(v: Vec, x: Int) -> Vec {
+    push(v, x)
+}
+
+fn len(v: Vec) -> Int {
+    len(v)
+}
+
+fn get(v: Vec, i: Int) -> Option {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec {
+    range(a, b)
+}
+
+fn clone(x: Int) -> Int {
+    clone(x)
+}
+
+fn str_len(s: Str) -> Int {
+    str_len(s)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: Str) -> Vec {
+    chars(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn parse_int(s: Str) -> Option {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+struct Int { value: String }
+
+struct Float { value: String }
+
+struct Bool { value: String }
+
+struct Str { value: String }
+
+struct Unit { value: String }
+
+struct Vec { value: String }
+
+struct Option { value: String }
+
+struct Result { value: String }
+
+struct Rect { width: Int, height: Int }
+
+fn print(x: Int) {
+    print_str(x.value)
+}
+
+fn print_str(s: Str) {
+    print_str(s.value)
+}
+
+fn vec() -> Vec {
+    Vec
+}
+
+fn push(v: Vec, x: Int) -> Vec {
+    push(v, x)
+}
+
+fn len(v: Vec) -> Int {
+    len(v)
+}
+
+fn get(v: Vec, i: Int) -> Option {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec {
+    range(a, b)
+}
+
+fn clone(x: Int) -> Int {
+    clone(x)
+}
+
+fn str_len(s: Str) -> Int {
+    str_len(s)
+}
+
+fn concat(a: Str, b: Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: Str) -> Vec {
+    chars(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn parse_int(s: Str) -> Option {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+struct Int { value: String }
+
+struct Float { value: String }
+
+struct Bool { value: String }
+
+struct Str { value: String }
+
+struct Unit { value: String }
+
+struct Vec { value: String }
+
+struct Option { value: String }
+
+struct Result { value: String }
+
+struct Rect { width: Int, height: Int }
+
+fn print(x: Int) {
+    print_str(x.value)
+}
+
+fn print_str(s: Str) {
+    print_str(s.value)
+}
+
+fn vec() -> Vec {
+    Vec
+}
+
+fn push(v: Vec, x: Int) -> Vec {
+    push(v, x)
+}
+
+fn len(v: Vec) -> Int {
+    len(v)
+}
+
+fn get(v: Vec, i: Int) -> Option {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec {
+    range(a

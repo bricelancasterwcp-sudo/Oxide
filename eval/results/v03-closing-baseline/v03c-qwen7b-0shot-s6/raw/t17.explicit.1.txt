@@ -1,0 +1,14 @@
+fn main() {
+    let nums = vec(10, 20, 30)
+    if letSome(x) == get(&nums, 1) {
+        print(x)
+    } else {
+        print(-1)
+    }
+    if letSome(x) == get(&nums, 5) {
+        print(x)
+    } else {
+        print(-1)
+    }
+    drop nums
+}

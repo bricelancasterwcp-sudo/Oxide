@@ -1,0 +1,370 @@
+fn main() {
+    let numbers = vec(5, 3, 8, 1, 9, 2)
+    let sorted = sort(numbers)
+    for x in sorted {
+        print(x)
+    }
+}
+
+fn sort(mutv: Vec<Int>) -> Vec<Int> {
+    for i in 0 < v.len() {
+        for j in 0 < v.len() - i - 1 {
+            if v.get(j) > v.get(j + 1) {
+                let temp = v.get(j)
+                v.set(j, v.get(j + 1))
+                v.set(j + 1, temp)
+            }
+        }
+    }
+    v
+}
+
+fn print(x: Int) {
+    print_str(x.to_string())
+}
+
+fn print_str(s: Str) {
+    println(s)
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn vec_push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn vec_len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn vec_get(v: Vec<Int>, i: Int) -> Option<Int> {
+    v.get(i)
+}
+
+fn vec_set(v: Vec<Int>, i: Int, x: Int) {
+    v.set(i, x)
+}
+
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v
+    for i in 0 < v.len() {
+        for j in 0 < v.len() - i - 1 {
+            if v.get(j) > v.get(j + 1) {
+                let temp = v.get(j)
+                v.set(j, v.get(j + 1))
+                v.set(j + 1, temp)
+            }
+        }
+    }
+    v
+}
+
+fn to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn vec_push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn vec_len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn vec_get(v: Vec<Int>, i: Int) -> Option<Int> {
+    v.get(i)
+}
+
+fn vec_set(v: Vec<Int>, i: Int, x: Int) {
+    v.set(i, x)
+}
+
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v
+    for i in 0 < v.len() {
+        for j in 0 < v.len() - i - 1 {
+            if v.get(j) > v.get(j + 1) {
+                let temp = v.get(j)
+                v.set(j, v.get(j + 1))
+                v.set(j + 1, temp)
+            }
+        }
+    }
+    v
+}
+
+fn to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn vec_push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn vec_len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn vec_get(v: Vec<Int>, i: Int) -> Option<Int> {
+    v.get(i)
+}
+
+fn vec_set(v: Vec<Int>, i: Int, x: Int) {
+    v.set(i, x)
+}
+
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v
+    for i in 0 < v.len() {
+        for j in 0 < v.len() - i - 1 {
+            if v.get(j) > v.get(j + 1) {
+                let temp = v.get(j)
+                v.set(j, v.get(j + 1))
+                v.set(j + 1, temp)
+            }
+        }
+    }
+    v
+}
+
+fn to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn vec_push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn vec_len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn vec_get(v: Vec<Int>, i: Int) -> Option<Int> {
+    v.get(i)
+}
+
+fn vec_set(v: Vec<Int>, i: Int, x: Int) {
+    v.set(i, x)
+}
+
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v
+    for i in 0 < v.len() {
+        for j in 0 < v.len() - i - 1 {
+            if v.get(j) > v.get(j + 1) {
+                let temp = v.get(j)
+                v.set(j, v.get(j + 1))
+                v.set(j + 1, temp)
+            }
+        }
+    }
+    v
+}
+
+fn to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn vec_push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn vec_len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn vec_get(v: Vec<Int>, i: Int) -> Option<Int> {
+    v.get(i)
+}
+
+fn vec_set(v: Vec<Int>, i: Int, x: Int) {
+    v.set(i, x)
+}
+
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v
+    for i in 0 < v.len() {
+        for j in 0 < v.len() - i - 1 {
+            if v.get(j) > v.get(j + 1) {
+                let temp = v.get(j)
+                v.set(j, v.get(j + 1))
+                v.set(j + 1, temp)
+            }
+        }
+    }
+    v
+}
+
+fn to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn vec_push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn vec_len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn vec_get(v: Vec<Int>, i: Int) -> Option<Int> {
+    v.get(i)
+}
+
+fn vec_set(v: Vec<Int>, i: Int, x: Int) {
+    v.set(i, x)
+}
+
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v
+    for i in 0 < v.len() {
+        for j in 0 < v.len() - i - 1 {
+            if v.get(j) > v.get(j + 1) {
+                let temp = v.get(j)
+                v.set(j, v.get(j + 1))
+                v.set(j + 1, temp)
+            }
+        }
+    }
+    v
+}
+
+fn to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn vec_push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn vec_len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn vec_get(v: Vec<Int>, i: Int) -> Option<Int> {
+    v.get(i)
+}
+
+fn vec_set(v: Vec<Int>, i: Int, x: Int) {
+    v.set(i, x)
+}
+
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v
+    for i in 0 < v.len() {
+        for j in 0 < v.len() - i - 1 {
+            if v.get(j) > v.get(j + 1) {
+                let temp = v.get(j)
+                v.set(j, v.get(j + 1))
+                v.set(j + 1, temp)
+            }
+        }
+    }
+    v
+}
+
+fn to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn vec_push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    v.push(x)
+}
+
+fn vec_len(v: Vec<Int>) -> Int {
+    v.len()
+}
+
+fn vec_get(v: Vec<Int>, i: Int) -> Option<Int> {
+    v.get(i)
+}
+
+fn vec_set(v: Vec<Int>, i: Int, x: Int) {
+    v.set(i, x)
+}
+
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    let mut v = v
+    for i in 0 < v.len() {
+        for j in 0 < v.len() - i - 1 {
+            if v.get(j) > v.get(j + 1) {
+                let temp = v.get(j)
+                v.set(j, v.get(j + 1))
+                v.set(j + 1, temp)
+            }
+        }
+    }
+    v
+}
+
+fn to_string(n: Int) -> Str {
+    n.to_string()
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn vec() -> Vec<Int> {
+    Vec()
+}
+
+fn vec

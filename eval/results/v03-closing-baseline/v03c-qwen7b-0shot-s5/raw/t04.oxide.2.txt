@@ -1,0 +1,26 @@
+fn is_prime(n: Int) -> Bool {
+    if n <= 1 {
+        return false
+    }
+    let limit = trunc(to_float(n).sqrt())
+    for i in range(2, limit + 1) {
+        if n % i == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn count_primes(limit: Int) -> Int {
+    let mut count = 0
+    for i in range(2, limit) {
+        if is_prime(i) {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn main() {
+    print(count_primes(100))
+}

@@ -1,0 +1,32 @@
+```rust
+fn main() {
+    let rect1 = Rectangle { width: 3, height: 4 };
+    let triangle = Triangle { sides: [3, 4, 5] };
+    let rect2 = Rectangle { width: 2, height: 5 };
+
+    println!("{}", rect1.perimeter());
+    println!("{}", triangle.perimeter());
+    println!("{}", rect2.perimeter());
+}
+
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn perimeter(&self) -> u32 {
+        2 * (self.width + self.height)
+    }
+}
+
+struct Triangle {
+    sides: [u32; 3],
+}
+
+impl Triangle {
+    fn perimeter(&self) -> u32 {
+        self.sides.iter().sum()
+    }
+}
+```

@@ -1,0 +1,303 @@
+fn main() {
+    let text = "mississippi"
+    let count_s = text.chars().filter(char_eq(char_of_strs_str_s())).count()
+    let distinct_chars = text.chars().collect()
+    print(count_s)
+    print_str("\n")
+    print(distinct_chars.len())
+    drop text
+}
+
+fn char_eq(a: Char) -> FnCharCharBool {
+    move || a == char_of_strs_str_s()
+}
+
+fn char_of_strs_str_s() -> Char {
+    char_of_strs_str("s")
+}
+
+fn char_of_strs_str(s: Str) -> Char {
+    s.chars().nth(0).unwrap()
+}
+
+fn collect_char_set(text: Str) -> HashSet<Char> {
+    let mut set = HashSet.new()
+    for c in text.chars() {
+        set.insert(c)
+    }
+    set
+}
+
+fn print_int(n: Int) {
+    print(n.to_string())
+}
+
+fn print_str(s: Str) {
+    print(s)
+}
+
+fn drop_text(text: Str) {
+    drop text
+}
+
+fn drop_hash_set(set: HashSet<Char>) {
+    drop set
+}
+
+fn drop_char(char: Char) {
+    drop char
+}
+
+fn drop_bool(b: Bool) {
+    drop b
+}
+
+fn drop_char_eq(char_eq: FnCharCharBool) {
+    drop char_eq
+}
+
+fn drop_char_of_strs_str(char_of_strs_str: FnStrChar) {
+    drop char_of_strs_str
+}
+
+fn drop_collect_char_set(collect_char_set: FnStrHashSetChar) {
+    drop collect_char_set
+}
+
+fn drop_print_int(print_int: FnInt) {
+    drop print_int
+}
+
+fn drop_print_str(print_str: FnStr) {
+    drop print_str
+}
+
+fn drop_drop_text(drop_text: FnStr) {
+    drop drop_text
+}
+
+fn drop_drop_hash_set(drop_hash_set: FnHashSetChar) {
+    drop drop_hash_set
+}
+
+fn drop_drop_char(drop_char: FnChar) {
+    drop drop_char
+}
+
+fn drop_drop_bool(drop_bool: FnBool) {
+    drop drop_bool
+}
+
+fn drop_drop_char_eq(drop_char_eq: FnCharCharBool) {
+    drop drop_char_eq
+}
+
+fn drop_drop_char_of_strs_str(drop_char_of_strs_str: FnStrChar) {
+    drop drop_char_of_strs_str
+}
+
+fn drop_drop_collect_char_set(drop_collect_char_set: FnStrHashSetChar) {
+    drop drop_collect_char_set
+}
+
+fn drop_drop_print_int(drop_print_int: FnInt) {
+    drop drop_print_int
+}
+
+fn drop_drop_print_str(drop_print_str: FnStr) {
+    drop drop_print_str
+}
+
+fn drop_drop_drop_text(drop_drop_text: FnStr) {
+    drop drop_drop_text
+}
+
+fn drop_drop_drop_hash_set(drop_drop_hash_set: FnHashSetChar) {
+    drop drop_drop_hash_set
+}
+
+fn drop_drop_drop_char(drop_drop_char: FnChar) {
+    drop drop_drop_char
+}
+
+fn drop_drop_drop_bool(drop_drop_bool: FnBool) {
+    drop drop_drop_bool
+}
+
+fn drop_drop_drop_char_eq(drop_drop_char_eq: FnCharCharBool) {
+    drop drop_drop_char_eq
+}
+
+fn drop_drop_drop_char_of_strs_str(drop_drop_char_of_strs_str: FnStrChar) {
+    drop drop_drop_char_of_strs_str
+}
+
+fn drop_drop_drop_collect_char_set(drop_drop_collect_char_set: FnStrHashSetChar) {
+    drop drop_drop_collect_char_set
+}
+
+fn drop_drop_drop_print_int(drop_drop_print_int: FnInt) {
+    drop drop_drop_print_int
+}
+
+fn drop_drop_drop_print_str(drop_drop_print_str: FnStr) {
+    drop drop_drop_print_str
+}
+
+fn drop_drop_drop_drop_text(drop_drop_drop_text: FnStr) {
+    drop drop_drop_drop_text
+}
+
+fn drop_drop_drop_drop_hash_set(drop_drop_drop_hash_set: FnHashSetChar) {
+    drop drop_drop_drop_hash_set
+}
+
+fn drop_drop_drop_drop_char(drop_drop_drop_char: FnChar) {
+    drop drop_drop_drop_char
+}
+
+fn drop_drop_drop_drop_bool(drop_drop_drop_bool: FnBool) {
+    drop drop_drop_drop_bool
+}
+
+fn drop_drop_drop_drop_char_eq(drop_drop_drop_char_eq: FnCharCharBool) {
+    drop drop_drop_drop_char_eq
+}
+
+fn drop_drop_drop_drop_char_of_strs_str(drop_drop_drop_char_of_strs_str: FnStrChar) {
+    drop drop_drop_drop_char_of_strs_str
+}
+
+fn drop_drop_drop_drop_collect_char_set(drop_drop_drop_collect_char_set: FnStrHashSetChar) {
+    drop drop_drop_drop_collect_char_set
+}
+
+fn drop_drop_drop_drop_print_int(drop_drop_drop_print_int: FnInt) {
+    drop drop_drop_drop_print_int
+}
+
+fn drop_drop_drop_drop_print_str(drop_drop_drop_print_str: FnStr) {
+    drop drop_drop_drop_print_str
+}
+
+fn drop_drop_drop_drop_drop_text(drop_drop_drop_drop_text: FnStr) {
+    drop drop_drop_drop_drop_text
+}
+
+fn drop_drop_drop_drop_drop_hash_set(drop_drop_drop_drop_hash_set: FnHashSetChar) {
+    drop drop_drop_drop_drop_hash_set
+}
+
+fn drop_drop_drop_drop_drop_char(drop_drop_drop_drop_char: FnChar) {
+    drop drop_drop_drop_drop_char
+}
+
+fn drop_drop_drop_drop_drop_bool(drop_drop_drop_drop_bool: FnBool) {
+    drop drop_drop_drop_drop_bool
+}
+
+fn drop_drop_drop_drop_drop_char_eq(drop_drop_drop_drop_char_eq: FnCharCharBool) {
+    drop drop_drop_drop_drop_char_eq
+}
+
+fn drop_drop_drop_drop_drop_char_of_strs_str(drop_drop_drop_drop_char_of_strs_str: FnStrChar) {
+    drop drop_drop_drop_drop_char_of_strs_str
+}
+
+fn drop_drop_drop_drop_drop_collect_char_set(drop_drop_drop_drop_collect_char_set: FnStrHashSetChar) {
+    drop drop_drop_drop_drop_collect_char_set
+}
+
+fn drop_drop_drop_drop_drop_print_int(drop_drop_drop_drop_print_int: FnInt) {
+    drop drop_drop_drop_drop_print_int
+}
+
+fn drop_drop_drop_drop_drop_print_str(drop_drop_drop_drop_print_str: FnStr) {
+    drop drop_drop_drop_drop_print_str
+}
+
+fn drop_drop_drop_drop_drop_drop_text(drop_drop_drop_drop_drop_text: FnStr) {
+    drop drop_drop_drop_drop_drop_text
+}
+
+fn drop_drop_drop_drop_drop_drop_hash_set(drop_drop_drop_drop_drop_hash_set: FnHashSetChar) {
+    drop drop_drop_drop_drop_drop_hash_set
+}
+
+fn drop_drop_drop_drop_drop_drop_char(drop_drop_drop_drop_drop_char: FnChar) {
+    drop drop_drop_drop_drop_drop_char
+}
+
+fn drop_drop_drop_drop_drop_drop_bool(drop_drop_drop_drop_drop_bool: FnBool) {
+    drop drop_drop_drop_drop_drop_bool
+}
+
+fn drop_drop_drop_drop_drop_drop_char_eq(drop_drop_drop_drop_drop_char_eq: FnCharCharBool) {
+    drop drop_drop_drop_drop_drop_char_eq
+}
+
+fn drop_drop_drop_drop_drop_drop_char_of_strs_str(drop_drop_drop_drop_drop_char_of_strs_str: FnStrChar) {
+    drop drop_drop_drop_drop_drop_char_of_strs_str
+}
+
+fn drop_drop_drop_drop_drop_drop_collect_char_set(drop_drop_drop_drop_drop_collect_char_set: FnStrHashSetChar) {
+    drop drop_drop_drop_drop_drop_collect_char_set
+}
+
+fn drop_drop_drop_drop_drop_drop_print_int(drop_drop_drop_drop_drop_drop_print_int: FnInt) {
+    drop drop_drop_drop_drop_drop_drop_print_int
+}
+
+fn drop_drop_drop_drop_drop_drop_print_str(drop_drop_drop_drop_drop_drop_print_str: FnStr) {
+    drop drop_drop_drop_drop_drop_drop_print_str
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_text(drop_drop_drop_drop_drop_drop_drop_text: FnStr) {
+    drop drop_drop_drop_drop_drop_drop_drop_text
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_hash_set(drop_drop_drop_drop_drop_drop_drop_hash_set: FnHashSetChar) {
+    drop drop_drop_drop_drop_drop_drop_drop_hash_set
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_char(drop_drop_drop_drop_drop_drop_drop_char: FnChar) {
+    drop drop_drop_drop_drop_drop_drop_drop_char
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_bool(drop_drop_drop_drop_drop_drop_drop_bool: FnBool) {
+    drop drop_drop_drop_drop_drop_drop_drop_bool
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_char_eq(drop_drop_drop_drop_drop_drop_drop_char_eq: FnCharCharBool) {
+    drop drop_drop_drop_drop_drop_drop_drop_char_eq
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_char_of_strs_str(drop_drop_drop_drop_drop_drop_drop_char_of_strs_str: FnStrChar) {
+    drop drop_drop_drop_drop_drop_drop_drop_char_of_strs_str
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_collect_char_set(drop_drop_drop_drop_drop_drop_drop_collect_char_set: FnStrHashSetChar) {
+    drop drop_drop_drop_drop_drop_drop_drop_collect_char_set
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_print_int(drop_drop_drop_drop_drop_drop_drop_print_int: FnInt) {
+    drop drop_drop_drop_drop_drop_drop_drop_print_int
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_print_str(drop_drop_drop_drop_drop_drop_drop_print_str: FnStr) {
+    drop drop_drop_drop_drop_drop_drop_drop_print_str
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_drop_text(drop_drop_drop_drop_drop_drop_drop_drop_text: FnStr) {
+    drop drop_drop_drop_drop_drop_drop_drop_drop_text
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_drop_hash_set(drop_drop_drop_drop_drop_drop_drop_drop_hash_set: FnHashSetChar) {
+    drop drop_drop_drop_drop_drop_drop_drop_drop_hash_set
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_drop_char(drop_drop_drop_drop_drop_drop_drop_drop_char: FnChar) {
+    drop drop_drop_drop_drop_drop_drop_drop_drop_char
+}
+
+fn drop_drop_drop_drop_drop_drop_drop_drop

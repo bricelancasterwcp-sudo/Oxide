@@ -1,0 +1,8 @@
+fn main() {
+    let vec = vec(10, 20, 30)
+    print(get(vec, 1).unwrap_or(-1))
+    print(match get(vec, 5) {
+            Some(x) => x,
+            None => -1,
+        })
+}

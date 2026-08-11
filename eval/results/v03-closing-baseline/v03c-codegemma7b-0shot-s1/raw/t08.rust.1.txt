@@ -1,0 +1,20 @@
+use std::collections::HashSet;
+use std::cmp::Ordering;
+
+fn main() {
+    let list = vec![3, 8, -2, 12, 7];
+    let mut positive_count = 0;
+    let mut largest = list[0];
+
+    for number in list {
+        match number.cmp(&0) {
+            Ordering::Greater => positive_count += 1,
+            Ordering::Less => (),
+            Ordering::Equal => (),
+        }
+        largest = largest.max(number);
+    }
+
+    println!("Positive count: {}", positive_count);
+    println!("Largest value: {}", largest);
+}

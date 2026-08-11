@@ -1,0 +1,10 @@
+fn divide_100(divisor: Int) -> Int {
+    let quotient = 100 / divisor
+    quotient
+}
+
+fn main() {
+    print(divide_100(5))
+    print(divide_100(0))
+    print(divide_100(4))
+}

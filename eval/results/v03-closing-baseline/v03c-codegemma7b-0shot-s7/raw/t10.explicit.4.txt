@@ -1,0 +1,11 @@
+fn main() {
+    let numbers = vec(4, 1, 7, 3, 9, 2)
+    let mut kept_count = 0
+    for num in &numbers {
+        if num > &mut && 3 {
+            print(num)
+            kept_count = kept_count + 1
+        }
+    }
+    print(kept_count)
+}

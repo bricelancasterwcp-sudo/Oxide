@@ -1,0 +1,21 @@
+fn is_prime(x: Int) -> Bool {
+    if x < 2 {
+        return false
+    }
+    for i in 2.to_int().range(x) {
+        if x % i == 0 {
+            return false
+        }
+    }
+    true
+}
+
+fn main() {
+    let mut acc = 0
+    for x in 0.to_int().range(100) {
+        if is_prime(x) {
+            acc = acc + 1
+        }
+    }
+    print(acc)
+}

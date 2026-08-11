@@ -1,0 +1,15 @@
+struct Point { x: Float, y: Float }
+
+fn perimeter(p1: Point, p2: Point, p3: Point) -> Float {
+    let d1 = ((p2.x - p1.x).to_float()).powf(2.0) + ((p2.y - p1.y).to_float()).powf(2.0)
+    let d2 = ((p3.x - p2.x).to_float()).powf(2.0) + ((p3.y - p2.y).to_float()).powf(2.0)
+    let d3 = ((p1.x - p3.x).to_float()).powf(2.0) + ((p1.y - p3.y).to_float()).powf(2.0)
+    (d1.sqrt() + d2.sqrt() + d3.sqrt()).to_float()
+}
+
+fn main() {
+    let p1 = Point { x: 0.0, y: 0.0 }
+    let p2 = Point { x: 3.0, y: 4.0 }
+    let p3 = Point { x: 8.0, y: 0.0 }
+    print(perimeter(p1, p2, p3))
+}

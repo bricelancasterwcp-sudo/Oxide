@@ -1,0 +1,10 @@
+fn read_backward(text: Str) -> Bool {
+    let reversed = str_rev(text)
+    reversed == text
+}
+
+fn main() {
+    print(read_backward("level"))
+    print(read_backward("stereo"))
+    print(read_backward("rotor"))
+}

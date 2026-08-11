@@ -1,0 +1,17 @@
+fn main() {
+    let list = [3, 8, -2, 12, 7];
+    let mut positive_count = 0;
+    let mut largest_value = i32::MIN;
+
+    for &value in &list {
+        if value > 0 {
+            positive_count += 1;
+        }
+        if value > largest_value {
+            largest_value = value;
+        }
+    }
+
+    println!("Positive values count: {}", positive_count);
+    println!("Largest value: {}", largest_value);
+}

@@ -1,0 +1,327 @@
+fn main() {
+    let mut v = vec()
+    for i in 1.step_to(8) {
+        v = push(v, 3 * i)
+    }
+    let sum = reduce(v, 0, add)
+    print(sum)
+}
+
+fn reduce(v: Vec<Int>, init: Int, op: Int, x: Int) -> Int {
+    if v.is_empty() {
+        init
+    } else {
+        op(reduce(v.tail(), init, op), v.head())
+    }
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Vec { head: Int, tail: Vec }
+
+fn vec() -> Vec {
+    Vec(0, Vec())
+}
+
+fn push(v: Vec, x: Int) -> Vec {
+    Vec(x, v)
+}
+
+fn is_empty(v: Vec) -> Bool {
+    if v.tail.is_empty() {
+        true
+    } else {
+        false
+    }
+}
+
+fn tail(v: Vec) -> Vec {
+    v.tail
+}
+
+fn head(v: Vec) -> Int {
+    v.head
+}
+
+fn step_to(v: Int, n: Int) -> Vec {
+    if v == n {
+        push(vec(), v)
+    } else {
+        push(step_to(v + 1, n), v)
+    }
+}
+
+struct Int { val: Int }
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+}
+
+fn print_str(s: Str) {
+    let s1 = s + "\n"
+    let p: Int = s1.len()
+    print_str_len(s1, 0, p)
+}
+
+fn print_str_len(s: Str, i: Int, p: Int) {
+    if i < p {
+        let c = get(chars(s), i)?
+        putchar(c)
+        print_str_len(s, i + 1, p)
+    }
+}
+
+fn str_from_int(x: Int) -> Str {
+    let n = len(str_digits(x))
+    let mut v = vec()
+    for i in 1.step_to(n) {
+        v = push(v, char_from_int(get(str_digits(x), n - i)?))
+    }
+    concat(v, " ".repeat(n - 1))
+}
+
+fn char_from_int(x: Int) -> Str {
+    let s = "0123456789"
+    get(chars(s), x)?
+}
+
+fn str_digits(x: Int) -> Vec {
+    if x < 10 {
+        vec(x)
+    } else {
+        push(str_digits(x / 10), x % 10)
+    }
+}
+
+fn len(v: Vec) -> Int {
+    if v.is_empty() {
+        0
+    } else {
+        len(v.tail) + 1
+    }
+}
+
+fn get(v: Vec, i: Int) -> Option<Int> {
+    if i == 0 {
+        Some(v.head)
+    } else {
+        get(v.tail, i - 1)
+    }
+}
+
+fn step_to(v: Int, n: Int) -> Vec {
+    if v == n {
+        push(vec(), v)
+    } else {
+        push(step_to(v + 1, n), v)
+    }
+}
+
+struct Str { val: Str }
+
+fn chars(s: Str) -> Vec {
+    let n = len(s)
+    let mut v = vec()
+    for i in 0.step_to(n) {
+        v = push(v, s.at(i))
+    }
+    v
+}
+
+fn len(s: Str) -> Int {
+    if s.is_empty() {
+        0
+    } else {
+        len(s.tail()) + 1
+    }
+}
+
+fn at(s: Str, i: Int) -> Char {
+    if i == 0 {
+        s.head
+    } else {
+        at(s.tail(), i - 1)
+    }
+}
+
+struct Char { val: Char }
+
+fn repeat(c: Char, n: Int) -> Str {
+    if n == 0 {
+        ""
+    } else {
+        c + repeat(c, n - 1)
+    }
+}
+
+fn putchar(c: Char) {
+    print_str("".push(c))
+}
+
+struct Bool { val: Bool }
+
+fn true_bool() -> Bool {
+    Bool(true)
+}
+
+struct None { val: None }
+
+fn none_option() -> Option<Int> {
+    None
+}
+
+struct Some { val: Some }
+
+fn some_option() -> Option<Int> {
+    Some(42)
+}
+
+struct Ok { val: Ok }
+
+fn ok_result() -> Result<Int, Str> {
+    Ok(42)
+}
+
+struct Err { val: Err }
+
+fn err_result() -> Result<Int, Str> {
+    Err("oops")
+}
+
+struct Unit { val: Unit }
+
+fn unit() -> Unit {
+    Unit()
+}
+
+fn if_expr(c: Bool, t: Int, e: Int) -> Int {
+    if c {
+        t
+    } else {
+        e
+    }
+}
+
+fn match_expr(e: Int, p1: Int, p2: Int) -> Int {
+    match e {
+        Pattern(p1) => p1,
+        Pattern(p2) => p2,
+        _ => 0,
+    }
+}
+
+struct Pattern { val: Pattern }
+
+struct Some { val: Some }
+
+fn some(x: Int) -> Option<Int> {
+    Some(x)
+}
+
+fn question_mark(e: Option<Int>) -> Int {
+    match e {
+        Some(x) => x,
+        None => 0,
+    }
+}
+
+fn let_stmt(x: Int) -> Int {
+    let x = x + 1
+    x + 1
+}
+
+fn assign_stmt(x: Int) -> Int {
+    x = x + 1
+    x + 1
+}
+
+struct Vec { val: Vec }
+
+fn vec() -> Vec {
+    Vec()
+}
+
+fn push(v: Vec, x: Int) -> Vec {
+    Vec()
+}
+
+struct Int { val: Int }
+
+fn print(x: Int) {
+    print_str(str_from_int(x))
+}
+
+fn print_str(s: Str) {
+    let s1 = s + "\n"
+    let p: Int = s1.len()
+    print_str_len(s1, 0, p)
+}
+
+fn print_str_len(s: Str, i: Int, p: Int) {
+    if i < p {
+        let c = get(chars(s), i)?
+        putchar(c)
+        print_str_len(s, i + 1, p)
+    }
+}
+
+fn str_from_int(x: Int) -> Str {
+    let n = len(str_digits(x))
+    let mut v = vec()
+    for i in 1.step_to(n) {
+        v = push(v, char_from_int(get(str_digits(x), n - i)?))
+    }
+    concat(v, " ".repeat(n - 1))
+}
+
+fn char_from_int(x: Int) -> Str {
+    let s = "0123456789"
+    get(chars(s), x)?
+}
+
+fn str_digits(x: Int) -> Vec {
+    if x < 10 {
+        vec(x)
+    } else {
+        push(str_digits(x / 10), x % 10)
+    }
+}
+
+fn len(v: Vec) -> Int {
+    if v.is_empty() {
+        0
+    } else {
+        len(v.tail) + 1
+    }
+}
+
+fn get(v: Vec, i: Int) -> Option<Int> {
+    if i == 0 {
+        Some(v.head)
+    } else {
+        get(v.tail, i - 1)
+    }
+}
+
+struct Str { val: Str }
+
+fn chars(s: Str) -> Vec {
+    let n = len(s)
+    let mut v = vec()
+    for i in 0.step_to(n) {
+        v = push(v, s.at(i))
+    }
+    v
+}
+
+fn len(s: Str) -> Int {
+    if s.is_empty() {
+        0
+    } else {
+        len(s.tail()) + 1
+    }
+}
+
+fn at(s: Str, i: Int)

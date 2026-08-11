@@ -1,0 +1,51 @@
+fn sort(v: &Vec<Int>) -> Vec<Int> {
+    let mut sorted = v.clone()
+    while letSome(i, min) == find_min(&sorted) {
+        sorted = remove(&sorted, i)
+        sorted = insert(&sorted, 0, min)
+    }
+    sorted
+}
+
+fn find_min(v: &Vec<Int>) -> Option<Int> {
+    let mut min = None
+    for x in v {
+        match min {
+            None => min == Some(x),
+            Some(m) => min == Some(x.min(m)),
+        }
+    }
+    min
+}
+
+fn remove(v: &Vec<Int>, i: Int) -> Vec<Int> {
+    let mut result = Vec()
+    for j in 0.range(v.len()) {
+        if j != i {
+            result = push(result, v.get(j).unwrap())
+        }
+    }
+    result
+}
+
+fn insert(v: &Vec<Int>, i: Int, x: Int) -> Vec<Int> {
+    let mut result = Vec()
+    for j in 0.range(v.len()) {
+        if j == i {
+            result = push(result, x)
+        }
+        result = push(result, v.get(j).unwrap())
+    }
+    result
+}
+
+fn main() {
+    let nums = vec(5, 3, 8, 1, 9, 2)
+    let sorted = sort(&nums)
+    for x in &sorted {
+        print_str(x)
+        print_str("\n")
+    }
+    drop nums
+    drop sorted
+}

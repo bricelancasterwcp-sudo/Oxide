@@ -1,0 +1,9 @@
+fn main() {
+    print(100 / 5)
+    if 0 == 0 {
+        print("undefined")
+    } else {
+        print(100 / 0)
+    }
+    print(100 / 4)
+}

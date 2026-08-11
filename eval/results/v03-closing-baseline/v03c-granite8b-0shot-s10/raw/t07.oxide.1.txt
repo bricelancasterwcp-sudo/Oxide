@@ -1,0 +1,330 @@
+struct Multiples {
+    idx: Int,
+    mult: Int,
+}
+
+fn main() {
+    let sum = sum_first_n(Multiples { idx: 1, mult: 3 }, 8)
+    print(sum)
+}
+
+fn sum_first_n(mutMultiples: Multiples, n: Int) -> Int {
+    let mut sum = 0
+    for _ in range(0, n) {
+        let m = get(mutMultiples.idx)?
+        sum = sum + m
+        mutMultiples.idx = mutMultiples.idx + 1
+        mutMultiples.mult = 3
+    }
+    sum
+}
+
+fn get(idx: Int) -> Option<Int> {
+    if idx == 1 {
+        Some(3)
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.to(b) {
+        v = push(v, i)
+    }
+    v
+}
+
+fn vec() -> Vec<T> {
+    vec()
+}
+
+fn push(mutVec: Vec<T>, x: T) -> Vec<T> {
+    mutVec
+}
+
+fn len(v: Vec<T>) -> Int {
+    len(v)
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn print(x: T) {
+    print(x)
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn main() {
+    let multiples = Multiples { idx: 1, mult: 3 }
+    let first_8 = first_n_multiples(multiples, 8)
+    let sum = sum_multiples(first_8)
+    print(sum)
+}
+
+fn first_n_multiples(mutMultiples: Multiples, n: Int) -> Vec<Int> {
+    let mut v = vec()
+    for _ in range(0, n) {
+        let m = get(mutMultiples.idx)?
+        v = push(v, m)
+        mutMultiples.idx = mutMultiples.idx + 1
+        mutMultiples.mult = 3
+    }
+    v
+}
+
+fn sum_multiples(multiples: Vec<Int>) -> Int {
+    let mut sum = 0
+    for m in multiples {
+        sum = sum + m
+    }
+    sum
+}
+
+fn get(idx: Int) -> Option<Int> {
+    if idx == 1 {
+        Some(3)
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.to(b) {
+        v = push(v, i)
+    }
+    v
+}
+
+fn vec() -> Vec<T> {
+    vec()
+}
+
+fn push(mutVec: Vec<T>, x: T) -> Vec<T> {
+    mutVec
+}
+
+fn len(v: Vec<T>) -> Int {
+    len(v)
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn print(x: T) {
+    print(x)
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn main() {
+    let multiples = Multiples { idx: 1, mult: 3 }
+    let first_8 = first_n_multiples(multiples, 8)
+    let sum = sum_multiples(first_8)
+    print(sum)
+}
+
+fn first_n_multiples(mutMultiples: Multiples, n: Int) -> Vec<Int> {
+    let mut v = vec()
+    for _ in range(0, n) {
+        let m = get(mutMultiples.idx)?
+        v = push(v, m)
+        mutMultiples.idx = mutMultiples.idx + 1
+        mutMultiples.mult = 3
+    }
+    v
+}
+
+fn sum_multiples(multiples: Vec<Int>) -> Int {
+    let mut sum = 0
+    for m in multiples {
+        sum = sum + m
+    }
+    sum
+}
+
+fn get(idx: Int) -> Option<Int> {
+    if idx == 1 {
+        Some(3)
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.to(b) {
+        v = push(v, i)
+    }
+    v
+}
+
+fn vec() -> Vec<T> {
+    vec()
+}
+
+fn push(mutVec: Vec<T>, x: T) -> Vec<T> {
+    mutVec
+}
+
+fn len(v: Vec<T>) -> Int {
+    len(v)
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn print(x: T) {
+    print(x)
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn main() {
+    let multiples = Multiples { idx: 1, mult: 3 }
+    let first_8 = first_n_multiples(multiples, 8)
+    let sum = sum_multiples(first_8)
+    print(sum)
+}
+
+fn first_n_multiples(mutMultiples: Multiples, n: Int) -> Vec<Int> {
+    let mut v = vec()
+    for _ in range(0, n) {
+        let m = get(mutMultiples.idx)?
+        v = push(v, m)
+        mutMultiples.idx = mutMultiples.idx + 1
+        mutMultiples.mult = 3
+    }
+    v
+}
+
+fn sum_multiples(multiples: Vec<Int>) -> Int {
+    let mut sum = 0
+    for m in multiples {
+        sum = sum + m
+    }
+    sum
+}
+
+fn get(idx: Int) -> Option<Int> {
+    if idx == 1 {
+        Some(3)
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.to(b) {
+        v = push(v, i)
+    }
+    v
+}
+
+fn vec() -> Vec<T> {
+    vec()
+}
+
+fn push(mutVec: Vec<T>, x: T) -> Vec<T> {
+    mutVec
+}
+
+fn len(v: Vec<T>) -> Int {
+    len(v)
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn print(x: T) {
+    print(x)
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn main() {
+    let multiples = Multiples { idx: 1, mult: 3 }
+    let first_8 = first_n_multiples(multiples, 8)
+    let sum = sum_multiples(first_8)
+    print(sum)
+}
+
+fn first_n_multiples(mutMultiples: Multiples, n: Int) -> Vec<Int> {
+    let mut v = vec()
+    for _ in range(0, n) {
+        let m = get(mutMultiples.idx)?
+        v = push(v, m)
+        mutMultiples.idx = mutMultiples.idx + 1
+        mutMultiples.mult = 3
+    }
+    v
+}
+
+fn sum_multiples(multiples: Vec<Int>) -> Int {
+    let mut sum = 0
+    for m in multiples {
+        sum = sum + m
+    }
+    sum
+}
+
+fn get(idx: Int) -> Option<Int> {
+    if idx == 1 {
+        Some(3)
+    } else {
+        None
+    }
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.to(b) {
+        v = push(v, i)
+    }
+    v
+}
+
+fn vec() -> Vec<T> {
+    vec()
+}
+
+fn push(mutVec: Vec<T>, x: T) -> Vec<T> {
+    mutVec
+}
+
+fn len(v: Vec<T>) -> Int {
+    len(v)
+}
+
+fn clone(x: T) -> T {
+    x
+}
+
+fn print(x: T) {
+    print(x)
+}
+
+fn print_str(s: Str) {
+    print_str(s)
+}
+
+fn main() {
+    let multiples = Multiples { idx: 1, mult: 3 }
+    let first_8 = first_n_multiples(multiples, 8)
+    let sum = sum_multiples(first_8)
+   

@@ -1,0 +1,12 @@
+```rust
+const L: [i32; 3] = [10, 20, 30];
+
+fn main() {
+    println!("{}", L.get(1).unwrap_or(&-1));
+    println!("{}", L.get(5).unwrap_or(&-1));
+}
+```
+
+This program defines a constant array `L` with three elements: 10, 20, and 30. The `main` function then uses the `get` method of the array to retrieve the elements at positions 1 and 5. If the position is within the array bounds, the corresponding element is printed. Otherwise, the function prints -1.
+
+Note that the `unwrap_or` method is used to provide a default value (-1) in case the element at the given position is not found. This ensures that the program does not panic in case of an invalid index.

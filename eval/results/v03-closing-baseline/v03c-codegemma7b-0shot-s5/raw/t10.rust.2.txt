@@ -1,0 +1,13 @@
+fn main() {
+    let mut list = vec![4, 1, 7, 3, 9, 2];
+    let mut kept = 0;
+
+    for num in &list {
+        if *num > 3 {
+            println!("{}", num);
+            kept += 1;
+        }
+    }
+
+    println!("{} values kept", kept);
+}

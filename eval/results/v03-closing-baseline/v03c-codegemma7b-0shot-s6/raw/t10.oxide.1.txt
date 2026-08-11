@@ -1,0 +1,11 @@
+fn main() {
+    let mut list = vec(4, 1, 7, 3, 9, 2)
+    let mut n = 0
+    for x in list.iter() {
+        if x > 3 {
+            print("{}\n", x)
+            n = n + 1
+        }
+    }
+    print("{}", n)
+}

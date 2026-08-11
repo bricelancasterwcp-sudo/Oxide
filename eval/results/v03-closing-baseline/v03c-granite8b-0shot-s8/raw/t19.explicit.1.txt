@@ -1,0 +1,288 @@
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print(area(&r))
+    print(perimeter(&r))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(r: &Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: &Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn print(n: Int) {
+    println(int_to_str(n))
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = "0123456789".to_string()
+    let mut n = n
+    for i in (0.to(10)).rev() {
+        let d = n % 10
+        s = replace_range(s, 1 + i, 1 + i, d.to_string())
+        n = n / 10
+    }
+    s
+}
+
+fn replace_range(s: Str, start: Int, end: Int, r: Str) -> Str {
+    let mut s = s
+    let prefix = s.get(0, start)
+    let suffix = s.get(end, s.len())
+    prefix + r + suffix
+}
+
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print(area(&r))
+    print(perimeter(&r))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(r: &Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: &Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn print(n: Int) {
+    println(int_to_str(n))
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = "0123456789".to_string()
+    let mut n = n
+    for i in (0.to(10)).rev() {
+        let d = n % 10
+        s = replace_range(s, 1 + i, 1 + i, d.to_string())
+        n = n / 10
+    }
+    s
+}
+
+fn replace_range(s: Str, start: Int, end: Int, r: Str) -> Str {
+    let mut s = s
+    let prefix = s.get(0, start)
+    let suffix = s.get(end, s.len())
+    prefix + r + suffix
+}
+
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print(area(&r))
+    print(perimeter(&r))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(r: &Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: &Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn print(n: Int) {
+    println(int_to_str(n))
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = "0123456789".to_string()
+    let mut n = n
+    for i in (0.to(10)).rev() {
+        let d = n % 10
+        s = replace_range(s, 1 + i, 1 + i, d.to_string())
+        n = n / 10
+    }
+    s
+}
+
+fn replace_range(s: Str, start: Int, end: Int, r: Str) -> Str {
+    let mut s = s
+    let prefix = s.get(0, start)
+    let suffix = s.get(end, s.len())
+    prefix + r + suffix
+}
+
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print(area(&r))
+    print(perimeter(&r))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(r: &Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: &Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn print(n: Int) {
+    println(int_to_str(n))
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = "0123456789".to_string()
+    let mut n = n
+    for i in (0.to(10)).rev() {
+        let d = n % 10
+        s = replace_range(s, 1 + i, 1 + i, d.to_string())
+        n = n / 10
+    }
+    s
+}
+
+fn replace_range(s: Str, start: Int, end: Int, r: Str) -> Str {
+    let mut s = s
+    let prefix = s.get(0, start)
+    let suffix = s.get(end, s.len())
+    prefix + r + suffix
+}
+
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print(area(&r))
+    print(perimeter(&r))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(r: &Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: &Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn print(n: Int) {
+    println(int_to_str(n))
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = "0123456789".to_string()
+    let mut n = n
+    for i in (0.to(10)).rev() {
+        let d = n % 10
+        s = replace_range(s, 1 + i, 1 + i, d.to_string())
+        n = n / 10
+    }
+    s
+}
+
+fn replace_range(s: Str, start: Int, end: Int, r: Str) -> Str {
+    let mut s = s
+    let prefix = s.get(0, start)
+    let suffix = s.get(end, s.len())
+    prefix + r + suffix
+}
+
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print(area(&r))
+    print(perimeter(&r))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(r: &Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: &Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn print(n: Int) {
+    println(int_to_str(n))
+}
+
+fn println(s: Str) {
+    print_str(s + "\n")
+}
+
+fn int_to_str(n: Int) -> Str {
+    let mut s = "0123456789".to_string()
+    let mut n = n
+    for i in (0.to(10)).rev() {
+        let d = n % 10
+        s = replace_range(s, 1 + i, 1 + i, d.to_string())
+        n = n / 10
+    }
+    s
+}
+
+fn replace_range(s: Str, start: Int, end: Int, r: Str) -> Str {
+    let mut s = s
+    let prefix = s.get(0, start)
+    let suffix = s.get(end, s.len())
+    prefix + r + suffix
+}
+
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print(area(&r))
+    print(perimeter(&r))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(r: &Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: &Rectangle) -> Int {
+    2 * (r.width + r.height)
+}

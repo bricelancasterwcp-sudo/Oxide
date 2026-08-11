@@ -1,0 +1,14 @@
+fn main() {
+    let num = 100
+    print(num / 5)
+    if num == 0 {
+        print_str("undefined")
+    } else {
+        print(num / 4)
+    }
+    if num == 0 {
+        print_str("undefined")
+    } else {
+        print(num / 0)
+    }
+}

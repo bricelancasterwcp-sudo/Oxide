@@ -1,0 +1,389 @@
+fn area_rect(a: Int, b: Int) -> Int {
+    a * b
+}
+
+fn area_tri(a: Int, b: Int, c: Int) -> Int {
+    let s = (a + b + c) / 2
+    (s * (s - a) * (s - b) * (s - c)).trunc(0)
+}
+
+fn main() {
+    enum_shape(vec(Shape(Rect(3, 4)), Shape(Tri(3, 4, 5)), Shape(Rect(2, 5))))
+}
+
+fn enum_shape(shapes: Vec<Shape>) {
+    for s in shapes {
+        match s {
+            Shape(rect) => print(area_rect(rect.a, rect.b)),
+            Shape(tri) => print(area_tri(tri.a, tri.b, tri.c)),
+        }
+    }
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),
+    Tri(Int, Int, Int),
+}
+
+enum Shape {
+    Rect(Int, Int),

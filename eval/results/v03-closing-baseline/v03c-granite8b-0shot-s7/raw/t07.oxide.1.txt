@@ -1,0 +1,308 @@
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    print(match first_big(v) {
+            Some(n) => n + 2,
+            None => -1,
+        })
+}
+
+fn first_big(v: Vec<Int>) -> Option<Int> {
+    let mut found = None
+    for x in v {
+        if x > 10 {
+            found = Some(x)
+            break
+        }
+    }
+    found
+}
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6), 9)
+    let mut sum = Sum { sum: 0 }
+    for x in v {
+        sum.sum = add(sum.sum, x)
+    }
+    print(sum.sum)
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+struct Sum { sum: Int }
+
+fn main() {
+    let v = push(push(push(vec(), 3), 6),

@@ -1,0 +1,25 @@
+fn sort(v: Vec<Int>) -> Vec<Int> {
+    for i in 0.range(v.len()) {
+        for j in (i + 1).range(v.len()) {
+            if get(v, i) > get(v, j) {
+                let temp = get(v, i).unwrap()
+                let val_j = get(v, j).unwrap()
+                drop temp
+                drop val_j
+                set(v, i, val_j)
+                set(v, j, temp)
+            }
+        }
+    }
+    v
+}
+
+fn main() {
+    let nums = vec(5, 3, 8, 1, 9, 2)
+    let sorted = sort(clone(&nums))
+    for x in &sorted {
+        print_str(&x)
+    }
+    drop nums
+    drop sorted
+}

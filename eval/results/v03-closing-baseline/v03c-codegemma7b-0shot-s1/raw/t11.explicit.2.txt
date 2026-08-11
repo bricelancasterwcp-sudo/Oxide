@@ -1,0 +1,20 @@
+fn sort(list: &Vec<Int>) -> Vec<Int> {
+    let mut result = list.clone()
+    let mut i = 0
+    while i < result.len() - 1 {
+        let j = i + 1
+        if result.get(i).unwrap() > result.get(j).unwrap() {
+            result.swap(i, j)
+        }
+        i = j
+    }
+    result
+}
+
+fn main() {
+    let list = vec(5, 3, 8, 1, 9, 2)
+    for x in &sort_vec {
+        print(x)
+    }
+    drop list
+}

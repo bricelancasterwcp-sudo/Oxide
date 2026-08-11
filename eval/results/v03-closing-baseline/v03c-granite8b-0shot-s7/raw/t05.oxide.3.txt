@@ -1,0 +1,20 @@
+struct Nat {
+    head: Int,
+    tail: Vec<Nat>,
+}
+
+fn add(x: Nat, y: Nat) -> Nat {
+    match (x.tail.len() - y.tail.len()).signum() {
+        _ => Nat { head: x.head + y.head, tail: vec() },
+    }
+}
+
+fn main() {
+    let one = Nat { head: 1, tail: vec() }
+    let two = Nat { head: 1, tail: push(vec(), one) }
+    let three = Nat { head: 1, tail: push(vec(), two) }
+    print(two.head + two.tail.len())
+    print(three.head + three.tail.len())
+    let ten = add(three, three)
+    print(ten.head + ten.tail.len())
+}

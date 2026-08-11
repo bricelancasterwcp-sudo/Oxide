@@ -1,0 +1,56 @@
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        ShapeKind1(rectangle) => 2 * (rectangle.width + rectangle.height),
+        ShapeKind2(triangle) => triangle.a + triangle.b + triangle.c,
+    }
+}
+
+fn main() {
+    let rect1 = ShapeKind1(Rectangle { width: 3, height: 4 })
+    let tri = ShapeKind2(Triangle { a: 3, b: 4, c: 5 })
+    let rect2 = ShapeKind1(Rectangle { width: 2, height: 5 })
+    print(perimeter(&rect1))
+    print(perimeter(&tri))
+    print(perimeter(&rect2))
+}
+
+enum ShapeKind1 {
+    Rectangle(Rectangle),
+}
+
+enum ShapeKind2 {
+    Triangle(Triangle),
+}
+
+enum Shape {
+    ShapeKind1(ShapeKind1),
+    ShapeKind2(ShapeKind2),
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn print(x: Int) {
+    println(x)
+}
+
+fn print_str(s: &Str) {
+    println(s)
+}
+
+fn main() {
+    let rect1 = ShapeKind1(Rectangle { width: 3, height: 4 })
+    let tri = ShapeKind2(Triangle { a: 3, b: 4, c: 5 })
+    let rect2 = ShapeKind1(Rectangle { width: 2, height: 5 })
+    print(perimeter(&rect1))
+    print(perimeter(&tri))
+    print(perimeter(&rect2))
+}

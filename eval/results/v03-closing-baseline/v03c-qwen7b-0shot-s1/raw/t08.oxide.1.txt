@@ -1,0 +1,30 @@
+fn count_positive(v: Vec<Int>) -> Int {
+    let mut count = 0
+    for x in v {
+        if x > 0 {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn max_value(v: Vec<Int>) -> Int {
+    let mut max = -1000000000
+    for x in v {
+        if x > max {
+            max = x
+        }
+    }
+    max
+}
+
+fn main() {
+    let v = vec(3, 8, -2, 12, 7)
+    let pos_count = count_positive(v.clone())
+    let max_val = max_value(v.clone())
+    print_str("Positive count: ")
+    print(pos_count)
+    print_str("\n")
+    print_str("Max value: ")
+    print(max_val)
+}

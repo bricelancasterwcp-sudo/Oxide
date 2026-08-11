@@ -1,0 +1,402 @@
+struct Division { dividend: Int, divisor: Int }
+
+fn main() {
+    let nums = vec(5, 0, 4)
+    for n in nums {
+        let div = Division { dividend: 100, divisor: n }
+        match div.divisor {
+            Divisor(_div) => print(divide(dividend, divisor)),
+            None => print_str("undefined"),
+        }
+    }
+}
+
+fn divide(dividend: Int, divisor: Int) -> Int {
+    if divisor == 0 {
+        -1
+    } else {
+        dividend / divisor
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend / divisor)
+    }
+}
+
+fn div(dividend: Int, divisor: Int) -> Option<Int> {
+    if divisor == 0 {
+        None
+    } else {
+        Some(dividend /

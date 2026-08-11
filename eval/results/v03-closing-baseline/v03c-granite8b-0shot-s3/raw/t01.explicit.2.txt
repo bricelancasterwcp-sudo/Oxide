@@ -1,0 +1,269 @@
+fn main() {
+    let nums = push(push(vec(), 5), 40)
+    let bigger = extend(clone(&nums), 70)
+    print(sum_big(&nums, 10))
+    drop nums
+    print(sum_big(&bigger, 10))
+    drop bigger
+}
+
+fn sum_big(v: &Vec<Int>, limit: Int) -> Int {
+    let total = 0
+    for x in &v {
+        if x > limit {
+            total = total + x
+        }
+    }
+    total * total
+}
+
+fn extend(v: Vec<Int>, x: Int) -> Vec<Int> {
+    push(v, x)
+}
+
+fn clone(x: &T) -> T {
+    x
+}
+
+fn vec() -> Vec<T> {
+    vec()
+}
+
+fn push(v: Vec<T>, x: T) -> Vec<T> {
+    push(v, x)
+}
+
+fn print(x: &T) {
+    print(x)
+}
+
+fn len(v: &Vec<T>) -> Int {
+    len(v)
+}
+
+fn get(v: &Vec<T>, i: Int) -> Option<T> {
+    get(v, i)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    range(a, b)
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    concat(a, b)
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    chars(s)
+}
+
+fn int_to_str(n: Int) -> Str {
+    int_to_str(n)
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    parse_int(s)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn trunc(x: Float) -> Int {
+    trunc(x)
+}
+
+fn print_str(s: &Str) {
+    print_str(s)
+}
+
+fn drop_str(s: &Str) {
+    drop_str(s)
+}
+
+fn drop_int(n: &Int) {
+    drop_int(n)
+}
+
+fn drop_float(f: &Float) {
+    drop_float(f)
+}
+
+fn drop_vec(v: &Vec<T>) {
+    drop_vec(v)
+}
+
+fn drop_option(o: &Option<T>) {
+    drop_option(o)
+}
+
+fn drop_result(r: &Result<T, E>) {
+    drop_result(r)
+}
+
+fn drop_any(a: &T) {
+    drop_any(a)
+}
+
+fn drop_user_struct(s: &UserStruct) {
+    drop_user_struct(s)
+}
+
+fn drop_user_enum(e: &UserEnum) {
+    drop_user_enum(e)
+}
+
+fn get_user_struct_field_0(s: &UserStruct) -> T1 {
+    get_user_struct_field_0(s)
+}
+
+fn get_user_struct_field_1(s: &UserStruct) -> T2 {
+    get_user_struct_field_1(s)
+}
+
+fn get_user_enum_field_0(e: &UserEnum) -> T1 {
+    get_user_enum_field_0(e)
+}
+
+fn get_user_enum_field_1(e: &UserEnum) -> T2 {
+    get_user_enum_field_1(e)
+}
+
+fn clone_user_struct(s: &UserStruct) -> UserStruct {
+    clone_user_struct(s)
+}
+
+fn clone_user_enum(e: &UserEnum) -> UserEnum {
+    clone_user_enum(e)
+}
+
+fn print_user_struct(s: &UserStruct) {
+    print_user_struct(s)
+}
+
+fn print_user_enum(e: &UserEnum) {
+    print_user_enum(e)
+}
+
+fn parse_user_struct(s: &Str) -> Option<UserStruct> {
+    parse_user_struct(s)
+}
+
+fn parse_user_enum(s: &Str) -> Option<UserEnum> {
+    parse_user_enum(s)
+}
+
+fn int_to_user_struct(n: Int) -> UserStruct {
+    int_to_user_struct(n)
+}
+
+fn int_to_user_enum(n: Int) -> UserEnum {
+    int_to_user_enum(n)
+}
+
+fn to_float_user_struct(s: UserStruct) -> Float {
+    to_float_user_struct(s)
+}
+
+fn to_float_user_enum(e: UserEnum) -> Float {
+    to_float_user_enum(e)
+}
+
+fn trunc_user_struct(s: UserStruct) -> Int {
+    trunc_user_struct(s)
+}
+
+fn trunc_user_enum(e: UserEnum) -> Int {
+    trunc_user_enum(e)
+}
+
+fn eq_user_struct(s1: &UserStruct, s2: &UserStruct) -> Bool {
+    eq_user_struct(s1, s2)
+}
+
+fn eq_user_enum(e1: &UserEnum, e2: &UserEnum) -> Bool {
+    eq_user_enum(e1, e2)
+}
+
+fn drop_user_struct_ref(s: &UserStruct) {
+    drop_user_struct_ref(s)
+}
+
+fn drop_user_enum_ref(e: &UserEnum) {
+    drop_user_enum_ref(e)
+}
+
+fn get_user_struct_field_0_ref(s: &UserStruct) -> T1 {
+    get_user_struct_field_0_ref(s)
+}
+
+fn get_user_struct_field_1_ref(s: &UserStruct) -> T2 {
+    get_user_struct_field_1_ref(s)
+}
+
+fn get_user_enum_field_0_ref(e: &UserEnum) -> T1 {
+    get_user_enum_field_0_ref(e)
+}
+
+fn get_user_enum_field_1_ref(e: &UserEnum) -> T2 {
+    get_user_enum_field_1_ref(e)
+}
+
+fn clone_user_struct_ref(s: &UserStruct) -> UserStruct {
+    clone_user_struct_ref(s)
+}
+
+fn clone_user_enum_ref(e: &UserEnum) -> UserEnum {
+    clone_user_enum_ref(e)
+}
+
+fn print_user_struct_ref(s: &UserStruct) {
+    print_user_struct_ref(s)
+}
+
+fn print_user_enum_ref(e: &UserEnum) {
+    print_user_enum_ref(e)
+}
+
+fn parse_user_struct_ref(s: &Str) -> Option<UserStruct> {
+    parse_user_struct_ref(s)
+}
+
+fn parse_user_enum_ref(s: &Str) -> Option<UserEnum> {
+    parse_user_enum_ref(s)
+}
+
+fn int_to_user_struct_ref(n: Int) -> UserStruct {
+    int_to_user_struct_ref(n)
+}
+
+fn int_to_user_enum_ref(n: Int) -> UserEnum {
+    int_to_user_enum_ref(n)
+}
+
+fn to_float_user_struct_ref(s: UserStruct) -> Float {
+    to_float_user_struct_ref(s)
+}
+
+fn to_float_user_enum_ref(e: UserEnum) -> Float {
+    to_float_user_enum_ref(e)
+}
+
+fn trunc_user_struct_ref(s: UserStruct) -> Int {
+    trunc_user_struct_ref(s)
+}
+
+fn trunc_user_enum_ref(e: UserEnum) -> Int {
+    trunc_user_enum_ref(e)
+}
+
+fn eq_user_struct_ref(s1: &UserStruct, s2: &UserStruct) -> Bool {
+    eq_user_struct_ref(s1, s2)
+}
+
+fn eq_user_enum_ref(e1: &UserEnum, e2: &UserEnum) -> Bool {
+    eq_user_enum_ref(e1, e2)
+}
+
+fn main() {
+    let nums = push(push(vec(), 5), 

@@ -1,0 +1,22 @@
+fn count_positive_and_largest(nums: &Vec<Int>) -> Tuple<Int, Int> {
+    let mut positive_count = 0
+    let mut largest = std_int_min()
+    for num in nums {
+        if num > &std_int_zero {
+            positive_count = positive_count + 1
+        }
+        if num > &largest {
+            largest = num.clone()
+        }
+    }
+    Tuple(positive_count, largest)
+}
+
+fn main() {
+    let numbers = vec(3, 8, -2, 12, 7)
+    let result = count_positive_and_largest(&numbers)
+    print(result.first)
+    print(result.second)
+    drop numbers
+    drop result
+}

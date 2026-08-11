@@ -1,0 +1,7 @@
+fn main() {
+    let mut v = vec(1, 2, 3, 4, 5)
+    while v.len() > 0 {
+        print(get(v, v.len() - 1))
+        v = push(vec(), truncate(v, v.len() - 1))
+    }
+}

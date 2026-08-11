@@ -1,0 +1,420 @@
+fn main() {
+    let s = "stack"
+    let chars = chars(s)
+    let reversed_chars: Vec<Str> = chars.iter().rev().map(str).collect()
+    let reversed_str: Str = reversed_chars.join("")
+    print_str(&reversed_str)
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    s.chars().map(str).collect()
+}
+
+fn print_str(s: &Str) {
+    for c in s.chars() {
+        print(&c)
+    }
+}
+
+fn print(c: &Char) {
+    let s = str(c)
+    print_str(&s)
+}
+
+fn str(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn to_string(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn map(f: &Fn) -> Vec<Str> {
+    vec().iter().map(f).collect()
+}
+
+fn rev(it: &Vec<Str>) -> Vec<Str> {
+    it.iter().rev().map(String).collect()
+}
+
+fn join(vec: &Vec<Str>, sep: &Str) -> Str {
+    vec.join(sep)
+}
+
+fn collect(it: &Vec<Str>) -> Vec<Str> {
+    it.to_vec()
+}
+
+fn iter(vec: &Vec<Str>) -> Vec<Str> {
+    vec.iter().map(String).collect()
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn to_float(n: &Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: &Float) -> Int {
+    x.trunc()
+}
+
+fn clone(x: &Str) -> Str {
+    x.clone()
+}
+
+fn print(c: &Char) {
+    let s = str(c)
+    print_str(&s)
+}
+
+fn str(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn to_string(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn map(f: &Fn) -> Vec<Str> {
+    vec().iter().map(f).collect()
+}
+
+fn rev(it: &Vec<Str>) -> Vec<Str> {
+    it.iter().rev().map(String).collect()
+}
+
+fn join(vec: &Vec<Str>, sep: &Str) -> Str {
+    vec.join(sep)
+}
+
+fn collect(it: &Vec<Str>) -> Vec<Str> {
+    it.to_vec()
+}
+
+fn iter(vec: &Vec<Str>) -> Vec<Str> {
+    vec.iter().map(String).collect()
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn to_float(n: &Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: &Float) -> Int {
+    x.trunc()
+}
+
+fn clone(x: &Str) -> Str {
+    x.clone()
+}
+
+fn print(c: &Char) {
+    let s = str(c)
+    print_str(&s)
+}
+
+fn str(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn to_string(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn map(f: &Fn) -> Vec<Str> {
+    vec().iter().map(f).collect()
+}
+
+fn rev(it: &Vec<Str>) -> Vec<Str> {
+    it.iter().rev().map(String).collect()
+}
+
+fn join(vec: &Vec<Str>, sep: &Str) -> Str {
+    vec.join(sep)
+}
+
+fn collect(it: &Vec<Str>) -> Vec<Str> {
+    it.to_vec()
+}
+
+fn iter(vec: &Vec<Str>) -> Vec<Str> {
+    vec.iter().map(String).collect()
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn to_float(n: &Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: &Float) -> Int {
+    x.trunc()
+}
+
+fn clone(x: &Str) -> Str {
+    x.clone()
+}
+
+fn print(c: &Char) {
+    let s = str(c)
+    print_str(&s)
+}
+
+fn str(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn to_string(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn map(f: &Fn) -> Vec<Str> {
+    vec().iter().map(f).collect()
+}
+
+fn rev(it: &Vec<Str>) -> Vec<Str> {
+    it.iter().rev().map(String).collect()
+}
+
+fn join(vec: &Vec<Str>, sep: &Str) -> Str {
+    vec.join(sep)
+}
+
+fn collect(it: &Vec<Str>) -> Vec<Str> {
+    it.to_vec()
+}
+
+fn iter(vec: &Vec<Str>) -> Vec<Str> {
+    vec.iter().map(String).collect()
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn to_float(n: &Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: &Float) -> Int {
+    x.trunc()
+}
+
+fn clone(x: &Str) -> Str {
+    x.clone()
+}
+
+fn print(c: &Char) {
+    let s = str(c)
+    print_str(&s)
+}
+
+fn str(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn to_string(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn map(f: &Fn) -> Vec<Str> {
+    vec().iter().map(f).collect()
+}
+
+fn rev(it: &Vec<Str>) -> Vec<Str> {
+    it.iter().rev().map(String).collect()
+}
+
+fn join(vec: &Vec<Str>, sep: &Str) -> Str {
+    vec.join(sep)
+}
+
+fn collect(it: &Vec<Str>) -> Vec<Str> {
+    it.to_vec()
+}
+
+fn iter(vec: &Vec<Str>) -> Vec<Str> {
+    vec.iter().map(String).collect()
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn to_float(n: &Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: &Float) -> Int {
+    x.trunc()
+}
+
+fn clone(x: &Str) -> Str {
+    x.clone()
+}
+
+fn print(c: &Char) {
+    let s = str(c)
+    print_str(&s)
+}
+
+fn str(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn to_string(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn map(f: &Fn) -> Vec<Str> {
+    vec().iter().map(f).collect()
+}
+
+fn rev(it: &Vec<Str>) -> Vec<Str> {
+    it.iter().rev().map(String).collect()
+}
+
+fn join(vec: &Vec<Str>, sep: &Str) -> Str {
+    vec.join(sep)
+}
+
+fn collect(it: &Vec<Str>) -> Vec<Str> {
+    it.to_vec()
+}
+
+fn iter(vec: &Vec<Str>) -> Vec<Str> {
+    vec.iter().map(String).collect()
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn to_float(n: &Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: &Float) -> Int {
+    x.trunc()
+}
+
+fn clone(x: &Str) -> Str {
+    x.clone()
+}
+
+fn print(c: &Char) {
+    let s = str(c)
+    print_str(&s)
+}
+
+fn str(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn to_string(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn map(f: &Fn) -> Vec<Str> {
+    vec().iter().map(f).collect()
+}
+
+fn rev(it: &Vec<Str>) -> Vec<Str> {
+    it.iter().rev().map(String).collect()
+}
+
+fn join(vec: &Vec<Str>, sep: &Str) -> Str {
+    vec.join(sep)
+}
+
+fn collect(it: &Vec<Str>) -> Vec<Str> {
+    it.to_vec()
+}
+
+fn iter(vec: &Vec<Str>) -> Vec<Str> {
+    vec.iter().map(String).collect()
+}
+
+fn vec() -> Vec<Str> {
+    vec()
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn to_float(n: &Int) -> Float {
+    n.to_float()
+}
+
+fn trunc(x: &Float) -> Int {
+    x.trunc()
+}
+
+fn clone(x: &Str) -> Str {
+    x.clone()
+}
+
+fn print(c: &Char) {
+    let s = str(c)
+    print_str(&s)
+}
+
+fn str(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn to_string(c: &Char) -> Str {
+    c.to_string()
+}
+
+fn map(f: &Fn) -> Vec<Str> {
+    vec().iter().map(f).collect()
+}
+
+fn rev(it: &Vec<Str>) -> Vec<Str> {
+    it.iter().rev().map(String).collect()
+}
+
+fn join(vec: &Vec<Str>, sep: &Str) -> Str {
+    vec.join(sep)
+}
+
+fn collect(it: &Vec<Str>) -> Vec<Str> {
+    it.to_vec()
+}
+
+fn iter(vec: &Vec<Str>) -> Vec<Str> {
+    vec.iter().map

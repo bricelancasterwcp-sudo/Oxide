@@ -1,0 +1,13 @@
+fn main() {
+    println!("{}", 100 / 5); // prints 20
+    if 0 == 0 { // check if divisor is 0
+        println!("Undefined"); // print undefined if divisor is 0
+    } else {
+        println!("{}", 100 / 0); // prints undefined
+    }
+    if 4 == 0 { // check if divisor is 0
+        println!("Undefined"); // print undefined if divisor is 0
+    } else {
+        println!("{}", 100 / 4); // prints 25
+    }
+}

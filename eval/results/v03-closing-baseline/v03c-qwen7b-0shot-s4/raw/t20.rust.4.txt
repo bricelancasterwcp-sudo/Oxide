@@ -1,0 +1,21 @@
+fn main() {
+    let items = vec![
+        ("pen", 3, 4),
+        ("pad", 9, 2),
+        ("ink", 5, 3),
+    ];
+
+    let mut total_cost = 0;
+    let mut highest_cost_item = ("", 0);
+
+    for item in items.iter() {
+        let cost = item.1 * item.2;
+        total_cost += cost;
+        if cost > highest_cost_item.1 {
+            highest_cost_item = (item.0, cost);
+        }
+    }
+
+    println!("Combined cost: {}", total_cost);
+    println!("Item with the highest cost: {}", highest_cost_item.0);
+}

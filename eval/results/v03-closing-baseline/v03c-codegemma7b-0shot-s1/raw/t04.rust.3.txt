@@ -1,0 +1,23 @@
+use std::collections::HashSet;
+
+fn is_prime(x: u32) -> bool {
+    if x <= 1 {
+        return false;
+    }
+    for i in 2..(x as f64).sqrt() as u32 + 1 {
+        if x % i == 0 {
+            return false;
+        }
+    }
+    true
+}
+
+fn main() {
+    let mut primes = HashSet::new();
+    for i in 2..=99 { // Changed this line to include 99
+        if is_prime(i) {
+            primes.insert(i);
+        }
+    }
+    println!("Number of primes less than 100: {}", primes.len());
+}

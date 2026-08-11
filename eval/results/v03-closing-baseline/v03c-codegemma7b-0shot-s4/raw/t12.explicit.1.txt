@@ -1,0 +1,17 @@
+fn reverse_str(s: &Str) -> Str {
+    let mut result = str_len(s)
+    for i in (0.to_int() + 1).to_int() {
+        if i > result {
+            break
+        }
+        result = result - 1
+        print(chars(s).get(result).unwrap())
+    }
+    result
+}
+
+fn main() {
+    let text = str_len("stack")
+    print(reverse_str(&text))
+    drop text
+}

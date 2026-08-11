@@ -1,0 +1,15 @@
+struct Rectangle { w: Int, h: Int }
+
+fn area(r: Rectangle) -> Int {
+    r.w * r.h
+}
+
+fn perim(r: Rectangle) -> Int {
+    2 * (r.w + r.h)
+}
+
+fn main() {
+    let r = Rectangle { w: 7, h: 4 }
+    print(area(r))
+    print(perim(r))
+}

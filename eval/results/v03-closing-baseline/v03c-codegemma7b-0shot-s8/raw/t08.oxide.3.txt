@@ -1,0 +1,193 @@
+fn main() {
+    let list = vec(3, 8, -2, 12, 7)
+    let positive = len(filter(list, lambda(x) > 0))
+    let largest = max(list)
+    print(positive)
+    print(largest)
+}
+
+fn filter(list: Vec<Int>, pred: FnMutintInt) -> Vec<Int> {
+    let mut result = vec()
+    for x in list {
+        if pred(x) {
+            result = push(result, x)
+        }
+    }
+    result
+}
+
+fn max(list: Vec<Int>) -> Int {
+    let mut result = -1000000000
+    for x in list {
+        if x > result {
+            result = x
+        }
+    }
+    result
+}
+
+fn len(list: Vec<Int>) -> Int {
+    let mut result = 0
+    for _ in list {
+        result = result + 1
+    }
+    result
+}
+
+fn push(list: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = list
+    result = append(result, x)
+    result
+}
+
+fn append(mutlist: Vec<Int>, x: Int) -> Vec<Int> {
+    list = push(list, x)
+    list
+}
+
+fn print(x: Int) {
+    print_str(to_str(x))
+}
+
+fn print_str(s: Str) {
+    let mut i = 0
+    while i < str_len(s) {
+        print(char(get(chars(s), i)?)?)
+        i = i + 1
+    }
+}
+
+fn char(c: Int) -> Option<Char> {
+    if c >= 0 && c <= 255 {
+        Some(Char(c))
+    } else {
+        None
+    }
+}
+
+fn to_str(n: Int) -> Str {
+    if n == 0 {
+        return Str("0")
+    }
+    let mut result = Str("")
+    let mut tmp = n
+    while tmp > 0 {
+        let digit = trunc(tmp % 10)
+        result = concat(result, char(digit)?)
+        tmp = trunc(tmp / 10)
+    }
+    result
+}
+
+fn str_len(s: Str) -> Int {
+    let mut result = 0
+    for _ in chars(s) {
+        result = result + 1
+    }
+    result
+}
+
+fn chars(s: Str) -> Vec<Int> {
+    let mut result = vec()
+    let mut i = 0
+    while i < str_len(s) {
+        result = push(result, int_to_str(get(s, i)?)?)
+        i = i + 1
+    }
+    result
+}
+
+fn int_to_str(n: Int) -> Str {
+    if n == 0 {
+        return Str("0")
+    }
+    let mut result = Str("")
+    let mut tmp = n
+    if tmp < 0 {
+        result = concat(result, Str("-"))
+        tmp = trunc(tmp / -1)
+    }
+    while tmp > 0 {
+        let digit = trunc(tmp % 10)
+        result = concat(result, char(digit)?)
+        tmp = trunc(tmp / 10)
+    }
+    result
+}
+
+fn trunc(x: Float) -> Int {
+    let mut result = Int(0)
+    if x >= 0.0 {
+        result = Int(x)
+    } else {
+        result = Int(x - 0.5)
+    }
+    result
+}
+
+fn get(s: Str, i: Int) -> Option<Int> {
+    if i >= 0 && i < str_len(s) {
+        Some(int(get(chars(s), i)?)?)
+    } else {
+        None
+    }
+}
+
+fn int(c: Int) -> Option<Int> {
+    if c >= 0 && c <= 9 {
+        Some(Int(c))
+    } else {
+        None
+    }
+}
+
+fn lambda(x: Int) -> Bool {
+    return x > 0
+}
+
+fn append(mutlist: Vec<Int>, x: Int) -> Vec<Int> {
+    list = push(list, x)
+    list
+}
+
+fn push(list: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut result = list
+    result = append(result, x)
+    result
+}
+
+fn len(list: Vec<Int>) -> Int {
+    let mut result = 0
+    for _ in list {
+        result = result + 1
+    }
+    result
+}
+
+fn max(list: Vec<Int>) -> Int {
+    let mut result = -1000000000
+    for x in list {
+        if x > result {
+            result = x
+        }
+    }
+    result
+}
+
+fn filter(list: Vec<Int>, pred: FnMutintInt) -> Vec<Int> {
+    let mut result = vec()
+    for x in list {
+        if pred(x) {
+            result = push(result, x)
+        }
+    }
+    result
+}
+
+fn main() {
+    let list = vec(3, 8, -2, 12, 7)
+    let positive = len(filter(list, lambda(x) > 0))
+    let largest = max(list)
+    print(positive)
+    print(largest)
+}

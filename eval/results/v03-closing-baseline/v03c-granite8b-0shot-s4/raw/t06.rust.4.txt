@@ -1,0 +1,13 @@
+fn main() {
+    for n in 2..1000 {
+        if perfect(n) {
+            println!("{}", n);
+        }
+    }
+}
+
+fn perfect(n: u32) -> bool {
+    (2..=(n as f64).sqrt().ceil() as u32)
+        .filter(|x| n % x == 0)
+        .sum::<u32>() == n
+}

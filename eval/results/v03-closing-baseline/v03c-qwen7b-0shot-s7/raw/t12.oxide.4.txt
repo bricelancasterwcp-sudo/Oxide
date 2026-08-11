@@ -1,0 +1,12 @@
+fn reverse(s: Str) -> Str {
+    let mut chars = chars(s)
+    let mut reversed = vec()
+    while letSome(c) == chars.pop() {
+        push(reversed, c)
+    }
+    concat(reversed, "")
+}
+
+fn main() {
+    print(reverse("stack"))
+}

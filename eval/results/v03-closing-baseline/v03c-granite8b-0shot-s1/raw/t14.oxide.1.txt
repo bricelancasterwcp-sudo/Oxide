@@ -1,0 +1,15 @@
+fn main() {
+    printed = 0
+    text = "mississippi"
+    loop_each_character_in(text, ch)
+    if ch == "s" {
+        printed = printed + 1
+    }
+    end
+    print(printed)
+    distinct_characters = set()
+    loop_each_character_in(text, ch)
+    distinct_characters = add(ch, distinct_characters)
+    end
+    print(len(distinct_characters))
+}

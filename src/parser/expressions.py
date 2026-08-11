@@ -51,6 +51,7 @@ BUILTIN_METHOD_NAMES: frozenset[str] = frozenset(
         "range",
         "str_len",
         "to_float",
+        "to_str",
         "trunc",
         "vec",
     }

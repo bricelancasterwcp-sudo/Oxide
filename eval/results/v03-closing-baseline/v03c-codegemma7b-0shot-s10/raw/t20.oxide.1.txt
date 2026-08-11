@@ -1,0 +1,230 @@
+fn main() {
+    let pen = Item { price: 3, quantity: 4, name: "pen" }
+    let pad = Item { price: 9, quantity: 2, name: "pad" }
+    let ink = Item { price: 5, quantity: 3, name: "ink" }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    if pen.cost() > pad.cost() && pen.cost() > ink.cost() {
+        print(pen.name)
+    } else if pad.cost() > ink.cost() {
+        print(pad.name)
+    } else {
+        print(ink.name)
+    }
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+    name: Str,
+}
+
+fn cost(self: Item) -> Int {
+    self.price * self.quantity
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4, name: "pen" }
+    let pad = Item { price: 9, quantity: 2, name: "pad" }
+    let ink = Item { price: 5, quantity: 3, name: "ink" }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    if pen.cost() > pad.cost() && pen.cost() > ink.cost() {
+        print(pen.name)
+    } else if pad.cost() > ink.cost() {
+        print(pad.name)
+    } else {
+        print(ink.name)
+    }
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+    name: Str,
+}
+
+fn cost(self: Item) -> Int {
+    self.price * self.quantity
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4, name: "pen" }
+    let pad = Item { price: 9, quantity: 2, name: "pad" }
+    let ink = Item { price: 5, quantity: 3, name: "ink" }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    if pen.cost() > pad.cost() && pen.cost() > ink.cost() {
+        print(pen.name)
+    } else if pad.cost() > ink.cost() {
+        print(pad.name)
+    } else {
+        print(ink.name)
+    }
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+    name: Str,
+}
+
+fn cost(self: Item) -> Int {
+    self.price * self.quantity
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4, name: "pen" }
+    let pad = Item { price: 9, quantity: 2, name: "pad" }
+    let ink = Item { price: 5, quantity: 3, name: "ink" }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    if pen.cost() > pad.cost() && pen.cost() > ink.cost() {
+        print(pen.name)
+    } else if pad.cost() > ink.cost() {
+        print(pad.name)
+    } else {
+        print(ink.name)
+    }
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+    name: Str,
+}
+
+fn cost(self: Item) -> Int {
+    self.price * self.quantity
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4, name: "pen" }
+    let pad = Item { price: 9, quantity: 2, name: "pad" }
+    let ink = Item { price: 5, quantity: 3, name: "ink" }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    if pen.cost() > pad.cost() && pen.cost() > ink.cost() {
+        print(pen.name)
+    } else if pad.cost() > ink.cost() {
+        print(pad.name)
+    } else {
+        print(ink.name)
+    }
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+    name: Str,
+}
+
+fn cost(self: Item) -> Int {
+    self.price * self.quantity
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4, name: "pen" }
+    let pad = Item { price: 9, quantity: 2, name: "pad" }
+    let ink = Item { price: 5, quantity: 3, name: "ink" }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    if pen.cost() > pad.cost() && pen.cost() > ink.cost() {
+        print(pen.name)
+    } else if pad.cost() > ink.cost() {
+        print(pad.name)
+    } else {
+        print(ink.name)
+    }
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+    name: Str,
+}
+
+fn cost(self: Item) -> Int {
+    self.price * self.quantity
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4, name: "pen" }
+    let pad = Item { price: 9, quantity: 2, name: "pad" }
+    let ink = Item { price: 5, quantity: 3, name: "ink" }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    if pen.cost() > pad.cost() && pen.cost() > ink.cost() {
+        print(pen.name)
+    } else if pad.cost() > ink.cost() {
+        print(pad.name)
+    } else {
+        print(ink.name)
+    }
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+    name: Str,
+}
+
+fn cost(self: Item) -> Int {
+    self.price * self.quantity
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4, name: "pen" }
+    let pad = Item { price: 9, quantity: 2, name: "pad" }
+    let ink = Item { price: 5, quantity: 3, name: "ink" }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    if pen.cost() > pad.cost() && pen.cost() > ink.cost() {
+        print(pen.name)
+    } else if pad.cost() > ink.cost() {
+        print(pad.name)
+    } else {
+        print(ink.name)
+    }
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+    name: Str,
+}
+
+fn cost(self: Item) -> Int {
+    self.price * self.quantity
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4, name: "pen" }
+    let pad = Item { price: 9, quantity: 2, name: "pad" }
+    let ink = Item { price: 5, quantity: 3, name: "ink" }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    if pen.cost() > pad.cost() && pen.cost() > ink.cost() {
+        print(pen.name)
+    } else if pad.cost() > ink.cost() {
+        print(pad.name)
+    } else {
+        print(ink.name)
+    }
+}
+
+struct Item {
+    price: Int,
+    quantity: Int,
+    name: Str,
+}
+
+fn cost(self: Item) -> Int {
+    self.price * self.quantity
+}
+
+fn main() {
+    let pen = Item { price: 3, quantity: 4, name: "pen" }
+    let pad = Item { price: 9, quantity: 2, name: "pad" }
+    let ink = Item { price: 5, quantity: 3, name: "ink" }
+    let cost = pen.cost() + pad.cost

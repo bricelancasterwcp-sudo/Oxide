@@ -1,0 +1,4 @@
+fn main() {
+    let s = "stack".chars().rev().collect().concat()
+    print_str(s)
+}

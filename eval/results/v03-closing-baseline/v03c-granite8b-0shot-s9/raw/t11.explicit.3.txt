@@ -1,0 +1,79 @@
+fn sort(v: &Vec<Int>) -> Vec<Int> {
+    let mut v = clone(v)
+    for i in 0 < len(&v) {
+        let mut j = i
+        while j > 0 && get(&v, j) > get(&v, j - 1) {
+            swap(&mut && v, j, j - 1)
+            j = j - 1
+        }
+    }
+    v
+}
+
+fn main() {
+    let l = push(push(push(push(push(vec(), 5), 3), 8), 1), 9)
+    let s = sort(&l)
+    for x in &s {
+        print(x)
+    }
+    drop l
+    drop s
+}
+
+fn swap(v: &Vec<Int>, i: Int, j: Int) {
+    let t = get(&v, i)
+    drop i
+    let i = get(&v, j)
+    drop j
+    v = push(push(clone(&v), i), t)
+}
+
+fn sort(v: &Vec<Int>) -> Vec<Int> {
+    let mut v = clone(v)
+    for i in 0 < len(&v) {
+        let mut j = i
+        while j > 0 && get(&v, j) > get(&v, j - 1) {
+            swap(&mut && v, j, j - 1)
+            j = j - 1
+        }
+    }
+    v
+}
+
+fn main() {
+    let l = push(push(push(push(push(vec(), 5), 3), 8), 1), 9)
+    let s = sort(&l)
+    for x in &s {
+        print(x)
+    }
+    drop l
+    drop s
+}
+
+fn swap(v: &Vec<Int>, i: Int, j: Int) {
+    let t = get(&v, i)
+    let i = get(&v, j)
+    v = push(push(clone(&v), i), t)
+}
+
+fn sort(v: &Vec<Int>) -> Vec<Int> {
+    let mut v = clone(v)
+    for i in 0 < len(&v) {
+        let mut j = i
+        while j > 0 && get(&v, j) > get(&v, j - 1) {
+            swap(&mut && v, j, j - 1)
+            j = j - 1
+        }
+    }
+    v
+}
+
+fn main() {
+    let l = push(push(push(push(push(vec(), 5), 3), 8), 1), 9)
+    let s = sort(&l)
+    for x in &s {
+        print(x)
+    }
+    drop l
+    drop s
+}

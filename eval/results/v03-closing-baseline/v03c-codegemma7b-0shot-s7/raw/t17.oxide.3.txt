@@ -1,0 +1,11 @@
+fn main() {
+    let vec = vec(10, 20, 30)
+    print(match get(vec, 1) {
+            Some(x) => x,
+            None => -1,
+        })
+    print(match get(vec, 5) {
+            Some(x) => x,
+            None => -1,
+        })
+}

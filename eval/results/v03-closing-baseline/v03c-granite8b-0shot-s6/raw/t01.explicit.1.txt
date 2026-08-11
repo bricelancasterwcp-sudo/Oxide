@@ -1,0 +1,7 @@
+fn main() {
+    let sum_of_squares = 0
+    for x in range(0, 10) {
+        sum_of_squares = sum_of_squares + x * x
+    }
+    print(sum_of_squares)
+}

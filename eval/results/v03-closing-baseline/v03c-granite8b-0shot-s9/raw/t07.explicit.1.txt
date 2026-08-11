@@ -1,0 +1,94 @@
+fn main() {
+    let mut v = vec()
+    for i in 0.step_by(3, 24) {
+        v = push(v, i)
+    }
+    let sum = fold(v, 0, f)
+    print(sum)
+}
+
+fn f(x: Int, y: Int) -> Int {
+    x + y
+}
+
+fn assert_eq(x: Int, y: Int) -> Bool {
+    if x == y {
+        true
+    } else {
+        print("Assertion failed:")
+        print("Expected ")
+        print_int(x)
+        print(" but got ")
+        print_int(y)
+        false
+    }
+}
+
+fn main_test() {
+    assert_eq(0, fold(vec(), 0, f))
+    assert_eq(3, fold(push(vec(), 1), 0, f))
+    assert_eq(6, fold(push(push(vec(), 1), 2), 0, f))
+    assert_eq(14, fold(push(push(push(vec(), 1), 2), 4), 0, f))
+}
+
+fn range(from: Int, to: Int) -> Vec<Int> {
+    let mut v = vec()
+    let mut x = from
+    while x < to {
+        v = push(v, x)
+        x = x + 1
+    }
+    v
+}
+
+fn fold(v: Vec<Int>, base: Int, f: &Fn<Int, Int, Int>) -> Int {
+    let mut x = base
+    for y in &v {
+        x = f(x, y)
+    }
+    x
+}
+
+fn test_range() -> Bool {
+    assert_eq(vec(), range(1, 1))
+    assert_eq(push(vec(), 2), range(2, 2))
+    assert_eq(push(push(vec(), 3), 4), range(3, 4))
+    assert_eq(push(push(push(vec(), 2), 4), 6), range(2, 6))
+    assert_eq(push(push(push(push(vec(), 1), 3), 5), 7), range(1, 7))
+    true
+}
+
+fn test_fold() -> Bool {
+    assert_eq(0, fold(vec(), 0, f))
+    assert_eq(1, fold(push(vec(), 1), 0, f))
+    assert_eq(3, fold(push(push(vec(), 1), 2), 0, f))
+    assert_eq(6, fold(push(push(push(vec(), 1), 2), 3), 0, f))
+    true
+}
+
+fn main_test_range() -> Bool {
+    test_range() && test_fold()
+}
+
+fn assert_eq(x: Int, y: Int) -> Bool {
+    if x == y {
+        true
+    } else {
+        print("Assertion failed:")
+        print("Expected ")
+        print_int(x)
+        print(" but got ")
+        print_int(y)
+        false
+    }
+}
+
+fn main() {
+    let v = main_test_range()
+    if v {
+        print("All tests passed!\n")
+    } else {
+        print("Some tests failed :(\n")
+    }
+    drop v
+}

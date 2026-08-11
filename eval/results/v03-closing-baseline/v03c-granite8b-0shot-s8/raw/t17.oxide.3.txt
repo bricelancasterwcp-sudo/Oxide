@@ -1,0 +1,28 @@
+struct List { head: Option<Int>, tail: ListPtr }
+
+enum ListPtr {
+    Empty,
+    Cons(Int, ListPtr),
+}
+
+fn get_at(l: List, i: Int) -> Int {
+    match l.head {
+        None => -1,
+        Some(h) => {
+            if i == 0 {
+                h
+            } else {
+                match l.tail {
+                    ListPtrEmpty => -1,
+                    ListPtrCons(h2, t2) => get_at(List { head: None, tail: t2 }, i - 1),
+                }
+            }
+        },
+    }
+}
+
+fn main() {
+    let l = List { head: Some(10), tail: ListPtrCons(20, ListPtrCons(30, ListPtrEmpty)) }
+    print(get_at(l, 1))
+    print(get_at(l, 5))
+}

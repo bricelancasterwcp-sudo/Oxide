@@ -1,0 +1,26 @@
+fn sort(a: Vec<Int>) -> Vec<Int> {
+    let mut result = a
+    let n = len(&result)
+    for i in range(0, n) {
+        let mut min_idx = i
+        for j in range(i + 1, n) {
+            if to_float(result.get(j)) < to_float(result.get(min_idx)) {
+                min_idx = j
+            }
+        }
+        if min_idx != i {
+            let temp = result.get(min_idx)
+            result.set(min_idx, result.get(i))
+            result.set(i, temp)
+        }
+    }
+    result
+}
+
+fn main() {
+    let nums = sort(vec(5, 3, 8, 1, 9, 2))
+    for x in &nums {
+        print_str(&x)
+    }
+    drop nums
+}

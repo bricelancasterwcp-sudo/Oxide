@@ -1,0 +1,12 @@
+fn gcd(mut m: u64, mut n: u64) -> u64 {
+    while n != 0 {
+        let t = m % n;
+        m = n;
+        n = t;
+    }
+    m
+}
+
+fn main() {
+    println!("{}", gcd(252, 105));
+}

@@ -1,0 +1,330 @@
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    String_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result = ""
+    for c in v.iter().rev() {
+        result = result + c
+    }
+    result
+}
+
+fn reverse_string(text: Str) -> Str {
+    let mut result = vec()
+    for c in text.chars().rev() {
+        result.push(c)
+    }
+    string_from(result)
+}
+
+fn main() {
+    let text = "stack"
+    print(reverse_string(text))
+}
+
+fn string_from(v: Vec<Char>) -> Str {
+    let mut result

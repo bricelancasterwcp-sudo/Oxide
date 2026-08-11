@@ -1,0 +1,22 @@
+fn perfect_numbers(limit: Int) -> Vec<Int> {
+    let mut result = vec()
+    for num in range(1, limit) {
+        let mut sum = 0
+        for i in range(1, num) {
+            if num % i == 0 {
+                sum = sum + i
+            }
+        }
+        if sum == num {
+            result = push(result, num)
+        }
+    }
+    result
+}
+
+fn main() {
+    let perfects = perfect_numbers(1000)
+    for num in &perfects {
+        print(num)
+    }
+}

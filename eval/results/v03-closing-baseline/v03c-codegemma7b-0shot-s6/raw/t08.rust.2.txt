@@ -1,0 +1,17 @@
+use std::cmp;
+
+fn main() {
+    let mut count = 0;
+    let mut max = std::i32::MIN;
+    let list = vec![3, 8, -2, 12, 7];
+
+    for num in list {
+        if num > 0 {
+            count += 1;
+        }
+        max = cmp::max(max, num);
+    }
+
+    println!("Positive numbers: {}", count);
+    println!("Largest value: {}", max);
+}

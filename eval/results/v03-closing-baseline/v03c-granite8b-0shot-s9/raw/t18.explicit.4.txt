@@ -1,0 +1,13 @@
+fn perimeter(l: Int, w: Int) -> Int {
+    2 * (l + w)
+}
+
+fn main() {
+    let width = 3
+    let length = 4
+    let height = 5
+    let base = 2
+    print(perimeter(length, width))
+    print(perimeter(base, height))
+    print(perimeter(length, height))
+}

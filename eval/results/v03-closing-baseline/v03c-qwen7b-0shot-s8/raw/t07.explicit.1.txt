@@ -1,0 +1,16 @@
+fn sum_multiples() -> Int {
+    let mut multiples = Vec()
+    for i in range(1, 9) {
+        push(multiples, i * 3)
+    }
+    let total = 0
+    for x in &multiples {
+        total = total + x
+    }
+    total
+}
+
+fn main() {
+    let result = sum_multiples()
+    print(result)
+}

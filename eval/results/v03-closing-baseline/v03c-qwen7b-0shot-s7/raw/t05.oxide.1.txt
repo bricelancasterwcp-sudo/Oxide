@@ -1,0 +1,18 @@
+struct Pair { a: Int, b: Int }
+
+fn next(p: Pair) -> Pair {
+    Pair(a + p.b, p.a)
+}
+
+fn fib(n: Int) -> Int {
+    let p = Pair(1, 1)
+    let mut acc = p
+    for _ in range(2, n) {
+        acc = next(acc)
+    }
+    acc.a
+}
+
+fn main() {
+    print(fib(20))
+}

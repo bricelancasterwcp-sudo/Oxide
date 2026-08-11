@@ -1,0 +1,386 @@
+fn main() {
+    let rectangle = Rectangle { width: 7, height: 4 }
+    print(rectangle.area())
+    print(rectangle.perimeter())
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn perimeter(r: &Rectangle) -> Int {
+    r.width + r.width + r.height + r.height
+}
+
+fn area(r: &Rectangle) -> Int {
+    r.width * r.height
+}
+
+struct Shape {
+    name: Str,
+}
+
+struct Circle {
+    radius: Float,
+}
+
+struct Triangle {
+    base: Int,
+    height: Int,
+}
+
+fn area(c: &Circle) -> Float {
+    PI * c.radius * c.radius
+}
+
+fn perimeter(c: &Circle) -> Float {
+    2 * PI * c.radius
+}
+
+fn main() {
+    let rectangle = Rectangle { width: 7, height: 4 }
+    let circle = Circle { radius: 3.0 }
+    print(rectangle.area())
+    print(rectangle.perimeter())
+    print(circle.area())
+    print(circle.perimeter())
+}
+
+fn main() {
+    let rectangle = Rectangle { width: 7, height: 4 }
+    let triangle = Triangle { base: 5, height: 6 }
+    let shape = Shape { name: "circle" }
+    print(rectangle.area())
+    print(triangle.area())
+    if shape.name == "circle" {
+        print("Shape is a circle")
+    }
+}
+
+struct Circle {
+    radius: Float,
+}
+
+struct Triangle {
+    base: Int,
+    height: Int,
+}
+
+fn area(c: &Circle) -> Float {
+    PI * c.radius * c.radius
+}
+
+fn perimeter(c: &Circle) -> Float {
+    2 * PI * c.radius
+}
+
+fn area(t: &Triangle) -> Float {
+    0.5 * t.base * t.height
+}
+
+fn main() {
+    let circle = Circle { radius: 3.0 }
+    let triangle = Triangle { base: 5, height: 6 }
+    print(circle.area())
+    print(triangle.area())
+}
+
+fn main() {
+    let numbers = vec(1, 2, 3, 4, 5, 6)
+    let even = filter(&numbers, &is_even)
+    print(even)
+}
+
+fn is_even(n: &Int) -> Bool {
+    n % 2 == 0
+}
+
+struct Circle {
+    radius: Float,
+}
+
+fn area(c: &Circle) -> Float {
+    PI * c.radius * c.radius
+}
+
+fn main() {
+    let circle = Circle { radius: 3.0 }
+    print(circle.area())
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    print(x + y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    print(x - y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    print(x * y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    print(x / y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    print(x % y)
+}
+
+fn main() {
+    let x = true
+    let y = false
+    print(!x)
+    print(x && y)
+    print(x || y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    print(x < y)
+    print(x <= y)
+    print(x > y)
+    print(x >= y)
+    print(x == y)
+    print(x != y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    let z = 3
+    print(x < y && y < z)
+    print(x != y || y == z)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    print(x + y)
+    print(x - y)
+    print(x * y)
+    print(x / y)
+    print(x % y)
+    print(!x)
+    print(x && y)
+    print(x || y)
+    print(x < y)
+    print(x <= y)
+    print(x > y)
+    print(x >= y)
+    print(x == y)
+    print(x != y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    let z = 3
+    if x < y && y < z {
+        print("small")
+    } else if y < z {
+        print("medium")
+    } else {
+        print("large")
+    }
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    let z = 3
+    let sum = x + y + z
+    if x < y && y < z {
+        print("x is the smallest")
+    } else if y < z {
+        print("y is the smallest")
+    } else {
+        print("z is the smallest")
+    }
+    print("sum:", sum)
+}
+
+struct Circle {
+    radius: Float,
+}
+
+fn area(c: &Circle) -> Float {
+    PI * c.radius * c.radius
+}
+
+fn perimeter(c: &Circle) -> Float {
+    2 * PI * c.radius
+}
+
+fn main() {
+    let c = Circle { radius: 3.0 }
+    print(c.area())
+    print(c.perimeter())
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    if x < y {
+        print(x)
+    }
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    if x < y {
+        print(x)
+    } else {
+        print(y)
+    }
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    if x < y {
+        print(x)
+    } else {
+        print(y)
+    }
+    print("Hello")
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    if x < y {
+        print(x)
+    } else {
+        print(y)
+    }
+    print("Hello")
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    loop_forever(x, y)
+}
+
+fn loop_forever(x: Int, y: Int) {
+    loop_forever(x, y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    loop_forever(x, y)
+}
+
+fn loop_forever(x: Int, y: Int) {
+    loop_forever(x, y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    loop_forever(x, y)
+}
+
+fn loop_forever(x: Int, y: Int) {
+    loop_forever(x, y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    loop_forever(x, y)
+}
+
+fn loop_forever(x: Int, y: Int) {
+    loop_forever(x, y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    loop_forever(x, y)
+}
+
+fn loop_forever(x: Int, y: Int) {
+    loop_forever(x, y)
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    while x < y {
+        print(x)
+        x = x + 1
+    }
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    while x < y {
+        print(x)
+        x = x + 1
+    }
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    while x < y {
+        print(x)
+        x = x + 1
+    }
+    print("done")
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    while x < y {
+        print(x)
+        x = x + 1
+    }
+    print("done")
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    while x < y {
+        print(x)
+        x = x + 1
+    }
+    print("done")
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    while x < y {
+        print(x)
+        x = x + 1
+    }
+    print("done")
+}
+
+fn main() {
+    let x = 5
+    let y = 8
+    while x < y {
+        print(x

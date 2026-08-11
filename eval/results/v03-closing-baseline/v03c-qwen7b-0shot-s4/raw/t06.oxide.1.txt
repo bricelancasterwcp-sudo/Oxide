@@ -1,0 +1,8 @@
+fn main() {
+    for num in 1.999 {
+        let sum: Int = range(1, num).filter(x, x < num).filter(x, num % x == 0).sum()
+        if sum == num {
+            print(num)
+        }
+    }
+}

@@ -1,0 +1,11 @@
+fn reverse_print(s: &Str) {
+    for c in chars(s).rev() {
+        print(c)
+    }
+}
+
+fn main() {
+    let text = "stack"
+    reverse_print(text)
+    drop text
+}

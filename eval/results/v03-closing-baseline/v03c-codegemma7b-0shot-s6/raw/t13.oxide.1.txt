@@ -1,0 +1,16 @@
+fn is_palindrome(text: String) -> Result<String, String> {
+    let text = text.to_lowercase().replace(" ", "").as_bytes().to_vec()
+    let len = text.len()
+    for i in 0.to_string().len() / 2 {
+        if text.get(i).unwrap() != text.get(len - 1 - i).unwrap() {
+            return Err("not a palindrome".to_string())
+        }
+    }
+    Ok("is a palindrome".to_string())
+}
+
+fn main() {
+    print_str(is_palindrome("level".to_string()))
+    print_str(is_palindrome("stereo".to_string()))
+    print_str(is_palindrome("rotor".to_string()))
+}

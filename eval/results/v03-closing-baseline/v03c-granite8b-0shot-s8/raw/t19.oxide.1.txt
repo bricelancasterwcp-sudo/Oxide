@@ -1,0 +1,12 @@
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn main() {
+    let rect = Rectangle { width: 7, height: 4 }
+    let area = rect.width * rect.height
+    print(area)
+    let perimeter = 2 * (rect.width + rect.height)
+    print(perimeter)
+}

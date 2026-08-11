@@ -1,0 +1,8 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    let r2 = Reading { label: "lab2", ..r }
+    let total = fold(r2.values, 0, fun(acc, n) == acc + n * n)
+    print(total)
+}

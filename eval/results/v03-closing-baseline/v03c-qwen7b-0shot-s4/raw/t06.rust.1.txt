@@ -1,0 +1,10 @@
+```rust
+fn main() {
+    for n in 1..1000 {
+        let sum: u32 = (1..n).filter(|&x| n % x == 0).sum();
+        if sum == n {
+            println!("{}", n);
+        }
+    }
+}
+```

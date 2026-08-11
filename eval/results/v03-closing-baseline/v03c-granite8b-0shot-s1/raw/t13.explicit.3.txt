@@ -1,0 +1,20 @@
+fn print(s: &Str) {
+    for c in &chars_rev_str_s {
+        print_str(str_c)
+    }
+}
+
+fn main() {
+    print("level")
+}
+
+fn print(s: &Str) {
+    let chars_rev_str_s = clone(&chars_str_s)
+    let str_c = clone(&s)
+    loop
+}
+
+fn main() {
+    let level = "level"
+    print(level)
+}

@@ -1,0 +1,13 @@
+fn main() {
+    let pen = (3 * 4)
+    let pad = (9 * 2)
+    let ink = (5 * 3)
+    print(pen + pad + ink)
+    if pen > pad && pen > ink {
+        print("pen")
+    } else if pad > pen && pad > ink {
+        print("pad")
+    } else {
+        print("ink")
+    }
+}

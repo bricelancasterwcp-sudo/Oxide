@@ -1,0 +1,21 @@
+fn factors(x: Int) -> Vec<Int> {
+    let mut result = vec()
+    for i in 1 + (x / 2) {
+        if x % i == 0 {
+            push(result, i)
+        }
+    }
+    result
+}
+
+fn is_perfect(x: Int) -> Bool {
+    x == sum(factors(x))
+}
+
+fn main() {
+    for i in 1 + (1000 / 2) {
+        if is_perfect(i) {
+            print(i)
+        }
+    }
+}

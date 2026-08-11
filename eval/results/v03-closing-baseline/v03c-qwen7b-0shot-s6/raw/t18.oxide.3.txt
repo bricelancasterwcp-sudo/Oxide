@@ -1,0 +1,22 @@
+struct Point { x: Float, y: Float }
+
+struct Rect { width: Float, height: Float }
+
+struct Tri { a: Float, b: Float, c: Float }
+
+fn perimeter(rect: Rect) -> Float {
+    2.0 * (rect.width + rect.height)
+}
+
+fn perimeter(tri: Tri) -> Float {
+    tri.a + tri.b + tri.c
+}
+
+fn main() {
+    let rect1 = Rect { width: 3.0, height: 4.0 }
+    let rect2 = Rect { width: 2.0, height: 5.0 }
+    let tri = Tri { a: 3.0, b: 4.0, c: 5.0 }
+    print(perimeter(rect1))
+    print(perimeter(tri))
+    print(perimeter(rect2))
+}

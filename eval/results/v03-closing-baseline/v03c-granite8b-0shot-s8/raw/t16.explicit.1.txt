@@ -1,0 +1,14 @@
+fn divide(mutdividend: Int, divisor: Int) -> Int {
+    let mut quotient = 0
+    while dividend >= divisor {
+        dividend = dividend - divisor
+        quotient = quotient + 1
+    }
+    quotient
+}
+
+fn main() {
+    print(divide(100, 5))
+    print(divide(100, 0))
+    print(divide(100, 4))
+}

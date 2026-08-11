@@ -1,0 +1,14 @@
+```rust
+fn main() {
+    let list = vec![10, 20, 30];
+    let positions = vec![1, 5];
+
+    for &pos in &positions {
+        if let Some(&value) = list.get(pos) {
+            println!("{}", value);
+        } else {
+            println!("-1");
+        }
+    }
+}
+```

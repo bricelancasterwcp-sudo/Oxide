@@ -1,0 +1,14 @@
+struct VecInt { values: Vec<Int> }
+
+fn get_elem(v: VecInt, idx: Int) -> Int {
+    match get(v.values, idx) {
+        Some(n) => n,
+        None => -1,
+    }
+}
+
+fn main() {
+    let v = VecInt { values: push(push(push(vec(), 10), 20), 30) }
+    print(get_elem(v, 1))
+    print(get_elem(v, 5))
+}

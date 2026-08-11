@@ -1,0 +1,10 @@
+fn area(x: Int, y: Int) -> Int {
+    x * y
+}
+
+fn main() {
+    let width = 7
+    let height = 4
+    print(area(width, height))
+    print(area(width + 1, height + 1))
+}

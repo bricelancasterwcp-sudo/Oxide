@@ -1,0 +1,310 @@
+fn main() {
+    let text = "stack"
+    let mut chars = text.chars().collect()
+    chars = chars.iter().rev().map(clone).collect()
+    print_str(chars)
+}
+
+fn clone(x: Str) -> Str {
+    x
+}
+
+fn clone(x: Int) -> Int {
+    x
+}
+
+fn clone(x: Float) -> Float {
+    x
+}
+
+fn clone(x: Bool) -> Bool {
+    x
+}
+
+fn clone(x: Unit) -> Unit {
+    x
+}
+
+fn clone(x: Vec<T>) -> Vec<T> {
+    x
+}
+
+fn clone(x: Option<T>) -> Option<T> {
+    match x {
+        Some(x) => Some(clone(x)),
+        None => None,
+    }
+}
+
+fn clone(x: Result<T, E>) -> Result<T, E> {
+    match x {
+        Ok(x) => Ok(clone(x)),
+        Err(e) => Err(e),
+    }
+}
+
+fn clone(x: Reading) -> Reading {
+    Reading(clone(x.label), clone(x.values))
+}
+
+fn clone(x: Circle) -> Circle {
+    Circle(clone(x.radius))
+}
+
+fn clone(x: Square) -> Square {
+    Square(clone(x.side))
+}
+
+fn clone(x: Triangle) -> Triangle {
+    Triangle(clone(x.base), clone(x.height))
+}
+
+fn clone(x: Polyline) -> Polyline {
+    Polyline(clone(x.points))
+}
+
+fn clone(x: Text) -> Text {
+    Text(clone(x.text))
+}
+
+fn clone(x: Point) -> Point {
+    Point(clone(x.x), clone(x.y))
+}
+
+fn clone(x: Color) -> Color {
+    Color(clone(x.r), clone(x.g), clone(x.b))
+}
+
+fn clone(x: Shape) -> Shape {
+    match x {
+        Shape(x) => Shape(clone(x)),
+    }
+}
+
+fn clone(x: Variant) -> Variant {
+    match x {
+        Variant(x) => Variant(clone(x)),
+    }
+}
+
+fn clone(x: None) -> None {
+    None
+}
+
+fn clone(x: Some<T>) -> Some<T> {
+    Some(clone(x.unwrap()))
+}
+
+fn clone(x: Ok<T>) -> Ok<T> {
+    Ok(clone(x.unwrap()))
+}
+
+fn clone(x: Err<E>) -> Err<E> {
+    Err(clone(x.unwrap_err()))
+}
+
+fn clone(x: Result<T, E>) -> Result<T, E> {
+    match x {
+        Ok(x) => Ok(clone(x)),
+        Err(e) => Err(clone(e)),
+    }
+}
+
+fn clone(x: Option<T>) -> Option<T> {
+    match x {
+        Some(x) => Some(clone(x)),
+        None => None,
+    }
+}
+
+fn clone(x: Variant) -> Variant {
+    match x {
+        Variant(x) => Variant(clone(x)),
+    }
+}
+
+fn clone(x: None) -> None {
+    None
+}
+
+fn clone(x: Some<T>) -> Some<T> {
+    Some(clone(x.unwrap()))
+}
+
+fn clone(x: Ok<T>) -> Ok<T> {
+    Ok(clone(x.unwrap()))
+}
+
+fn clone(x: Err<E>) -> Err<E> {
+    Err(clone(x.unwrap_err()))
+}
+
+fn clone(x: Result<T, E>) -> Result<T, E> {
+    match x {
+        Ok(x) => Ok(clone(x)),
+        Err(e) => Err(clone(e)),
+    }
+}
+
+fn clone(x: Option<T>) -> Option<T> {
+    match x {
+        Some(x) => Some(clone(x)),
+        None => None,
+    }
+}
+
+fn clone(x: Variant) -> Variant {
+    match x {
+        Variant(x) => Variant(clone(x)),
+    }
+}
+
+fn clone(x: None) -> None {
+    None
+}
+
+fn clone(x: Some<T>) -> Some<T> {
+    Some(clone(x.unwrap()))
+}
+
+fn clone(x: Ok<T>) -> Ok<T> {
+    Ok(clone(x.unwrap()))
+}
+
+fn clone(x: Err<E>) -> Err<E> {
+    Err(clone(x.unwrap_err()))
+}
+
+fn clone(x: Result<T, E>) -> Result<T, E> {
+    match x {
+        Ok(x) => Ok(clone(x)),
+        Err(e) => Err(clone(e)),
+    }
+}
+
+fn clone(x: Option<T>) -> Option<T> {
+    match x {
+        Some(x) => Some(clone(x)),
+        None => None,
+    }
+}
+
+fn clone(x: Variant) -> Variant {
+    match x {
+        Variant(x) => Variant(clone(x)),
+    }
+}
+
+fn clone(x: None) -> None {
+    None
+}
+
+fn clone(x: Some<T>) -> Some<T> {
+    Some(clone(x.unwrap()))
+}
+
+fn clone(x: Ok<T>) -> Ok<T> {
+    Ok(clone(x.unwrap()))
+}
+
+fn clone(x: Err<E>) -> Err<E> {
+    Err(clone(x.unwrap_err()))
+}
+
+fn clone(x: Result<T, E>) -> Result<T, E> {
+    match x {
+        Ok(x) => Ok(clone(x)),
+        Err(e) => Err(clone(e)),
+    }
+}
+
+fn clone(x: Option<T>) -> Option<T> {
+    match x {
+        Some(x) => Some(clone(x)),
+        None => None,
+    }
+}
+
+fn clone(x: Variant) -> Variant {
+    match x {
+        Variant(x) => Variant(clone(x)),
+    }
+}
+
+fn clone(x: None) -> None {
+    None
+}
+
+fn clone(x: Some<T>) -> Some<T> {
+    Some(clone(x.unwrap()))
+}
+
+fn clone(x: Ok<T>) -> Ok<T> {
+    Ok(clone(x.unwrap()))
+}
+
+fn clone(x: Err<E>) -> Err<E> {
+    Err(clone(x.unwrap_err()))
+}
+
+fn clone(x: Result<T, E>) -> Result<T, E> {
+    match x {
+        Ok(x) => Ok(clone(x)),
+        Err(e) => Err(clone(e)),
+    }
+}
+
+fn clone(x: Option<T>) -> Option<T> {
+    match x {
+        Some(x) => Some(clone(x)),
+        None => None,
+    }
+}
+
+fn clone(x: Variant) -> Variant {
+    match x {
+        Variant(x) => Variant(clone(x)),
+    }
+}
+
+fn clone(x: None) -> None {
+    None
+}
+
+fn clone(x: Some<T>) -> Some<T> {
+    Some(clone(x.unwrap()))
+}
+
+fn clone(x: Ok<T>) -> Ok<T> {
+    Ok(clone(x.unwrap()))
+}
+
+fn clone(x: Err<E>) -> Err<E> {
+    Err(clone(x.unwrap_err()))
+}
+
+fn clone(x: Result<T, E>) -> Result<T, E> {
+    match x {
+        Ok(x) => Ok(clone(x)),
+        Err(e) => Err(clone(e)),
+    }
+}
+
+fn clone(x: Option<T>) -> Option<T> {
+    match x {
+        Some(x) => Some(clone(x)),
+        None => None,
+    }
+}
+
+fn clone(x: Variant) -> Variant {
+    match x {
+        Variant(x) => Variant(clone(x)),
+    }
+}
+
+fn clone(x: None) -> None {
+    None
+}
+
+fn clone(x: Some<T>) -> Some<T>

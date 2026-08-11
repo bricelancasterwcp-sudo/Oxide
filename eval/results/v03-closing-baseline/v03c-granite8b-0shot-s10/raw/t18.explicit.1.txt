@@ -1,0 +1,349 @@
+fn main() {
+    let rectangle = Rectangle { width: 3, height: 4 }
+    let triangle = Triangle { a: 3, b: 4, c: 5 }
+    let rectangle = Rectangle { width: 2, height: 5 }
+    println(perimeter(&rectangle))
+    println(perimeter(&triangle))
+    println(perimeter(&rectangle))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => 2 * (width + height),
+        Triangle(a, b, c) => a + b + c,
+    }
+}
+
+fn area(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => width * height,
+        Triangle(_, _, _) => 0,
+    }
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn main() {
+    let triangle = Triangle { a: 3, b: 4, c: 5 }
+    let rectangle = Rectangle { width: 2, height: 5 }
+    println(perimeter(&triangle))
+    println(perimeter(&rectangle))
+    println(area(&triangle))
+    println(area(&rectangle))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => 2 * (width + height),
+        Triangle(a, b, c) => a + b + c,
+    }
+}
+
+fn area(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => width * height,
+        Triangle(_, _, _) => 0,
+    }
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn main() {
+    let triangle = Triangle { a: 3, b: 4, c: 5 }
+    let rectangle = Rectangle { width: 2, height: 5 }
+    println(perimeter(&triangle))
+    println(perimeter(&rectangle))
+    println(area(&triangle))
+    println(area(&rectangle))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => 2 * (width + height),
+        Triangle(a, b, c) => a + b + c,
+    }
+}
+
+fn area(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => width * height,
+        Triangle(_, _, _) => 0,
+    }
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn main() {
+    let triangle = Triangle { a: 3, b: 4, c: 5 }
+    let rectangle = Rectangle { width: 2, height: 5 }
+    println(perimeter(&triangle))
+    println(perimeter(&rectangle))
+    println(area(&triangle))
+    println(area(&rectangle))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => 2 * (width + height),
+        Triangle(a, b, c) => a + b + c,
+    }
+}
+
+fn area(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => width * height,
+        Triangle(_, _, _) => 0,
+    }
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn main() {
+    let triangle = Triangle { a: 3, b: 4, c: 5 }
+    let rectangle = Rectangle { width: 2, height: 5 }
+    println(perimeter(&triangle))
+    println(perimeter(&rectangle))
+    println(area(&triangle))
+    println(area(&rectangle))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => 2 * (width + height),
+        Triangle(a, b, c) => a + b + c,
+    }
+}
+
+fn area(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => width * height,
+        Triangle(_, _, _) => 0,
+    }
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn main() {
+    let triangle = Triangle { a: 3, b: 4, c: 5 }
+    let rectangle = Rectangle { width: 2, height: 5 }
+    println(perimeter(&triangle))
+    println(perimeter(&rectangle))
+    println(area(&triangle))
+    println(area(&rectangle))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => 2 * (width + height),
+        Triangle(a, b, c) => a + b + c,
+    }
+}
+
+fn area(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => width * height,
+        Triangle(_, _, _) => 0,
+    }
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn main() {
+    let triangle = Triangle { a: 3, b: 4, c: 5 }
+    let rectangle = Rectangle { width: 2, height: 5 }
+    println(perimeter(&triangle))
+    println(perimeter(&rectangle))
+    println(area(&triangle))
+    println(area(&rectangle))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => 2 * (width + height),
+        Triangle(a, b, c) => a + b + c,
+    }
+}
+
+fn area(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => width * height,
+        Triangle(_, _, _) => 0,
+    }
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn main() {
+    let triangle = Triangle { a: 3, b: 4, c: 5 }
+    let rectangle = Rectangle { width: 2, height: 5 }
+    println(perimeter(&triangle))
+    println(perimeter(&rectangle))
+    println(area(&triangle))
+    println(area(&rectangle))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => 2 * (width + height),
+        Triangle(a, b, c) => a + b + c,
+    }
+}
+
+fn area(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => width * height,
+        Triangle(_, _, _) => 0,
+    }
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle),
+}
+
+fn main() {
+    let triangle = Triangle { a: 3, b: 4, c: 5 }
+    let rectangle = Rectangle { width: 2, height: 5 }
+    println(perimeter(&triangle))
+    println(perimeter(&rectangle))
+    println(area(&triangle))
+    println(area(&rectangle))
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+struct Triangle {
+    a: Int,
+    b: Int,
+    c: Int,
+}
+
+fn perimeter(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => 2 * (width + height),
+        Triangle(a, b, c) => a + b + c,
+    }
+}
+
+fn area(shape: &Shape) -> Int {
+    match shape {
+        Rectangle(width, height) => width * height,
+        Triangle(_, _, _) => 0,
+    }
+}
+
+enum Shape {
+    Rectangle(Rectangle),
+    Triangle(Triangle

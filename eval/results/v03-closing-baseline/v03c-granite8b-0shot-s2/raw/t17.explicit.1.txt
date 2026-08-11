@@ -1,0 +1,19 @@
+fn lookups(list: Vec<Int>, pos1: Int, pos5: Int) -> Vec<Int> {
+    let mut res = vec()
+    let x1 = get(&list, pos1)
+    res = push(res, x1)
+    let x5 = get(&list, pos5)
+    res = push(res, x5)
+    res
+}
+
+fn main() {
+    let list = push(push(push(vec(), 10), 20), 30)
+    let res = lookups(&list, 1, 5)
+    print_str("element at position 1: ")
+    print(res.get(0))
+    print_str("element at position 5: ")
+    print(res.get(1))
+    drop res
+    drop list
+}

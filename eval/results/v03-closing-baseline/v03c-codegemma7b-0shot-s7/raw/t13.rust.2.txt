@@ -1,0 +1,9 @@
+fn main() {
+    assert_eq!(is_palindrome("level"), true);
+    assert_eq!(is_palindrome("stereo"), false);
+    assert_eq!(is_palindrome("rotor"), true);
+}
+
+fn is_palindrome(text: &str) -> bool {
+    text == text.chars().rev().collect::<String>()
+}

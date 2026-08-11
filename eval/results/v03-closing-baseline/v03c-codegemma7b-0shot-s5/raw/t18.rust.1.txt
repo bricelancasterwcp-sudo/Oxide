@@ -1,0 +1,11 @@
+fn main() {
+    // Rectangle 3 by 4
+    println!("Perimeter: {}", 2 * (3 + 4));
+
+    // Triangle 3, 4, 5
+    let s = (3*3 + 4*4 + 5*5) / 2;
+    println!("Perimeter: {}", (s - 3) + (s - 4) + (s - 5) + s);
+
+    // Rectangle 2 by 5
+    println!("Perimeter: {}", 2 * (2 + 5));
+}

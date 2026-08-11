@@ -1,0 +1,137 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn first_big(v: Vec<Int>) -> Int {
+    let mut found = -1
+    for x in v {
+        if x > 10 {
+            found = x
+            break
+        }
+    }
+    found
+}
+
+fn second(v: Vec<Int>) -> Option<Int> {
+    let x = get(v, 1)?
+    Some(x + 1)
+}
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    print(first_big(r.values))            // field access copies: r stays usable
+    let r2 = Reading { label: "lab2", ..r }
+    match second(r2.values) {
+        Some(n) => print(n),
+        None => print_str("too short"),
+    }
+}
+
+struct Rect { width: Int, height: Int }
+
+enum Shape {
+    Circle(Float),
+    Rectangle(Rect),
+}
+
+enum Result {
+    Ok(Int),
+    Err,
+}
+
+enum Option {
+    Some(Int),
+    None,
+}
+
+enum Vec {
+    Empty,
+    Cons(Int, Box<Vec>),
+}
+
+enum Str {
+    Empty,
+    Cons(Char, Box<Str>),
+}
+
+enum Unit {
+    Unit,
+}
+
+enum Bool {
+    True,
+    False,
+}
+
+enum Int {
+    Int(Int),
+}
+
+enum Float {
+    Float(Float),
+}
+
+enum Char {
+    Char(Char),
+}
+
+enum None {
+    None,
+}
+
+enum Some {
+    Some(Int),
+}
+
+enum Ok {
+    Ok(Int),
+}
+
+enum Err {
+    Err,
+}
+
+enum Cons {
+    Cons(Int, Box<Vec>),
+}
+
+enum Empty {
+    Empty,
+}
+
+enum None {
+    None,
+}
+
+enum Some {
+    Some(Int),
+}
+
+enum Ok {
+    Ok(Int),
+}
+
+enum Err {
+    Err,
+}
+
+enum Circle {
+    Circle(Float),
+}
+
+enum Rectangle {
+    Rectangle(Rect),
+}
+
+fn area(r: Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn main() {
+    let r = Rectangle { width: 7, height: 4 }
+    print(area(r))
+    print(perimeter(r))
+}

@@ -1,0 +1,14 @@
+fn main() {
+    for i in 2 <= i * i {
+        let mut d = 1
+        let mut s = 0
+        for d in 1 <= d * d && d <= i {
+            if i % d == 0 {
+                s = s + d
+            }
+        }
+        if i == s {
+            print(i)
+        }
+    }
+}

@@ -1,0 +1,64 @@
+fn main() {
+    let s = "mississippi"
+    let mut count_s = 0
+    let mut seen = Vec()
+    for c in chars(s) {
+        if c == "s" {
+            count_s = count_s + 1
+        }
+        if !contains(seen, c) {
+            push(seen, c)
+        }
+    }
+    print(count_s)
+    print_str(" ")
+    print(len(seen))
+}
+
+fn contains(v: Vec<Str>, x: Str) -> Bool {
+    for e in v {
+        if e == x {
+            return True
+        }
+    }
+    False
+}
+
+fn push(v: Vec<Str>, x: Str) -> Vec<Str> {
+    let mut new_v = v.clone()
+    new_v.push(x)
+    new_v
+}
+
+fn len(v: Vec<Str>) -> Int {
+    v.len()
+}
+
+fn chars(s: Str) -> Vec<Str> {
+    let mut result = Vec()
+    for i in range(0, str_len(s)) {
+        push(result, substring(s, i, i + 1))
+    }
+    result
+}
+
+fn substring(s: Str, start: Int, end: Int) -> Str {
+    s.substring(start, end)
+}
+
+fn main() {
+    let s = "mississippi"
+    let mut count_s = 0
+    let mut seen = Vec()
+    for c in chars(s) {
+        if c == "s" {
+            count_s = count_s + 1
+        }
+        if !contains(seen, c) {
+            push(seen, c)
+        }
+    }
+    print(count_s)
+    print_str(" ")
+    print(len(seen))
+}

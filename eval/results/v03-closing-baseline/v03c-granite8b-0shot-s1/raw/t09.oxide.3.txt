@@ -1,0 +1,33 @@
+fn main() {
+    let input = vec(1, 2, 3, 4, 5)
+    let result = reverse(input)
+    for x in result {
+        print(x)
+    }
+}
+
+fn reverse(input: Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in input {
+        result = push(result, x)
+    }
+    result
+}
+
+struct IntList { head: Int, tail: Vec<Int> }
+
+fn reverse(input: Vec<Int>) -> Vec<Int> {
+    let mut result = vec()
+    for x in input {
+        result = push(result, x)
+    }
+    result
+}
+
+fn main() {
+    let input = vec(1, 2, 3, 4, 5)
+    let result = reverse(input)
+    for x in result {
+        print(x)
+    }
+}

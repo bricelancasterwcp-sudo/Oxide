@@ -1,0 +1,12 @@
+const INPUT: &[i32] = &[4, 1, 7, 3, 9, 2];
+
+fn main() {
+    let mut count = 0;
+    for &i in INPUT {
+        if i > 3 {
+            println!("{}", i);
+            count += 1;
+        }
+    }
+    println!("Kept: {}", count);
+}

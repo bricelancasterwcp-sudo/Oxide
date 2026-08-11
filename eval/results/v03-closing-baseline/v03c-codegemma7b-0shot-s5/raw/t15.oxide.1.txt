@@ -1,0 +1,12 @@
+fn main() {
+    let mut parsed = 0
+    let mut failed = 0
+    for word in "12 x 30".split_whitespace() {
+        match parse_int(word) {
+            Some(n) => parsed == parsed + n,
+            None => failed == failed + 1,
+        }
+    }
+    print(parsed)
+    print(failed)
+}

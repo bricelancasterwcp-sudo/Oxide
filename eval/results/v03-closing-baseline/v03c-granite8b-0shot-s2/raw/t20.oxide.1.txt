@@ -1,0 +1,25 @@
+fn pen() -> Int {
+    3
+}
+
+fn pad() -> Int {
+    9
+}
+
+fn ink() -> Int {
+    5
+}
+
+fn main() {
+    let pens = pen() * 4
+    let pads = pad() * 2
+    let ink = ink() * 3
+    let total_cost = pens + pads + ink
+    print(total_cost)
+    let max_cost = max(pens, pads, ink)
+    match max_cost {
+        _ => print("ink"),
+        PEN => print("pen"),
+        PAD => print("pad"),
+    }
+}

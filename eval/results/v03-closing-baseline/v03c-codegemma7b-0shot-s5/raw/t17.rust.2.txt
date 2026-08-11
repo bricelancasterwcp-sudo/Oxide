@@ -1,0 +1,10 @@
+fn main() {
+    let list = [10, 20, 30];
+
+    println!("{}", list[1]);
+    if list.len() > 5 {
+        println!("{}", list[5]);
+    } else {
+        println!("-1");
+    }
+}

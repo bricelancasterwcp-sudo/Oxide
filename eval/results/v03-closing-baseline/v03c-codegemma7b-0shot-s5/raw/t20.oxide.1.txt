@@ -1,0 +1,61 @@
+fn main() {
+    let pen = Item { unit_price: 3, quantity: 4 }
+    let pad = Item { unit_price: 9, quantity: 2 }
+    let ink = Item { unit_price: 5, quantity: 3 }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    let most_expensive = max(max(pen, pad), ink)
+    print_str(most_expensive.name())
+}
+
+struct Item { unit_price: Int, quantity: Int }
+
+fn cost(self: Item) -> Int {
+    self.unit_price * self.quantity
+}
+
+fn max(a: Item, b: Item) -> Item {
+    if a.cost() > b.cost() {
+        a
+    } else {
+        b
+    }
+}
+
+fn name(self: Item) -> Str {
+    match self {
+        Item(a) => a,
+        Item(b) => b,
+        Item(c) => c,
+    }
+}
+
+fn max(a: Item, b: Item) -> Item {
+    if a.cost() > b.cost() {
+        a
+    } else {
+        b
+    }
+}
+
+fn name(self: Item) -> Str {
+    match self {
+        Item(a) => a,
+        Item(b) => b,
+        Item(c) => c,
+    }
+}
+
+fn cost(self: Item) -> Int {
+    self.unit_price * self.quantity
+}
+
+fn main() {
+    let pen = Item { unit_price: 3, quantity: 4 }
+    let pad = Item { unit_price: 9, quantity: 2 }
+    let ink = Item { unit_price: 5, quantity: 3 }
+    let cost = pen.cost() + pad.cost() + ink.cost()
+    print(cost)
+    let most_expensive = max(max(pen, pad), ink)
+    print_str(most_expensive.name())
+}

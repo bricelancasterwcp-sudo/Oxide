@@ -1,0 +1,21 @@
+fn list_find(list: &Vec<Int>, pos: Int) -> Option<Int> {
+    let mut idx = 0
+    while idx < len(&list) {
+        if idx == pos {
+            return Some(get(&list, idx))
+        }
+        idx = idx + 1
+    }
+    None
+}
+
+fn main() {
+    let nums = push(push(vec(), 10), 20)
+    let num_1 = list_find(&nums, 1)
+    let num_5 = list_find(&nums, 5)
+    drop nums
+    let num_10 = list_find(&nums, 10)
+    print(num_1)
+    print(num_5)
+    print(num_10)
+}

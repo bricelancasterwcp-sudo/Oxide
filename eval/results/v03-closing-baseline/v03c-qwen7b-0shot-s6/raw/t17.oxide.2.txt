@@ -1,0 +1,7 @@
+struct List { values: Vec<Int> }
+
+fn main() {
+    let l = List { values: vec(10, 20, 30) }
+    print(get(l.values, 1)?)
+    print(get(l.values, 5)?)
+}

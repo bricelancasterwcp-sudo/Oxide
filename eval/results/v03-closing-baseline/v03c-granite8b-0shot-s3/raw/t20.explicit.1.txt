@@ -1,0 +1,30 @@
+fn pen() -> Int {
+    3
+}
+
+fn pad() -> Int {
+    9
+}
+
+fn ink() -> Int {
+    5
+}
+
+fn main() {
+    let pen_cost = pen() * 4
+    let pad_cost = pad() * 2
+    let ink_cost = ink() * 3
+    print_str("Total cost: ")
+    print(pen_cost + pad_cost + ink_cost)
+    let max_cost = pen_cost
+    let max_name = "pen"
+    if pad_cost > max_cost {
+        max_cost = pad_cost
+        max_name = "pad"
+    }
+    if ink_cost > max_cost {
+        max_name = "ink"
+    }
+    print_str("Item with highest cost: ")
+    print_str(max_name)
+}

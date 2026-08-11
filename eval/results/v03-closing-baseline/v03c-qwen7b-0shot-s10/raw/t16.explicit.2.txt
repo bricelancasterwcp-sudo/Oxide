@@ -1,0 +1,11 @@
+fn main() {
+    let num = 100
+    for divisor in vec(5, 0, 4) {
+        if divisor != 0 {
+            let quotient = num / divisor
+            print_str(&int_to_strquotient)
+        } else {
+            print_str("undefined")
+        }
+    }
+}

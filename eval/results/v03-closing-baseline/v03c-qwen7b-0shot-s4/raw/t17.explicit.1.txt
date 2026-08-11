@@ -1,0 +1,16 @@
+fn main() {
+    let list = vec(10, 20, 30)
+    let pos1 = 1
+    let pos5 = 5
+    if pos1 < 3 {
+        print(list.get(pos1).unwrap_or(&mut - 1))
+    } else {
+        print(-1)
+    }
+    if pos5 < 3 {
+        print(list.get(pos5).unwrap_or(&mut - 1))
+    } else {
+        print(-1)
+    }
+    drop list
+}

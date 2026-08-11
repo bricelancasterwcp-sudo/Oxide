@@ -1,0 +1,7 @@
+fn print(s: &Str) {
+    loop
+}
+
+fn main() {
+    print("level")
+}

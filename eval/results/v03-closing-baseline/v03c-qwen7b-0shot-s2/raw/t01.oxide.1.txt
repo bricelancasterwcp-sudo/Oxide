@@ -1,0 +1,17 @@
+struct Number { value: Int }
+
+fn square(n: Number) -> Number {
+    Number(value == n.value * n.value)
+}
+
+fn sum_of_squares() -> Int {
+    let mut sum = Number(value == 0)
+    for i in range(0, 10) {
+        sum = Number(value == sum.value.value + square(Number(value == i)).value)
+    }
+    sum.value
+}
+
+fn main() {
+    print(sum_of_squares())
+}

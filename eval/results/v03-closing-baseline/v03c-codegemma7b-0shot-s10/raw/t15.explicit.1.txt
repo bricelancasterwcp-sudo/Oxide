@@ -1,0 +1,12 @@
+fn main() {
+    let mut total = 0
+    let mut count = 0
+    for arg in std_input() {
+        if letOk(num) == parse_int(arg) {
+            total = total + num
+            count = count + 1
+        }
+    }
+    print(total)
+    print(count)
+}

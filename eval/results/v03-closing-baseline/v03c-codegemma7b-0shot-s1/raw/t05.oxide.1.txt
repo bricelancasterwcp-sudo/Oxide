@@ -1,0 +1,16 @@
+fn third(v: Vec<Int>) -> Int {
+    let len = len(v)
+    if len < 2 {
+        return 0
+    } else {
+        return v.get(len - 1).unwrap() + v.get(len - 2).unwrap()
+    }
+}
+
+fn main() {
+    let mut v = vec(1, 1)
+    for _ in 20 {
+        v = push(v, third(v))
+    }
+    print(v.get(19).unwrap())
+}

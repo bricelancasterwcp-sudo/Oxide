@@ -1,0 +1,29 @@
+struct T { i: Int }
+
+fn foo(x: Int) -> Int {
+    3 + x
+}
+
+fn bar(x: Int) -> Int {
+    foo(x + 1)
+}
+
+fn main() {
+    print(bar(2))
+}
+
+struct T { i: Int }
+
+fn foo(x: Int) -> Int {
+    let y = x + 1
+    let z = y + 1
+    3 + z
+}
+
+fn bar(x: Int) -> Int {
+    foo(x + 1)
+}
+
+fn main() {
+    print(bar(2))
+}

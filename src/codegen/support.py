@@ -95,6 +95,10 @@ fn to_float(x: i64) -> f64 {
 
 fn trunc(x: f64) -> i64 {
     x as i64
+}
+
+fn to_str(x: i64) -> String {
+    x.to_string()
 }"""
 
 # --------------------------------------------------------------------- naming
@@ -170,6 +174,7 @@ BUILTIN_REF: dict[str, tuple[bool, ...]] = {
     "parse_int": (True,),
     "to_float": (False,),
     "trunc": (False,),
+    "to_str": (False,),
 }
 
 

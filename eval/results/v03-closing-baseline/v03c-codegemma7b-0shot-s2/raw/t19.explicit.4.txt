@@ -1,0 +1,114 @@
+fn area(rect: &Rectangle) -> Int {
+    rect.width * rect.height
+}
+
+fn perimeter(rect: &Rectangle) -> Int {
+    2 * (rect.width + rect.height)
+}
+
+fn main() {
+    let rect = Rectangle { width: 7, height: 4 }
+    print(area(&rect))
+    print(perimeter(&rect))
+    drop rect
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(rect: &Rectangle) -> Int {
+    rect.width * rect.height
+}
+
+fn perimeter(rect: &Rectangle) -> Int {
+    2 * (rect.width + rect.height)
+}
+
+fn main() {
+    let rect = Rectangle { width: 7, height: 4 }
+    print(area(&rect))
+    print(perimeter(&rect))
+    drop rect
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(rect: &Rectangle) -> Int {
+    rect.width * rect.height
+}
+
+fn perimeter(rect: &Rectangle) -> Int {
+    2 * (rect.width + rect.height)
+}
+
+fn main() {
+    let rect = Rectangle { width: 7, height: 4 }
+    print(area(&rect))
+    print(perimeter(&rect))
+    drop rect
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(rect: &Rectangle) -> Int {
+    rect.width * rect.height
+}
+
+fn perimeter(rect: &Rectangle) -> Int {
+    2 * (rect.width + rect.height)
+}
+
+fn main() {
+    let rect = Rectangle { width: 7, height: 4 }
+    print(area(&rect))
+    print(perimeter(&rect))
+    drop rect
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(rect: &Rectangle) -> Int {
+    rect.width * rect.height
+}
+
+fn perimeter(rect: &Rectangle) -> Int {
+    2 * (rect.width + rect.height)
+}
+
+fn main() {
+    let rect = Rectangle { width: 7, height: 4 }
+    print(area(&rect))
+    print(perimeter(&rect))
+    drop rect
+}
+
+struct Rectangle {
+    width: Int,
+    height: Int,
+}
+
+fn area(rect: &Rectangle) -> Int {
+    rect.width * rect.height
+}
+
+fn perimeter(rect: &Rectangle) -> Int {
+    2 * (rect.width + rect.height)
+}
+
+fn main() {
+    let rect = Rectangle { width: 7, height: 4 }
+    print(area(&rect))
+    print(perimeter(&rect))
+    drop rect
+}

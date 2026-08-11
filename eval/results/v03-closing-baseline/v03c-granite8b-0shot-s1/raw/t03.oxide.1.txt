@@ -1,0 +1,13 @@
+fn gcd(m: Int, n: Int) -> Int {
+    if m < n {
+        gcd(n, m)
+    } else if n == 0 {
+        m
+    } else {
+        gcd(n, m % n)
+    }
+}
+
+fn main() {
+    print(gcd(252, 105))
+}

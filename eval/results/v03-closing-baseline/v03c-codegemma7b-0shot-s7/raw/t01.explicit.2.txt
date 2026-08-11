@@ -1,0 +1,81 @@
+fn square(n: Int) -> Int {
+    n * n
+}
+
+fn main() {
+    let total = 0
+    for i in 0.to(10) {
+        total = total + square(i)
+    }
+    print(total)
+}
+
+fn to_int(n: Float) -> Int {
+    trunc(n)
+}
+
+fn to_float(n: Int) -> Float {
+    to_float(n)
+}
+
+fn push(v: Vec<Int>, x: Int) -> Vec<Int> {
+    let mut new_v = v
+    new_v.push(x)
+    new_v
+}
+
+fn len(v: &Vec<Int>) -> Int {
+    v.len()
+}
+
+fn get(v: &Vec<Int>, i: Int) -> Option<Int> {
+    v.get(i)
+}
+
+fn range(a: Int, b: Int) -> Vec<Int> {
+    let mut v = vec()
+    for i in a.to(b) {
+        push(v, i)
+    }
+    v
+}
+
+fn clone(x: &Int) -> Int {
+    to_int(to_float(x))
+}
+
+fn str_len(s: &Str) -> Int {
+    s.len()
+}
+
+fn concat(a: &Str, b: &Str) -> Str {
+    a.to_owned() + b.to_owned()
+}
+
+fn chars(s: &Str) -> Vec<Str> {
+    let mut v = vec()
+    for c in s.chars() {
+        push(v, c.to_string())
+    }
+    v
+}
+
+fn int_to_str(n: Int) -> Str {
+    n.to_string()
+}
+
+fn parse_int(s: &Str) -> Option<Int> {
+    match s.parse() {
+        Ok(n) => Some(n),
+        Err(_) => None,
+    }
+}
+
+fn main() {
+    let nums = push(push(vec(), 5), 40)
+    let bigger = push(clone(&nums), 70)
+    print(sum_big(&nums, 10))
+    drop nums
+    print(sum_big(&bigger, 10))
+    drop bigger
+}

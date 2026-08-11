@@ -1,0 +1,11 @@
+```rust
+fn main() {
+    let divisors = vec![5, 0, 4];
+    for &divisor in divisors.iter() {
+        match divisor {
+            0 => println!("undefined"),
+            _ => println!("{}", 100 / divisor),
+        }
+    }
+}
+```

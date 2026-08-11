@@ -1,0 +1,15 @@
+struct Reading { label: Str, values: Vec<Int> }
+
+fn main() {
+    let r = Reading { label: "lab", values: push(push(vec(), 3), 42) }
+    let v = r.values
+    let mut i = 0
+    let mut sum = 0
+    while i < len(v) {
+        if get(v, i)? == 3 {
+            sum = sum + 3 * i + clone(get(v, i)?)
+        }
+        i = i + 1
+    }
+    print(sum)
+}

@@ -1,0 +1,26 @@
+struct Number { val: Int }
+
+fn is_even(n: Int) -> Bool {
+    n % 2 == 0
+}
+
+fn transform(n: Int) -> Int {
+    if is_even(n) {
+        n / 2
+    } else {
+        n * 3 + 1
+    }
+}
+
+fn count_steps(mutacer: Int) -> Int {
+    let mut steps = 0
+    while mutacer != 1 {
+        mutacer = transform(mutacer)
+        steps = steps + 1
+    }
+    steps
+}
+
+fn main() {
+    print(count_steps(27))
+}

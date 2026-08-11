@@ -1,0 +1,8 @@
+fn main() {
+  let list = vec![4, 1, 7, 3, 9, 2];
+  for n in list {
+    if n > 3 {
+      println!("{}", n);
+    }
+  }
+}

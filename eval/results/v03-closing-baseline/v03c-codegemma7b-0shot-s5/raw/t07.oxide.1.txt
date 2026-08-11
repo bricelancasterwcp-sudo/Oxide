@@ -1,0 +1,14 @@
+fn main() {
+    let mut a = vec()
+    let mut s = 0
+    for x in 0.step_by(3).take(8) {
+        a = push(a, x)
+        s = s + x
+    }
+    for y in a {
+        print(y)
+        print(" ")
+    }
+    print_str("\n")
+    print(s)
+}

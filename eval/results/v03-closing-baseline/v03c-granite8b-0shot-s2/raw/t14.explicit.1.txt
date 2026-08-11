@@ -1,0 +1,26 @@
+fn count(s: &Str, c: Char) -> Int {
+    let mut count = 0
+    for ch in chars(&s) {
+        if ch == c {
+            count = count + 1
+        }
+    }
+    count
+}
+
+fn distinct(s: &Str) -> Int {
+    let mut found = vec()
+    for ch in chars(&s) {
+        if !contains(&found, ch) {
+            found = push(found, ch)
+        }
+    }
+    len(&found)
+}
+
+fn main() {
+    let s = "mississippi"
+    print(count(&s, "s"))
+    drop s
+    print(distinct(&s))
+}

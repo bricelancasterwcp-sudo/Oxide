@@ -1,0 +1,16 @@
+fn main() {
+    let num = 100
+    let div1 = 5
+    let div2 = 0
+    let div3 = 4
+    let quo1 = num / div1
+    if div2 == 0 {
+        print("undefined")
+    } else {
+        let quo2 = num / div2
+    }
+    let quo3 = num / div3
+    print(quo1)
+    print(quo2)
+    print(quo3)
+}

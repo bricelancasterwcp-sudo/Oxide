@@ -1,0 +1,22 @@
+struct GcdResult { gcd: Int, steps: Vec<Str> }
+
+fn gcd(a: Int, b: Int) -> GcdResult {
+    let mut steps = vec()
+    let mut x = a
+    let mut y = b
+    while y != 0 {
+        steps.push(format("{} = {} * {} + {}", x, x, y, x % y))
+        let temp = y
+        y = x % y
+        x = temp
+    }
+    GcdResult(gcd, steps)
+}
+
+fn main() {
+    let result = gcd(252, 105)
+    print(result.gcd)
+    for step in result.steps {
+        print_str(step)
+    }
+}

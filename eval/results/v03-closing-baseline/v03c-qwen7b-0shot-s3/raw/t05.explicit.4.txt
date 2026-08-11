@@ -1,0 +1,22 @@
+fn fibonacci(n: Int) -> Int {
+    let a = 1
+    let b = 1
+    if n == 0 {
+        return a
+    } else if n == 1 {
+        return b
+    } else {
+        for _ in 2.up_to(n) {
+            let temp = a + b
+            drop a
+            a = b
+            b = temp
+        }
+        return b
+    }
+}
+
+fn main() {
+    let term = fibonacci(20)
+    print(term)
+}

@@ -1,0 +1,14 @@
+fn reverse(list: Vec<Int>) -> Vec<Int> {
+    let mut list = list
+    for i in range(0, len(list) / 2) {
+        let a = get(list, i)?
+        let b = get(list, len(list) - i - 1)?
+        list = push(list, b)
+        list = push(list, a)
+    }
+    list
+}
+
+fn main() {
+    print(reverse(push(push(push(vec(), 1), 2), 3)))
+}
