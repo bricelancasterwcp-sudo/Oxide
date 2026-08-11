@@ -61,9 +61,14 @@ arm per family):
 
 Paired first-pass deltas (oxide − explicit, `eval.rollup`): qwen
 **+9.0pp** (SE 6.8), codegemma **+4.5pp** (SE 3.7), granite **+1.0pp**
-(SE 4.6). None clears 2 SE. `OX04xx` gate: qwen 1 occurrence/1 session,
-codegemma 0/0, granite 2/2 — the linearity gate remains essentially
-unpopulated, unchanged in kind from G0. Context exhaustion: qwen 1/600,
+(SE 4.6). None clears 2 SE. `OX04xx` gate, **first attempts only**
+(`eval.g0_report`'s gate counter): qwen 1 occurrence/1 session,
+codegemma 0/0, granite 2/2. Over **all** attempts (`eval.g0_report`'s
+`stage_hist_all`, linearity bucket): qwen 7, codegemma 0, granite 7 —
+the two figures are not the same measurement and are labeled here so a
+reader re-running either tool is not confused by the mismatch. Either
+way the linearity gate remains essentially unpopulated, unchanged in
+kind from G0. Context exhaustion: qwen 1/600,
 codegemma 1/600, granite **99/600 (16.5%)** — granite's window covariate
 (SPEC §48, `num_ctx` 4096) applies throughout, consistent with G0's
 16.7%.
@@ -117,36 +122,65 @@ HEAD.
 appear) — the counter is structurally zero by construction now that
 `to_str` is in `BUILTINS`, exactly the mechanical claim predicted.
 
-**5. g3, `fn to_str` self-definitions: prediction MISSED — essentially
-flat, not fallen.** Measured: **16 occurrences across 6 programs**,
-against a re-verified pre-change baseline of 15 occurrences across 6
-programs (reproduced directly from the committed G0 root, matching
-SPEC §57's cited numbers exactly). Program count is unchanged; the
-occurrence count moved by one, in the wrong direction. This did not
-fall. The likely reason: `to_str` was deliberately added as a
-**resolver-only** alias and never added to `LANGUAGE_CARD.md` (verified
-— the card still teaches only `int_to_str`; SPEC §57 and its own design
-doc frame this explicitly as "narrowed to a to_str alias on
-measurement"). A model that has never seen `to_str` on its card has no
-new information telling it the name now exists, so nothing about its
-own decision to self-define `fn to_str` when it wants that spelling
-changes — the fix resolves the *call* mechanically without touching the
-*demand* signal at all. Reported as a miss, not reinterpreted as a
-partial success; the brief's pre-registration governs.
+**5. g3, `fn to_str` self-definitions: prediction MISSED — flat, and
+within the counter's own demonstrated run-to-run noise.** Measured this
+campaign: **16 occurrences across 6 programs**. The pre-change G0
+baseline (re-verified directly from the committed G0 root, matching
+SPEC §57's cited numbers exactly) is 15 occurrences across 6 programs.
+Between those two points sits a third, previously unreported
+measurement: `g1-vec-literal` (`g1c`, the constrained grid measured
+after vec-literal but before either g2 or g3 landed) scores **14
+occurrences across 7 programs** — re-verified directly against its own
+committed root the same way. The series across three independent
+campaigns is **15 → 14 → 16** occurrences and **6 → 7 → 6** programs.
+That is a ±1–2 occurrence, ±1 program band of run-to-run variation in a
+counter that saw no change to `to_str`'s status between G0 and g1c, and
+this run's movement (+1 occurrence, 0 program change, relative to G0)
+sits inside that band. The honest reading is therefore not "the count
+moved in the wrong direction" — it is **flat, within noise this run can
+now bound, and still a miss against the prediction**, because the
+prediction was that it should fall and across three measurements it has
+never fallen below its own opening value net of the demonstrated ±1–2
+wobble. The likely reason it never falls: `to_str` was deliberately
+added as a **resolver-only** alias and never added to
+`LANGUAGE_CARD.md` (verified — the card still teaches only
+`int_to_str`; SPEC §57 and its own design doc frame this explicitly as
+"narrowed to a to_str alias on measurement"). A model that has never
+seen `to_str` on its card has no new information telling it the name
+now exists, so nothing about its own decision to self-define `fn
+to_str` when it wants that spelling changes — the fix resolves the
+*call* mechanically without touching the *demand* signal at all.
+Reported as a miss, not reinterpreted as a partial success; the brief's
+pre-registration governs, and the miss verdict is unchanged by this
+correction — only the over-reading of a +1 as directional is retracted.
 
 **6. Aggregate first-attempt pass rates: CONFIRMED — no detectable
 change, verified against the correct predecessor.** The immediate
 predecessor for isolating g2+g3's own contribution is **not** G0 — it
 is `g1-vec-literal` (`g1c`), the last full-grid measurement before g2/g3
 landed. `git log 52c7487..2de2b89 -- src/ SPEC.md eval/grammar/
-LANGUAGE_CARD.md LANGUAGE_CARD_EXPLICIT.md` shows only two
-behavior-affecting commits since g1c: §56 (field assignment + grammar)
-and §57 (`to_str`, no grammar change, no card change). Two other commits
-in that range (`8e80eab` renaming the project, `593c71b` a span-fidelity
-test fix) explicitly left model-facing surfaces untouched — `8e80eab`'s
-own message names this as deliberate, precisely because a renamed card
-retokenizes the prompt and breaks comparability. v03c vs. g1c, all nine
-arm-rows, all three metrics (27 cells):
+LANGUAGE_CARD.md LANGUAGE_CARD_EXPLICIT.md` returns **13 commits**, not
+two — run it and check the count against this paragraph. Of those 13:
+six touch only `SPEC.md` prose unrelated to generation behavior
+(`2de2b89` a taxonomy/dossier and §55 mechanism-claim correction,
+`48d1768`/`ddff7df`/`3270b66` deepseek-16b-lite registration and
+quantization-pin bookkeeping — a family outside this campaign's three —
+`8e80eab` the project rename, and `593c71b` a §55 rationale correction
+with no normative change); one (`846014f`) touches `src/sema/cfg.py`
+and `src/sema/destructure.py` but only corrects docstrings and deletes
+a write to a dict key the commit's own message shows is
+mutation-confirmed unreachable through the public API
+(`analyze.use_classes()` resolves keys through `resolve.use_of`, which
+holds `Var` ids only, never the statement id the deleted line wrote
+under) — verified by reading its diff, not the commit message alone;
+and the remaining six implement the two features under test: `1cea2a6`
+(§56 SPEC text), `87e6b65` (§56 implementation — parser/AST/codegen/
+sema), `f54cf22` (§56 grammar), `440f062` (§56 lower-bound
+qualification, SPEC-only), `6871255` (§57 SPEC text), and `2c91240`
+(§57 implementation). `8e80eab`'s own message additionally names
+leaving model-facing card strings untouched as deliberate, precisely
+because a renamed card retokenizes the prompt and breaks comparability.
+v03c vs. g1c, all nine arm-rows, all three metrics (27 cells):
 
 | family | arm | first-compile Δ | first-pass Δ | final-pass Δ |
 |---|---|---|---|---|
@@ -160,9 +194,14 @@ arm-rows, all three metrics (27 cells):
 | granite | explicit | 0 | −0.5pp (−1/200) | −0.5pp (−1/200) |
 | granite | rust | 0 | 0 | −0.5pp (−1/200) |
 
-18 of 27 cells show zero movement; the other 9 move by exactly ±1
-session (±0.5pp) except qwen's oxide row, which moves by 3 and 5
-sessions (+1.5pp / +2.5pp). Every value is an order of magnitude below
+**16 of 27 cells show zero movement; the other 11 move nonzero.** Of
+those 11, eight move by exactly ±1 session (±0.5pp): qwen explicit (all
+three metrics), qwen rust (first-pass, final-pass), granite explicit
+(first-pass, final-pass), and granite rust (final-pass). The remaining
+three are qwen's oxide row in full — first-compile +3, first-pass +3,
+and final-pass +5 sessions (+1.5pp / +1.5pp / +2.5pp) — the largest
+mover in the table and still well short of the ±5pp floor below. Every
+value is an order of magnitude below
 SPEC §47's own ±5pp floor for this corpus, and the residual wobble
 matches the byte-level, cross-server-instance sampling non-determinism
 at temperature 0.8 that g1's own REPORT already documented (48 of
@@ -175,20 +214,45 @@ overwhelmingly g1's own already-published vec-literal effect (g1c
 reported qwen oxide first-pass 26.0% → 29.0% on its own), not anything
 new in this campaign.
 
-**7. Rust arm: CONFIRMED flat at the rate level.** Across both
-comparisons (vs. g1c and vs. g0c), rust first-compile and first-pass are
-identical or within one session (0.5pp) in every family; final-pass
-wobbles by at most one session. Byte-identical is explicitly **not**
-claimed — see point 6's cross-server sampling note — and the
-pre-registration only committed to the rate level.
+**7. Rust arm: CONFIRMED flat at the rate level, with the wobble stated
+precisely rather than capped uniformly.** Rust first-compile is
+identical (0 movement) in all three families against both g1c and g0c.
+First-pass is identical against both except qwen, which moves −1
+session (−0.5pp) against both comparisons alike. Final-pass wobbles by
+at most **one** session against g1c (qwen −1, granite −1, codegemma 0)
+but by up to **two** sessions against g0c (qwen 59.5%→58.5% = −2
+sessions, granite 53.0%→52.0% = −2 sessions, codegemma −1 session) — a
+larger wobble than the g1c comparison shows, and "at most one session"
+does not hold for that pairing. Both figures are still small in
+absolute terms (the largest is 1.0pp, one order of magnitude under the
+±5pp floor) and the conclusion is unchanged: rust stays flat at the
+rate level against every baseline this run is compared to. Byte-
+identical is explicitly **not** claimed — see point 6's cross-server
+sampling note — and the pre-registration only committed to the rate
+level.
 
 ## Comparability statement, verified against each cited run's own manifest
 
-| run | backend | oxide/explicit constrained? | rust constrained? | `num_ctx` (qwen/codegemma/granite) | grammar SHA (oxide / explicit) | llama.cpp build |
+| run | manifest `backend` (top-level) | oxide/explicit constrained? | rust constrained? | `num_ctx` (qwen/codegemma/granite) | grammar SHA (oxide / explicit) | `preflight.build_info` |
 |---|---|---|---|---|---|---|
-| `g0c` (G0 baseline) | llama.cpp | yes | **never** | 8192 / 8192 / 4096 | `3a6c5ff1…` / `c68d335f…` | `b1-4988f6e` |
-| `g1c` (vec-literal) | llama.cpp | yes | **never** | 8192 / 8192 / 4096 | `3a6c5ff1…` / `c68d335f…` (identical to g0c) | `b1-4988f6e` |
-| `v03c` (this run) | llama.cpp | yes | **never** | 8192 / 8192 / 4096 | `051e8cc5…` / `d40a4923…` (**different** — §56 widened both grammars) | `b1-4988f6e` |
+| `g0c` (G0 baseline) | `llamacpp` (no dot, literal) | yes | **never** | 8192 / 8192 / 4096 | `3a6c5ff1…` / `c68d335f…` | `b1-4988f6e` |
+| `g1c` (vec-literal) | `llama.cpp` | yes | **never** | 8192 / 8192 / 4096 | `3a6c5ff1…` / `c68d335f…` (identical to g0c) | `b1-4988f6e` |
+| `v03c` (this run) | `llama.cpp` | yes | **never** | 8192 / 8192 / 4096 | `051e8cc5…` / `d40a4923…` (**different** — §56 widened both grammars) | `b1-4988f6e` |
+
+The top-level `backend` string genuinely differs across these three
+runs' manifests, verbatim — `g0c`'s literally reads `"llamacpp"` (no
+dot), `g1c`'s and `v03c`'s both read `"llama.cpp"`. This is not a
+different backend: `manifest["preflight"]["backend"]` reads
+`"llama.cpp"` in all three (including g0c), and `preflight.build_info`
+matches (`b1-4988f6e`) across all three, confirming the identical
+llama-server/llama.cpp system throughout. The top-level field's
+spelling changed because `eval.driver.BACKEND_LABELS` (a fix that
+normalizes the CLI's `"llamacpp"` token to the manifest's canonical
+`"llama.cpp"`, added specifically so the top-level field and
+`preflight.backend` cannot read as two different backends) landed after
+G0 and was already in place for g1c and v03c. Printed here exactly as
+each manifest reads, per this table's own header, rather than
+normalized.
 
 Read directly from each run's own `manifest.json` (`grammar_sha256`,
 `num_ctx`, `preflight.build_info`, `preflight.server_n_ctx`), not
@@ -270,6 +334,12 @@ Raw: 30 run dirs (`v03c-<slug>-0shot-s1`…`s10`), `cells.jsonl` +
 --models qwen7b,codegemma7b,granite8b --seeds 1-10 --run-prefix v03c`;
 `python -m eval.deformation eval/results/v03-closing-baseline`;
 `eval.demand.scan_oxide_arm(Path('eval/results/v03-closing-baseline'))`.
+The paired first-pass deltas quoted above (`eval.rollup`) were read via
+`eval.g0_report`'s own call into `rollup.paired_delta`/`paired_se`, not
+`eval.rollup`'s CLI. If reproducing them by invoking
+`python -m eval.rollup` directly against this root, pass `--out`
+explicitly: its default is `<results-root>/6a-rollup/`, which would
+otherwise write an untracked directory into this committed data root.
 
 ## What happens next
 
