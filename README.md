@@ -68,6 +68,26 @@ the next experiment: a token-matched fine-tune of Black Oxide against Rust
 repository — including the results that went against the thesis, and a log
 of three headline claims withdrawn when they failed to replicate.
 
+## Standalone write-ups
+
+Two findings from this project are written up as self-contained
+documents, each with its numbers, method, controls, and limits:
+
+- **[Constrained decoding deforms rather than
+  rejects](docs/findings/2026-08-12-constrained-decoding-deforms.md)** —
+  a grammar can only steer generation to the nearest legal string, so it
+  manufactures programs the model did not write: one artifact accounted
+  for 44% of the largest error class, another appeared 18 times in 600
+  constrained programs and zero in 600 unconstrained. Independently
+  corroborated by two sibling projects
+  ([robigo](https://github.com/bricelancasterwcp-sudo/robigo),
+  [assay](https://github.com/bricelancasterwcp-sudo/assay)).
+- **[Most of the win was ergonomics, not
+  ownership](docs/findings/2026-08-12-ergonomics-beat-ownership.md)** —
+  the +59pp headline decomposes to ≈+10pp ownership and up-to-+42pp
+  surface ergonomics under a matched-novelty control, vanishing at
+  frontier capability; with the design guidance that follows.
+
 ## Where the evidence stands
 
 **Partially supported, with a capability window.** Ordered by how well each
